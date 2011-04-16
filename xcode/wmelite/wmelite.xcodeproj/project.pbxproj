@@ -389,12 +389,12 @@
 		46D40E4A134A44DC002829D8 /* Vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector2.h; path = ../../src/Vector2.h; sourceTree = SOURCE_ROOT; };
 		46D40E4B134A44DC002829D8 /* wintypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wintypes.h; path = ../../src/wintypes.h; sourceTree = SOURCE_ROOT; };
 		46D40E4C134A44DC002829D8 /* wme_debugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wme_debugger.h; path = ../../src/wme_debugger.h; sourceTree = SOURCE_ROOT; };
-		46D40F6B134A5D0F002829D8 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = /Users/nedoma/Documents/projects/wmelite/xcode/dep/zlib/lib/libz.a; sourceTree = "<absolute>"; };
-		46D40F71134A5D45002829D8 /* libfreeimage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreeimage.a; path = /Users/nedoma/Documents/projects/wmelite/xcode/dep/FreeImage/lib/libfreeimage.a; sourceTree = "<absolute>"; };
-		46D40F76134A5D67002829D8 /* libbass.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbass.dylib; path = /Users/nedoma/Documents/projects/wmelite/xcode/dep/bass/lib/libbass.dylib; sourceTree = "<absolute>"; };
-		46D40F78134A5D92002829D8 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = /Users/nedoma/Documents/projects/wmelite/xcode/dep/freetype/lib/libfreetype.a; sourceTree = "<absolute>"; };
-		46D40F7D134A5DBA002829D8 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = /Users/nedoma/Documents/projects/wmelite/xcode/dep/boost/lib/libboost_filesystem.a; sourceTree = "<absolute>"; };
-		46D40F7F134A5DBA002829D8 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = /Users/nedoma/Documents/projects/wmelite/xcode/dep/boost/lib/libboost_system.a; sourceTree = "<absolute>"; };
+		46D40F6B134A5D0F002829D8 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../dep/zlib/lib/libz.a; sourceTree = SOURCE_ROOT; };
+		46D40F71134A5D45002829D8 /* libfreeimage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreeimage.a; path = ../dep/FreeImage/lib/libfreeimage.a; sourceTree = SOURCE_ROOT; };
+		46D40F76134A5D67002829D8 /* libbass.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbass.dylib; path = ../dep/bass/lib/libbass.dylib; sourceTree = SOURCE_ROOT; };
+		46D40F78134A5D92002829D8 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../dep/freetype/lib/libfreetype.a; sourceTree = SOURCE_ROOT; };
+		46D40F7D134A5DBA002829D8 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../dep/boost/lib/libboost_filesystem.a; sourceTree = SOURCE_ROOT; };
+		46D40F7F134A5DBA002829D8 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../dep/boost/lib/libboost_system.a; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* wmelite-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "wmelite-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* wmelite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wmelite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1016,7 +1016,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1024,18 +1024,20 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
+				VALID_ARCHS = i386;
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
+				VALID_ARCHS = i386;
 			};
 			name = Release;
 		};

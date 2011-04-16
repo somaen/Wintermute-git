@@ -131,7 +131,7 @@
 		4615090A13520B93000E96C4 /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4615089613520B93000E96C4 /* Vector2.cpp */; };
 		4615094013521059000E96C4 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4615093F13521059000E96C4 /* CFNetwork.framework */; };
 		461509531352207F000E96C4 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 461509521352207F000E96C4 /* libfreetype.a */; };
-		469AB60F135225D100F669E8 /* data.dcp in Resources */ = {isa = PBXBuildFile; fileRef = 469AB60E135225D100F669E8 /* data.dcp */; };
+		46EB701A1359B54A00E280F6 /* data.dcp in Resources */ = {isa = PBXBuildFile; fileRef = 46EB70191359B54A00E280F6 /* data.dcp */; };
 		FD779EDE0E26BA1200F39101 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD779EDD0E26BA1200F39101 /* CoreAudio.framework */; };
 		FD77A07D0E26BD8C00F39101 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FD77A07C0E26BD8C00F39101 /* Icon.png */; };
 		FD77A07F0E26BDA900F39101 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FD77A07E0E26BDA900F39101 /* Default.png */; };
@@ -145,11 +145,11 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		461507A713520AFD000E96C4 /* libbass.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbass.a; path = "/Users/nedoma/Documents/projects/wmelite/xcode-ios/dep/bass/lib/libbass.a"; sourceTree = "<absolute>"; };
-		461507A913520B13000E96C4 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = "/Users/nedoma/Documents/projects/wmelite/xcode-ios/dep/boost/lib/libboost_filesystem.a"; sourceTree = "<absolute>"; };
-		461507AB13520B13000E96C4 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = "/Users/nedoma/Documents/projects/wmelite/xcode-ios/dep/boost/lib/libboost_system.a"; sourceTree = "<absolute>"; };
-		461507AD13520B24000E96C4 /* libfreeimage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreeimage.a; path = "/Users/nedoma/Documents/projects/wmelite/xcode-ios/dep/FreeImage/lib/libfreeimage.a"; sourceTree = "<absolute>"; };
-		461507B113520B46000E96C4 /* libSDL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL.a; path = "/Users/nedoma/Documents/projects/wmelite/xcode-ios/dep/SDL/lib/libSDL.a"; sourceTree = "<absolute>"; };
+		461507A713520AFD000E96C4 /* libbass.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbass.a; path = ../dep/bass/lib/libbass.a; sourceTree = SOURCE_ROOT; };
+		461507A913520B13000E96C4 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../dep/boost/lib/libboost_filesystem.a; sourceTree = SOURCE_ROOT; };
+		461507AB13520B13000E96C4 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../dep/boost/lib/libboost_system.a; sourceTree = SOURCE_ROOT; };
+		461507AD13520B24000E96C4 /* libfreeimage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreeimage.a; path = ../dep/FreeImage/lib/libfreeimage.a; sourceTree = SOURCE_ROOT; };
+		461507B113520B46000E96C4 /* libSDL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL.a; path = ../dep/SDL/lib/libSDL.a; sourceTree = SOURCE_ROOT; };
 		461507B313520B93000E96C4 /* AdActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AdActor.cpp; path = ../../src/AdActor.cpp; sourceTree = SOURCE_ROOT; };
 		461507B413520B93000E96C4 /* AdActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdActor.h; path = ../../src/AdActor.h; sourceTree = SOURCE_ROOT; };
 		461507B513520B93000E96C4 /* AdActorDir.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AdActorDir.cpp; path = ../../src/AdActorDir.cpp; sourceTree = SOURCE_ROOT; };
@@ -382,8 +382,8 @@
 		4615089813520B93000E96C4 /* wintypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wintypes.h; path = ../../src/wintypes.h; sourceTree = SOURCE_ROOT; };
 		4615089913520B93000E96C4 /* wme_debugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wme_debugger.h; path = ../../src/wme_debugger.h; sourceTree = SOURCE_ROOT; };
 		4615093F13521059000E96C4 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		461509521352207F000E96C4 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = "/Users/nedoma/Documents/projects/wmelite/xcode-ios/dep/freetype/lib/libfreetype.a"; sourceTree = "<absolute>"; };
-		469AB60E135225D100F669E8 /* data.dcp */ = {isa = PBXFileReference; lastKnownFileType = file; name = data.dcp; path = ../../xcode/wmelite/build/Debug/wmelite.app/Contents/Resources/data.dcp; sourceTree = SOURCE_ROOT; };
+		461509521352207F000E96C4 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../dep/freetype/lib/libfreetype.a; sourceTree = SOURCE_ROOT; };
+		46EB70191359B54A00E280F6 /* data.dcp */ = {isa = PBXFileReference; lastKnownFileType = file; path = data.dcp; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD779EDD0E26BA1200F39101 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		FD77A07C0E26BD8C00F39101 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -683,7 +683,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				469AB60E135225D100F669E8 /* data.dcp */,
+				46EB70191359B54A00E280F6 /* data.dcp */,
 				FD77A07E0E26BDA900F39101 /* Default.png */,
 				FD77A07C0E26BD8C00F39101 /* Icon.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -755,9 +755,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				469AB60F135225D100F669E8 /* data.dcp in Resources */,
 				FD77A07D0E26BD8C00F39101 /* Icon.png in Resources */,
 				FD77A07F0E26BDA900F39101 /* Default.png in Resources */,
+				46EB701A1359B54A00E280F6 /* data.dcp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
