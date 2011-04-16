@@ -84,10 +84,11 @@ HRESULT CBRenderSDL::InitRenderer(int width, int height)
 	m_RealHeight = Game->m_Registry->ReadInt("Debug", "ForceResHeight", m_Height);
 #endif
 
-	/*	
-	m_RealWidth = 480;
-	m_RealHeight = 320;
+	/*
+	m_RealWidth = 960;
+	m_RealHeight = 640;
 	*/
+	
 
 	float origAspect = (float)m_Width / (float)m_Height;
 	float realAspect = (float)m_RealWidth / (float)m_RealHeight;
@@ -153,6 +154,48 @@ HRESULT CBRenderSDL::InitRenderer(int width, int height)
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBRenderSDL::Flip()
 {
+	
+#ifdef __IPHONEOS__
+	// hack: until viewports work correctly, we just paint black bars instead
+	SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
+
+	SDL_Rect rect;
+
+	if (m_BorderLeft > 0)
+	{
+		rect.x = 0;
+		rect.y = 0;
+		rect.w = m_BorderLeft;
+		rect.h = m_RealHeight;		
+		SDL_RenderFillRect(m_Renderer, &rect);
+	}
+	if (m_BorderRight > 0)
+	{
+		rect.x = (m_RealWidth - m_BorderRight);
+		rect.y = 0;
+		rect.w = m_BorderRight;
+		rect.h = m_RealHeight;		
+		SDL_RenderFillRect(m_Renderer, &rect);
+	}
+	if (m_BorderTop > 0)
+	{
+		rect.x = 0;
+		rect.y = 0;
+		rect.w = m_RealWidth;
+		rect.h = m_BorderTop;		
+		SDL_RenderFillRect(m_Renderer, &rect);
+	}
+	if (m_BorderBottom > 0)
+	{
+		rect.x = 0;
+		rect.y = m_RealHeight - m_BorderBottom;
+		rect.w = m_RealWidth;
+		rect.h = m_BorderBottom;		
+		SDL_RenderFillRect(m_Renderer, &rect);
+	}
+#endif
+
+
 	SDL_RenderPresent(m_Renderer);
 
 	return S_OK;
@@ -298,7 +341,7 @@ HRESULT CBRenderSDL::SetViewport(int left, int top, int right, int bottom)
 	rect.w = (right - left) * m_RatioX;
 	rect.h = (bottom - top) * m_RatioY;
 	
-	// TODO fix!!!
+	// TODO fix this once viewports work correctly in SDL/landscape
 #ifndef __IPHONEOS__	
 	SDL_RenderSetViewport(GetSdlRenderer(), &rect);
 #endif
@@ -311,8 +354,8 @@ void CBRenderSDL::ModTargetRect(SDL_Rect* rect)
 	SDL_Rect viewportRect;
 	SDL_RenderGetViewport(GetSdlRenderer(), &viewportRect);
 
-	rect->x = MathUtil::Round((rect->x + m_BorderLeft - viewportRect.x) * m_RatioX);
-	rect->y = MathUtil::Round((rect->y + m_BorderTop - viewportRect.y) * m_RatioY);
+	rect->x = MathUtil::Round(rect->x * m_RatioX + m_BorderLeft - viewportRect.x);
+	rect->y = MathUtil::Round(rect->y * m_RatioY + m_BorderTop - viewportRect.y);
 	rect->w = MathUtil::RoundUp(rect->w * m_RatioX);
 	rect->h = MathUtil::RoundUp(rect->h * m_RatioY);
 }
