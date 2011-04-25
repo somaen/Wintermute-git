@@ -237,7 +237,12 @@ void CBPlatform::HandleEvent(SDL_Event* event)
 	case SDL_MOUSEBUTTONDOWN:
 
 #ifdef __IPHONEOS__
-		SetCursorPos(event->button.x, event->button.y);
+		{
+			CBRenderSDL* renderer = static_cast<CBRenderSDL*>(Game->m_Renderer);
+			POINT p;
+			GetCursorPos(&p);			
+			Game->SetActiveObject(renderer->GetObjectAt(p.x, p.y));
+		}
 #endif
 		switch (event->button.button)
 		{

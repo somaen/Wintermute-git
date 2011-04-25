@@ -52,8 +52,12 @@ CBRenderSDL::~CBRenderSDL()
 HRESULT CBRenderSDL::InitRenderer(int width, int height)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) return E_FAIL;
-		
 	
+	
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 0);
+	SDL_GL_SetAttribute(SDL_GL_RETAINED_BACKING, 1);
+
+
 	m_Width = width;
 	m_Height = height;
 
@@ -366,8 +370,8 @@ void CBRenderSDL::PointFromScreen(POINT* point)
 	SDL_Rect viewportRect;
 	SDL_RenderGetViewport(GetSdlRenderer(), &viewportRect);
 
-	point->x = point->x / m_RatioX - m_BorderLeft + viewportRect.x;
-	point->y = point->y / m_RatioY - m_BorderTop + viewportRect.y;
+	point->x = point->x / m_RatioX - m_BorderLeft / m_RatioX + viewportRect.x;
+	point->y = point->y / m_RatioY - m_BorderTop / m_RatioY + viewportRect.y;
 }
 
 

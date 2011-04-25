@@ -38,6 +38,10 @@ THE SOFTWARE.
 #	include <CoreServices/CoreServices.h>
 #endif
 
+#ifdef __IPHONEOS__
+#	include "ios_utils.h"
+#endif
+
 
 //////////////////////////////////////////////////////////////////////////
 AnsiString PathUtil::UnifySeparators(const AnsiString& path)
@@ -191,7 +195,11 @@ AnsiString PathUtil::GetUserDirectory()
 			userDir = buffer;
 
 	}
+#elif __IPHONEOS__
+	char path[MAX_PATH];
+	IOS_GetDataDir(path);
+	userDir = AnsiString(path);
 #endif
-
+	
 	return userDir;
 }
