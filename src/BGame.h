@@ -238,6 +238,7 @@ public:
 	static void AfterLoadSubFrame(void* Subframe, void* Data);
 	static void AfterLoadSound(void* Sound, void* Data);
 	static void AfterLoadFont(void* Font, void* Data);
+	static void AfterLoadScript(void* script, void* data);
 	static void InvalidateValues(void* Value, void* Data);
 	HRESULT LoadSettings(char* Filename);
 	HRESULT ResumeMusic(int Channel);
@@ -258,7 +259,7 @@ public:
 	virtual HRESULT Cleanup();
 	virtual HRESULT LoadGame(int Slot);
 	virtual HRESULT LoadGame(char* Filename);
-	virtual HRESULT SaveGame(int Slot, char* Desc);
+	virtual HRESULT SaveGame(int slot, char* desc, bool quickSave = false);
 	virtual HRESULT ShowCursor();
 	CBSprite* m_CursorNoninteractive;
 	CBObject* m_ActiveObject;

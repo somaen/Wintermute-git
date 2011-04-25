@@ -3177,10 +3177,10 @@ HRESULT CBGame::ShowCursor()
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBGame::SaveGame(int Slot, char* Desc)
+HRESULT CBGame::SaveGame(int slot, char* desc, bool quickSave)
 {
 	char Filename[MAX_PATH+1];
-	GetSaveSlotFilename(Slot, Filename);
+	GetSaveSlotFilename(slot, Filename);
 
 	LOG(0, "Saving game '%s'...", Filename);
 
@@ -3191,21 +3191,24 @@ HRESULT CBGame::SaveGame(int Slot, char* Desc)
 	m_IndicatorDisplay = true;
 	m_IndicatorProgress = 0;
 	CBPersistMgr* pm = new CBPersistMgr(Game);
-	if(FAILED(ret = pm->InitSave(Desc))) goto save_finish;
+	if(FAILED(ret = pm->InitSave(desc))) goto save_finish;
 
-	SAFE_DELETE(m_SaveLoadImage);
-	if(m_SaveImageName)
+	if (!quickSave)
 	{
-		m_SaveLoadImage = new CBSurfaceSDL(this);
-
-		if(!m_SaveLoadImage || FAILED(m_SaveLoadImage->Create(m_SaveImageName, true, 0, 0, 0)))
+		SAFE_DELETE(m_SaveLoadImage);
+		if(m_SaveImageName)
 		{
-			SAFE_DELETE(m_SaveLoadImage);
+			m_SaveLoadImage = new CBSurfaceSDL(this);
+
+			if(!m_SaveLoadImage || FAILED(m_SaveLoadImage->Create(m_SaveImageName, true, 0, 0, 0)))
+			{
+				SAFE_DELETE(m_SaveLoadImage);
+			}
 		}
 	}
 
-	if(FAILED(ret = CSysClassRegistry::GetInstance()->SaveTable(Game, pm))) goto save_finish;
-	if(FAILED(ret = CSysClassRegistry::GetInstance()->SaveInstances(Game, pm))) goto save_finish;
+	if(FAILED(ret = CSysClassRegistry::GetInstance()->SaveTable(Game, pm, quickSave))) goto save_finish;
+	if(FAILED(ret = CSysClassRegistry::GetInstance()->SaveInstances(Game, pm, quickSave))) goto save_finish;
 	if(FAILED(ret = pm->SaveFile(Filename))) goto save_finish;
 
 save_finish:
@@ -3295,7 +3298,8 @@ HRESULT CBGame::InitAfterLoad()
 	CSysClassRegistry::GetInstance()->EnumInstances(AfterLoadRegion,   "CBRegion",   NULL);
 	CSysClassRegistry::GetInstance()->EnumInstances(AfterLoadSubFrame, "CBSubFrame", NULL);
 	CSysClassRegistry::GetInstance()->EnumInstances(AfterLoadSound,    "CBSound",    NULL);
-	CSysClassRegistry::GetInstance()->EnumInstances(AfterLoadFont,     "CBFontTT",    NULL);
+	CSysClassRegistry::GetInstance()->EnumInstances(AfterLoadFont,     "CBFontTT",   NULL);
+	CSysClassRegistry::GetInstance()->EnumInstances(AfterLoadScript,   "CScScript",  NULL);
 
 	m_ScEngine->RefreshScriptBreakpoints();
 
@@ -3326,6 +3330,12 @@ void CBGame::AfterLoadSound(void* Sound, void* Data)
 void CBGame::AfterLoadFont(void* Font, void* Data)
 {
 	((CBFontTT*)Font)->AfterLoad();
+}
+
+//////////////////////////////////////////////////////////////////////////
+void CBGame::AfterLoadScript(void* script, void* data)
+{
+	((CScScript*)script)->AfterLoad();
 }
 
 

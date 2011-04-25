@@ -36,9 +36,9 @@ public:
 
 	HRESULT EnumInstances(SYS_INSTANCE_CALLBACK lpCallback, const char* className, void* lpData);
 	HRESULT LoadTable(CBGame* Game, CBPersistMgr* PersistMgr);
-	HRESULT SaveTable(CBGame* Game, CBPersistMgr* PersistMgr);
+	HRESULT SaveTable(CBGame* Game, CBPersistMgr* PersistMgr, bool quickSave);
 	HRESULT LoadInstances(CBGame* Game, CBPersistMgr* PersistMgr);
-	HRESULT SaveInstances(CBGame* Game, CBPersistMgr* PersistMgr);
+	HRESULT SaveInstances(CBGame* Game, CBPersistMgr* PersistMgr, bool quickSave);
 	void* IDToPointer(int classID, int instanceID);
 	bool GetPointerID(void* pointer, int* classID, int* instanceID);
 	bool RegisterClass(CSysClass* classObj);

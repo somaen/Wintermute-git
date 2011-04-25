@@ -156,7 +156,7 @@ void* CSysClassRegistry::IDToPointer(int classID, int instanceID)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CSysClassRegistry::SaveTable(CBGame* Game, CBPersistMgr* PersistMgr)
+HRESULT CSysClassRegistry::SaveTable(CBGame* Game, CBPersistMgr* PersistMgr, bool quickSave)
 {
 	PersistMgr->PutDWORD(m_Classes.size());
 
@@ -166,9 +166,13 @@ HRESULT CSysClassRegistry::SaveTable(CBGame* Game, CBPersistMgr* PersistMgr)
 	for (it = m_Classes.begin(); it != m_Classes.end(); ++it)
 	{
 		counter++;
-		Game->m_IndicatorProgress = 50.0f / (float)((float)m_Classes.size() / (float)counter);
-		Game->DisplayContent(false);
-		Game->m_Renderer->Flip();
+
+		if (!quickSave)
+		{
+			Game->m_IndicatorProgress = 50.0f / (float)((float)m_Classes.size() / (float)counter);
+			Game->DisplayContent(false);
+			Game->m_Renderer->Flip();
+		}
 
 		(*it)->SaveTable(Game, PersistMgr);
 	}
@@ -215,7 +219,7 @@ HRESULT CSysClassRegistry::LoadTable(CBGame* Game, CBPersistMgr* PersistMgr)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CSysClassRegistry::SaveInstances(CBGame* Game, CBPersistMgr* PersistMgr)
+HRESULT CSysClassRegistry::SaveInstances(CBGame* Game, CBPersistMgr* PersistMgr, bool quickSave)
 {
 
 	Classes::iterator it;
@@ -234,11 +238,14 @@ HRESULT CSysClassRegistry::SaveInstances(CBGame* Game, CBPersistMgr* PersistMgr)
 	{
 		counter++;
 
-		if (counter % 20 == 0)
+		if (!quickSave)
 		{
-			Game->m_IndicatorProgress = 50 + 50.0f / (float)((float)m_Classes.size() / (float)counter);
-			Game->DisplayContent(false);
-			Game->m_Renderer->Flip();
+			if (counter % 20 == 0)
+			{
+				Game->m_IndicatorProgress = 50 + 50.0f / (float)((float)m_Classes.size() / (float)counter);
+				Game->DisplayContent(false);
+				Game->m_Renderer->Flip();
+			}
 		}
 		Game->MiniUpdate();
 

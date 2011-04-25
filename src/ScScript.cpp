@@ -1223,15 +1223,28 @@ HRESULT CScScript::Persist(CBPersistMgr* PersistMgr){
 	// buffer	
 	if (PersistMgr->m_Saving)
 	{
-		PersistMgr->Transfer(TMEMBER(m_BufferSize));
-		PersistMgr->PutBytes(m_Buffer, m_BufferSize);
+		if (m_State != SCRIPT_PERSISTENT && m_State != SCRIPT_FINISHED && m_State != SCRIPT_THREAD_FINISHED)
+		{
+			PersistMgr->Transfer(TMEMBER(m_BufferSize));
+			PersistMgr->PutBytes(m_Buffer, m_BufferSize);
+		}
+		else
+		{
+			// don't save idle/finished scripts
+			int bufferSize = 0;
+			PersistMgr->Transfer(TMEMBER(bufferSize));
+		}
 	}
 	else
 	{
 		PersistMgr->Transfer(TMEMBER(m_BufferSize));
-		m_Buffer = new BYTE[m_BufferSize];
-		PersistMgr->GetBytes(m_Buffer, m_BufferSize);
-		InitTables();
+		if (m_BufferSize > 0)
+		{
+			m_Buffer = new BYTE[m_BufferSize];
+			PersistMgr->GetBytes(m_Buffer, m_BufferSize);
+			InitTables();
+		}
+		else m_Buffer = NULL;
 	}
 
 	PersistMgr->Transfer(TMEMBER(m_CallStack));
@@ -1681,4 +1694,25 @@ bool CScScript::DbgSetTracingMode(bool IsTracing)
 bool CScScript::DbgGetTracingMode()
 {
 	return m_TracingMode;
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+void CScScript::AfterLoad()
+{
+	if (m_Buffer == NULL)
+	{
+		BYTE* buffer = m_Engine->GetCompiledScript(m_Filename, &m_BufferSize);
+		if (!buffer)
+		{
+			Game->LOG(0, "Error reinitializing script '%s' after load. Script will be terminated.", m_Filename);
+			m_State = SCRIPT_ERROR;
+			return;
+		}
+
+		m_Buffer = new BYTE [m_BufferSize];
+		memcpy(m_Buffer, buffer, m_BufferSize);
+
+		InitTables();
+	}
 }

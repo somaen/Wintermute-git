@@ -46,6 +46,8 @@ public:
 	HRESULT FinishThreads();
 	HRESULT CopyParameters(CScStack* Stack);
 
+	void AfterLoad();
+
 #ifdef __WIN32__
 	static DWORD Call_cdecl(const void* args, size_t sz, DWORD func, bool* StackCorrupt);
 	static DWORD Call_stdcall(const void* args, size_t sz, DWORD func, bool* StackCorrupt);

@@ -235,6 +235,10 @@ void CBPlatform::HandleEvent(SDL_Event* event)
 	{
 
 	case SDL_MOUSEBUTTONDOWN:
+
+#ifdef __IPHONEOS__
+		SetCursorPos(event->button.x, event->button.y);
+#endif
 		switch (event->button.button)
 		{
 		case SDL_BUTTON_LEFT:
@@ -303,7 +307,7 @@ void CBPlatform::HandleEvent(SDL_Event* event)
 #ifdef __IPHONEOS__
 		if (Game)
 		{
-			//Game->SaveGame(0, "autosave");
+			Game->SaveGame(0, "autosave", true);
 			Game->m_Quitting = true;
 		}
 #else
