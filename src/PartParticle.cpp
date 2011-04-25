@@ -74,17 +74,17 @@ HRESULT CPartParticle::SetSprite(char* Filename)
 
 	SAFE_DELETE(m_Sprite);
 
-	CSysClassRegistry::m_Disabled = true;
+	CSysClassRegistry::GetInstance()->m_Disabled = true;
 	m_Sprite = new CBSprite(Game, Game);
 	if(m_Sprite && SUCCEEDED(m_Sprite->LoadFile(Filename)))
 	{
-		CSysClassRegistry::m_Disabled = false;
+		CSysClassRegistry::GetInstance()->m_Disabled = false;
 		return S_OK;
 	}
 	else
 	{		
 		SAFE_DELETE(m_Sprite);
-		CSysClassRegistry::m_Disabled = false;
+		CSysClassRegistry::GetInstance()->m_Disabled = false;
 		return E_FAIL;
 	}
 	
@@ -261,9 +261,9 @@ HRESULT CPartParticle::Persist(CBPersistMgr* PersistMgr)
 	{
 		char* Filename;
 		PersistMgr->Transfer(TMEMBER(Filename));
-		CSysClassRegistry::m_Disabled = true;
+		CSysClassRegistry::GetInstance()->m_Disabled = true;
 		SetSprite(Filename);
-		CSysClassRegistry::m_Disabled = false;
+		CSysClassRegistry::GetInstance()->m_Disabled = false;
 		SAFE_DELETE_ARRAY(Filename);
 	}
 	

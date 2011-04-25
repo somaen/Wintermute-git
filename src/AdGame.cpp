@@ -1336,7 +1336,7 @@ HRESULT CAdGame::Persist(CBPersistMgr *PersistMgr)
 HRESULT CAdGame::LoadGame(char* Filename)
 {
 	HRESULT ret = CBGame::LoadGame(Filename);
-	if(SUCCEEDED(ret)) CSysClassRegistry::EnumInstances(AfterLoadRegion, "CAdRegion", NULL);
+	if(SUCCEEDED(ret)) CSysClassRegistry::GetInstance()->EnumInstances(AfterLoadRegion, "CAdRegion", NULL);
 	return ret;
 }
 
@@ -1344,7 +1344,7 @@ HRESULT CAdGame::LoadGame(char* Filename)
 HRESULT CAdGame::InitAfterLoad()
 {
 	CBGame::InitAfterLoad();
-	CSysClassRegistry::EnumInstances(AfterLoadScene,   "CAdScene",   NULL);
+	CSysClassRegistry::GetInstance()->EnumInstances(AfterLoadScene,   "CAdScene",   NULL);
 	return S_OK;
 }
 

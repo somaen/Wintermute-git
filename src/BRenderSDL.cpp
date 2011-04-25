@@ -136,7 +136,7 @@ HRESULT CBRenderSDL::InitRenderer(int width, int height)
 	// SDL defaults to OGL ES2, which doesn't work on old devices
 	SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
 #else
-	SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl");
+	//SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl");
 #endif
 
 	m_Renderer = SDL_CreateRenderer(m_Win, -1, 0);

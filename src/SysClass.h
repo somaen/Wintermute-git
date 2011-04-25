@@ -27,30 +27,60 @@ THE SOFTWARE.
 #define __WmeSysClass_H__
 
 
-#include <map>
+#include <set>
 using namespace std;
 
 
 class CSysClass  
 {
 public:
-	int m_NumInst;
+	CSysClass(const AnsiString& name, PERSISTBUILD build, PERSISTLOAD load, bool persistent_class);
+	~CSysClass();
+	
 	int GetNumInstances();
-	CSysInstance* GetInstanceAt(int Index);
-	bool RemoveInstance(void* Instance);
-	bool AddInstance(void* Instance, int ID);
+	bool RemoveInstance(void* instance);
+	CSysInstance* AddInstance(void* instance, int id, int savedId = -1);
 	bool RemoveAllInstances();
+
+	int GetInstanceID(void* pointer);
+	void* IDToPointer(int savedID);
+
+	void SetID(int id) { m_ID = id; }
+	int GetID() const { return m_ID; }
+
+	int GetSavedID() const { return m_SavedID; }
+
+	bool IsPersistent() const { return m_Persistent; }
+
+	AnsiString GetName() const { return m_Name; }
+
+	void SaveTable(CBGame* Game, CBPersistMgr* PersistMgr);
+	void LoadTable(CBGame* Game, CBPersistMgr* PersistMgr);
+
+	void SaveInstances(CBGame* Game, CBPersistMgr* PersistMgr);
+	void LoadInstance(void* instance, CBPersistMgr* PersistMgr);
+
+	void InstanceCallback(SYS_INSTANCE_CALLBACK lpCallback, void* lpData);
+
+	void ResetSavedIDs();
+
+	void Dump(FILE* stream);
+	
+private:	
+	int m_NumInst;
 	bool m_Persistent;
 	CSysClass* m_Next;
 	int m_ID;
 	int m_SavedID;
-	char* m_Name;
+	AnsiString m_Name;
 	PERSISTBUILD m_Build;
-	PERSISTLOAD m_Load;
-	CSysClass(const char* name, PERSISTBUILD build, PERSISTLOAD load, bool persistent_class);
-	virtual ~CSysClass();
-	//CBArray<CSysInstance*, CSysInstance*> m_Instances;
-	CSysInstance* m_Inst;
+	PERSISTLOAD m_Load;		
+
+	typedef std::set<CSysInstance*> Instances;
+	Instances m_Instances;
+
+	typedef std::map<void*, CSysInstance*> InstanceMap;
+	InstanceMap m_InstanceMap;
 };
 
 #endif

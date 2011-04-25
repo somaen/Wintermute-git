@@ -27,14 +27,9 @@ THE SOFTWARE.
 #include "SysClassRegistry.h"
 
 
-int CSysClassRegistry::m_Count = 0;
-bool CSysClassRegistry::m_Disabled = false;
-CSysClass* CSysClassRegistry::m_Classes = NULL;
-
 //////////////////////////////////////////////////////////////////////////
 CSysClassRegistry::CSysClassRegistry()
 {
-
 }
 
 
@@ -44,162 +39,138 @@ CSysClassRegistry::~CSysClassRegistry()
 
 }
 
+//////////////////////////////////////////////////////////////////////////
+CSysClassRegistry* CSysClassRegistry::GetInstance()
+{
+	static CSysClassRegistry classReg;
+	return &classReg;
+}
+
 
 //////////////////////////////////////////////////////////////////////////
-bool CSysClassRegistry::RegisterClass(CSysClass *Class)
+bool CSysClassRegistry::RegisterClass(CSysClass* classObj)
 {
-	Class->m_ID = m_Count++;
+	classObj->SetID(m_Count++);
+	m_Classes.insert(classObj);
 
-	CSysClass* next = m_Classes;
-	m_Classes = Class;
-	m_Classes->m_Next = next;
+	m_NameMap[classObj->GetName()] = classObj;
+	m_IdMap[classObj->GetID()] = classObj;
 
 	return true;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-bool CSysClassRegistry::UnregisterClass(CSysClass *Class)
+bool CSysClassRegistry::UnregisterClass(CSysClass* classObj)
 {
-	CSysClass* last = NULL;
-	for(CSysClass* c=m_Classes; c!=NULL; c=c->m_Next){
-		if(c==Class){
-			int NumInst = 0;
-			CSysInstance* Inst = c->m_Inst;
-			while(Inst!=NULL){
-				NumInst++;
-				Inst = Inst->m_Next;
-			}
-			if(NumInst!=0){
-				char str[MAX_PATH];
-				sprintf(str, "Memory leak@class %-20s: %d instance(s) left\n", c->m_Name, NumInst);
-				CBPlatform::OutputDebugString(str);
-			}
 
-			if(!last) m_Classes = c->m_Next;
-			else last->m_Next = c->m_Next;
+	Classes::iterator it = m_Classes.find(classObj);
+	if (it == m_Classes.end()) return false;
 
-			break;
-		}
-		last = c;
+	if (classObj->GetNumInstances() != 0)
+	{
+		char str[MAX_PATH];
+		sprintf(str, "Memory leak@class %-20s: %d instance(s) left\n", classObj->GetName().c_str(), classObj->GetNumInstances());
+		CBPlatform::OutputDebugString(str);
 	}
+	m_Classes.erase(it);
+
+	NameMap::iterator mapIt = m_NameMap.find(classObj->GetName());
+	if (mapIt != m_NameMap.end()) m_NameMap.erase(mapIt);
+
+	IdMap::iterator idIt = m_IdMap.find(classObj->GetID());
+	if (idIt != m_IdMap.end()) m_IdMap.erase(idIt);
+
+	
 	return true;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-bool CSysClassRegistry::RegisterInstance(const char* ClassName, void* Instance)
+bool CSysClassRegistry::RegisterInstance(const char* className, void* instance)
 {
 	if(m_Disabled) return true;
-	for(CSysClass* c=m_Classes; c!=NULL; c=c->m_Next){
-		if(!strcmp(c->m_Name, ClassName)){
-			c->AddInstance(Instance, m_Count++);
-			//CSysInstance* inst = new CSysInstance(Instance, m_Count++);
-			//c->m_Instances.Add(inst);
-			break;
-		}
+
+	NameMap::iterator mapIt = m_NameMap.find(className);
+	if (mapIt == m_NameMap.end()) return false;
+
+	CSysInstance* inst = (*mapIt).second->AddInstance(instance, m_Count++);
+	return (inst != NULL);
+}
+
+//////////////////////////////////////////////////////////////////////////
+void CSysClassRegistry::AddInstanceToTable(CSysInstance* instance, void* pointer)
+{
+	m_InstanceMap[pointer] = instance;
+
+	if (instance->GetSavedID() >= 0)
+		m_SavedInstanceMap[instance->GetSavedID()] = instance;
+}
+
+//////////////////////////////////////////////////////////////////////////
+int CSysClassRegistry::GetNextID()
+{
+	return m_Count++;
+}
+
+//////////////////////////////////////////////////////////////////////////
+bool CSysClassRegistry::UnregisterInstance(const char* className, void* instance)
+{
+	NameMap::iterator mapIt = m_NameMap.find(className);
+	if (mapIt == m_NameMap.end()) return false;
+	(*mapIt).second->RemoveInstance(instance);
+
+	InstanceMap::iterator instIt = m_InstanceMap.find(instance);
+	if (instIt != m_InstanceMap.end())
+	{
+		m_InstanceMap.erase(instIt);
+		return true;
 	}
+	else return false;
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+bool CSysClassRegistry::GetPointerID(void* pointer, int* classID, int* instanceID)
+{
+	if (pointer == NULL) return true;
+
+	InstanceMap::iterator it = m_InstanceMap.find(pointer);
+	if (it == m_InstanceMap.end()) return false;
+
+
+	CSysInstance* inst = (*it).second;
+	*instanceID = inst->GetID();
+	*classID = inst->GetClass()->GetID();
+
 	return true;
 }
 
-
 //////////////////////////////////////////////////////////////////////////
-bool CSysClassRegistry::UnregisterInstance(const char* ClassName, void* Instance)
+void* CSysClassRegistry::IDToPointer(int classID, int instanceID)
 {
-	//if(Instance!=NULL && !((CBBase*)Instance)->m_Persistable) return true;
-	for(CSysClass* c=m_Classes; c!=NULL; c=c->m_Next){
-		if(!strcmp(c->m_Name, ClassName)){
-			//for(int i=0; i<c->m_Instances.GetSize(); i++){
-			//	if(c->m_Instances[i]->m_Instance==Instance){
-			//		delete c->m_Instances[i];
-			//		c->m_Instances.RemoveAt(i);
-			//		break;
-			//	}			
-			//}
-			c->RemoveInstance(Instance);
-
-			break;
-		}
-	}
-	return true;
+	SavedInstanceMap::iterator it = m_SavedInstanceMap.find(instanceID);
+	if (it == m_SavedInstanceMap.end()) return NULL;
+	else return (*it).second->GetInstance();
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-bool CSysClassRegistry::GetPointerID(void *Pointer, int *ClassID, int *InstanceID)
+HRESULT CSysClassRegistry::SaveTable(CBGame* Game, CBPersistMgr* PersistMgr)
 {
-	if(Pointer==NULL) return true;
-	
-	for(CSysClass* c=m_Classes; c!=NULL; c=c->m_Next){		
-		
-		for(CSysInstance* Inst=c->m_Inst; Inst!=NULL; Inst = Inst->m_Next){
-			if(Inst->m_Instance==Pointer){
-				*ClassID = c->m_ID;
-				*InstanceID = Inst->m_ID;
-				return true;
-			}
-		}
-	}
-	return false;
-}
+	PersistMgr->PutDWORD(m_Classes.size());
 
+	int counter = 0;
 
-//////////////////////////////////////////////////////////////////////////
-void* CSysClassRegistry::IDToPointer(int ClassID, int InstanceID)
-{
-	for(CSysClass* c=m_Classes; c!=NULL; c=c->m_Next){
-		if(c->m_SavedID==ClassID){
-			CSysInstance* Inst = c->m_Inst;
-			while(Inst!=NULL){
-				if(Inst->m_SavedID==InstanceID)
-				{
-					Inst->m_Used = true;
-					return Inst->m_Instance;
-				}
-				Inst = Inst->m_Next;
-			}
-			break;
-		}
-	}
-
-	return NULL;
-}
-
-
-//////////////////////////////////////////////////////////////////////////
-HRESULT CSysClassRegistry::SaveTable(CBGame* Game, CBPersistMgr *PersistMgr)
-{
-	CSysClass* c;
-
-	int NumClasses = 0;
-	for(c=m_Classes; c!=NULL; c=c->m_Next) NumClasses++;
-
-	PersistMgr->PutDWORD(NumClasses);
-
-	int CurrentClass = 0;
-	for(c=m_Classes; c!=NULL; c=c->m_Next){
-		CurrentClass++;
-		Game->m_IndicatorProgress = 50.0f / (float)((float)NumClasses / (float)CurrentClass);
+	Classes::iterator it;
+	for (it = m_Classes.begin(); it != m_Classes.end(); ++it)
+	{
+		counter++;
+		Game->m_IndicatorProgress = 50.0f / (float)((float)m_Classes.size() / (float)counter);
 		Game->DisplayContent(false);
 		Game->m_Renderer->Flip();
 
-		PersistMgr->PutString(c->m_Name);
-		PersistMgr->PutDWORD(c->m_ID);
-
-		int NumInst = 0;
-		CSysInstance* Inst = c->m_Inst;
-		while(Inst!=NULL){
-			NumInst++;
-			Inst = Inst->m_Next;
-		}
-
-		PersistMgr->PutDWORD(NumInst);
-
-		Inst = c->m_Inst;
-		while(Inst!=NULL){
-			PersistMgr->PutDWORD(Inst->m_ID);
-			Inst = Inst->m_Next;
-		}
+		(*it)->SaveTable(Game, PersistMgr);
 	}
 
 	return S_OK;
@@ -207,116 +178,71 @@ HRESULT CSysClassRegistry::SaveTable(CBGame* Game, CBPersistMgr *PersistMgr)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CSysClassRegistry::LoadTable(CBGame* Game, CBPersistMgr *PersistMgr)
+HRESULT CSysClassRegistry::LoadTable(CBGame* Game, CBPersistMgr* PersistMgr)
 {
-	//MarkInstances(false);
-
-	int i;
-	CSysInstance* Inst;
+	Classes::iterator it;
 
 	// reset SavedID of current instances
-	for(CSysClass* c=m_Classes; c!=NULL; c=c->m_Next)
+	for (it = m_Classes.begin(); it != m_Classes.end(); ++it)
 	{
-		Inst = c->m_Inst;
-		while(Inst!=NULL){
-			Inst->m_SavedID = -1;
-			Inst = Inst->m_Next;
-		}
+		(*it)->ResetSavedIDs();
 	}
 
-	// TEST
-	for(CSysClass* c=m_Classes; c!=NULL; c=c->m_Next)
+	for (it = m_Classes.begin(); it != m_Classes.end(); ++it)
 	{
-		if(c->m_Persistent) continue;
-		c->RemoveAllInstances();
+		if ((*it)->IsPersistent()) continue;
+		(*it)->RemoveAllInstances();
 	}
 
+	m_InstanceMap.clear();
 
 
-	int NumClasses = PersistMgr->GetDWORD();
+	int numClasses = PersistMgr->GetDWORD();
 
-	for(i=0; i<NumClasses; i++){
-		
-		Game->m_IndicatorProgress = 50.0f / (float)((float)NumClasses / (float)i);
+	for (int i = 0; i < numClasses; i++)
+	{
+		Game->m_IndicatorProgress = 50.0f / (float)((float)numClasses / (float)i);
 		Game->DisplayContentSimple();
 		Game->m_Renderer->Flip();
-				
 
-		char* str = PersistMgr->GetString();
-		for(CSysClass* c=m_Classes; c!=NULL; c=c->m_Next){
-			if(!strcmp(c->m_Name, str)){
-				c->m_SavedID = PersistMgr->GetDWORD();
-				int NumInstances = PersistMgr->GetDWORD();
-				for(int j=0; j<NumInstances; j++){
-					// persistent class, just map instance (there SHOULD at most be one instance)
-					if(c->m_Persistent){
-						if(j>0) Game->LOG(0, "Warning: attempting to load multiple instances of persistent class %s (%d)", c->m_Name, NumInstances);
-						
-						int inst_id = PersistMgr->GetDWORD();
-
-						CSysInstance* Inst = c->GetInstanceAt(j);
-						if(Inst!=NULL) Inst->m_SavedID = inst_id;
-						else Game->LOG(0, "Warning: instance %d of persistent class %s not found", j, c->m_Name);
-					}
-					// normal instances, create empty objects
-					else{
-						void* empty_object = c->m_Build();
-						for(int k=0; k<c->GetNumInstances(); k++){
-							CSysInstance* Inst = c->GetInstanceAt(k);
-							if(Inst->m_Instance==empty_object){
-								Inst->m_SavedID = PersistMgr->GetDWORD();
-								//c->m_Instances[k]->m_ID = m_Count++;
-								break;
-							}
-						}
-					}
-				}
-				break;
-			}
-		}
+		char* className = PersistMgr->GetString();
+		NameMap::iterator mapIt = m_NameMap.find(className);
+		if (mapIt != m_NameMap.end()) (*mapIt).second->LoadTable(Game, PersistMgr);
 	}
 
-	//WeedUnusedInstances();
 	return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CSysClassRegistry::SaveInstances(CBGame* Game, CBPersistMgr *PersistMgr)
+HRESULT CSysClassRegistry::SaveInstances(CBGame* Game, CBPersistMgr* PersistMgr)
 {
-	CSysClass* c;
-	HRESULT ret;
+
+	Classes::iterator it;
 
 	// count total instances
-	int NumInstances = 0;
-	int NumClasses = 0;
-	for(c=m_Classes; c!=NULL; c=c->m_Next){
-		NumInstances+=c->GetNumInstances();
-		NumClasses++;
+	int numInstances = 0;
+	for (it = m_Classes.begin(); it != m_Classes.end(); ++it)
+	{
+		numInstances += (*it)->GetNumInstances();
 	}
-	PersistMgr->PutDWORD(NumInstances);
 
-	int CurrentClass = 0;
-	for(c=m_Classes; c!=NULL; c=c->m_Next){
-		CurrentClass++;
+	PersistMgr->PutDWORD(numInstances);
 
-		if(CurrentClass%20 == 0){
-			Game->m_IndicatorProgress = 50 + 50.0f / (float)((float)NumClasses / (float)CurrentClass);
+	int counter = 0;
+	for (it = m_Classes.begin(); it != m_Classes.end(); ++it)
+	{
+		counter++;
+
+		if (counter % 20 == 0)
+		{
+			Game->m_IndicatorProgress = 50 + 50.0f / (float)((float)m_Classes.size() / (float)counter);
 			Game->DisplayContent(false);
 			Game->m_Renderer->Flip();
 		}
 		Game->MiniUpdate();
-		
-		CSysInstance* Inst = c->m_Inst;
-		while(Inst!=NULL){
-			// write instace header
-			PersistMgr->PutDWORD(c->m_ID);
-			PersistMgr->PutDWORD(Inst->m_ID);
 
-			if(FAILED(ret=c->m_Load(Inst->m_Instance, PersistMgr))) return ret;
-
-			Inst = Inst->m_Next;
-		}
+		(*it)->SaveInstances(Game, PersistMgr);
 	}
 
 	return S_OK;
@@ -326,98 +252,54 @@ HRESULT CSysClassRegistry::SaveInstances(CBGame* Game, CBPersistMgr *PersistMgr)
 //////////////////////////////////////////////////////////////////////////
 HRESULT CSysClassRegistry::LoadInstances(CBGame* Game, CBPersistMgr *PersistMgr)
 {
-	CSysClass* c;
-	HRESULT ret;
-
-	int ClassID, InstanceID;
-
 	// get total instances
-	int NumInstances = PersistMgr->GetDWORD();
+	int numInstances = PersistMgr->GetDWORD();
 
-	for(int i=0; i<NumInstances; i++){
-		
-		if(i%20 == 0)
+	for (int i = 0; i < numInstances; i++)
+	{
+		if (i % 20 == 0)
 		{
-			Game->m_IndicatorProgress = 50 + 50.0f / (float)((float)NumInstances / (float)i);
+			Game->m_IndicatorProgress = 50 + 50.0f / (float)((float)numInstances / (float)i);
 			Game->DisplayContentSimple();
 			Game->m_Renderer->Flip();
 		}
 
-		ClassID = PersistMgr->GetDWORD();
-		InstanceID = PersistMgr->GetDWORD();
-		void* instance = IDToPointer(ClassID, InstanceID);
+		int classID = PersistMgr->GetDWORD();
+		int instanceID = PersistMgr->GetDWORD();
+		void* instance = IDToPointer(classID, instanceID);
 
-		for(c=m_Classes; c!=NULL; c=c->m_Next){
-			if(c->m_SavedID==ClassID){
-				if(FAILED(ret=c->m_Load(instance, PersistMgr))) return ret;
-				break;
+
+		Classes::iterator it;
+		for (it = m_Classes.begin(); it != m_Classes.end(); ++it)
+		{
+			if ((*it)->GetSavedID() == classID)
+			{
+				(*it)->LoadInstance(instance, PersistMgr);
 			}
-		}		
+		}
 	}
+
+	m_SavedInstanceMap.clear();
 
 	return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CSysClassRegistry::EnumInstances(SYS_INSTANCE_CALLBACK lpCallback, const char* ClassName, void *lpData)
+HRESULT CSysClassRegistry::EnumInstances(SYS_INSTANCE_CALLBACK lpCallback, const char* className, void* lpData)
 {
-	for(CSysClass* c=m_Classes; c!=NULL; c=c->m_Next){
-		if(!strcmp(c->m_Name, ClassName)){
+	NameMap::iterator mapIt = m_NameMap.find(className);
+	if (mapIt == m_NameMap.end()) return E_FAIL;
 
-			/*
-			for(int i=0; i<c->m_Instances.GetSize(); i++){
-				lpCallback(c->m_Instances[i]->m_Instance, lpData);
-			}
-			*/
-			CSysInstance* Inst = c->m_Inst;
-			while(Inst!=NULL){
-				lpCallback(Inst->m_Instance, lpData);
-				Inst = Inst->m_Next;
-			}
-			break;
-		}
-	}
-
+	(*mapIt).second->InstanceCallback(lpCallback, lpData);
 	return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-bool CSysClassRegistry::MarkInstances(bool Used)
+void CSysClassRegistry::DumpClasses(FILE* stream)
 {
-	for(CSysClass* c=m_Classes; c!=NULL; c=c->m_Next){
-		CSysInstance* Inst = c->m_Inst;
-		while(Inst!=NULL){
-			Inst->m_Used = Used;
-			Inst = Inst->m_Next;
-		}
-	}
-	return true;
-}
-
-//////////////////////////////////////////////////////////////////////////
-bool CSysClassRegistry::WeedUnusedInstances()
-{
-	for(CSysClass* c=m_Classes; c!=NULL; c=c->m_Next){
-		CSysInstance* Inst = c->m_Inst;
-		CSysInstance* LastInst = NULL;
-		while(Inst!=NULL){
-			if(!Inst->m_Used)
-			{
-				if(LastInst==NULL) c->m_Inst = Inst->m_Next;
-				else LastInst->m_Next = Inst->m_Next;
-
-				CSysInstance* Temp = Inst;
-				Inst = Inst->m_Next;
-				delete Temp;
-			}
-			else
-			{
-				LastInst = Inst;
-				Inst = Inst->m_Next;
-			}
-		}
-	}
-	return true;
+	Classes::iterator it;
+	for (it = m_Classes.begin(); it != m_Classes.end(); ++it)
+		(*it)->Dump(stream);
 }

@@ -31,26 +31,28 @@ THE SOFTWARE.
 CBSaveThumbHelper::CBSaveThumbHelper(CBGame* inGame):CBBase(inGame)
 {
 	m_Thumbnail = NULL;
-	m_RichThumbnail = NULL;
 }
 
 //////////////////////////////////////////////////////////////////////////
 CBSaveThumbHelper::~CBSaveThumbHelper(void)
 {
 	SAFE_DELETE(m_Thumbnail);
-	SAFE_DELETE(m_RichThumbnail);
 }
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBSaveThumbHelper::StoreThumbnail(bool DoFlip)
 {
 	SAFE_DELETE(m_Thumbnail);
-	SAFE_DELETE(m_RichThumbnail);
 
 	if (Game->m_ThumbnailWidth > 0 && Game->m_ThumbnailHeight > 0)
 	{
 		if(DoFlip)
 		{
+			// when using opengl on windows it seems to be necessary to do this twice
+			// works normally for direct3d
+			Game->DisplayContent(false);
+			Game->m_Renderer->Flip();
+			
 			Game->DisplayContent(false);
 			Game->m_Renderer->Flip();
 		}

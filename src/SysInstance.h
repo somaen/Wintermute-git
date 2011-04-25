@@ -27,17 +27,27 @@ THE SOFTWARE.
 #define __WmeSysInstance_H__
 
 
+class CSysClass;
+
 class CSysInstance  
 {
 public:
+	CSysInstance(void* Instance, int ID, CSysClass* sysClass);
+	virtual ~CSysInstance();
+
+	int GetID() const { return m_ID; }
+	int GetSavedID() const { return m_SavedID; }
+	void* GetInstance() const { return m_Instance; }
+	CSysClass* GetClass() const { return m_Class; }
+
+	void SetSavedID(int id) { m_SavedID = id; }
+
+private:
 	bool m_Used;
 	int m_ID;
 	int m_SavedID;
 	void* m_Instance;
-	CSysInstance(void* Instance, int ID);
-	virtual ~CSysInstance();
-	class CSysInstance* m_Next;
-
+	CSysClass* m_Class;
 };
 
 #endif

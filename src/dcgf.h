@@ -98,7 +98,7 @@ typedef HRESULT (WINAPI *PERSISTLOAD)(void*, CBPersistMgr*);
 #define IMPLEMENT_PERSISTENT(class_name, persistent_class)\
 	const char class_name::m_ClassName[] = #class_name;\
 	void* class_name::PersistBuild(){\
-		return new class_name(DYNAMIC_CONSTRUCTOR, DYNAMIC_CONSTRUCTOR);\
+		return ::new class_name(DYNAMIC_CONSTRUCTOR, DYNAMIC_CONSTRUCTOR);\
 	}\
 	\
 	HRESULT class_name::PersistLoad(void* Instance, CBPersistMgr* PersistMgr){\
@@ -113,12 +113,12 @@ typedef HRESULT (WINAPI *PERSISTLOAD)(void*, CBPersistMgr*);
 	\
 	void* class_name::operator new (size_t size){\
 		void* ret = ::operator new(size);\
-		CSysClassRegistry::RegisterInstance(#class_name, ret);\
+		CSysClassRegistry::GetInstance()->RegisterInstance(#class_name, ret);\
 		return ret;\
 	}\
 	\
 	void class_name::operator delete (void* p){\
-		CSysClassRegistry::UnregisterInstance(#class_name, p);\
+		CSysClassRegistry::GetInstance()->UnregisterInstance(#class_name, p);\
 		::operator delete(p);\
 	}\
 

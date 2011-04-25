@@ -1220,12 +1220,15 @@ HRESULT CScScript::Persist(CBPersistMgr* PersistMgr){
 	
 	PersistMgr->Transfer(TMEMBER(Game));
 
-	// buffer
-	PersistMgr->Transfer(TMEMBER(m_BufferSize));
-	if(PersistMgr->m_Saving){
+	// buffer	
+	if (PersistMgr->m_Saving)
+	{
+		PersistMgr->Transfer(TMEMBER(m_BufferSize));
 		PersistMgr->PutBytes(m_Buffer, m_BufferSize);
 	}
-	else{
+	else
+	{
+		PersistMgr->Transfer(TMEMBER(m_BufferSize));
 		m_Buffer = new BYTE[m_BufferSize];
 		PersistMgr->GetBytes(m_Buffer, m_BufferSize);
 		InitTables();

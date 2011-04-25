@@ -472,7 +472,7 @@ HRESULT CBPersistMgr::Transfer(const char* Name, void* Val)
 
 	if(m_Saving)
 	{
-		CSysClassRegistry::GetPointerID(*(void**)Val, &ClassID, &InstanceID);
+		CSysClassRegistry::GetInstance()->GetPointerID(*(void**)Val, &ClassID, &InstanceID);
 		if(*(void**)Val!= NULL && (ClassID==-1 || InstanceID==-1))
 		{
 			Game->LOG(0, "Warning: invalid instance '%s'", Name);
@@ -486,7 +486,7 @@ HRESULT CBPersistMgr::Transfer(const char* Name, void* Val)
 		ClassID = GetDWORD();
 		InstanceID = GetDWORD();
 
-		*(void**)Val = CSysClassRegistry::IDToPointer(ClassID, InstanceID);
+		*(void**)Val = CSysClassRegistry::GetInstance()->IDToPointer(ClassID, InstanceID);
 	}
 	
 	return S_OK;
