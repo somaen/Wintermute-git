@@ -134,7 +134,7 @@ HRESULT CBRenderer::Flip()
 
 
 //////////////////////////////////////////////////////////////////////
-HRESULT CBRenderer::InitRenderer(int width, int height)
+HRESULT CBRenderer::InitRenderer(int width, int height, bool windowed)
 {
 	return E_FAIL;
 }

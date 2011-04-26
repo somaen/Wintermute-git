@@ -201,9 +201,9 @@ public:
 
 	// compatibility bits
 	bool m_CompatKillMethodThreads;
-
-	// FPS stuff
+	
 private:	
+	// FPS stuff
 	DWORD m_LastTime;
 	DWORD m_FpsTime;
 	DWORD m_FramesRendered;	
@@ -331,6 +331,18 @@ private:
 
 	LastClickInfo m_LastClick[2];
 	bool IsDoubleClick(int buttonIndex);
+
+
+
+protected:
+	// WME Lite specific
+	bool m_AutoSaveOnExit;
+	int m_AutoSaveSlot;
+	bool m_CursorHidden;
+
+public:
+	void AutoSaveOnExit();
+
 
 };
 

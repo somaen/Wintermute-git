@@ -29,18 +29,18 @@ THE SOFTWARE.
 
 //////////////////////////////////////////////////////////////////////////
 #define DCGF_VER_MAJOR 1
-#define DCGF_VER_MINOR 9
-#define DCGF_VER_BUILD 3
-#define DCGF_VER_SUFFIX ""
-#define DCGF_VER_BETA false
+#define DCGF_VER_MINOR 0
+#define DCGF_VER_BUILD 0
+#define DCGF_VER_SUFFIX "beta"
+#define DCGF_VER_BETA true
 
-#define DCGF_NAME "Wintermute Engine"
+#define DCGF_NAME "WME Lite"
 #define DCGF_MAGIC 0xDEC0ADDE
 
 // minimal saved game version we support
 #define SAVEGAME_VER_MAJOR 1
-#define SAVEGAME_VER_MINOR 9
-#define SAVEGAME_VER_BUILD 3
+#define SAVEGAME_VER_MINOR 0
+#define SAVEGAME_VER_BUILD 0
 //////////////////////////////////////////////////////////////////////////
 
 #define COMPRESSED_FILE_MAGIC 0x504D435A // ZCMP

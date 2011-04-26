@@ -49,7 +49,7 @@ CBRenderSDL::~CBRenderSDL()
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRenderSDL::InitRenderer(int width, int height)
+HRESULT CBRenderSDL::InitRenderer(int width, int height, bool windowed)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) return E_FAIL;
 	
@@ -126,6 +126,10 @@ HRESULT CBRenderSDL::InitRenderer(int width, int height)
 	flags |= SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS;
 #endif
 
+	//m_Windowed = Game->m_Registry->ReadBool("Video", "Windowed", true);
+	if (!windowed) flags |= SDL_WINDOW_FULLSCREEN;
+
+
 	m_Win = SDL_CreateWindow("WME Lite",
 		SDL_WINDOWPOS_UNDEFINED,
 		SDL_WINDOWPOS_UNDEFINED,
@@ -147,9 +151,6 @@ HRESULT CBRenderSDL::InitRenderer(int width, int height)
 	if (!m_Renderer) return E_FAIL;
 
 	m_Active = true;
-
-	m_Windowed = Game->m_Registry->ReadBool("Video", "Windowed", true);
-	if (!m_Windowed) SDL_SetWindowFullscreen(m_Win, SDL_TRUE);
 
 
 	return S_OK;

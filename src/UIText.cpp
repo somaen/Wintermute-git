@@ -461,15 +461,7 @@ HRESULT CUIText::Persist(CBPersistMgr* PersistMgr){
 
 	CUIObject::Persist(PersistMgr);
 	PersistMgr->Transfer(TMEMBER_INT(m_TextAlign));
-
-	// 1.1.36
-	if(PersistMgr->CheckVersion(1, 1, 36)){
-		PersistMgr->Transfer(TMEMBER_INT(m_VerticalAlign));
-	}
-	else{
-		m_VerticalAlign = VAL_CENTER;
-	}
-
+	PersistMgr->Transfer(TMEMBER_INT(m_VerticalAlign));
 
 	return S_OK;
 }

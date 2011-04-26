@@ -533,15 +533,7 @@ HRESULT CBSprite::Persist(CBPersistMgr *PersistMgr)
 	PersistMgr->Transfer(TMEMBER(m_Owner));
 	PersistMgr->Transfer(TMEMBER(m_Precise));
 	PersistMgr->Transfer(TMEMBER(m_Streamed));
-
-	if(PersistMgr->CheckVersion(1, 8, 5))
-	{
-		PersistMgr->Transfer(TMEMBER(m_StreamedKeepLoaded));
-	}
-	else
-	{
-		m_StreamedKeepLoaded = false;
-	}
+	PersistMgr->Transfer(TMEMBER(m_StreamedKeepLoaded));
 
 
 	return S_OK;

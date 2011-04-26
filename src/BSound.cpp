@@ -183,14 +183,7 @@ HRESULT CBSound::Persist(CBPersistMgr *PersistMgr)
 	PersistMgr->Transfer(TMEMBER(m_SoundPrivateVolume));
 	PersistMgr->Transfer(TMEMBER(m_SoundStreamed));
 	PersistMgr->Transfer(TMEMBER_INT(m_SoundType));
-
-	// 1.1.41
-	if(PersistMgr->CheckVersion(1, 1, 41)){
-		PersistMgr->Transfer(TMEMBER(m_SoundLoopStart));
-	}
-	else{
-		m_SoundLoopStart = 0;
-	}
+	PersistMgr->Transfer(TMEMBER(m_SoundLoopStart));
 
 	return S_OK;
 }

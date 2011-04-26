@@ -338,19 +338,9 @@ HRESULT CBSubFrame::Persist(CBPersistMgr* PersistMgr)
 	PersistMgr->Transfer(TMEMBER(m_CKBlue));
 	PersistMgr->Transfer(TMEMBER(m_LifeTime));
 
-	if(PersistMgr->CheckVersion(1, 8, 5))
-	{
-		PersistMgr->Transfer(TMEMBER(m_KeepLoaded));
-		PersistMgr->Transfer(TMEMBER(m_MirrorX));
-		PersistMgr->Transfer(TMEMBER(m_MirrorY));
-	}
-	else
-	{
-		m_KeepLoaded = false;
-		m_MirrorX = false;
-		m_MirrorY = false;
-	}
-
+	PersistMgr->Transfer(TMEMBER(m_KeepLoaded));
+	PersistMgr->Transfer(TMEMBER(m_MirrorX));
+	PersistMgr->Transfer(TMEMBER(m_MirrorY));
 	PersistMgr->Transfer(TMEMBER(m_Transparent));
 
 	return S_OK;

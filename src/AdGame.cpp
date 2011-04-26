@@ -1104,6 +1104,8 @@ HRESULT CAdGame::ExternalCall(CScScript *Script, CScStack *Stack, CScStack *This
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdGame::ShowCursor()
 {
+	if (m_CursorHidden) return S_OK;
+
 	if(m_SelectedItem && Game->m_State == GAME_RUNNING && m_StateEx == GAME_NORMAL && m_Interactive)
 	{
 		if(m_SelectedItem->m_CursorCombined)
@@ -1319,13 +1321,8 @@ HRESULT CAdGame::Persist(CBPersistMgr *PersistMgr)
 	PersistMgr->Transfer(TMEMBER(m_SmartItemCursor));
 
 	if(!PersistMgr->m_Saving) m_InitialScene = false;
-
 	
-	if(!PersistMgr->CheckVersion(1, 7, 91))
-	{
-		PersistMgr->Transfer(TMEMBER(m_StartupScene));
-	}
-	else if(!PersistMgr->m_Saving) m_StartupScene = NULL;
+	PersistMgr->Transfer(TMEMBER(m_StartupScene));
 
 
 	return S_OK;

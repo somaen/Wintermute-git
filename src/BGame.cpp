@@ -221,6 +221,11 @@ CBGame::CBGame():CBObject(this)
 
 	// compatibility bits
 	m_CompatKillMethodThreads = false;
+
+
+	m_AutoSaveOnExit = true;
+	m_AutoSaveSlot = 999;
+	m_CursorHidden = false;
 }
 
 
@@ -2456,6 +2461,42 @@ CScValue* CBGame::ScGetProperty(char *Name)
 		return m_ScValue;
 	}
 
+	//////////////////////////////////////////////////////////////////////////
+	// AutoSaveOnExit
+	//////////////////////////////////////////////////////////////////////////
+	else if(strcmp(Name, "AutoSaveOnExit")==0)
+	{
+		m_ScValue->SetBool(m_AutoSaveOnExit);
+		return m_ScValue;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// AutoSaveSlot
+	//////////////////////////////////////////////////////////////////////////
+	else if(strcmp(Name, "AutoSaveSlot")==0)
+	{
+		m_ScValue->SetInt(m_AutoSaveSlot);
+		return m_ScValue;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// CursorHidden
+	//////////////////////////////////////////////////////////////////////////
+	else if(strcmp(Name, "CursorHidden")==0)
+	{
+		m_ScValue->SetBool(m_CursorHidden);
+		return m_ScValue;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// Platform (RO)
+	//////////////////////////////////////////////////////////////////////////
+	else if(strcmp(Name, "Platform")==0)
+	{
+		m_ScValue->SetString(CBPlatform::GetPlatformName().c_str());
+		return m_ScValue;
+	}
+
 	else return CBObject::ScGetProperty(Name);
 }
 
@@ -2644,6 +2685,33 @@ HRESULT CBGame::ScSetProperty(char *Name, CScValue *Value)
 	else if(strcmp(Name, "AutorunDisabled")==0)
 	{
 		m_AutorunDisabled = Value->GetBool();
+		return S_OK;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// AutoSaveOnExit
+	//////////////////////////////////////////////////////////////////////////
+	else if(strcmp(Name, "AutoSaveOnExit")==0)
+	{
+		m_AutoSaveOnExit = Value->GetBool();
+		return S_OK;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// AutoSaveSlot
+	//////////////////////////////////////////////////////////////////////////
+	else if(strcmp(Name, "AutoSaveSlot")==0)
+	{
+		m_AutoSaveSlot = Value->GetInt();
+		return S_OK;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// CursorHidden
+	//////////////////////////////////////////////////////////////////////////
+	else if(strcmp(Name, "CursorHidden")==0)
+	{
+		m_CursorHidden = Value->GetBool();
 		return S_OK;
 	}
 
@@ -3159,6 +3227,8 @@ HRESULT CBGame::ExternalCall(CScScript* Script, CScStack* Stack, CScStack* ThisS
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBGame::ShowCursor()
 {
+	if (m_CursorHidden) return S_OK;
+
 	if(!m_Interactive && Game->m_State==GAME_RUNNING)
 	{
 		if(m_CursorNoninteractive) return DrawCursor(m_CursorNoninteractive);
@@ -3677,17 +3747,12 @@ HRESULT CBGame::Persist(CBPersistMgr *PersistMgr)
 	
 	m_Windows.Persist(PersistMgr);
 
-	if(PersistMgr->CheckVersion(1, 7, 1))
-	{
-		PersistMgr->Transfer(TMEMBER(m_SuppressScriptErrors));
-	}
-	else m_SuppressScriptErrors = false;
+	PersistMgr->Transfer(TMEMBER(m_SuppressScriptErrors));
+	PersistMgr->Transfer(TMEMBER(m_AutorunDisabled));
 
-	if(PersistMgr->CheckVersion(1, 8, 2))
-	{
-		PersistMgr->Transfer(TMEMBER(m_AutorunDisabled));
-	}
-	else m_AutorunDisabled = false;
+	PersistMgr->Transfer(TMEMBER(m_AutoSaveOnExit));
+	PersistMgr->Transfer(TMEMBER(m_AutoSaveSlot));
+	PersistMgr->Transfer(TMEMBER(m_CursorHidden));
 
 	return S_OK;
 }
@@ -4600,4 +4665,13 @@ bool CBGame::IsDoubleClick(int buttonIndex)
 		m_LastClick[buttonIndex].Time = 0;
 		return true;
 	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+void CBGame::AutoSaveOnExit()
+{
+	if (!m_AutoSaveOnExit) return;
+	if (m_State == GAME_FROZEN) return;
+
+	SaveGame(m_AutoSaveSlot, "autosave", true);
 }

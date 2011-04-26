@@ -490,24 +490,8 @@ HRESULT CBFontBitmap::Persist(CBPersistMgr* PersistMgr)
 		PersistMgr->GetBytes(m_Widths, sizeof(m_Widths));
 
 
-	// 1.1.36
-	if(PersistMgr->CheckVersion(1, 1, 36))
-	{
-		PersistMgr->Transfer(TMEMBER(m_FontextFix));
-	}
-	else
-	{
-		m_FontextFix = false;
-	}
-
-	if(PersistMgr->CheckVersion(1, 8, 5))
-	{
-		PersistMgr->Transfer(TMEMBER(m_WholeCell));
-	}
-	else
-	{
-		m_WholeCell = false;
-	}
+	PersistMgr->Transfer(TMEMBER(m_FontextFix));
+	PersistMgr->Transfer(TMEMBER(m_WholeCell));
 
 
 	return S_OK;

@@ -1321,25 +1321,14 @@ HRESULT CAdActor::Persist(CBPersistMgr *PersistMgr)
 	PersistMgr->Transfer(TMEMBER(m_TurnRightSprite));
 	PersistMgr->Transfer(TMEMBER(m_WalkSprite));
 
-	if(PersistMgr->CheckVersion(1, 7, 92))
-	{
-		PersistMgr->Transfer(TMEMBER(m_AnimSprite2));
-		PersistMgr->Transfer(TMEMBER(m_TalkAnimName));
-		PersistMgr->Transfer(TMEMBER(m_IdleAnimName));
-		PersistMgr->Transfer(TMEMBER(m_WalkAnimName));
-		PersistMgr->Transfer(TMEMBER(m_TurnLeftAnimName));
-		PersistMgr->Transfer(TMEMBER(m_TurnRightAnimName));
+	PersistMgr->Transfer(TMEMBER(m_AnimSprite2));
+	PersistMgr->Transfer(TMEMBER(m_TalkAnimName));
+	PersistMgr->Transfer(TMEMBER(m_IdleAnimName));
+	PersistMgr->Transfer(TMEMBER(m_WalkAnimName));
+	PersistMgr->Transfer(TMEMBER(m_TurnLeftAnimName));
+	PersistMgr->Transfer(TMEMBER(m_TurnRightAnimName));
 
-		m_Anims.Persist(PersistMgr);
-	}
-	else
-	{
-		if(!PersistMgr->m_Saving)
-		{
-			SetDefaultAnimNames();
-			m_AnimSprite2 = NULL;
-		}
-	}
+	m_Anims.Persist(PersistMgr);
 
 	return S_OK;
 }

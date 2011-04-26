@@ -54,8 +54,8 @@ int CBPlatform::Initialize(CBGame* inGame, int argc, char* argv[])
 	if(!Game) return 1;
 
 
-	bool SilentMode = false;
-
+	bool windowedMode = false;
+	
 
 	// parse command line
 	char* SaveGame = NULL;
@@ -85,6 +85,7 @@ int CBPlatform::Initialize(CBGame* inGame, int argc, char* argv[])
 				delete [] IniName;
 			}
 		}
+		else if(CBPlatform::stricmp(param, "-windowed")==0) windowedMode = true;
 	}
 
 
@@ -109,13 +110,9 @@ int CBPlatform::Initialize(CBGame* inGame, int argc, char* argv[])
 		Game->LOG(0, "Error loading game settings.");
 		SAFE_DELETE(Game);
 
-		if(!SilentMode)
-		{
 #ifdef __WIN32__
-			::MessageBox(NULL, "Some of the essential files are missing. Please reinstall.", NULL, MB_OK|MB_ICONERROR);
+		::MessageBox(NULL, "Some of the essential files are missing. Please reinstall.", NULL, MB_OK|MB_ICONERROR);
 #endif
-		}
-
 		return 2;
 	}
 
@@ -129,7 +126,7 @@ int CBPlatform::Initialize(CBGame* inGame, int argc, char* argv[])
 	HRESULT ret;
 
 	// initialize the renderer
-	ret = Game->m_Renderer->InitRenderer(Game->m_SettingsResWidth, Game->m_SettingsResHeight);
+	ret = Game->m_Renderer->InitRenderer(Game->m_SettingsResWidth, Game->m_SettingsResHeight, windowedMode);
 	if (FAILED(ret))
 	{
 		Game->LOG(ret, "Error initializing renderer. Exiting.");
@@ -312,7 +309,7 @@ void CBPlatform::HandleEvent(SDL_Event* event)
 #ifdef __IPHONEOS__
 		if (Game)
 		{
-			Game->SaveGame(0, "autosave", true);
+			Game->AutoSaveOnExit();
 			Game->m_Quitting = true;
 		}
 #else

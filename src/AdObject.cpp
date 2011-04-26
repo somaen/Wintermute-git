@@ -1017,27 +1017,13 @@ HRESULT CAdObject::Persist(CBPersistMgr *PersistMgr)
 
 	for(int i=0; i<MAX_NUM_REGIONS; i++) PersistMgr->Transfer(TMEMBER(m_CurrentRegions[i]));
 
-	if(PersistMgr->CheckVersion(1, 7, 1))
-	{
-		m_AttachmentsPre.Persist(PersistMgr);
-		m_AttachmentsPost.Persist(PersistMgr);
-		PersistMgr->Transfer(TMEMBER(m_RegisterAlias));
-	}
-	else m_RegisterAlias = this;
+	m_AttachmentsPre.Persist(PersistMgr);
+	m_AttachmentsPost.Persist(PersistMgr);
+	PersistMgr->Transfer(TMEMBER(m_RegisterAlias));
 
-
-	if(PersistMgr->CheckVersion(1, 8, 4))
-	{
-		PersistMgr->Transfer(TMEMBER(m_PartFollowParent));
-		PersistMgr->Transfer(TMEMBER(m_PartOffsetX));
-		PersistMgr->Transfer(TMEMBER(m_PartOffsetY));
-	}
-	else
-	{
-		m_PartFollowParent = false;
-		m_PartOffsetX = 0;
-		m_PartOffsetY = 0;
-	}
+	PersistMgr->Transfer(TMEMBER(m_PartFollowParent));
+	PersistMgr->Transfer(TMEMBER(m_PartOffsetX));
+	PersistMgr->Transfer(TMEMBER(m_PartOffsetY));
 
 	return S_OK;
 }

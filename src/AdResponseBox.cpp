@@ -539,18 +539,8 @@ HRESULT CAdResponseBox::Persist(CBPersistMgr* PersistMgr)
 	PersistMgr->Transfer(TMEMBER(m_WaitingScript));
 	PersistMgr->Transfer(TMEMBER(m_Window));
 
-	// 1.6.1
-	if(PersistMgr->CheckVersion(1, 6, 1))
-		PersistMgr->Transfer(TMEMBER_INT(m_VerticalAlign));
-	else
-		m_VerticalAlign = VAL_BOTTOM;
-
-	// 1.6.2
-	if(PersistMgr->CheckVersion(1, 6, 2))
-		PersistMgr->Transfer(TMEMBER_INT(m_Align));
-	else
-		m_Align = TAL_LEFT;
-
+	PersistMgr->Transfer(TMEMBER_INT(m_VerticalAlign));
+	PersistMgr->Transfer(TMEMBER_INT(m_Align));
 
 	return S_OK;
 }

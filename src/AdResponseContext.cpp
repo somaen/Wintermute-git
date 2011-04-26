@@ -47,11 +47,7 @@ CAdResponseContext::~CAdResponseContext()
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdResponseContext::Persist(CBPersistMgr *PersistMgr)
 {
-	if(PersistMgr->CheckVersion(1, 8, 7))
-	{
-		PersistMgr->Transfer(TMEMBER(Game));
-	}
-
+	PersistMgr->Transfer(TMEMBER(Game));
 	PersistMgr->Transfer(TMEMBER(m_Context));
 	PersistMgr->Transfer(TMEMBER(m_ID));
 

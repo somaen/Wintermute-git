@@ -225,11 +225,7 @@ HRESULT CAdSentence::Persist(CBPersistMgr* PersistMgr){
 	PersistMgr->Transfer(TMEMBER(m_Text));
 	PersistMgr->Transfer(TMEMBER(m_Width));
 	PersistMgr->Transfer(TMEMBER(m_FixedPos));
-
-	if(PersistMgr->CheckVersion(1, 1, 40)){
-		PersistMgr->Transfer(TMEMBER(m_Freezable));
-	}
-	else m_Freezable = false;
+	PersistMgr->Transfer(TMEMBER(m_Freezable));
 
 	return S_OK;
 }
