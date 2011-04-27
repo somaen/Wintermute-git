@@ -61,12 +61,12 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDL.lib SDLmain.lib bass.lib zlib.lib freetype2311.lib FreeImage.lib"
+				AdditionalDependencies="SDL.lib SDLmain.lib bass.lib zlib.lib freetype2311_D.lib FreeImage.lib"
 				OutputFile="$(InputDir)\..\bin\$(IntDir)\$(ProjectName).exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="dep\sdl\lib;dep\zlib\lib;dep\bass\lib;dep\freetype\lib;dep\FreeImage\lib;dep\boost\lib"
 				AdditionalManifestDependencies=""
-				IgnoreDefaultLibraryNames="msvcrt"
+				IgnoreDefaultLibraryNames="LIBCMT"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -92,7 +92,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="@copy dep\bass\lib\*.dll $(TargetDir) &gt; nul&#x0D;&#x0A;@copy dep\sdl\lib\*.dll $(TargetDir) &gt; nul&#x0D;&#x0A;@copy dep\FreeImage\lib\*.dll $(TargetDir) &gt; nul"
+				CommandLine="@copy dep\bass\lib\*.dll $(TargetDir) &gt; nul&#x0D;&#x0A;@copy dep\sdl\lib\*.dll $(TargetDir) &gt; nul&#x0D;&#x0A;@copy dep\FreeImage\lib\*.dll $(TargetDir) &gt; nul&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -124,7 +124,7 @@
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="dep\sdl\include;dep\zlib\include;dep\bass\include;dep\freetype\include;dep\FreeImage\include;dep\boost\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -141,10 +141,11 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDL.lib SDLmain.lib bass.lib zlib.lib freetype2311.lib FreeImage.lib"
+				AdditionalDependencies="SDL.lib SDLmain.lib bass.lib zlib.lib freetype2311ST.lib FreeImage.lib"
 				OutputFile="$(InputDir)\..\bin\$(IntDir)\$(ProjectName).exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="dep\sdl\lib;dep\zlib\lib;dep\bass\lib;dep\freetype\lib;dep\FreeImage\lib;dep\boost\lib"
+				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				GenerateMapFile="true"
 				SubSystem="2"
@@ -173,7 +174,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="@copy dep\bass\lib\*.dll $(TargetDir) &gt; nul&#x0D;&#x0A;@copy dep\sdl\lib\*.dll $(TargetDir) &gt; nul&#x0D;&#x0A;@copy dep\FreeImage\lib\*.dll $(TargetDir) &gt; nul"
+				CommandLine="@copy dep\bass\lib\*.dll $(TargetDir) &gt; nul&#x0D;&#x0A;@copy dep\sdl\lib\*.dll $(TargetDir) &gt; nul&#x0D;&#x0A;@copy dep\FreeImage\lib\*.dll $(TargetDir) &gt; nul&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>

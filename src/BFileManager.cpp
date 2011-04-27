@@ -386,7 +386,7 @@ HRESULT CBFileManager::RegisterPackages()
 
 				//printf("%s\n", fileName.c_str());
 				if (!StringUtil::CompareNoCase(extension, PathUtil::GetExtension(fileName))) continue;
-				RegisterPackage(absPath.string().c_str(), dit->path().filename().c_str());
+				RegisterPackage(absPath.string().c_str(), dit->path().filename().string().c_str());
 			}
 		}
 	}
