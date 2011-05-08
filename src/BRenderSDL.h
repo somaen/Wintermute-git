@@ -59,6 +59,9 @@ public:
 	void PointFromScreen(POINT* point);
 	void PointToScreen(POINT* point);
 
+	float GetScaleRatioX() const { return m_RatioX; }
+	float GetScaleRatioY() const { return m_RatioY; }
+
 private:
 	SDL_Renderer* m_Renderer;
 	SDL_Window* m_Win;

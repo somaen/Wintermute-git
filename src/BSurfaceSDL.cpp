@@ -335,6 +335,11 @@ HRESULT CBSurfaceSDL::DisplayTrans(int X, int Y, RECT rect, DWORD Alpha, TSprite
 	return DrawSprite(X, Y, &rect, 100, 100, Alpha, false, BlendMode, MirrorX, MirrorY);
 }
 
+//////////////////////////////////////////////////////////////////////////
+HRESULT CBSurfaceSDL::DisplayTransOffset(int X, int Y, RECT rect, DWORD Alpha, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY, int offsetX, int offsetY)
+{
+	return DrawSprite(X, Y, &rect, 100, 100, Alpha, false, BlendMode, MirrorX, MirrorY, offsetX, offsetY);
+}
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBSurfaceSDL::DisplayTransZoom(int X, int Y, RECT rect, float ZoomX, float ZoomY, DWORD Alpha, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY)
@@ -357,7 +362,7 @@ HRESULT CBSurfaceSDL::DisplayTransform(int X, int Y, int HotX, int HotY, RECT Re
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurfaceSDL::DrawSprite(int X, int Y, RECT* Rect, float ZoomX, float ZoomY, DWORD Alpha, bool AlphaDisable, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY)
+HRESULT CBSurfaceSDL::DrawSprite(int X, int Y, RECT* Rect, float ZoomX, float ZoomY, DWORD Alpha, bool AlphaDisable, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY, int offsetX, int offsetY)
 {
 	CBRenderSDL* renderer = static_cast<CBRenderSDL*>(Game->m_Renderer);
 
@@ -389,6 +394,9 @@ HRESULT CBSurfaceSDL::DrawSprite(int X, int Y, RECT* Rect, float ZoomX, float Zo
 	position.h = (float)srcRect.h * ZoomX / 100.f;
 
 	renderer->ModTargetRect(&position);
+
+	position.x += offsetX;
+	position.y += offsetY;
 
 	SDL_RenderCopy(renderer->GetSdlRenderer(), m_Texture, &srcRect, &position);
 

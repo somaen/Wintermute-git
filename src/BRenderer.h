@@ -66,6 +66,9 @@ public:
 	virtual HRESULT DisplayDebugInfo() { return E_FAIL; };
 	virtual HRESULT DrawShaderQuad() { return E_FAIL; }
 
+	virtual float GetScaleRatioX() const { return 1.0f; }
+	virtual float GetScaleRatioY() const { return 1.0f; }
+
 	HRESULT ClipCursor();
 	HRESULT UnclipCursor();
 

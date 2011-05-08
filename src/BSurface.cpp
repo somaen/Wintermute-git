@@ -92,6 +92,12 @@ HRESULT CBSurface::DisplayTrans(int X, int Y, RECT rect, DWORD Alpha, TSpriteBle
 	return E_FAIL;
 }
 
+//////////////////////////////////////////////////////////////////////
+HRESULT CBSurface::DisplayTransOffset(int X, int Y, RECT rect, DWORD Alpha, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY, int offsetX, int offsetY)
+{
+	return E_FAIL;
+}
+
 
 //////////////////////////////////////////////////////////////////////
 HRESULT CBSurface::DisplayTransZoom(int X, int Y, RECT rect, float ZoomX, float ZoomY, DWORD Alpha, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY)

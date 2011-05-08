@@ -207,7 +207,7 @@ void CBFontTT::DrawText(BYTE* Text, int X, int Y, int Width, TTextAlign Align, i
 				Color = DRGBA(D3DCOLGetR(Color), D3DCOLGetG(Color), D3DCOLGetB(Color), D3DCOLGetA(m_Renderer->m_ForceAlphaColor));
 				m_Renderer->m_ForceAlphaColor = 0;
 			}
-			Surface->DisplayTrans(X+m_Layers[i]->m_OffsetX, Y+m_Layers[i]->m_OffsetY - textOffset, rc, Color);
+			Surface->DisplayTransOffset(X, Y - textOffset, rc, Color, BLEND_NORMAL, false, false, m_Layers[i]->m_OffsetX, m_Layers[i]->m_OffsetY);
 
 			m_Renderer->m_ForceAlphaColor = OrigForceAlpha;
 		}
