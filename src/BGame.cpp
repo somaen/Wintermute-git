@@ -426,6 +426,7 @@ void CBGame::DEBUG_DebugEnable(const char* Filename)
 {
 	m_DEBUG_DebugMode = true;
 
+#ifndef __IPHONEOS__
 	if(Filename)m_DEBUG_LogFile = fopen(Filename, "a+");
 	else m_DEBUG_LogFile = fopen("./zz_debug.log", "a+");
 
@@ -436,7 +437,8 @@ void CBGame::DEBUG_DebugEnable(const char* Filename)
 	}
 
 	if(m_DEBUG_LogFile!=NULL) fprintf(m_DEBUG_LogFile, "\n");
-
+#endif
+	
 	time_t timeNow;
 	time(&timeNow);		
 	struct tm* tm = localtime(&timeNow);
@@ -472,14 +474,23 @@ void CBGame::DEBUG_DebugDisable()
 //////////////////////////////////////////////////////////////////////
 void CBGame::LOG(HRESULT res, LPCSTR fmt, ...)
 {
-	if(!m_DEBUG_DebugMode || m_DEBUG_LogFile == NULL) return;
+	if(!m_DEBUG_DebugMode) return;
+
+	time_t timeNow;
+	time(&timeNow);		
+	struct tm* tm = localtime(&timeNow);
 
 	char buff[512];
 	va_list va;
-
+	
 	va_start(va, fmt);
 	vsprintf(buff, fmt, va);
 	va_end(va);
+	
+#ifdef __IPHONEOS__
+	printf("%02d:%02d:%02d: %s\n", tm->tm_hour, tm->tm_min, tm->tm_sec, buff);
+#else
+	if (m_DEBUG_LogFile == NULL) return;
 
 	// redirect to an engine's own callback
 	if(m_EngineLogCallback)
@@ -488,13 +499,9 @@ void CBGame::LOG(HRESULT res, LPCSTR fmt, ...)
 	}
 	if(m_DebugMgr) m_DebugMgr->OnLog(res, buff);
 
-
-	time_t timeNow;
-	time(&timeNow);		
-	struct tm* tm = localtime(&timeNow);
-
 	fprintf(m_DEBUG_LogFile, "%02d:%02d: %s\n", tm->tm_hour, tm->tm_min, buff);
 	fflush(m_DEBUG_LogFile);
+#endif	
 
 	//QuickMessage(buff);
 }

@@ -239,6 +239,12 @@ void CBPlatform::HandleEvent(SDL_Event* event)
 			POINT p;
 			GetCursorPos(&p);			
 			Game->SetActiveObject(renderer->GetObjectAt(p.x, p.y));
+			
+			if (Game->m_ActiveObject != NULL && strcmp(Game->m_ActiveObject->GetClassName(), "CUIButton") == 0)
+			{
+				CUIButton* btn = static_cast<CUIButton*> (Game->m_ActiveObject);
+				if (btn->m_Visible && !btn->m_Disable) btn->m_Press = true;
+			}
 		}
 #endif
 		switch (event->button.button)

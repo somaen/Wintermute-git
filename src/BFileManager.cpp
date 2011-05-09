@@ -642,7 +642,7 @@ CBFileEntry* CBFileManager::GetPackageEntry(const char *Filename)
 CBFile* CBFileManager::OpenFile(const char *Filename, bool AbsPathWarning)
 {
 	if (strcmp(Filename, "") == 0) return NULL;
-
+	//Game->LOG(0, "open file: %s", Filename);
 #ifdef __WIN32__
 	if(Game->m_DEBUG_DebugMode && Game->m_DEBUG_AbsolutePathWarning && AbsPathWarning)
 	{
