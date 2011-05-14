@@ -44,6 +44,8 @@ CBSurfaceSDL::~CBSurfaceSDL()
 {
 	if (m_Texture) SDL_DestroyTexture(m_Texture);
 	SAFE_DELETE_ARRAY(m_AlphaMask);
+
+	Game->AddMem(-m_Width * m_Height * 4);
 }
 
 
@@ -153,6 +155,8 @@ HRESULT CBSurfaceSDL::Create(char* Filename, bool default_ck, BYTE ck_red, BYTE 
 	if(m_KeepLoaded) m_LifeTime = -1;
 	
 	m_Valid = true;
+
+	Game->AddMem(m_Width * m_Height * 4);
 	
 
 	return S_OK;
@@ -243,6 +247,8 @@ HRESULT CBSurfaceSDL::Create(int Width, int Height)
 	m_Width = Width;
 	m_Height = Height;
 
+	Game->AddMem(m_Width * m_Height * 4);
+
 	m_Valid = true;
 
 	return S_OK;
@@ -256,6 +262,8 @@ HRESULT CBSurfaceSDL::CreateFromSDLSurface(SDL_Surface* surface)
 
 	m_Width = surface->w;
 	m_Height = surface->h;
+
+	Game->AddMem(m_Width * m_Height * 4);
 
 	m_Valid = true;
 

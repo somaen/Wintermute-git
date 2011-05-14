@@ -222,6 +222,8 @@ CBGame::CBGame():CBObject(this)
 	// compatibility bits
 	m_CompatKillMethodThreads = false;
 
+	m_UsedMem = 0;
+
 
 	m_AutoSaveOnExit = true;
 	m_AutoSaveSlot = 999;
@@ -1973,8 +1975,7 @@ HRESULT CBGame::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisS
 		Stack->CorrectParams(1);
 		char* Filename = Stack->Pop()->GetString();
 
-		if(!m_UseD3D) Script->RuntimeError("Game.DumpTextureStats is only available in accelerated mode");
-		else m_Renderer->DumpData(Filename);
+		m_Renderer->DumpData(Filename);
 
 		Stack->PushNULL();
 		return S_OK;
@@ -4554,6 +4555,10 @@ HRESULT CBGame::DisplayDebugInfo()
 		Game->m_SystemFont->DrawText((BYTE*)str, 0, 130, m_Renderer->m_Width, TAL_RIGHT);
 
 		if(m_ActiveObject!=NULL) m_SystemFont->DrawText((BYTE*)m_ActiveObject->m_Name, 0, 150, m_Renderer->m_Width, TAL_RIGHT);
+
+		sprintf(str, "GfxMem: %dMB", m_UsedMem / (1024 * 1024));
+		m_SystemFont->DrawText((BYTE*)str, 0, 170, m_Renderer->m_Width, TAL_RIGHT);
+
 	}
 
 	return S_OK;
@@ -4651,6 +4656,9 @@ bool CBGame::IsDoubleClick(int buttonIndex)
 	maxDoubleCLickTime = GetDoubleClickTime();
 	maxMoveX = GetSystemMetrics(SM_CXDOUBLECLK);
 	maxMoveY = GetSystemMetrics(SM_CYDOUBLECLK);
+#else if __IPHONEOS__
+	maxMoveX = 12;
+	maxMoveY = 12;
 #endif
 
 	POINT pos;
@@ -4681,4 +4689,10 @@ void CBGame::AutoSaveOnExit()
 	if (m_State == GAME_FROZEN) return;
 
 	SaveGame(m_AutoSaveSlot, "autosave", true);
+}
+
+//////////////////////////////////////////////////////////////////////////
+void CBGame::AddMem(int bytes)
+{
+	m_UsedMem += bytes;
 }

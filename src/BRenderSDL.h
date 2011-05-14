@@ -59,6 +59,8 @@ public:
 	void PointFromScreen(POINT* point);
 	void PointToScreen(POINT* point);
 
+	void DumpData(char* Filename);
+
 	float GetScaleRatioX() const { return m_RatioX; }
 	float GetScaleRatioY() const { return m_RatioY; }
 

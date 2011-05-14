@@ -313,6 +313,8 @@ public:
 
 	AnsiString GetDataDir();
 
+	void AddMem(int bytes);
+
 private:	
 	CBDebugger* m_DebugMgr;
 
@@ -331,6 +333,7 @@ private:
 
 	LastClickInfo m_LastClick[2];
 	bool IsDoubleClick(int buttonIndex);
+	DWORD m_UsedMem;
 
 
 

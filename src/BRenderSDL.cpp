@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BRenderSDL.h"
+#include "BSurfaceSDL.h"
 #include "FreeImage.h"
 #include "MathUtil.h"
 
@@ -88,9 +89,9 @@ HRESULT CBRenderSDL::InitRenderer(int width, int height, bool windowed)
 	m_RealHeight = Game->m_Registry->ReadInt("Debug", "ForceResHeight", m_Height);
 #endif
 
-	/*
-	m_RealWidth = 960;
-	m_RealHeight = 640;
+	/*	
+	m_RealWidth = 480;
+	m_RealHeight = 320;
 	*/
 	
 
@@ -385,4 +386,38 @@ void CBRenderSDL::PointToScreen(POINT* point)
 	point->x = MathUtil::RoundUp(point->x * m_RatioX) + m_BorderLeft - viewportRect.x;
 	point->y = MathUtil::RoundUp(point->y * m_RatioY) + m_BorderTop - viewportRect.y;
 
+}
+
+//////////////////////////////////////////////////////////////////////////
+void CBRenderSDL::DumpData(char* Filename)
+{
+	FILE* f = fopen(Filename, "wt");
+	if(!f) return;
+
+	CBSurfaceStorage* Mgr = Game->m_SurfaceStorage;
+
+	int TotalKB = 0;
+	int TotalLoss = 0;
+	fprintf(f, "Filename;Usage;Size;KBytes\n");
+	for(int i=0; i<Mgr->m_Surfaces.GetSize(); i++)
+	{
+		CBSurfaceSDL* Surf = (CBSurfaceSDL*)Mgr->m_Surfaces[i];
+		if(!Surf->m_Filename) continue;
+		if(!Surf->m_Valid) continue;
+
+		fprintf(f, "%s;%d;", Surf->m_Filename, Surf->m_ReferenceCount);
+		fprintf(f, "%dx%d;", Surf->GetWidth(), Surf->GetHeight());
+
+		int kb = Surf->GetWidth() * Surf->GetHeight() * 4 / 1024;
+
+		TotalKB+=kb;
+		fprintf(f, "%d;", kb);
+		fprintf(f, "\n");
+	}
+	fprintf(f, "Total %d;;;%d\n", Mgr->m_Surfaces.GetSize(), TotalKB);
+
+
+	fclose(f);
+	Game->LOG(0, "Texture Stats Dump completed.");
+	Game->QuickMessage("Texture Stats Dump completed.");
 }
