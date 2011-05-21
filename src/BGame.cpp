@@ -30,7 +30,7 @@ THE SOFTWARE.
 #include "SXString.h"
 #include "SXDate.h"
 #include "SXArray.h"
-#include "SXObject.h"
+#include "SxObject.h"
 #include "SXMemBuffer.h"
 #include "SXFile.h"
 #include "PathUtil.h"
@@ -283,7 +283,7 @@ HRESULT CBGame::Cleanup()
 	m_EngineLogCallback = NULL;
 	m_EngineLogCallbackData = NULL;	
 
-	for(i=0; i<NUM_MUSIC_CHANNELS; i++)
+	for (i=0; i<NUM_MUSIC_CHANNELS; i++)
 	{
 		SAFE_DELETE(m_Music[i]);
 		m_MusicStartTime[i] = 0;
@@ -292,7 +292,8 @@ HRESULT CBGame::Cleanup()
 	UnregisterObject(m_Fader);
 	m_Fader = NULL;
 
-	for(i=0; i<m_RegObjects.GetSize(); i++){
+	for (i=0; i<m_RegObjects.GetSize(); i++)
+	{
 		SAFE_DELETE(m_RegObjects[i]);
 	}
 	m_RegObjects.RemoveAll();
@@ -310,7 +311,7 @@ HRESULT CBGame::Cleanup()
 	SAFE_DELETE(m_ScValue);
 	SAFE_DELETE(m_SFX);
 
-	for(i=0; i<m_Scripts.GetSize(); i++)
+	for (i=0; i<m_Scripts.GetSize(); i++)
 	{
 		m_Scripts[i]->m_Owner = NULL;
 		m_Scripts[i]->Finish();
@@ -332,7 +333,7 @@ HRESULT CBGame::Cleanup()
 
 	SAFE_DELETE_ARRAY(m_Name);
 	SAFE_DELETE_ARRAY(m_Filename);
-	for(int i=0; i<7; i++)
+	for (int i=0; i<7; i++)
 	{
 		SAFE_DELETE_ARRAY(m_Caption[i]);
 	}

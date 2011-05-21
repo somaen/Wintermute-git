@@ -25,8 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BStringTable.h"
-#include <algorithm>
-
+#include "StringUtil.h"
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -57,9 +56,7 @@ HRESULT CBStringTable::AddString(const char *Key, const char *Val, bool ReportDu
 	}
 
 	string final_key = Key;
-	//if(!final_key.empty()) CBPlatform::strlwr(final_key.begin());
-	//if(!final_key.empty()) CBPlatform::strlwr(final_key->pointer);
-	transform (final_key.begin(), final_key.end(), final_key.begin(), tolower);
+	StringUtil::ToLowerCase(final_key);
 
 	m_StringsIter = m_Strings.find(final_key);
 	if(m_StringsIter != m_Strings.end() && ReportDuplicities) Game->LOG(0, "  Warning: Duplicate definition of string '%s'.", final_key.c_str());

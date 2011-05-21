@@ -122,6 +122,18 @@ HRESULT CAdGame::Cleanup()
 	m_Inventories.RemoveAll();
 
 
+	if (m_ResponseBox)
+	{
+		Game->UnregisterObject(m_ResponseBox);
+		m_ResponseBox = NULL;
+	}
+
+	if (m_InventoryBox)
+	{
+		Game->UnregisterObject(m_InventoryBox);
+		m_InventoryBox = NULL;
+	}
+
 	SAFE_DELETE_ARRAY(m_PrevSceneName);
 	SAFE_DELETE_ARRAY(m_PrevSceneFilename);
 	SAFE_DELETE_ARRAY(m_ScheduledScene);
