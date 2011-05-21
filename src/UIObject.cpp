@@ -63,7 +63,7 @@ CUIObject::CUIObject(CBGame* inGame):CBObject(inGame)
 //////////////////////////////////////////////////////////////////////////
 CUIObject::~CUIObject()
 {
-	CSysClassRegistry::GetInstance()->EnumInstances(CBGame::InvalidateValues, "CScValue", (void*)this);
+	if(!Game->m_LoadInProgress) CSysClassRegistry::GetInstance()->EnumInstances(CBGame::InvalidateValues, "CScValue", (void*)this);
 
 	if(m_Back) delete m_Back;
 	if(m_Font && !m_SharedFonts) Game->m_FontStorage->RemoveFont(m_Font);
