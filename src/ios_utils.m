@@ -26,10 +26,26 @@ THE SOFTWARE.
 #include "ios_utils.h"
 #include <string.h>
 #import <Foundation/NSPathUtilities.h>
+#import <UIKit/UIApplication.h>
 
 void IOS_GetDataDir(char* buffer)
 {
 	NSString* docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	const char* utf8path = [docsDirectory UTF8String];
 	strcpy(buffer, utf8path);
+}
+
+void IOS_ShowStatusLine(int show)
+{
+	if (show)
+	{
+		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
+		[[UIApplication sharedApplication] setStatusBarHidden:NO animated:UIStatusBarAnimationFade];
+	}
+	else
+	{
+		[[UIApplication sharedApplication] setStatusBarHidden:YES animated:UIStatusBarAnimationFade];
+	}
+
+
 }

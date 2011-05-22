@@ -38,6 +38,10 @@ THE SOFTWARE.
 #include "crc.h"
 #include "StringUtil.h"
 
+#ifdef __IPHONEOS__
+#	include "ios_utils.h"
+#endif
+
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -2096,6 +2100,34 @@ HRESULT CBGame::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisS
 		return S_OK;
 	}
 
+	//////////////////////////////////////////////////////////////////////////
+	// ShowStatusLine
+	//////////////////////////////////////////////////////////////////////////
+	else if(strcmp(Name, "ShowStatusLine")==0)
+	{
+		Stack->CorrectParams(0);
+#ifdef __IPHONEOS__
+		IOS_ShowStatusLine(TRUE);
+#endif
+		Stack->PushNULL();
+		
+		return S_OK;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// HideStatusLine
+	//////////////////////////////////////////////////////////////////////////
+	else if(strcmp(Name, "HideStatusLine")==0)
+	{
+		Stack->CorrectParams(0);
+#ifdef __IPHONEOS__
+		IOS_ShowStatusLine(FALSE);
+#endif
+		Stack->PushNULL();
+		
+		return S_OK;
+	}
+	
 	else return CBObject::ScCallMethod(Script, Stack, ThisStack, Name);
 }
 

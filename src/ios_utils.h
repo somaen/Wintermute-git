@@ -32,6 +32,7 @@ extern "C" {
 #endif
 	
 	void IOS_GetDataDir(char* buffer);
+	void IOS_ShowStatusLine(int show);
 
 #ifdef __cplusplus
 }
