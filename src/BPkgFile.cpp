@@ -44,6 +44,7 @@ extern "C"{
 CBPkgFile::CBPkgFile(CBGame* inGame):CBFile(inGame)
 {
 	m_FileEntry = NULL;
+	m_File = NULL;
 	m_Compressed = false;
 
     m_Stream.zalloc = (alloc_func)0;
@@ -75,7 +76,11 @@ HRESULT CBPkgFile::Open(const char* Filename)
 	}
 
 	m_FileEntry = Game->m_FileManager->GetPackageEntry(fileName);
-	if(!m_FileEntry) return E_FAIL;
+	if (!m_FileEntry) return E_FAIL;
+
+	m_File = m_FileEntry->m_Package->GetFilePointer();
+	if (!m_File) return E_FAIL;
+
 
 	m_Compressed = (m_FileEntry->m_CompressedLength != 0);
 	m_Size = m_FileEntry->m_Length;
@@ -89,7 +94,13 @@ HRESULT CBPkgFile::Open(const char* Filename)
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBPkgFile::Close()
 {
-	m_FileEntry = NULL;
+	if (m_FileEntry)
+	{
+		m_FileEntry->m_Package->CloseFilePointer(m_File);
+		m_FileEntry = NULL;
+	}
+	m_File = NULL;
+
 	m_Pos = 0;
 	m_Size = 0;
 
@@ -124,7 +135,7 @@ HRESULT CBPkgFile::Read(void *Buffer, DWORD Size)
 			// needs to read more data?
 			if(m_Stream.avail_in==0){
 				m_Stream.avail_in = MIN(COMPRESSED_BUFFER_SIZE, m_FileEntry->m_CompressedLength - m_Stream.total_in);
-				m_FileEntry->m_Package->Read(m_FileEntry->m_Offset + m_Stream.total_in, m_CompBuffer, m_Stream.avail_in);
+				m_FileEntry->m_Package->Read(m_File, m_FileEntry->m_Offset + m_Stream.total_in, m_CompBuffer, m_Stream.avail_in);
 				m_Stream.next_in = m_CompBuffer;
 			}
 
@@ -139,7 +150,7 @@ HRESULT CBPkgFile::Read(void *Buffer, DWORD Size)
 	
 	}
 	else{
-		ret = m_FileEntry->m_Package->Read(m_FileEntry->m_Offset+m_Pos, (BYTE*)Buffer, Size);		
+		ret = m_FileEntry->m_Package->Read(m_File, m_FileEntry->m_Offset+m_Pos, (BYTE*)Buffer, Size);		
 	}
 
 	m_Pos+=Size;
@@ -190,7 +201,7 @@ HRESULT CBPkgFile::SeekToPos(DWORD NewPos)
 			// needs to read more data?
 			if(m_Stream.avail_in==0){
 				m_Stream.avail_in = MIN(COMPRESSED_BUFFER_SIZE, m_FileEntry->m_CompressedLength - m_Stream.total_in);
-				m_FileEntry->m_Package->Read(m_FileEntry->m_Offset + m_Stream.total_in, m_CompBuffer, m_Stream.avail_in);
+				m_FileEntry->m_Package->Read(m_File, m_FileEntry->m_Offset + m_Stream.total_in, m_CompBuffer, m_Stream.avail_in);
 				m_Stream.next_in = m_CompBuffer;
 			}
 

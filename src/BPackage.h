@@ -32,9 +32,12 @@ THE SOFTWARE.
 class CBPackage : public CBBase  
 {
 public:
+	FILE* GetFilePointer();
+	void CloseFilePointer(FILE*& file);
+
 	bool m_BoundToExe;
 	BYTE m_Priority;
-	HRESULT Read(DWORD Offset, BYTE* Buffer, DWORD Size);
+	HRESULT Read(FILE* file, DWORD offset, BYTE* buffer, DWORD size);
 	HRESULT Close();
 	HRESULT Open();
 	char* m_Name;

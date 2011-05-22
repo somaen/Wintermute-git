@@ -46,7 +46,7 @@ CBPackage::CBPackage(CBGame* inGame):CBBase(inGame)
 CBPackage::~CBPackage()
 {
 	if(m_Name) delete [] m_Name;
-	if(m_File) fclose(m_File);
+	CloseFilePointer(m_File);
 }
 
 
@@ -56,12 +56,7 @@ HRESULT CBPackage::Open()
 	if (m_File) return S_OK;
 	else
 	{
-		m_File = Game->m_FileManager->OpenPackage(m_Name);
-		if (!m_File)
-		{
-			Game->m_FileManager->RequestCD(m_CD, m_Name, "");
-			m_File = Game->m_FileManager->OpenPackage(m_Name);
-		}
+		m_File = GetFilePointer();
 		return m_File ? S_OK : E_FAIL;
 	}
 }
@@ -77,13 +72,33 @@ HRESULT CBPackage::Close()
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBPackage::Read(DWORD Offset, BYTE *Buffer, DWORD Size)
+HRESULT CBPackage::Read(FILE* file, DWORD offset, BYTE* buffer, DWORD size)
 {
 	HRESULT ret;
-	if(FAILED(ret=Open())) return ret;
-	else{
-		if(fseek(m_File, Offset, SEEK_SET)) return E_FAIL;
-		if(fread(Buffer, Size, 1, m_File)!=1) return E_FAIL;
+	if (FAILED(ret = Open())) return ret;
+	else
+	{
+		if (fseek(file, offset, SEEK_SET)) return E_FAIL;
+		if (fread(buffer, size, 1, file) != 1) return E_FAIL;
 		else return S_OK;
 	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+FILE* CBPackage::GetFilePointer()
+{
+	FILE* file = Game->m_FileManager->OpenPackage(m_Name);
+	if (!file)
+	{
+		Game->m_FileManager->RequestCD(m_CD, m_Name, "");
+		file = Game->m_FileManager->OpenPackage(m_Name);
+	}
+	return file;
+}
+
+//////////////////////////////////////////////////////////////////////////
+void CBPackage::CloseFilePointer(FILE*& file)
+{
+	if (file) fclose(file);
+	file = NULL;
 }
