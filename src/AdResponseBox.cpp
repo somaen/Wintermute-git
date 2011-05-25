@@ -149,6 +149,11 @@ HRESULT CAdResponseBox::CreateButtons()
 			}
 			btn->SetName("response");
 			btn->CorrectSize();
+
+			// make the responses touchable
+			if (Game->m_TouchInterface)
+				btn->m_Height = max(btn->m_Height, 50);
+
 			//btn->SetListener(this, btn, m_Responses[i]->m_ID);
 			btn->SetListener(this, btn, i);
 			btn->m_Visible = false;

@@ -232,6 +232,12 @@ CBGame::CBGame():CBObject(this)
 	m_AutoSaveOnExit = true;
 	m_AutoSaveSlot = 999;
 	m_CursorHidden = false;
+
+#ifdef __IPHONEOS__
+	m_TouchInterface = true;
+#else
+	m_TouchInterface = false;
+#endif
 }
 
 

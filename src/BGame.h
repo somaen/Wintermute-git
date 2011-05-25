@@ -315,6 +315,8 @@ public:
 
 	void AddMem(int bytes);
 
+	bool m_TouchInterface;
+
 private:	
 	CBDebugger* m_DebugMgr;
 

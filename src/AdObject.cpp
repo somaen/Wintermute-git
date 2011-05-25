@@ -918,8 +918,11 @@ void CAdObject::Talk(char *Text, char* Sound, DWORD Duration, char *Stances, TTe
 
 	if(m_SubtitlesWidth>0) width = m_SubtitlesWidth;
 	else{
-		if(x < Game->m_Renderer->m_Width/4 || x > Game->m_Renderer->m_Width*0.75) width = max(Game->m_Renderer->m_Width/4, min(x*2, (Game->m_Renderer->m_Width - x) * 2));
-		else width = Game->m_Renderer->m_Width/2;
+		if((x < Game->m_Renderer->m_Width / 4 || x > Game->m_Renderer->m_Width * 0.75) && !Game->m_TouchInterface)
+		{
+			width = max(Game->m_Renderer->m_Width / 4, min(x * 2, (Game->m_Renderer->m_Width - x) * 2));
+		}
+		else width = Game->m_Renderer->m_Width / 2;
 	}
 
 	height = m_Sentence->m_Font->GetTextHeight((BYTE*)m_Sentence->m_Text, width);

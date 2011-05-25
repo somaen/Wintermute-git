@@ -117,6 +117,7 @@ int CBFontBitmap::TextHeightDraw(BYTE* text, int x, int y, int width, TTextAlign
 	{
 		str = AnsiString((char*)text);
 	}
+	if (str.empty()) return 0;
 
 	int LineLength=0;
 	int RealLength=0;
