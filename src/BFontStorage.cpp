@@ -77,6 +77,16 @@ HRESULT CBFontStorage::Cleanup(bool Warn)
 }
 
 //////////////////////////////////////////////////////////////////////////
+HRESULT CBFontStorage::InitLoop()
+{
+	for (int i = 0; i < m_Fonts.GetSize(); i++)
+	{
+		m_Fonts[i]->InitLoop();
+	}
+	return S_OK;
+}
+
+//////////////////////////////////////////////////////////////////////////
 CBFont* CBFontStorage::AddFont(char *Filename)
 {
 	if(!Filename) return NULL;

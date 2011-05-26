@@ -38,6 +38,8 @@ public:
 	virtual void DrawText(BYTE* text, int x, int y, int width, TTextAlign align=TAL_LEFT, int max_height=-1, int MaxLenght=-1);
 	virtual int GetLetterHeight();
 
+	virtual void InitLoop() {};
+
 	CBFont(CBGame* inGame);
 	virtual ~CBFont();
 

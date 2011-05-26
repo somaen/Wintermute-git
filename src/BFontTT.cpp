@@ -93,6 +93,27 @@ void CBFontTT::ClearCache()
 }
 
 //////////////////////////////////////////////////////////////////////////
+void CBFontTT::InitLoop()
+{
+	// we need more aggressive cache management on iOS not to waste too much memory on fonts
+	if (Game->m_ConstrainedMemory)
+	{
+		// purge all cached images not used in the last frame
+		for(int i = 0; i < NUM_CACHED_TEXTS; i++)
+		{
+			if (m_CachedTexts[i] == NULL) continue;
+
+			if (!m_CachedTexts[i]->m_Marked)
+			{
+				delete m_CachedTexts[i];
+				m_CachedTexts[i] = NULL;
+			}
+			else m_CachedTexts[i]->m_Marked = false;
+		}
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
 int CBFontTT::GetTextWidth(BYTE* Text, int MaxLength)
 {
 	WideString text;
@@ -158,6 +179,7 @@ void CBFontTT::DrawText(BYTE* Text, int X, int Y, int Width, TTextAlign Align, i
 				Surface = m_CachedTexts[i]->m_Surface;
 				textOffset = m_CachedTexts[i]->m_TextOffset;
 				m_CachedTexts[i]->m_Priority++;
+				m_CachedTexts[i]->m_Marked = true;
 				break;
 			}
 			else
@@ -189,6 +211,7 @@ void CBFontTT::DrawText(BYTE* Text, int X, int Y, int Width, TTextAlign Align, i
 			m_CachedTexts[MinIndex]->m_Priority = 1;
 			m_CachedTexts[MinIndex]->m_Text = text;
 			m_CachedTexts[MinIndex]->m_TextOffset = textOffset;
+			m_CachedTexts[MinIndex]->m_Marked = true;
 		}
 	}
 

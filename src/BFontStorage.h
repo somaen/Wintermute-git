@@ -45,6 +45,7 @@ public:
 	CBFontStorage(CBGame* inGame);
 	virtual ~CBFontStorage();
 	CBArray<CBFont*, CBFont*> m_Fonts;
+	HRESULT InitLoop();
 
 	FT_Library GetFTLibrary() const { return m_FTLibrary; }
 

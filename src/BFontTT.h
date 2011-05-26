@@ -48,6 +48,7 @@ private:
 		CBSurface* m_Surface;
 		int m_Priority;
 		int m_TextOffset;
+		bool m_Marked;
 
 		CBCachedTTFontText()
 		{
@@ -57,6 +58,7 @@ private:
 			m_Surface = NULL;
 			m_Priority = -1;
 			m_TextOffset = 0;
+			m_Marked = false;
 		}
 
 		virtual ~CBCachedTTFontText()
@@ -129,6 +131,7 @@ public:
 	float GetLineHeight() const { return m_LineHeight; }
 
 	void AfterLoad();
+	void InitLoop();
 
 private:
 	HRESULT ParseLayer(CBTTFontLayer* Layer, BYTE* Buffer);

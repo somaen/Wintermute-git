@@ -235,8 +235,10 @@ CBGame::CBGame():CBObject(this)
 
 #ifdef __IPHONEOS__
 	m_TouchInterface = true;
+	m_ConstrainedMemory = true; // TODO differentiate old and new iOS devices
 #else
 	m_TouchInterface = false;
+	m_ConstrainedMemory = false;
 #endif
 }
 
@@ -541,6 +543,7 @@ HRESULT CBGame::InitLoop()
 	UpdateMusicCrossfade();
 	
 	m_SurfaceStorage->InitLoop();
+	m_FontStorage->InitLoop();
 	
 
 	//m_ActiveObject = NULL;
@@ -1446,9 +1449,11 @@ HRESULT CBGame::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisS
 	//////////////////////////////////////////////////////////////////////////
 	else if(strcmp(Name, "SaveGame")==0)
 	{
-		Stack->CorrectParams(2);
+		Stack->CorrectParams(3);
 		int Slot = Stack->Pop()->GetInt();
 		char* xdesc = Stack->Pop()->GetString();
+		bool quick = Stack->Pop()->GetBool(false);
+
 		char* Desc = new char[strlen(xdesc)+1];
 		strcpy(Desc, xdesc);
 		Stack->PushBool(true);

@@ -316,6 +316,7 @@ public:
 	void AddMem(int bytes);
 
 	bool m_TouchInterface;
+	bool m_ConstrainedMemory;
 
 private:	
 	CBDebugger* m_DebugMgr;
