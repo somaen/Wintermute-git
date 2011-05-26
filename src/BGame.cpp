@@ -489,8 +489,9 @@ void CBGame::DEBUG_DebugDisable()
 //////////////////////////////////////////////////////////////////////
 void CBGame::LOG(HRESULT res, LPCSTR fmt, ...)
 {
+#ifndef __IPHONEOS__
 	if(!m_DEBUG_DebugMode) return;
-
+#endif
 	time_t timeNow;
 	time(&timeNow);		
 	struct tm* tm = localtime(&timeNow);
@@ -504,6 +505,7 @@ void CBGame::LOG(HRESULT res, LPCSTR fmt, ...)
 	
 #ifdef __IPHONEOS__
 	printf("%02d:%02d:%02d: %s\n", tm->tm_hour, tm->tm_min, tm->tm_sec, buff);
+	fflush(stdout);
 #else
 	if (m_DEBUG_LogFile == NULL) return;
 
