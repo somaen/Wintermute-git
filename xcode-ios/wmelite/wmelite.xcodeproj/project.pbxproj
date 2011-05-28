@@ -131,6 +131,11 @@
 		4615090A13520B93000E96C4 /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4615089613520B93000E96C4 /* Vector2.cpp */; };
 		4615094013521059000E96C4 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4615093F13521059000E96C4 /* CFNetwork.framework */; };
 		461509531352207F000E96C4 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 461509521352207F000E96C4 /* libfreetype.a */; };
+		469528CB1391348600A42BB9 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 469528C61391348600A42BB9 /* Icon-72.png */; };
+		469528CC1391348600A42BB9 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 469528C71391348600A42BB9 /* Icon-Small-50.png */; };
+		469528CD1391348600A42BB9 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 469528C81391348600A42BB9 /* Icon-Small.png */; };
+		469528CE1391348600A42BB9 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 469528C91391348600A42BB9 /* Icon-Small@2x.png */; };
+		469528CF1391348600A42BB9 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 469528CA1391348600A42BB9 /* Icon@2x.png */; };
 		46ADBD131365C7E5000D9788 /* ios_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 46ADBD121365C7E5000D9788 /* ios_utils.m */; };
 		46EB701A1359B54A00E280F6 /* data.dcp in Resources */ = {isa = PBXBuildFile; fileRef = 46EB70191359B54A00E280F6 /* data.dcp */; };
 		FD779EDE0E26BA1200F39101 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD779EDD0E26BA1200F39101 /* CoreAudio.framework */; };
@@ -384,6 +389,11 @@
 		4615089913520B93000E96C4 /* wme_debugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wme_debugger.h; path = ../../src/wme_debugger.h; sourceTree = SOURCE_ROOT; };
 		4615093F13521059000E96C4 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		461509521352207F000E96C4 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../dep/freetype/lib/libfreetype.a; sourceTree = SOURCE_ROOT; };
+		469528C61391348600A42BB9 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		469528C71391348600A42BB9 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		469528C81391348600A42BB9 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		469528C91391348600A42BB9 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		469528CA1391348600A42BB9 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		46ADBD111365C7E5000D9788 /* ios_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ios_utils.h; path = ../../src/ios_utils.h; sourceTree = SOURCE_ROOT; };
 		46ADBD121365C7E5000D9788 /* ios_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ios_utils.m; path = ../../src/ios_utils.m; sourceTree = SOURCE_ROOT; };
 		46EB70191359B54A00E280F6 /* data.dcp */ = {isa = PBXFileReference; lastKnownFileType = file; path = data.dcp; sourceTree = "<group>"; };
@@ -688,6 +698,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				469528C61391348600A42BB9 /* Icon-72.png */,
+				469528C71391348600A42BB9 /* Icon-Small-50.png */,
+				469528C81391348600A42BB9 /* Icon-Small.png */,
+				469528C91391348600A42BB9 /* Icon-Small@2x.png */,
+				469528CA1391348600A42BB9 /* Icon@2x.png */,
 				46EB70191359B54A00E280F6 /* data.dcp */,
 				FD77A07E0E26BDA900F39101 /* Default.png */,
 				FD77A07C0E26BD8C00F39101 /* Icon.png */,
@@ -763,6 +778,11 @@
 				FD77A07D0E26BD8C00F39101 /* Icon.png in Resources */,
 				FD77A07F0E26BDA900F39101 /* Default.png in Resources */,
 				46EB701A1359B54A00E280F6 /* data.dcp in Resources */,
+				469528CB1391348600A42BB9 /* Icon-72.png in Resources */,
+				469528CC1391348600A42BB9 /* Icon-Small-50.png in Resources */,
+				469528CD1391348600A42BB9 /* Icon-Small.png in Resources */,
+				469528CE1391348600A42BB9 /* Icon-Small@2x.png in Resources */,
+				469528CF1391348600A42BB9 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -973,6 +993,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -991,6 +1012,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
