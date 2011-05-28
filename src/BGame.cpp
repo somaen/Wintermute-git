@@ -4023,9 +4023,12 @@ HRESULT CBGame::GetSaveSlotFilename(int Slot, char *Buffer)
 AnsiString CBGame::GetDataDir()
 {
 	AnsiString userDir = PathUtil::GetUserDirectory();
+#ifdef __IPHONEOS__
+	return userDir;
+#else
 	AnsiString baseDir = m_Registry->GetBasePath();
-
-	return PathUtil::Combine(userDir, baseDir);	
+	return PathUtil::Combine(userDir, baseDir);
+#endif
 }
 
 
