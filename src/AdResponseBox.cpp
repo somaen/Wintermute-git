@@ -137,13 +137,14 @@ HRESULT CAdResponseBox::CreateButtons()
 			else
 			{
 				btn->SetText(m_Responses[i]->m_Text);
-				btn->m_Font = (m_Font==NULL)?Game->m_SystemFont:m_Font;
-
-				if (!Game->m_TouchInterface)
-					btn->m_FontHover = (m_FontHover==NULL)?Game->m_SystemFont:m_FontHover;
-				
+				btn->m_Font = (m_Font==NULL)?Game->m_SystemFont:m_Font;				
+				btn->m_FontHover = (m_FontHover==NULL)?Game->m_SystemFont:m_FontHover;				
 				btn->m_FontPress = btn->m_FontHover;
 				btn->m_Align = m_Align;
+
+				if (Game->m_TouchInterface)
+					btn->m_FontHover = btn->m_Font;
+
 
 				if(m_Responses[i]->m_Font) btn->m_Font = m_Responses[i]->m_Font;
 

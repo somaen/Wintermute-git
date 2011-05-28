@@ -62,6 +62,8 @@ public:
 	virtual ~CAdSentence();
 	CAdTalkDef* m_TalkDef;
 
+	bool CanSkip();
+
 private:
 	char* m_TempStance;
 	char* GetStance(int Stance);

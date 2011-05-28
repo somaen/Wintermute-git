@@ -384,6 +384,8 @@ HRESULT CBFileManager::RegisterPackages()
 			{
 				AnsiString fileName = (*dit).path().string();
 
+				if (!IsValidPackage(fileName)) continue;
+
 				//printf("%s\n", fileName.c_str());
 				if (!StringUtil::CompareNoCase(extension, PathUtil::GetExtension(fileName))) continue;
 				RegisterPackage(absPath.string().c_str(), dit->path().filename().string().c_str());
@@ -547,6 +549,18 @@ HRESULT CBFileManager::RegisterPackage(const char* Path, const char* Name, bool 
 	return S_OK;
 }
 
+//////////////////////////////////////////////////////////////////////////
+bool CBFileManager::IsValidPackage(const AnsiString& fileName) const
+{
+	AnsiString plainName = PathUtil::GetFileNameWithoutExtension(fileName);
+
+	// check for device-type specific packages
+	if (StringUtil::StartsWith(plainName, "xdevice_", true))
+	{				
+		return StringUtil::CompareNoCase(plainName, "xdevice_" + Game->GetDeviceType());
+	}
+	return true;
+}
 
 //////////////////////////////////////////////////////////////////////////
 FILE* CBFileManager::OpenPackage(char *Name)

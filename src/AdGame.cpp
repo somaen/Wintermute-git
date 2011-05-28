@@ -284,9 +284,13 @@ HRESULT CAdGame::DisplaySentences(bool Frozen)
 //////////////////////////////////////////////////////////////////////////
 void CAdGame::FinishSentences()
 {
-	for(int i=0; i<m_Sentences.GetSize(); i++){
-		m_Sentences[i]->m_Duration = 0;
-		if(m_Sentences[i]->m_Sound) m_Sentences[i]->m_Sound->Stop();
+	for(int i=0; i<m_Sentences.GetSize(); i++)
+	{
+		if (m_Sentences[i]->CanSkip())
+		{
+			m_Sentences[i]->m_Duration = 0;
+			if (m_Sentences[i]->m_Sound) m_Sentences[i]->m_Sound->Stop();
+		}
 	}
 }
 

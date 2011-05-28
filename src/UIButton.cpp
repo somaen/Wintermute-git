@@ -572,8 +572,7 @@ HRESULT CUIButton::Display(int OffsetX, int OffsetY)
 
 	if((m_Press && m_Hover && !Game->m_MouseLeftDown) ||
 		m_OneTimePress && CBPlatform::GetTime() - m_OneTimePressTime >= 100) Press();
-
-	m_Press = m_Hover && Game->m_MouseLeftDown && Game->m_CapturedObject == this;
+	
 
 	if(m_Disable)
 	{
@@ -634,6 +633,8 @@ HRESULT CUIButton::Display(int OffsetX, int OffsetY)
 	if(m_ImageFocus && m_ImageFocus!=image) m_ImageFocus->Reset();
 	if(m_ImagePress && m_ImagePress!=image) m_ImagePress->Reset();
 	if(m_ImageHover && m_ImageHover!=image) m_ImageHover->Reset();
+
+	m_Press = m_Hover && Game->m_MouseLeftDown && Game->m_CapturedObject == this;
 
 	return S_OK;
 }

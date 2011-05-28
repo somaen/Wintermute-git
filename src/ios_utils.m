@@ -46,6 +46,12 @@ void IOS_ShowStatusLine(int show)
 	{
 		[[UIApplication sharedApplication] setStatusBarHidden:YES animated:UIStatusBarAnimationFade];
 	}
+}
 
-
+void IOS_GetDeviceType(char* buffer)
+{
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+		strcpy(buffer, "tablet");
+	else
+		strcpy(buffer, "phone");
 }

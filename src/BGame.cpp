@@ -2551,6 +2551,15 @@ CScValue* CBGame::ScGetProperty(char *Name)
 		return m_ScValue;
 	}
 
+	//////////////////////////////////////////////////////////////////////////
+	// DeviceType (RO)
+	//////////////////////////////////////////////////////////////////////////
+	else if(strcmp(Name, "DeviceType")==0)
+	{
+		m_ScValue->SetString(GetDeviceType().c_str());
+		return m_ScValue;
+	}
+
 	else return CBObject::ScGetProperty(Name);
 }
 
@@ -4741,4 +4750,16 @@ void CBGame::AutoSaveOnExit()
 void CBGame::AddMem(int bytes)
 {
 	m_UsedMem += bytes;
+}
+
+//////////////////////////////////////////////////////////////////////////
+AnsiString CBGame::GetDeviceType() const
+{
+#ifdef __IPHONEOS__
+	char devType[128];
+	IOS_GetDeviceType(devType);
+	return AnsiString(devType);
+#else
+	return "computer";
+#endif
 }

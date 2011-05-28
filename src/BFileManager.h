@@ -45,7 +45,7 @@ public:
 	CBFileEntry* GetPackageEntry(const char* Filename);
 	FILE* OpenSingleFile(char* Name);
 	FILE* OpenPackage(char* Name);
-	HRESULT RegisterPackages();
+	HRESULT RegisterPackages();	
 	HRESULT InitPaths();
 	HRESULT ReloadPaths();
 	typedef enum{
@@ -66,6 +66,7 @@ public:
 private:
 	HRESULT RegisterPackage(const char* Path, const char* Name, bool SearchSignature=false);	
 	map<string, CBFileEntry*>::iterator m_FilesIter;
+	bool IsValidPackage(const AnsiString& fileName) const;
 	
 };
 

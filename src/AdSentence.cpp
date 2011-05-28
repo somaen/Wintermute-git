@@ -305,3 +305,10 @@ HRESULT CAdSentence::Update(TDirection Dir)
 
 	return S_OK;
 }
+
+//////////////////////////////////////////////////////////////////////////
+bool CAdSentence::CanSkip()
+{
+	// prevent accidental sentence skipping (TODO make configurable)
+	return (Game->m_Timer - m_StartTime) > 300;
+}
