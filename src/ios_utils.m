@@ -50,7 +50,7 @@ void IOS_ShowStatusLine(int show)
 
 void IOS_GetDeviceType(char* buffer)
 {
-	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 		strcpy(buffer, "tablet");
 	else
 		strcpy(buffer, "phone");
