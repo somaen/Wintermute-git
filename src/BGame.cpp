@@ -1459,7 +1459,7 @@ HRESULT CBGame::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisS
 		char* Desc = new char[strlen(xdesc)+1];
 		strcpy(Desc, xdesc);
 		Stack->PushBool(true);
-		if(FAILED(SaveGame(Slot, Desc))){
+		if(FAILED(SaveGame(Slot, Desc, quick))){
 			Stack->Pop();
 			Stack->PushBool(false);
 		}
@@ -2560,6 +2560,15 @@ CScValue* CBGame::ScGetProperty(char *Name)
 		return m_ScValue;
 	}
 
+	//////////////////////////////////////////////////////////////////////////
+	// MostRecentSaveSlot (RO)
+	//////////////////////////////////////////////////////////////////////////
+	else if(strcmp(Name, "MostRecentSaveSlot")==0)
+	{
+		m_ScValue->SetInt(m_Registry->ReadInt("System", "MostRecentSaveSlot", -1));
+		return m_ScValue;
+	}
+	
 	else return CBObject::ScGetProperty(Name);
 }
 
@@ -3343,6 +3352,8 @@ HRESULT CBGame::SaveGame(int slot, char* desc, bool quickSave)
 	if(FAILED(ret = CSysClassRegistry::GetInstance()->SaveTable(Game, pm, quickSave))) goto save_finish;
 	if(FAILED(ret = CSysClassRegistry::GetInstance()->SaveInstances(Game, pm, quickSave))) goto save_finish;
 	if(FAILED(ret = pm->SaveFile(Filename))) goto save_finish;
+
+	m_Registry->WriteInt("System", "MostRecentSaveSlot", slot);
 
 save_finish:
 	delete pm;
