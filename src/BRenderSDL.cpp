@@ -152,7 +152,7 @@ HRESULT CBRenderSDL::InitRenderer(int width, int height, bool windowed)
 	if (!m_Renderer) return E_FAIL;
 
 	m_Active = true;
-
+	
 
 	return S_OK;
 }
@@ -165,39 +165,46 @@ HRESULT CBRenderSDL::Flip()
 	// hack: until viewports work correctly, we just paint black bars instead
 	SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
 
-	SDL_Rect rect;
-
-	if (m_BorderLeft > 0)
+	static bool firstRefresh = true; // prevents a weird color glitch
+	if (firstRefresh)
 	{
-		rect.x = 0;
-		rect.y = 0;
-		rect.w = m_BorderLeft;
-		rect.h = m_RealHeight;		
-		SDL_RenderFillRect(m_Renderer, &rect);
+		firstRefresh = false;
 	}
-	if (m_BorderRight > 0)
+	else
 	{
-		rect.x = (m_RealWidth - m_BorderRight);
-		rect.y = 0;
-		rect.w = m_BorderRight;
-		rect.h = m_RealHeight;		
-		SDL_RenderFillRect(m_Renderer, &rect);
-	}
-	if (m_BorderTop > 0)
-	{
-		rect.x = 0;
-		rect.y = 0;
-		rect.w = m_RealWidth;
-		rect.h = m_BorderTop;		
-		SDL_RenderFillRect(m_Renderer, &rect);
-	}
-	if (m_BorderBottom > 0)
-	{
-		rect.x = 0;
-		rect.y = m_RealHeight - m_BorderBottom;
-		rect.w = m_RealWidth;
-		rect.h = m_BorderBottom;		
-		SDL_RenderFillRect(m_Renderer, &rect);
+		SDL_Rect rect;
+		if (m_BorderLeft > 0)
+		{
+			rect.x = 0;
+			rect.y = 0;
+			rect.w = m_BorderLeft;
+			rect.h = m_RealHeight;		
+			SDL_RenderFillRect(m_Renderer, &rect);
+		}
+		if (m_BorderRight > 0)
+		{
+			rect.x = (m_RealWidth - m_BorderRight);
+			rect.y = 0;
+			rect.w = m_BorderRight;
+			rect.h = m_RealHeight;		
+			SDL_RenderFillRect(m_Renderer, &rect);
+		}
+		if (m_BorderTop > 0)
+		{
+			rect.x = 0;
+			rect.y = 0;
+			rect.w = m_RealWidth;
+			rect.h = m_BorderTop;		
+			SDL_RenderFillRect(m_Renderer, &rect);
+		}
+		if (m_BorderBottom > 0)
+		{
+			rect.x = 0;
+			rect.y = m_RealHeight - m_BorderBottom;
+			rect.w = m_RealWidth;
+			rect.h = m_BorderBottom;		
+			SDL_RenderFillRect(m_Renderer, &rect);
+		}
 	}
 #endif
 

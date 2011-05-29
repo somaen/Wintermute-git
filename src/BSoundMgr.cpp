@@ -108,7 +108,7 @@ HRESULT CBSoundMgr::InitLoop()
 {
 	if(!m_SoundAvailable) return S_OK;
 
-	BASS_Update(200);
+	BASS_Update(500);
 
 	return S_OK;
 }
