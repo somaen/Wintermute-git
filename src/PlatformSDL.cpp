@@ -297,10 +297,12 @@ void CBPlatform::HandleEvent(SDL_Event* event)
 		switch (event->window.event)
 		{
 		case SDL_WINDOWEVENT_FOCUS_GAINED:
+		case SDL_WINDOWEVENT_RESTORED:
 			if (Game) Game->OnActivate(true, true);
 			SDL_ShowCursor(SDL_DISABLE);
 			break;
 		case SDL_WINDOWEVENT_FOCUS_LOST:
+		case SDL_WINDOWEVENT_MINIMIZED:
 			if (Game) Game->OnActivate(false, false);
 			SDL_ShowCursor(SDL_ENABLE);
 			break;
