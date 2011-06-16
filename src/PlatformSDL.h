@@ -88,6 +88,9 @@ public:
 	static char* strupr(char* string);
 	static char* strlwr(char* string);
 	
+	// sdl event callback
+	static int SDLEventWatcher(void* userdata, SDL_Event* event);
+	
 private:
 	static CBGame* Game;
 };

@@ -3827,6 +3827,8 @@ HRESULT CBGame::Persist(CBPersistMgr *PersistMgr)
 	PersistMgr->Transfer(TMEMBER(m_AutoSaveOnExit));
 	PersistMgr->Transfer(TMEMBER(m_AutoSaveSlot));
 	PersistMgr->Transfer(TMEMBER(m_CursorHidden));
+	
+	if (!PersistMgr->m_Saving) m_Quitting = false;
 
 	return S_OK;
 }

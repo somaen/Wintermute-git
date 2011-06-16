@@ -135,14 +135,18 @@ int CBPlatform::Initialize(CBGame* inGame, int argc, char* argv[])
 	}
 
 	Game->Initialize3();	
-
+	
+#ifdef __IPHONEOS__
+	SDL_AddEventWatch(CBPlatform::SDLEventWatcher, NULL);
+#endif
+	
 	// initialize sound manager (non-fatal if we fail)
 	ret = Game->m_SoundMgr->Initialize();
 	if(FAILED(ret))
 	{
 		Game->LOG(ret, "Sound is NOT available.");
 	}
-
+		
 
 	// load game
 	DWORD DataInitStart = GetTime();
@@ -195,10 +199,10 @@ int CBPlatform::MessageLoop()
 
 			// ***** flip
 			if(!Game->m_SuspendedRendering) Game->m_Renderer->Flip();
-
-			if(Game->m_Quitting) break;
 			if(Game->m_Loading) Game->LoadGame(Game->m_ScheduledLoadSlot);
 		}
+		if(Game->m_Quitting) break;
+
 	}
 
 	if(Game)
@@ -303,8 +307,10 @@ void CBPlatform::HandleEvent(SDL_Event* event)
 			break;
 		case SDL_WINDOWEVENT_FOCUS_LOST:
 		case SDL_WINDOWEVENT_MINIMIZED:
+#ifndef __IPHONEOS__
 			if (Game) Game->OnActivate(false, false);
 			SDL_ShowCursor(SDL_ENABLE);
+#endif
 			break;
 
 		case SDL_WINDOWEVENT_CLOSE:
@@ -327,6 +333,19 @@ void CBPlatform::HandleEvent(SDL_Event* event)
 		break;
 
 	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+int CBPlatform::SDLEventWatcher(void* userdata, SDL_Event* event)
+{
+	if (event->type == SDL_WINDOWEVENT && event->window.event == SDL_WINDOWEVENT_MINIMIZED)
+	{
+		if (Game) Game->AutoSaveOnExit();
+		if (Game) Game->OnActivate(false, false);
+		SDL_ShowCursor(SDL_ENABLE);
+	}
+	
+	return 1;
 }
 
 

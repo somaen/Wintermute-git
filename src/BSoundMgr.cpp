@@ -76,6 +76,13 @@ HRESULT CBSoundMgr::Initialize()
 {
 	m_SoundAvailable = false;
 
+
+#ifdef __IPHONEOS__
+	#define BASS_CONFIG_IOS_MIXAUDIO 34 
+	BASS_SetConfig(BASS_CONFIG_IOS_MIXAUDIO, 0);
+#endif
+
+	
 	if (HIWORD(BASS_GetVersion()) != BASSVERSION)
 	{
 		Game->LOG(0, "An incorrect version of BASS was loaded");
@@ -87,7 +94,7 @@ HRESULT CBSoundMgr::Initialize()
 		Game->LOG(0, "Can't initialize sound device");
 		return E_FAIL;
 	}
-
+	
 
 	m_VolumeMaster = Game->m_Registry->ReadInt("Audio", "MasterVolume", 100);
 
