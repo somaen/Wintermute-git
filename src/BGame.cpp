@@ -4756,6 +4756,9 @@ bool CBGame::IsDoubleClick(int buttonIndex)
 //////////////////////////////////////////////////////////////////////////
 void CBGame::AutoSaveOnExit()
 {
+	m_SoundMgr->SaveSettings();
+	m_Registry->SaveValues();
+		
 	if (!m_AutoSaveOnExit) return;
 	if (m_State == GAME_FROZEN) return;
 

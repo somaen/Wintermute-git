@@ -57,6 +57,7 @@ public:
 	CBSoundMgr(CBGame* inGame);
 	virtual ~CBSoundMgr();
 	CBArray<CBSoundBuffer*, CBSoundBuffer*> m_Sounds;
+	void SaveSettings();
 };
 
 #endif

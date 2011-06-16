@@ -76,11 +76,7 @@ AnsiString CBRegistry::ReadString(const AnsiString& subKey, const AnsiString& ke
 //////////////////////////////////////////////////////////////////////////
 bool CBRegistry::WriteString(const AnsiString& subKey, const AnsiString& key, const AnsiString& value)
 {
-	m_Values[subKey][key] = value;
-	
-#ifdef __IPHONEOS__
-	SaveValues();
-#endif
+	m_Values[subKey][key] = value;	
 	return true;
 }
 

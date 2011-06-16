@@ -46,15 +46,7 @@ CBSoundMgr::CBSoundMgr(CBGame* inGame):CBBase(inGame)
 //////////////////////////////////////////////////////////////////////////
 CBSoundMgr::~CBSoundMgr()
 {
-	if(m_SoundAvailable)
-	{
-		Game->m_Registry->WriteInt("Audio", "MasterVolume", m_VolumeMaster);
-		
-		Game->m_Registry->WriteInt("Audio", "SFXVolume",    m_VolumeSFX);
-		Game->m_Registry->WriteInt("Audio", "SpeechVolume", m_VolumeSpeech);
-		Game->m_Registry->WriteInt("Audio", "MusicVolume",  m_VolumeMusic);
-	}
-
+	SaveSettings();
 	Cleanup();
 }
 
@@ -70,6 +62,18 @@ HRESULT CBSoundMgr::Cleanup()
 	return S_OK;
 }
 
+//////////////////////////////////////////////////////////////////////////
+void CBSoundMgr::SaveSettings()
+{
+	if (m_SoundAvailable)
+	{
+		Game->m_Registry->WriteInt("Audio", "MasterVolume", m_VolumeMaster);
+		
+		Game->m_Registry->WriteInt("Audio", "SFXVolume",    m_VolumeSFX);
+		Game->m_Registry->WriteInt("Audio", "SpeechVolume", m_VolumeSpeech);
+		Game->m_Registry->WriteInt("Audio", "MusicVolume",  m_VolumeMusic);
+	}	
+}
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBSoundMgr::Initialize()
