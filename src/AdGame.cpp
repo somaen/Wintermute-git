@@ -2063,7 +2063,7 @@ HRESULT CAdGame::OnMouseLeftUp()
 	m_CapturedObject = NULL;
 	m_MouseLeftDown = false;
 
-	bool Handled = m_State==GAME_RUNNING && SUCCEEDED(ApplyEvent("LeftRelease"));
+	bool Handled = /*m_State==GAME_RUNNING &&*/ SUCCEEDED(ApplyEvent("LeftRelease"));
 	if(!Handled)
 	{
 		if(m_ActiveObject!=NULL)
