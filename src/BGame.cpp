@@ -4728,8 +4728,8 @@ bool CBGame::IsDoubleClick(int buttonIndex)
 	maxMoveX = GetSystemMetrics(SM_CXDOUBLECLK);
 	maxMoveY = GetSystemMetrics(SM_CYDOUBLECLK);
 #else if __IPHONEOS__
-	maxMoveX = 12;
-	maxMoveY = 12;
+	maxMoveX = 16;
+	maxMoveY = 16;
 #endif
 
 	POINT pos;
