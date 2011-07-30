@@ -131,7 +131,7 @@ public:
 	bool GetEventsEnabled() const { return m_EventsEnabled; }
 	void ValidateProducts(const char* prodIdList);
 
-    void ReceiveTransactionsStart();
+	void ReceiveTransactionsStart();
 	void ReceiveTransactionsEnd();
 	void AddTransaction(const char* id, const char* productId, const char* state);
 	
@@ -139,8 +139,8 @@ public:
 	void ReceiveProductsEnd();
 	void AddValidProduct(const char* id, const char* name, const char* desc, const char* price);
 	void AddInvalidProduct(const char* id);
-    
-    void OnRestoreFinished(bool error);
+	
+	void OnRestoreFinished(bool error);
 
 private:
 	void Cleanup();
@@ -153,7 +153,7 @@ private:
 	AnsiStringArray m_InvalidProducts;
 	CBScriptHolder* m_LastProductRequestOwner;
 	CBScriptHolder* m_LastPurchaseOwner;
-    CBScriptHolder* m_LastRestoreOwner;
+	CBScriptHolder* m_LastRestoreOwner;
 
 	CBArray<CBStoreTransaction*, CBStoreTransaction*> m_Transactions;
 

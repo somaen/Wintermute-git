@@ -26,7 +26,10 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "SXStore.h"
 #include "StringUtil.h"
-#include "IOS_StoreKit_interface.h"
+
+#ifdef __IPHONEOS__
+#	include "IOS_StoreKit_interface.h"
+#endif
 
 
 IMPLEMENT_PERSISTENT(CSXStore, false);
@@ -34,12 +37,14 @@ IMPLEMENT_PERSISTENT(CSXStore, false);
 //////////////////////////////////////////////////////////////////////////
 CSXStore::CSXStore(CBGame* inGame) : CBObject(inGame)
 {
-    StoreKit_SetExternalData((void*)this);
-    
+#ifdef __IPHONEOS__
+	StoreKit_SetExternalData((void*)this);
+#endif
+
 	m_EventsEnabled = false;
 	m_LastProductRequestOwner = NULL;
 	m_LastPurchaseOwner = NULL;
-    m_LastRestoreOwner = NULL;
+	m_LastRestoreOwner = NULL;
 }
 
 
@@ -271,7 +276,7 @@ HRESULT CSXStore::Persist(CBPersistMgr* PersistMgr)
 	PersistMgr->Transfer(TMEMBER(m_EventsEnabled));
 	PersistMgr->Transfer(TMEMBER(m_LastProductRequestOwner));
 	PersistMgr->Transfer(TMEMBER(m_LastPurchaseOwner));
-    PersistMgr->Transfer(TMEMBER(m_LastRestoreOwner));
+	PersistMgr->Transfer(TMEMBER(m_LastRestoreOwner));
 	PersistMgr->Transfer(TMEMBER(m_InvalidProducts));
 
 	// persist valid products
@@ -305,7 +310,9 @@ void CSXStore::AfterLoad()
 	{
 		SetEventsEnabled(NULL, true);
 	}
-    StoreKit_SetExternalData((void*)this);
+#ifdef __IPHONEOS__
+	StoreKit_SetExternalData((void*)this);
+#endif
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -313,7 +320,7 @@ void CSXStore::OnObjectDestroyed(CBScriptHolder* obj)
 {
 	if (m_LastProductRequestOwner == obj) m_LastProductRequestOwner = NULL;
 	if (m_LastPurchaseOwner == obj) m_LastPurchaseOwner = NULL;
-    if (m_LastRestoreOwner == obj) m_LastRestoreOwner = NULL;
+	if (m_LastRestoreOwner == obj) m_LastRestoreOwner = NULL;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -322,29 +329,37 @@ void CSXStore::SetEventsEnabled(CScScript* script, bool val)
 	m_EventsEnabled = val;
 
 	if (val)
-    {
-        if (script) m_LastPurchaseOwner = script->m_Owner;
-        StoreKit_EnableEvents();
-    }
-    else
-    {
-        m_LastPurchaseOwner = NULL;
-        StoreKit_DisableEvents();
-    }
-    
-    
+	{
+		if (script) m_LastPurchaseOwner = script->m_Owner;
+#ifdef __IPHONEOS__
+		StoreKit_EnableEvents();
+#endif
+	}
+	else
+	{
+		m_LastPurchaseOwner = NULL;
+#ifdef __IPHONEOS__
+		StoreKit_DisableEvents();
+#endif
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
 void CSXStore::ValidateProducts(const char* prodIdList)
 {
-    StoreKit_ValidateProducts(prodIdList);
+#ifdef __IPHONEOS__
+	StoreKit_ValidateProducts(prodIdList);
+#endif
 }
 
 //////////////////////////////////////////////////////////////////////////
 bool CSXStore::IsAvailable()
 {
+#ifdef __IPHONEOS__
 	return StoreKit_IsStoreAvailable() > 0;
+#else
+	return false;
+#endif
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -391,8 +406,8 @@ void CSXStore::ReceiveTransactionsStart()
 //////////////////////////////////////////////////////////////////////////
 void CSXStore::ReceiveTransactionsEnd()
 {
-	if (m_LastPurchaseOwner) m_LastPurchaseOwner->ApplyEvent("StoreTransactionArrived");
-	else Game->ApplyEvent("StoreTransactionArrived");    
+	if (m_LastPurchaseOwner) m_LastPurchaseOwner->ApplyEvent("TransactionsUpdated");
+	else Game->ApplyEvent("TransactionsUpdated");    
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -407,6 +422,7 @@ bool CSXStore::Purchase(CScScript* script, const char* productId)
 {
 	if (!productId) return false;
 
+#ifdef __IPHONEOS__
 	for (int i = 0; i < m_ValidProducts.GetSize(); i++)
 	{
 		if (strcmp(productId, m_ValidProducts[i]->GetId()) == 0)
@@ -417,6 +433,7 @@ bool CSXStore::Purchase(CScScript* script, const char* productId)
 			return true;
 		}
 	}
+#endif
 	script->RuntimeError("Store.Purchase() - '%s' is not a valid product id", productId);
 	return false;
 }
@@ -425,20 +442,21 @@ bool CSXStore::Purchase(CScScript* script, const char* productId)
 bool CSXStore::FinishTransaction(CScScript* script, const char* transId)
 {
 	if (!transId) return false;
-
+#ifdef __IPHONEOS__
 	for (int i = 0; i < m_Transactions.GetSize(); i++)
 	{
 		if (strcmp(transId, m_Transactions[i]->GetId()) == 0)
 		{
 			if (StoreKit_FinishTransaction(transId) > 0)
-            {
-                SAFE_DELETE(m_Transactions[i]);
-                m_Transactions.RemoveAt(i);
-                return true;
-            }
+			{
+				SAFE_DELETE(m_Transactions[i]);
+				m_Transactions.RemoveAt(i);
+				return true;
+			}
 			else return false;
 		}
 	}
+#endif
 	script->RuntimeError("Store.FinishTransaction() - '%s' is not a valid transaction id", transId);
 	return false;
 }
@@ -446,72 +464,81 @@ bool CSXStore::FinishTransaction(CScScript* script, const char* transId)
 //////////////////////////////////////////////////////////////////////////
 void CSXStore::RestoreTransactions(CScScript* script)
 {
-    m_LastRestoreOwner = script->m_Owner;
+	m_LastRestoreOwner = script->m_Owner;
+#ifdef __IPHONEOS__
 	StoreKit_RestoreTransactions();
+#endif
 }
 
 //////////////////////////////////////////////////////////////////////////
 void CSXStore::OnRestoreFinished(bool error)
 {
-    if (m_LastRestoreOwner)
-    {
-        if (error) m_LastRestoreOwner->ApplyEvent("TransactionsRestoreFinished");
-        else m_LastRestoreOwner->ApplyEvent("TransactionsRestoreFailed");
-    }
+	if (m_LastRestoreOwner)
+	{
+		if (error) m_LastRestoreOwner->ApplyEvent("TransactionsRestoreFinished");
+		else m_LastRestoreOwner->ApplyEvent("TransactionsRestoreFailed");
+	}
 }
 
 
+
+#ifdef __IPHONEOS__
+
+//////////////////////////////////////////////////////////////////////////
+// StoreKit callbacks (called from ObjC)
 //////////////////////////////////////////////////////////////////////////
 void StoreKit_AddValidProductCallback(const char* id, const char* name, const char* desc, const char* price, void* data)
 {
-    CSXStore* store = static_cast<CSXStore*>(data);
-    if (store) store->AddValidProduct(id, name, desc, price);
+	CSXStore* store = static_cast<CSXStore*>(data);
+	if (store) store->AddValidProduct(id, name, desc, price);
 }
 
 //////////////////////////////////////////////////////////////////////////
 void StoreKit_AddInvalidProductCallback(const char* id, void* data)
 {
-    CSXStore* store = static_cast<CSXStore*>(data);
-    if (store) store->AddInvalidProduct(id);
+	CSXStore* store = static_cast<CSXStore*>(data);
+	if (store) store->AddInvalidProduct(id);
 }
 
 //////////////////////////////////////////////////////////////////////////
 void StoreKit_ReceiveProductsStartCallback(void* data)
 {
-    CSXStore* store = static_cast<CSXStore*>(data);
-    if (store) store->ReceiveProductsStart();
+	CSXStore* store = static_cast<CSXStore*>(data);
+	if (store) store->ReceiveProductsStart();
 }
 
 //////////////////////////////////////////////////////////////////////////
 void StoreKit_ReceiveProductsEndCallback(void* data)
 {
-    CSXStore* store = static_cast<CSXStore*>(data);
-    if (store) store->ReceiveProductsEnd();
+	CSXStore* store = static_cast<CSXStore*>(data);
+	if (store) store->ReceiveProductsEnd();
 }
 
 //////////////////////////////////////////////////////////////////////////
 void StoreKit_AddTransactionCallback(const char* id, const char* productId, const char* state, void* data)
 {
-    CSXStore* store = static_cast<CSXStore*>(data);
-    if (store) store->AddTransaction(id, productId, state);
+	CSXStore* store = static_cast<CSXStore*>(data);
+	if (store) store->AddTransaction(id, productId, state);
 }
 
 //////////////////////////////////////////////////////////////////////////
 void StoreKit_ReceiveTransactionsStartCallback(void* data)
 {
-    CSXStore* store = static_cast<CSXStore*>(data);
-    if (store) store->ReceiveTransactionsStart();
+	CSXStore* store = static_cast<CSXStore*>(data);
+	if (store) store->ReceiveTransactionsStart();
 }
 
 //////////////////////////////////////////////////////////////////////////
 void StoreKit_ReceiveTransactionsEndCallback(void* data)
 {
-    CSXStore* store = static_cast<CSXStore*>(data);
-    if (store) store->ReceiveTransactionsEnd();
+	CSXStore* store = static_cast<CSXStore*>(data);
+	if (store) store->ReceiveTransactionsEnd();
 }
 //////////////////////////////////////////////////////////////////////////
 void StoreKit_RestoreFinishedCallback(void* data, int error)
 {
-    CSXStore* store = static_cast<CSXStore*>(data);
-    if (store) store->OnRestoreFinished(error > 0);
+	CSXStore* store = static_cast<CSXStore*>(data);
+	if (store) store->OnRestoreFinished(error > 0);
 }
+
+#endif // __IPHONEOS__

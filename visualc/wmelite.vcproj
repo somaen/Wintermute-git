@@ -2303,6 +2303,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\src\SXStore.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\src\SXString.cpp"
 				>
 				<FileConfiguration
@@ -3016,6 +3020,10 @@
 			</File>
 			<File
 				RelativePath="..\src\SxObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\SXStore.h"
 				>
 			</File>
 			<File
