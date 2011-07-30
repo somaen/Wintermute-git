@@ -70,6 +70,7 @@ public:
 	HRESULT Transfer(const char* Name, POINT* Val);
 	HRESULT Transfer(const char* Name, char** Val);
 	HRESULT Transfer(const char* Name, Vector2* Val);
+	HRESULT Transfer(const char* Name, AnsiStringArray& Val);
 	CBPersistMgr(CBGame* inGame=NULL);
 	virtual ~CBPersistMgr();
 	bool CheckVersion(BYTE VerMajor, BYTE VerMinor, BYTE VerBuild);

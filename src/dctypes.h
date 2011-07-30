@@ -28,6 +28,7 @@ THE SOFTWARE.
 
 #include <string>
 #include <list>
+#include <vector>
 
 using namespace std;
 
@@ -39,6 +40,9 @@ typedef std::wstring WideString;
 
 typedef std::list<WideString> WideStringList;
 typedef std::list<AnsiString> AnsiStringList;
+
+typedef std::vector<WideString> WideStringArray;
+typedef std::vector<AnsiString> AnsiStringArray;
 
 
 typedef enum {

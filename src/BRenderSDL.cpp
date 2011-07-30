@@ -285,6 +285,7 @@ HRESULT CBRenderSDL::DrawLine(int X1, int Y1, int X2, int Y2, DWORD Color)
 	point2.x = X2;
 	point2.y = Y2;
 	PointToScreen(&point2);
+    
 
 	SDL_RenderDrawLine(m_Renderer, point1.x, point1.y, point2.x, point2.y);
 	return S_OK;

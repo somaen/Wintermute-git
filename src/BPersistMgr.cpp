@@ -427,6 +427,35 @@ HRESULT CBPersistMgr::Transfer(const char* Name, char** Val)
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////
+HRESULT CBPersistMgr::Transfer(const char* Name, AnsiStringArray& Val)
+{
+	size_t size;
+
+	if (m_Saving)
+	{
+		size = Val.size();
+		PutBytes((BYTE*)&size, sizeof(size_t));
+
+		for (AnsiStringArray::iterator it = Val.begin(); it != Val.end(); ++it)
+		{
+			PutString((*it).c_str());
+		}
+	}
+	else
+	{
+		Val.clear();
+		GetBytes((BYTE*)&size, sizeof(size_t));
+
+		for (size_t i = 0; i < size; i++)
+		{
+			char* str = GetString();
+			if (str) Val.push_back(str);
+		}
+	}
+
+	return S_OK;
+}
 
 //////////////////////////////////////////////////////////////////////////
 // BYTE

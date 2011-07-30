@@ -31,6 +31,7 @@ THE SOFTWARE.
 #include "BDebugger.h"
 #include "dctypes.h"	// Added by ClassView
 #include "BSaveThumbHelper.h"
+#include "SXStore.h"
 #include "SDL.h"
 
 typedef void (*ENGINE_LOG_CALLBACK)(char* Text, HRESULT Result, void* Data);
@@ -152,6 +153,7 @@ public:
 	CBSoundMgr* m_SoundMgr;
 	CScEngine* m_ScEngine;
 	CSXMath* m_MathClass;
+	CSXStore* m_Store;
 	CBSurfaceStorage* m_SurfaceStorage;
 	CBFontStorage* m_FontStorage;
 	CBGame();

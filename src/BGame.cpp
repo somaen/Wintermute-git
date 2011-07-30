@@ -240,6 +240,8 @@ CBGame::CBGame():CBObject(this)
 	m_TouchInterface = false;
 	m_ConstrainedMemory = false;
 #endif
+
+	m_Store = NULL;
 }
 
 
@@ -265,7 +267,7 @@ CBGame::~CBGame()
 	
 	SAFE_DELETE(m_SaveLoadImage);
 	SAFE_DELETE(m_MathClass);
-
+	
 	SAFE_DELETE(m_TransMgr);	
 	SAFE_DELETE(m_ScEngine);
 	SAFE_DELETE(m_FontStorage);
@@ -300,6 +302,9 @@ HRESULT CBGame::Cleanup()
 		SAFE_DELETE(m_Music[i]);
 		m_MusicStartTime[i] = 0;
 	}
+
+	UnregisterObject(m_Store);
+	m_Store = NULL;
 
 	UnregisterObject(m_Fader);
 	m_Fader = NULL;
@@ -392,10 +397,15 @@ HRESULT CBGame::Initialize1()
 	if(m_Fader==NULL) goto init_fail;
 	RegisterObject(m_Fader);
 
+	m_Store = new CSXStore(this);
+	if(m_Store==NULL) goto init_fail;
+	RegisterObject(m_Store);
+
 	return S_OK;
 
 init_fail:
 	if(m_MathClass) delete m_MathClass;
+	if(m_Store) delete m_Store;
 	if(m_KeyboardState) delete m_KeyboardState;
 	if(m_TransMgr) delete m_TransMgr;
 	if(m_DebugMgr) delete m_DebugMgr;
@@ -2568,7 +2578,16 @@ CScValue* CBGame::ScGetProperty(char *Name)
 		m_ScValue->SetInt(m_Registry->ReadInt("System", "MostRecentSaveSlot", -1));
 		return m_ScValue;
 	}
-	
+
+	//////////////////////////////////////////////////////////////////////////
+	// Store (RO)
+	//////////////////////////////////////////////////////////////////////////
+	else if(strcmp(Name, "Store")==0)
+	{
+		m_ScValue->SetNative(m_Store, true);
+		return m_ScValue;
+	}
+
 	else return CBObject::ScGetProperty(Name);
 }
 
@@ -2892,6 +2911,7 @@ HRESULT CBGame::UnregisterObject(CBObject *Object)
 	// is it main object?
 	if(m_MainObject==Object) m_MainObject = NULL;
 
+	if (m_Store) m_Store->OnObjectDestroyed(Object);
 
 	// destroy object
 	for(i=0; i<m_RegObjects.GetSize(); i++)
@@ -3446,6 +3466,7 @@ HRESULT CBGame::InitAfterLoad()
 	CSysClassRegistry::GetInstance()->EnumInstances(AfterLoadScript,   "CScScript",  NULL);
 
 	m_ScEngine->RefreshScriptBreakpoints();
+	m_Store->AfterLoad();
 
 	return S_OK;
 }
@@ -3827,6 +3848,11 @@ HRESULT CBGame::Persist(CBPersistMgr *PersistMgr)
 	PersistMgr->Transfer(TMEMBER(m_AutoSaveOnExit));
 	PersistMgr->Transfer(TMEMBER(m_AutoSaveSlot));
 	PersistMgr->Transfer(TMEMBER(m_CursorHidden));
+
+	if (PersistMgr->CheckVersion(1, 0, 1))
+		PersistMgr->Transfer(TMEMBER(m_Store));
+	else
+		m_Store = NULL;
 	
 	if (!PersistMgr->m_Saving) m_Quitting = false;
 

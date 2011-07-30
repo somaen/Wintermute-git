@@ -56,6 +56,8 @@ THE SOFTWARE.
 		static AnsiString ToString(int val);
 		static AnsiString ToString(float val);
 		static AnsiString ToString(double val);
+
+		static void Split(const AnsiString& list, const AnsiString& delimiters, AnsiStringArray& result, bool keepEmptyItems = false);
 	};
 
 #endif // __WmeStringUtil_H__
