@@ -204,6 +204,35 @@ HRESULT CSXStore::ScCallMethod(CScScript* script, CScStack* stack, CScStack* thi
 		return S_OK;
 	}
 
+	//////////////////////////////////////////////////////////////////////////
+	// UnlockProduct
+	//////////////////////////////////////////////////////////////////////////
+	else if (strcmp(name, "UnlockProduct") == 0)
+	{
+		stack->CorrectParams(1);
+		char* prodId = stack->Pop()->GetString();
+		
+		Game->m_Registry->WriteBool("Purchases", prodId, true);
+		Game->m_Registry->SaveValues();
+		
+		stack->PushBool(true);
+
+		return S_OK;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// IsProductUnlocked
+	//////////////////////////////////////////////////////////////////////////
+	else if (strcmp(name, "IsProductUnlocked") == 0)
+	{
+		stack->CorrectParams(1);
+		char* prodId = stack->Pop()->GetString();
+
+		stack->PushBool(Game->m_Registry->ReadBool("Purchases", prodId, false));
+
+		return S_OK;
+	}
+
 	else return E_FAIL;
 }
 
