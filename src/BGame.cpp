@@ -2584,7 +2584,9 @@ CScValue* CBGame::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	else if(strcmp(Name, "Store")==0)
 	{
-		m_ScValue->SetNative(m_Store, true);
+		if (m_Store) m_ScValue->SetNative(m_Store, true);
+		else m_ScValue->SetNULL();
+
 		return m_ScValue;
 	}
 
@@ -3466,7 +3468,7 @@ HRESULT CBGame::InitAfterLoad()
 	CSysClassRegistry::GetInstance()->EnumInstances(AfterLoadScript,   "CScScript",  NULL);
 
 	m_ScEngine->RefreshScriptBreakpoints();
-	m_Store->AfterLoad();
+	if (m_Store) m_Store->AfterLoad();
 
 	return S_OK;
 }
