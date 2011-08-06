@@ -504,8 +504,8 @@ void CSXStore::OnRestoreFinished(bool error)
 {
 	if (m_LastRestoreOwner)
 	{
-		if (error) m_LastRestoreOwner->ApplyEvent("TransactionsRestoreFinished");
-		else m_LastRestoreOwner->ApplyEvent("TransactionsRestoreFailed");
+		if (error) m_LastRestoreOwner->ApplyEvent("TransactionsRestoreFailed");
+		else m_LastRestoreOwner->ApplyEvent("TransactionsRestoreFinished");
 	}
 }
 
