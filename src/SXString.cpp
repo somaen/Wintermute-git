@@ -146,6 +146,8 @@ HRESULT CSXString::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 			return S_OK;
 		}
 
+		if (val->IsNULL()) len = strlen(m_String) - start;
+
 		try
 		{
 			WideString str;
