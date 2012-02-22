@@ -29,25 +29,34 @@ THE SOFTWARE.
 
 class CSysClass;
 
-class CSysInstance  
-{
+class CSysInstance {
 public:
-	CSysInstance(void* Instance, int ID, CSysClass* sysClass);
+	CSysInstance(void *Instance, int ID, CSysClass *sysClass);
 	virtual ~CSysInstance();
 
-	int GetID() const { return m_ID; }
-	int GetSavedID() const { return m_SavedID; }
-	void* GetInstance() const { return m_Instance; }
-	CSysClass* GetClass() const { return m_Class; }
+	int GetID() const {
+		return m_ID;
+	}
+	int GetSavedID() const {
+		return m_SavedID;
+	}
+	void *GetInstance() const {
+		return m_Instance;
+	}
+	CSysClass *GetClass() const {
+		return m_Class;
+	}
 
-	void SetSavedID(int id) { m_SavedID = id; }
+	void SetSavedID(int id) {
+		m_SavedID = id;
+	}
 
 private:
 	bool m_Used;
 	int m_ID;
 	int m_SavedID;
-	void* m_Instance;
-	CSysClass* m_Class;
+	void *m_Instance;
+	CSysClass *m_Class;
 };
 
 #endif

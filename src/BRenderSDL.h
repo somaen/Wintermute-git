@@ -29,44 +29,51 @@ THE SOFTWARE.
 #include "BRenderer.h"
 #include "SDL.h"
 
-class CBRenderSDL : public CBRenderer
-{
+class CBRenderSDL : public CBRenderer {
 public:
-	CBRenderSDL(CBGame* inGame);
+	CBRenderSDL(CBGame *inGame);
 	~CBRenderSDL();
 
-	const char* GetName();
+	const char *GetName();
 
 	HRESULT InitRenderer(int width, int height, bool windowed);
 	HRESULT Flip();
-	HRESULT Fill(BYTE r, BYTE g, BYTE b, RECT* rect);
+	HRESULT Fill(BYTE r, BYTE g, BYTE b, RECT *rect);
 
 	HRESULT Fade(WORD Alpha);
-	HRESULT FadeToColor(DWORD Color, RECT* rect = NULL);
+	HRESULT FadeToColor(DWORD Color, RECT *rect = NULL);
 
 	HRESULT SwitchFullscreen();
 
 	HRESULT DrawLine(int X1, int Y1, int X2, int Y2, DWORD Color);
 
-	CBImage* TakeScreenshot();
+	CBImage *TakeScreenshot();
 
-	SDL_Renderer* GetSdlRenderer() const { return m_Renderer; }
-	SDL_Window* GetSdlWindow() const { return m_Win; }
+	SDL_Renderer *GetSdlRenderer() const {
+		return m_Renderer;
+	}
+	SDL_Window *GetSdlWindow() const {
+		return m_Win;
+	}
 
 	HRESULT SetViewport(int left, int top, int right, int bottom);
 
-	void ModTargetRect(SDL_Rect* rect);
-	void PointFromScreen(POINT* point);
-	void PointToScreen(POINT* point);
+	void ModTargetRect(SDL_Rect *rect);
+	void PointFromScreen(POINT *point);
+	void PointToScreen(POINT *point);
 
-	void DumpData(char* Filename);
+	void DumpData(char *Filename);
 
-	float GetScaleRatioX() const { return m_RatioX; }
-	float GetScaleRatioY() const { return m_RatioY; }
+	float GetScaleRatioX() const {
+		return m_RatioX;
+	}
+	float GetScaleRatioY() const {
+		return m_RatioY;
+	}
 
 private:
-	SDL_Renderer* m_Renderer;
-	SDL_Window* m_Win;
+	SDL_Renderer *m_Renderer;
+	SDL_Window *m_Win;
 	AnsiString m_Name;
 
 	int m_BorderLeft;

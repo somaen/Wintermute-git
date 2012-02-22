@@ -35,19 +35,20 @@ THE SOFTWARE.
 
 class CBFont;
 
-class CBFontStorage : public CBBase  
-{
+class CBFontStorage : public CBBase {
 public:
 	DECLARE_PERSISTENT(CBFontStorage, CBBase);
-	HRESULT Cleanup(bool Warn=false);	
-	HRESULT RemoveFont(CBFont* Font);
-	CBFont* AddFont(char* Filename);
-	CBFontStorage(CBGame* inGame);
+	HRESULT Cleanup(bool Warn = false);
+	HRESULT RemoveFont(CBFont *Font);
+	CBFont *AddFont(char *Filename);
+	CBFontStorage(CBGame *inGame);
 	virtual ~CBFontStorage();
-	CBArray<CBFont*, CBFont*> m_Fonts;
+	CBArray<CBFont *, CBFont *> m_Fonts;
 	HRESULT InitLoop();
 
-	FT_Library GetFTLibrary() const { return m_FTLibrary; }
+	FT_Library GetFTLibrary() const {
+		return m_FTLibrary;
+	}
 
 private:
 	void InitFreeType();

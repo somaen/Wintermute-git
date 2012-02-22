@@ -30,8 +30,7 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CAdSceneNode, false);
 
 //////////////////////////////////////////////////////////////////////////
-CAdSceneNode::CAdSceneNode(CBGame* inGame):CBObject(inGame)
-{
+CAdSceneNode::CAdSceneNode(CBGame *inGame): CBObject(inGame) {
 	m_Type = OBJECT_NONE;
 	m_Region = NULL;
 	m_Entity = NULL;
@@ -39,8 +38,7 @@ CAdSceneNode::CAdSceneNode(CBGame* inGame):CBObject(inGame)
 
 
 //////////////////////////////////////////////////////////////////////////
-CAdSceneNode::~CAdSceneNode()
-{
+CAdSceneNode::~CAdSceneNode() {
 	Game->UnregisterObject(m_Region);
 	m_Region = NULL;
 
@@ -50,8 +48,7 @@ CAdSceneNode::~CAdSceneNode()
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdSceneNode::SetEntity(CAdEntity *Entity)
-{
+HRESULT CAdSceneNode::SetEntity(CAdEntity *Entity) {
 	m_Type = OBJECT_ENTITY;
 	m_Entity = Entity;
 	return Game->RegisterObject(Entity);
@@ -59,8 +56,7 @@ HRESULT CAdSceneNode::SetEntity(CAdEntity *Entity)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdSceneNode::SetRegion(CAdRegion *Region)
-{
+HRESULT CAdSceneNode::SetRegion(CAdRegion *Region) {
 	m_Type = OBJECT_REGION;
 	m_Region = Region;
 	return Game->RegisterObject(Region);
@@ -68,7 +64,7 @@ HRESULT CAdSceneNode::SetRegion(CAdRegion *Region)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdSceneNode::Persist(CBPersistMgr* PersistMgr){
+HRESULT CAdSceneNode::Persist(CBPersistMgr *PersistMgr) {
 
 	CBObject::Persist(PersistMgr);
 

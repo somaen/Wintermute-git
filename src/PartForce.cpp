@@ -28,8 +28,7 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////////
-CPartForce::CPartForce(CBGame* inGame) : CBNamedObject(inGame)
-{
+CPartForce::CPartForce(CBGame *inGame) : CBNamedObject(inGame) {
 	m_Pos = Vector2(0.0f, 0.0f);
 	m_Direction = Vector2(0.0f, 0.0f);
 	m_Type = FORCE_POINT;
@@ -37,14 +36,12 @@ CPartForce::CPartForce(CBGame* inGame) : CBNamedObject(inGame)
 
 
 //////////////////////////////////////////////////////////////////////////
-CPartForce::~CPartForce(void)
-{
+CPartForce::~CPartForce(void) {
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CPartForce::Persist(CBPersistMgr* PersistMgr)
-{
+HRESULT CPartForce::Persist(CBPersistMgr *PersistMgr) {
 	PersistMgr->Transfer(TMEMBER(m_Name));
 	PersistMgr->Transfer(TMEMBER(m_Pos));
 	PersistMgr->Transfer(TMEMBER(m_Direction));

@@ -27,22 +27,21 @@ THE SOFTWARE.
 #define __WmeBActiveRect_H__
 
 
-class CBActiveRect:CBBase
-{
-public:	
+class CBActiveRect: CBBase {
+public:
 	void ClipRect();
 	bool m_Precise;
 	float m_ZoomX;
 	float m_ZoomY;
-	CBSubFrame* m_Frame;
-	CBObject* m_Owner;
-	CBRegion* m_Region;
+	CBSubFrame *m_Frame;
+	CBObject *m_Owner;
+	CBRegion *m_Region;
 	int m_OffsetX;
 	int m_OffsetY;
 	RECT m_Rect;
-	CBActiveRect(CBGame* inGameOwner=NULL);
-	CBActiveRect(CBGame* inGameOwner, CBObject* Owner, CBSubFrame* Frame, int X, int Y, int Width, int Height, float ZoomX=100, float ZoomY=100, bool Precise=true);
-	CBActiveRect(CBGame* inGame, CBObject* Owner, CBRegion* Region, int OffsetX, int OffsetY);
+	CBActiveRect(CBGame *inGameOwner = NULL);
+	CBActiveRect(CBGame *inGameOwner, CBObject *Owner, CBSubFrame *Frame, int X, int Y, int Width, int Height, float ZoomX = 100, float ZoomY = 100, bool Precise = true);
+	CBActiveRect(CBGame *inGame, CBObject *Owner, CBRegion *Region, int OffsetX, int OffsetY);
 	virtual ~CBActiveRect();
 
 };

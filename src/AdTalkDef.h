@@ -27,23 +27,22 @@ THE SOFTWARE.
 #define __WmeAdTalkDef_H__
 
 
-class CAdTalkDef : public CBObject  
-{
+class CAdTalkDef : public CBObject {
 public:
-	char* m_DefaultSpriteSetFilename;
-	CAdSpriteSet* m_DefaultSpriteSet;
-	CBSprite* GetDefaultSprite(TDirection Dir);
+	char *m_DefaultSpriteSetFilename;
+	CAdSpriteSet *m_DefaultSpriteSet;
+	CBSprite *GetDefaultSprite(TDirection Dir);
 	HRESULT LoadDefaultSprite();
 	DECLARE_PERSISTENT(CAdTalkDef, CBObject);
 
-	CAdTalkDef(CBGame* inGame);
+	CAdTalkDef(CBGame *inGame);
 	virtual ~CAdTalkDef();
-	HRESULT LoadFile(const char* Filename);
-	HRESULT LoadBuffer(BYTE* Buffer, bool Complete=true);
-	CBArray<CAdTalkNode*, CAdTalkNode*> m_Nodes;
-	char* m_DefaultSpriteFilename;
-	CBSprite* m_DefaultSprite;
-	virtual HRESULT SaveAsText(CBDynBuffer* Buffer, int Indent=0);
+	HRESULT LoadFile(const char *Filename);
+	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	CBArray<CAdTalkNode *, CAdTalkNode *> m_Nodes;
+	char *m_DefaultSpriteFilename;
+	CBSprite *m_DefaultSprite;
+	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent = 0);
 };
 
 #endif

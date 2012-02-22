@@ -31,21 +31,20 @@ THE SOFTWARE.
 
 
 #ifdef __WIN32__
-#	include <shlobj.h>
+#   include <shlobj.h>
 #endif
 
 #ifdef __MACOSX__
-#	include <CoreServices/CoreServices.h>
+#   include <CoreServices/CoreServices.h>
 #endif
 
 #ifdef __IPHONEOS__
-#	include "ios_utils.h"
+#   include "ios_utils.h"
 #endif
 
 
 //////////////////////////////////////////////////////////////////////////
-AnsiString PathUtil::UnifySeparators(const AnsiString& path)
-{
+AnsiString PathUtil::UnifySeparators(const AnsiString &path) {
 	AnsiString newPath = path;
 
 	std::replace(newPath.begin(), newPath.end(), L'\\', L'/');
@@ -53,16 +52,14 @@ AnsiString PathUtil::UnifySeparators(const AnsiString& path)
 }
 
 //////////////////////////////////////////////////////////////////////////
-AnsiString PathUtil::NormalizeFileName(const AnsiString& path)
-{
+AnsiString PathUtil::NormalizeFileName(const AnsiString &path) {
 	AnsiString newPath = UnifySeparators(path);
 	StringUtil::ToLowerCase(newPath);
 	return newPath;
 }
 
 //////////////////////////////////////////////////////////////////////////
-AnsiString PathUtil::Combine(const AnsiString& path1, const AnsiString& path2)
-{
+AnsiString PathUtil::Combine(const AnsiString &path1, const AnsiString &path2) {
 	AnsiString newPath1 = UnifySeparators(path1);
 	AnsiString newPath2 = UnifySeparators(path2);
 
@@ -73,19 +70,17 @@ AnsiString PathUtil::Combine(const AnsiString& path1, const AnsiString& path2)
 }
 
 //////////////////////////////////////////////////////////////////////////
-AnsiString PathUtil::GetDirectoryName(const AnsiString& path)
-{
+AnsiString PathUtil::GetDirectoryName(const AnsiString &path) {
 	AnsiString newPath = UnifySeparators(path);
-	
+
 	size_t pos = newPath.find_last_of(L'/');
-	
+
 	if (pos == AnsiString::npos) return "";
 	else return newPath.substr(0, pos + 1);
 }
 
 //////////////////////////////////////////////////////////////////////////
-AnsiString PathUtil::GetFileName(const AnsiString& path)
-{
+AnsiString PathUtil::GetFileName(const AnsiString &path) {
 	AnsiString newPath = UnifySeparators(path);
 
 	size_t pos = newPath.find_last_of(L'/');
@@ -95,8 +90,7 @@ AnsiString PathUtil::GetFileName(const AnsiString& path)
 }
 
 //////////////////////////////////////////////////////////////////////////
-AnsiString PathUtil::GetFileNameWithoutExtension(const AnsiString& path)
-{
+AnsiString PathUtil::GetFileNameWithoutExtension(const AnsiString &path) {
 	AnsiString fileName = GetFileName(path);
 
 	size_t pos = fileName.find_last_of('.');
@@ -106,8 +100,7 @@ AnsiString PathUtil::GetFileNameWithoutExtension(const AnsiString& path)
 }
 
 //////////////////////////////////////////////////////////////////////////
-AnsiString PathUtil::GetExtension(const AnsiString& path)
-{
+AnsiString PathUtil::GetExtension(const AnsiString &path) {
 	AnsiString fileName = GetFileName(path);
 
 	size_t pos = fileName.find_last_of('.');
@@ -118,20 +111,19 @@ AnsiString PathUtil::GetExtension(const AnsiString& path)
 
 
 //////////////////////////////////////////////////////////////////////////
-AnsiString PathUtil::GetSafeLogFileName()
-{
+AnsiString PathUtil::GetSafeLogFileName() {
 	AnsiString logFileName = GetUserDirectory();
 
 #ifdef __WIN32__
 	char moduleName[MAX_PATH];
 	::GetModuleFileName(NULL, moduleName, MAX_PATH);
-	
+
 	AnsiString fileName = GetFileNameWithoutExtension(moduleName) + ".log";
 	fileName = Combine("/Wintermute Engine/Logs/", fileName);
 	logFileName = Combine(logFileName, fileName);
-	
+
 #else
-	// !PORTME	
+	// !PORTME
 	logFileName = Combine(logFileName, "/Wintermute Engine/wme.log");
 #endif
 
@@ -140,20 +132,17 @@ AnsiString PathUtil::GetSafeLogFileName()
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool PathUtil::CreateDirectory(const AnsiString& path)
-{
+bool PathUtil::CreateDirectory(const AnsiString &path) {
 	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool PathUtil::MatchesMask(const AnsiString& fileName, const AnsiString& mask)
-{
+bool PathUtil::MatchesMask(const AnsiString &fileName, const AnsiString &mask) {
 	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool PathUtil::FileExists(const AnsiString& fileName)
-{
+bool PathUtil::FileExists(const AnsiString &fileName) {
 	std::ifstream stream;
 
 	stream.open(fileName.c_str());
@@ -165,8 +154,7 @@ bool PathUtil::FileExists(const AnsiString& fileName)
 
 
 //////////////////////////////////////////////////////////////////////////
-AnsiString PathUtil::GetUserDirectory()
-{
+AnsiString PathUtil::GetUserDirectory() {
 	AnsiString userDir = "./";
 
 #ifdef __WIN32__
@@ -174,11 +162,9 @@ AnsiString PathUtil::GetUserDirectory()
 	buffer[0] = '\0';
 	LPITEMIDLIST pidl = NULL;
 	LPMALLOC pMalloc;
-	if(SUCCEEDED(SHGetMalloc(&pMalloc)))
-	{
+	if (SUCCEEDED(SHGetMalloc(&pMalloc))) {
 		SHGetSpecialFolderLocation(NULL, CSIDL_APPDATA, &pidl);
-		if(pidl)
-		{
+		if (pidl) {
 			SHGetPathFromIDList(pidl, buffer);
 		}
 		pMalloc->Free(pidl);
@@ -187,10 +173,9 @@ AnsiString PathUtil::GetUserDirectory()
 #elif __MACOSX__
 	FSRef fileRef;
 	OSStatus error = FSFindFolder(kUserDomain, kApplicationSupportFolderType, true, &fileRef);
-	if (error == noErr)
-	{
+	if (error == noErr) {
 		char buffer[MAX_PATH];
-		error = FSRefMakePath(&fileRef, (UInt8*)buffer, sizeof(buffer));
+		error = FSRefMakePath(&fileRef, (UInt8 *)buffer, sizeof(buffer));
 		if (error == noErr)
 			userDir = buffer;
 
@@ -200,6 +185,6 @@ AnsiString PathUtil::GetUserDirectory()
 	IOS_GetDataDir(path);
 	userDir = AnsiString(path);
 #endif
-	
+
 	return userDir;
 }

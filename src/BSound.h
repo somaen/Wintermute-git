@@ -28,10 +28,9 @@ THE SOFTWARE.
 
 
 #include "BBase.h"
-#include "dctypes.h"	// Added by ClassView
+#include "dctypes.h"    // Added by ClassView
 
-class CBSound : public CBBase  
-{
+class CBSound : public CBBase {
 public:
 	HRESULT SetPan(float Pan);
 	int m_SoundPrivateVolume;
@@ -53,17 +52,17 @@ public:
 	HRESULT Resume();
 	HRESULT Pause(bool FreezePaused = false);
 	HRESULT Stop();
-	HRESULT Play(bool Looping=false);
+	HRESULT Play(bool Looping = false);
 	DWORD GetLength();
 	bool m_SoundStreamed;
 	TSoundType m_SoundType;
-	char* m_SoundFilename;
+	char *m_SoundFilename;
 	HRESULT SetSoundSimple();
-	HRESULT SetSound(char* Filename, TSoundType Type=SOUND_SFX, bool Streamed=false);	
-	CBSound(CBGame* inGame);
+	HRESULT SetSound(char *Filename, TSoundType Type = SOUND_SFX, bool Streamed = false);
+	CBSound(CBGame *inGame);
 	virtual ~CBSound();
 
-	HRESULT ApplyFX(TSFXType Type=SFX_NONE, float Param1=0, float Param2=0, float Param3=0, float Param4=0);
+	HRESULT ApplyFX(TSFXType Type = SFX_NONE, float Param1 = 0, float Param2 = 0, float Param3 = 0, float Param4 = 0);
 
 	TSFXType m_SFXType;
 	float m_SFXParam1;
@@ -72,7 +71,7 @@ public:
 	float m_SFXParam4;
 
 private:
-	CBSoundBuffer* m_Sound;
+	CBSoundBuffer *m_Sound;
 
 };
 

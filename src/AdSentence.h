@@ -28,46 +28,45 @@ THE SOFTWARE.
 
 
 #include "BBase.h"
-#include "dctypes.h"	// Added by ClassView
+#include "dctypes.h"    // Added by ClassView
 
-class CAdSentence : public CBBase  
-{
-public:	
+class CAdSentence : public CBBase {
+public:
 	bool m_Freezable;
 	bool m_FixedPos;
-	CBSprite* m_CurrentSprite;
-	char* m_CurrentSkelAnim;
-	HRESULT Update(TDirection Dir=DI_DOWN);
-	HRESULT SetupTalkFile(char* SoundFilename);
+	CBSprite *m_CurrentSprite;
+	char *m_CurrentSkelAnim;
+	HRESULT Update(TDirection Dir = DI_DOWN);
+	HRESULT SetupTalkFile(char *SoundFilename);
 	DECLARE_PERSISTENT(CAdSentence, CBBase);
 	HRESULT Finish();
-	void SetSound(CBSound* Sound);
+	void SetSound(CBSound *Sound);
 	bool m_SoundStarted;
-	CBSound* m_Sound;
+	CBSound *m_Sound;
 	TTextAlign m_Align;
 	HRESULT Display();
 	int m_Width;
 	POINT m_Pos;
-	CBFont* m_Font;
-	char* GetNextStance();
-	char* GetCurrentStance();
-	void SetStances(char* Stances);
-	void SetText(char* Text);
+	CBFont *m_Font;
+	char *GetNextStance();
+	char *GetCurrentStance();
+	void SetStances(char *Stances);
+	void SetText(char *Text);
 	int m_CurrentStance;
 	DWORD m_StartTime;
-	char* m_Stances;
-	char* m_Text;	
+	char *m_Stances;
+	char *m_Text;
 	DWORD m_Duration;
-	CAdSentence(CBGame* inGame);
+	CAdSentence(CBGame *inGame);
 	virtual ~CAdSentence();
-	CAdTalkDef* m_TalkDef;
+	CAdTalkDef *m_TalkDef;
 
 	bool CanSkip();
 
 private:
-	char* m_TempStance;
-	char* GetStance(int Stance);
-	
+	char *m_TempStance;
+	char *GetStance(int Stance);
+
 };
 
 #endif

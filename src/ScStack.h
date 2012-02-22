@@ -29,25 +29,24 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
-class CScStack : public CBBase
-{
+class CScStack : public CBBase {
 public:
-	CScValue* GetAt(int Index);
-	CScValue* GetPushValue();
+	CScValue *GetAt(int Index);
+	CScValue *GetPushValue();
 	DECLARE_PERSISTENT(CScStack, CBBase);
-	void PushNative(CBScriptable* Val, bool Persistent);
-	void PushString(const char* Val);
+	void PushNative(CBScriptable *Val, bool Persistent);
+	void PushString(const char *Val);
 	void PushBool(bool Val);
 	void PushInt(int Val);
 	void PushFloat(double Val);
 	void PushNULL();
 	void CorrectParams(DWORD expected_params);
-	CScValue* GetTop();
-	void Push(CScValue* Val);
-	CScValue* Pop();
-	CScStack(CBGame* inGame);
+	CScValue *GetTop();
+	void Push(CScValue *Val);
+	CScValue *Pop();
+	CScStack(CBGame *inGame);
 	virtual ~CScStack();
-	CBArray<CScValue*, CScValue*> m_Values;
+	CBArray<CScValue *, CScValue *> m_Values;
 	int m_SP;
 
 };

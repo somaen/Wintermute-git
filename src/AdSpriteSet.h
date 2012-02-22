@@ -28,21 +28,20 @@ THE SOFTWARE.
 
 
 #include "BObject.h"
-#include "BSprite.h"	// Added by ClassView
+#include "BSprite.h"    // Added by ClassView
 
-class CAdSpriteSet : public CBObject  
-{
+class CAdSpriteSet : public CBObject {
 public:
-	bool ContainsSprite(CBSprite* Sprite);
-	virtual HRESULT SaveAsText(CBDynBuffer* Buffer, int Indent=0);
-	CBSprite* GetSprite(TDirection Direction);
+	bool ContainsSprite(CBSprite *Sprite);
+	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent = 0);
+	CBSprite *GetSprite(TDirection Direction);
 	DECLARE_PERSISTENT(CAdSpriteSet, CBObject);
-	CBObject* m_Owner;	
-	CAdSpriteSet(CBGame* inGame, CBObject* Owner=NULL);
+	CBObject *m_Owner;
+	CAdSpriteSet(CBGame *inGame, CBObject *Owner = NULL);
 	virtual ~CAdSpriteSet();
-	HRESULT LoadFile(char* Filename, int LifeTime=-1, TSpriteCacheType CacheType=CACHE_ALL);
-	HRESULT LoadBuffer(BYTE* Buffer, bool Complete=true, int LifeTime=-1, TSpriteCacheType CacheType=CACHE_ALL);
-	CBSprite* m_Sprites[NUM_DIRECTIONS];
+	HRESULT LoadFile(char *Filename, int LifeTime = -1, TSpriteCacheType CacheType = CACHE_ALL);
+	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true, int LifeTime = -1, TSpriteCacheType CacheType = CACHE_ALL);
+	CBSprite *m_Sprites[NUM_DIRECTIONS];
 };
 
 #endif

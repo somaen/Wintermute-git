@@ -27,27 +27,26 @@ THE SOFTWARE.
 #define __WmeAdTalkNode_H__
 
 
-class CAdTalkNode : public CBBase  
-{
+class CAdTalkNode : public CBBase {
 public:
-	char* m_SpriteSetFilename;
-	CAdSpriteSet* m_SpriteSet;
-	CBSprite* GetSprite(TDirection Dir);
+	char *m_SpriteSetFilename;
+	CAdSpriteSet *m_SpriteSet;
+	CBSprite *GetSprite(TDirection Dir);
 	bool IsInTimeInterval(DWORD Time, TDirection Dir);
 	HRESULT LoadSprite();
 	DECLARE_PERSISTENT(CAdTalkNode, CBBase);
 
-	CAdTalkNode(CBGame* inGame);
+	CAdTalkNode(CBGame *inGame);
 	virtual ~CAdTalkNode();
-	HRESULT LoadBuffer(BYTE* Buffer, bool Complete=true);
-	virtual HRESULT SaveAsText(CBDynBuffer* Buffer, int Indent=0);
-	char* m_SpriteFilename;
-	CBSprite* m_Sprite;
+	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent = 0);
+	char *m_SpriteFilename;
+	CBSprite *m_Sprite;
 	DWORD m_StartTime;
 	DWORD m_EndTime;
 	bool m_PlayToEnd;
 	bool m_PreCache;
-	char* m_Comment;
+	char *m_Comment;
 
 };
 

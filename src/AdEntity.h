@@ -27,33 +27,32 @@ THE SOFTWARE.
 #define __WmeAdEntity_H__
 
 
-class CAdEntity : public CAdTalkHolder
-{
+class CAdEntity : public CAdTalkHolder {
 public:
-	HRESULT SetSprite(char* Filename);
+	HRESULT SetSprite(char *Filename);
 	int m_WalkToX;
 	int m_WalkToY;
 	TDirection m_WalkToDir;
-	void SetItem(char* ItemName);
-	char* m_Item;
+	void SetItem(char *ItemName);
+	char *m_Item;
 	DECLARE_PERSISTENT(CAdEntity, CAdTalkHolder);
 	void UpdatePosition();
 	virtual int GetHeight();
-	CBRegion* m_Region;
+	CBRegion *m_Region;
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 	virtual HRESULT Update();
 	virtual HRESULT Display();
-	CAdEntity(CBGame* inGame);
+	CAdEntity(CBGame *inGame);
 	virtual ~CAdEntity();
-	HRESULT LoadFile(char * Filename);
-	HRESULT LoadBuffer(BYTE* Buffer, bool Complete=true);
+	HRESULT LoadFile(char *Filename);
+	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
 	TEntityType m_Subtype;
 
 	// scripting interface
-	virtual CScValue* ScGetProperty(char* Name);
+	virtual CScValue *ScGetProperty(char *Name);
 	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name);
-	virtual char* ScToString();
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual char *ScToString();
 
 };
 

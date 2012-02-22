@@ -29,16 +29,15 @@ THE SOFTWARE.
 
 #include "BObject.h"
 
-class CAdScaleLevel : public CBObject  
-{
+class CAdScaleLevel : public CBObject {
 public:
 	DECLARE_PERSISTENT(CAdScaleLevel, CBObject);
 	float m_Scale;
-	CAdScaleLevel(CBGame* inGame);
+	CAdScaleLevel(CBGame *inGame);
 	virtual ~CAdScaleLevel();
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
-	HRESULT LoadFile(char* Filename);
-	HRESULT LoadBuffer(BYTE* Buffer, bool Complete=true);
+	HRESULT LoadFile(char *Filename);
+	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
 };
 
 #endif

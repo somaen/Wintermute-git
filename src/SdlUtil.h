@@ -28,10 +28,9 @@ THE SOFTWARE.
 
 #include "SDL.h"
 
-class SdlUtil
-{
+class SdlUtil {
 public:
-	static SDL_Texture* CreateTextureFromSurface(SDL_Renderer* renderer, SDL_Surface* surface);
+	static SDL_Texture *CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surface);
 };
 
 

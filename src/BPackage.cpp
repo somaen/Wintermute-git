@@ -32,8 +32,7 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////////
-CBPackage::CBPackage(CBGame* inGame):CBBase(inGame)
-{
+CBPackage::CBPackage(CBGame *inGame): CBBase(inGame) {
 	m_File = NULL;
 	m_Name = NULL;
 	m_CD = 0;
@@ -43,19 +42,16 @@ CBPackage::CBPackage(CBGame* inGame):CBBase(inGame)
 
 
 //////////////////////////////////////////////////////////////////////////
-CBPackage::~CBPackage()
-{
-	if(m_Name) delete [] m_Name;
+CBPackage::~CBPackage() {
+	if (m_Name) delete [] m_Name;
 	CloseFilePointer(m_File);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBPackage::Open()
-{
+HRESULT CBPackage::Open() {
 	if (m_File) return S_OK;
-	else
-	{
+	else {
 		m_File = GetFilePointer();
 		return m_File ? S_OK : E_FAIL;
 	}
@@ -63,21 +59,18 @@ HRESULT CBPackage::Open()
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBPackage::Close()
-{
-	if(m_File) fclose(m_File);
+HRESULT CBPackage::Close() {
+	if (m_File) fclose(m_File);
 	m_File = NULL;
 	return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBPackage::Read(FILE* file, DWORD offset, BYTE* buffer, DWORD size)
-{
+HRESULT CBPackage::Read(FILE *file, DWORD offset, BYTE *buffer, DWORD size) {
 	HRESULT ret;
 	if (FAILED(ret = Open())) return ret;
-	else
-	{
+	else {
 		if (fseek(file, offset, SEEK_SET)) return E_FAIL;
 		if (fread(buffer, size, 1, file) != 1) return E_FAIL;
 		else return S_OK;
@@ -85,11 +78,9 @@ HRESULT CBPackage::Read(FILE* file, DWORD offset, BYTE* buffer, DWORD size)
 }
 
 //////////////////////////////////////////////////////////////////////////
-FILE* CBPackage::GetFilePointer()
-{
-	FILE* file = Game->m_FileManager->OpenPackage(m_Name);
-	if (!file)
-	{
+FILE *CBPackage::GetFilePointer() {
+	FILE *file = Game->m_FileManager->OpenPackage(m_Name);
+	if (!file) {
 		Game->m_FileManager->RequestCD(m_CD, m_Name, "");
 		file = Game->m_FileManager->OpenPackage(m_Name);
 	}
@@ -97,8 +88,7 @@ FILE* CBPackage::GetFilePointer()
 }
 
 //////////////////////////////////////////////////////////////////////////
-void CBPackage::CloseFilePointer(FILE*& file)
-{
+void CBPackage::CloseFilePointer(FILE*& file) {
 	if (file) fclose(file);
 	file = NULL;
 }

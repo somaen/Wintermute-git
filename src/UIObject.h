@@ -28,50 +28,49 @@ THE SOFTWARE.
 
 
 #include "BObject.h"
-#include "dctypes.h"	// Added by ClassView
+#include "dctypes.h"    // Added by ClassView
 
 class CUITiledImage;
 
-class CUIObject : public CBObject
-{
+class CUIObject : public CBObject {
 public:
 
-	HRESULT GetTotalOffset(int* OffsetX, int* OffsetY);
+	HRESULT GetTotalOffset(int *OffsetX, int *OffsetY);
 	bool m_CanFocus;
 	HRESULT Focus();
-	virtual HRESULT HandleMouse(TMouseEvent Event, TMouseButton Button);	
+	virtual HRESULT HandleMouse(TMouseEvent Event, TMouseButton Button);
 	bool IsFocused();
 	bool m_ParentNotify;
 	DECLARE_PERSISTENT(CUIObject, CBObject);
-	CUIObject* m_Parent;
-	virtual HRESULT Display(int OffsetX=0, int OffsetY=0);
+	CUIObject *m_Parent;
+	virtual HRESULT Display(int OffsetX = 0, int OffsetY = 0);
 	virtual void CorrectSize();
 	bool m_SharedFonts;
 	bool m_SharedImages;
-	void SetText(const char* Text);
-	char* m_Text;
-	CBFont* m_Font;
+	void SetText(const char *Text);
+	char *m_Text;
+	CBFont *m_Font;
 	bool m_Visible;
-	CUITiledImage* m_Back;
+	CUITiledImage *m_Back;
 	bool m_Disable;
-	CUIObject(CBGame* inGame=NULL);
+	CUIObject(CBGame *inGame = NULL);
 	virtual ~CUIObject();
 	int m_Width;
 	int m_Height;
 	TUIObjectType m_Type;
-	CBSprite* m_Image;
-	void SetListener(CBScriptHolder* Object, CBScriptHolder* ListenerObject, DWORD ListenerParam);
-	CBScriptHolder* m_ListenerParamObject;
+	CBSprite *m_Image;
+	void SetListener(CBScriptHolder *Object, CBScriptHolder *ListenerObject, DWORD ListenerParam);
+	CBScriptHolder *m_ListenerParamObject;
 	DWORD m_ListenerParamDWORD;
-	CBScriptHolder* m_ListenerObject;
-	CUIObject* m_FocusedWidget;
-	virtual HRESULT SaveAsText(CBDynBuffer* Buffer, int Indent);
+	CBScriptHolder *m_ListenerObject;
+	CUIObject *m_FocusedWidget;
+	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 
 	// scripting interface
-	virtual CScValue* ScGetProperty(char* Name);
+	virtual CScValue *ScGetProperty(char *Name);
 	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name);
-	virtual char* ScToString();
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual char *ScToString();
 };
 
 #endif

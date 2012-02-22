@@ -30,17 +30,16 @@ THE SOFTWARE.
 #include <map>
 #include "BBase.h"
 
-class CBStringTable : public CBBase  
-{
+class CBStringTable : public CBBase {
 public:
-	const char* ExpandStatic(const char* String, bool ForceExpand=false);
-	HRESULT LoadFile(char* Filename, bool DeleteAll=true);
-	void Expand(char** Str, bool ForceExpand=false);
-	HRESULT AddString(const char* Key, const char* Val, bool ReportDuplicities=true);
-	CBStringTable(CBGame* inGame);
+	const char *ExpandStatic(const char *String, bool ForceExpand = false);
+	HRESULT LoadFile(char *Filename, bool DeleteAll = true);
+	void Expand(char **Str, bool ForceExpand = false);
+	HRESULT AddString(const char *Key, const char *Val, bool ReportDuplicities = true);
+	CBStringTable(CBGame *inGame);
 	virtual ~CBStringTable();
 	map<string, string> m_Strings;
-	char* GetKey(const char* Str);
+	char *GetKey(const char *Str);
 private:
 	map<string, string>::iterator m_StringsIter;
 

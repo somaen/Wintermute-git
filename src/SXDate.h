@@ -29,18 +29,17 @@ THE SOFTWARE.
 
 #include "BScriptable.h"
 
-class CSXDate : public CBScriptable  
-{
+class CSXDate : public CBScriptable {
 public:
-	int ScCompare(CBScriptable* Value);
+	int ScCompare(CBScriptable *Value);
 	DECLARE_PERSISTENT(CSXDate, CBScriptable);
-	CSXDate(CBGame* inGame, CScStack* Stack);
+	CSXDate(CBGame *inGame, CScStack *Stack);
 	virtual ~CSXDate();
-	CScValue* ScGetProperty(char* Name);
+	CScValue *ScGetProperty(char *Name);
 	HRESULT ScSetProperty(char *Name, CScValue *Value);
-	HRESULT ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name);
-	char* ScToString();
-	char* m_String;
+	HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	char *ScToString();
+	char *m_String;
 	struct tm m_tm;
 };
 

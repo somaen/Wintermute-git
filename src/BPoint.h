@@ -27,8 +27,7 @@ THE SOFTWARE.
 #define __WmeBPoint_H__
 
 
-class CBPoint: public CBBase
-{
+class CBPoint: public CBBase {
 public:
 	DECLARE_PERSISTENT(CBPoint, CBBase);
 	CBPoint();

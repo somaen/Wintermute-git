@@ -27,8 +27,7 @@ THE SOFTWARE.
 #define __WmeAdLayer_H__
 
 
-class CAdLayer : public CBObject  
-{
+class CAdLayer : public CBObject {
 public:
 	bool m_CloseUp;
 	DECLARE_PERSISTENT(CAdLayer, CBObject);
@@ -36,18 +35,18 @@ public:
 	int m_Height;
 	int m_Width;
 	bool m_Main;
-	CAdLayer(CBGame* inGame);
+	CAdLayer(CBGame *inGame);
 	virtual ~CAdLayer();
-	CBArray<CAdSceneNode*, CAdSceneNode*> m_Nodes;
-	HRESULT LoadFile(char* Filename);
-	HRESULT LoadBuffer(BYTE* Buffer, bool Complete=true);
+	CBArray<CAdSceneNode *, CAdSceneNode *> m_Nodes;
+	HRESULT LoadFile(char *Filename);
+	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 
 	// scripting interface
-	virtual CScValue* ScGetProperty(char* Name);
+	virtual CScValue *ScGetProperty(char *Name);
 	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name);
-	virtual char* ScToString();
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual char *ScToString();
 };
 
 #endif

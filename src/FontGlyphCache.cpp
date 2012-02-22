@@ -28,35 +28,29 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////////
-FontGlyphCache::FontGlyphCache()
-{
+FontGlyphCache::FontGlyphCache() {
 }
 
 //////////////////////////////////////////////////////////////////////////
-FontGlyphCache::~FontGlyphCache()
-{
+FontGlyphCache::~FontGlyphCache() {
 	GlyphInfoMap::iterator it;
 
-	for (it = m_Glyphs.begin(); it != m_Glyphs.end(); ++it)
-	{
+	for (it = m_Glyphs.begin(); it != m_Glyphs.end(); ++it) {
 		SAFE_DELETE(it->second);
 	}
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool FontGlyphCache::HasGlyph(wchar_t ch)
-{
+bool FontGlyphCache::HasGlyph(wchar_t ch) {
 	return (m_Glyphs.find(ch) != m_Glyphs.end());
 }
 
 //////////////////////////////////////////////////////////////////////////
-void FontGlyphCache::Initialize()
-{
+void FontGlyphCache::Initialize() {
 }
 
 //////////////////////////////////////////////////////////////////////////
-GlyphInfo* FontGlyphCache::GetGlyph(wchar_t ch)
-{
+GlyphInfo *FontGlyphCache::GetGlyph(wchar_t ch) {
 	GlyphInfoMap::const_iterator it;
 	it = m_Glyphs.find(ch);
 	if (it == m_Glyphs.end()) return NULL;
@@ -65,8 +59,7 @@ GlyphInfo* FontGlyphCache::GetGlyph(wchar_t ch)
 }
 
 //////////////////////////////////////////////////////////////////////////
-void FontGlyphCache::AddGlyph(wchar_t ch, int glyphIndex, FT_GlyphSlot glyphSlot, size_t width, size_t height, BYTE* pixels, size_t stride)
-{
+void FontGlyphCache::AddGlyph(wchar_t ch, int glyphIndex, FT_GlyphSlot glyphSlot, size_t width, size_t height, BYTE *pixels, size_t stride) {
 	if (stride == 0) stride = width;
 
 	m_Glyphs[ch] = new GlyphInfo(glyphIndex);
@@ -76,21 +69,18 @@ void FontGlyphCache::AddGlyph(wchar_t ch, int glyphIndex, FT_GlyphSlot glyphSlot
 
 
 //////////////////////////////////////////////////////////////////////////
-void GlyphInfo::SetGlyphImage(size_t width, size_t height, size_t stride, BYTE* pixels)
-{
+void GlyphInfo::SetGlyphImage(size_t width, size_t height, size_t stride, BYTE *pixels) {
 	if (m_Image) SDL_FreeSurface(m_Image);
 
 	m_Image = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, 32, 0x000000FF, 0x0000FF00, 0x00FF0000, 0xFF000000);
 	SDL_LockSurface(m_Image);
 
-	Uint8* buf = (Uint8*)m_Image->pixels;
-		
-	for (int y = 0; y < height; y++)
-	{		
-		Uint32* buf32 = (Uint32*)buf;
+	Uint8 *buf = (Uint8 *)m_Image->pixels;
 
-		for (int x = 0; x < width; x++)
-		{
+	for (int y = 0; y < height; y++) {
+		Uint32 *buf32 = (Uint32 *)buf;
+
+		for (int x = 0; x < width; x++) {
 			BYTE alpha = pixels[y * stride + x];
 			Uint32 color = SDL_MapRGBA(m_Image->format, 255, 255, 255, alpha);
 			buf32[x] = color;

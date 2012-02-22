@@ -30,23 +30,20 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CAdResponseContext, false);
 
 //////////////////////////////////////////////////////////////////////////
-CAdResponseContext::CAdResponseContext(CBGame* inGame):CBBase(inGame)
-{
+CAdResponseContext::CAdResponseContext(CBGame *inGame): CBBase(inGame) {
 	m_ID = 0;
 	m_Context = NULL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CAdResponseContext::~CAdResponseContext()
-{
+CAdResponseContext::~CAdResponseContext() {
 	SAFE_DELETE_ARRAY(m_Context);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdResponseContext::Persist(CBPersistMgr *PersistMgr)
-{
+HRESULT CAdResponseContext::Persist(CBPersistMgr *PersistMgr) {
 	PersistMgr->Transfer(TMEMBER(Game));
 	PersistMgr->Transfer(TMEMBER(m_Context));
 	PersistMgr->Transfer(TMEMBER(m_ID));
@@ -55,11 +52,10 @@ HRESULT CAdResponseContext::Persist(CBPersistMgr *PersistMgr)
 }
 
 //////////////////////////////////////////////////////////////////////////
-void CAdResponseContext::SetContext(char* Context)
-{
+void CAdResponseContext::SetContext(char *Context) {
 	SAFE_DELETE_ARRAY(m_Context);
-	if(Context){
-		m_Context = new char [strlen(Context)+1];
-		if(m_Context) strcpy(m_Context, Context);
+	if (Context) {
+		m_Context = new char [strlen(Context) + 1];
+		if (m_Context) strcpy(m_Context, Context);
 	}
 }

@@ -28,21 +28,20 @@ THE SOFTWARE.
 
 #include "BScriptable.h"
 
-class CSXArray : public CBScriptable  
-{
+class CSXArray : public CBScriptable {
 public:
-	HRESULT Push(CScValue* Val);
-	bool ValidNumber(const char* OrigStr, char* OutStr);
+	HRESULT Push(CScValue *Val);
+	bool ValidNumber(const char *OrigStr, char *OutStr);
 	DECLARE_PERSISTENT(CSXArray, CBScriptable);
-	CSXArray(CBGame* inGame, CScStack* Stack);
-	CSXArray(CBGame* inGame);
+	CSXArray(CBGame *inGame, CScStack *Stack);
+	CSXArray(CBGame *inGame);
 	virtual ~CSXArray();
-	CScValue* ScGetProperty(char* Name);
+	CScValue *ScGetProperty(char *Name);
 	HRESULT ScSetProperty(char *Name, CScValue *Value);
-	HRESULT ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name);
-	char* ScToString();
+	HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	char *ScToString();
 	int m_Length;
-	CScValue* m_Values;
+	CScValue *m_Values;
 };
 
 #endif

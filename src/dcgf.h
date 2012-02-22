@@ -46,14 +46,14 @@ THE SOFTWARE.
 #define COMPRESSED_FILE_MAGIC 0x504D435A // ZCMP
 
 #ifdef _MSC_VER
-#	pragma warning (disable: 4786) // symbols longer than 255 chars (STL)
-#	pragma warning (disable: 4355) // this in base member initialization
-#	pragma warning (disable: 4018) // signed/unsigned match
-#	pragma warning (disable: 4244) // conversion from float to int
-#	pragma warning (disable: 4996) // CRT deprecate
-#	pragma warning (disable: 4799) // No EMMS at end of function ...
-#	pragma warning (disable: 4701) // No EMMS at end of function ...
-#	pragma warning (disable: 4200) // nonstandard extension used : zero-sized array in struct/union
+#   pragma warning (disable: 4786) // symbols longer than 255 chars (STL)
+#   pragma warning (disable: 4355) // this in base member initialization
+#   pragma warning (disable: 4018) // signed/unsigned match
+#   pragma warning (disable: 4244) // conversion from float to int
+#   pragma warning (disable: 4996) // CRT deprecate
+#   pragma warning (disable: 4799) // No EMMS at end of function ...
+#   pragma warning (disable: 4701) // No EMMS at end of function ...
+#   pragma warning (disable: 4200) // nonstandard extension used : zero-sized array in struct/union
 #endif
 
 
@@ -66,7 +66,7 @@ THE SOFTWARE.
 
 
 #ifdef GetClassName
-	#undef GetClassName
+#undef GetClassName
 #endif
 
 
@@ -81,8 +81,8 @@ THE SOFTWARE.
 class CBPersistMgr;
 
 // persistence support
-typedef void* (WINAPI *PERSISTBUILD)(void);
-typedef HRESULT (WINAPI *PERSISTLOAD)(void*, CBPersistMgr*);
+typedef void *(WINAPI *PERSISTBUILD)(void);
+typedef HRESULT(WINAPI *PERSISTLOAD)(void *, CBPersistMgr *);
 
 #define DECLARE_PERSISTENT(class_name, parent_class)\
 	static const char m_ClassName[];\
@@ -93,7 +93,7 @@ typedef HRESULT (WINAPI *PERSISTLOAD)(void*, CBPersistMgr*);
 	virtual HRESULT Persist(CBPersistMgr* PersistMgr);\
 	void* operator new (size_t size);\
 	void operator delete(void* p);\
-
+	 
 
 #define IMPLEMENT_PERSISTENT(class_name, persistent_class)\
 	const char class_name::m_ClassName[] = #class_name;\
@@ -121,11 +121,11 @@ typedef HRESULT (WINAPI *PERSISTLOAD)(void*, CBPersistMgr*);
 		CSysClassRegistry::GetInstance()->UnregisterInstance(#class_name, p);\
 		::operator delete(p);\
 	}\
-
+	 
 #define TMEMBER(member_name) #member_name, &member_name
 #define TMEMBER_INT(member_name) #member_name, (int*)&member_name
 
-typedef void (*SYS_INSTANCE_CALLBACK)(void* Instance, void* Data);
+typedef void (*SYS_INSTANCE_CALLBACK)(void *Instance, void *Data);
 
 
 // classes/instances registry
@@ -248,7 +248,7 @@ typedef void (*SYS_INSTANCE_CALLBACK)(void* Instance, void* Data);
 #define MIN(a,b)            (((a) < (b)) ? (a) : (b))
 #endif
 
-#define D3DCOLGetB(rgb)	 ((BYTE)(rgb))
+#define D3DCOLGetB(rgb)  ((BYTE)(rgb))
 #define D3DCOLGetG(rgb)  ((BYTE)(((WORD)(rgb)) >> 8))
 #define D3DCOLGetR(rgb)  ((BYTE)((rgb)>>16))
 #define D3DCOLGetA(rgb)  ((BYTE)((rgb)>>24))

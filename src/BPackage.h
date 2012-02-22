@@ -29,21 +29,20 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
-class CBPackage : public CBBase  
-{
+class CBPackage : public CBBase {
 public:
-	FILE* GetFilePointer();
+	FILE *GetFilePointer();
 	void CloseFilePointer(FILE*& file);
 
 	bool m_BoundToExe;
 	BYTE m_Priority;
-	HRESULT Read(FILE* file, DWORD offset, BYTE* buffer, DWORD size);
+	HRESULT Read(FILE *file, DWORD offset, BYTE *buffer, DWORD size);
 	HRESULT Close();
 	HRESULT Open();
-	char* m_Name;
+	char *m_Name;
 	int m_CD;
-	FILE* m_File;
-	CBPackage(CBGame* inGame);
+	FILE *m_File;
+	CBPackage(CBGame *inGame);
 	virtual ~CBPackage();
 
 };

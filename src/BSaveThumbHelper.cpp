@@ -28,41 +28,35 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////////
-CBSaveThumbHelper::CBSaveThumbHelper(CBGame* inGame):CBBase(inGame)
-{
+CBSaveThumbHelper::CBSaveThumbHelper(CBGame *inGame): CBBase(inGame) {
 	m_Thumbnail = NULL;
 }
 
 //////////////////////////////////////////////////////////////////////////
-CBSaveThumbHelper::~CBSaveThumbHelper(void)
-{
+CBSaveThumbHelper::~CBSaveThumbHelper(void) {
 	SAFE_DELETE(m_Thumbnail);
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSaveThumbHelper::StoreThumbnail(bool DoFlip)
-{
+HRESULT CBSaveThumbHelper::StoreThumbnail(bool DoFlip) {
 	SAFE_DELETE(m_Thumbnail);
 
-	if (Game->m_ThumbnailWidth > 0 && Game->m_ThumbnailHeight > 0)
-	{
-		if(DoFlip)
-		{
+	if (Game->m_ThumbnailWidth > 0 && Game->m_ThumbnailHeight > 0) {
+		if (DoFlip) {
 			// when using opengl on windows it seems to be necessary to do this twice
 			// works normally for direct3d
 			Game->DisplayContent(false);
 			Game->m_Renderer->Flip();
-			
+
 			Game->DisplayContent(false);
 			Game->m_Renderer->Flip();
 		}
 
-		CBImage* Screenshot = Game->m_Renderer->TakeScreenshot();
-		if(!Screenshot) return E_FAIL;
+		CBImage *Screenshot = Game->m_Renderer->TakeScreenshot();
+		if (!Screenshot) return E_FAIL;
 
 		// normal thumbnail
-		if(Game->m_ThumbnailWidth > 0 && Game->m_ThumbnailHeight > 0)
-		{
+		if (Game->m_ThumbnailWidth > 0 && Game->m_ThumbnailHeight > 0) {
 			m_Thumbnail = new CBImage(Game);
 			m_Thumbnail->CopyFrom(Screenshot, Game->m_ThumbnailWidth, Game->m_ThumbnailHeight);
 		}

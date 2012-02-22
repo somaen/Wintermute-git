@@ -1,19 +1,19 @@
 /*
  This file is part of WME Lite.
  http://dead-code.org/redir.php?target=wmelite
- 
+
  Copyright (c) 2011 Jan Nedoma
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in
  all copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,27 +28,32 @@
 #include "IOS_StoreKit_interface.h"
 
 
-@interface StoreKitMgr : NSObject<SKProductsRequestDelegate, SKPaymentTransactionObserver>
-{
-    SKProductsRequest* productsRequest;
-    void* externalData;
-    NSMutableDictionary* dictTransactions;
+@interface StoreKitMgr :
+NSObject<SKProductsRequestDelegate, SKPaymentTransactionObserver> {
+	SKProductsRequest *productsRequest;
+	void *externalData;
+	NSMutableDictionary *dictTransactions;
 }
-+(StoreKitMgr*)sharedStoreKitMgr;
--(void)setExternalData:(void*)data;
++(StoreKitMgr *)sharedStoreKitMgr;
+-(void)setExternalData:
+(void *)data;
 -(BOOL)storeAvailable;
 -(void)enableEvents;
 -(void)disableEvents;
--(void)validateProducts:(const char*)ids;
--(void)purchase:(const char*)prodId;
--(void)processTransaction:(SKPaymentTransaction*)transaction;
+-(void)validateProducts:
+(const char *)ids;
+-(void)purchase:
+(const char *)prodId;
+-(void)processTransaction:
+(SKPaymentTransaction *)transaction;
 -(void)restoreTransactions;
--(BOOL)finishTransaction:(const char*)transId;
+-(BOOL)finishTransaction:
+(const char *)transId;
 @end
 
 
-@interface SKProduct (LocalizedPrice)
+@interface SKProduct(LocalizedPrice)
 
-@property (nonatomic, readonly) NSString* localizedPrice;
+@property(nonatomic, readonly) NSString *localizedPrice;
 
 @end

@@ -29,16 +29,15 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
-class CBNamedObject : public CBBase
-{
+class CBNamedObject : public CBBase {
 public:
-	CBNamedObject(CBGame* inGame);
+	CBNamedObject(CBGame *inGame);
 	CBNamedObject();
 	virtual ~CBNamedObject(void);
 	CBNamedObject(TDynamicConstructor, TDynamicConstructor);
 
-	char* m_Name;
-	void SetName(char* Name);
+	char *m_Name;
+	void SetName(char *Name);
 };
 
 #endif

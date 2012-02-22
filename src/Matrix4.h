@@ -29,20 +29,17 @@ THE SOFTWARE.
 
 class Vector2;
 
-class Matrix4
-{
+class Matrix4 {
 public:
 	Matrix4();
 	~Matrix4();
 
 	void Identity();
 	void RotationZ(float angle);
-	void TransformVector2(Vector2& vec);
+	void TransformVector2(Vector2 &vec);
 
-	union
-	{
-		struct
-		{
+	union {
+		struct {
 			float _11, _12, _13, _14;
 			float _21, _22, _23, _24;
 			float _31, _32, _33, _34;

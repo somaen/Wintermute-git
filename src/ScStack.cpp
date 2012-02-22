@@ -30,21 +30,19 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CScStack, false);
 
 //////////////////////////////////////////////////////////////////////////
-CScStack::CScStack(CBGame* inGame):CBBase(inGame)
-{
+CScStack::CScStack(CBGame *inGame): CBBase(inGame) {
 	m_SP = -1;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CScStack::~CScStack()
-{
+CScStack::~CScStack() {
 
 #if _DEBUG
 	//Game->LOG(0, "STAT: Stack size: %d, SP=%d", m_Values.GetSize(), m_SP);
 #endif
 
-	for(int i=0; i<m_Values.GetSize(); i++){
+	for (int i = 0; i < m_Values.GetSize(); i++) {
 		delete m_Values[i];
 	}
 	m_Values.RemoveAll();
@@ -52,9 +50,8 @@ CScStack::~CScStack()
 
 
 //////////////////////////////////////////////////////////////////////////
-CScValue* CScStack::Pop()
-{
-	if(m_SP<0){
+CScValue *CScStack::Pop() {
+	if (m_SP < 0) {
 		Game->LOG(0, "Fatal: Stack underflow");
 		return NULL;
 	}
@@ -64,16 +61,14 @@ CScValue* CScStack::Pop()
 
 
 //////////////////////////////////////////////////////////////////////////
-void CScStack::Push(CScValue* Val)
-{
+void CScStack::Push(CScValue *Val) {
 	m_SP++;
-	
-	if(m_SP < m_Values.GetSize()){
+
+	if (m_SP < m_Values.GetSize()) {
 		m_Values[m_SP]->Cleanup();
 		m_Values[m_SP]->Copy(Val);
-	}
-	else{
-		CScValue* val = new CScValue(Game);
+	} else {
+		CScValue *val = new CScValue(Game);
 		val->Copy(Val);
 		m_Values.Add(val);
 	}
@@ -81,12 +76,11 @@ void CScStack::Push(CScValue* Val)
 
 
 //////////////////////////////////////////////////////////////////////////
-CScValue* CScStack::GetPushValue()
-{
+CScValue *CScStack::GetPushValue() {
 	m_SP++;
-	
-	if(m_SP >= m_Values.GetSize()){
-		CScValue* val = new CScValue(Game);
+
+	if (m_SP >= m_Values.GetSize()) {
+		CScValue *val = new CScValue(Game);
 		m_Values.Add(val);
 	}
 	m_Values[m_SP]->Cleanup();
@@ -96,48 +90,44 @@ CScValue* CScStack::GetPushValue()
 
 
 //////////////////////////////////////////////////////////////////////////
-CScValue* CScStack::GetTop()
-{
-	if(m_SP<0 || m_SP >= m_Values.GetSize()) return NULL;
+CScValue *CScStack::GetTop() {
+	if (m_SP < 0 || m_SP >= m_Values.GetSize()) return NULL;
 	else return m_Values[m_SP];
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CScValue* CScStack::GetAt(int Index)
-{
+CScValue *CScStack::GetAt(int Index) {
 	Index = m_SP - Index;
-	if(Index<0 || Index >= m_Values.GetSize()) return NULL;
+	if (Index < 0 || Index >= m_Values.GetSize()) return NULL;
 	else return m_Values[Index];
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-void CScStack::CorrectParams(DWORD expected_params)
-{
+void CScStack::CorrectParams(DWORD expected_params) {
 	int num_params = Pop()->GetInt();
 
-	if(expected_params < num_params){ // too many params
-		while(expected_params < num_params){
+	if (expected_params < num_params) { // too many params
+		while (expected_params < num_params) {
 			//Pop();
 			delete m_Values[m_SP - expected_params];
 			m_Values.RemoveAt(m_SP - expected_params);
 			num_params--;
 			m_SP--;
 		}
-	}
-	else if(expected_params > num_params){ // need more params
-		while(expected_params > num_params){
+	} else if (expected_params > num_params) { // need more params
+		while (expected_params > num_params) {
 			//Push(null_val);
-			CScValue* null_val = new CScValue(Game);
+			CScValue *null_val = new CScValue(Game);
 			null_val->SetNULL();
-			m_Values.InsertAt(m_SP - num_params+1, null_val);
+			m_Values.InsertAt(m_SP - num_params + 1, null_val);
 			num_params++;
 			m_SP++;
 
-			if(m_Values.GetSize()>m_SP+1){
-				delete m_Values[m_Values.GetSize()-1];
-				m_Values.RemoveAt(m_Values.GetSize()-1);
+			if (m_Values.GetSize() > m_SP + 1) {
+				delete m_Values[m_Values.GetSize() - 1];
+				m_Values.RemoveAt(m_Values.GetSize() - 1);
 			}
 		}
 	}
@@ -145,8 +135,7 @@ void CScStack::CorrectParams(DWORD expected_params)
 
 
 //////////////////////////////////////////////////////////////////////////
-void CScStack::PushNULL()
-{
+void CScStack::PushNULL() {
 	/*
 	CScValue* val = new CScValue(Game);
 	val->SetNULL();
@@ -158,8 +147,7 @@ void CScStack::PushNULL()
 
 
 //////////////////////////////////////////////////////////////////////////
-void CScStack::PushInt(int Val)
-{
+void CScStack::PushInt(int Val) {
 	/*
 	CScValue* val = new CScValue(Game);
 	val->SetInt(Val);
@@ -171,8 +159,7 @@ void CScStack::PushInt(int Val)
 
 
 //////////////////////////////////////////////////////////////////////////
-void CScStack::PushFloat(double Val)
-{
+void CScStack::PushFloat(double Val) {
 	/*
 	CScValue* val = new CScValue(Game);
 	val->SetFloat(Val);
@@ -184,8 +171,7 @@ void CScStack::PushFloat(double Val)
 
 
 //////////////////////////////////////////////////////////////////////////
-void CScStack::PushBool(bool Val)
-{
+void CScStack::PushBool(bool Val) {
 	/*
 	CScValue* val = new CScValue(Game);
 	val->SetBool(Val);
@@ -197,8 +183,7 @@ void CScStack::PushBool(bool Val)
 
 
 //////////////////////////////////////////////////////////////////////////
-void CScStack::PushString(const char *Val)
-{
+void CScStack::PushString(const char *Val) {
 	/*
 	CScValue* val = new CScValue(Game);
 	val->SetString(Val);
@@ -210,8 +195,7 @@ void CScStack::PushString(const char *Val)
 
 
 //////////////////////////////////////////////////////////////////////////
-void CScStack::PushNative(CBScriptable *Val, bool Persistent)
-{
+void CScStack::PushNative(CBScriptable *Val, bool Persistent) {
 	/*
 	CScValue* val = new CScValue(Game);
 	val->SetNative(Val, Persistent);
@@ -224,8 +208,8 @@ void CScStack::PushNative(CBScriptable *Val, bool Persistent)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CScStack::Persist(CBPersistMgr* PersistMgr){
-	
+HRESULT CScStack::Persist(CBPersistMgr *PersistMgr) {
+
 	PersistMgr->Transfer(TMEMBER(Game));
 
 	PersistMgr->Transfer(TMEMBER(m_SP));

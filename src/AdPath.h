@@ -29,19 +29,18 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
-class CAdPath : public CBBase  
-{
+class CAdPath : public CBBase {
 public:
 	DECLARE_PERSISTENT(CAdPath, CBBase);
-	CBPoint* GetCurrent();
-	bool SetReady(bool ready=true);
-	void AddPoint(CBPoint* point);
-	CBPoint* GetNext();
-	CBPoint* GetFirst();
+	CBPoint *GetCurrent();
+	bool SetReady(bool ready = true);
+	void AddPoint(CBPoint *point);
+	CBPoint *GetNext();
+	CBPoint *GetFirst();
 	void Reset();
-	CAdPath(CBGame* inGame);
+	CAdPath(CBGame *inGame);
 	virtual ~CAdPath();
-	CBArray <CBPoint*, CBPoint*> m_Points;
+	CBArray <CBPoint *, CBPoint *> m_Points;
 	int m_CurrIndex;
 	bool m_Ready;
 };

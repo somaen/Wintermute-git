@@ -27,16 +27,15 @@ THE SOFTWARE.
 #define __WmeAdSceneState_H__
 
 
-class CAdSceneState : public CBBase  
-{
+class CAdSceneState : public CBBase {
 public:
-	CAdNodeState* GetNodeState(char* Name, bool Saving);
-	void SetFilename(char* Filename);
+	CAdNodeState *GetNodeState(char *Name, bool Saving);
+	void SetFilename(char *Filename);
 	DECLARE_PERSISTENT(CAdSceneState, CBBase);
-	CAdSceneState(CBGame* inGame);
+	CAdSceneState(CBGame *inGame);
 	virtual ~CAdSceneState();
-	char* m_Filename;
-	CBArray<CAdNodeState*, CAdNodeState*> m_NodeStates;
+	char *m_Filename;
+	CBArray<CAdNodeState *, CAdNodeState *> m_NodeStates;
 };
 
 #endif

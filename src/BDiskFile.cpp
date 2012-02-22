@@ -28,8 +28,7 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////////
-CBDiskFile::CBDiskFile(CBGame* inGame):CBFile(inGame)
-{
+CBDiskFile::CBDiskFile(CBGame *inGame): CBFile(inGame) {
 	m_File = NULL;
 	m_Data = NULL;
 	m_Compressed = false;
@@ -38,63 +37,55 @@ CBDiskFile::CBDiskFile(CBGame* inGame):CBFile(inGame)
 
 
 //////////////////////////////////////////////////////////////////////////
-CBDiskFile::~CBDiskFile()
-{
-	Close();	
+CBDiskFile::~CBDiskFile() {
+	Close();
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDiskFile::Open(const char* Filename)
-{
+HRESULT CBDiskFile::Open(const char *Filename) {
 	Close();
 
 	char FullPath[MAX_PATH];
 
-	for(int i=0; i<Game->m_FileManager->m_SinglePaths.GetSize(); i++)
-	{
+	for (int i = 0; i < Game->m_FileManager->m_SinglePaths.GetSize(); i++) {
 		sprintf(FullPath, "%s%s", Game->m_FileManager->m_SinglePaths[i], Filename);
 		CorrectSlashes(FullPath);
 
 		m_File = fopen(FullPath, "rb");
-		if(m_File!=NULL) break;
+		if (m_File != NULL) break;
 	}
 
 	// if we didn't find it in search paths, try to open directly
-	if(!m_File)
-	{
+	if (!m_File) {
 		strcpy(FullPath, Filename);
 		CorrectSlashes(FullPath);
 		m_File = fopen(FullPath, "rb");
 	}
 
-	if(m_File)
-	{
+	if (m_File) {
 		DWORD magic1, magic2;
 		fread(&magic1, sizeof(DWORD), 1, m_File);
 		fread(&magic2, sizeof(DWORD), 1, m_File);
 
 
-		if(magic1==DCGF_MAGIC && magic2==COMPRESSED_FILE_MAGIC) m_Compressed = true;
+		if (magic1 == DCGF_MAGIC && magic2 == COMPRESSED_FILE_MAGIC) m_Compressed = true;
 
-		if(m_Compressed)
-		{
+		if (m_Compressed) {
 			DWORD DataOffset, CompSize, UncompSize;
 			fread(&DataOffset, sizeof(DWORD), 1, m_File);
 			fread(&CompSize, sizeof(DWORD), 1, m_File);
 			fread(&UncompSize, sizeof(DWORD), 1, m_File);
 
-			BYTE* CompBuffer = new BYTE[CompSize];
-			if(!CompBuffer)
-			{
+			BYTE *CompBuffer = new BYTE[CompSize];
+			if (!CompBuffer) {
 				Game->LOG(0, "Error allocating memory for compressed file '%s'", Filename);
 				Close();
 				return E_FAIL;
 			}
 
 			m_Data = new BYTE[UncompSize];
-			if(!m_Data)
-			{
+			if (!m_Data) {
 				Game->LOG(0, "Error allocating buffer for file '%s'", Filename);
 				delete [] CompBuffer;
 				Close();
@@ -104,8 +95,7 @@ HRESULT CBDiskFile::Open(const char* Filename)
 			fseek(m_File, DataOffset + m_PrefixSize, SEEK_SET);
 			fread(CompBuffer, CompSize, 1, m_File);
 
-			if(uncompress(m_Data, (uLongf*)&UncompSize, CompBuffer, CompSize)!=Z_OK)
-			{
+			if (uncompress(m_Data, (uLongf *)&UncompSize, CompBuffer, CompSize) != Z_OK) {
 				Game->LOG(0, "Error uncompressing file '%s'", Filename);
 				delete [] CompBuffer;
 				Close();
@@ -117,9 +107,7 @@ HRESULT CBDiskFile::Open(const char* Filename)
 			m_Pos = 0;
 			fclose(m_File);
 			m_File = NULL;
-		}
-		else
-		{
+		} else {
 			m_Pos = 0;
 			fseek(m_File, 0, SEEK_END);
 			m_Size = ftell(m_File) - m_PrefixSize;
@@ -127,15 +115,13 @@ HRESULT CBDiskFile::Open(const char* Filename)
 		}
 
 		return S_OK;
-	}
-	else return E_FAIL;
+	} else return E_FAIL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDiskFile::Close()
-{
-	if(m_File) fclose(m_File);
+HRESULT CBDiskFile::Close() {
+	if (m_File) fclose(m_File);
 	m_File = NULL;
 	m_Pos = 0;
 	m_Size = 0;
@@ -148,71 +134,67 @@ HRESULT CBDiskFile::Close()
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDiskFile::Read(void *Buffer, DWORD Size)
-{
-	if(m_Compressed)
-	{
-		memcpy(Buffer, m_Data+m_Pos, Size);
-		m_Pos+=Size;
+HRESULT CBDiskFile::Read(void *Buffer, DWORD Size) {
+	if (m_Compressed) {
+		memcpy(Buffer, m_Data + m_Pos, Size);
+		m_Pos += Size;
 		return S_OK;
-	}
-	else
-	{
-		if(m_File)			
-		{
+	} else {
+		if (m_File) {
 			size_t count = fread(Buffer, 1, Size, m_File);
 			m_Pos += count;
 			return S_OK;
-		}
-		else return E_FAIL;
+		} else return E_FAIL;
 	}
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDiskFile::Seek(DWORD Pos, TSeek Origin)
-{
-	if(m_Compressed)
-	{
-		DWORD NewPos=0;
+HRESULT CBDiskFile::Seek(DWORD Pos, TSeek Origin) {
+	if (m_Compressed) {
+		DWORD NewPos = 0;
 
-		switch(Origin)
-		{
-			case SEEK_TO_BEGIN:   NewPos = Pos;          break;
-			case SEEK_TO_END:     NewPos = m_Size + Pos; break;
-			case SEEK_TO_CURRENT: NewPos = m_Pos + Pos;  break;
+		switch (Origin) {
+		case SEEK_TO_BEGIN:
+			NewPos = Pos;
+			break;
+		case SEEK_TO_END:
+			NewPos = m_Size + Pos;
+			break;
+		case SEEK_TO_CURRENT:
+			NewPos = m_Pos + Pos;
+			break;
 		}
 
-		if(NewPos<0 || NewPos > m_Size) return E_FAIL;
+		if (NewPos < 0 || NewPos > m_Size) return E_FAIL;
 		else m_Pos = NewPos;
 		return S_OK;
-	}
-	else
-	{
-		if(!m_File) return E_FAIL;
+	} else {
+		if (!m_File) return E_FAIL;
 
-		int ret=1;
+		int ret = 1;
 
-		switch(Origin)
-		{
-			case SEEK_TO_BEGIN:   ret = fseek(m_File, m_PrefixSize + Pos, SEEK_SET); break;
-			case SEEK_TO_END:     ret = fseek(m_File, Pos, SEEK_END); break;
-			case SEEK_TO_CURRENT: ret = fseek(m_File, Pos, SEEK_CUR); break;
+		switch (Origin) {
+		case SEEK_TO_BEGIN:
+			ret = fseek(m_File, m_PrefixSize + Pos, SEEK_SET);
+			break;
+		case SEEK_TO_END:
+			ret = fseek(m_File, Pos, SEEK_END);
+			break;
+		case SEEK_TO_CURRENT:
+			ret = fseek(m_File, Pos, SEEK_CUR);
+			break;
 		}
-		if(ret==0)
-		{
+		if (ret == 0) {
 			m_Pos = ftell(m_File - m_PrefixSize);
 			return S_OK;
-		}
-		else return E_FAIL;
+		} else return E_FAIL;
 	}
 }
 
 //////////////////////////////////////////////////////////////////////////
-void CBDiskFile::CorrectSlashes(char* fileName)
-{
-	for (size_t i = 0; i < strlen(fileName); i++)
-	{
+void CBDiskFile::CorrectSlashes(char *fileName) {
+	for (size_t i = 0; i < strlen(fileName); i++) {
 		if (fileName[i] == '\\') fileName[i] = '/';
 	}
 }

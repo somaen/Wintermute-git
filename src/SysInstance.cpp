@@ -29,18 +29,16 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////////
-CSysInstance::CSysInstance(void* Instance, int ID, CSysClass* sysClass)
-{
+CSysInstance::CSysInstance(void *Instance, int ID, CSysClass *sysClass) {
 	m_Instance = Instance;
 	m_ID = ID;
 	m_SavedID = -1;
 	m_Class = sysClass;
-	
+
 	m_Used = false;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CSysInstance::~CSysInstance()
-{
+CSysInstance::~CSysInstance() {
 }

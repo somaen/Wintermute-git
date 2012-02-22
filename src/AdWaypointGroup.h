@@ -27,24 +27,23 @@ THE SOFTWARE.
 #define __WmeAdWaypointGroup_H__
 
 
-class CAdWaypointGroup : public CBObject
-{
+class CAdWaypointGroup : public CBObject {
 public:
 	float m_LastMimicScale;
 	int m_LastMimicX;
 	int m_LastMimicY;
 	void Cleanup();
-	HRESULT Mimic(CAdWaypointGroup* Wpt, float Scale=100.0f, int X=0, int Y=0);
+	HRESULT Mimic(CAdWaypointGroup *Wpt, float Scale = 100.0f, int X = 0, int Y = 0);
 	DECLARE_PERSISTENT(CAdWaypointGroup, CBObject);
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 	bool m_Active;
-	CAdWaypointGroup(CBGame* inGame);
-	HRESULT LoadFile(char* Filename);
-	HRESULT LoadBuffer(BYTE* Buffer, bool Complete=true);
+	CAdWaypointGroup(CBGame *inGame);
+	HRESULT LoadFile(char *Filename);
+	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
 	virtual ~CAdWaypointGroup();
-	CBArray<CBPoint*, CBPoint*> m_Points;
+	CBArray<CBPoint *, CBPoint *> m_Points;
 	int m_EditorSelectedPoint;
-	virtual CScValue* ScGetProperty(char* Name);
+	virtual CScValue *ScGetProperty(char *Name);
 	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
 };
 

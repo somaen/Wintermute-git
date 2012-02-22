@@ -29,77 +29,88 @@ THE SOFTWARE.
 
 #include "SDL.h"
 
-	//////////////////////////////////////////////////////////////////////////
-	class GlyphInfo
-	{
-	public:
-		GlyphInfo(int glyphIndex)
-		{
-			m_GlyphIndex = glyphIndex;
-			m_AdvanceX = m_AdvanceY = 0;
-			m_BearingX = m_BearingY = 0;
+//////////////////////////////////////////////////////////////////////////
+class GlyphInfo {
+public:
+	GlyphInfo(int glyphIndex) {
+		m_GlyphIndex = glyphIndex;
+		m_AdvanceX = m_AdvanceY = 0;
+		m_BearingX = m_BearingY = 0;
 
-			m_Width = m_Height = 0;
+		m_Width = m_Height = 0;
 
-			m_Image = NULL;
-		}
+		m_Image = NULL;
+	}
 
-		~GlyphInfo()
-		{
-			if (m_Image) SDL_FreeSurface(m_Image);
-		}
+	~GlyphInfo() {
+		if (m_Image) SDL_FreeSurface(m_Image);
+	}
 
-		void SetGlyphInfo(float AdvanceX, float AdvanceY, int BearingX, int BearingY)
-		{
-			m_AdvanceX = AdvanceX;
-			m_AdvanceY = AdvanceY;
-			m_BearingX = BearingX;
-			m_BearingY = BearingY;
-		}
+	void SetGlyphInfo(float AdvanceX, float AdvanceY, int BearingX, int BearingY) {
+		m_AdvanceX = AdvanceX;
+		m_AdvanceY = AdvanceY;
+		m_BearingX = BearingX;
+		m_BearingY = BearingY;
+	}
 
-		void SetGlyphImage(size_t width, size_t height, size_t stride, BYTE* pixels);
+	void SetGlyphImage(size_t width, size_t height, size_t stride, BYTE *pixels);
 
-		int GetGlyphIndex() { return m_GlyphIndex; }
-		int GetWidth() { return m_Width; }
-		int GetHeight() { return m_Height; }
-		float GetAdvanceX() { return m_AdvanceX; }
-		float GetAdvanceY() { return m_AdvanceY; }
-		int GetBearingX() { return m_BearingX; }
-		int GetBearingY() { return m_BearingY; }
-		SDL_Surface* GetImage() { return m_Image; }
+	int GetGlyphIndex() {
+		return m_GlyphIndex;
+	}
+	int GetWidth() {
+		return m_Width;
+	}
+	int GetHeight() {
+		return m_Height;
+	}
+	float GetAdvanceX() {
+		return m_AdvanceX;
+	}
+	float GetAdvanceY() {
+		return m_AdvanceY;
+	}
+	int GetBearingX() {
+		return m_BearingX;
+	}
+	int GetBearingY() {
+		return m_BearingY;
+	}
+	SDL_Surface *GetImage() {
+		return m_Image;
+	}
 
-	private:
-		int m_GlyphIndex;
+private:
+	int m_GlyphIndex;
 
-		float m_AdvanceX;
-		float m_AdvanceY;
-		int m_BearingX;
-		int m_BearingY;
+	float m_AdvanceX;
+	float m_AdvanceY;
+	int m_BearingX;
+	int m_BearingY;
 
-		int m_Width;
-		int m_Height;
+	int m_Width;
+	int m_Height;
 
-		SDL_Surface* m_Image;
-	};
+	SDL_Surface *m_Image;
+};
 
 
 
-	//////////////////////////////////////////////////////////////////////////
-	class FontGlyphCache
-	{
-	public:
-		FontGlyphCache();
-		virtual ~FontGlyphCache();
+//////////////////////////////////////////////////////////////////////////
+class FontGlyphCache {
+public:
+	FontGlyphCache();
+	virtual ~FontGlyphCache();
 
-		void Initialize();
-		bool HasGlyph(wchar_t ch);
-		GlyphInfo* GetGlyph(wchar_t ch);
-		void AddGlyph(wchar_t ch, int glyphIndex, FT_GlyphSlot glyphSlot, size_t width, size_t height, BYTE* pixels, size_t stride = 0);
+	void Initialize();
+	bool HasGlyph(wchar_t ch);
+	GlyphInfo *GetGlyph(wchar_t ch);
+	void AddGlyph(wchar_t ch, int glyphIndex, FT_GlyphSlot glyphSlot, size_t width, size_t height, BYTE *pixels, size_t stride = 0);
 
-	private:
-		typedef std::map<wchar_t, GlyphInfo*> GlyphInfoMap;
-		GlyphInfoMap m_Glyphs;
-	};
+private:
+	typedef std::map<wchar_t, GlyphInfo *> GlyphInfoMap;
+	GlyphInfoMap m_Glyphs;
+};
 
 
 #endif // __WmeFontGlyphCache_H__

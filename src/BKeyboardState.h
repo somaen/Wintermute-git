@@ -30,8 +30,7 @@ THE SOFTWARE.
 #include "BBase.h"
 #include "SDL.h"
 
-class CBKeyboardState : public CBScriptable
-{
+class CBKeyboardState : public CBScriptable {
 public:
 	DWORD m_CurrentKeyData;
 	DWORD m_CurrentCharCode;
@@ -42,22 +41,22 @@ public:
 	bool m_CurrentControl;
 
 	DECLARE_PERSISTENT(CBKeyboardState, CBScriptable);
-	CBKeyboardState(CBGame* inGame);
+	CBKeyboardState(CBGame *inGame);
 	virtual ~CBKeyboardState();
-	HRESULT ReadKey(SDL_Event* event);
+	HRESULT ReadKey(SDL_Event *event);
 
 	static bool IsShiftDown();
 	static bool IsControlDown();
 	static bool IsAltDown();
 
 	// scripting interface
-	virtual CScValue* ScGetProperty(char* Name);
+	virtual CScValue *ScGetProperty(char *Name);
 	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name);
-	virtual char* ScToString();
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual char *ScToString();
 
 private:
-	DWORD KeyCodeToVKey(SDL_Event* event);
+	DWORD KeyCodeToVKey(SDL_Event *event);
 	SDL_Keycode VKeyToKeyCode(DWORD vkey);
 };
 

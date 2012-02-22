@@ -33,18 +33,17 @@ THE SOFTWARE.
 class CBGame;
 class CBDynBuffer;
 
-class CBBase  
-{
+class CBBase {
 public:
 	bool m_Persistable;
-	HRESULT SetEditorProp(const char* PropName, const char* PropValue);
-	const char* GetEditorProp(const char* PropName, const char* InitVal=NULL);
-	CBBase(TDynamicConstructor, TDynamicConstructor){};
-	HRESULT ParseEditorProperty(BYTE* Buffer, bool Complete=true);
-	virtual HRESULT SaveAsText(CBDynBuffer* Buffer, int Indent=0);
+	HRESULT SetEditorProp(const char *PropName, const char *PropValue);
+	const char *GetEditorProp(const char *PropName, const char *InitVal = NULL);
+	CBBase(TDynamicConstructor, TDynamicConstructor) {};
+	HRESULT ParseEditorProperty(BYTE *Buffer, bool Complete = true);
+	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent = 0);
 	CBBase();
-	CBGame* Game;
-	CBBase(CBGame* GameOwner);
+	CBGame *Game;
+	CBBase(CBGame *GameOwner);
 	virtual ~CBBase();
 
 	map<string, string> m_EditorProps;

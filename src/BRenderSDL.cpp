@@ -31,8 +31,7 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////////
-CBRenderSDL::CBRenderSDL(CBGame* inGame) : CBRenderer(inGame)
-{
+CBRenderSDL::CBRenderSDL(CBGame *inGame) : CBRenderer(inGame) {
 	m_Renderer = NULL;
 	m_Win = NULL;
 
@@ -41,20 +40,18 @@ CBRenderSDL::CBRenderSDL(CBGame* inGame) : CBRenderer(inGame)
 }
 
 //////////////////////////////////////////////////////////////////////////
-CBRenderSDL::~CBRenderSDL()
-{
+CBRenderSDL::~CBRenderSDL() {
 	if (m_Renderer) SDL_DestroyRenderer(m_Renderer);
 	if (m_Win) SDL_DestroyWindow(m_Win);
-	
+
 	SDL_Quit();
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRenderSDL::InitRenderer(int width, int height, bool windowed)
-{
+HRESULT CBRenderSDL::InitRenderer(int width, int height, bool windowed) {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) return E_FAIL;
-	
-	
+
+
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 0);
 	SDL_GL_SetAttribute(SDL_GL_RETAINED_BACKING, 1);
 
@@ -72,40 +69,35 @@ HRESULT CBRenderSDL::InitRenderer(int width, int height, bool windowed)
 	m_RealHeight = 320;
 
 	int numModes = SDL_GetNumDisplayModes(0);
-	for (int i = 0; i < numModes; i++)
-	{
+	for (int i = 0; i < numModes; i++) {
 		SDL_DisplayMode mode;
 		SDL_GetDisplayMode(0, i, &mode);
 
-		if (mode.w > mode.h)
-		{
+		if (mode.w > mode.h) {
 			m_RealWidth = mode.w;
 			m_RealHeight = mode.h;
 			break;
 		}
-	}	
+	}
 #else
 	m_RealWidth = Game->m_Registry->ReadInt("Debug", "ForceResWidth", m_Width);
 	m_RealHeight = Game->m_Registry->ReadInt("Debug", "ForceResHeight", m_Height);
 #endif
 
-	/*	
+	/*
 	m_RealWidth = 480;
 	m_RealHeight = 320;
 	*/
-	
+
 
 	float origAspect = (float)m_Width / (float)m_Height;
 	float realAspect = (float)m_RealWidth / (float)m_RealHeight;
 
 	float ratio;
-	if (origAspect < realAspect)
-	{
+	if (origAspect < realAspect) {
 		// normal to wide
 		ratio = (float)m_RealHeight / (float)m_Height;
-	}
-	else
-	{
+	} else {
 		// wide to normal
 		ratio = (float)m_RealWidth / (float)m_Width;
 	}
@@ -132,11 +124,11 @@ HRESULT CBRenderSDL::InitRenderer(int width, int height, bool windowed)
 
 
 	m_Win = SDL_CreateWindow("WME Lite",
-		SDL_WINDOWPOS_UNDEFINED,
-		SDL_WINDOWPOS_UNDEFINED,
-		m_RealWidth, m_RealHeight,
-		flags);
-	
+	                         SDL_WINDOWPOS_UNDEFINED,
+	                         SDL_WINDOWPOS_UNDEFINED,
+	                         m_RealWidth, m_RealHeight,
+	                         flags);
+
 	if (!m_Win) return E_FAIL;
 
 	SDL_ShowCursor(SDL_DISABLE);
@@ -152,57 +144,49 @@ HRESULT CBRenderSDL::InitRenderer(int width, int height, bool windowed)
 	if (!m_Renderer) return E_FAIL;
 
 	m_Active = true;
-	
+
 
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRenderSDL::Flip()
-{
-	
+HRESULT CBRenderSDL::Flip() {
+
 #ifdef __IPHONEOS__
 	// hack: until viewports work correctly, we just paint black bars instead
 	SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x00, 0x00, 0xFF);
 
 	static bool firstRefresh = true; // prevents a weird color glitch
-	if (firstRefresh)
-	{
+	if (firstRefresh) {
 		firstRefresh = false;
-	}
-	else
-	{
+	} else {
 		SDL_Rect rect;
-		if (m_BorderLeft > 0)
-		{
+		if (m_BorderLeft > 0) {
 			rect.x = 0;
 			rect.y = 0;
 			rect.w = m_BorderLeft;
-			rect.h = m_RealHeight;		
+			rect.h = m_RealHeight;
 			SDL_RenderFillRect(m_Renderer, &rect);
 		}
-		if (m_BorderRight > 0)
-		{
+		if (m_BorderRight > 0) {
 			rect.x = (m_RealWidth - m_BorderRight);
 			rect.y = 0;
 			rect.w = m_BorderRight;
-			rect.h = m_RealHeight;		
+			rect.h = m_RealHeight;
 			SDL_RenderFillRect(m_Renderer, &rect);
 		}
-		if (m_BorderTop > 0)
-		{
+		if (m_BorderTop > 0) {
 			rect.x = 0;
 			rect.y = 0;
 			rect.w = m_RealWidth;
-			rect.h = m_BorderTop;		
+			rect.h = m_BorderTop;
 			SDL_RenderFillRect(m_Renderer, &rect);
 		}
-		if (m_BorderBottom > 0)
-		{
+		if (m_BorderBottom > 0) {
 			rect.x = 0;
 			rect.y = m_RealHeight - m_BorderBottom;
 			rect.w = m_RealWidth;
-			rect.h = m_BorderBottom;		
+			rect.h = m_BorderBottom;
 			SDL_RenderFillRect(m_Renderer, &rect);
 		}
 	}
@@ -215,8 +199,7 @@ HRESULT CBRenderSDL::Flip()
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRenderSDL::Fill(BYTE r, BYTE g, BYTE b, RECT* rect)
-{
+HRESULT CBRenderSDL::Fill(BYTE r, BYTE g, BYTE b, RECT *rect) {
 	SDL_SetRenderDrawColor(m_Renderer, r, g, b, 0xFF);
 	SDL_RenderClear(m_Renderer);
 
@@ -224,27 +207,22 @@ HRESULT CBRenderSDL::Fill(BYTE r, BYTE g, BYTE b, RECT* rect)
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRenderSDL::Fade(WORD Alpha)
-{
+HRESULT CBRenderSDL::Fade(WORD Alpha) {
 	DWORD dwAlpha = 255 - Alpha;
-	return FadeToColor(dwAlpha<<24);
+	return FadeToColor(dwAlpha << 24);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRenderSDL::FadeToColor(DWORD Color, RECT* rect)
-{
+HRESULT CBRenderSDL::FadeToColor(DWORD Color, RECT *rect) {
 	SDL_Rect fillRect;
 
-	if (rect)
-	{
+	if (rect) {
 		fillRect.x = rect->left;
 		fillRect.y = rect->top;
 		fillRect.w = rect->right - rect->left;
-		fillRect.h = rect->bottom - rect->top;		
-	}
-	else
-	{
+		fillRect.h = rect->bottom - rect->top;
+	} else {
 		RECT rc;
 		Game->GetCurrentViewportRect(&rc);
 		fillRect.x = rc.left;
@@ -267,8 +245,7 @@ HRESULT CBRenderSDL::FadeToColor(DWORD Color, RECT* rect)
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRenderSDL::DrawLine(int X1, int Y1, int X2, int Y2, DWORD Color)
-{
+HRESULT CBRenderSDL::DrawLine(int X1, int Y1, int X2, int Y2, DWORD Color) {
 	BYTE r = D3DCOLGetR(Color);
 	BYTE g = D3DCOLGetG(Color);
 	BYTE b = D3DCOLGetB(Color);
@@ -285,42 +262,39 @@ HRESULT CBRenderSDL::DrawLine(int X1, int Y1, int X2, int Y2, DWORD Color)
 	point2.x = X2;
 	point2.y = Y2;
 	PointToScreen(&point2);
-    
+
 
 	SDL_RenderDrawLine(m_Renderer, point1.x, point1.y, point2.x, point2.y);
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-CBImage* CBRenderSDL::TakeScreenshot()
-{
+CBImage *CBRenderSDL::TakeScreenshot() {
 	SDL_Rect viewport;
 
 	SDL_RenderGetViewport(m_Renderer, &viewport);
-	
-	SDL_Surface* surface = SDL_CreateRGBSurface(0, viewport.w, viewport.h, 24, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK, 0x00000000);
+
+	SDL_Surface *surface = SDL_CreateRGBSurface(0, viewport.w, viewport.h, 24, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK, 0x00000000);
 	if (!surface) return NULL;
 
 	if (SDL_RenderReadPixels(m_Renderer, NULL, surface->format->format, surface->pixels, surface->pitch) < 0) return NULL;
 
 
-	FIBITMAP* dib = FreeImage_Allocate(viewport.w, viewport.h, 24, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK);
-	
+	FIBITMAP *dib = FreeImage_Allocate(viewport.w, viewport.h, 24, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK);
+
 	int bytespp = FreeImage_GetLine(dib) / FreeImage_GetWidth(dib);
-	
-	for (unsigned y = 0; y < FreeImage_GetHeight(dib); y++)
-	{
-		BYTE* bits = FreeImage_GetScanLine(dib, y);
-		BYTE* src = (BYTE*)surface->pixels + (viewport.h - y - 1) * surface->pitch;
+
+	for (unsigned y = 0; y < FreeImage_GetHeight(dib); y++) {
+		BYTE *bits = FreeImage_GetScanLine(dib, y);
+		BYTE *src = (BYTE *)surface->pixels + (viewport.h - y - 1) * surface->pitch;
 		memcpy(bits, src, bytespp * viewport.w);
 	}
-	
+
 	return new CBImage(Game, dib);
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRenderSDL::SwitchFullscreen()
-{
+HRESULT CBRenderSDL::SwitchFullscreen() {
 	if (m_Windowed) SDL_SetWindowFullscreen(m_Win, SDL_TRUE);
 	else SDL_SetWindowFullscreen(m_Win, SDL_FALSE);
 
@@ -332,12 +306,9 @@ HRESULT CBRenderSDL::SwitchFullscreen()
 }
 
 //////////////////////////////////////////////////////////////////////////
-const char* CBRenderSDL::GetName()
-{
-	if (m_Name.empty())
-	{
-		if (m_Renderer)
-		{
+const char *CBRenderSDL::GetName() {
+	if (m_Name.empty()) {
+		if (m_Renderer) {
 			SDL_RendererInfo info;
 			SDL_GetRendererInfo(m_Renderer, &info);
 			m_Name = AnsiString(info.name);
@@ -347,24 +318,22 @@ const char* CBRenderSDL::GetName()
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRenderSDL::SetViewport(int left, int top, int right, int bottom)
-{
+HRESULT CBRenderSDL::SetViewport(int left, int top, int right, int bottom) {
 	SDL_Rect rect;
 	rect.x = left + m_BorderLeft;
 	rect.y = top + m_BorderTop;
 	rect.w = (right - left) * m_RatioX;
 	rect.h = (bottom - top) * m_RatioY;
-	
+
 	// TODO fix this once viewports work correctly in SDL/landscape
-#ifndef __IPHONEOS__	
+#ifndef __IPHONEOS__
 	SDL_RenderSetViewport(GetSdlRenderer(), &rect);
 #endif
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-void CBRenderSDL::ModTargetRect(SDL_Rect* rect)
-{
+void CBRenderSDL::ModTargetRect(SDL_Rect *rect) {
 	SDL_Rect viewportRect;
 	SDL_RenderGetViewport(GetSdlRenderer(), &viewportRect);
 
@@ -375,8 +344,7 @@ void CBRenderSDL::ModTargetRect(SDL_Rect* rect)
 }
 
 //////////////////////////////////////////////////////////////////////////
-void CBRenderSDL::PointFromScreen(POINT* point)
-{
+void CBRenderSDL::PointFromScreen(POINT *point) {
 	SDL_Rect viewportRect;
 	SDL_RenderGetViewport(GetSdlRenderer(), &viewportRect);
 
@@ -386,8 +354,7 @@ void CBRenderSDL::PointFromScreen(POINT* point)
 
 
 //////////////////////////////////////////////////////////////////////////
-void CBRenderSDL::PointToScreen(POINT* point)
-{
+void CBRenderSDL::PointToScreen(POINT *point) {
 	SDL_Rect viewportRect;
 	SDL_RenderGetViewport(GetSdlRenderer(), &viewportRect);
 
@@ -397,28 +364,26 @@ void CBRenderSDL::PointToScreen(POINT* point)
 }
 
 //////////////////////////////////////////////////////////////////////////
-void CBRenderSDL::DumpData(char* Filename)
-{
-	FILE* f = fopen(Filename, "wt");
-	if(!f) return;
+void CBRenderSDL::DumpData(char *Filename) {
+	FILE *f = fopen(Filename, "wt");
+	if (!f) return;
 
-	CBSurfaceStorage* Mgr = Game->m_SurfaceStorage;
+	CBSurfaceStorage *Mgr = Game->m_SurfaceStorage;
 
 	int TotalKB = 0;
 	int TotalLoss = 0;
 	fprintf(f, "Filename;Usage;Size;KBytes\n");
-	for(int i=0; i<Mgr->m_Surfaces.GetSize(); i++)
-	{
-		CBSurfaceSDL* Surf = (CBSurfaceSDL*)Mgr->m_Surfaces[i];
-		if(!Surf->m_Filename) continue;
-		if(!Surf->m_Valid) continue;
+	for (int i = 0; i < Mgr->m_Surfaces.GetSize(); i++) {
+		CBSurfaceSDL *Surf = (CBSurfaceSDL *)Mgr->m_Surfaces[i];
+		if (!Surf->m_Filename) continue;
+		if (!Surf->m_Valid) continue;
 
 		fprintf(f, "%s;%d;", Surf->m_Filename, Surf->m_ReferenceCount);
 		fprintf(f, "%dx%d;", Surf->GetWidth(), Surf->GetHeight());
 
 		int kb = Surf->GetWidth() * Surf->GetHeight() * 4 / 1024;
 
-		TotalKB+=kb;
+		TotalKB += kb;
 		fprintf(f, "%d;", kb);
 		fprintf(f, "\n");
 	}

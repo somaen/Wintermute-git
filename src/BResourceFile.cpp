@@ -29,26 +29,22 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////////
-CBResourceFile::CBResourceFile(CBGame* inGame):CBFile(inGame)
-{
+CBResourceFile::CBResourceFile(CBGame *inGame): CBFile(inGame) {
 	m_Data = NULL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CBResourceFile::~CBResourceFile()
-{
+CBResourceFile::~CBResourceFile() {
 	Close();
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBResourceFile::Open(const char* Filename)
-{
+HRESULT CBResourceFile::Open(const char *Filename) {
 	Close();
 
-	if (CBResources::GetFile(Filename, m_Data, m_Size))
-	{
+	if (CBResources::GetFile(Filename, m_Data, m_Size)) {
 		m_Pos = 0;
 		return S_OK;
 	}
@@ -56,8 +52,7 @@ HRESULT CBResourceFile::Open(const char* Filename)
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBResourceFile::Close()
-{
+HRESULT CBResourceFile::Close() {
 	m_Data = NULL;
 	m_Pos = 0;
 	m_Size = 0;
@@ -67,32 +62,35 @@ HRESULT CBResourceFile::Close()
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBResourceFile::Read(void *Buffer, DWORD Size)
-{
-	if(!m_Data || m_Pos + Size > m_Size) return E_FAIL;
+HRESULT CBResourceFile::Read(void *Buffer, DWORD Size) {
+	if (!m_Data || m_Pos + Size > m_Size) return E_FAIL;
 
-	memcpy(Buffer, (BYTE*)m_Data+m_Pos, Size);
-	m_Pos+=Size;
+	memcpy(Buffer, (BYTE *)m_Data + m_Pos, Size);
+	m_Pos += Size;
 
 	return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBResourceFile::Seek(DWORD Pos, TSeek Origin)
-{
-	if(!m_Data) return E_FAIL;
+HRESULT CBResourceFile::Seek(DWORD Pos, TSeek Origin) {
+	if (!m_Data) return E_FAIL;
 
-	DWORD NewPos=0;
+	DWORD NewPos = 0;
 
-	switch (Origin)
-	{
-		case SEEK_TO_BEGIN:   NewPos = Pos;          break;
-		case SEEK_TO_END:     NewPos = m_Size + Pos; break;
-		case SEEK_TO_CURRENT: NewPos = m_Pos + Pos;  break;
+	switch (Origin) {
+	case SEEK_TO_BEGIN:
+		NewPos = Pos;
+		break;
+	case SEEK_TO_END:
+		NewPos = m_Size + Pos;
+		break;
+	case SEEK_TO_CURRENT:
+		NewPos = m_Pos + Pos;
+		break;
 	}
 
-	if( NewPos<0 || NewPos > m_Size) return E_FAIL;
+	if (NewPos < 0 || NewPos > m_Size) return E_FAIL;
 	else m_Pos = NewPos;
 
 	return S_OK;

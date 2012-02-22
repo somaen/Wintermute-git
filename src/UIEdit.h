@@ -29,37 +29,36 @@ THE SOFTWARE.
 
 #include "UIObject.h"
 
-class CUIEdit : public CUIObject  
-{
+class CUIEdit : public CUIObject {
 public:
 	DECLARE_PERSISTENT(CUIEdit, CUIObject);
 	int m_MaxLength;
-	int InsertChars(int Pos, BYTE* Chars, int Num);
+	int InsertChars(int Pos, BYTE *Chars, int Num);
 	int DeleteChars(int Start, int End);
 	bool m_CursorVisible;
 	DWORD m_LastBlinkTime;
 	virtual HRESULT Display(int OffsetX, int OffsetY);
-	virtual bool HandleKeypress(SDL_Event* event);
+	virtual bool HandleKeypress(SDL_Event *event);
 	int m_ScrollOffset;
 	int m_FrameWidth;
 	DWORD m_CursorBlinkRate;
-	void SetCursorChar(char* Char);
-	char* m_CursorChar;
+	void SetCursorChar(char *Char);
+	char *m_CursorChar;
 	int m_SelEnd;
 	int m_SelStart;
-	CBFont* m_FontSelected;
-	CUIEdit(CBGame* inGame);
+	CBFont *m_FontSelected;
+	CUIEdit(CBGame *inGame);
 	virtual ~CUIEdit();
 
-	HRESULT LoadFile(char* Filename);
-	HRESULT LoadBuffer(BYTE* Buffer, bool Complete=true);
-	virtual HRESULT SaveAsText(CBDynBuffer* Buffer, int Indent);
+	HRESULT LoadFile(char *Filename);
+	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 
 	// scripting interface
-	virtual CScValue* ScGetProperty(char* Name);
+	virtual CScValue *ScGetProperty(char *Name);
 	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name);
-	virtual char* ScToString();
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual char *ScToString();
 };
 
 #endif

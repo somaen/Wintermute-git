@@ -27,20 +27,19 @@ THE SOFTWARE.
 #define __WmeAdSceneNode_H__
 
 
-#include "AdTypes.h"	// Added by ClassView
-#include "AdRegion.h"	// Added by ClassView
+#include "AdTypes.h"    // Added by ClassView
+#include "AdRegion.h"   // Added by ClassView
 #include "AdEntity.h"
 
-class CAdSceneNode : public CBObject
-{
+class CAdSceneNode : public CBObject {
 public:
 	DECLARE_PERSISTENT(CAdSceneNode, CBObject);
-	HRESULT SetRegion(CAdRegion* Region);
-	HRESULT SetEntity(CAdEntity* Entity);
-	CAdEntity* m_Entity;
-	CAdRegion* m_Region;
+	HRESULT SetRegion(CAdRegion *Region);
+	HRESULT SetEntity(CAdEntity *Entity);
+	CAdEntity *m_Entity;
+	CAdRegion *m_Region;
 	TObjectType m_Type;
-	CAdSceneNode(CBGame* inGame);
+	CAdSceneNode(CBGame *inGame);
 	virtual ~CAdSceneNode();
 
 };

@@ -30,12 +30,11 @@ THE SOFTWARE.
 #include "BBase.h"
 #include "bass.h"
 
-class CBSoundMgr : public CBBase  
-{
-public:	
+class CBSoundMgr : public CBBase {
+public:
 	float PosToPan(int X, int Y);
 	HRESULT ResumeAll();
-	HRESULT PauseAll(bool IncludingMusic=true);
+	HRESULT PauseAll(bool IncludingMusic = true);
 	HRESULT Cleanup();
 	//DECLARE_PERSISTENT(CBSoundMgr, CBBase);
 	BYTE GetMasterVolumePercent();
@@ -48,15 +47,15 @@ public:
 	int m_VolumeMusic;
 	int m_VolumeSpeech;
 	int m_VolumeSFX;
-	HRESULT RemoveSound(CBSoundBuffer* Sound);
-	CBSoundBuffer* AddSound(const char* Filename, TSoundType Type=SOUND_SFX, bool Streamed=false);
-	HRESULT AddSound(CBSoundBuffer* Sound, TSoundType Type=SOUND_SFX);
+	HRESULT RemoveSound(CBSoundBuffer *Sound);
+	CBSoundBuffer *AddSound(const char *Filename, TSoundType Type = SOUND_SFX, bool Streamed = false);
+	HRESULT AddSound(CBSoundBuffer *Sound, TSoundType Type = SOUND_SFX);
 	HRESULT InitLoop();
 	HRESULT Initialize();
 	bool m_SoundAvailable;
-	CBSoundMgr(CBGame* inGame);
+	CBSoundMgr(CBGame *inGame);
 	virtual ~CBSoundMgr();
-	CBArray<CBSoundBuffer*, CBSoundBuffer*> m_Sounds;
+	CBArray<CBSoundBuffer *, CBSoundBuffer *> m_Sounds;
 	void SaveSettings();
 };
 

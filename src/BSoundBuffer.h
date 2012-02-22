@@ -30,16 +30,15 @@ THE SOFTWARE.
 #include "BBase.h"
 #include "bass.h"
 
-class CBSoundBuffer : public CBBase  
-{
+class CBSoundBuffer : public CBBase {
 public:
 
-	CBSoundBuffer(CBGame* inGame);
+	CBSoundBuffer(CBGame *inGame);
 	virtual ~CBSoundBuffer();
 
 
 	HRESULT Pause();
-	HRESULT Play(bool Looping=false, DWORD StartSample=0);
+	HRESULT Play(bool Looping = false, DWORD StartSample = 0);
 	HRESULT Resume();
 	HRESULT Stop();
 	bool IsPlaying();
@@ -47,20 +46,22 @@ public:
 	void SetLooping(bool looping);
 
 	DWORD GetPosition();
-	HRESULT SetPosition(DWORD Pos);	
+	HRESULT SetPosition(DWORD Pos);
 	DWORD GetLength();
 
 	HRESULT SetLoopStart(DWORD Pos);
-	DWORD GetLoopStart() const { return m_LoopStart; }
+	DWORD GetLoopStart() const {
+		return m_LoopStart;
+	}
 
 	HRESULT SetPan(float Pan);
-	HRESULT SetPrivateVolume(int Volume);	
+	HRESULT SetPrivateVolume(int Volume);
 	HRESULT SetVolume(int Volume);
 
 	void SetType(TSoundType Type);
 
-	HRESULT LoadFromFile(const char* Filename, bool ForceReload=false);
-	void SetStreaming(bool Streamed, DWORD NumBlocks=0, DWORD BlockSize=0);
+	HRESULT LoadFromFile(const char *Filename, bool ForceReload = false);
+	void SetStreaming(bool Streamed, DWORD NumBlocks = 0, DWORD BlockSize = 0);
 	HRESULT ApplyFX(TSFXType Type, float Param1, float Param2, float Param3, float Param4);
 
 	HSTREAM m_Stream;
@@ -70,16 +71,16 @@ public:
 	DWORD m_LoopStart;
 	TSoundType m_Type;
 	bool m_Looping;
-	CBFile* m_File;
-	char* m_Filename;
+	CBFile *m_File;
+	char *m_Filename;
 	bool m_Streamed;
 	int m_PrivateVolume;
-	
-	static void CALLBACK LoopSyncProc(HSYNC handle, DWORD channel, DWORD data, void* user);
 
-	static void CALLBACK FileCloseProc(void* user);
-	static QWORD CALLBACK FileLenProc(void* user);
-	static DWORD CALLBACK FileReadProc(void *buffer, DWORD length, void* user);
+	static void CALLBACK LoopSyncProc(HSYNC handle, DWORD channel, DWORD data, void *user);
+
+	static void CALLBACK FileCloseProc(void *user);
+	static QWORD CALLBACK FileLenProc(void *user);
+	static DWORD CALLBACK FileReadProc(void *buffer, DWORD length, void *user);
 	static BOOL CALLBACK FileSeekProc(QWORD offset, void *user);
 };
 

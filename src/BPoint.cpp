@@ -30,28 +30,25 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CBPoint, false);
 
 //////////////////////////////////////////////////////////////////////////
-CBPoint::CBPoint()
-{
+CBPoint::CBPoint() {
 	x = y = 0;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CBPoint::~CBPoint()
-{
+CBPoint::~CBPoint() {
 
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CBPoint::CBPoint(int initX, int initY)
-{
+CBPoint::CBPoint(int initX, int initY) {
 	x = initX;
 	y = initY;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBPoint::Persist(CBPersistMgr* PersistMgr){
+HRESULT CBPoint::Persist(CBPersistMgr *PersistMgr) {
 
 	PersistMgr->Transfer(TMEMBER(x));
 	PersistMgr->Transfer(TMEMBER(y));

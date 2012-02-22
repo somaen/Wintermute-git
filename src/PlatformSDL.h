@@ -32,15 +32,15 @@ THE SOFTWARE.
 
 
 #ifdef __WIN32__
-#	define WIN32_LEAN_AND_MEAN
+#   define WIN32_LEAN_AND_MEAN
 
-#	ifndef _WIN32_WINNT
-	#	define _WIN32_WINNT 0x0500
-#	endif
-#	include <windows.h>
-#	include <shellapi.h>
+#   ifndef _WIN32_WINNT
+#   define _WIN32_WINNT 0x0500
+#   endif
+#   include <windows.h>
+#   include <shellapi.h>
 #else
-#	include "wintypes.h"
+#   include "wintypes.h"
 #endif // __WIN32__
 
 
@@ -48,12 +48,11 @@ class CBGame;
 
 
 //////////////////////////////////////////////////////////////////////////
-class CBPlatform
-{
+class CBPlatform {
 public:
-	static int Initialize(CBGame* inGame, int argc, char* argv[]);
+	static int Initialize(CBGame *inGame, int argc, char *argv[]);
 	static int MessageLoop();
-	static void HandleEvent(SDL_Event* event);
+	static void HandleEvent(SDL_Event *event);
 
 	static AnsiString GetSystemFontPath();
 	static AnsiString GetPlatformName();
@@ -65,8 +64,8 @@ public:
 	static BOOL GetCursorPos(LPPOINT lpPoint);
 	static BOOL SetCursorPos(int X, int Y);
 	static BOOL ShowWindow(HWND hWnd, int nCmdShow);
-	static bool DeleteFile(const char* lpFileName);
-	static bool CopyFile(const char* from, const char* to, bool failIfExists);
+	static bool DeleteFile(const char *lpFileName);
+	static bool CopyFile(const char *from, const char *to, bool failIfExists);
 	static HWND SetCapture(HWND hWnd);
 	static BOOL ReleaseCapture();
 	static BOOL SetForegroundWindow(HWND hWnd);
@@ -76,23 +75,23 @@ public:
 	static BOOL PtInRect(LPRECT lprc, POINT p);
 	static BOOL SetRect(LPRECT lprc, int left, int top, int right, int bottom);
 	static BOOL IntersectRect(LPRECT lprcDst, CONST LPRECT lprcSrc1, CONST LPRECT lprcSrc2);
-	static BOOL UnionRect(LPRECT lprcDst, RECT* lprcSrc1, RECT* lprcSrc2);
-	static BOOL CopyRect(LPRECT lprcDst, RECT* lprcSrc);
+	static BOOL UnionRect(LPRECT lprcDst, RECT *lprcSrc1, RECT *lprcSrc2);
+	static BOOL CopyRect(LPRECT lprcDst, RECT *lprcSrc);
 	static BOOL OffsetRect(LPRECT lprc, int dx, int dy);
 	static BOOL EqualRect(LPRECT rect1, LPRECT rect2);
 
 
 	// string functions
-	static int stricmp(const char* str1, const char* str2);
-	static int strnicmp(const char* str1, const char* str2, size_t maxCount);
-	static char* strupr(char* string);
-	static char* strlwr(char* string);
-	
+	static int stricmp(const char *str1, const char *str2);
+	static int strnicmp(const char *str1, const char *str2, size_t maxCount);
+	static char *strupr(char *string);
+	static char *strlwr(char *string);
+
 	// sdl event callback
-	static int SDLEventWatcher(void* userdata, SDL_Event* event);
-	
+	static int SDLEventWatcher(void *userdata, SDL_Event *event);
+
 private:
-	static CBGame* Game;
+	static CBGame *Game;
 };
 
 

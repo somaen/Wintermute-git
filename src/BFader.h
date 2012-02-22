@@ -29,8 +29,7 @@ THE SOFTWARE.
 
 #include "BObject.h"
 
-class CBFader : public CBObject  
-{
+class CBFader : public CBObject {
 public:
 	bool m_System;
 	DWORD GetCurrentColor();
@@ -40,7 +39,7 @@ public:
 	HRESULT Display();
 	HRESULT Update();
 	DECLARE_PERSISTENT(CBFader, CBObject);
-	CBFader(CBGame* inGame);
+	CBFader(CBGame *inGame);
 	virtual ~CBFader();
 	bool m_Active;
 	BYTE m_Red;

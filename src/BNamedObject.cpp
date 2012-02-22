@@ -28,36 +28,31 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////////
-CBNamedObject::CBNamedObject(CBGame* inGame) : CBBase(inGame)
-{
+CBNamedObject::CBNamedObject(CBGame *inGame) : CBBase(inGame) {
 	m_Name = NULL;
 }
 
 //////////////////////////////////////////////////////////////////////////
-CBNamedObject::CBNamedObject() : CBBase()
-{
+CBNamedObject::CBNamedObject() : CBBase() {
 	m_Name = NULL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CBNamedObject::CBNamedObject(TDynamicConstructor, TDynamicConstructor)
-{
+CBNamedObject::CBNamedObject(TDynamicConstructor, TDynamicConstructor) {
 	m_Name = NULL;
 }
 
 //////////////////////////////////////////////////////////////////////////
-CBNamedObject::~CBNamedObject(void)
-{
+CBNamedObject::~CBNamedObject(void) {
 	SAFE_DELETE_ARRAY(m_Name);
 }
 
 
 //////////////////////////////////////////////////////////////////////
-void CBNamedObject::SetName(char * Name)
-{
+void CBNamedObject::SetName(char *Name) {
 	SAFE_DELETE_ARRAY(m_Name);
 
-	m_Name = new char [strlen(Name)+1];
-	if(m_Name!=NULL) strcpy(m_Name, Name);
+	m_Name = new char [strlen(Name) + 1];
+	if (m_Name != NULL) strcpy(m_Name, Name);
 }

@@ -30,25 +30,22 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CAdSceneState, false);
 
 //////////////////////////////////////////////////////////////////////////
-CAdSceneState::CAdSceneState(CBGame* inGame):CBBase(inGame)
-{
+CAdSceneState::CAdSceneState(CBGame *inGame): CBBase(inGame) {
 	m_Filename = NULL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CAdSceneState::~CAdSceneState()
-{
+CAdSceneState::~CAdSceneState() {
 	SAFE_DELETE_ARRAY(m_Filename);
 
-	for(int i=0; i<m_NodeStates.GetSize(); i++)	delete m_NodeStates[i];
+	for (int i = 0; i < m_NodeStates.GetSize(); i++) delete m_NodeStates[i];
 	m_NodeStates.RemoveAll();
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdSceneState::Persist(CBPersistMgr *PersistMgr)
-{
+HRESULT CAdSceneState::Persist(CBPersistMgr *PersistMgr) {
 	PersistMgr->Transfer(TMEMBER(m_Filename));
 	m_NodeStates.Persist(PersistMgr);
 
@@ -57,27 +54,24 @@ HRESULT CAdSceneState::Persist(CBPersistMgr *PersistMgr)
 
 
 //////////////////////////////////////////////////////////////////////////
-void CAdSceneState::SetFilename(char *Filename)
-{
+void CAdSceneState::SetFilename(char *Filename) {
 	SAFE_DELETE_ARRAY(m_Filename);
-	m_Filename = new char [strlen(Filename)+1];
-	if(m_Filename) strcpy(m_Filename, Filename);
+	m_Filename = new char [strlen(Filename) + 1];
+	if (m_Filename) strcpy(m_Filename, Filename);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CAdNodeState* CAdSceneState::GetNodeState(char *Name, bool Saving)
-{
-	for(int i=0; i<m_NodeStates.GetSize(); i++){
-		if(CBPlatform::stricmp(m_NodeStates[i]->m_Name, Name)==0) return m_NodeStates[i];
+CAdNodeState *CAdSceneState::GetNodeState(char *Name, bool Saving) {
+	for (int i = 0; i < m_NodeStates.GetSize(); i++) {
+		if (CBPlatform::stricmp(m_NodeStates[i]->m_Name, Name) == 0) return m_NodeStates[i];
 	}
 
-	if(Saving){
-		CAdNodeState* ret = new CAdNodeState(Game);
+	if (Saving) {
+		CAdNodeState *ret = new CAdNodeState(Game);
 		ret->SetName(Name);
 		m_NodeStates.Add(ret);
 
 		return ret;
-	}
-	else return NULL;
+	} else return NULL;
 }

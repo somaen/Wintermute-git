@@ -28,8 +28,7 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////////
-SDL_Texture* SdlUtil::CreateTextureFromSurface(SDL_Renderer* renderer, SDL_Surface* surface)
-{
+SDL_Texture *SdlUtil::CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surface) {
 	// this is a copy of SDL_CreateTextureFromSurface, but setting the texture streaming access
 
 	const SDL_PixelFormat *fmt;
@@ -57,15 +56,15 @@ SDL_Texture* SdlUtil::CreateTextureFromSurface(SDL_Renderer* renderer, SDL_Surfa
 	format = info.texture_formats[0];
 	for (i = 0; i < info.num_texture_formats; ++i) {
 		if (!SDL_ISPIXELFORMAT_FOURCC(info.texture_formats[i]) &&
-			SDL_ISPIXELFORMAT_ALPHA(info.texture_formats[i]) == needAlpha) {
-				format = info.texture_formats[i];
-				break;
+		        SDL_ISPIXELFORMAT_ALPHA(info.texture_formats[i]) == needAlpha) {
+			format = info.texture_formats[i];
+			break;
 		}
 	}
 
 
 	texture = SDL_CreateTexture(renderer, format, SDL_TEXTUREACCESS_STREAMING,
-		surface->w, surface->h);
+	                            surface->w, surface->h);
 	if (!texture) {
 		return NULL;
 	}

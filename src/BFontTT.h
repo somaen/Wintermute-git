@@ -33,25 +33,22 @@ THE SOFTWARE.
 
 class FontGlyphCache;
 
-class CBFontTT : public CBFont
-{
+class CBFontTT : public CBFont {
 private:
 	//////////////////////////////////////////////////////////////////////////
-	class CBCachedTTFontText
-	{
+	class CBCachedTTFontText {
 	public:
 		WideString m_Text;
 		int m_Width;
 		TTextAlign m_Align;
 		int m_MaxHeight;
 		int m_MaxLength;
-		CBSurface* m_Surface;
+		CBSurface *m_Surface;
 		int m_Priority;
 		int m_TextOffset;
 		bool m_Marked;
 
-		CBCachedTTFontText()
-		{
+		CBCachedTTFontText() {
 			m_Text = L"";
 			m_Width = m_MaxHeight = m_MaxLength = -1;
 			m_Align = TAL_LEFT;
@@ -61,98 +58,100 @@ private:
 			m_Marked = false;
 		}
 
-		virtual ~CBCachedTTFontText()
-		{
-			if(m_Surface) delete m_Surface;
+		virtual ~CBCachedTTFontText() {
+			if (m_Surface) delete m_Surface;
 		}
 	};
 
 public:
 	//////////////////////////////////////////////////////////////////////////
-	class CBTTFontLayer
-	{
+	class CBTTFontLayer {
 	public:
-		CBTTFontLayer()
-		{
+		CBTTFontLayer() {
 			m_OffsetX = m_OffsetY = 0;
 			m_Color = 0x00000000;
 		}
-		
-		HRESULT Persist(CBPersistMgr* PersistMgr)
-		{
+
+		HRESULT Persist(CBPersistMgr *PersistMgr) {
 			PersistMgr->Transfer(TMEMBER(m_OffsetX));
 			PersistMgr->Transfer(TMEMBER(m_OffsetY));
 			PersistMgr->Transfer(TMEMBER(m_Color));
 			return S_OK;
 		}
-		
+
 		int m_OffsetX;
 		int m_OffsetY;
 		DWORD m_Color;
 	};
 
 	//////////////////////////////////////////////////////////////////////////
-	class TextLine
-	{
+	class TextLine {
 	public:
-		TextLine(const WideString& text, int width)
-		{
+		TextLine(const WideString &text, int width) {
 			m_Text = text;
 			m_Width = width;
 		}
 
-		const WideString& GetText() const { return m_Text; }
-		int GetWidth() const { return m_Width; }
+		const WideString &GetText() const {
+			return m_Text;
+		}
+		int GetWidth() const {
+			return m_Width;
+		}
 	private:
 		WideString m_Text;
 		int m_Width;
 	};
-	typedef std::list<TextLine*> TextLineList;
+	typedef std::list<TextLine *> TextLineList;
 
 
 public:
 	DECLARE_PERSISTENT(CBFontTT, CBFont);
-	CBFontTT(CBGame* inGame);
+	CBFontTT(CBGame *inGame);
 	virtual ~CBFontTT(void);
 
-	virtual int GetTextWidth(BYTE* text, int MaxLenght=-1);
-	virtual int GetTextHeight(BYTE* text, int width);
-	virtual void DrawText(BYTE* text, int x, int y, int width, TTextAlign align=TAL_LEFT, int max_height=-1, int MaxLenght=-1);
+	virtual int GetTextWidth(BYTE *text, int MaxLenght = -1);
+	virtual int GetTextHeight(BYTE *text, int width);
+	virtual void DrawText(BYTE *text, int x, int y, int width, TTextAlign align = TAL_LEFT, int max_height = -1, int MaxLenght = -1);
 	virtual int GetLetterHeight();
 
-	HRESULT LoadBuffer(BYTE* Buffer);
-	HRESULT LoadFile(char* Filename);
+	HRESULT LoadBuffer(BYTE *Buffer);
+	HRESULT LoadFile(char *Filename);
 
-	static unsigned long FTReadSeekProc(FT_Stream stream, unsigned long offset,	unsigned char* buffer, unsigned long count);
+	static unsigned long FTReadSeekProc(FT_Stream stream, unsigned long offset, unsigned char *buffer, unsigned long count);
 	static void FTCloseProc(FT_Stream stream);
 
-	FontGlyphCache* GetGlyphCache() { return m_GlyphCache; }
+	FontGlyphCache *GetGlyphCache() {
+		return m_GlyphCache;
+	}
 
-	float GetLineHeight() const { return m_LineHeight; }
+	float GetLineHeight() const {
+		return m_LineHeight;
+	}
 
 	void AfterLoad();
 	void InitLoop();
 
 private:
-	HRESULT ParseLayer(CBTTFontLayer* Layer, BYTE* Buffer);
+	HRESULT ParseLayer(CBTTFontLayer *Layer, BYTE *Buffer);
 
-	void WrapText(const WideString& text, int maxWidth, int maxHeight, TextLineList& lines);
-	void MeasureText(const WideString& text, int maxWidth, int maxHeight, int& textWidth, int& textHeight);
+	void WrapText(const WideString &text, int maxWidth, int maxHeight, TextLineList &lines);
+	void MeasureText(const WideString &text, int maxWidth, int maxHeight, int &textWidth, int &textHeight);
 	float GetKerning(wchar_t leftChar, wchar_t rightChar);
-	void PrepareGlyphs(const WideString& text);
+	void PrepareGlyphs(const WideString &text);
 	void CacheGlyph(wchar_t ch);
 
-	CBSurface* RenderTextToTexture(const WideString& text, int width, TTextAlign align, int maxHeight, int& textOffset);
-	void BlitSurface(SDL_Surface* src, SDL_Surface* target, SDL_Rect* targetRect);
+	CBSurface *RenderTextToTexture(const WideString &text, int width, TTextAlign align, int maxHeight, int &textOffset);
+	void BlitSurface(SDL_Surface *src, SDL_Surface *target, SDL_Rect *targetRect);
 
 
-	CBCachedTTFontText* m_CachedTexts[NUM_CACHED_TEXTS];
+	CBCachedTTFontText *m_CachedTexts[NUM_CACHED_TEXTS];
 
 	HRESULT InitFont();
 	FT_Stream m_FTStream;
 	FT_Face m_FTFace;
 
-	FontGlyphCache* m_GlyphCache;
+	FontGlyphCache *m_GlyphCache;
 
 	float m_Ascender;
 	float m_Descender;
@@ -171,11 +170,11 @@ public:
 	bool m_IsUnderline;
 	bool m_IsStriked;
 	int m_FontHeight;
-	char* m_FontFile;
+	char *m_FontFile;
 
-	CBArray<CBTTFontLayer*, CBTTFontLayer*> m_Layers;
+	CBArray<CBTTFontLayer *, CBTTFontLayer *> m_Layers;
 	void ClearCache();
-	
+
 };
 
 #endif

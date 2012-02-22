@@ -31,53 +31,68 @@ THE SOFTWARE.
 
 class CBImage;
 
-class CBRenderer:public CBBase
-{
+class CBRenderer: public CBBase {
 public:
 	int m_RealWidth;
 	int m_RealHeight;
 	int m_DrawOffsetX;
 	int m_DrawOffsetY;
 
-	virtual void DumpData(char* Filename){};
-	virtual CBImage* TakeScreenshot();
+	virtual void DumpData(char *Filename) {};
+	virtual CBImage *TakeScreenshot();
 	virtual HRESULT SetViewport(int left, int top, int right, int bottom);
-	virtual HRESULT SetViewport(RECT* Rect);
+	virtual HRESULT SetViewport(RECT *Rect);
 	virtual HRESULT SetScreenViewport();
 	virtual HRESULT Fade(WORD Alpha);
-	virtual HRESULT FadeToColor(DWORD Color, RECT* rect=NULL);
+	virtual HRESULT FadeToColor(DWORD Color, RECT *rect = NULL);
 	virtual HRESULT DrawLine(int X1, int Y1, int X2, int Y2, DWORD Color);
-	virtual HRESULT DrawRect(int X1, int Y1, int X2, int Y2, DWORD Color, int Width=1);
-	CBRenderer(CBGame* inGame=NULL);
+	virtual HRESULT DrawRect(int X1, int Y1, int X2, int Y2, DWORD Color, int Width = 1);
+	CBRenderer(CBGame *inGame = NULL);
 	virtual ~CBRenderer();
-	virtual HRESULT SetProjection() { return S_OK; };
+	virtual HRESULT SetProjection() {
+		return S_OK;
+	};
 
-	virtual HRESULT WindowedBlt();	
-	virtual HRESULT Fill(BYTE r, BYTE g, BYTE b, RECT* rect=NULL);
+	virtual HRESULT WindowedBlt();
+	virtual HRESULT Fill(BYTE r, BYTE g, BYTE b, RECT *rect = NULL);
 	virtual void OnWindowChange();
 	virtual HRESULT InitRenderer(int width, int height, bool windowed);
 	virtual HRESULT Flip();
 	virtual void InitLoop();
 	virtual HRESULT SwitchFullscreen();
-	virtual HRESULT Setup2D(bool Force=false);
+	virtual HRESULT Setup2D(bool Force = false);
 	virtual HRESULT SetupLines();
 
-	virtual const char* GetName(){ return ""; };
-	virtual HRESULT DisplayDebugInfo() { return E_FAIL; };
-	virtual HRESULT DrawShaderQuad() { return E_FAIL; }
+	virtual const char *GetName() {
+		return "";
+	};
+	virtual HRESULT DisplayDebugInfo() {
+		return E_FAIL;
+	};
+	virtual HRESULT DrawShaderQuad() {
+		return E_FAIL;
+	}
 
-	virtual float GetScaleRatioX() const { return 1.0f; }
-	virtual float GetScaleRatioY() const { return 1.0f; }
+	virtual float GetScaleRatioX() const {
+		return 1.0f;
+	}
+	virtual float GetScaleRatioY() const {
+		return 1.0f;
+	}
 
 	HRESULT ClipCursor();
 	HRESULT UnclipCursor();
 
-	CBObject* GetObjectAt(int X, int Y);
+	CBObject *GetObjectAt(int X, int Y);
 	void DeleteRectList();
 
-	virtual HRESULT StartSpriteBatch() { return S_OK; };
-	virtual HRESULT EndSpriteBatch() { return S_OK; };
-	bool PointInViewport(POINT* P);
+	virtual HRESULT StartSpriteBatch() {
+		return S_OK;
+	};
+	virtual HRESULT EndSpriteBatch() {
+		return S_OK;
+	};
+	bool PointInViewport(POINT *P);
 	DWORD m_ForceAlphaColor;
 	HINSTANCE m_Instance;
 	HWND m_Window;
@@ -89,11 +104,11 @@ public:
 	RECT m_ViewportRect;
 	RECT m_ScreenRect;
 	RECT m_MonitorRect;
-	int m_BPP;	
+	int m_BPP;
 	int m_Height;
 	int m_Width;
 
-	CBArray<CBActiveRect*, CBActiveRect*> m_RectList;
+	CBArray<CBActiveRect *, CBActiveRect *> m_RectList;
 };
 
 #endif

@@ -29,23 +29,22 @@ THE SOFTWARE.
 
 #include "coll_templ.h"
 
-class CBSurfaceStorage : public CBBase
-{
+class CBSurfaceStorage : public CBBase {
 public:
 	DWORD m_LastCleanupTime;
 	HRESULT InitLoop();
 	HRESULT SortSurfaces();
-	static int SurfaceSortCB(const void* arg1, const void* arg2);
-	HRESULT Cleanup(bool Warn=false);
+	static int SurfaceSortCB(const void *arg1, const void *arg2);
+	HRESULT Cleanup(bool Warn = false);
 	//DECLARE_PERSISTENT(CBSurfaceStorage, CBBase);
 
 	HRESULT RestoreAll();
-	CBSurface* AddSurface(char* Filename, bool default_ck=true, BYTE ck_red=0, BYTE ck_green=0, BYTE ck_blue=0, int LifeTime=-1, bool KeepLoaded=false);
-	HRESULT RemoveSurface(CBSurface* surface);
-	CBSurfaceStorage(CBGame* inGame);
+	CBSurface *AddSurface(char *Filename, bool default_ck = true, BYTE ck_red = 0, BYTE ck_green = 0, BYTE ck_blue = 0, int LifeTime = -1, bool KeepLoaded = false);
+	HRESULT RemoveSurface(CBSurface *surface);
+	CBSurfaceStorage(CBGame *inGame);
 	virtual ~CBSurfaceStorage();
 
-	CBArray<CBSurface*, CBSurface*> m_Surfaces;
+	CBArray<CBSurface *, CBSurface *> m_Surfaces;
 };
 
 #endif

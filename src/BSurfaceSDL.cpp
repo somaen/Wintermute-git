@@ -30,8 +30,7 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////////
-CBSurfaceSDL::CBSurfaceSDL(CBGame* inGame) : CBSurface(inGame)
-{
+CBSurfaceSDL::CBSurfaceSDL(CBGame *inGame) : CBSurface(inGame) {
 	m_Texture = NULL;
 	m_AlphaMask = NULL;
 
@@ -40,8 +39,7 @@ CBSurfaceSDL::CBSurfaceSDL(CBGame* inGame) : CBSurface(inGame)
 }
 
 //////////////////////////////////////////////////////////////////////////
-CBSurfaceSDL::~CBSurfaceSDL()
-{
+CBSurfaceSDL::~CBSurfaceSDL() {
 	if (m_Texture) SDL_DestroyTexture(m_Texture);
 	SAFE_DELETE_ARRAY(m_AlphaMask);
 
@@ -50,9 +48,8 @@ CBSurfaceSDL::~CBSurfaceSDL()
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurfaceSDL::Create(char* Filename, bool default_ck, BYTE ck_red, BYTE ck_green, BYTE ck_blue, int LifeTime, bool KeepLoaded)
-{
-	CBRenderSDL* renderer = static_cast<CBRenderSDL*>(Game->m_Renderer);
+HRESULT CBSurfaceSDL::Create(char *Filename, bool default_ck, BYTE ck_red, BYTE ck_green, BYTE ck_blue, int LifeTime, bool KeepLoaded) {
+	CBRenderSDL *renderer = static_cast<CBRenderSDL *>(Game->m_Renderer);
 
 
 	FreeImageIO io;
@@ -62,50 +59,43 @@ HRESULT CBSurfaceSDL::Create(char* Filename, bool default_ck, BYTE ck_red, BYTE 
 	io.tell_proc = CBSurfaceSDL::TellProc;
 
 
-	CBFile* file = Game->m_FileManager->OpenFile(Filename);
+	CBFile *file = Game->m_FileManager->OpenFile(Filename);
 	if (!file) return E_FAIL;
 
 
-	if(default_ck)
-	{
+	if (default_ck) {
 		ck_red   = 255;
 		ck_green = 0;
 		ck_blue  = 255;
 	}
 
-	
+
 	FREE_IMAGE_FORMAT imgFormat = FreeImage_GetFileTypeFromHandle(&io, (fi_handle)file, 0);
-	FIBITMAP* img = FreeImage_LoadFromHandle(imgFormat, &io, (fi_handle)file, 0);
+	FIBITMAP *img = FreeImage_LoadFromHandle(imgFormat, &io, (fi_handle)file, 0);
 	Game->m_FileManager->CloseFile(file);
-	
+
 	if (!img) return E_FAIL;
 
 	m_Width = FreeImage_GetWidth(img);
 	m_Height = FreeImage_GetHeight(img);
 
 
-	bool isSaveGameGrayscale = CBPlatform::strnicmp(Filename, "savegame:", 9)==0 && (Filename[strlen(Filename)-1]=='g' || Filename[strlen(Filename)-1]=='G');
-	if (isSaveGameGrayscale)
-	{
-		FIBITMAP* newImg = FreeImage_ConvertToGreyscale(img);
-		if (newImg)
-		{
+	bool isSaveGameGrayscale = CBPlatform::strnicmp(Filename, "savegame:", 9) == 0 && (Filename[strlen(Filename) - 1] == 'g' || Filename[strlen(Filename) - 1] == 'G');
+	if (isSaveGameGrayscale) {
+		FIBITMAP *newImg = FreeImage_ConvertToGreyscale(img);
+		if (newImg) {
 			FreeImage_Unload(img);
 			img = newImg;
 		}
 	}
 
 	// convert 32-bit BMPs to 24-bit or they appear totally transparent (does any app actually write alpha in BMP properly?)
-	if (FreeImage_GetBPP(img) != 32 || (imgFormat == FIF_BMP && FreeImage_GetBPP(img) != 24))
-	{
-		FIBITMAP* newImg = FreeImage_ConvertTo24Bits(img);
-		if (newImg)
-		{
+	if (FreeImage_GetBPP(img) != 32 || (imgFormat == FIF_BMP && FreeImage_GetBPP(img) != 24)) {
+		FIBITMAP *newImg = FreeImage_ConvertTo24Bits(img);
+		if (newImg) {
 			FreeImage_Unload(img);
 			img = newImg;
-		}
-		else
-		{
+		} else {
 			FreeImage_Unload(img);
 			return -1;
 		}
@@ -114,8 +104,8 @@ HRESULT CBSurfaceSDL::Create(char* Filename, bool default_ck, BYTE ck_red, BYTE 
 	FreeImage_FlipVertical(img);
 
 
-	void* inPtr = FreeImage_GetBits(img); 
-	SDL_Surface* surf = SDL_CreateRGBSurfaceFrom(inPtr, m_Width, m_Height, FreeImage_GetBPP(img), FreeImage_GetPitch(img), FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK, FI_RGBA_ALPHA_MASK); 
+	void *inPtr = FreeImage_GetBits(img);
+	SDL_Surface *surf = SDL_CreateRGBSurfaceFrom(inPtr, m_Width, m_Height, FreeImage_GetBPP(img), FreeImage_GetPitch(img), FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK, FI_RGBA_ALPHA_MASK);
 
 	// no alpha, set color key
 	if (FreeImage_GetBPP(img) != 32)
@@ -124,8 +114,7 @@ HRESULT CBSurfaceSDL::Create(char* Filename, bool default_ck, BYTE ck_red, BYTE 
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
 	//m_Texture = SdlUtil::CreateTextureFromSurface(renderer->GetSdlRenderer(), surf);
 	m_Texture = SDL_CreateTextureFromSurface(renderer->GetSdlRenderer(), surf);
-	if (!m_Texture)
-	{
+	if (!m_Texture) {
 		SDL_FreeSurface(surf);
 		FreeImage_Unload(img);
 		return E_FAIL;
@@ -143,28 +132,26 @@ HRESULT CBSurfaceSDL::Create(char* Filename, bool default_ck, BYTE ck_red, BYTE 
 	m_CKBlue = ck_blue;
 
 
-	if (!m_Filename || CBPlatform::stricmp(m_Filename, Filename) !=0)
-	{
+	if (!m_Filename || CBPlatform::stricmp(m_Filename, Filename) != 0) {
 		SetFilename(Filename);
 	}
 
-	if(m_LifeTime==0 || LifeTime==-1 || LifeTime>m_LifeTime)
+	if (m_LifeTime == 0 || LifeTime == -1 || LifeTime > m_LifeTime)
 		m_LifeTime = LifeTime;
 
 	m_KeepLoaded = KeepLoaded;
-	if(m_KeepLoaded) m_LifeTime = -1;
-	
+	if (m_KeepLoaded) m_LifeTime = -1;
+
 	m_Valid = true;
 
 	Game->AddMem(m_Width * m_Height * 4);
-	
+
 
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-void CBSurfaceSDL::GenAlphaMask(SDL_Surface* surface)
-{
+void CBSurfaceSDL::GenAlphaMask(SDL_Surface *surface) {
 	SAFE_DELETE_ARRAY(m_AlphaMask);
 	if (!surface) return;
 
@@ -173,20 +160,16 @@ void CBSurfaceSDL::GenAlphaMask(SDL_Surface* surface)
 	bool hasColorKey;
 	Uint32 colorKey;
 	Uint8 ckRed, ckGreen, ckBlue;
-	if (SDL_GetColorKey(surface, &colorKey) == 0)
-	{
+	if (SDL_GetColorKey(surface, &colorKey) == 0) {
 		hasColorKey = true;
 		SDL_GetRGB(colorKey, surface->format, &ckRed, &ckGreen, &ckBlue);
-	}
-	else hasColorKey = false;
+	} else hasColorKey = false;
 
 	m_AlphaMask = new BYTE[surface->w * surface->h];
 
 	bool hasTransparency = false;
-	for (int y = 0; y < surface->h; y++)
-	{
-		for (int x = 0; x < surface->w; x++)
-		{
+	for (int y = 0; y < surface->h; y++) {
+		for (int x = 0; x < surface->w; x++) {
 			Uint32 pixel = GetPixel(surface, x, y);
 
 			Uint8 r, g, b, a;
@@ -206,14 +189,12 @@ void CBSurfaceSDL::GenAlphaMask(SDL_Surface* surface)
 }
 
 //////////////////////////////////////////////////////////////////////////
-Uint32 CBSurfaceSDL::GetPixel(SDL_Surface *surface, int x, int y)
-{
+Uint32 CBSurfaceSDL::GetPixel(SDL_Surface *surface, int x, int y) {
 	int bpp = surface->format->BytesPerPixel;
 	/* Here p is the address to the pixel we want to retrieve */
-	Uint8* p = (Uint8*)surface->pixels + y * surface->pitch + x * bpp;
+	Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 
-	switch(bpp)
-	{
+	switch (bpp) {
 	case 1:
 		return *p;
 		break;
@@ -223,7 +204,7 @@ Uint32 CBSurfaceSDL::GetPixel(SDL_Surface *surface, int x, int y)
 		break;
 
 	case 3:
-		if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
 			return p[0] << 16 | p[1] << 8 | p[2];
 		else
 			return p[0] | p[1] << 8 | p[2] << 16;
@@ -239,9 +220,8 @@ Uint32 CBSurfaceSDL::GetPixel(SDL_Surface *surface, int x, int y)
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurfaceSDL::Create(int Width, int Height)
-{
-	CBRenderSDL* renderer = static_cast<CBRenderSDL*>(Game->m_Renderer);
+HRESULT CBSurfaceSDL::Create(int Width, int Height) {
+	CBRenderSDL *renderer = static_cast<CBRenderSDL *>(Game->m_Renderer);
 	m_Texture = SDL_CreateTexture(renderer->GetSdlRenderer(), SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, Width, Height);
 
 	m_Width = Width;
@@ -255,9 +235,8 @@ HRESULT CBSurfaceSDL::Create(int Width, int Height)
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurfaceSDL::CreateFromSDLSurface(SDL_Surface* surface)
-{
-	CBRenderSDL* renderer = static_cast<CBRenderSDL*>(Game->m_Renderer);
+HRESULT CBSurfaceSDL::CreateFromSDLSurface(SDL_Surface *surface) {
+	CBRenderSDL *renderer = static_cast<CBRenderSDL *>(Game->m_Renderer);
 	m_Texture = SDL_CreateTextureFromSurface(renderer->GetSdlRenderer(), surface);
 
 	m_Width = surface->w;
@@ -271,8 +250,7 @@ HRESULT CBSurfaceSDL::CreateFromSDLSurface(SDL_Surface* surface)
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBSurfaceSDL::IsTransparentAt(int X, int Y)
-{
+bool CBSurfaceSDL::IsTransparentAt(int X, int Y) {
 	int access;
 	int width, height;
 	SDL_QueryTexture(m_Texture, NULL, &access, &width, &height);
@@ -288,8 +266,7 @@ bool CBSurfaceSDL::IsTransparentAt(int X, int Y)
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBSurfaceSDL::IsTransparentAtLite(int X, int Y)
-{
+bool CBSurfaceSDL::IsTransparentAtLite(int X, int Y) {
 	//if (!m_LockPixels) return false;
 
 	Uint32 format;
@@ -309,70 +286,61 @@ bool CBSurfaceSDL::IsTransparentAtLite(int X, int Y)
 	SDL_PixelFormat* pixelFormat = SDL_AllocFormat(format);
 	Uint8 r, g, b, a;
 	SDL_GetRGBA(pixel, pixelFormat, &r, &g, &b, &a);
-	SDL_FreeFormat(pixelFormat);	
+	SDL_FreeFormat(pixelFormat);
 
 	return a <= 128;
 	*/
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurfaceSDL::StartPixelOp()
-{
+HRESULT CBSurfaceSDL::StartPixelOp() {
 	//SDL_LockTexture(m_Texture, NULL, &m_LockPixels, &m_LockPitch);
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurfaceSDL::EndPixelOp()
-{
+HRESULT CBSurfaceSDL::EndPixelOp() {
 	//SDL_UnlockTexture(m_Texture);
 	return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurfaceSDL::Display(int X, int Y, RECT rect, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY)
-{
+HRESULT CBSurfaceSDL::Display(int X, int Y, RECT rect, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY) {
 	return DrawSprite(X, Y, &rect, 100, 100, 0xFFFFFFFF, true, BlendMode, MirrorX, MirrorY);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurfaceSDL::DisplayTrans(int X, int Y, RECT rect, DWORD Alpha, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY)
-{
+HRESULT CBSurfaceSDL::DisplayTrans(int X, int Y, RECT rect, DWORD Alpha, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY) {
 	return DrawSprite(X, Y, &rect, 100, 100, Alpha, false, BlendMode, MirrorX, MirrorY);
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurfaceSDL::DisplayTransOffset(int X, int Y, RECT rect, DWORD Alpha, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY, int offsetX, int offsetY)
-{
+HRESULT CBSurfaceSDL::DisplayTransOffset(int X, int Y, RECT rect, DWORD Alpha, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY, int offsetX, int offsetY) {
 	return DrawSprite(X, Y, &rect, 100, 100, Alpha, false, BlendMode, MirrorX, MirrorY, offsetX, offsetY);
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurfaceSDL::DisplayTransZoom(int X, int Y, RECT rect, float ZoomX, float ZoomY, DWORD Alpha, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY)
-{
+HRESULT CBSurfaceSDL::DisplayTransZoom(int X, int Y, RECT rect, float ZoomX, float ZoomY, DWORD Alpha, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY) {
 	return DrawSprite(X, Y, &rect, ZoomX, ZoomY, Alpha, false, BlendMode, MirrorX, MirrorY);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurfaceSDL::DisplayZoom(int X, int Y, RECT rect, float ZoomX, float ZoomY, DWORD Alpha, bool Transparent, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY)
-{
+HRESULT CBSurfaceSDL::DisplayZoom(int X, int Y, RECT rect, float ZoomX, float ZoomY, DWORD Alpha, bool Transparent, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY) {
 	return DrawSprite(X, Y, &rect, ZoomX, ZoomY, Alpha, !Transparent, BlendMode, MirrorX, MirrorY);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurfaceSDL::DisplayTransform(int X, int Y, int HotX, int HotY, RECT Rect, float ZoomX, float ZoomY, DWORD Alpha, float Rotate, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY)
-{
+HRESULT CBSurfaceSDL::DisplayTransform(int X, int Y, int HotX, int HotY, RECT Rect, float ZoomX, float ZoomY, DWORD Alpha, float Rotate, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY) {
 	return DrawSprite(X, Y, &Rect, ZoomX, ZoomY, Alpha, false, BlendMode, MirrorX, MirrorY);
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurfaceSDL::DrawSprite(int X, int Y, RECT* Rect, float ZoomX, float ZoomY, DWORD Alpha, bool AlphaDisable, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY, int offsetX, int offsetY)
-{
-	CBRenderSDL* renderer = static_cast<CBRenderSDL*>(Game->m_Renderer);
+HRESULT CBSurfaceSDL::DrawSprite(int X, int Y, RECT *Rect, float ZoomX, float ZoomY, DWORD Alpha, bool AlphaDisable, TSpriteBlendMode BlendMode, bool MirrorX, bool MirrorY, int offsetX, int offsetY) {
+	CBRenderSDL *renderer = static_cast<CBRenderSDL *>(Game->m_Renderer);
 
 	if (renderer->m_ForceAlphaColor != 0) Alpha = renderer->m_ForceAlphaColor;
 
@@ -413,24 +381,21 @@ HRESULT CBSurfaceSDL::DrawSprite(int X, int Y, RECT* Rect, float ZoomX, float Zo
 }
 
 //////////////////////////////////////////////////////////////////////////
-unsigned CBSurfaceSDL::ReadProc(void *buffer, unsigned size, unsigned count, fi_handle handle)
-{
-	CBFile* file = static_cast<CBFile*>(handle);
+unsigned CBSurfaceSDL::ReadProc(void *buffer, unsigned size, unsigned count, fi_handle handle) {
+	CBFile *file = static_cast<CBFile *>(handle);
 	file->Read(buffer, size * count);
 	return count;
 }
 
 //////////////////////////////////////////////////////////////////////////
-int CBSurfaceSDL::SeekProc(fi_handle handle, long offset, int origin)
-{
-	CBFile* file = static_cast<CBFile*>(handle);
+int CBSurfaceSDL::SeekProc(fi_handle handle, long offset, int origin) {
+	CBFile *file = static_cast<CBFile *>(handle);
 	file->Seek(offset, (TSeek)origin);
 	return 0;
 }
 
 //////////////////////////////////////////////////////////////////////////
-long CBSurfaceSDL::TellProc(fi_handle handle)
-{
-	CBFile* file = static_cast<CBFile*>(handle);
+long CBSurfaceSDL::TellProc(fi_handle handle) {
+	CBFile *file = static_cast<CBFile *>(handle);
 	return file->GetPos();
 }

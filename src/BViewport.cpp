@@ -31,8 +31,7 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CBViewport, false);
 
 //////////////////////////////////////////////////////////////////////////
-CBViewport::CBViewport(CBGame* inGame):CBBase(inGame)
-{
+CBViewport::CBViewport(CBGame *inGame): CBBase(inGame) {
 	CBPlatform::SetRectEmpty(&m_Rect);
 	m_MainObject = NULL;
 	m_OffsetX = m_OffsetY = 0;
@@ -40,14 +39,13 @@ CBViewport::CBViewport(CBGame* inGame):CBBase(inGame)
 
 
 //////////////////////////////////////////////////////////////////////////
-CBViewport::~CBViewport()
-{
+CBViewport::~CBViewport() {
 
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBViewport::Persist(CBPersistMgr* PersistMgr){
+HRESULT CBViewport::Persist(CBPersistMgr *PersistMgr) {
 
 	PersistMgr->Transfer(TMEMBER(Game));
 
@@ -61,15 +59,14 @@ HRESULT CBViewport::Persist(CBPersistMgr* PersistMgr){
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBViewport::SetRect(int left, int top, int right, int bottom, bool NoCheck)
-{
-	if(!NoCheck){
+HRESULT CBViewport::SetRect(int left, int top, int right, int bottom, bool NoCheck) {
+	if (!NoCheck) {
 		left = max(left, 0);
 		top = max(top, 0);
 		right = min(right, Game->m_Renderer->m_Width);
 		bottom = min(bottom, Game->m_Renderer->m_Height);
 	}
-	
+
 	CBPlatform::SetRect(&m_Rect, left, top, right, bottom);
 	m_OffsetX = left;
 	m_OffsetY = top;
@@ -78,21 +75,18 @@ HRESULT CBViewport::SetRect(int left, int top, int right, int bottom, bool NoChe
 
 
 //////////////////////////////////////////////////////////////////////////
-RECT* CBViewport::GetRect()
-{
+RECT *CBViewport::GetRect() {
 	return &m_Rect;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-int CBViewport::GetWidth()
-{
+int CBViewport::GetWidth() {
 	return m_Rect.right - m_Rect.left;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-int CBViewport::GetHeight()
-{
+int CBViewport::GetHeight() {
 	return m_Rect.bottom - m_Rect.top;
 }

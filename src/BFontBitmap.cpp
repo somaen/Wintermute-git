@@ -35,8 +35,7 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CBFontBitmap, false);
 
 //////////////////////////////////////////////////////////////////////
-CBFontBitmap::CBFontBitmap(CBGame* inGame):CBFont(inGame)
-{
+CBFontBitmap::CBFontBitmap(CBGame *inGame): CBFont(inGame) {
 	m_Subframe = NULL;
 	m_Sprite = NULL;
 	m_WidthsFrame = 0;
@@ -49,47 +48,39 @@ CBFontBitmap::CBFontBitmap(CBGame* inGame):CBFont(inGame)
 
 
 //////////////////////////////////////////////////////////////////////
-CBFontBitmap::~CBFontBitmap()
-{
+CBFontBitmap::~CBFontBitmap() {
 	SAFE_DELETE(m_Subframe);
 	SAFE_DELETE(m_Sprite);
 }
 
 
 //////////////////////////////////////////////////////////////////////
-void CBFontBitmap::DrawText(BYTE * text, int x, int y, int width, TTextAlign align, int max_height, int MaxLenght)
-{
+void CBFontBitmap::DrawText(BYTE *text, int x, int y, int width, TTextAlign align, int max_height, int MaxLenght) {
 	TextHeightDraw(text, x, y, width, align, true, max_height, MaxLenght);
 }
 
 
 //////////////////////////////////////////////////////////////////////
-int CBFontBitmap::GetTextHeight(BYTE* text, int width)
-{
+int CBFontBitmap::GetTextHeight(BYTE *text, int width) {
 	return TextHeightDraw(text, 0, 0, width, TAL_LEFT, false);
 }
 
 
 //////////////////////////////////////////////////////////////////////
-int CBFontBitmap::GetTextWidth(BYTE* text, int MaxLength)
-{
+int CBFontBitmap::GetTextWidth(BYTE *text, int MaxLength) {
 	AnsiString str;
 
-	if (Game->m_TextEncoding==TEXT_UTF8)
-	{
-		WideString wstr = StringUtil::Utf8ToWide(Utf8String((char*)text));
+	if (Game->m_TextEncoding == TEXT_UTF8) {
+		WideString wstr = StringUtil::Utf8ToWide(Utf8String((char *)text));
 		str = StringUtil::WideToAnsi(wstr);
-	}
-	else
-	{
-		str = AnsiString((char*)text);
+	} else {
+		str = AnsiString((char *)text);
 	}
 
 	if (MaxLength >= 0 && str.length() > MaxLength) str = str.substr(0, MaxLength);
 
 	int TextWidth = 0;
-	for (size_t i = 0; i < str.length(); i++)
-	{
+	for (size_t i = 0; i < str.length(); i++) {
 		TextWidth += GetCharWidth(str[i]);
 	}
 
@@ -98,124 +89,114 @@ int CBFontBitmap::GetTextWidth(BYTE* text, int MaxLength)
 
 
 //////////////////////////////////////////////////////////////////////
-int CBFontBitmap::TextHeightDraw(BYTE* text, int x, int y, int width, TTextAlign align, bool draw, int max_height, int MaxLenght)
-{
-	if(MaxLenght==0) return 0;
+int CBFontBitmap::TextHeightDraw(BYTE *text, int x, int y, int width, TTextAlign align, bool draw, int max_height, int MaxLenght) {
+	if (MaxLenght == 0) return 0;
 
-	if(text==NULL || text[0]=='\0') return m_TileHeight; 
+	if (text == NULL || text[0] == '\0') return m_TileHeight;
 
 
 
 	AnsiString str;
 
-	if (Game->m_TextEncoding==TEXT_UTF8)
-	{
-		WideString wstr = StringUtil::Utf8ToWide(Utf8String((char*)text));
+	if (Game->m_TextEncoding == TEXT_UTF8) {
+		WideString wstr = StringUtil::Utf8ToWide(Utf8String((char *)text));
 		str = StringUtil::WideToAnsi(wstr);
-	}
-	else
-	{
-		str = AnsiString((char*)text);
+	} else {
+		str = AnsiString((char *)text);
 	}
 	if (str.empty()) return 0;
 
-	int LineLength=0;
-	int RealLength=0;
-	int NumLines=0;
+	int LineLength = 0;
+	int RealLength = 0;
+	int NumLines = 0;
 
 	int i;
 
-	int index=-1;
-	int start=0;
-	int end=0;
-	int last_end=0;
+	int index = -1;
+	int start = 0;
+	int end = 0;
+	int last_end = 0;
 
-	bool done=false;
-	bool new_line=false;
-	bool long_line=false;
+	bool done = false;
+	bool new_line = false;
+	bool long_line = false;
 
-	if(draw) Game->m_Renderer->StartSpriteBatch();
+	if (draw) Game->m_Renderer->StartSpriteBatch();
 
-	while(!done)
-	{
-		if(max_height>0 && (NumLines+1)*m_TileHeight>max_height)
-		{
-			if(draw) Game->m_Renderer->EndSpriteBatch();
-			return NumLines*m_TileHeight;
+	while (!done) {
+		if (max_height > 0 && (NumLines + 1)*m_TileHeight > max_height) {
+			if (draw) Game->m_Renderer->EndSpriteBatch();
+			return NumLines * m_TileHeight;
 		}
 
 		index++;
 
-		if(str[index]==' ' && (max_height < 0 || max_height / m_TileHeight > 1))
-		{
-			end = index-1;
+		if (str[index] == ' ' && (max_height < 0 || max_height / m_TileHeight > 1)) {
+			end = index - 1;
 			RealLength = LineLength;
 		}
 
-		if(str[index]=='\n')
-		{
-			end = index-1;
+		if (str[index] == '\n') {
+			end = index - 1;
 			RealLength = LineLength;
 			new_line = true;
 		}
 
-		if(LineLength+GetCharWidth(str[index])>width && last_end==end)
-		{
-			end = index-1;
+		if (LineLength + GetCharWidth(str[index]) > width && last_end == end) {
+			end = index - 1;
 			RealLength = LineLength;
 			new_line = true;
-			long_line=true;
+			long_line = true;
 		}
 
-		if(str[index+1]=='\0' || (MaxLenght>=0 && index==MaxLenght-1))
-		{
-			done = true;			
-			if(!new_line)
-			{
+		if (str[index + 1] == '\0' || (MaxLenght >= 0 && index == MaxLenght - 1)) {
+			done = true;
+			if (!new_line) {
 				end = index;
-				LineLength+=GetCharWidth(str[index]);
+				LineLength += GetCharWidth(str[index]);
 				RealLength = LineLength;
 			}
-		}
-		else LineLength+=GetCharWidth(str[index]);
+		} else LineLength += GetCharWidth(str[index]);
 
-		if((LineLength>width) || done || new_line)
-		{
-			if(end<0) done = true;
+		if ((LineLength > width) || done || new_line) {
+			if (end < 0) done = true;
 			int StartX;
-			switch(align)
-			{
-				case TAL_CENTER: StartX = x + (width-RealLength)/2; break;
-				case TAL_RIGHT: StartX = x + width-RealLength; break;
-				case TAL_LEFT: StartX = x; break;
+			switch (align) {
+			case TAL_CENTER:
+				StartX = x + (width - RealLength) / 2;
+				break;
+			case TAL_RIGHT:
+				StartX = x + width - RealLength;
+				break;
+			case TAL_LEFT:
+				StartX = x;
+				break;
 			}
-			for(i=start; i<end+1; i++)
-			{
-				if(draw) DrawChar(str[i], StartX, y);
-				StartX+=GetCharWidth(str[i]);
+			for (i = start; i < end + 1; i++) {
+				if (draw) DrawChar(str[i], StartX, y);
+				StartX += GetCharWidth(str[i]);
 			}
-			y+=m_TileHeight;
+			y += m_TileHeight;
 			last_end = end;
-			if(long_line) end--;
-			start = end+2;
-			index = end+1;			
+			if (long_line) end--;
+			start = end + 2;
+			index = end + 1;
 			LineLength = 0;
 			new_line = false;
 			long_line = false;
 			NumLines++;
 		}
 	}
-	
-	if(draw) Game->m_Renderer->EndSpriteBatch();
-	
-	return NumLines*m_TileHeight;
+
+	if (draw) Game->m_Renderer->EndSpriteBatch();
+
+	return NumLines * m_TileHeight;
 }
 
 
 //////////////////////////////////////////////////////////////////////
-void CBFontBitmap::DrawChar(BYTE c, int x, int y)
-{
-	if(m_FontextFix) c--;
+void CBFontBitmap::DrawChar(BYTE c, int x, int y) {
+	if (m_FontextFix) c--;
 
 	int row, col;
 
@@ -225,43 +206,38 @@ void CBFontBitmap::DrawChar(BYTE c, int x, int y)
 	RECT rect;
 	/* l t r b */
 	int TileWidth;
-	if(m_WholeCell) TileWidth = m_TileWidth;
+	if (m_WholeCell) TileWidth = m_TileWidth;
 	else TileWidth = m_Widths[c];
 
-	CBPlatform::SetRect(&rect, col*m_TileWidth, row*m_TileHeight, col*m_TileWidth+TileWidth, (row+1)*m_TileHeight);
+	CBPlatform::SetRect(&rect, col * m_TileWidth, row * m_TileHeight, col * m_TileWidth + TileWidth, (row + 1)*m_TileHeight);
 	bool Handled = false;
-	if(m_Sprite)
-	{
+	if (m_Sprite) {
 		m_Sprite->GetCurrentFrame();
-		if(m_Sprite->m_CurrentFrame >=0 && m_Sprite->m_CurrentFrame < m_Sprite->m_Frames.GetSize() && m_Sprite->m_Frames[m_Sprite->m_CurrentFrame])
-		{
-			if(m_Sprite->m_Frames[m_Sprite->m_CurrentFrame]->m_Subframes.GetSize()>0)
-			{
+		if (m_Sprite->m_CurrentFrame >= 0 && m_Sprite->m_CurrentFrame < m_Sprite->m_Frames.GetSize() && m_Sprite->m_Frames[m_Sprite->m_CurrentFrame]) {
+			if (m_Sprite->m_Frames[m_Sprite->m_CurrentFrame]->m_Subframes.GetSize() > 0) {
 				m_Sprite->m_Frames[m_Sprite->m_CurrentFrame]->m_Subframes[0]->m_Surface->DisplayTrans(x, y, rect);
 			}
 			Handled = true;
 		}
 	}
-	if(!Handled && m_Subframe) m_Subframe->m_Surface->DisplayTrans(x, y, rect);
+	if (!Handled && m_Subframe) m_Subframe->m_Surface->DisplayTrans(x, y, rect);
 }
 
 
 //////////////////////////////////////////////////////////////////////
-HRESULT CBFontBitmap::LoadFile(char * Filename)
-{
-	BYTE* Buffer = Game->m_FileManager->ReadWholeFile(Filename);
-	if(Buffer==NULL)
-	{
+HRESULT CBFontBitmap::LoadFile(char *Filename) {
+	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	if (Buffer == NULL) {
 		Game->LOG(0, "CBFontBitmap::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
 	}
 
 	HRESULT ret;
 
-	m_Filename = new char [strlen(Filename)+1];
+	m_Filename = new char [strlen(Filename) + 1];
 	strcpy(m_Filename, Filename);
 
-	if(FAILED(ret = LoadBuffer(Buffer))) Game->LOG(0, "Error parsing FONT file '%s'", Filename);
+	if (FAILED(ret = LoadBuffer(Buffer))) Game->LOG(0, "Error parsing FONT file '%s'", Filename);
 
 	delete [] Buffer;
 
@@ -270,80 +246,76 @@ HRESULT CBFontBitmap::LoadFile(char * Filename)
 
 
 TOKEN_DEF_START
-TOKEN_DEF (FONTEXT_FIX)
-TOKEN_DEF (FONT)
-TOKEN_DEF (IMAGE)
-TOKEN_DEF (TRANSPARENT)
-TOKEN_DEF (COLUMNS)
-TOKEN_DEF (TILE_WIDTH)
-TOKEN_DEF (TILE_HEIGHT)
-TOKEN_DEF (DEFAULT_WIDTH)
-TOKEN_DEF (WIDTHS)
-TOKEN_DEF (AUTO_WIDTH)
-TOKEN_DEF (SPACE_WIDTH)
-TOKEN_DEF (EXPAND_WIDTH)
-TOKEN_DEF (EDITOR_PROPERTY)
-TOKEN_DEF (SPRITE)
-TOKEN_DEF (WIDTHS_FRAME)
-TOKEN_DEF (PAINT_WHOLE_CELL)
+TOKEN_DEF(FONTEXT_FIX)
+TOKEN_DEF(FONT)
+TOKEN_DEF(IMAGE)
+TOKEN_DEF(TRANSPARENT)
+TOKEN_DEF(COLUMNS)
+TOKEN_DEF(TILE_WIDTH)
+TOKEN_DEF(TILE_HEIGHT)
+TOKEN_DEF(DEFAULT_WIDTH)
+TOKEN_DEF(WIDTHS)
+TOKEN_DEF(AUTO_WIDTH)
+TOKEN_DEF(SPACE_WIDTH)
+TOKEN_DEF(EXPAND_WIDTH)
+TOKEN_DEF(EDITOR_PROPERTY)
+TOKEN_DEF(SPRITE)
+TOKEN_DEF(WIDTHS_FRAME)
+TOKEN_DEF(PAINT_WHOLE_CELL)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////
-HRESULT CBFontBitmap::LoadBuffer(BYTE * Buffer)
-{
+HRESULT CBFontBitmap::LoadBuffer(BYTE *Buffer) {
 	TOKEN_TABLE_START(commands)
-		TOKEN_TABLE (FONTEXT_FIX)
-		TOKEN_TABLE (FONT)
-		TOKEN_TABLE (IMAGE)
-		TOKEN_TABLE (TRANSPARENT)
-		TOKEN_TABLE (COLUMNS)
-		TOKEN_TABLE (TILE_WIDTH)
-		TOKEN_TABLE (TILE_HEIGHT)
-		TOKEN_TABLE (DEFAULT_WIDTH)
-		TOKEN_TABLE (WIDTHS)
-		TOKEN_TABLE (AUTO_WIDTH)
-		TOKEN_TABLE (SPACE_WIDTH)
-		TOKEN_TABLE (EXPAND_WIDTH)
-		TOKEN_TABLE (EDITOR_PROPERTY)
-		TOKEN_TABLE (SPRITE)
-		TOKEN_TABLE (WIDTHS_FRAME)
-		TOKEN_TABLE (PAINT_WHOLE_CELL)
-		TOKEN_TABLE_END
+	TOKEN_TABLE(FONTEXT_FIX)
+	TOKEN_TABLE(FONT)
+	TOKEN_TABLE(IMAGE)
+	TOKEN_TABLE(TRANSPARENT)
+	TOKEN_TABLE(COLUMNS)
+	TOKEN_TABLE(TILE_WIDTH)
+	TOKEN_TABLE(TILE_HEIGHT)
+	TOKEN_TABLE(DEFAULT_WIDTH)
+	TOKEN_TABLE(WIDTHS)
+	TOKEN_TABLE(AUTO_WIDTH)
+	TOKEN_TABLE(SPACE_WIDTH)
+	TOKEN_TABLE(EXPAND_WIDTH)
+	TOKEN_TABLE(EDITOR_PROPERTY)
+	TOKEN_TABLE(SPRITE)
+	TOKEN_TABLE(WIDTHS_FRAME)
+	TOKEN_TABLE(PAINT_WHOLE_CELL)
+	TOKEN_TABLE_END
 
-		char* params;
+	char *params;
 	int cmd;
 	CBParser parser(Game);
 
-	if(parser.GetCommand ((char**)&Buffer, commands, (char**)&params)!=TOKEN_FONT)
-	{
+	if (parser.GetCommand((char **)&Buffer, commands, (char **)&params) != TOKEN_FONT) {
 		Game->LOG(0, "'FONT' keyword expected.");
 		return E_FAIL;
 	}
-	Buffer = (BYTE*)params;
+	Buffer = (BYTE *)params;
 
 	int widths[300];
-	int num=0, default_width=8;
+	int num = 0, default_width = 8;
 	int last_width = 0;
 	int i;
-	int r=255,g=255,b=255;
+	int r = 255, g = 255, b = 255;
 	bool custom_trans = false;
-	char* surface_file = NULL;
-	char* sprite_file = NULL;
+	char *surface_file = NULL;
+	char *sprite_file = NULL;
 
 	bool AutoWidth = false;
 	int SpaceWidth = 0;
 	int ExpandWidth = 0;
 
-	while ((cmd = parser.GetCommand ((char**)&Buffer, commands, (char**)&params)) > 0)
-	{
+	while ((cmd = parser.GetCommand((char **)&Buffer, commands, (char **)&params)) > 0) {
 
-		switch (cmd)
-		{
+		switch (cmd) {
 		case TOKEN_IMAGE:
-			surface_file = (char*)params;
+			surface_file = (char *)params;
 			break;
 
 		case TOKEN_SPRITE:
-			sprite_file = (char*)params;
+			sprite_file = (char *)params;
 			break;
 
 		case TOKEN_TRANSPARENT:
@@ -353,8 +325,7 @@ HRESULT CBFontBitmap::LoadBuffer(BYTE * Buffer)
 
 		case TOKEN_WIDTHS:
 			parser.ScanStr(params, "%D", widths, &num);
-			for(i=0; last_width < NUM_CHARACTERS, num > 0; last_width++,num--,i++)
-			{
+			for (i = 0; last_width < NUM_CHARACTERS, num > 0; last_width++, num--, i++) {
 				m_Widths[last_width] = (BYTE)widths[i];
 			}
 			break;
@@ -400,71 +371,60 @@ HRESULT CBFontBitmap::LoadBuffer(BYTE * Buffer)
 			break;
 
 		case TOKEN_EDITOR_PROPERTY:
-			ParseEditorProperty((BYTE*)params, false);
+			ParseEditorProperty((BYTE *)params, false);
 			break;
 		}
 
 	}
-	if (cmd == PARSERR_TOKENNOTFOUND)
-	{
+	if (cmd == PARSERR_TOKENNOTFOUND) {
 		Game->LOG(0, "Syntax error in FONT definition");
 		return E_FAIL;
 	}
 
-	if(sprite_file!=NULL)
-	{
+	if (sprite_file != NULL) {
 		SAFE_DELETE(m_Sprite);
 		m_Sprite = new CBSprite(Game, this);
-		if(!m_Sprite || FAILED(m_Sprite->LoadFile(sprite_file))) SAFE_DELETE(m_Sprite);
+		if (!m_Sprite || FAILED(m_Sprite->LoadFile(sprite_file))) SAFE_DELETE(m_Sprite);
 	}
 
-	if(surface_file!=NULL && !m_Sprite)
-	{
+	if (surface_file != NULL && !m_Sprite) {
 		m_Subframe = new CBSubFrame(Game);
-		if(custom_trans) m_Subframe->SetSurface(surface_file, false, r, g, b);
+		if (custom_trans) m_Subframe->SetSurface(surface_file, false, r, g, b);
 		else m_Subframe->SetSurface(surface_file);
 	}
 
 
-	if(((m_Subframe == NULL || m_Subframe->m_Surface==NULL) && m_Sprite==NULL) || m_NumColumns == 0 || m_TileWidth == 0 || m_TileHeight == 0)
-	{
+	if (((m_Subframe == NULL || m_Subframe->m_Surface == NULL) && m_Sprite == NULL) || m_NumColumns == 0 || m_TileWidth == 0 || m_TileHeight == 0) {
 		Game->LOG(0, "Incomplete font definition");
 		return E_FAIL;
 	}
 
-	if(AutoWidth)
-	{
+	if (AutoWidth) {
 		// calculate characters width
 		GetWidths();
 
 		// do we need to modify widths?
-		if(ExpandWidth!=0)
-		{
-			for(i = 0; i < NUM_CHARACTERS; i++)
-			{
+		if (ExpandWidth != 0) {
+			for (i = 0; i < NUM_CHARACTERS; i++) {
 				int NewWidth = (int)m_Widths[i] + ExpandWidth;
-				if(NewWidth < 0) NewWidth = 0;
-				
+				if (NewWidth < 0) NewWidth = 0;
+
 				m_Widths[i] = (BYTE)NewWidth;
 			}
 		}
 
 		// handle space character
 		char SpaceChar = ' ';
-		if(m_FontextFix) SpaceChar--;
+		if (m_FontextFix) SpaceChar--;
 
-		if(SpaceWidth != 0) m_Widths[SpaceChar] = SpaceWidth;
-		else
-		{
-			if(m_Widths[SpaceChar] == ExpandWidth || m_Widths[SpaceChar] == 0)
-			{
-				m_Widths[SpaceChar] = (m_Widths['m']+m_Widths['i'])/2;
+		if (SpaceWidth != 0) m_Widths[SpaceChar] = SpaceWidth;
+		else {
+			if (m_Widths[SpaceChar] == ExpandWidth || m_Widths[SpaceChar] == 0) {
+				m_Widths[SpaceChar] = (m_Widths['m'] + m_Widths['i']) / 2;
 			}
 		}
-	}
-	else
-	{
-		for(i = last_width; i < NUM_CHARACTERS; i++) m_Widths[i] = default_width;
+	} else {
+		for (i = last_width; i < NUM_CHARACTERS; i++) m_Widths[i] = default_width;
 	}
 
 
@@ -473,8 +433,7 @@ HRESULT CBFontBitmap::LoadBuffer(BYTE * Buffer)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFontBitmap::Persist(CBPersistMgr* PersistMgr)
-{
+HRESULT CBFontBitmap::Persist(CBPersistMgr *PersistMgr) {
 
 	CBFont::Persist(PersistMgr);
 	PersistMgr->Transfer(TMEMBER(m_NumColumns));
@@ -485,7 +444,7 @@ HRESULT CBFontBitmap::Persist(CBPersistMgr* PersistMgr)
 	PersistMgr->Transfer(TMEMBER(m_Sprite));
 	PersistMgr->Transfer(TMEMBER(m_WidthsFrame));
 
-	if(PersistMgr->m_Saving)
+	if (PersistMgr->m_Saving)
 		PersistMgr->PutBytes(m_Widths, sizeof(m_Widths));
 	else
 		PersistMgr->GetBytes(m_Widths, sizeof(m_Widths));
@@ -500,52 +459,43 @@ HRESULT CBFontBitmap::Persist(CBPersistMgr* PersistMgr)
 
 
 //////////////////////////////////////////////////////////////////////////
-int CBFontBitmap::GetCharWidth(BYTE Index)
-{
-	if(m_FontextFix) Index--;
+int CBFontBitmap::GetCharWidth(BYTE Index) {
+	if (m_FontextFix) Index--;
 	return m_Widths[Index];
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFontBitmap::GetWidths()
-{
-	CBSurface* surf = NULL;
+HRESULT CBFontBitmap::GetWidths() {
+	CBSurface *surf = NULL;
 
-	if(m_Sprite)
-	{
-		if(m_WidthsFrame >= 0 && m_WidthsFrame < m_Sprite->m_Frames.GetSize())
-		{
-			if(m_Sprite->m_Frames[m_WidthsFrame] && m_Sprite->m_Frames[m_WidthsFrame]->m_Subframes.GetSize()>0)
-			{
+	if (m_Sprite) {
+		if (m_WidthsFrame >= 0 && m_WidthsFrame < m_Sprite->m_Frames.GetSize()) {
+			if (m_Sprite->m_Frames[m_WidthsFrame] && m_Sprite->m_Frames[m_WidthsFrame]->m_Subframes.GetSize() > 0) {
 				surf = m_Sprite->m_Frames[m_WidthsFrame]->m_Subframes[0]->m_Surface;
 			}
 		}
-	}	
-	if(surf==NULL && m_Subframe) surf = m_Subframe->m_Surface;
-	if(!surf || FAILED(surf->StartPixelOp())) return E_FAIL;
+	}
+	if (surf == NULL && m_Subframe) surf = m_Subframe->m_Surface;
+	if (!surf || FAILED(surf->StartPixelOp())) return E_FAIL;
 
 
-	for(int i=0; i<NUM_CHARACTERS; i++)
-	{
-		int xxx = (i%m_NumColumns) * m_TileWidth;
-		int yyy = (i/m_NumColumns) * m_TileHeight;
+	for (int i = 0; i < NUM_CHARACTERS; i++) {
+		int xxx = (i % m_NumColumns) * m_TileWidth;
+		int yyy = (i / m_NumColumns) * m_TileHeight;
 
 
 		int min_col = -1;
-		for(int row=0; row<m_TileHeight; row++)
-		{
-			for(int col=m_TileWidth-1; col>=min_col+1; col--)
-			{
-				if(xxx+col < 0 || xxx+col >= surf->GetWidth() || yyy+row < 0 || yyy+row >= surf->GetHeight()) continue;
-				if(!surf->IsTransparentAtLite(xxx+col, yyy+row))
-				{
+		for (int row = 0; row < m_TileHeight; row++) {
+			for (int col = m_TileWidth - 1; col >= min_col + 1; col--) {
+				if (xxx + col < 0 || xxx + col >= surf->GetWidth() || yyy + row < 0 || yyy + row >= surf->GetHeight()) continue;
+				if (!surf->IsTransparentAtLite(xxx + col, yyy + row)) {
 					//min_col = col;
 					min_col = max(col, min_col);
 					break;
 				}
 			}
-			if(min_col==m_TileWidth-1) break;
+			if (min_col == m_TileWidth - 1) break;
 		}
 
 		m_Widths[i] = min_col + 1;
@@ -562,7 +512,6 @@ HRESULT CBFontBitmap::GetWidths()
 }
 
 //////////////////////////////////////////////////////////////////////////
-int CBFontBitmap::GetLetterHeight()
-{
+int CBFontBitmap::GetLetterHeight() {
 	return m_TileHeight;
 }

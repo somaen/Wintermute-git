@@ -27,42 +27,41 @@ THE SOFTWARE.
 #define __WmeBScriptHolder_H__
 
 
-class CBScriptHolder : public CBScriptable
-{
+class CBScriptHolder : public CBScriptable {
 public:
 	DECLARE_PERSISTENT(CBScriptHolder, CBScriptable);
 
-	CBScriptHolder(CBGame* inGame);
+	CBScriptHolder(CBGame *inGame);
 	virtual ~CBScriptHolder();
 
-	virtual CScScript* InvokeMethodThread(char* MethodName);
+	virtual CScScript *InvokeMethodThread(char *MethodName);
 	virtual void MakeFreezable(bool Freezable);
-	bool CanHandleEvent(char* EventName);
-	virtual bool CanHandleMethod(char* EventMethod);
+	bool CanHandleEvent(char *EventName);
+	virtual bool CanHandleMethod(char *EventMethod);
 	HRESULT Cleanup();
-	HRESULT RemoveScript(CScScript* Script);
-	HRESULT AddScript(char* Filename);
-	virtual HRESULT SaveAsText(CBDynBuffer* Buffer, int Indent);	
-	virtual HRESULT Listen(CBScriptHolder* param1, DWORD param2);	
-	HRESULT ApplyEvent(const char* EventName, bool Unbreakable=false);
-	void SetFilename(char* Filename);
-	HRESULT ParseProperty(BYTE* Buffer, bool Complete=true);
+	HRESULT RemoveScript(CScScript *Script);
+	HRESULT AddScript(char *Filename);
+	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
+	virtual HRESULT Listen(CBScriptHolder *param1, DWORD param2);
+	HRESULT ApplyEvent(const char *EventName, bool Unbreakable = false);
+	void SetFilename(char *Filename);
+	HRESULT ParseProperty(BYTE *Buffer, bool Complete = true);
 
-	char* m_Filename;
+	char *m_Filename;
 	bool m_Freezable;
 	bool m_Ready;
-	CBArray<CScScript*, CScScript*> m_Scripts;
+	CBArray<CScScript *, CScScript *> m_Scripts;
 
 	// scripting interface
-	virtual CScValue* ScGetProperty(char* Name);
+	virtual CScValue *ScGetProperty(char *Name);
 	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name);
-	virtual char* ScToString();
-	virtual void ScDebuggerDesc(char* Buf, int BufSize);
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual char *ScToString();
+	virtual void ScDebuggerDesc(char *Buf, int BufSize);
 
 	// IWmeObject
 public:
-	virtual bool SendEvent(const char* EventName);
+	virtual bool SendEvent(const char *EventName);
 };
 
 #endif

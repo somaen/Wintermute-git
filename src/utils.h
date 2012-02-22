@@ -29,32 +29,31 @@ THE SOFTWARE.
 
 class CBGame;
 
-class CBUtils
-{
+class CBUtils {
 public:
 	static void Clip(int *DestX, int *DestY, RECT *SrcRect, RECT *DestRect);
 	static void Swap(int *a, int *b);
-	static bool StrBeginsI(const char* String, const char* Fragment);
+	static bool StrBeginsI(const char *String, const char *Fragment);
 	static float NormalizeAngle(float Angle);
 
-	static void CreatePath(const char* Path, bool PathOnly=false);
+	static void CreatePath(const char *Path, bool PathOnly = false);
 
-	static void DebugMessage(HWND hWnd, const char* Text);
-	static char* SetString(char** String, const char* Value);
+	static void DebugMessage(HWND hWnd, const char *Text);
+	static char *SetString(char **String, const char *Value);
 
-	static int StrNumEntries(const char* Str, const char Delim=',');
-	static char* StrEntry(int Entry, const char* Str, const char Delim=',');
+	static int StrNumEntries(const char *Str, const char Delim = ',');
+	static char *StrEntry(int Entry, const char *Str, const char Delim = ',');
 
 	static int RandomInt(int From, int To);
 	static float RandomFloat(float From, float To);
 	static float RandomAngle(float From, float To);
 
-	static bool MatchesPattern(const char* pattern, const char* string);
+	static bool MatchesPattern(const char *pattern, const char *string);
 
-	static char* GetPath(char* Filename);
-	static char* GetFilename(char* Filename);
+	static char *GetPath(char *Filename);
+	static char *GetFilename(char *Filename);
 
-	static void RGBtoHSL(DWORD RGBColor, BYTE* OutH, BYTE* OutS, BYTE* OutL);
+	static void RGBtoHSL(DWORD RGBColor, BYTE *OutH, BYTE *OutS, BYTE *OutL);
 	static DWORD HSLtoRGB(BYTE H, BYTE S, BYTE L);
 
 private:

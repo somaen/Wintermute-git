@@ -29,28 +29,29 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
-class CBRegistry : public CBBase  
-{
+class CBRegistry : public CBBase {
 public:
-	void SetIniName(char* Name);
-	char* GetIniName();
-	bool WriteBool(const AnsiString& subKey, const AnsiString& key, bool Value);
-	bool ReadBool(const AnsiString& subKey, const AnsiString& key, bool init = false);
-	bool WriteInt(const AnsiString& subKey, const AnsiString& key, int value);
-	int ReadInt(const AnsiString& subKey, const AnsiString& key, int init = 0);
-	bool WriteString(const AnsiString& subKey, const AnsiString& key, const AnsiString& value);
-	AnsiString ReadString(const AnsiString& subKey, const AnsiString& key, const AnsiString& init = "");
-	CBRegistry(CBGame* inGame);
+	void SetIniName(char *Name);
+	char *GetIniName();
+	bool WriteBool(const AnsiString &subKey, const AnsiString &key, bool Value);
+	bool ReadBool(const AnsiString &subKey, const AnsiString &key, bool init = false);
+	bool WriteInt(const AnsiString &subKey, const AnsiString &key, int value);
+	int ReadInt(const AnsiString &subKey, const AnsiString &key, int init = 0);
+	bool WriteString(const AnsiString &subKey, const AnsiString &key, const AnsiString &value);
+	AnsiString ReadString(const AnsiString &subKey, const AnsiString &key, const AnsiString &init = "");
+	CBRegistry(CBGame *inGame);
 	virtual ~CBRegistry();
 
-	void SetBasePath(const char* basePath);
-	AnsiString GetBasePath() const { return m_BasePath; }
+	void SetBasePath(const char *basePath);
+	AnsiString GetBasePath() const {
+		return m_BasePath;
+	}
 
 	void LoadValues(bool local);
 	void SaveValues();
 
 private:
-	char* m_IniName;
+	char *m_IniName;
 
 	typedef map<AnsiString, AnsiString> KeyValuePair;
 	typedef map<AnsiString, KeyValuePair> PathValueMap;
@@ -60,10 +61,10 @@ private:
 
 	AnsiString m_BasePath;
 
-	void LoadXml(const AnsiString fileName, PathValueMap& values);
-	void SaveXml(const AnsiString fileName, PathValueMap& values);
+	void LoadXml(const AnsiString fileName, PathValueMap &values);
+	void SaveXml(const AnsiString fileName, PathValueMap &values);
 
-	AnsiString GetValue(PathValueMap& values, const AnsiString path, const AnsiString& key, bool& found);
+	AnsiString GetValue(PathValueMap &values, const AnsiString path, const AnsiString &key, bool &found);
 };
 
 #endif

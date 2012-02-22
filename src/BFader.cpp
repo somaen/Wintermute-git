@@ -33,8 +33,7 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CBFader, false);
 
 //////////////////////////////////////////////////////////////////////////
-CBFader::CBFader(CBGame* inGame):CBObject(inGame)
-{
+CBFader::CBFader(CBGame *inGame): CBObject(inGame) {
 	m_Active = false;
 	m_Red = m_Green = m_Blue = 0;
 	m_CurrentAlpha = 0x00;
@@ -47,50 +46,46 @@ CBFader::CBFader(CBGame* inGame):CBObject(inGame)
 
 
 //////////////////////////////////////////////////////////////////////////
-CBFader::~CBFader()
-{
+CBFader::~CBFader() {
 
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFader::Update()
-{
-	if(!m_Active) return S_OK;
+HRESULT CBFader::Update() {
+	if (!m_Active) return S_OK;
 
 	int AlphaDelta = m_TargetAlpha - m_SourceAlpha;
 
 	DWORD time;
-	
-	if(m_System) time = CBPlatform::GetTime() - m_StartTime;
+
+	if (m_System) time = CBPlatform::GetTime() - m_StartTime;
 	else time = Game->m_Timer - m_StartTime;
 
-	if(time >= m_Duration) m_CurrentAlpha = m_TargetAlpha;
-	else{
+	if (time >= m_Duration) m_CurrentAlpha = m_TargetAlpha;
+	else {
 		m_CurrentAlpha = m_SourceAlpha + (float)time / (float)m_Duration * AlphaDelta;
 	}
 	m_CurrentAlpha = MIN(255, max(m_CurrentAlpha, (BYTE)0));
-	
+
 	m_Ready = time >= m_Duration;
-	if(m_Ready && m_CurrentAlpha==0x00) m_Active = false;
+	if (m_Ready && m_CurrentAlpha == 0x00) m_Active = false;
 
 	return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFader::Display()
-{
-	if(!m_Active) return S_OK;
+HRESULT CBFader::Display() {
+	if (!m_Active) return S_OK;
 
-	if(m_CurrentAlpha>0x00) return Game->m_Renderer->FadeToColor(DRGBA(m_Red, m_Green, m_Blue, m_CurrentAlpha));
+	if (m_CurrentAlpha > 0x00) return Game->m_Renderer->FadeToColor(DRGBA(m_Red, m_Green, m_Blue, m_CurrentAlpha));
 	else return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFader::Deactivate()
-{
+HRESULT CBFader::Deactivate() {
 	m_Active = false;
 	m_Ready = true;
 	return S_OK;
@@ -98,8 +93,7 @@ HRESULT CBFader::Deactivate()
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFader::FadeIn(DWORD SourceColor, DWORD Duration, bool System)
-{
+HRESULT CBFader::FadeIn(DWORD SourceColor, DWORD Duration, bool System) {
 	m_Ready = false;
 	m_Active = true;
 
@@ -112,8 +106,8 @@ HRESULT CBFader::FadeIn(DWORD SourceColor, DWORD Duration, bool System)
 
 	m_Duration = Duration;
 	m_System = System;
-	
-	if(m_System) m_StartTime = CBPlatform::GetTime();
+
+	if (m_System) m_StartTime = CBPlatform::GetTime();
 	else m_StartTime = Game->m_Timer;
 
 	return S_OK;
@@ -121,8 +115,7 @@ HRESULT CBFader::FadeIn(DWORD SourceColor, DWORD Duration, bool System)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFader::FadeOut(DWORD TargetColor, DWORD Duration, bool System)
-{
+HRESULT CBFader::FadeOut(DWORD TargetColor, DWORD Duration, bool System) {
 	m_Ready = false;
 	m_Active = true;
 
@@ -137,7 +130,7 @@ HRESULT CBFader::FadeOut(DWORD TargetColor, DWORD Duration, bool System)
 	m_Duration = Duration;
 	m_System = System;
 
-	if(m_System) m_StartTime = CBPlatform::GetTime();
+	if (m_System) m_StartTime = CBPlatform::GetTime();
 	else m_StartTime = Game->m_Timer;
 
 
@@ -146,16 +139,14 @@ HRESULT CBFader::FadeOut(DWORD TargetColor, DWORD Duration, bool System)
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBFader::GetCurrentColor()
-{
+DWORD CBFader::GetCurrentColor() {
 	return DRGBA(m_Red, m_Green, m_Blue, m_CurrentAlpha);
 }
 
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFader::Persist(CBPersistMgr *PersistMgr)
-{
+HRESULT CBFader::Persist(CBPersistMgr *PersistMgr) {
 	CBObject::Persist(PersistMgr);
 
 	PersistMgr->Transfer(TMEMBER(m_Active));
@@ -169,7 +160,7 @@ HRESULT CBFader::Persist(CBPersistMgr *PersistMgr)
 	PersistMgr->Transfer(TMEMBER(m_TargetAlpha));
 	PersistMgr->Transfer(TMEMBER(m_System));
 
-	if(m_System && !PersistMgr->m_Saving) m_StartTime = 0;
+	if (m_System && !PersistMgr->m_Saving) m_StartTime = 0;
 
 	return S_OK;
 }

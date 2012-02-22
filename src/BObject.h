@@ -35,15 +35,14 @@ class CBSound;
 class CBSurface;
 
 
-class CBObject : public CBScriptHolder
-{
+class CBObject : public CBScriptHolder {
 public:
 	TSpriteBlendMode m_BlendMode;
 	virtual HRESULT AfterMove();
 	float m_RelativeRotate;
 	bool m_RotateValid;
 	float m_Rotate;
-	void SetSoundEvent(char* EventName);
+	void SetSoundEvent(char *EventName);
 	bool m_Rotatable;
 	DWORD m_AlphaColor;
 	float m_Scale;
@@ -51,10 +50,10 @@ public:
 	float m_ScaleY;
 	float m_RelativeScale;
 	virtual bool IsReady();
-	virtual bool GetExtendedFlag(char* FlagName);
+	virtual bool GetExtendedFlag(char *FlagName);
 	virtual HRESULT ResetSoundPan();
 	virtual HRESULT UpdateSounds();
-	HRESULT UpdateOneSound(CBSound* Sound);
+	HRESULT UpdateOneSound(CBSound *Sound);
 	bool m_AutoSoundPanning;
 	DWORD m_SFXStart;
 	int m_SFXVolume;
@@ -62,9 +61,9 @@ public:
 	HRESULT SetSFXVolume(int Volume);
 	HRESULT ResumeSFX();
 	HRESULT PauseSFX();
-	HRESULT StopSFX(bool DeleteSound=true);
-	HRESULT PlaySFX(char* Filename, bool Looping=false, bool PlayNow=true, char* EventName=NULL, DWORD LoopStart=0);
-	CBSound* m_SFX;
+	HRESULT StopSFX(bool DeleteSound = true);
+	HRESULT PlaySFX(char *Filename, bool Looping = false, bool PlayNow = true, char *EventName = NULL, DWORD LoopStart = 0);
+	CBSound *m_SFX;
 
 	TSFXType m_SFXType;
 	float m_SFXParam1;
@@ -74,24 +73,24 @@ public:
 
 	virtual bool HandleMouseWheel(int Delta);
 	virtual HRESULT HandleMouse(TMouseEvent Event, TMouseButton Button);
-	virtual bool HandleKeypress(SDL_Event* event);
+	virtual bool HandleKeypress(SDL_Event *event);
 	virtual int GetHeight();
-	HRESULT SetCursor(char* Filename);
-	HRESULT SetActiveCursor(char* Filename);
+	HRESULT SetCursor(char *Filename);
+	HRESULT SetActiveCursor(char *Filename);
 	HRESULT Cleanup();
-	char* GetCaption(int Case=1);
-	void SetCaption(char* Caption, int Case=1);
+	char *GetCaption(int Case = 1);
+	void SetCaption(char *Caption, int Case = 1);
 	bool m_EditorSelected;
 	bool m_EditorAlwaysRegister;
 	bool m_EditorOnly;
 	bool m_Is3D;
 	DECLARE_PERSISTENT(CBObject, CBScriptHolder);
 	virtual HRESULT ShowCursor();
-	CBSprite* m_Cursor;
+	CBSprite *m_Cursor;
 	bool m_SharedCursors;
-	CBSprite* m_ActiveCursor;
-	virtual HRESULT SaveAsText(CBDynBuffer* Buffer, int Indent);
-	virtual HRESULT Listen(CBScriptHolder* param1, DWORD param2);
+	CBSprite *m_ActiveCursor;
+	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
+	virtual HRESULT Listen(CBScriptHolder *param1, DWORD param2);
 	bool m_Ready;
 	bool m_Registrable;
 	bool m_Zoomable;
@@ -100,28 +99,36 @@ public:
 	bool m_RectSet;
 	int m_ID;
 	bool m_Movable;
-	CBObject(CBGame* inGame);
+	CBObject(CBGame *inGame);
 	virtual ~CBObject();
-	char* m_Caption[7];
-	char* m_SoundEvent;
+	char *m_Caption[7];
+	char *m_SoundEvent;
 	int m_PosY;
 	int m_PosX;
 	bool m_SaveState;
 
 	// base
-	virtual HRESULT Update()  { return E_FAIL; };
-	virtual HRESULT Display() { return E_FAIL; };
-	virtual HRESULT InvalidateDeviceObjects()  { return S_OK; };
-	virtual HRESULT RestoreDeviceObjects()     { return S_OK; };
+	virtual HRESULT Update()  {
+		return E_FAIL;
+	};
+	virtual HRESULT Display() {
+		return E_FAIL;
+	};
+	virtual HRESULT InvalidateDeviceObjects()  {
+		return S_OK;
+	};
+	virtual HRESULT RestoreDeviceObjects()     {
+		return S_OK;
+	};
 	bool m_NonIntMouseEvents;
 
 
 public:
 	// scripting interface
-	virtual CScValue* ScGetProperty(char* Name);
+	virtual CScValue *ScGetProperty(char *Name);
 	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name);
-	virtual char* ScToString();
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual char *ScToString();
 };
 
 #endif

@@ -28,22 +28,19 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////
-CBImage::CBImage(CBGame* inGame, FIBITMAP* bitmap):CBBase(inGame)
-{
+CBImage::CBImage(CBGame *inGame, FIBITMAP *bitmap): CBBase(inGame) {
 	m_Bitmap = bitmap;
 }
 
 
 //////////////////////////////////////////////////////////////////////
-CBImage::~CBImage()
-{
+CBImage::~CBImage() {
 	if (m_Bitmap) FreeImage_Unload(m_Bitmap);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBImage::SaveBMPFile(char* Filename)
-{
+HRESULT CBImage::SaveBMPFile(char *Filename) {
 	if (!m_Bitmap) return E_FAIL;
 
 	if (FreeImage_Save(FIF_BMP, m_Bitmap, Filename)) return S_OK;
@@ -52,38 +49,34 @@ HRESULT CBImage::SaveBMPFile(char* Filename)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBImage::Resize(int NewWidth, int NewHeight)
-{
+HRESULT CBImage::Resize(int NewWidth, int NewHeight) {
 	if (!m_Bitmap) return E_FAIL;
 
 	if (NewWidth == 0) NewWidth = FreeImage_GetWidth(m_Bitmap);
 	if (NewHeight == 0) NewHeight = FreeImage_GetHeight(m_Bitmap);
 
 
-	FIBITMAP* newImg = FreeImage_Rescale(m_Bitmap, NewWidth, NewHeight, FILTER_BILINEAR);
-	if (newImg)
-	{
+	FIBITMAP *newImg = FreeImage_Rescale(m_Bitmap, NewWidth, NewHeight, FILTER_BILINEAR);
+	if (newImg) {
 		FreeImage_Unload(m_Bitmap);
 		m_Bitmap = newImg;
 		return S_OK;
-	}
-	else return E_FAIL;
+	} else return E_FAIL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-BYTE* CBImage::CreateBMPBuffer(DWORD* BufferSize)
-{
+BYTE *CBImage::CreateBMPBuffer(DWORD *BufferSize) {
 	if (!m_Bitmap) return NULL;
 
-	FIMEMORY* fiMem = FreeImage_OpenMemory();
+	FIMEMORY *fiMem = FreeImage_OpenMemory();
 	FreeImage_SaveToMemory(FIF_PNG, m_Bitmap, fiMem);
 	DWORD size;
-	BYTE* data;
+	BYTE *data;
 	FreeImage_AcquireMemory(fiMem, &data, &size);
 
-	
-	BYTE* Buffer = new BYTE[size];
+
+	BYTE *Buffer = new BYTE[size];
 	memcpy(Buffer, data, size);
 
 	FreeImage_CloseMemory(fiMem);
@@ -95,8 +88,7 @@ BYTE* CBImage::CreateBMPBuffer(DWORD* BufferSize)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBImage::CopyFrom(CBImage* OrigImage, int NewWidth, int NewHeight)
-{
+HRESULT CBImage::CopyFrom(CBImage *OrigImage, int NewWidth, int NewHeight) {
 	if (m_Bitmap) FreeImage_Unload(m_Bitmap);
 
 	if (NewWidth == 0) NewWidth = FreeImage_GetWidth(OrigImage->GetBitmap());

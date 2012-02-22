@@ -30,40 +30,36 @@ THE SOFTWARE.
 using namespace boost::filesystem;
 
 //////////////////////////////////////////////////////////////////////
-static inline unsigned Sqr (int x)
-{
-  return (x * x);
+static inline unsigned Sqr(int x) {
+	return (x * x);
 }
 
 
 //////////////////////////////////////////////////////////////////////////////////
-void CBUtils::Clip(int *DestX, int *DestY, RECT *SrcRect, RECT *DestRect)
-{
+void CBUtils::Clip(int *DestX, int *DestY, RECT *SrcRect, RECT *DestRect) {
 	// If it's partly off the right side of the screen
-	if(*DestX + (SrcRect->right - SrcRect->left) > DestRect->right)
-		SrcRect->right -= *DestX + (SrcRect->right-SrcRect->left) - DestRect->right;
+	if (*DestX + (SrcRect->right - SrcRect->left) > DestRect->right)
+		SrcRect->right -= *DestX + (SrcRect->right - SrcRect->left) - DestRect->right;
 
-	if(SrcRect->right < 0) SrcRect->right = 0;
+	if (SrcRect->right < 0) SrcRect->right = 0;
 
 	// Partly off the left side of the screen
-	if(*DestX < DestRect->left)
-	{
+	if (*DestX < DestRect->left) {
 		SrcRect->left += DestRect->left - *DestX;
 		*DestX = DestRect->left;
 	}
 
 	// Partly off the top of the screen
-	if(*DestY < DestRect->top)
-	{
+	if (*DestY < DestRect->top) {
 		SrcRect->top += DestRect->top - *DestY;
 		*DestY = DestRect->top;
 	}
 
 	// If it's partly off the bottom side of the screen
-	if(*DestY + (SrcRect->bottom - SrcRect->top) > DestRect->bottom)
-	SrcRect->bottom -= ((SrcRect->bottom-SrcRect->top)+*DestY) - DestRect->bottom;
+	if (*DestY + (SrcRect->bottom - SrcRect->top) > DestRect->bottom)
+		SrcRect->bottom -= ((SrcRect->bottom - SrcRect->top) + *DestY) - DestRect->bottom;
 
-	if(SrcRect->bottom < 0) SrcRect->bottom = 0;
+	if (SrcRect->bottom < 0) SrcRect->bottom = 0;
 
 	return;
 }
@@ -71,99 +67,83 @@ void CBUtils::Clip(int *DestX, int *DestY, RECT *SrcRect, RECT *DestRect)
 //////////////////////////////////////////////////////////////////////////////////
 // Swap - swaps two integers
 //////////////////////////////////////////////////////////////////////////////////
-void CBUtils::Swap(int *a, int *b)
-{
+void CBUtils::Swap(int *a, int *b) {
 	int Temp = *a;
 	*a = *b;
 	*b = Temp;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBUtils::StrBeginsI(const char* String, const char* Fragment)
-{
-	return (CBPlatform::strnicmp(String, Fragment, strlen(Fragment))==0);
+bool CBUtils::StrBeginsI(const char *String, const char *Fragment) {
+	return (CBPlatform::strnicmp(String, Fragment, strlen(Fragment)) == 0);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-float CBUtils::NormalizeAngle(float Angle)
-{
-	while(Angle > 360) Angle -= 360;
-	while(Angle < 0) Angle += 360;
+float CBUtils::NormalizeAngle(float Angle) {
+	while (Angle > 360) Angle -= 360;
+	while (Angle < 0) Angle += 360;
 
 	return Angle;
 }
 
 
 ////////////////////////////////////////////////////////////////////////////////
-void CBUtils::CreatePath(const char* Path, bool PathOnly)
-{
+void CBUtils::CreatePath(const char *Path, bool PathOnly) {
 	AnsiString path;
 
 	if (!PathOnly) path = PathUtil::GetDirectoryName(Path);
 	else path = Path;
 
-	try
-	{
+	try {
 		create_directories(path);
-	}
-	catch (...)
-	{
+	} catch (...) {
 		return;
 	}
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-void CBUtils::DebugMessage(HWND hWnd, const char* Text)
-{
+void CBUtils::DebugMessage(HWND hWnd, const char *Text) {
 	//MessageBox(hWnd, Text, "WME", MB_OK|MB_ICONINFORMATION);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-char* CBUtils::SetString(char** String, const char* Value)
-{
+char *CBUtils::SetString(char **String, const char *Value) {
 	SAFE_DELETE_ARRAY(*String);
-	*String = new char[strlen(Value)+1];
-	if(*String) strcpy(*String, Value);
+	*String = new char[strlen(Value) + 1];
+	if (*String) strcpy(*String, Value);
 	return *String;
 }
 
 //////////////////////////////////////////////////////////////////////////
-int CBUtils::StrNumEntries(const char* Str, const char Delim)
-{
+int CBUtils::StrNumEntries(const char *Str, const char Delim) {
 	int NumEntries = 1;
-	for(int i=0; i<strlen(Str); i++)
-	{
-		if(Str[i]==Delim) NumEntries++;
+	for (int i = 0; i < strlen(Str); i++) {
+		if (Str[i] == Delim) NumEntries++;
 	}
 	return NumEntries;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-char* CBUtils::StrEntry(int Entry, const char* Str, const char Delim)
-{
+char *CBUtils::StrEntry(int Entry, const char *Str, const char Delim) {
 	int NumEntries = 0;
 
-	const char* Start = NULL;
+	const char *Start = NULL;
 	int Len = 0;
 
-	for(int i=0; i<=strlen(Str); i++)
-	{
-		if(NumEntries==Entry)
-		{
-			if(!Start) Start = Str + i;
+	for (int i = 0; i <= strlen(Str); i++) {
+		if (NumEntries == Entry) {
+			if (!Start) Start = Str + i;
 			else Len++;
 		}
-		if(Str[i]==Delim || Str[i]=='\0')
-		{
+		if (Str[i] == Delim || Str[i] == '\0') {
 			NumEntries++;
-			if(Start)
-			{
-				char* Ret = new char[Len+1];
-				memset(Ret, 0, Len+1);
+			if (Start) {
+				char *Ret = new char[Len + 1];
+				memset(Ret, 0, Len + 1);
 				strncpy(Ret, Start, Len);
 				return Ret;
 			}
@@ -173,10 +153,8 @@ char* CBUtils::StrEntry(int Entry, const char* Str, const char Delim)
 }
 
 //////////////////////////////////////////////////////////////////////////
-int CBUtils::RandomInt(int From, int To)
-{
-	if(To < From)
-	{
+int CBUtils::RandomInt(int From, int To) {
+	if (To < From) {
 		int i = To;
 		To = From;
 		From = i;
@@ -185,110 +163,99 @@ int CBUtils::RandomInt(int From, int To)
 }
 
 //////////////////////////////////////////////////////////////////////////
-float CBUtils::RandomFloat(float From, float To)
-{
-	float RandNum = (float)rand () / (float)RAND_MAX;
+float CBUtils::RandomFloat(float From, float To) {
+	float RandNum = (float)rand() / (float)RAND_MAX;
 	return From + (To - From) * RandNum;
 }
 
 //////////////////////////////////////////////////////////////////////////
-float CBUtils::RandomAngle(float From, float To)
-{
-	while(To < From)
-	{
+float CBUtils::RandomAngle(float From, float To) {
+	while (To < From) {
 		To += 360;
 	}
 	return NormalizeAngle(RandomFloat(From, To));
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBUtils::MatchesPattern(const char* Pattern, const char* String)
-{
+bool CBUtils::MatchesPattern(const char *Pattern, const char *String) {
 	char stringc, patternc;
 
-	for(;; ++String)
-	{
+	for (;; ++String) {
 		stringc = toupper(*String);
 		patternc = toupper(*Pattern++);
 
-		switch(patternc)
-		{
-			case 0:
-				return (stringc==0);
+		switch (patternc) {
+		case 0:
+			return (stringc == 0);
 
-			case '?':
-				if (stringc == 0) return false;
+		case '?':
+			if (stringc == 0) return false;
 			break;
 
-			case '*':
-				if (!*Pattern) return true;
+		case '*':
+			if (!*Pattern) return true;
 
-				if (*Pattern=='.')
-				{
-					char* dot;
-					if (Pattern[1]=='*' && Pattern[2]==0) return true;
-					dot = (char*)strchr(String, '.');
-					if (Pattern[1]==0) return (dot==NULL || dot[1]==0);
-					if (dot!=NULL)
-					{
-						String=dot;
-						if (strpbrk(Pattern, "*?[")==NULL && strchr(String+1, '.')==NULL)
-							return(CBPlatform::stricmp(Pattern+1, String+1)==0);
-					}
+			if (*Pattern == '.') {
+				char *dot;
+				if (Pattern[1] == '*' && Pattern[2] == 0) return true;
+				dot = (char *)strchr(String, '.');
+				if (Pattern[1] == 0) return (dot == NULL || dot[1] == 0);
+				if (dot != NULL) {
+					String = dot;
+					if (strpbrk(Pattern, "*?[") == NULL && strchr(String + 1, '.') == NULL)
+						return(CBPlatform::stricmp(Pattern + 1, String + 1) == 0);
 				}
+			}
 
-				while (*String)
-					if (CBUtils::MatchesPattern(Pattern, String++))
-						return true;
-				return false;
+			while (*String)
+				if (CBUtils::MatchesPattern(Pattern, String++))
+					return true;
+			return false;
 
-			default:
-				if (patternc != stringc)
-					if (patternc=='.' && stringc==0)
-						return(CBUtils::MatchesPattern(Pattern, String));
-					else
-						return false;
+		default:
+			if (patternc != stringc)
+				if (patternc == '.' && stringc == 0)
+					return(CBUtils::MatchesPattern(Pattern, String));
+				else
+					return false;
 			break;
 		}
 	}
 }
 
 //////////////////////////////////////////////////////////////////////////
-char* CBUtils::GetPath(char* Filename)
-{
+char *CBUtils::GetPath(char *Filename) {
 	AnsiString path = PathUtil::GetDirectoryName(Filename);
 	path = system_complete(path).string();
 
-	char* ret = new char[path.length() + 1];
+	char *ret = new char[path.length() + 1];
 	strcpy(ret, path.c_str());
 
 	return ret;
 }
 
 //////////////////////////////////////////////////////////////////////////
-char* CBUtils::GetFilename(char* Filename)
-{
+char *CBUtils::GetFilename(char *Filename) {
 	AnsiString path = PathUtil::GetFileName(Filename);
-	char* ret = new char[path.length() + 1];
+	char *ret = new char[path.length() + 1];
 	strcpy(ret, path.c_str());
 	return ret;
 }
 
 //////////////////////////////////////////////////////////////////////////
-void CBUtils::RGBtoHSL(DWORD RGBColor, BYTE* OutH, BYTE* OutS, BYTE* OutL)
-{
+void CBUtils::RGBtoHSL(DWORD RGBColor, BYTE *OutH, BYTE *OutS, BYTE *OutL) {
 	float var_R = (D3DCOLGetR(RGBColor) / 255.0f);
 	float var_G = (D3DCOLGetG(RGBColor) / 255.0f);
 	float var_B = (D3DCOLGetB(RGBColor) / 255.0f);
 
 	//Min. value of RGB
 	float var_Min = min(var_R, var_G);
-	var_Min = min(var_Min, var_B );
+	var_Min = min(var_Min, var_B);
 
 	//Max. value of RGB
 	float var_Max = max(var_R, var_G);
 	var_Max = max(var_Max, var_B);
-	
+
 	//Delta RGB value
 	float del_Max = var_Max - var_Min;
 
@@ -297,14 +264,12 @@ void CBUtils::RGBtoHSL(DWORD RGBColor, BYTE* OutH, BYTE* OutS, BYTE* OutL)
 	L = (var_Max + var_Min) / 2.0f;
 
 	//This is a gray, no chroma...
-	if(del_Max == 0)
-	{
+	if (del_Max == 0) {
 		H = 0;
 		S = 0;
 	}
 	//Chromatic data...
-	else
-	{
+	else {
 		if (L < 0.5f) S = del_Max / (var_Max + var_Min);
 		else S = del_Max / (2.0f - var_Max - var_Min);
 
@@ -312,12 +277,12 @@ void CBUtils::RGBtoHSL(DWORD RGBColor, BYTE* OutH, BYTE* OutS, BYTE* OutL)
 		float del_G = (((var_Max - var_G) / 6.0f) + (del_Max / 2.0f)) / del_Max;
 		float del_B = (((var_Max - var_B) / 6.0f) + (del_Max / 2.0f)) / del_Max;
 
-		if(var_R == var_Max) H = del_B - del_G;
-		else if(var_G == var_Max) H = (1.0f / 3.0f) + del_R - del_B;
-		else if(var_B == var_Max) H = (2.0f / 3.0f) + del_G - del_R;
+		if (var_R == var_Max) H = del_B - del_G;
+		else if (var_G == var_Max) H = (1.0f / 3.0f) + del_R - del_B;
+		else if (var_B == var_Max) H = (2.0f / 3.0f) + del_G - del_R;
 
-		if(H < 0) H += 1;
-		if(H > 1) H -= 1;
+		if (H < 0) H += 1;
+		if (H > 1) H -= 1;
 	}
 
 	*OutH = H * 255;
@@ -327,8 +292,7 @@ void CBUtils::RGBtoHSL(DWORD RGBColor, BYTE* OutH, BYTE* OutS, BYTE* OutL)
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBUtils::HSLtoRGB(BYTE InH, BYTE InS, BYTE InL)
-{
+DWORD CBUtils::HSLtoRGB(BYTE InH, BYTE InS, BYTE InL) {
 	float H = InH / 255.0f;
 	float S = InS / 255.0f;
 	float L = InL / 255.0f;
@@ -336,17 +300,14 @@ DWORD CBUtils::HSLtoRGB(BYTE InH, BYTE InS, BYTE InL)
 	BYTE R, G, B;
 
 
-	if ( S == 0 )
-	{
+	if (S == 0) {
 		R = L * 255;
 		G = L * 255;
 		B = L * 255;
-	}
-	else
-	{
+	} else {
 		float var_1, var_2;
 
-		if(L < 0.5) var_2 = L * (1.0 + S);
+		if (L < 0.5) var_2 = L * (1.0 + S);
 		else var_2 = (L + S) - (S * L);
 
 		var_1 = 2.0f * L - var_2;
@@ -360,8 +321,7 @@ DWORD CBUtils::HSLtoRGB(BYTE InH, BYTE InS, BYTE InL)
 
 
 //////////////////////////////////////////////////////////////////////////
-float CBUtils::Hue2RGB(float v1, float v2, float vH)
-{
+float CBUtils::Hue2RGB(float v1, float v2, float vH) {
 	if (vH < 0.0f) vH += 1.0f;
 	if (vH > 1.0f) vH -= 1.0f;
 	if ((6.0f * vH) < 1.0f) return (v1 + (v2 - v1) * 6.0f * vH);

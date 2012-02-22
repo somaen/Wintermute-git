@@ -28,8 +28,7 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////////
-CBFileEntry::CBFileEntry(CBGame* inGame):CBBase(inGame)
-{
+CBFileEntry::CBFileEntry(CBGame *inGame): CBBase(inGame) {
 	m_Package = NULL;
 	m_Length = m_CompressedLength = m_Offset = m_Flags = 0;
 	m_Filename = "";
@@ -41,7 +40,6 @@ CBFileEntry::CBFileEntry(CBGame* inGame):CBBase(inGame)
 
 
 //////////////////////////////////////////////////////////////////////////
-CBFileEntry::~CBFileEntry()
-{
+CBFileEntry::~CBFileEntry() {
 	m_Package = NULL; // ref only
 }

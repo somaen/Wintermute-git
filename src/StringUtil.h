@@ -27,37 +27,36 @@ THE SOFTWARE.
 #define __WmeStringUtil_H__
 
 
-	class StringUtil
-	{
-	public:
-		static void ToLowerCase(AnsiString& str);
-		static void ToLowerCase(WideString& str);
-		static void ToUpperCase(AnsiString& str);
-		static void ToUpperCase(WideString& str);
-		static bool CompareNoCase(const AnsiString& str1, const AnsiString& str2);
-		static bool CompareNoCase(const WideString& str1, const WideString& str2);
-		static WideString Utf8ToWide(const Utf8String& Utf8Str);
-		static Utf8String WideToUtf8(const WideString& WideStr);
-		static WideString AnsiToWide(const AnsiString& str);
-		static AnsiString WideToAnsi(const WideString& str);
+class StringUtil {
+public:
+	static void ToLowerCase(AnsiString &str);
+	static void ToLowerCase(WideString &str);
+	static void ToUpperCase(AnsiString &str);
+	static void ToUpperCase(WideString &str);
+	static bool CompareNoCase(const AnsiString &str1, const AnsiString &str2);
+	static bool CompareNoCase(const WideString &str1, const WideString &str2);
+	static WideString Utf8ToWide(const Utf8String &Utf8Str);
+	static Utf8String WideToUtf8(const WideString &WideStr);
+	static WideString AnsiToWide(const AnsiString &str);
+	static AnsiString WideToAnsi(const WideString &str);
 
-		static bool StartsWith(const AnsiString& str, const AnsiString& pattern, bool ignoreCase=false);
-		static bool EndsWith(const AnsiString& str, const AnsiString& pattern, bool ignoreCase=false);
-		
-		static bool IsUtf8BOM(const BYTE* buffer, DWORD bufferSize);
+	static bool StartsWith(const AnsiString &str, const AnsiString &pattern, bool ignoreCase = false);
+	static bool EndsWith(const AnsiString &str, const AnsiString &pattern, bool ignoreCase = false);
 
-		static AnsiString Replace(const AnsiString& str, const AnsiString& from, const AnsiString& to);
-		static AnsiString Trim(const AnsiString& str, bool fromLeft = true, bool fromRight = true, const AnsiString& chars = " \n\r\t");
+	static bool IsUtf8BOM(const BYTE *buffer, DWORD bufferSize);
 
-		static int IndexOf(const WideString& str, const WideString& toFind, size_t startFrom);
-		static int LastIndexOf(const WideString& str, const WideString& toFind, size_t startFrom);
+	static AnsiString Replace(const AnsiString &str, const AnsiString &from, const AnsiString &to);
+	static AnsiString Trim(const AnsiString &str, bool fromLeft = true, bool fromRight = true, const AnsiString &chars = " \n\r\t");
 
-		static AnsiString ToString(size_t val);
-		static AnsiString ToString(int val);
-		static AnsiString ToString(float val);
-		static AnsiString ToString(double val);
+	static int IndexOf(const WideString &str, const WideString &toFind, size_t startFrom);
+	static int LastIndexOf(const WideString &str, const WideString &toFind, size_t startFrom);
 
-		static void Split(const AnsiString& list, const AnsiString& delimiters, AnsiStringArray& result, bool keepEmptyItems = false);
-	};
+	static AnsiString ToString(size_t val);
+	static AnsiString ToString(int val);
+	static AnsiString ToString(float val);
+	static AnsiString ToString(double val);
+
+	static void Split(const AnsiString &list, const AnsiString &delimiters, AnsiStringArray &result, bool keepEmptyItems = false);
+};
 
 #endif // __WmeStringUtil_H__

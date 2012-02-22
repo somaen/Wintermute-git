@@ -29,19 +29,18 @@ THE SOFTWARE.
 
 #include "BScriptable.h"
 
-class CSXString : public CBScriptable  
-{
+class CSXString : public CBScriptable {
 public:
-	virtual int ScCompare(CBScriptable* Val);
+	virtual int ScCompare(CBScriptable *Val);
 	DECLARE_PERSISTENT(CSXString, CBScriptable);
-	CScValue* ScGetProperty(char* Name);
+	CScValue *ScGetProperty(char *Name);
 	HRESULT ScSetProperty(char *Name, CScValue *Value);
-	HRESULT ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name);
-	void ScSetString(const char* Val);
-	char* ScToString();
-	void SetStringVal(const char* Val);
-	char* m_String;
-	CSXString(CBGame* inGame, CScStack* Stack);
+	HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	void ScSetString(const char *Val);
+	char *ScToString();
+	void SetStringVal(const char *Val);
+	char *m_String;
+	CSXString(CBGame *inGame, CScStack *Stack);
 	virtual ~CSXString();
 	int m_Capacity;
 };

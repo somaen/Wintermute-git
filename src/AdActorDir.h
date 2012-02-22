@@ -27,11 +27,10 @@ THE SOFTWARE.
 #define __WmeAdActorDir_H__
 
 
-class CAdActorDir : public CBBase
-{
+class CAdActorDir : public CBBase {
 public:
 	DECLARE_PERSISTENT(CAdActorDir, CBBase);
-	CAdActorDir(CBGame* inGame);
+	CAdActorDir(CBGame *inGame);
 	virtual ~CAdActorDir(void);
 };
 

@@ -30,44 +30,43 @@ THE SOFTWARE.
 #include <map>
 #include "coll_templ.h"
 
-class CBFileManager:CBBase
-{
-public:	
-	bool FindPackageSignature(FILE* f, DWORD* Offset);
+class CBFileManager: CBBase {
+public:
+	bool FindPackageSignature(FILE *f, DWORD *Offset);
 	HRESULT Cleanup();
-	HRESULT SetBasePath(char* Path);
+	HRESULT SetBasePath(char *Path);
 	HRESULT RestoreCurrentDir();
-	char* m_BasePath;
-	bool GetFullPath(char* Filename, char* Fullname);
-	CBFile* OpenFileRaw(const char* Filename);
-	HRESULT CloseFile(CBFile* File);
-	CBFile* OpenFile(const char* Filename, bool AbsPathWarning=true);
-	CBFileEntry* GetPackageEntry(const char* Filename);
-	FILE* OpenSingleFile(char* Name);
-	FILE* OpenPackage(char* Name);
-	HRESULT RegisterPackages();	
+	char *m_BasePath;
+	bool GetFullPath(char *Filename, char *Fullname);
+	CBFile *OpenFileRaw(const char *Filename);
+	HRESULT CloseFile(CBFile *File);
+	CBFile *OpenFile(const char *Filename, bool AbsPathWarning = true);
+	CBFileEntry *GetPackageEntry(const char *Filename);
+	FILE *OpenSingleFile(char *Name);
+	FILE *OpenPackage(char *Name);
+	HRESULT RegisterPackages();
 	HRESULT InitPaths();
 	HRESULT ReloadPaths();
-	typedef enum{
-		PATH_PACKAGE, PATH_SINGLE
+	typedef enum {
+	    PATH_PACKAGE, PATH_SINGLE
 	} TPathType;
-	HRESULT AddPath(TPathType Type, const char* Path);
-	HRESULT RequestCD(int CD, char* PackageFile, char* Filename);
-	HRESULT SaveFile(char* Filename, BYTE* Buffer, DWORD BufferSize, bool Compressed=false, BYTE* PrefixBuffer=NULL, DWORD PrefixSize=0);
-	BYTE* ReadWholeFile(const char* Filename, DWORD* Size=NULL, bool MustExist=true);
-	CBFileManager(CBGame* inGame=NULL);
+	HRESULT AddPath(TPathType Type, const char *Path);
+	HRESULT RequestCD(int CD, char *PackageFile, char *Filename);
+	HRESULT SaveFile(char *Filename, BYTE *Buffer, DWORD BufferSize, bool Compressed = false, BYTE *PrefixBuffer = NULL, DWORD PrefixSize = 0);
+	BYTE *ReadWholeFile(const char *Filename, DWORD *Size = NULL, bool MustExist = true);
+	CBFileManager(CBGame *inGame = NULL);
 	virtual ~CBFileManager();
-	CBArray<char*, char*> m_SinglePaths;
-	CBArray<char*, char*> m_PackagePaths;
-	CBArray<CBPackage*, CBPackage*> m_Packages;
-	CBArray<CBFile*, CBFile*> m_OpenFiles;
+	CBArray<char *, char *> m_SinglePaths;
+	CBArray<char *, char *> m_PackagePaths;
+	CBArray<CBPackage *, CBPackage *> m_Packages;
+	CBArray<CBFile *, CBFile *> m_OpenFiles;
 
-	map<string, CBFileEntry*> m_Files;
+	map<string, CBFileEntry *> m_Files;
 private:
-	HRESULT RegisterPackage(const char* Path, const char* Name, bool SearchSignature=false);	
-	map<string, CBFileEntry*>::iterator m_FilesIter;
-	bool IsValidPackage(const AnsiString& fileName) const;
-	
+	HRESULT RegisterPackage(const char *Path, const char *Name, bool SearchSignature = false);
+	map<string, CBFileEntry *>::iterator m_FilesIter;
+	bool IsValidPackage(const AnsiString &fileName) const;
+
 };
 
 #endif

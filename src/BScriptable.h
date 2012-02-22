@@ -34,39 +34,38 @@ class CScValue;
 class CScStack;
 class CScScript;
 
-class CBScriptable : public CBNamedObject, public IWmeDebugObject
-{
+class CBScriptable : public CBNamedObject, public IWmeDebugObject {
 public:
-	virtual CScScript* InvokeMethodThread(char* MethodName);
+	virtual CScScript *InvokeMethodThread(char *MethodName);
 	DECLARE_PERSISTENT(CBScriptable, CBNamedObject);
 
-	CBScriptable(CBGame* inGame, bool NoValue = false, bool Persistable=true);
+	CBScriptable(CBGame *inGame, bool NoValue = false, bool Persistable = true);
 	virtual ~CBScriptable();
 
 	// high level scripting interface
-	virtual bool CanHandleMethod(char* EventMethod);
-	virtual HRESULT ScSetProperty(char* Name, CScValue* Value);
-	virtual CScValue* ScGetProperty(char* Name);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack* Stack, CScStack* ThisStack, char* Name);
-	virtual char* ScToString();
-	virtual void* ScToMemBuffer();
+	virtual bool CanHandleMethod(char *EventMethod);
+	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
+	virtual CScValue *ScGetProperty(char *Name);
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual char *ScToString();
+	virtual void *ScToMemBuffer();
 	virtual int ScToInt();
 	virtual double ScToFloat();
 	virtual bool ScToBool();
-	virtual void ScSetString(const char* Val);
+	virtual void ScSetString(const char *Val);
 	virtual void ScSetInt(int Val);
 	virtual void ScSetFloat(double Val);
 	virtual void ScSetBool(bool Val);
-	virtual int ScCompare(CBScriptable* Val);
-	virtual void ScDebuggerDesc(char* Buf, int BufSize);
+	virtual int ScCompare(CBScriptable *Val);
+	virtual void ScDebuggerDesc(char *Buf, int BufSize);
 	int m_RefCount;
-	CScValue* m_ScValue;
-	CScValue* m_ScProp;
+	CScValue *m_ScValue;
+	CScValue *m_ScProp;
 
 public:
 	// IWmeDebugObject
-	const char* DbgGetNativeClass();
-	IWmeDebugProp* DbgGetProperty(const char* Name);
+	const char *DbgGetNativeClass();
+	IWmeDebugProp *DbgGetProperty(const char *Name);
 
 };
 

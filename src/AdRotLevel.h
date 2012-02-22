@@ -27,16 +27,15 @@ THE SOFTWARE.
 #define __WmeAdRotLevel_H__
 
 
-class CAdRotLevel : public CBObject  
-{
+class CAdRotLevel : public CBObject {
 public:
 	DECLARE_PERSISTENT(CAdRotLevel, CBObject);
-	CAdRotLevel(CBGame* inGame);
+	CAdRotLevel(CBGame *inGame);
 	virtual ~CAdRotLevel();
 	float m_Rotation;
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
-	HRESULT LoadFile(char* Filename);
-	HRESULT LoadBuffer(BYTE* Buffer, bool Complete=true);
+	HRESULT LoadFile(char *Filename);
+	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
 };
 
 #endif

@@ -27,18 +27,17 @@ THE SOFTWARE.
 #define __WmeBTransitionMgr_H__
 
 
-class CBTransitionMgr : public CBBase
-{
+class CBTransitionMgr : public CBBase {
 public:
 	bool m_Started;
 	DWORD m_LastTime;
 	bool m_OrigInteractive;
 	bool m_PreserveInteractive;
 	HRESULT Update();
-	HRESULT Start(TTransitionType Type, bool NonInteractive=false);
+	HRESULT Start(TTransitionType Type, bool NonInteractive = false);
 	bool IsReady();
 	TTransMgrState m_State;
-	CBTransitionMgr(CBGame* inGame);
+	CBTransitionMgr(CBGame *inGame);
 	virtual ~CBTransitionMgr();
 	TTransitionType m_Type;
 

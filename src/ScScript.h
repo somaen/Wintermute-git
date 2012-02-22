@@ -28,62 +28,61 @@ THE SOFTWARE.
 
 
 #include "BBase.h"
-#include "dcscript.h"	// Added by ClassView
+#include "dcscript.h"   // Added by ClassView
 #include "wme_debugger.h"
 
 class CScEngine;
-class CScScript : public CBBase, public IWmeDebugScript
-{
+class CScScript : public CBBase, public IWmeDebugScript {
 public:
-	HRESULT DbgSendScript(IWmeDebugClient* Client);
-	HRESULT DbgSendVariables(IWmeDebugClient* Client);
+	HRESULT DbgSendScript(IWmeDebugClient *Client);
+	HRESULT DbgSendVariables(IWmeDebugClient *Client);
 
 	CBArray<int, int> m_Breakpoints;
 	bool m_TracingMode;
 
-	CScScript* m_ParentScript;
+	CScScript *m_ParentScript;
 	bool m_Unbreakable;
 	HRESULT FinishThreads();
-	HRESULT CopyParameters(CScStack* Stack);
+	HRESULT CopyParameters(CScStack *Stack);
 
 	void AfterLoad();
 
 #ifdef __WIN32__
-	static DWORD Call_cdecl(const void* args, size_t sz, DWORD func, bool* StackCorrupt);
-	static DWORD Call_stdcall(const void* args, size_t sz, DWORD func, bool* StackCorrupt);
+	static DWORD Call_cdecl(const void *args, size_t sz, DWORD func, bool *StackCorrupt);
+	static DWORD Call_stdcall(const void *args, size_t sz, DWORD func, bool *StackCorrupt);
 	static DWORD GetST0(void);
 	static double GetST0Double(void);
 #endif
 
-	CScValue* m_Operand;
-	CScValue* m_Reg1;
+	CScValue *m_Operand;
+	CScValue *m_Reg1;
 	bool m_Freezable;
 	HRESULT Resume();
 	HRESULT Pause();
-	bool CanHandleEvent(char* EventName);
-	bool CanHandleMethod(char* MethodName);
-	HRESULT CreateThread(CScScript* Original, DWORD InitIP, const char* EventName);
-	HRESULT CreateMethodThread(CScScript *Original, const char* MethodName);
-	CScScript* InvokeEventHandler(const char* EventName, bool Unbreakable=false);
+	bool CanHandleEvent(char *EventName);
+	bool CanHandleMethod(char *MethodName);
+	HRESULT CreateThread(CScScript *Original, DWORD InitIP, const char *EventName);
+	HRESULT CreateMethodThread(CScScript *Original, const char *MethodName);
+	CScScript *InvokeEventHandler(const char *EventName, bool Unbreakable = false);
 	DWORD m_TimeSlice;
 	DECLARE_PERSISTENT(CScScript, CBBase);
 	void RuntimeError(LPCSTR fmt, ...);
 	HRESULT Run();
 	HRESULT Finish(bool IncludingThreads = false);
 	HRESULT Sleep(DWORD Duration);
-	HRESULT WaitForExclusive(CBObject* Object);
-	HRESULT WaitFor(CBObject* Object);
+	HRESULT WaitForExclusive(CBObject *Object);
+	HRESULT WaitFor(CBObject *Object);
 	DWORD m_WaitTime;
 	bool m_WaitFrozen;
-	CBObject* m_WaitObject;
-	CScScript* m_WaitScript;
+	CBObject *m_WaitObject;
+	CScScript *m_WaitScript;
 	TScriptState m_State;
 	TScriptState m_OrigState;
-	CScValue* GetVar(char* Name);
-	DWORD GetFuncPos(const char* Name);
-	DWORD GetEventPos(const char* Name);
-	DWORD GetMethodPos(const char* Name);
-	typedef struct{
+	CScValue *GetVar(char *Name);
+	DWORD GetFuncPos(const char *Name);
+	DWORD GetEventPos(const char *Name);
+	DWORD GetMethodPos(const char *Name);
+	typedef struct {
 		DWORD magic;
 		DWORD version;
 		DWORD code_start;
@@ -92,69 +91,69 @@ public:
 		DWORD event_table;
 		DWORD externals_table;
 		DWORD method_table;
-	}TScriptHeader;
+	} TScriptHeader;
 
 
-	typedef struct{
-		char* name;
+	typedef struct {
+		char *name;
 		DWORD pos;
-	}TFunctionPos;
+	} TFunctionPos;
 
-	typedef struct{
-		char* name;
+	typedef struct {
+		char *name;
 		DWORD pos;
-	}TMethodPos;
+	} TMethodPos;
 
-	typedef struct{
-		char* name;
+	typedef struct {
+		char *name;
 		DWORD pos;
-	}TEventPos;
+	} TEventPos;
 
-	typedef struct{
-		char* name;
-		char* dll_name;
+	typedef struct {
+		char *name;
+		char *dll_name;
 		TCallType call_type;
 		TExternalType returns;
 		int num_params;
-		TExternalType* params;
-	}TExternalFunction;
+		TExternalType *params;
+	} TExternalFunction;
 
 
-	CScStack* m_CallStack;
-	CScStack* m_ThisStack;
-	CScStack* m_ScopeStack;
-	CScStack* m_Stack;
-	CScValue* m_Globals;
-	CScEngine* m_Engine;
+	CScStack *m_CallStack;
+	CScStack *m_ThisStack;
+	CScStack *m_ScopeStack;
+	CScStack *m_Stack;
+	CScValue *m_Globals;
+	CScEngine *m_Engine;
 	int m_CurrentLine;
 	HRESULT ExecuteInstruction();
-	char* GetString();
+	char *GetString();
 	DWORD GetDWORD();
 	double GetFloat();
 	void Cleanup();
-	HRESULT Create(char* Filename, BYTE* Buffer, DWORD Size, CBScriptHolder* Owner);
+	HRESULT Create(char *Filename, BYTE *Buffer, DWORD Size, CBScriptHolder *Owner);
 	DWORD m_IP;
 	DWORD m_BufferSize;
-	BYTE* m_Buffer;
-	CScScript(CBGame* inGame, CScEngine* Engine);
+	BYTE *m_Buffer;
+	CScScript(CBGame *inGame, CScEngine *Engine);
 	virtual ~CScScript();
-	char* m_Filename;
-	char** m_Symbols;
+	char *m_Filename;
+	char **m_Symbols;
 	int m_NumSymbols;
-	TFunctionPos* m_Functions;
-	TMethodPos* m_Methods;
-	TEventPos* m_Events;
+	TFunctionPos *m_Functions;
+	TMethodPos *m_Methods;
+	TEventPos *m_Events;
 	int m_NumExternals;
-	TExternalFunction* m_Externals;
+	TExternalFunction *m_Externals;
 	int m_NumFunctions;
 	int m_NumMethods;
 	int m_NumEvents;
 	bool m_Thread;
 	bool m_MethodThread;
-	char* m_ThreadEvent;
-	CBScriptHolder* m_Owner;
-	CScScript::TExternalFunction* GetExternal(char* Name);
-	HRESULT ExternalCall(CScStack* Stack, CScStack* ThisStack, CScScript::TExternalFunction* Function);
+	char *m_ThreadEvent;
+	CBScriptHolder *m_Owner;
+	CScScript::TExternalFunction *GetExternal(char *Name);
+	HRESULT ExternalCall(CScStack *Stack, CScStack *ThisStack, CScScript::TExternalFunction *Function);
 private:
 	HRESULT InitScript();
 	HRESULT InitTables();
@@ -163,7 +162,7 @@ private:
 // IWmeDebugScript interface implementation
 public:
 	virtual int DbgGetLine();
-	virtual const char* DbgGetFilename();
+	virtual const char *DbgGetFilename();
 	virtual TScriptState DbgGetState();
 	virtual int DbgGetNumBreakpoints();
 	virtual int DbgGetBreakpoint(int Index);

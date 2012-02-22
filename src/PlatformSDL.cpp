@@ -30,10 +30,10 @@ THE SOFTWARE.
 #include <boost/filesystem.hpp>
 
 #ifdef __WIN32__
-#	include <dbghelp.h>
-#	include <direct.h>
+#   include <dbghelp.h>
+#   include <direct.h>
 #else
-#	include <unistd.h>
+#   include <unistd.h>
 #endif
 
 
@@ -41,38 +41,34 @@ THE SOFTWARE.
 using namespace boost::filesystem;
 
 
-CBGame* CBPlatform::Game = NULL;
+CBGame *CBPlatform::Game = NULL;
 
 
 #define CLASS_NAME "GF_FRAME"
 //////////////////////////////////////////////////////////////////////////
-int CBPlatform::Initialize(CBGame* inGame, int argc, char* argv[])
-{
+int CBPlatform::Initialize(CBGame *inGame, int argc, char *argv[]) {
 	setlocale(LC_CTYPE, "");
 
 	Game = inGame;
-	if(!Game) return 1;
+	if (!Game) return 1;
 
 
 	bool windowedMode = false;
-	
+
 
 	// parse command line
-	char* SaveGame = NULL;
+	char *SaveGame = NULL;
 	char param[MAX_PATH];
-	for(int i = 0; i < argc; i++)
-	{
+	for (int i = 0; i < argc; i++) {
 		strcpy(param, argv[i]);
 
-		if(CBPlatform::stricmp(param, "-project")==0)
-		{
+		if (CBPlatform::stricmp(param, "-project") == 0) {
 			if (argc > i) strcpy(param, argv[i + 1]);
 			else param[0] = '\0';
 
-			if(strcmp(param, "") != 0)
-			{
-				char* IniDir = CBUtils::GetPath(param);
-				char* IniName = CBUtils::GetFilename(param);
+			if (strcmp(param, "") != 0) {
+				char *IniDir = CBUtils::GetPath(param);
+				char *IniName = CBUtils::GetFilename(param);
 
 				// switch to ini's dir
 				chdir(IniDir);
@@ -84,17 +80,15 @@ int CBPlatform::Initialize(CBGame* inGame, int argc, char* argv[])
 				delete [] IniDir;
 				delete [] IniName;
 			}
-		}
-		else if(CBPlatform::stricmp(param, "-windowed")==0) windowedMode = true;
+		} else if (CBPlatform::stricmp(param, "-windowed") == 0) windowedMode = true;
 	}
 
 
-	if(Game->m_Registry->ReadBool("Debug", "DebugMode")) Game->DEBUG_DebugEnable("./wme.log");
+	if (Game->m_Registry->ReadBool("Debug", "DebugMode")) Game->DEBUG_DebugEnable("./wme.log");
 
 	Game->m_DEBUG_ShowFPS = Game->m_Registry->ReadBool("Debug", "ShowFPS");
 
-	if(Game->m_Registry->ReadBool("Debug", "DisableSmartCache"))
-	{
+	if (Game->m_Registry->ReadBool("Debug", "DisableSmartCache")) {
 		Game->LOG(0, "Smart cache is DISABLED");
 		Game->m_SmartCache = false;
 	}
@@ -105,13 +99,12 @@ int CBPlatform::Initialize(CBGame* inGame, int argc, char* argv[])
 	Game->Initialize1();
 
 
-	if(FAILED(Game->LoadSettings("startup.settings")))
-	{
+	if (FAILED(Game->LoadSettings("startup.settings"))) {
 		Game->LOG(0, "Error loading game settings.");
 		SAFE_DELETE(Game);
 
 #ifdef __WIN32__
-		::MessageBox(NULL, "Some of the essential files are missing. Please reinstall.", NULL, MB_OK|MB_ICONERROR);
+		::MessageBox(NULL, "Some of the essential files are missing. Please reinstall.", NULL, MB_OK | MB_ICONERROR);
 #endif
 		return 2;
 	}
@@ -127,32 +120,29 @@ int CBPlatform::Initialize(CBGame* inGame, int argc, char* argv[])
 
 	// initialize the renderer
 	ret = Game->m_Renderer->InitRenderer(Game->m_SettingsResWidth, Game->m_SettingsResHeight, windowedMode);
-	if (FAILED(ret))
-	{
+	if (FAILED(ret)) {
 		Game->LOG(ret, "Error initializing renderer. Exiting.");
 		SAFE_DELETE(Game);
 		return 3;
 	}
 
-	Game->Initialize3();	
-	
+	Game->Initialize3();
+
 #ifdef __IPHONEOS__
 	SDL_AddEventWatch(CBPlatform::SDLEventWatcher, NULL);
 #endif
-	
+
 	// initialize sound manager (non-fatal if we fail)
 	ret = Game->m_SoundMgr->Initialize();
-	if(FAILED(ret))
-	{
+	if (FAILED(ret)) {
 		Game->LOG(ret, "Sound is NOT available.");
 	}
-		
+
 
 	// load game
 	DWORD DataInitStart = GetTime();
 
-	if(FAILED(Game->LoadFile(Game->m_SettingsGameFile?Game->m_SettingsGameFile:"default.game")))
-	{
+	if (FAILED(Game->LoadFile(Game->m_SettingsGameFile ? Game->m_SettingsGameFile : "default.game"))) {
 		Game->LOG(ret, "Error loading game file. Exiting.");
 		SAFE_DELETE(Game);
 		return false;
@@ -164,9 +154,8 @@ int CBPlatform::Initialize(CBGame* inGame, int argc, char* argv[])
 	Game->LOG(0, "Engine initialized in %d ms", GetTime() - DataInitStart);
 	Game->LOG(0, "");
 
-	
-	if(SaveGame)
-	{
+
+	if (SaveGame) {
 		Game->LoadGame(SaveGame);
 		delete [] SaveGame;
 	}
@@ -177,20 +166,16 @@ int CBPlatform::Initialize(CBGame* inGame, int argc, char* argv[])
 
 
 //////////////////////////////////////////////////////////////////////////
-int CBPlatform::MessageLoop()
-{
+int CBPlatform::MessageLoop() {
 	bool done = false;
 
-	while (!done)
-	{
+	while (!done) {
 		SDL_Event event;
-		while (SDL_PollEvent(&event))
-		{
+		while (SDL_PollEvent(&event)) {
 			HandleEvent(&event);
 		}
 
-		if(Game && Game->m_Renderer->m_Active && Game->m_Renderer->m_Ready)
-		{
+		if (Game && Game->m_Renderer->m_Active && Game->m_Renderer->m_Ready) {
 
 			Game->DisplayContent();
 			Game->DisplayQuickMsg();
@@ -198,29 +183,28 @@ int CBPlatform::MessageLoop()
 			Game->DisplayDebugInfo();
 
 			// ***** flip
-			if(!Game->m_SuspendedRendering) Game->m_Renderer->Flip();
-			if(Game->m_Loading) Game->LoadGame(Game->m_ScheduledLoadSlot);
+			if (!Game->m_SuspendedRendering) Game->m_Renderer->Flip();
+			if (Game->m_Loading) Game->LoadGame(Game->m_ScheduledLoadSlot);
 		}
-		if(Game->m_Quitting) break;
+		if (Game->m_Quitting) break;
 
 	}
 
-	if(Game)
-	{
+	if (Game) {
 		// remember previous window position
 		/*
 		if(Game->m_Renderer && Game->m_Renderer->m_Windowed)
 		{
-			if(!::IsIconic(Game->m_Renderer->m_Window))
-			{
-				int PosX = Game->m_Renderer->m_WindowRect.left;
-				int PosY = Game->m_Renderer->m_WindowRect.top;
-				PosX -= Game->m_Renderer->m_MonitorRect.left;
-				PosY -= Game->m_Renderer->m_MonitorRect.top;
+		    if(!::IsIconic(Game->m_Renderer->m_Window))
+		    {
+		        int PosX = Game->m_Renderer->m_WindowRect.left;
+		        int PosY = Game->m_Renderer->m_WindowRect.top;
+		        PosX -= Game->m_Renderer->m_MonitorRect.left;
+		        PosY -= Game->m_Renderer->m_MonitorRect.top;
 
-				Game->m_Registry->WriteInt("Video", "WindowPosX", PosX);
-				Game->m_Registry->WriteInt("Video", "WindowPosY", PosY);
-			}
+		        Game->m_Registry->WriteInt("Video", "WindowPosX", PosX);
+		        Game->m_Registry->WriteInt("Video", "WindowPosY", PosY);
+		    }
 		}
 		*/
 
@@ -230,39 +214,33 @@ int CBPlatform::MessageLoop()
 }
 
 //////////////////////////////////////////////////////////////////////////
-void CBPlatform::HandleEvent(SDL_Event* event)
-{
-	switch (event->type)
-	{
+void CBPlatform::HandleEvent(SDL_Event *event) {
+	switch (event->type) {
 
 	case SDL_MOUSEBUTTONDOWN:
 
 #ifdef __IPHONEOS__
 		{
-			CBRenderSDL* renderer = static_cast<CBRenderSDL*>(Game->m_Renderer);
+			CBRenderSDL *renderer = static_cast<CBRenderSDL *>(Game->m_Renderer);
 			POINT p;
-			GetCursorPos(&p);			
+			GetCursorPos(&p);
 			Game->SetActiveObject(renderer->GetObjectAt(p.x, p.y));
-			
-			if (Game->m_ActiveObject != NULL && strcmp(Game->m_ActiveObject->GetClassName(), "CUIButton") == 0)
-			{
-				CUIButton* btn = static_cast<CUIButton*> (Game->m_ActiveObject);
+
+			if (Game->m_ActiveObject != NULL && strcmp(Game->m_ActiveObject->GetClassName(), "CUIButton") == 0) {
+				CUIButton *btn = static_cast<CUIButton *>(Game->m_ActiveObject);
 				if (btn->m_Visible && !btn->m_Disable) btn->m_Press = true;
 			}
 		}
 #endif
-		switch (event->button.button)
-		{
+		switch (event->button.button) {
 		case SDL_BUTTON_LEFT:
-			if (Game)
-			{
+			if (Game) {
 				if (Game->IsLeftDoubleClick()) Game->OnMouseLeftDblClick();
 				else Game->OnMouseLeftDown();
 			}
 			break;
 		case SDL_BUTTON_RIGHT:
-			if (Game)
-			{
+			if (Game) {
 				if (Game->IsRightDoubleClick()) Game->OnMouseRightDblClick();
 				else Game->OnMouseRightDown();
 			}
@@ -274,8 +252,7 @@ void CBPlatform::HandleEvent(SDL_Event* event)
 		break;
 
 	case SDL_MOUSEBUTTONUP:
-		switch (event->button.button)
-		{
+		switch (event->button.button) {
 		case SDL_BUTTON_LEFT:
 			if (Game) Game->OnMouseLeftUp();
 			break;
@@ -287,19 +264,18 @@ void CBPlatform::HandleEvent(SDL_Event* event)
 			break;
 		}
 		break;
-	
+
 	case SDL_MOUSEWHEEL:
 		if (Game) Game->HandleMouseWheel(event->wheel.y);
 		break;
-	
+
 	case SDL_KEYDOWN:
 	case SDL_TEXTINPUT:
 		if (Game) Game->HandleKeypress(event);
 		break;
 
 	case SDL_WINDOWEVENT:
-		switch (event->window.event)
-		{
+		switch (event->window.event) {
 		case SDL_WINDOWEVENT_FOCUS_GAINED:
 		case SDL_WINDOWEVENT_RESTORED:
 			if (Game) Game->OnActivate(true, true);
@@ -321,30 +297,27 @@ void CBPlatform::HandleEvent(SDL_Event* event)
 
 	case SDL_QUIT:
 #ifdef __IPHONEOS__
-		if (Game)
-		{
+		if (Game) {
 			Game->AutoSaveOnExit();
 			Game->m_Quitting = true;
 		}
 #else
 		if (Game) Game->OnWindowClose();
 #endif
-		
+
 		break;
 
 	}
 }
 
 //////////////////////////////////////////////////////////////////////////
-int CBPlatform::SDLEventWatcher(void* userdata, SDL_Event* event)
-{
-	if (event->type == SDL_WINDOWEVENT && event->window.event == SDL_WINDOWEVENT_MINIMIZED)
-	{
+int CBPlatform::SDLEventWatcher(void *userdata, SDL_Event *event) {
+	if (event->type == SDL_WINDOWEVENT && event->window.event == SDL_WINDOWEVENT_MINIMIZED) {
 		if (Game) Game->AutoSaveOnExit();
 		if (Game) Game->OnActivate(false, false);
 		SDL_ShowCursor(SDL_ENABLE);
 	}
-	
+
 	return 1;
 }
 
@@ -352,8 +325,7 @@ int CBPlatform::SDLEventWatcher(void* userdata, SDL_Event* event)
 //////////////////////////////////////////////////////////////////////////
 // Win32 API bindings
 //////////////////////////////////////////////////////////////////////////
-HINSTANCE CBPlatform::ShellExecute(HWND hwnd, LPCSTR lpOperation, LPCSTR lpFile, LPCSTR lpParameters, LPCSTR lpDirectory, INT nShowCmd)
-{
+HINSTANCE CBPlatform::ShellExecute(HWND hwnd, LPCSTR lpOperation, LPCSTR lpFile, LPCSTR lpParameters, LPCSTR lpDirectory, INT nShowCmd) {
 #ifdef __WIN32__
 	return ::ShellExecute(hwnd, lpOperation, lpFile, lpParameters, lpDirectory, nShowCmd);
 #else
@@ -362,8 +334,7 @@ HINSTANCE CBPlatform::ShellExecute(HWND hwnd, LPCSTR lpOperation, LPCSTR lpFile,
 }
 
 //////////////////////////////////////////////////////////////////////////
-void CBPlatform::OutputDebugString(LPCSTR lpOutputString)
-{
+void CBPlatform::OutputDebugString(LPCSTR lpOutputString) {
 #ifdef __WIN32__
 	::OutputDebugString(lpOutputString);
 #endif
@@ -371,15 +342,13 @@ void CBPlatform::OutputDebugString(LPCSTR lpOutputString)
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBPlatform::GetTime()
-{
+DWORD CBPlatform::GetTime() {
 	return SDL_GetTicks();
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL CBPlatform::GetCursorPos(LPPOINT lpPoint)
-{
-	CBRenderSDL* renderer = static_cast<CBRenderSDL*>(Game->m_Renderer);
+BOOL CBPlatform::GetCursorPos(LPPOINT lpPoint) {
+	CBRenderSDL *renderer = static_cast<CBRenderSDL *>(Game->m_Renderer);
 
 	int x, y;
 	SDL_GetMouseState(&x, &y);
@@ -392,9 +361,8 @@ BOOL CBPlatform::GetCursorPos(LPPOINT lpPoint)
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL CBPlatform::SetCursorPos(int X, int Y)
-{
-	CBRenderSDL* renderer = static_cast<CBRenderSDL*>(Game->m_Renderer);
+BOOL CBPlatform::SetCursorPos(int X, int Y) {
+	CBRenderSDL *renderer = static_cast<CBRenderSDL *>(Game->m_Renderer);
 
 	POINT p;
 	p.x = X;
@@ -406,8 +374,7 @@ BOOL CBPlatform::SetCursorPos(int X, int Y)
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL CBPlatform::ShowWindow(HWND hWnd, int nCmdShow)
-{
+BOOL CBPlatform::ShowWindow(HWND hWnd, int nCmdShow) {
 #ifdef __WIN32__
 	return ::ShowWindow(hWnd, nCmdShow);
 #else
@@ -416,29 +383,23 @@ BOOL CBPlatform::ShowWindow(HWND hWnd, int nCmdShow)
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBPlatform::DeleteFile(const char* lpFileName)
-{
+bool CBPlatform::DeleteFile(const char *lpFileName) {
 	return remove(lpFileName) ? true : false;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBPlatform::CopyFile(const char* from, const char* to, bool failIfExists)
-{
-	try
-	{
+bool CBPlatform::CopyFile(const char *from, const char *to, bool failIfExists) {
+	try {
 		if (failIfExists && exists(to)) return false;
 		copy_file(from, to);
 		return true;
-	}
-	catch (...)
-	{
+	} catch (...) {
 		return false;
 	}
 }
 
 //////////////////////////////////////////////////////////////////////////
-HWND CBPlatform::SetCapture(HWND hWnd)
-{
+HWND CBPlatform::SetCapture(HWND hWnd) {
 #ifdef __WIN32__
 	return ::SetCapture(hWnd);
 #else
@@ -447,8 +408,7 @@ HWND CBPlatform::SetCapture(HWND hWnd)
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL CBPlatform::ReleaseCapture()
-{
+BOOL CBPlatform::ReleaseCapture() {
 #ifdef __WIN32__
 	return ::ReleaseCapture();
 #else
@@ -457,8 +417,7 @@ BOOL CBPlatform::ReleaseCapture()
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL CBPlatform::SetForegroundWindow(HWND hWnd)
-{
+BOOL CBPlatform::SetForegroundWindow(HWND hWnd) {
 #ifdef __WIN32__
 	return ::SetForegroundWindow(hWnd);
 #else
@@ -467,27 +426,23 @@ BOOL CBPlatform::SetForegroundWindow(HWND hWnd)
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL CBPlatform::SetRectEmpty(LPRECT lprc)
-{
+BOOL CBPlatform::SetRectEmpty(LPRECT lprc) {
 	lprc->left = lprc->right = lprc->top = lprc->bottom = 0;
 	return TRUE;
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL CBPlatform::IsRectEmpty(CONST LPRECT lprc)
-{
+BOOL CBPlatform::IsRectEmpty(CONST LPRECT lprc) {
 	return (lprc->left >= lprc->right) || (lprc->top >= lprc->bottom);
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL CBPlatform::PtInRect(LPRECT lprc, POINT p)
-{
+BOOL CBPlatform::PtInRect(LPRECT lprc, POINT p) {
 	return (p.x >= lprc->left) && (p.x < lprc->right) && (p.y >= lprc->top) && (p.y < lprc->bottom);
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL CBPlatform::SetRect(LPRECT lprc, int left, int top, int right, int bottom)
-{
+BOOL CBPlatform::SetRect(LPRECT lprc, int left, int top, int right, int bottom) {
 	lprc->left   = left;
 	lprc->top    = top;
 	lprc->right  = right;
@@ -497,12 +452,10 @@ BOOL CBPlatform::SetRect(LPRECT lprc, int left, int top, int right, int bottom)
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL CBPlatform::IntersectRect(LPRECT lprcDst, CONST LPRECT lprcSrc1, CONST LPRECT lprcSrc2)
-{
+BOOL CBPlatform::IntersectRect(LPRECT lprcDst, CONST LPRECT lprcSrc1, CONST LPRECT lprcSrc2) {
 	if (IsRectEmpty(lprcSrc1) || IsRectEmpty(lprcSrc2) ||
-		lprcSrc1->left >= lprcSrc2->right || lprcSrc2->left >= lprcSrc1->right ||
-		lprcSrc1->top >= lprcSrc2->bottom || lprcSrc2->top >= lprcSrc1->bottom)
-	{
+	        lprcSrc1->left >= lprcSrc2->right || lprcSrc2->left >= lprcSrc1->right ||
+	        lprcSrc1->top >= lprcSrc2->bottom || lprcSrc2->top >= lprcSrc1->bottom) {
 		SetRectEmpty(lprcDst);
 		return FALSE;
 	}
@@ -510,46 +463,35 @@ BOOL CBPlatform::IntersectRect(LPRECT lprcDst, CONST LPRECT lprcSrc1, CONST LPRE
 	lprcDst->right  = min(lprcSrc1->right, lprcSrc2->right);
 	lprcDst->top    = max(lprcSrc1->top, lprcSrc2->top);
 	lprcDst->bottom = min(lprcSrc1->bottom, lprcSrc2->bottom);
-	
+
 	return TRUE;
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL CBPlatform::UnionRect(LPRECT lprcDst, RECT* lprcSrc1, RECT* lprcSrc2)
-{
-	if (IsRectEmpty(lprcSrc1))
-	{
-		if (IsRectEmpty(lprcSrc2))
-		{
+BOOL CBPlatform::UnionRect(LPRECT lprcDst, RECT *lprcSrc1, RECT *lprcSrc2) {
+	if (IsRectEmpty(lprcSrc1)) {
+		if (IsRectEmpty(lprcSrc2)) {
 			SetRectEmpty(lprcDst);
 			return FALSE;
-		}
-		else
-		{
+		} else {
 			*lprcDst = *lprcSrc2;
 		}
-	}
-	else
-	{
-		if (IsRectEmpty(lprcSrc2))
-		{
+	} else {
+		if (IsRectEmpty(lprcSrc2)) {
 			*lprcDst = *lprcSrc1;
-		}
-		else
-		{
+		} else {
 			lprcDst->left   = min(lprcSrc1->left, lprcSrc2->left);
 			lprcDst->top    = min(lprcSrc1->top, lprcSrc2->top);
 			lprcDst->right  = max(lprcSrc1->right, lprcSrc2->right);
 			lprcDst->bottom = max(lprcSrc1->bottom, lprcSrc2->bottom);
 		}
 	}
-	
+
 	return TRUE;
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL CBPlatform::CopyRect(LPRECT lprcDst, RECT* lprcSrc)
-{
+BOOL CBPlatform::CopyRect(LPRECT lprcDst, RECT *lprcSrc) {
 	if (lprcDst == NULL || lprcSrc == NULL) return FALSE;
 
 	*lprcDst = *lprcSrc;
@@ -557,8 +499,7 @@ BOOL CBPlatform::CopyRect(LPRECT lprcDst, RECT* lprcSrc)
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL CBPlatform::OffsetRect(LPRECT lprc, int dx, int dy)
-{
+BOOL CBPlatform::OffsetRect(LPRECT lprc, int dx, int dy) {
 	if (lprc == NULL) return FALSE;
 
 	lprc->left   += dx;
@@ -570,15 +511,13 @@ BOOL CBPlatform::OffsetRect(LPRECT lprc, int dx, int dy)
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL CBPlatform::EqualRect(LPRECT rect1, LPRECT rect2)
-{
+BOOL CBPlatform::EqualRect(LPRECT rect1, LPRECT rect2) {
 	return rect1->left == rect2->left && rect1->right == rect2->right && rect1->top == rect2->top && rect1->bottom == rect2->bottom;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-AnsiString CBPlatform::GetSystemFontPath()
-{
+AnsiString CBPlatform::GetSystemFontPath() {
 #ifdef __WIN32__
 	// we're looking for something like "c:\windows\fonts\";
 	char winDir[MAX_PATH + 1];
@@ -592,14 +531,12 @@ AnsiString CBPlatform::GetSystemFontPath()
 }
 
 //////////////////////////////////////////////////////////////////////////
-AnsiString CBPlatform::GetPlatformName()
-{
+AnsiString CBPlatform::GetPlatformName() {
 	return AnsiString(SDL_GetPlatform());
 }
 
 //////////////////////////////////////////////////////////////////////////
-int CBPlatform::stricmp(const char* str1, const char* str2)
-{
+int CBPlatform::stricmp(const char *str1, const char *str2) {
 #ifdef __WIN32__
 	return ::stricmp(str1, str2);
 #else
@@ -608,8 +545,7 @@ int CBPlatform::stricmp(const char* str1, const char* str2)
 }
 
 //////////////////////////////////////////////////////////////////////////
-int CBPlatform::strnicmp(const char* str1, const char* str2, size_t maxCount)
-{
+int CBPlatform::strnicmp(const char *str1, const char *str2, size_t maxCount) {
 #ifdef __WIN32__
 	return ::strnicmp(str1, str2, maxCount);
 #else
@@ -619,12 +555,9 @@ int CBPlatform::strnicmp(const char* str1, const char* str2, size_t maxCount)
 
 
 //////////////////////////////////////////////////////////////////////////
-char* CBPlatform::strupr(char* string)
-{
-	if (string)
-	{
-		for (size_t i = 0; i < strlen(string); ++i)
-		{
+char *CBPlatform::strupr(char *string) {
+	if (string) {
+		for (size_t i = 0; i < strlen(string); ++i) {
 			string[i] = toupper(string[i]);
 		}
 	}
@@ -632,12 +565,9 @@ char* CBPlatform::strupr(char* string)
 }
 
 //////////////////////////////////////////////////////////////////////////
-char* CBPlatform::strlwr(char* string)
-{
-	if (string)
-	{
-		for (size_t i = 0; i < strlen(string); ++i)
-		{
+char *CBPlatform::strlwr(char *string) {
+	if (string) {
+		for (size_t i = 0; i < strlen(string); ++i) {
 			string[i] = tolower(string[i]);
 		}
 	}

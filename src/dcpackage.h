@@ -28,13 +28,13 @@ THE SOFTWARE.
 
 
 #define PACKAGE_MAGIC_1   0xDEC0ADDE
-#define PACKAGE_MAGIC_2   0x4B4E554A	// "JUNK"
+#define PACKAGE_MAGIC_2   0x4B4E554A    // "JUNK"
 #define PACKAGE_VERSION   0x00000200
 #define PACKAGE_EXTENSION "dcp"
 
 #include <time.h>
 
-typedef struct{
+typedef struct {
 	DWORD Magic1;
 	DWORD Magic2;
 	DWORD PackageVersion;
@@ -49,26 +49,26 @@ typedef struct{
 #endif
 	char Desc[100];
 	DWORD NumDirs;
-}TPackageHeader;
+} TPackageHeader;
 
 /*
 v2:  DWORD DirOffset
 
 
 Dir: BYTE NameLength
-	 char Name [NameLength]
-	 BYTE CD;
-	 DWORD NumEntries
+     char Name [NameLength]
+     BYTE CD;
+     DWORD NumEntries
 
 
 Entry: BYTE NameLength
        char Name [NameLength]
        DWORD Offset
        DWORD Length
-	   DWORD CompLength
+       DWORD CompLength
        DWORD Flags
 v2:    DWORD TimeDate1
-       DWORD TimeDate2	// not used
+       DWORD TimeDate2  // not used
 
 */
 

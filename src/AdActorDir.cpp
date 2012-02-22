@@ -30,20 +30,17 @@ IMPLEMENT_PERSISTENT(CAdActorDir, false);
 
 
 //////////////////////////////////////////////////////////////////////////
-CAdActorDir::CAdActorDir(CBGame* inGame): CBBase(inGame)
-{
+CAdActorDir::CAdActorDir(CBGame *inGame): CBBase(inGame) {
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CAdActorDir::~CAdActorDir(void)
-{
+CAdActorDir::~CAdActorDir(void) {
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdActorDir::Persist(CBPersistMgr* PersistMgr)
-{
+HRESULT CAdActorDir::Persist(CBPersistMgr *PersistMgr) {
 	//PersistMgr->Transfer(TMEMBER(x));
 
 	return S_OK;

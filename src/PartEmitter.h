@@ -31,12 +31,11 @@ THE SOFTWARE.
 #include "PartParticle.h"
 #include "PartForce.h"
 
-class CPartEmitter : public CBObject
-{
+class CPartEmitter : public CBObject {
 public:
 	DECLARE_PERSISTENT(CPartEmitter, CBObject);
 
-	CPartEmitter(CBGame* inGame, CBScriptHolder* Owner);
+	CPartEmitter(CBGame *inGame, CBScriptHolder *Owner);
 	virtual ~CPartEmitter(void);
 
 	int m_Width;
@@ -93,40 +92,40 @@ public:
 
 	bool m_UseRegion;
 
-	char* m_EmitEvent;
-	CBScriptHolder* m_Owner;
+	char *m_EmitEvent;
+	CBScriptHolder *m_Owner;
 
 	HRESULT Start();
-	
+
 	HRESULT Update();
-	HRESULT Display(CBRegion* Region=NULL);
+	HRESULT Display(CBRegion *Region = NULL);
 
 	HRESULT SortParticlesByZ();
-	HRESULT AddSprite(char* Filename);
-	HRESULT RemoveSprite(char* Filename);
+	HRESULT AddSprite(char *Filename);
+	HRESULT RemoveSprite(char *Filename);
 	HRESULT SetBorder(int X, int Y, int Width, int Height);
 	HRESULT SetBorderThickness(int ThicknessLeft, int ThicknessRight, int ThicknessTop, int ThicknessBottom);
 
-	HRESULT AddForce(char* Name, CPartForce::TForceType Type, int PosX, int PosY, float Angle, float Strength);
-	HRESULT RemoveForce(char* Name);
+	HRESULT AddForce(char *Name, CPartForce::TForceType Type, int PosX, int PosY, float Angle, float Strength);
+	HRESULT RemoveForce(char *Name);
 
-	CBArray<CPartForce*, CPartForce*> m_Forces;
+	CBArray<CPartForce *, CPartForce *> m_Forces;
 
 	// scripting interface
-	virtual CScValue* ScGetProperty(char* Name);
-	virtual HRESULT ScSetProperty(char* Name, CScValue* Value);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack* Stack, CScStack* ThisStack, char* Name);
-	virtual char* ScToString();
+	virtual CScValue *ScGetProperty(char *Name);
+	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual char *ScToString();
 
 
 private:
-	CPartForce* AddForceByName(char* Name);
-	int static CompareZ(const void* Obj1, const void* Obj2);
-	HRESULT InitParticle(CPartParticle* Particle, DWORD CurrentTime, DWORD TimerDelta);
+	CPartForce *AddForceByName(char *Name);
+	int static CompareZ(const void *Obj1, const void *Obj2);
+	HRESULT InitParticle(CPartParticle *Particle, DWORD CurrentTime, DWORD TimerDelta);
 	HRESULT UpdateInternal(DWORD CurrentTime, DWORD TimerDelta);
 	DWORD m_LastGenTime;
-	CBArray<CPartParticle*, CPartParticle*> m_Particles;	
-	CBArray<char*, char*> m_Sprites;
+	CBArray<CPartParticle *, CPartParticle *> m_Particles;
+	CBArray<char *, char *> m_Sprites;
 };
 
 #endif

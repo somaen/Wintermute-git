@@ -27,34 +27,33 @@ THE SOFTWARE.
 #define __WmeBFrame_H__
 
 
-class CBFrame: public CBScriptable
-{
+class CBFrame: public CBScriptable {
 public:
 	bool m_KillSound;
 	bool m_Keyframe;
-	HRESULT OneTimeDisplay(CBObject* Owner, bool Muted=false);
+	HRESULT OneTimeDisplay(CBObject *Owner, bool Muted = false);
 	DECLARE_PERSISTENT(CBFrame, CBScriptable);
-	CBSound* m_Sound;
+	CBSound *m_Sound;
 	bool m_EditorExpanded;
-	bool GetBoundingRect(LPRECT Rect, int X, int Y, float ScaleX=100, float ScaleY=100);
+	bool GetBoundingRect(LPRECT Rect, int X, int Y, float ScaleX = 100, float ScaleY = 100);
 	HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 	int m_MoveY;
 	int m_MoveX;
 	DWORD m_Delay;
-	CBArray<CBSubFrame*, CBSubFrame*> m_Subframes;
-	HRESULT Draw(int X, int Y, CBObject* Register = NULL, float ZoomX=100, float ZoomY=100, bool Precise = true, DWORD Alpha=0xFFFFFFFF, bool AllFrames=false, float Rotate=0.0f, TSpriteBlendMode BlendMode=BLEND_NORMAL);
-	HRESULT LoadBuffer(BYTE* Buffer, int LifeTime, bool KeepLoaded);
+	CBArray<CBSubFrame *, CBSubFrame *> m_Subframes;
+	HRESULT Draw(int X, int Y, CBObject *Register = NULL, float ZoomX = 100, float ZoomY = 100, bool Precise = true, DWORD Alpha = 0xFFFFFFFF, bool AllFrames = false, float Rotate = 0.0f, TSpriteBlendMode BlendMode = BLEND_NORMAL);
+	HRESULT LoadBuffer(BYTE *Buffer, int LifeTime, bool KeepLoaded);
 
-	CBFrame(CBGame* inGame);
+	CBFrame(CBGame *inGame);
 	virtual ~CBFrame();
 
-	CBArray<char*, char*> m_ApplyEvent;
+	CBArray<char *, char *> m_ApplyEvent;
 
 	// scripting interface
-	virtual CScValue* ScGetProperty(char* Name);
-	virtual HRESULT ScSetProperty(char* Name, CScValue* Value);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack* Stack, CScStack* ThisStack, char* Name);
-	virtual char* ScToString();
+	virtual CScValue *ScGetProperty(char *Name);
+	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual char *ScToString();
 
 };
 

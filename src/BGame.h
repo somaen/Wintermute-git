@@ -27,24 +27,23 @@ THE SOFTWARE.
 #define __WmeBGame_H__
 
 
-#include "BSound.h"	// Added by ClassView
+#include "BSound.h" // Added by ClassView
 #include "BDebugger.h"
-#include "dctypes.h"	// Added by ClassView
+#include "dctypes.h"    // Added by ClassView
 #include "BSaveThumbHelper.h"
 #include "SXStore.h"
 #include "SDL.h"
 
-typedef void (*ENGINE_LOG_CALLBACK)(char* Text, HRESULT Result, void* Data);
+typedef void (*ENGINE_LOG_CALLBACK)(char *Text, HRESULT Result, void *Data);
 
 
 #define NUM_MUSIC_CHANNELS 5
 
-class CBGame: public CBObject
-{
+class CBGame: public CBObject {
 public:
 	DECLARE_PERSISTENT(CBGame, CBObject);
 
-	virtual HRESULT OnScriptShutdown(CScScript* Script);
+	virtual HRESULT OnScriptShutdown(CScScript *Script);
 
 	virtual HRESULT OnActivate(bool Activate, bool RefreshMouse);
 	virtual HRESULT OnMouseLeftDown();
@@ -66,7 +65,7 @@ public:
 	bool m_MiniUpdateEnabled;
 	virtual HRESULT MiniUpdate();
 
-	void GetMousePos(POINT* Pos);
+	void GetMousePos(POINT *Pos);
 	RECT m_MouseLockRect;
 
 	bool m_ShuttingDown;
@@ -80,7 +79,7 @@ public:
 	TTextEncoding m_TextEncoding;
 	bool m_TextRTL;
 
-	CBSprite* m_LoadingIcon;
+	CBSprite *m_LoadingIcon;
 	int m_LoadingIconX;
 	int m_LoadingIconY;
 	int m_LoadingIconPersistent;
@@ -88,9 +87,9 @@ public:
 	virtual HRESULT ResetContent();
 
 	void DEBUG_DumpClassRegistry();
-	HRESULT SetWaitCursor(char* Filename);
+	HRESULT SetWaitCursor(char *Filename);
 
-	char* m_LocalSaveDir;
+	char *m_LocalSaveDir;
 	bool m_SaveDirChecked;
 
 
@@ -103,15 +102,15 @@ public:
 	int m_IndicatorHeight;
 
 	bool m_RichSavedGames;
-	char* m_SavedGameExt;
+	char *m_SavedGameExt;
 
-	char* m_LoadImageName;
-	char* m_SaveImageName;
+	char *m_LoadImageName;
+	char *m_SaveImageName;
 	int m_SaveImageX;
 	int m_SaveImageY;
 	int m_LoadImageX;
 	int m_LoadImageY;
-	CBSurface* m_SaveLoadImage;
+	CBSurface *m_SaveLoadImage;
 
 	HRESULT DisplayIndicator();
 
@@ -122,58 +121,58 @@ public:
 	HMODULE m_ResourceModule;
 	void SetResourceModule(HMODULE ResModule);
 
-	void SetEngineLogCallback(ENGINE_LOG_CALLBACK Callback=NULL, void* Data=NULL);
+	void SetEngineLogCallback(ENGINE_LOG_CALLBACK Callback = NULL, void *Data = NULL);
 	ENGINE_LOG_CALLBACK m_EngineLogCallback;
-	void* m_EngineLogCallbackData;
+	void *m_EngineLogCallbackData;
 
 	bool m_EditorMode;
 	bool m_DoNotExpandStrings;
-	void GetOffset(int* OffsetX, int* OffsetY);
+	void GetOffset(int *OffsetX, int *OffsetY);
 	void SetOffset(int OffsetX, int OffsetY);
 	int GetSequence();
 	int m_OffsetY;
 	int m_OffsetX;
 	float m_OffsetPercentX;
 	float m_OffsetPercentY;
-	CBObject* m_MainObject;
+	CBObject *m_MainObject;
 	HRESULT InitInput(HINSTANCE hInst, HWND hWnd);
 	HRESULT InitLoop();
 	DWORD m_CurrentTime;
 	DWORD m_DeltaTime;
-	CBFont* m_SystemFont;
-	CBFont* m_VideoFont;
+	CBFont *m_SystemFont;
+	CBFont *m_VideoFont;
 	HRESULT Initialize1();
 	HRESULT Initialize2();
 	HRESULT Initialize3();
-	CBFileManager* m_FileManager;
-	CBTransitionMgr* m_TransMgr;
-	CBDebugger* GetDebugMgr();
+	CBFileManager *m_FileManager;
+	CBTransitionMgr *m_TransMgr;
+	CBDebugger *GetDebugMgr();
 	void LOG(HRESULT res, LPCSTR fmt, ...);
-	CBRenderer* m_Renderer;
-	CBSoundMgr* m_SoundMgr;
-	CScEngine* m_ScEngine;
-	CSXMath* m_MathClass;
-	CSXStore* m_Store;
-	CBSurfaceStorage* m_SurfaceStorage;
-	CBFontStorage* m_FontStorage;
+	CBRenderer *m_Renderer;
+	CBSoundMgr *m_SoundMgr;
+	CScEngine *m_ScEngine;
+	CSXMath *m_MathClass;
+	CSXStore *m_Store;
+	CBSurfaceStorage *m_SurfaceStorage;
+	CBFontStorage *m_FontStorage;
 	CBGame();
 	virtual ~CBGame();
 	void DEBUG_DebugDisable();
-	void DEBUG_DebugEnable(const char* Filename=NULL);
+	void DEBUG_DebugEnable(const char *Filename = NULL);
 	bool m_DEBUG_DebugMode;
 	bool m_DEBUG_AbsolutePathWarning;
-	FILE* m_DEBUG_LogFile;
+	FILE *m_DEBUG_LogFile;
 	int m_Sequence;
-	virtual HRESULT LoadFile(const char * Filename);
-	virtual HRESULT LoadBuffer(BYTE * Buffer, bool Complete=true);
-	CBArray<CBQuickMsg*, CBQuickMsg*> m_QuickMessages;	
-	CBArray<CUIWindow*, CUIWindow*> m_Windows;
-	CBArray<CBViewport*, CBViewport*> m_ViewportStack;
+	virtual HRESULT LoadFile(const char *Filename);
+	virtual HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	CBArray<CBQuickMsg *, CBQuickMsg *> m_QuickMessages;
+	CBArray<CUIWindow *, CUIWindow *> m_Windows;
+	CBArray<CBViewport *, CBViewport *> m_ViewportStack;
 	int m_ViewportSP;
 	bool m_MouseLeftDown;
 	bool m_MouseRightDown;
 	bool m_MouseMidlleDown;
-	CBStringTable* m_StringTable;
+	CBStringTable *m_StringTable;
 
 	int m_SettingsResWidth;
 	int m_SettingsResHeight;
@@ -185,30 +184,30 @@ public:
 	bool m_SettingsRequireSound;
 	bool m_SettingsAllowDesktopRes;
 	int m_SettingsTLMode;
-	char* m_SettingsGameFile;
-	CBFader* m_Fader;
+	char *m_SettingsGameFile;
+	CBFader *m_Fader;
 	bool m_SuppressScriptErrors;
 
 	virtual HRESULT InvalidateDeviceObjects();
 	virtual HRESULT RestoreDeviceObjects();
 
 	virtual void PublishNatives();
-	virtual HRESULT ExternalCall(CScScript* Script, CScStack* Stack, CScStack* ThisStack, char* Name);
+	virtual HRESULT ExternalCall(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
 
 	// scripting interface
-	virtual CScValue* ScGetProperty(char* Name);
+	virtual CScValue *ScGetProperty(char *Name);
 	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name);
-	virtual char* ScToString();
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual char *ScToString();
 
 	// compatibility bits
 	bool m_CompatKillMethodThreads;
-	
-private:	
+
+private:
 	// FPS stuff
 	DWORD m_LastTime;
 	DWORD m_FpsTime;
-	DWORD m_FramesRendered;	
+	DWORD m_FramesRendered;
 
 public:
 	DWORD m_SurfaceGCCycleTime;
@@ -222,55 +221,55 @@ public:
 	bool m_PersonalizedSave;
 	HRESULT EmptySaveSlot(int Slot);
 	bool IsSaveSlotUsed(int Slot);
-	HRESULT GetSaveSlotDescription(int Slot, char* Buffer);
-	HRESULT GetSaveSlotFilename(int Slot, char* Buffer);
+	HRESULT GetSaveSlotDescription(int Slot, char *Buffer);
+	HRESULT GetSaveSlotFilename(int Slot, char *Buffer);
 	void SetWindowTitle();
 	virtual bool HandleMouseWheel(int Delta);
 	bool m_Quitting;
-	virtual HRESULT GetVersion(BYTE* VerMajor, BYTE* VerMinor, BYTE* ExtMajor, BYTE* ExtMinor);
-	virtual bool HandleKeypress(SDL_Event* event);
+	virtual HRESULT GetVersion(BYTE *VerMajor, BYTE *VerMinor, BYTE *ExtMajor, BYTE *ExtMinor);
+	virtual bool HandleKeypress(SDL_Event *event);
 	int m_FreezeLevel;
 	HRESULT Unfreeze();
-	HRESULT Freeze(bool IncludingMusic=true);
-	HRESULT FocusWindow(CUIWindow* Window);
+	HRESULT Freeze(bool IncludingMusic = true);
+	HRESULT FocusWindow(CUIWindow *Window);
 	bool m_LoadInProgress;
-	CUIWindow* m_FocusedWindow;
+	CUIWindow *m_FocusedWindow;
 	bool m_EditorForceScripts;
-	static void AfterLoadRegion(void* Region, void* Data);
-	static void AfterLoadSubFrame(void* Subframe, void* Data);
-	static void AfterLoadSound(void* Sound, void* Data);
-	static void AfterLoadFont(void* Font, void* Data);
-	static void AfterLoadScript(void* script, void* data);
-	static void InvalidateValues(void* Value, void* Data);
-	HRESULT LoadSettings(char* Filename);
+	static void AfterLoadRegion(void *Region, void *Data);
+	static void AfterLoadSubFrame(void *Subframe, void *Data);
+	static void AfterLoadSound(void *Sound, void *Data);
+	static void AfterLoadFont(void *Font, void *Data);
+	static void AfterLoadScript(void *script, void *data);
+	static void InvalidateValues(void *Value, void *Data);
+	HRESULT LoadSettings(char *Filename);
 	HRESULT ResumeMusic(int Channel);
 	HRESULT SetMusicStartTime(int Channel, DWORD Time);
 	HRESULT PauseMusic(int Channel);
 	HRESULT StopMusic(int Channel);
-	HRESULT PlayMusic(int Channel, char* Filename, bool Looping = true, DWORD LoopStart=0);
-	CBSound* m_Music[NUM_MUSIC_CHANNELS];
+	HRESULT PlayMusic(int Channel, char *Filename, bool Looping = true, DWORD LoopStart = 0);
+	CBSound *m_Music[NUM_MUSIC_CHANNELS];
 	bool m_MusicCrossfadeRunning;
 	bool m_MusicCrossfadeSwap;
 	DWORD m_MusicCrossfadeStartTime;
 	DWORD m_MusicCrossfadeLength;
 	int m_MusicCrossfadeChannel1;
 	int m_MusicCrossfadeChannel2;
-	HRESULT DisplayWindows(bool InGame=false);
-	CBRegistry* m_Registry;
+	HRESULT DisplayWindows(bool InGame = false);
+	CBRegistry *m_Registry;
 	bool m_UseD3D;
 	virtual HRESULT Cleanup();
 	virtual HRESULT LoadGame(int Slot);
-	virtual HRESULT LoadGame(char* Filename);
-	virtual HRESULT SaveGame(int slot, char* desc, bool quickSave = false);
+	virtual HRESULT LoadGame(char *Filename);
+	virtual HRESULT SaveGame(int slot, char *desc, bool quickSave = false);
 	virtual HRESULT ShowCursor();
-	CBSprite* m_CursorNoninteractive;
-	CBObject* m_ActiveObject;
-	CBKeyboardState* m_KeyboardState;
+	CBSprite *m_CursorNoninteractive;
+	CBObject *m_ActiveObject;
+	CBKeyboardState *m_KeyboardState;
 	bool m_Interactive;
 	TGameState m_State;
 	TGameState m_OrigState;
 	bool m_OrigInteractive;
-	DWORD m_Timer;	
+	DWORD m_Timer;
 	DWORD m_TimerDelta;
 	DWORD m_TimerLast;
 
@@ -278,40 +277,40 @@ public:
 	DWORD m_LiveTimerDelta;
 	DWORD m_LiveTimerLast;
 
-	CBObject* m_CapturedObject;
+	CBObject *m_CapturedObject;
 	POINT m_MousePos;
-	bool ValidObject(CBObject* Object);
-	HRESULT UnregisterObject(CBObject* Object);
-	HRESULT RegisterObject(CBObject* Object);
-	void QuickMessage(char* Text);
+	bool ValidObject(CBObject *Object);
+	HRESULT UnregisterObject(CBObject *Object);
+	HRESULT RegisterObject(CBObject *Object);
+	void QuickMessage(char *Text);
 	void QuickMessageForm(LPSTR fmt, ...);
 	HRESULT DisplayQuickMsg();
 	DWORD m_Fps;
 	HRESULT UpdateMusicCrossfade();
 
-	CBArray<CBObject*, CBObject*> m_RegObjects;
-	
+	CBArray<CBObject *, CBObject *> m_RegObjects;
+
 public:
-	virtual HRESULT DisplayContent(bool Update=true, bool DisplayAll=false);
+	virtual HRESULT DisplayContent(bool Update = true, bool DisplayAll = false);
 	virtual HRESULT DisplayContentSimple();
 	bool m_ForceNonStreamedSounds;
 	void ResetMousePos();
 	int m_SubtitlesSpeed;
 	void SetInteractive(bool State);
-	virtual HRESULT WindowLoadHook(CUIWindow* Win, char** Buf, char** Params);
-	virtual HRESULT WindowScriptMethodHook(CUIWindow* Win, CScScript* Script, CScStack* Stack, char* Name);
-	HRESULT GetCurrentViewportOffset(int* OffsetX=NULL, int* OffsetY=NULL);
-	HRESULT GetCurrentViewportRect(RECT* Rect, bool* Custom=NULL);
+	virtual HRESULT WindowLoadHook(CUIWindow *Win, char **Buf, char **Params);
+	virtual HRESULT WindowScriptMethodHook(CUIWindow *Win, CScScript *Script, CScStack *Stack, char *Name);
+	HRESULT GetCurrentViewportOffset(int *OffsetX = NULL, int *OffsetY = NULL);
+	HRESULT GetCurrentViewportRect(RECT *Rect, bool *Custom = NULL);
 	HRESULT PopViewport();
-	HRESULT PushViewport(CBViewport* Viewport);
-	HRESULT SetActiveObject(CBObject* Obj);	
+	HRESULT PushViewport(CBViewport *Viewport);
+	HRESULT SetActiveObject(CBObject *Obj);
 
-	CBSprite* m_LastCursor;
-	HRESULT DrawCursor(CBSprite* Cursor);
+	CBSprite *m_LastCursor;
+	HRESULT DrawCursor(CBSprite *Cursor);
 
 	virtual HRESULT InitAfterLoad();
 
-	CBSaveThumbHelper* m_CachedThumbnail;
+	CBSaveThumbHelper *m_CachedThumbnail;
 
 	AnsiString GetDataDir();
 
@@ -321,13 +320,11 @@ public:
 	bool m_ConstrainedMemory;
 	AnsiString GetDeviceType() const;
 
-private:	
-	CBDebugger* m_DebugMgr;
+private:
+	CBDebugger *m_DebugMgr;
 
-	struct LastClickInfo
-	{
-		LastClickInfo()
-		{
+	struct LastClickInfo {
+		LastClickInfo() {
 			PosX = PosY = 0;
 			Time = 0;
 		}

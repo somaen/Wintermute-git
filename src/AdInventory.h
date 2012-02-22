@@ -30,16 +30,15 @@ THE SOFTWARE.
 
 class CAdItem;
 
-class CAdInventory : public CBObject  
-{
+class CAdInventory : public CBObject {
 public:
 	DECLARE_PERSISTENT(CAdInventory, CBObject);
-	HRESULT RemoveItem(char* Name);
-	HRESULT RemoveItem(CAdItem* Item);
-	HRESULT InsertItem(char* Name, char* InsertAfter=NULL);
-	CAdInventory(CBGame* inGame);
-	virtual ~CAdInventory();	
-	CBArray<CAdItem*, CAdItem*> m_TakenItems;
+	HRESULT RemoveItem(char *Name);
+	HRESULT RemoveItem(CAdItem *Item);
+	HRESULT InsertItem(char *Name, char *InsertAfter = NULL);
+	CAdInventory(CBGame *inGame);
+	virtual ~CAdInventory();
+	CBArray<CAdItem *, CAdItem *> m_TakenItems;
 	int m_ScrollOffset;
 };
 

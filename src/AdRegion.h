@@ -27,25 +27,24 @@ THE SOFTWARE.
 #define __WmeAdRegion_H__
 
 
-class CAdRegion : public CBRegion
-{
+class CAdRegion : public CBRegion {
 public:
 	DECLARE_PERSISTENT(CAdRegion, CBRegion);
 	DWORD m_Alpha;
 	float m_Zoom;
 	bool m_Blocked;
 	bool m_Decoration;
-	CAdRegion(CBGame* inGame);
+	CAdRegion(CBGame *inGame);
 	virtual ~CAdRegion();
-	HRESULT LoadFile(char* Filename);
-	HRESULT LoadBuffer(BYTE* Buffer, bool Complete=true);
+	HRESULT LoadFile(char *Filename);
+	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 
 	// scripting interface
-	virtual CScValue* ScGetProperty(char* Name);
+	virtual CScValue *ScGetProperty(char *Name);
 	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name);
-	virtual char* ScToString();
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual char *ScToString();
 };
 
 #endif

@@ -30,8 +30,7 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CBSound, false);
 
 //////////////////////////////////////////////////////////////////////////
-CBSound::CBSound(CBGame* inGame):CBBase(inGame)
-{
+CBSound::CBSound(CBGame *inGame): CBBase(inGame) {
 	m_Sound = NULL;
 	m_SoundFilename = NULL;
 
@@ -51,9 +50,8 @@ CBSound::CBSound(CBGame* inGame):CBBase(inGame)
 
 
 //////////////////////////////////////////////////////////////////////////
-CBSound::~CBSound()
-{
-	if(m_Sound) Game->m_SoundMgr->RemoveSound(m_Sound);
+CBSound::~CBSound() {
+	if (m_Sound) Game->m_SoundMgr->RemoveSound(m_Sound);
 	m_Sound = NULL;
 
 	SAFE_DELETE_ARRAY(m_SoundFilename);
@@ -61,113 +59,98 @@ CBSound::~CBSound()
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSound::SetSound(char* Filename, TSoundType Type, bool Streamed)
-{
-	if(m_Sound){
+HRESULT CBSound::SetSound(char *Filename, TSoundType Type, bool Streamed) {
+	if (m_Sound) {
 		Game->m_SoundMgr->RemoveSound(m_Sound);
 		m_Sound = NULL;
 	}
 	SAFE_DELETE_ARRAY(m_SoundFilename);
 
 	m_Sound = Game->m_SoundMgr->AddSound(Filename, Type, Streamed);
-	if(m_Sound){
-		m_SoundFilename = new char[strlen(Filename)+1];
+	if (m_Sound) {
+		m_SoundFilename = new char[strlen(Filename) + 1];
 		strcpy(m_SoundFilename, Filename);
 
 		m_SoundType = Type;
 		m_SoundStreamed = Streamed;
 
 		return S_OK;
-	}
-	else return E_FAIL;
+	} else return E_FAIL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSound::SetSoundSimple()
-{
+HRESULT CBSound::SetSoundSimple() {
 	m_Sound = Game->m_SoundMgr->AddSound(m_SoundFilename, m_SoundType, m_SoundStreamed);
-	if(m_Sound){
-		if(m_SoundPosition) m_Sound->SetPosition(m_SoundPosition);
+	if (m_Sound) {
+		if (m_SoundPosition) m_Sound->SetPosition(m_SoundPosition);
 		m_Sound->SetLooping(m_SoundLooping);
 		m_Sound->SetPrivateVolume(m_SoundPrivateVolume);
 		m_Sound->SetLoopStart(m_SoundLoopStart);
 		m_Sound->m_FreezePaused = m_SoundFreezePaused;
-		if(m_SoundPlaying) return m_Sound->Resume();
+		if (m_SoundPlaying) return m_Sound->Resume();
 		else return S_OK;
-	}
-	else return E_FAIL;
+	} else return E_FAIL;
 }
 
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBSound::GetLength()
-{
-	if(m_Sound) return m_Sound->GetLength();
+DWORD CBSound::GetLength() {
+	if (m_Sound) return m_Sound->GetLength();
 	else return 0;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSound::Play(bool Looping)
-{	
-	if(m_Sound){
-		m_SoundPaused = false;		
+HRESULT CBSound::Play(bool Looping) {
+	if (m_Sound) {
+		m_SoundPaused = false;
 		return m_Sound->Play(Looping, m_SoundPosition);
-	}
-	else return E_FAIL;
+	} else return E_FAIL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSound::Stop()
-{
-	if(m_Sound){
+HRESULT CBSound::Stop() {
+	if (m_Sound) {
 		m_SoundPaused = false;
 		return m_Sound->Stop();
-	}
-	else return E_FAIL;
+	} else return E_FAIL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSound::Pause(bool FreezePaused)
-{
-	if(m_Sound){
+HRESULT CBSound::Pause(bool FreezePaused) {
+	if (m_Sound) {
 		m_SoundPaused = true;
-		if(FreezePaused) m_Sound->m_FreezePaused = true;
+		if (FreezePaused) m_Sound->m_FreezePaused = true;
 		return m_Sound->Pause();
-	}
-	else return E_FAIL;
+	} else return E_FAIL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSound::Resume()
-{
-	if(m_Sound && m_SoundPaused){
+HRESULT CBSound::Resume() {
+	if (m_Sound && m_SoundPaused) {
 		m_SoundPaused = false;
 		return m_Sound->Resume();
-	}
-	else return E_FAIL;
+	} else return E_FAIL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSound::Persist(CBPersistMgr *PersistMgr)
-{
-	if(PersistMgr->m_Saving && m_Sound){
+HRESULT CBSound::Persist(CBPersistMgr *PersistMgr) {
+	if (PersistMgr->m_Saving && m_Sound) {
 		m_SoundPlaying = m_Sound->IsPlaying();
 		m_SoundLooping = m_Sound->m_Looping;
 		m_SoundPrivateVolume = m_Sound->m_PrivateVolume;
-		if(m_SoundPlaying) m_SoundPosition = m_Sound->GetPosition();
+		if (m_SoundPlaying) m_SoundPosition = m_Sound->GetPosition();
 		m_SoundLoopStart = m_Sound->m_LoopStart;
 		m_SoundFreezePaused = m_Sound->m_FreezePaused;
 	}
 
-	if(PersistMgr->m_Saving)
-	{
+	if (PersistMgr->m_Saving) {
 		m_SFXType = SFX_NONE;
 		m_SFXParam1 = m_SFXParam2 = m_SFXParam3 = m_SFXParam4 = 0;
 	}
@@ -190,88 +173,76 @@ HRESULT CBSound::Persist(CBPersistMgr *PersistMgr)
 
 
 //////////////////////////////////////////////////////////////////////////
-bool CBSound::IsPlaying()
-{
+bool CBSound::IsPlaying() {
 	return m_Sound && m_Sound->IsPlaying();
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-bool CBSound::IsPaused()
-{
+bool CBSound::IsPaused() {
 	return m_Sound && m_SoundPaused;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSound::SetPositionTime(DWORD Time)
-{
-	if(!m_Sound) return E_FAIL;
+HRESULT CBSound::SetPositionTime(DWORD Time) {
+	if (!m_Sound) return E_FAIL;
 	m_SoundPosition = Time;
 	HRESULT ret = m_Sound->SetPosition(m_SoundPosition);
-	if(m_Sound->IsPlaying()) m_SoundPosition = 0;
+	if (m_Sound->IsPlaying()) m_SoundPosition = 0;
 	return ret;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBSound::GetPositionTime()
-{
-	if(!m_Sound) return 0;
+DWORD CBSound::GetPositionTime() {
+	if (!m_Sound) return 0;
 
-	if(!m_Sound->IsPlaying()) return 0;
+	if (!m_Sound->IsPlaying()) return 0;
 	else return m_Sound->GetPosition();
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSound::SetVolume(int Volume)
-{
-	if(!m_Sound) return E_FAIL;
+HRESULT CBSound::SetVolume(int Volume) {
+	if (!m_Sound) return E_FAIL;
 	else return m_Sound->SetPrivateVolume(Volume);
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSound::SetPrivateVolume(int Volume)
-{
-	if(!m_Sound) return E_FAIL;
+HRESULT CBSound::SetPrivateVolume(int Volume) {
+	if (!m_Sound) return E_FAIL;
 	else return m_Sound->m_PrivateVolume = Volume;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-int CBSound::GetVolume()
-{
-	if(!m_Sound) return 0;
+int CBSound::GetVolume() {
+	if (!m_Sound) return 0;
 	else return m_Sound->m_PrivateVolume;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSound::SetLoopStart(DWORD Pos)
-{
-	if(!m_Sound) return E_FAIL;
-	else
-	{
+HRESULT CBSound::SetLoopStart(DWORD Pos) {
+	if (!m_Sound) return E_FAIL;
+	else {
 		m_Sound->SetLoopStart(Pos);
 		return S_OK;
 	}
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSound::SetPan(float Pan)
-{
-	if(m_Sound) return m_Sound->SetPan(Pan);
+HRESULT CBSound::SetPan(float Pan) {
+	if (m_Sound) return m_Sound->SetPan(Pan);
 	else return E_FAIL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSound::ApplyFX(TSFXType Type, float Param1, float Param2, float Param3, float Param4)
-{
-	if(!m_Sound) return S_OK;
+HRESULT CBSound::ApplyFX(TSFXType Type, float Param1, float Param2, float Param3, float Param4) {
+	if (!m_Sound) return S_OK;
 
-	if(Type!=m_SFXType || Param1!=m_SFXParam1 || Param2!=m_SFXParam2 || Param3!=m_SFXParam3 || Param4!=m_SFXParam4)
-	{
+	if (Type != m_SFXType || Param1 != m_SFXParam1 || Param2 != m_SFXParam2 || Param3 != m_SFXParam3 || Param4 != m_SFXParam4) {
 		HRESULT Ret = m_Sound->ApplyFX(Type, Param1, Param2, Param3, Param4);
 
 		m_SFXType = Type;

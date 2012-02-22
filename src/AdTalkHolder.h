@@ -27,23 +27,22 @@ THE SOFTWARE.
 #define __WmeAdTalkHolder_H__
 
 
-class CAdTalkHolder : public CAdObject  
-{
+class CAdTalkHolder : public CAdObject {
 public:
 	DECLARE_PERSISTENT(CAdTalkHolder, CAdObject);
-	virtual CBSprite* GetTalkStance(char *Stance);
+	virtual CBSprite *GetTalkStance(char *Stance);
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
-	CBSprite* m_Sprite;
-	CBArray<CBSprite*, CBSprite*> m_TalkSprites;
-	CBArray<CBSprite*, CBSprite*> m_TalkSpritesEx;
-	CAdTalkHolder(CBGame* inGame);
+	CBSprite *m_Sprite;
+	CBArray<CBSprite *, CBSprite *> m_TalkSprites;
+	CBArray<CBSprite *, CBSprite *> m_TalkSpritesEx;
+	CAdTalkHolder(CBGame *inGame);
 	virtual ~CAdTalkHolder();
 
 	// scripting interface
-	virtual CScValue* ScGetProperty(char* Name);
+	virtual CScValue *ScGetProperty(char *Name);
 	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name);
-	virtual char* ScToString();
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual char *ScToString();
 
 };
 

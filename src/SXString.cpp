@@ -33,41 +33,37 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CSXString, false);
 
 //////////////////////////////////////////////////////////////////////////
-CSXString::CSXString(CBGame* inGame, CScStack* Stack):CBScriptable(inGame)
-{
+CSXString::CSXString(CBGame *inGame, CScStack *Stack): CBScriptable(inGame) {
 	m_String = NULL;
 	m_Capacity = 0;
-	
-	Stack->CorrectParams(1);
-	CScValue* Val = Stack->Pop();
 
-	if(Val->IsInt()){
+	Stack->CorrectParams(1);
+	CScValue *Val = Stack->Pop();
+
+	if (Val->IsInt()) {
 		m_Capacity = max(0, Val->GetInt());
-		if(m_Capacity>0){
+		if (m_Capacity > 0) {
 			m_String = new char[m_Capacity];
 			memset(m_String, 0, m_Capacity);
 		}
-	}
-	else{
+	} else {
 		SetStringVal(Val->GetString());
 	}
 
-	if(m_Capacity==0) SetStringVal("");
+	if (m_Capacity == 0) SetStringVal("");
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CSXString::~CSXString()
-{
-	if(m_String) delete [] m_String;
+CSXString::~CSXString() {
+	if (m_String) delete [] m_String;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-void CSXString::SetStringVal(const char *Val)
-{
+void CSXString::SetStringVal(const char *Val) {
 	int Len = strlen(Val);
-	if(Len>=m_Capacity){
+	if (Len >= m_Capacity) {
 		m_Capacity = Len + 1;
 		SAFE_DELETE_ARRAY(m_String);
 		m_String = new char[m_Capacity];
@@ -78,36 +74,31 @@ void CSXString::SetStringVal(const char *Val)
 
 
 //////////////////////////////////////////////////////////////////////////
-char* CSXString::ScToString()
-{
-	if(m_String) return m_String;
+char *CSXString::ScToString() {
+	if (m_String) return m_String;
 	else return "[null string]";
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-void CSXString::ScSetString(const char *Val)
-{
+void CSXString::ScSetString(const char *Val) {
 	SetStringVal(Val);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CSXString::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name)
-{
+HRESULT CSXString::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name) {
 	//////////////////////////////////////////////////////////////////////////
 	// Substring
 	//////////////////////////////////////////////////////////////////////////
-	if(strcmp(Name, "Substring")==0)
-	{
+	if (strcmp(Name, "Substring") == 0) {
 		Stack->CorrectParams(2);
 		int start = Stack->Pop()->GetInt();
 		int end   = Stack->Pop()->GetInt();
 
-		if(end < start) CBUtils::Swap(&start, &end);
+		if (end < start) CBUtils::Swap(&start, &end);
 
-		try
-		{
+		try {
 			WideString str;
 			if (Game->m_TextEncoding == TEXT_UTF8)
 				str = StringUtil::Utf8ToWide(m_String);
@@ -120,9 +111,7 @@ HRESULT CSXString::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 				Stack->PushString(StringUtil::WideToUtf8(subStr).c_str());
 			else
 				Stack->PushString(StringUtil::WideToAnsi(subStr).c_str());
-		}
-		catch (std::exception&)
-		{
+		} catch (std::exception &) {
 			Stack->PushNULL();
 		}
 
@@ -132,24 +121,21 @@ HRESULT CSXString::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 	//////////////////////////////////////////////////////////////////////////
 	// Substr
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Substr")==0)
-	{
+	else if (strcmp(Name, "Substr") == 0) {
 		Stack->CorrectParams(2);
 		int start = Stack->Pop()->GetInt();
 
-		CScValue* val = Stack->Pop();
+		CScValue *val = Stack->Pop();
 		int len = val->GetInt();
 
-		if (!val->IsNULL() && len <= 0)
-		{
+		if (!val->IsNULL() && len <= 0) {
 			Stack->PushString("");
 			return S_OK;
 		}
 
 		if (val->IsNULL()) len = strlen(m_String) - start;
 
-		try
-		{
+		try {
 			WideString str;
 			if (Game->m_TextEncoding == TEXT_UTF8)
 				str = StringUtil::Utf8ToWide(m_String);
@@ -162,9 +148,7 @@ HRESULT CSXString::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 				Stack->PushString(StringUtil::WideToUtf8(subStr).c_str());
 			else
 				Stack->PushString(StringUtil::WideToAnsi(subStr).c_str());
-		}
-		catch (std::exception&)
-		{
+		} catch (std::exception &) {
 			Stack->PushNULL();
 		}
 
@@ -174,8 +158,7 @@ HRESULT CSXString::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 	//////////////////////////////////////////////////////////////////////////
 	// ToUpperCase
 	//////////////////////////////////////////////////////////////////////////
-	else if (strcmp(Name, "ToUpperCase")==0)
-	{
+	else if (strcmp(Name, "ToUpperCase") == 0) {
 		Stack->CorrectParams(0);
 
 		WideString str;
@@ -193,12 +176,11 @@ HRESULT CSXString::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 
 		return S_OK;
 	}
-	
+
 	//////////////////////////////////////////////////////////////////////////
 	// ToLowerCase
 	//////////////////////////////////////////////////////////////////////////
-	else if (strcmp(Name, "ToLowerCase")==0)
-	{
+	else if (strcmp(Name, "ToLowerCase") == 0) {
 		Stack->CorrectParams(0);
 
 		WideString str;
@@ -220,11 +202,10 @@ HRESULT CSXString::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 	//////////////////////////////////////////////////////////////////////////
 	// IndexOf
 	//////////////////////////////////////////////////////////////////////////
-	else if (strcmp(Name, "IndexOf")==0)
-	{
+	else if (strcmp(Name, "IndexOf") == 0) {
 		Stack->CorrectParams(2);
 
-		char* strToFind = Stack->Pop()->GetString();
+		char *strToFind = Stack->Pop()->GetString();
 		int index = Stack->Pop()->GetInt();
 
 		WideString str;
@@ -248,16 +229,14 @@ HRESULT CSXString::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 	//////////////////////////////////////////////////////////////////////////
 	// Split
 	//////////////////////////////////////////////////////////////////////////
-	else if (strcmp(Name, "Split")==0)
-	{
+	else if (strcmp(Name, "Split") == 0) {
 		Stack->CorrectParams(1);
-		CScValue* Val = Stack->Pop();
+		CScValue *Val = Stack->Pop();
 		char Separators[MAX_PATH] = ",";
-		if(!Val->IsNULL()) strcpy(Separators, Val->GetString());
+		if (!Val->IsNULL()) strcpy(Separators, Val->GetString());
 
-		CSXArray* Array = new CSXArray(Game);
-		if (!Array)
-		{
+		CSXArray *Array = new CSXArray(Game);
+		if (!Array) {
 			Stack->PushNULL();
 			return S_OK;
 		}
@@ -280,20 +259,14 @@ HRESULT CSXString::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 
 		size_t start, pos;
 		start = 0;
-		do 
-		{
+		do {
 			pos = str.find_first_of(delims, start);
-			if (pos == start)
-			{
+			if (pos == start) {
 				start = pos + 1;
-			}
-			else if (pos == WideString::npos)
-			{
+			} else if (pos == WideString::npos) {
 				parts.push_back(str.substr(start));
 				break;
-			}
-			else
-			{
+			} else {
 				parts.push_back(str.substr(start, pos - start));
 				start = pos + 1;
 			}
@@ -301,9 +274,8 @@ HRESULT CSXString::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 
 		} while (pos != WideString::npos);
 
-		for (vector<WideString>::iterator it = parts.begin(); it != parts.end(); ++it)
-		{
-			WideString& part = (*it);
+		for (vector<WideString>::iterator it = parts.begin(); it != parts.end(); ++it) {
+			WideString &part = (*it);
 
 			if (Game->m_TextEncoding == TEXT_UTF8)
 				Val = new CScValue(Game, StringUtil::WideToUtf8(part).c_str());
@@ -323,29 +295,24 @@ HRESULT CSXString::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 
 
 //////////////////////////////////////////////////////////////////////////
-CScValue* CSXString::ScGetProperty(char *Name)
-{
+CScValue *CSXString::ScGetProperty(char *Name) {
 	m_ScValue->SetNULL();
 
 	//////////////////////////////////////////////////////////////////////////
 	// Type (RO)
 	//////////////////////////////////////////////////////////////////////////
-	if (strcmp(Name, "Type")==0)
-	{
+	if (strcmp(Name, "Type") == 0) {
 		m_ScValue->SetString("string");
 		return m_ScValue;
 	}
 	//////////////////////////////////////////////////////////////////////////
 	// Length (RO)
 	//////////////////////////////////////////////////////////////////////////
-	else if (strcmp(Name, "Length")==0)
-	{
-		if (Game->m_TextEncoding == TEXT_UTF8)
-		{
+	else if (strcmp(Name, "Length") == 0) {
+		if (Game->m_TextEncoding == TEXT_UTF8) {
 			WideString wstr = StringUtil::Utf8ToWide(m_String);
 			m_ScValue->SetInt(wstr.length());
-		}
-		else
+		} else
 			m_ScValue->SetInt(strlen(m_String));
 
 		return m_ScValue;
@@ -353,8 +320,7 @@ CScValue* CSXString::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// Capacity
 	//////////////////////////////////////////////////////////////////////////
-	else if (strcmp(Name, "Capacity")==0)
-	{
+	else if (strcmp(Name, "Capacity") == 0) {
 		m_ScValue->SetInt(m_Capacity);
 		return m_ScValue;
 	}
@@ -364,20 +330,16 @@ CScValue* CSXString::ScGetProperty(char *Name)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CSXString::ScSetProperty(char *Name, CScValue *Value)
-{
+HRESULT CSXString::ScSetProperty(char *Name, CScValue *Value) {
 	//////////////////////////////////////////////////////////////////////////
 	// Capacity
 	//////////////////////////////////////////////////////////////////////////
-	if (strcmp(Name, "Capacity")==0)
-	{
+	if (strcmp(Name, "Capacity") == 0) {
 		int NewCap = Value->GetInt();
-		if (NewCap < strlen(m_String)+1) Game->LOG(0, "Warning: cannot lower string capacity");
-		else if (NewCap != m_Capacity)
-		{
-			char* NewStr = new char[NewCap];
-			if (NewStr)
-			{
+		if (NewCap < strlen(m_String) + 1) Game->LOG(0, "Warning: cannot lower string capacity");
+		else if (NewCap != m_Capacity) {
+			char *NewStr = new char[NewCap];
+			if (NewStr) {
 				memset(NewStr, 0, NewCap);
 				strcpy(NewStr, m_String);
 				SAFE_DELETE_ARRAY(m_String);
@@ -393,29 +355,26 @@ HRESULT CSXString::ScSetProperty(char *Name, CScValue *Value)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CSXString::Persist(CBPersistMgr* PersistMgr){
+HRESULT CSXString::Persist(CBPersistMgr *PersistMgr) {
 
 	CBScriptable::Persist(PersistMgr);
 
 	PersistMgr->Transfer(TMEMBER(m_Capacity));
 
-	if(PersistMgr->m_Saving){
-		if(m_Capacity>0) PersistMgr->PutBytes((BYTE*)m_String, m_Capacity);
-	}
-	else{
-		if(m_Capacity>0){
+	if (PersistMgr->m_Saving) {
+		if (m_Capacity > 0) PersistMgr->PutBytes((BYTE *)m_String, m_Capacity);
+	} else {
+		if (m_Capacity > 0) {
 			m_String = new char[m_Capacity];
-			PersistMgr->GetBytes((BYTE*)m_String, m_Capacity);
-		}
-		else m_String = NULL;
+			PersistMgr->GetBytes((BYTE *)m_String, m_Capacity);
+		} else m_String = NULL;
 	}
-	
+
 	return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-int CSXString::ScCompare(CBScriptable *Val)
-{
-	return strcmp(m_String, ((CSXString*)Val)->m_String);
+int CSXString::ScCompare(CBScriptable *Val) {
+	return strcmp(m_String, ((CSXString *)Val)->m_String);
 }

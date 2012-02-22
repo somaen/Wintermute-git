@@ -31,8 +31,7 @@ THE SOFTWARE.
 
 class CBPackage;
 
-class CBFileEntry : public CBBase  
-{
+class CBFileEntry : public CBBase {
 public:
 	DWORD m_TimeDate2;
 	DWORD m_TimeDate1;
@@ -42,8 +41,8 @@ public:
 	DWORD m_CompressedLength;
 	DWORD m_Length;
 	DWORD m_Offset;
-	CBPackage* m_Package;
-	CBFileEntry(CBGame* inGame);
+	CBPackage *m_Package;
+	CBFileEntry(CBGame *inGame);
 	virtual ~CBFileEntry();
 
 };

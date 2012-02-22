@@ -29,22 +29,23 @@ THE SOFTWARE.
 
 #include "FreeImage.h"
 
-class CBImage:CBBase
-{
+class CBImage: CBBase {
 
 public:
-	CBImage(CBGame* inGame, FIBITMAP* bitmap = NULL);
+	CBImage(CBGame *inGame, FIBITMAP *bitmap = NULL);
 	~CBImage();
 
 
-	BYTE* CreateBMPBuffer(DWORD* BufferSize = NULL);
+	BYTE *CreateBMPBuffer(DWORD *BufferSize = NULL);
 	HRESULT Resize(int NewWidth, int NewHeight);
-	HRESULT SaveBMPFile(char* Filename);
-	HRESULT CopyFrom(CBImage* OrigImage, int NewWidth = 0, int NewHeight = 0);
+	HRESULT SaveBMPFile(char *Filename);
+	HRESULT CopyFrom(CBImage *OrigImage, int NewWidth = 0, int NewHeight = 0);
 
-	FIBITMAP* GetBitmap() const { return m_Bitmap; }
+	FIBITMAP *GetBitmap() const {
+		return m_Bitmap;
+	}
 private:
-	FIBITMAP* m_Bitmap;
+	FIBITMAP *m_Bitmap;
 };
 
 #endif

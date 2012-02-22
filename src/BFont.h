@@ -29,26 +29,25 @@ THE SOFTWARE.
 
 #define NUM_CHARACTERS 256
 
-class CBFont: public CBObject
-{
-public:			
+class CBFont: public CBObject {
+public:
 	DECLARE_PERSISTENT(CBFont, CBObject);
-	virtual int GetTextWidth(BYTE* text, int MaxLenght=-1);
-	virtual int GetTextHeight(BYTE* text, int width);
-	virtual void DrawText(BYTE* text, int x, int y, int width, TTextAlign align=TAL_LEFT, int max_height=-1, int MaxLenght=-1);
+	virtual int GetTextWidth(BYTE *text, int MaxLenght = -1);
+	virtual int GetTextHeight(BYTE *text, int width);
+	virtual void DrawText(BYTE *text, int x, int y, int width, TTextAlign align = TAL_LEFT, int max_height = -1, int MaxLenght = -1);
 	virtual int GetLetterHeight();
 
 	virtual void InitLoop() {};
 
-	CBFont(CBGame* inGame);
+	CBFont(CBGame *inGame);
 	virtual ~CBFont();
 
-	static CBFont* CreateFromFile(CBGame* Game, char* Filename);
+	static CBFont *CreateFromFile(CBGame *Game, char *Filename);
 
 private:
 	//HRESULT LoadBuffer(BYTE* Buffer);
 	//HRESULT LoadFile(char* Filename);
-	static bool IsTrueType(CBGame* Game, char* Filename);
+	static bool IsTrueType(CBGame *Game, char *Filename);
 };
 
 #endif

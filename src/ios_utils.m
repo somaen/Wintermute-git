@@ -28,28 +28,22 @@ THE SOFTWARE.
 #import <Foundation/NSPathUtilities.h>
 #import <UIKit/UIApplication.h>
 
-void IOS_GetDataDir(char* buffer)
-{
-	NSString* docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-	const char* utf8path = [docsDirectory UTF8String];
+void IOS_GetDataDir(char *buffer) {
+	NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex: 0];
+	const char *utf8path = [docsDirectory UTF8String];
 	strcpy(buffer, utf8path);
 }
 
-void IOS_ShowStatusLine(int show)
-{
-	if (show)
-	{
-		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
-		[[UIApplication sharedApplication] setStatusBarHidden:NO animated:UIStatusBarAnimationFade];
-	}
-	else
-	{
-		[[UIApplication sharedApplication] setStatusBarHidden:YES animated:UIStatusBarAnimationFade];
+void IOS_ShowStatusLine(int show) {
+	if (show) {
+[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackTranslucent animated: NO];
+[[UIApplication sharedApplication] setStatusBarHidden: NO animated: UIStatusBarAnimationFade];
+	} else {
+[[UIApplication sharedApplication] setStatusBarHidden: YES animated: UIStatusBarAnimationFade];
 	}
 }
 
-void IOS_GetDeviceType(char* buffer)
-{
+void IOS_GetDeviceType(char *buffer) {
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 		strcpy(buffer, "tablet");
 	else

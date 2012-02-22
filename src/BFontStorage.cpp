@@ -33,38 +33,32 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CBFontStorage, true);
 
 //////////////////////////////////////////////////////////////////////////
-CBFontStorage::CBFontStorage(CBGame* inGame):CBBase(inGame)
-{
+CBFontStorage::CBFontStorage(CBGame *inGame): CBBase(inGame) {
 	m_FTLibrary = NULL;
 	InitFreeType();
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CBFontStorage::~CBFontStorage()
-{
+CBFontStorage::~CBFontStorage() {
 	Cleanup(true);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-void CBFontStorage::InitFreeType()
-{
+void CBFontStorage::InitFreeType() {
 	FT_Error error = FT_Init_FreeType(&m_FTLibrary);
-	if (error)
-	{
+	if (error) {
 		Game->LOG(0, "Error initializing FreeType library.");
 	}
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFontStorage::Cleanup(bool Warn)
-{
+HRESULT CBFontStorage::Cleanup(bool Warn) {
 	int i;
 
-	for(i=0; i<m_Fonts.GetSize(); i++)
-	{
-		if(Warn) Game->LOG(0, "Removing orphan font '%s'", m_Fonts[i]->m_Filename);
+	for (i = 0; i < m_Fonts.GetSize(); i++) {
+		if (Warn) Game->LOG(0, "Removing orphan font '%s'", m_Fonts[i]->m_Filename);
 		delete m_Fonts[i];
 	}
 	m_Fonts.RemoveAll();
@@ -77,22 +71,19 @@ HRESULT CBFontStorage::Cleanup(bool Warn)
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFontStorage::InitLoop()
-{
-	for (int i = 0; i < m_Fonts.GetSize(); i++)
-	{
+HRESULT CBFontStorage::InitLoop() {
+	for (int i = 0; i < m_Fonts.GetSize(); i++) {
 		m_Fonts[i]->InitLoop();
 	}
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-CBFont* CBFontStorage::AddFont(char *Filename)
-{
-	if(!Filename) return NULL;
+CBFont *CBFontStorage::AddFont(char *Filename) {
+	if (!Filename) return NULL;
 
-	for(int i=0; i<m_Fonts.GetSize(); i++){
-		if(CBPlatform::stricmp(m_Fonts[i]->m_Filename, Filename)==0){
+	for (int i = 0; i < m_Fonts.GetSize(); i++) {
+		if (CBPlatform::stricmp(m_Fonts[i]->m_Filename, Filename) == 0) {
 			m_Fonts[i]->m_RefCount++;
 			return m_Fonts[i];
 		}
@@ -103,18 +94,17 @@ CBFont* CBFontStorage::AddFont(char *Filename)
 	if(!font) return NULL;
 
 	if(FAILED(font->LoadFile(Filename))){
-		delete font;
-		return NULL;
+	    delete font;
+	    return NULL;
 	}
 	else {
-		font->m_RefCount = 1;
-		m_Fonts.Add(font);
-		return font;
+	    font->m_RefCount = 1;
+	    m_Fonts.Add(font);
+	    return font;
 	}
 	*/
-	CBFont* font = CBFont::CreateFromFile(Game, Filename);
-	if(font)
-	{
+	CBFont *font = CBFont::CreateFromFile(Game, Filename);
+	if (font) {
 		font->m_RefCount = 1;
 		m_Fonts.Add(font);
 	}
@@ -123,14 +113,13 @@ CBFont* CBFontStorage::AddFont(char *Filename)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFontStorage::RemoveFont(CBFont *Font)
-{
-	if(!Font) return E_FAIL;
+HRESULT CBFontStorage::RemoveFont(CBFont *Font) {
+	if (!Font) return E_FAIL;
 
-	for(int i=0; i<m_Fonts.GetSize(); i++){
-		if(m_Fonts[i]==Font){
+	for (int i = 0; i < m_Fonts.GetSize(); i++) {
+		if (m_Fonts[i] == Font) {
 			m_Fonts[i]->m_RefCount--;
-			if(m_Fonts[i]->m_RefCount <= 0){
+			if (m_Fonts[i]->m_RefCount <= 0) {
 				delete m_Fonts[i];
 				m_Fonts.RemoveAt(i);
 			}
@@ -142,14 +131,14 @@ HRESULT CBFontStorage::RemoveFont(CBFont *Font)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFontStorage::Persist(CBPersistMgr* PersistMgr){
+HRESULT CBFontStorage::Persist(CBPersistMgr *PersistMgr) {
 
-	if(!PersistMgr->m_Saving) Cleanup(false);
+	if (!PersistMgr->m_Saving) Cleanup(false);
 
 	PersistMgr->Transfer(TMEMBER(Game));
 	m_Fonts.Persist(PersistMgr);
 
-	if(!PersistMgr->m_Saving) InitFreeType();
+	if (!PersistMgr->m_Saving) InitFreeType();
 
 	return S_OK;
 }

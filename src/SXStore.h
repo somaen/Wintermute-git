@@ -29,21 +29,17 @@ THE SOFTWARE.
 
 #include "BObject.h"
 
-class CSXStore : public CBObject  
-{
+class CSXStore : public CBObject {
 public:
 
 	//////////////////////////////////////////////////////////////////////////
-	class CBStoreProduct
-	{
+	class CBStoreProduct {
 	public:
-		CBStoreProduct()
-		{
+		CBStoreProduct() {
 			m_Id = m_Name = m_Desc = m_Price = NULL;
 		}
 
-		CBStoreProduct(const char* id, const char* name, const char* desc, const char* price)
-		{
+		CBStoreProduct(const char *id, const char *name, const char *desc, const char *price) {
 			m_Id = m_Name = m_Desc = m_Price = NULL;
 
 			CBUtils::SetString(&m_Id, id);
@@ -52,16 +48,14 @@ public:
 			CBUtils::SetString(&m_Price, price);
 		}
 
-		~CBStoreProduct()
-		{
+		~CBStoreProduct() {
 			delete [] m_Id;
 			delete [] m_Name;
 			delete [] m_Desc;
 			delete [] m_Price;
 		}
 
-		HRESULT Persist(CBPersistMgr* PersistMgr)
-		{
+		HRESULT Persist(CBPersistMgr *PersistMgr) {
 			PersistMgr->Transfer(TMEMBER(m_Id));
 			PersistMgr->Transfer(TMEMBER(m_Name));
 			PersistMgr->Transfer(TMEMBER(m_Desc));
@@ -69,29 +63,34 @@ public:
 			return S_OK;
 		}
 
-		const char* GetId() { return m_Id; }
-		const char* GetName() { return m_Name; }
-		const char* GetDesc() { return m_Desc; }
-		const char* GetPrice() { return m_Price; }
+		const char *GetId() {
+			return m_Id;
+		}
+		const char *GetName() {
+			return m_Name;
+		}
+		const char *GetDesc() {
+			return m_Desc;
+		}
+		const char *GetPrice() {
+			return m_Price;
+		}
 
 	private:
-		char* m_Id;
-		char* m_Name;
-		char* m_Desc;
-		char* m_Price;
+		char *m_Id;
+		char *m_Name;
+		char *m_Desc;
+		char *m_Price;
 	};
 
 	//////////////////////////////////////////////////////////////////////////
-	class CBStoreTransaction
-	{
+	class CBStoreTransaction {
 	public:
-		CBStoreTransaction()
-		{
+		CBStoreTransaction() {
 			m_Id = m_ProductId = m_State = NULL;
 		}
 
-		CBStoreTransaction(const char* id, const char* productId, const char* state)
-		{
+		CBStoreTransaction(const char *id, const char *productId, const char *state) {
 			m_Id = m_ProductId = m_State = NULL;
 
 			CBUtils::SetString(&m_Id, id);
@@ -99,63 +98,70 @@ public:
 			CBUtils::SetString(&m_State, state);
 		}
 
-		~CBStoreTransaction()
-		{
+		~CBStoreTransaction() {
 			delete [] m_Id;
 			delete [] m_ProductId;
 			delete [] m_State;
 		}
 
-		const char* GetId() { return m_Id; }
-		const char* GetProductId() { return m_ProductId; }
-		const char* GetState() { return m_State; }
+		const char *GetId() {
+			return m_Id;
+		}
+		const char *GetProductId() {
+			return m_ProductId;
+		}
+		const char *GetState() {
+			return m_State;
+		}
 
 	private:
-		char* m_Id;
-		char* m_ProductId;
-		char* m_State;
+		char *m_Id;
+		char *m_ProductId;
+		char *m_State;
 	};
 
 
 	DECLARE_PERSISTENT(CSXStore, CBObject);
-	CSXStore(CBGame* inGame);
+	CSXStore(CBGame *inGame);
 	virtual ~CSXStore();
-	virtual CScValue* ScGetProperty(char* name);
-	virtual HRESULT ScCallMethod(CScScript* script, CScStack* stack, CScStack* thisStack, char* name);
+	virtual CScValue *ScGetProperty(char *name);
+	virtual HRESULT ScCallMethod(CScScript *script, CScStack *stack, CScStack *thisStack, char *name);
 
 	void AfterLoad();
-	void OnObjectDestroyed(CBScriptHolder* obj);
+	void OnObjectDestroyed(CBScriptHolder *obj);
 
 	bool IsAvailable();
-	void SetEventsEnabled(CScScript* script, bool val);
-	bool GetEventsEnabled() const { return m_EventsEnabled; }
-	void ValidateProducts(const char* prodIdList);
+	void SetEventsEnabled(CScScript *script, bool val);
+	bool GetEventsEnabled() const {
+		return m_EventsEnabled;
+	}
+	void ValidateProducts(const char *prodIdList);
 
 	void ReceiveTransactionsStart();
 	void ReceiveTransactionsEnd();
-	void AddTransaction(const char* id, const char* productId, const char* state);
-	
+	void AddTransaction(const char *id, const char *productId, const char *state);
+
 	void ReceiveProductsStart();
 	void ReceiveProductsEnd();
-	void AddValidProduct(const char* id, const char* name, const char* desc, const char* price);
-	void AddInvalidProduct(const char* id);
-	
+	void AddValidProduct(const char *id, const char *name, const char *desc, const char *price);
+	void AddInvalidProduct(const char *id);
+
 	void OnRestoreFinished(bool error);
 
 private:
 	void Cleanup();
-	bool Purchase(CScScript* script, const char* productId);
-	bool FinishTransaction(CScScript* script, const char* transId);
-	void RestoreTransactions(CScScript* script);
+	bool Purchase(CScScript *script, const char *productId);
+	bool FinishTransaction(CScScript *script, const char *transId);
+	void RestoreTransactions(CScScript *script);
 
 	bool m_EventsEnabled;
-	CBArray<CBStoreProduct*, CBStoreProduct*> m_ValidProducts;
+	CBArray<CBStoreProduct *, CBStoreProduct *> m_ValidProducts;
 	AnsiStringArray m_InvalidProducts;
-	CBScriptHolder* m_LastProductRequestOwner;
-	CBScriptHolder* m_LastPurchaseOwner;
-	CBScriptHolder* m_LastRestoreOwner;
+	CBScriptHolder *m_LastProductRequestOwner;
+	CBScriptHolder *m_LastPurchaseOwner;
+	CBScriptHolder *m_LastRestoreOwner;
 
-	CBArray<CBStoreTransaction*, CBStoreTransaction*> m_Transactions;
+	CBArray<CBStoreTransaction *, CBStoreTransaction *> m_Transactions;
 
 };
 

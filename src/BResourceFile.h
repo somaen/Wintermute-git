@@ -29,17 +29,16 @@ THE SOFTWARE.
 
 #include "BFile.h"
 
-class CBResourceFile : public CBFile  
-{
+class CBResourceFile : public CBFile {
 public:
-	CBResourceFile(CBGame* inGame);
+	CBResourceFile(CBGame *inGame);
 	virtual ~CBResourceFile();
-	virtual HRESULT Seek(DWORD Pos, TSeek Origin=SEEK_TO_BEGIN);
-	virtual HRESULT Read(void* Buffer, DWORD Size);
+	virtual HRESULT Seek(DWORD Pos, TSeek Origin = SEEK_TO_BEGIN);
+	virtual HRESULT Read(void *Buffer, DWORD Size);
 	virtual HRESULT Close();
-    virtual HRESULT Open(const char* Filename);
+	virtual HRESULT Open(const char *Filename);
 private:
-	BYTE* m_Data;
+	BYTE *m_Data;
 };
 
 #endif

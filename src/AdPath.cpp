@@ -30,24 +30,21 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CAdPath, false);
 
 //////////////////////////////////////////////////////////////////////////
-CAdPath::CAdPath(CBGame* inGame):CBBase(inGame)
-{
+CAdPath::CAdPath(CBGame *inGame): CBBase(inGame) {
 	m_CurrIndex = -1;
 	m_Ready = false;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CAdPath::~CAdPath()
-{
+CAdPath::~CAdPath() {
 	Reset();
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-void CAdPath::Reset()
-{
-	for(int i=0; i<m_Points.GetSize(); i++)
+void CAdPath::Reset() {
+	for (int i = 0; i < m_Points.GetSize(); i++)
 		delete m_Points[i];
 
 	m_Points.RemoveAll();
@@ -57,43 +54,37 @@ void CAdPath::Reset()
 
 
 //////////////////////////////////////////////////////////////////////////
-CBPoint* CAdPath::GetFirst()
-{
-	if(m_Points.GetSize() > 0){
+CBPoint *CAdPath::GetFirst() {
+	if (m_Points.GetSize() > 0) {
 		m_CurrIndex = 0;
 		return m_Points[m_CurrIndex];
-	}
-	else return NULL;
+	} else return NULL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CBPoint* CAdPath::GetNext()
-{
+CBPoint *CAdPath::GetNext() {
 	m_CurrIndex++;
-	if(m_CurrIndex < m_Points.GetSize()) return m_Points[m_CurrIndex];
+	if (m_CurrIndex < m_Points.GetSize()) return m_Points[m_CurrIndex];
 	else return NULL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CBPoint* CAdPath::GetCurrent()
-{
-	if(m_CurrIndex >= 0 && m_CurrIndex < m_Points.GetSize()) return m_Points[m_CurrIndex];
+CBPoint *CAdPath::GetCurrent() {
+	if (m_CurrIndex >= 0 && m_CurrIndex < m_Points.GetSize()) return m_Points[m_CurrIndex];
 	else return NULL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-void CAdPath::AddPoint(CBPoint *point)
-{
+void CAdPath::AddPoint(CBPoint *point) {
 	m_Points.Add(point);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-bool CAdPath::SetReady(bool ready)
-{
+bool CAdPath::SetReady(bool ready) {
 	bool orig = m_Ready;
 	m_Ready = ready;
 
@@ -102,8 +93,8 @@ bool CAdPath::SetReady(bool ready)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdPath::Persist(CBPersistMgr* PersistMgr){
-	
+HRESULT CAdPath::Persist(CBPersistMgr *PersistMgr) {
+
 	PersistMgr->Transfer(TMEMBER(Game));
 
 	PersistMgr->Transfer(TMEMBER(m_CurrIndex));

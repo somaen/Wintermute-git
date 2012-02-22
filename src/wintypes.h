@@ -32,12 +32,12 @@ THE SOFTWARE.
 #define CALLBACK
 
 #ifndef __OBJC__
-	typedef int BOOL;
+typedef int BOOL;
 #endif
 
 #ifndef TRUE
-#	define TRUE 1
-#	define FALSE 0
+#   define TRUE 1
+#   define FALSE 0
 #endif
 
 
@@ -65,8 +65,7 @@ typedef PCSTR *PZPCSTR;
 
 
 
-typedef struct tagRECT
-{
+typedef struct tagRECT {
 	LONG    left;
 	LONG    top;
 	LONG    right;
@@ -74,8 +73,7 @@ typedef struct tagRECT
 } RECT, *LPRECT;
 
 
-typedef struct tagPOINT
-{
+typedef struct tagPOINT {
 	LONG  x;
 	LONG  y;
 } POINT, *LPPOINT;

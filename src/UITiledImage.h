@@ -29,19 +29,18 @@ THE SOFTWARE.
 
 #include "UIObject.h"
 
-class CUITiledImage : public CBObject  
-{
+class CUITiledImage : public CBObject {
 public:
 	DECLARE_PERSISTENT(CUITiledImage, CBObject);
-	void CorrectSize(int* Width, int* Height);
-	HRESULT LoadFile(char * Filename);
-	HRESULT LoadBuffer(BYTE * Buffer, bool Complete=true);
-	virtual HRESULT SaveAsText(CBDynBuffer* Buffer, int Indent);
+	void CorrectSize(int *Width, int *Height);
+	HRESULT LoadFile(char *Filename);
+	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 
 	HRESULT Display(int X, int Y, int Width, int Height);
-	CUITiledImage(CBGame* inGame=NULL);
+	CUITiledImage(CBGame *inGame = NULL);
 	virtual ~CUITiledImage();
-	CBSubFrame* m_Image;
+	CBSubFrame *m_Image;
 	RECT m_UpLeft;
 	RECT m_UpMiddle;
 	RECT m_UpRight;

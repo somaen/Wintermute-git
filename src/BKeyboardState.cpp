@@ -30,8 +30,7 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CBKeyboardState, false);
 
 //////////////////////////////////////////////////////////////////////////
-CBKeyboardState::CBKeyboardState(CBGame* inGame):CBScriptable(inGame)
-{
+CBKeyboardState::CBKeyboardState(CBGame *inGame): CBScriptable(inGame) {
 	m_CurrentPrintable = false;
 	m_CurrentCharCode = 0;
 	m_CurrentKeyData = 0;
@@ -43,8 +42,7 @@ CBKeyboardState::CBKeyboardState(CBGame* inGame):CBScriptable(inGame)
 
 
 //////////////////////////////////////////////////////////////////////////
-CBKeyboardState::~CBKeyboardState()
-{
+CBKeyboardState::~CBKeyboardState() {
 
 }
 
@@ -52,26 +50,22 @@ CBKeyboardState::~CBKeyboardState()
 //////////////////////////////////////////////////////////////////////////
 // high level scripting interface
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBKeyboardState::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name)
-{
+HRESULT CBKeyboardState::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name) {
 	//////////////////////////////////////////////////////////////////////////
 	// IsKeyDown
 	//////////////////////////////////////////////////////////////////////////
-	if (strcmp(Name, "IsKeyDown")==0)
-	{
+	if (strcmp(Name, "IsKeyDown") == 0) {
 		Stack->CorrectParams(1);
-		CScValue* val = Stack->Pop();
+		CScValue *val = Stack->Pop();
 		int vKey;
 
-		if (val->m_Type==VAL_STRING && strlen(val->GetString())>0)
-		{
-			char* str = val->GetString();
-			if(str[0]>='A' && str[0]<='Z') str[0] += ('a' - 'A');
+		if (val->m_Type == VAL_STRING && strlen(val->GetString()) > 0) {
+			char *str = val->GetString();
+			if (str[0] >= 'A' && str[0] <= 'Z') str[0] += ('a' - 'A');
 			vKey = (int)str[0];
-		}
-		else vKey = val->GetInt();
+		} else vKey = val->GetInt();
 
-		Uint8* state = SDL_GetKeyboardState(NULL);
+		Uint8 *state = SDL_GetKeyboardState(NULL);
 		SDL_Scancode scanCode = SDL_GetScancodeFromKey(VKeyToKeyCode(vKey));
 		bool isDown = state[scanCode] > 0;
 
@@ -84,14 +78,13 @@ HRESULT CBKeyboardState::ScCallMethod(CScScript* Script, CScStack *Stack, CScSta
 
 
 //////////////////////////////////////////////////////////////////////////
-CScValue* CBKeyboardState::ScGetProperty(char *Name)
-{
+CScValue *CBKeyboardState::ScGetProperty(char *Name) {
 	m_ScValue->SetNULL();
 
 	//////////////////////////////////////////////////////////////////////////
 	// Type
 	//////////////////////////////////////////////////////////////////////////
-	if(strcmp(Name, "Type")==0){
+	if (strcmp(Name, "Type") == 0) {
 		m_ScValue->SetString("keyboard");
 		return m_ScValue;
 	}
@@ -99,14 +92,13 @@ CScValue* CBKeyboardState::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// Key
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Key")==0){
-		if(m_CurrentPrintable){
+	else if (strcmp(Name, "Key") == 0) {
+		if (m_CurrentPrintable) {
 			char key[2];
 			key[0] = (char)m_CurrentCharCode;
 			key[1] = '\0';
 			m_ScValue->SetString(key);
-		}
-		else m_ScValue->SetString("");
+		} else m_ScValue->SetString("");
 
 		return m_ScValue;
 	}
@@ -114,7 +106,7 @@ CScValue* CBKeyboardState::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// Printable
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Printable")==0){
+	else if (strcmp(Name, "Printable") == 0) {
 		m_ScValue->SetBool(m_CurrentPrintable);
 		return m_ScValue;
 	}
@@ -122,7 +114,7 @@ CScValue* CBKeyboardState::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// KeyCode
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "KeyCode")==0){
+	else if (strcmp(Name, "KeyCode") == 0) {
 		m_ScValue->SetInt(m_CurrentCharCode);
 		return m_ScValue;
 	}
@@ -130,7 +122,7 @@ CScValue* CBKeyboardState::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// IsShift
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "IsShift")==0){
+	else if (strcmp(Name, "IsShift") == 0) {
 		m_ScValue->SetBool(m_CurrentShift);
 		return m_ScValue;
 	}
@@ -138,7 +130,7 @@ CScValue* CBKeyboardState::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// IsAlt
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "IsAlt")==0){
+	else if (strcmp(Name, "IsAlt") == 0) {
 		m_ScValue->SetBool(m_CurrentAlt);
 		return m_ScValue;
 	}
@@ -146,7 +138,7 @@ CScValue* CBKeyboardState::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// IsControl
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "IsControl")==0){
+	else if (strcmp(Name, "IsControl") == 0) {
 		m_ScValue->SetBool(m_CurrentControl);
 		return m_ScValue;
 	}
@@ -156,16 +148,15 @@ CScValue* CBKeyboardState::ScGetProperty(char *Name)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBKeyboardState::ScSetProperty(char *Name, CScValue *Value)
-{
+HRESULT CBKeyboardState::ScSetProperty(char *Name, CScValue *Value) {
 	/*
 	//////////////////////////////////////////////////////////////////////////
 	// Name
 	//////////////////////////////////////////////////////////////////////////
 	if(strcmp(Name, "Name")==0){
-		SetName(Value->GetString());
-		if(m_Renderer) SetWindowText(m_Renderer->m_Window, m_Name);
-		return S_OK;
+	    SetName(Value->GetString());
+	    if(m_Renderer) SetWindowText(m_Renderer->m_Window, m_Name);
+	    return S_OK;
 	}
 
 	else*/ return CBScriptable::ScSetProperty(Name, Value);
@@ -173,15 +164,13 @@ HRESULT CBKeyboardState::ScSetProperty(char *Name, CScValue *Value)
 
 
 //////////////////////////////////////////////////////////////////////////
-char* CBKeyboardState::ScToString()
-{
+char *CBKeyboardState::ScToString() {
 	return "[keyboard state]";
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBKeyboardState::ReadKey(SDL_Event* event)
-{
+HRESULT CBKeyboardState::ReadKey(SDL_Event *event) {
 	m_CurrentPrintable = (event->type == SDL_TEXTINPUT);
 	m_CurrentCharCode = KeyCodeToVKey(event);
 	//m_CurrentKeyData = KeyData;
@@ -195,8 +184,7 @@ HRESULT CBKeyboardState::ReadKey(SDL_Event* event)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBKeyboardState::Persist(CBPersistMgr *PersistMgr)
-{
+HRESULT CBKeyboardState::Persist(CBPersistMgr *PersistMgr) {
 	//if(!PersistMgr->m_Saving) Cleanup();
 	CBScriptable::Persist(PersistMgr);
 
@@ -211,33 +199,28 @@ HRESULT CBKeyboardState::Persist(CBPersistMgr *PersistMgr)
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBKeyboardState::IsShiftDown()
-{
+bool CBKeyboardState::IsShiftDown() {
 	int mod = SDL_GetModState();
 	return (mod & KMOD_LSHIFT) || (mod & KMOD_RSHIFT);
-}	
+}
 
 //////////////////////////////////////////////////////////////////////////
-bool CBKeyboardState::IsControlDown()
-{
+bool CBKeyboardState::IsControlDown() {
 	int mod = SDL_GetModState();
 	return (mod & KMOD_LCTRL) || (mod & KMOD_RCTRL);
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBKeyboardState::IsAltDown()
-{
+bool CBKeyboardState::IsAltDown() {
 	int mod = SDL_GetModState();
 	return (mod & KMOD_LALT) || (mod & KMOD_RALT);
 }
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBKeyboardState::KeyCodeToVKey(SDL_Event* event)
-{
+DWORD CBKeyboardState::KeyCodeToVKey(SDL_Event *event) {
 	if (event->type != SDL_KEYDOWN) return 0;
 
-	switch (event->key.keysym.sym)
-	{
+	switch (event->key.keysym.sym) {
 	case SDLK_KP_ENTER:
 		return SDLK_RETURN;
 	default:
@@ -246,8 +229,7 @@ DWORD CBKeyboardState::KeyCodeToVKey(SDL_Event* event)
 }
 
 //////////////////////////////////////////////////////////////////////////
-SDL_Keycode CBKeyboardState::VKeyToKeyCode(DWORD vkey)
-{
+SDL_Keycode CBKeyboardState::VKeyToKeyCode(DWORD vkey) {
 	// todo
 	return (SDL_Keycode)vkey;
 }

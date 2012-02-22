@@ -29,14 +29,13 @@ THE SOFTWARE.
 
 #include "BPoint.h"
 
-class CAdPathPoint : public CBPoint  
-{
+class CAdPathPoint : public CBPoint {
 public:
 	DECLARE_PERSISTENT(CAdPathPoint, CBPoint);
 	CAdPathPoint(int initX, int initY, int initDistance);
 	CAdPathPoint();
 	virtual ~CAdPathPoint();
-	CAdPathPoint* m_Origin;
+	CAdPathPoint *m_Origin;
 	bool m_Marked;
 	int m_Distance;
 };

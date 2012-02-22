@@ -29,12 +29,11 @@ THE SOFTWARE.
 
 #include "coll_templ.h"
 
-class CBSprite: public CBScriptHolder
-{
+class CBSprite: public CBScriptHolder {
 public:
 	HRESULT KillAllSounds();
-	CBSurface* GetSurface();
-	char* m_EditorBgFile;
+	CBSurface *GetSurface();
+	char *m_EditorBgFile;
 	int m_EditorBgOffsetX;
 	int m_EditorBgOffsetY;
 	int m_EditorBgAlpha;
@@ -46,36 +45,36 @@ public:
 	DECLARE_PERSISTENT(CBSprite, CBScriptHolder);
 
 	bool m_EditorAllFrames;
-	bool GetBoundingRect(LPRECT Rect, int X, int Y, float ScaleX=100, float ScaleY=100);
+	bool GetBoundingRect(LPRECT Rect, int X, int Y, float ScaleX = 100, float ScaleY = 100);
 	int m_MoveY;
 	int m_MoveX;
-	HRESULT Display(int X, int Y, CBObject* Register=NULL, float ZoomX=100, float ZoomY=100, DWORD Alpha=0xFFFFFFFF, float Rotate=0.0f, TSpriteBlendMode BlendMode=BLEND_NORMAL);
-	bool GetCurrentFrame(float ZoomX=100, float ZoomY=100);
+	HRESULT Display(int X, int Y, CBObject *Register = NULL, float ZoomX = 100, float ZoomY = 100, DWORD Alpha = 0xFFFFFFFF, float Rotate = 0.0f, TSpriteBlendMode BlendMode = BLEND_NORMAL);
+	bool GetCurrentFrame(float ZoomX = 100, float ZoomY = 100);
 	bool m_CanBreak;
 	bool m_EditorMuted;
 	bool m_Continuous;
 	void Reset();
-	CBObject* m_Owner;
+	CBObject *m_Owner;
 	bool m_Changed;
 	bool m_Paused;
 	bool m_Finished;
-	HRESULT LoadBuffer(BYTE* Buffer, bool Compete = true, int LifeTime=-1, TSpriteCacheType CacheType=CACHE_ALL);
-	HRESULT LoadFile(char* Filename, int LifeTime=-1, TSpriteCacheType CacheType=CACHE_ALL);
+	HRESULT LoadBuffer(BYTE *Buffer, bool Compete = true, int LifeTime = -1, TSpriteCacheType CacheType = CACHE_ALL);
+	HRESULT LoadFile(char *Filename, int LifeTime = -1, TSpriteCacheType CacheType = CACHE_ALL);
 	DWORD m_LastFrameTime;
-	HRESULT Draw(int X, int Y, CBObject* Register = NULL, float ZoomX=100, float ZoomY=100, DWORD Alpha=0xFFFFFFFF);
+	HRESULT Draw(int X, int Y, CBObject *Register = NULL, float ZoomX = 100, float ZoomY = 100, DWORD Alpha = 0xFFFFFFFF);
 	bool m_Looping;
 	int m_CurrentFrame;
-	HRESULT AddFrame(char* Filename, DWORD Delay=0, int HotspotX=0, int HotspotY=0, RECT* Rect=NULL);
-	CBSprite(CBGame* inGame, CBObject* Owner=NULL);
+	HRESULT AddFrame(char *Filename, DWORD Delay = 0, int HotspotX = 0, int HotspotY = 0, RECT *Rect = NULL);
+	CBSprite(CBGame *inGame, CBObject *Owner = NULL);
 	virtual ~CBSprite();
-	CBArray<CBFrame*, CBFrame*> m_Frames;
+	CBArray<CBFrame *, CBFrame *> m_Frames;
 	HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 
 	// scripting interface
-	virtual CScValue* ScGetProperty(char* Name);
-	virtual HRESULT ScSetProperty(char* Name, CScValue* Value);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack* Stack, CScStack* ThisStack, char* Name);
-	virtual char* ScToString();
+	virtual CScValue *ScGetProperty(char *Name);
+	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual char *ScToString();
 };
 
 #endif

@@ -29,14 +29,13 @@ THE SOFTWARE.
 
 #include "BScriptable.h"
 
-class CSXMath : public CBScriptable  
-{
+class CSXMath : public CBScriptable {
 public:
 	DECLARE_PERSISTENT(CSXMath, CBScriptable);
-	CSXMath(CBGame* inGame);
+	CSXMath(CBGame *inGame);
 	virtual ~CSXMath();
-	virtual CScValue* ScGetProperty(char* Name);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual CScValue *ScGetProperty(char *Name);
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
 
 private:
 	double DegreeToRadian(double Value);

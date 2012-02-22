@@ -31,12 +31,11 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CAdSentence, false);
 
 //////////////////////////////////////////////////////////////////////////
-CAdSentence::CAdSentence(CBGame* inGame):CBBase(inGame)
-{
+CAdSentence::CAdSentence(CBGame *inGame): CBBase(inGame) {
 	m_Text = NULL;
 	m_Stances = NULL;
 	m_TempStance = NULL;
-	
+
 	m_Duration = 0;
 	m_StartTime = 0;
 	m_CurrentStance = 0;
@@ -60,14 +59,13 @@ CAdSentence::CAdSentence(CBGame* inGame):CBBase(inGame)
 
 
 //////////////////////////////////////////////////////////////////////////
-CAdSentence::~CAdSentence()
-{
+CAdSentence::~CAdSentence() {
 	SAFE_DELETE(m_Sound);
 	SAFE_DELETE_ARRAY(m_Text);
 	SAFE_DELETE_ARRAY(m_Stances);
 	SAFE_DELETE_ARRAY(m_TempStance);
 	SAFE_DELETE(m_TalkDef);
-	
+
 	m_CurrentSprite = NULL; // ref only
 	m_CurrentSkelAnim = NULL;
 	m_Font = NULL; // ref only
@@ -75,80 +73,73 @@ CAdSentence::~CAdSentence()
 
 
 //////////////////////////////////////////////////////////////////////////
-void CAdSentence::SetText(char *Text)
-{
-	if(m_Text) delete [] m_Text;
-	m_Text = new char[strlen(Text)+1];
-	if(m_Text) strcpy(m_Text, Text);
+void CAdSentence::SetText(char *Text) {
+	if (m_Text) delete [] m_Text;
+	m_Text = new char[strlen(Text) + 1];
+	if (m_Text) strcpy(m_Text, Text);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-void CAdSentence::SetStances(char *Stances)
-{
-	if(m_Stances) delete [] m_Stances;
-	if(Stances)
-	{
-		m_Stances = new char[strlen(Stances)+1];
-		if(m_Stances) strcpy(m_Stances, Stances);
-	}
-	else m_Stances = NULL;
+void CAdSentence::SetStances(char *Stances) {
+	if (m_Stances) delete [] m_Stances;
+	if (Stances) {
+		m_Stances = new char[strlen(Stances) + 1];
+		if (m_Stances) strcpy(m_Stances, Stances);
+	} else m_Stances = NULL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-char* CAdSentence::GetCurrentStance()
-{
+char *CAdSentence::GetCurrentStance() {
 	return GetStance(m_CurrentStance);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-char* CAdSentence::GetNextStance()
-{
+char *CAdSentence::GetNextStance() {
 	m_CurrentStance++;
 	return GetStance(m_CurrentStance);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-char* CAdSentence::GetStance(int Stance)
-{
-	if(m_Stances==NULL) return NULL;
+char *CAdSentence::GetStance(int Stance) {
+	if (m_Stances == NULL) return NULL;
 
-	if(m_TempStance) delete [] m_TempStance;
+	if (m_TempStance) delete [] m_TempStance;
 	m_TempStance = NULL;
 
-	char* start;
-	char* curr;
+	char *start;
+	char *curr;
 	int pos;
 
-	if(Stance==0) start = m_Stances;
-	else{
-		pos=0;
+	if (Stance == 0) start = m_Stances;
+	else {
+		pos = 0;
 		start = NULL;
 		curr = m_Stances;
-		while(pos < Stance){
-			if(*curr=='\0') break;
-			if(*curr==',') pos++;
+		while (pos < Stance) {
+			if (*curr == '\0') break;
+			if (*curr == ',') pos++;
 			curr++;
 		}
-		if(pos==Stance) start = curr;		
+		if (pos == Stance) start = curr;
 	}
 
-	if(start==NULL) return NULL;
+	if (start == NULL) return NULL;
 
-	while(*start==' ' && *start!=',' && *start!='\0') start++;
+	while (*start == ' ' && *start != ',' && *start != '\0') start++;
 
 	curr = start;
-	while(*curr!='\0' && *curr!=',') curr++;
+	while (*curr != '\0' && *curr != ',') curr++;
 
-	while(curr > start && *(curr-1)==' ') curr--;
+	while (curr > start && *(curr - 1) == ' ') curr--;
 
-	m_TempStance = new char [curr-start+1];
-	if(m_TempStance){
-		m_TempStance[curr-start] = '\0';
-		strncpy(m_TempStance, start, curr-start);
+	m_TempStance = new char [curr - start + 1];
+	if (m_TempStance) {
+		m_TempStance[curr - start] = '\0';
+		strncpy(m_TempStance, start, curr - start);
 	}
 
 	return m_TempStance;
@@ -156,22 +147,21 @@ char* CAdSentence::GetStance(int Stance)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdSentence::Display()
-{
-	if(!m_Font || !m_Text) return E_FAIL;
+HRESULT CAdSentence::Display() {
+	if (!m_Font || !m_Text) return E_FAIL;
 
-	if(m_Sound && !m_SoundStarted){
+	if (m_Sound && !m_SoundStarted) {
 		m_Sound->Play();
 		m_SoundStarted = true;
 	}
 
-	if(Game->m_Subtitles){
+	if (Game->m_Subtitles) {
 		int x = m_Pos.x;
 		int y = m_Pos.y;
 
-		if(!m_FixedPos){
-			x = x - ((CAdGame*)Game)->m_Scene->GetOffsetLeft();
-			y = y - ((CAdGame*)Game)->m_Scene->GetOffsetTop();
+		if (!m_FixedPos) {
+			x = x - ((CAdGame *)Game)->m_Scene->GetOffsetLeft();
+			y = y - ((CAdGame *)Game)->m_Scene->GetOffsetTop();
 		}
 
 
@@ -179,7 +169,7 @@ HRESULT CAdSentence::Display()
 		x = min(x, Game->m_Renderer->m_Width - m_Width);
 		y = max(y, 0);
 
-		m_Font->DrawText((BYTE*)m_Text, x, y, m_Width, m_Align);
+		m_Font->DrawText((BYTE *)m_Text, x, y, m_Width, m_Align);
 	}
 
 	return S_OK;
@@ -187,9 +177,8 @@ HRESULT CAdSentence::Display()
 
 
 //////////////////////////////////////////////////////////////////////////
-void CAdSentence::SetSound(CBSound *Sound)
-{
-	if(!Sound) return;
+void CAdSentence::SetSound(CBSound *Sound) {
+	if (!Sound) return;
 	SAFE_DELETE(m_Sound);
 	m_Sound = Sound;
 	m_SoundStarted = false;
@@ -197,15 +186,14 @@ void CAdSentence::SetSound(CBSound *Sound)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdSentence::Finish()
-{
-	if(m_Sound) m_Sound->Stop();
+HRESULT CAdSentence::Finish() {
+	if (m_Sound) m_Sound->Stop();
 	return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdSentence::Persist(CBPersistMgr* PersistMgr){
+HRESULT CAdSentence::Persist(CBPersistMgr *PersistMgr) {
 
 	PersistMgr->Transfer(TMEMBER(Game));
 
@@ -232,47 +220,42 @@ HRESULT CAdSentence::Persist(CBPersistMgr* PersistMgr){
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdSentence::SetupTalkFile(char* SoundFilename)
-{
+HRESULT CAdSentence::SetupTalkFile(char *SoundFilename) {
 	SAFE_DELETE(m_TalkDef);
 	m_CurrentSprite = NULL;
 
-	if(!SoundFilename) return S_OK;
-	
-	
+	if (!SoundFilename) return S_OK;
+
+
 	AnsiString path = PathUtil::GetDirectoryName(SoundFilename);
 	AnsiString name = PathUtil::GetFileNameWithoutExtension(SoundFilename);
 
 	AnsiString talkDefFileName = PathUtil::Combine(path, name + ".talk");
 
-	CBFile* file = Game->m_FileManager->OpenFile(talkDefFileName.c_str());
-	if (file)
-	{
+	CBFile *file = Game->m_FileManager->OpenFile(talkDefFileName.c_str());
+	if (file) {
 		Game->m_FileManager->CloseFile(file);
-	}
-	else return S_OK; // no talk def file found
+	} else return S_OK; // no talk def file found
 
 
 	m_TalkDef = new CAdTalkDef(Game);
-	if (!m_TalkDef || FAILED(m_TalkDef->LoadFile(talkDefFileName.c_str())))
-	{
+	if (!m_TalkDef || FAILED(m_TalkDef->LoadFile(talkDefFileName.c_str()))) {
 		SAFE_DELETE(m_TalkDef);
 		return E_FAIL;
 	}
 	//Game->LOG(0, "Using .talk file: %s", TalkDefFile);
-	
+
 	return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdSentence::Update(TDirection Dir)
-{
-	if(!m_TalkDef) return S_OK;
+HRESULT CAdSentence::Update(TDirection Dir) {
+	if (!m_TalkDef) return S_OK;
 
 	DWORD CurrentTime;
 	// if sound is available, synchronize with sound, otherwise use timer
-	
+
 	/*
 	if(m_Sound) CurrentTime = m_Sound->GetPositionTime();
 	else CurrentTime = Game->m_Timer - m_StartTime;
@@ -280,35 +263,33 @@ HRESULT CAdSentence::Update(TDirection Dir)
 	CurrentTime = Game->m_Timer - m_StartTime;
 
 	bool TalkNodeFound = false;
-	for(int i=0; i<m_TalkDef->m_Nodes.GetSize(); i++){
-		if(m_TalkDef->m_Nodes[i]->IsInTimeInterval(CurrentTime, Dir)){
+	for (int i = 0; i < m_TalkDef->m_Nodes.GetSize(); i++) {
+		if (m_TalkDef->m_Nodes[i]->IsInTimeInterval(CurrentTime, Dir)) {
 			TalkNodeFound = true;
 
-			CBSprite* NewSprite = m_TalkDef->m_Nodes[i]->GetSprite(Dir);
-			if(NewSprite != m_CurrentSprite) NewSprite->Reset();
+			CBSprite *NewSprite = m_TalkDef->m_Nodes[i]->GetSprite(Dir);
+			if (NewSprite != m_CurrentSprite) NewSprite->Reset();
 			m_CurrentSprite = NewSprite;
 
-			if(!m_TalkDef->m_Nodes[i]->m_PlayToEnd) break;
+			if (!m_TalkDef->m_Nodes[i]->m_PlayToEnd) break;
 		}
 	}
 
 
 	// no talk node, try to use default sprite instead (if any)
-	if(!TalkNodeFound){
-		CBSprite* NewSprite = m_TalkDef->GetDefaultSprite(Dir);
-		if(NewSprite){
-			if(NewSprite != m_CurrentSprite) NewSprite->Reset();
+	if (!TalkNodeFound) {
+		CBSprite *NewSprite = m_TalkDef->GetDefaultSprite(Dir);
+		if (NewSprite) {
+			if (NewSprite != m_CurrentSprite) NewSprite->Reset();
 			m_CurrentSprite = NewSprite;
-		}
-		else m_CurrentSprite = NULL;
+		} else m_CurrentSprite = NULL;
 	}
 
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CAdSentence::CanSkip()
-{
+bool CAdSentence::CanSkip() {
 	// prevent accidental sentence skipping (TODO make configurable)
 	return (Game->m_Timer - m_StartTime) > 300;
 }

@@ -26,10 +26,9 @@ THE SOFTWARE.
 #ifndef __WmeBResources_H__
 #define __WmeBResources_H__
 
-class CBResources
-{
+class CBResources {
 public:
-	static bool GetFile(const char* fileName, BYTE*& buffer, DWORD& size);
+	static bool GetFile(const char *fileName, BYTE*& buffer, DWORD &size);
 };
 
 #endif

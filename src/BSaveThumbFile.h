@@ -29,17 +29,16 @@ THE SOFTWARE.
 
 #include "BFile.h"
 
-class CBSaveThumbFile : public CBFile  
-{
+class CBSaveThumbFile : public CBFile {
 public:
-	CBSaveThumbFile(CBGame* Game);
+	CBSaveThumbFile(CBGame *Game);
 	virtual ~CBSaveThumbFile();
-	virtual HRESULT Seek(DWORD Pos, TSeek Origin=SEEK_TO_BEGIN);
-	virtual HRESULT Read(void* Buffer, DWORD Size);
+	virtual HRESULT Seek(DWORD Pos, TSeek Origin = SEEK_TO_BEGIN);
+	virtual HRESULT Read(void *Buffer, DWORD Size);
 	virtual HRESULT Close();
-    virtual HRESULT Open(const char* Filename);
+	virtual HRESULT Open(const char *Filename);
 private:
-	BYTE* m_Data;
+	BYTE *m_Data;
 };
 
 #endif

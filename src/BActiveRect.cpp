@@ -28,8 +28,7 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////
-CBActiveRect::CBActiveRect(CBGame* inGame):CBBase(inGame)
-{
+CBActiveRect::CBActiveRect(CBGame *inGame): CBBase(inGame) {
 	CBPlatform::SetRectEmpty(&m_Rect);
 	m_Owner = NULL;
 	m_Frame = NULL;
@@ -42,11 +41,10 @@ CBActiveRect::CBActiveRect(CBGame* inGame):CBBase(inGame)
 
 
 //////////////////////////////////////////////////////////////////////
-CBActiveRect::CBActiveRect(CBGame* inGame, CBObject* Owner, CBSubFrame* Frame, int X, int Y, int Width, int Height, float ZoomX, float ZoomY, bool Precise):CBBase(inGame)
-{
+CBActiveRect::CBActiveRect(CBGame *inGame, CBObject *Owner, CBSubFrame *Frame, int X, int Y, int Width, int Height, float ZoomX, float ZoomY, bool Precise): CBBase(inGame) {
 	m_Owner = Owner;
 	m_Frame = Frame;
-	CBPlatform::SetRect(&m_Rect, X, Y, X+Width, Y+Height);
+	CBPlatform::SetRect(&m_Rect, X, Y, X + Width, Y + Height);
 	m_ZoomX = ZoomX;
 	m_ZoomY = ZoomY;
 	m_Precise = Precise;
@@ -56,16 +54,15 @@ CBActiveRect::CBActiveRect(CBGame* inGame, CBObject* Owner, CBSubFrame* Frame, i
 }
 
 //////////////////////////////////////////////////////////////////////
-CBActiveRect::CBActiveRect(CBGame* inGame, CBObject* Owner, CBRegion* Region, int OffsetX, int OffsetY):CBBase(inGame)
-{
-	m_Owner = Owner;	
+CBActiveRect::CBActiveRect(CBGame *inGame, CBObject *Owner, CBRegion *Region, int OffsetX, int OffsetY): CBBase(inGame) {
+	m_Owner = Owner;
 	m_Region = Region;
 	CBPlatform::CopyRect(&m_Rect, &Region->m_Rect);
 	CBPlatform::OffsetRect(&m_Rect, -OffsetX, -OffsetY);
 	m_ZoomX = 100;
 	m_ZoomY = 100;
 	m_Precise = true;
-	m_Frame = NULL;	
+	m_Frame = NULL;
 	ClipRect();
 	m_OffsetX = OffsetX;
 	m_OffsetY = OffsetY;
@@ -73,8 +70,7 @@ CBActiveRect::CBActiveRect(CBGame* inGame, CBObject* Owner, CBRegion* Region, in
 
 
 //////////////////////////////////////////////////////////////////////
-CBActiveRect::~CBActiveRect()
-{
+CBActiveRect::~CBActiveRect() {
 	m_Owner = NULL;
 	m_Frame = NULL;
 	m_Region = NULL;
@@ -82,23 +78,21 @@ CBActiveRect::~CBActiveRect()
 
 
 //////////////////////////////////////////////////////////////////////////
-void CBActiveRect::ClipRect()
-{
+void CBActiveRect::ClipRect() {
 	RECT rc;
 	bool CustomViewport;
 	Game->GetCurrentViewportRect(&rc, &CustomViewport);
-	CBRenderer* Rend = Game->m_Renderer;
+	CBRenderer *Rend = Game->m_Renderer;
 
-	if(!CustomViewport)
-	{
+	if (!CustomViewport) {
 		rc.left -= Rend->m_DrawOffsetX;
 		rc.right -= Rend->m_DrawOffsetX;
 		rc.top -= Rend->m_DrawOffsetY;
 		rc.bottom -= Rend->m_DrawOffsetY;
 	}
 
-	if(rc.left > m_Rect.left) m_OffsetX = rc.left - m_Rect.left;
-	if(rc.top  > m_Rect.top)  m_OffsetY = rc.top  - m_Rect.top;
+	if (rc.left > m_Rect.left) m_OffsetX = rc.left - m_Rect.left;
+	if (rc.top  > m_Rect.top)  m_OffsetY = rc.top  - m_Rect.top;
 
 	CBPlatform::IntersectRect(&m_Rect, &m_Rect, &rc);
 }

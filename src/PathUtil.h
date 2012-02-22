@@ -26,23 +26,22 @@ THE SOFTWARE.
 #ifndef __WmePathUtils_H__
 #define __WmePathUtils_H__
 
-	class PathUtil
-	{
-	public:
-		static AnsiString UnifySeparators(const AnsiString& path);
-		static AnsiString NormalizeFileName(const AnsiString& path);
-		static AnsiString Combine(const AnsiString& path1, const AnsiString& path2);
-		static AnsiString GetDirectoryName(const AnsiString& path);
-		static AnsiString GetFileName(const AnsiString& path);
-		static AnsiString GetFileNameWithoutExtension(const AnsiString& path);
-		static AnsiString GetExtension(const AnsiString& path);
-		static bool CreateDirectory(const AnsiString& path);
-		static bool MatchesMask(const AnsiString& fileName, const AnsiString& mask);
+class PathUtil {
+public:
+	static AnsiString UnifySeparators(const AnsiString &path);
+	static AnsiString NormalizeFileName(const AnsiString &path);
+	static AnsiString Combine(const AnsiString &path1, const AnsiString &path2);
+	static AnsiString GetDirectoryName(const AnsiString &path);
+	static AnsiString GetFileName(const AnsiString &path);
+	static AnsiString GetFileNameWithoutExtension(const AnsiString &path);
+	static AnsiString GetExtension(const AnsiString &path);
+	static bool CreateDirectory(const AnsiString &path);
+	static bool MatchesMask(const AnsiString &fileName, const AnsiString &mask);
 
-		static bool FileExists(const AnsiString& fileName);
+	static bool FileExists(const AnsiString &fileName);
 
-		static AnsiString GetSafeLogFileName();
-		static AnsiString GetUserDirectory();
-	};
+	static AnsiString GetSafeLogFileName();
+	static AnsiString GetUserDirectory();
+};
 
 #endif // __WmePathUtils_H__

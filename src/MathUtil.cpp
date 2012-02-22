@@ -29,16 +29,14 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////////
-float MathUtil::Round(float val)
-{
+float MathUtil::Round(float val) {
 	float result = floor(val);
 	if (val - result >= 0.5) result += 1.0;
 	return result;
 }
 
 //////////////////////////////////////////////////////////////////////////
-float MathUtil::RoundUp(float val)
-{
+float MathUtil::RoundUp(float val) {
 	float result = floor(val);
 	if (val - result > 0) result += 1.0;
 	return result;

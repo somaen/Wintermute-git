@@ -28,27 +28,26 @@ THE SOFTWARE.
 
 
 #include "BFile.h"
-#include "zlib.h"	// Added by ClassView
+#include "zlib.h"   // Added by ClassView
 
 #define COMPRESSED_BUFFER_SIZE 4096
 
-class CBPkgFile : public CBFile  
-{
-public:	
-	CBPkgFile(CBGame* inGame);
+class CBPkgFile : public CBFile {
+public:
+	CBPkgFile(CBGame *inGame);
 	virtual ~CBPkgFile();
-	virtual HRESULT Seek(DWORD Pos, TSeek Origin=SEEK_TO_BEGIN);
-	virtual HRESULT Read(void* Buffer, DWORD Size);
+	virtual HRESULT Seek(DWORD Pos, TSeek Origin = SEEK_TO_BEGIN);
+	virtual HRESULT Read(void *Buffer, DWORD Size);
 	virtual HRESULT Close();
-    virtual HRESULT Open(const char* Filename);
+	virtual HRESULT Open(const char *Filename);
 private:
 	bool m_InflateInit;
 	HRESULT SeekToPos(DWORD NewPos);
 	bool m_Compressed;
-	CBFileEntry* m_FileEntry;
+	CBFileEntry *m_FileEntry;
 	z_stream m_Stream;
 	BYTE m_CompBuffer[COMPRESSED_BUFFER_SIZE];
-	FILE* m_File;
+	FILE *m_File;
 };
 
 #endif

@@ -30,8 +30,7 @@ THE SOFTWARE.
 
 
 //////////////////////////////////////////////////////////////////////////
-Matrix4::Matrix4()
-{
+Matrix4::Matrix4() {
 	_11 = _12 = _13 = _14 = 0.0f;
 	_21 = _22 = _23 = _24 = 0.0f;
 	_31 = _32 = _33 = _34 = 0.0f;
@@ -39,14 +38,12 @@ Matrix4::Matrix4()
 }
 
 //////////////////////////////////////////////////////////////////////////
-Matrix4::~Matrix4()
-{
+Matrix4::~Matrix4() {
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-void Matrix4::Identity()
-{
+void Matrix4::Identity() {
 	_12 = _13 = _14 = 0.0f;
 	_21 = _23 = _24 = 0.0f;
 	_31 = _32 = _34 = 0.0f;
@@ -56,8 +53,7 @@ void Matrix4::Identity()
 }
 
 //////////////////////////////////////////////////////////////////////////
-void Matrix4::RotationZ(float angle)
-{
+void Matrix4::RotationZ(float angle) {
 	Identity();
 
 	m[0][0] = cos(angle);
@@ -67,10 +63,9 @@ void Matrix4::RotationZ(float angle)
 }
 
 //////////////////////////////////////////////////////////////////////////
-void Matrix4::TransformVector2(Vector2& vec)
-{
+void Matrix4::TransformVector2(Vector2 &vec) {
 	float norm;
-	
+
 	norm = m[0][3] * vec.x + m[1][3] * vec.y + m[3][3];
 
 	float x = (m[0][0] * vec.x + m[1][0] * vec.y + m[3][0]) / norm;

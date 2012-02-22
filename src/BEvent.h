@@ -28,23 +28,22 @@ THE SOFTWARE.
 
 
 #include "BBase.h"
-#include "dctypes.h"	// Added by ClassView
+#include "dctypes.h"    // Added by ClassView
 
-class CBEvent : public CBBase  
-{
+class CBEvent : public CBBase {
 public:
 	DECLARE_PERSISTENT(CBEvent, CBBase);
-	void SetScript(char* Script);
-	void SetName(char* Name);
-	static const char* GetEventName(TEventType Type);
-	char* m_Script;
-	char* m_Name;
+	void SetScript(char *Script);
+	void SetName(char *Name);
+	static const char *GetEventName(TEventType Type);
+	char *m_Script;
+	char *m_Name;
 	TEventType m_Type;
-	CBEvent(CBGame* inGame);
-	CBEvent(CBGame* inGame, TEventType Type, char* Script);
+	CBEvent(CBGame *inGame);
+	CBEvent(CBGame *inGame, TEventType Type, char *Script);
 	virtual ~CBEvent();
-	HRESULT LoadFile(char * Filename);
-	HRESULT LoadBuffer(BYTE * Buffer, bool Complete=true);
+	HRESULT LoadFile(char *Filename);
+	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
 };
 
 #endif

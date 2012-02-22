@@ -33,25 +33,22 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CSXObject, false);
 
 //////////////////////////////////////////////////////////////////////////
-CSXObject::CSXObject(CBGame* inGame, CScStack* Stack):CBObject(inGame)
-{
+CSXObject::CSXObject(CBGame *inGame, CScStack *Stack): CBObject(inGame) {
 	int NumParams = Stack->Pop()->GetInt(0);
-	for(int i=0; i<NumParams; i++){
+	for (int i = 0; i < NumParams; i++) {
 		AddScript(Stack->Pop()->GetString());
 	}
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-CSXObject::~CSXObject()
-{
+CSXObject::~CSXObject() {
 
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CSXObject::Persist(CBPersistMgr* PersistMgr)
-{
+HRESULT CSXObject::Persist(CBPersistMgr *PersistMgr) {
 	CBObject::Persist(PersistMgr);
 
 	return S_OK;

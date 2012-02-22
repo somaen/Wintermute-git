@@ -27,14 +27,13 @@ THE SOFTWARE.
 #define __WmeAdResponseContext_H__
 
 
-class CAdResponseContext : public CBBase  
-{
+class CAdResponseContext : public CBBase {
 public:
-	void SetContext(char* Context);
+	void SetContext(char *Context);
 	int m_ID;
-	char* m_Context;
+	char *m_Context;
 	DECLARE_PERSISTENT(CAdResponseContext, CBBase);
-	CAdResponseContext(CBGame* inGame);
+	CAdResponseContext(CBGame *inGame);
 	virtual ~CAdResponseContext();
 
 };

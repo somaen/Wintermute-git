@@ -29,11 +29,10 @@ THE SOFTWARE.
 
 #include "BObject.h"
 
-class CSXObject : public CBObject  
-{
+class CSXObject : public CBObject {
 public:
 	DECLARE_PERSISTENT(CSXObject, CBObject);
-	CSXObject(CBGame* inGame, CScStack* Stack);
+	CSXObject(CBGame *inGame, CScStack *Stack);
 	virtual ~CSXObject();
 
 };

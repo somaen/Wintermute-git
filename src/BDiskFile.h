@@ -29,19 +29,18 @@ THE SOFTWARE.
 
 #include "BFile.h"
 
-class CBDiskFile : public CBFile  
-{
+class CBDiskFile : public CBFile {
 public:
-	CBDiskFile(CBGame* inGame);
+	CBDiskFile(CBGame *inGame);
 	virtual ~CBDiskFile();
-	virtual HRESULT Seek(DWORD Pos, TSeek Origin=SEEK_TO_BEGIN);
-	virtual HRESULT Read(void* Buffer, DWORD Size);
+	virtual HRESULT Seek(DWORD Pos, TSeek Origin = SEEK_TO_BEGIN);
+	virtual HRESULT Read(void *Buffer, DWORD Size);
 	virtual HRESULT Close();
-    virtual HRESULT Open(const char* Filename);
+	virtual HRESULT Open(const char *Filename);
 private:
-	void CorrectSlashes(char* fileName);
-	FILE* m_File;
-	BYTE* m_Data;
+	void CorrectSlashes(char *fileName);
+	FILE *m_File;
+	BYTE *m_Data;
 	bool m_Compressed;
 	DWORD m_PrefixSize;
 };

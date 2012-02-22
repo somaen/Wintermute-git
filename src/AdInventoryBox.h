@@ -28,8 +28,7 @@ THE SOFTWARE.
 
 #include "BObject.h"
 
-class CAdInventoryBox : public CBObject  
-{
+class CAdInventoryBox : public CBObject {
 public:
 	bool m_HideSelected;
 	DECLARE_PERSISTENT(CAdInventoryBox, CBObject);
@@ -39,17 +38,17 @@ public:
 	int m_ItemWidth;
 	bool m_Visible;
 	virtual HRESULT Display();
-	CUIButton* m_CloseButton;
+	CUIButton *m_CloseButton;
 	int m_Spacing;
 	int m_ScrollOffset;
 	RECT m_ItemsArea;
-	HRESULT Listen(CBScriptHolder* param1, DWORD param2);
-	CUIWindow* m_Window;
-	CAdInventoryBox(CBGame* inGame);
+	HRESULT Listen(CBScriptHolder *param1, DWORD param2);
+	CUIWindow *m_Window;
+	CAdInventoryBox(CBGame *inGame);
 	virtual ~CAdInventoryBox();
-	HRESULT LoadFile(char* Filename);
-	HRESULT LoadBuffer(BYTE* Buffer, bool Complete=true);
-	virtual HRESULT SaveAsText(CBDynBuffer* Buffer, int Indent);
+	HRESULT LoadFile(char *Filename);
+	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 };
 
 #endif

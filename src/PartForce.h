@@ -30,22 +30,20 @@ THE SOFTWARE.
 #include "BBase.h"
 #include "Vector2.h"
 
-class CPartForce : public CBNamedObject
-{
+class CPartForce : public CBNamedObject {
 public:
-	typedef enum TForceType
-	{
-		FORCE_POINT, FORCE_GLOBAL
+	typedef enum TForceType {
+	    FORCE_POINT, FORCE_GLOBAL
 	};
-	
-	CPartForce(CBGame* inGame);
+
+	CPartForce(CBGame *inGame);
 	virtual ~CPartForce(void);
 
 	Vector2 m_Pos;
 	Vector2 m_Direction;
 	TForceType m_Type;
 
-	HRESULT Persist(CBPersistMgr* PersistMgr);
+	HRESULT Persist(CBPersistMgr *PersistMgr);
 };
 
 #endif

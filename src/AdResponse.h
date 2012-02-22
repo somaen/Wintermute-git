@@ -29,23 +29,22 @@ THE SOFTWARE.
 
 #include "BObject.h"
 
-class CAdResponse : public CBObject
-{
-public:	
+class CAdResponse : public CBObject {
+public:
 	DECLARE_PERSISTENT(CAdResponse, CBObject);
-	HRESULT SetIcon(char* Filename);
-	HRESULT SetFont(char* Filename);
-	HRESULT SetIconHover(char* Filename);
-	HRESULT SetIconPressed(char* Filename);
-	void SetText(char* Text);
+	HRESULT SetIcon(char *Filename);
+	HRESULT SetFont(char *Filename);
+	HRESULT SetIconHover(char *Filename);
+	HRESULT SetIconPressed(char *Filename);
+	void SetText(char *Text);
 	int m_ID;
-	CBSprite* m_Icon;
-	CBSprite* m_IconHover;
-	CBSprite* m_IconPressed;
-	CBFont* m_Font;
-	char* m_Text;
-	char* m_TextOrig;
-	CAdResponse(CBGame* inGame);
+	CBSprite *m_Icon;
+	CBSprite *m_IconHover;
+	CBSprite *m_IconPressed;
+	CBFont *m_Font;
+	char *m_Text;
+	char *m_TextOrig;
+	CAdResponse(CBGame *inGame);
 	virtual ~CAdResponse();
 	TResponseType m_ResponseType;
 

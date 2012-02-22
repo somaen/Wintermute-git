@@ -27,204 +27,171 @@ THE SOFTWARE.
 #include "BDebugger.h"
 
 //////////////////////////////////////////////////////////////////////////
-CBDebugger::CBDebugger(CBGame* inGame) : CBBase(inGame)
-{
+CBDebugger::CBDebugger(CBGame *inGame) : CBBase(inGame) {
 	m_Enabled = false;
 }
 
 //////////////////////////////////////////////////////////////////////////
-CBDebugger::~CBDebugger(void)
-{
+CBDebugger::~CBDebugger(void) {
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::Initialize()
-{
+HRESULT CBDebugger::Initialize() {
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::Shutdown()
-{
+HRESULT CBDebugger::Shutdown() {
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::OnGameInit()
-{
+HRESULT CBDebugger::OnGameInit() {
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::OnGameShutdown()
-{
+HRESULT CBDebugger::OnGameShutdown() {
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::OnGameTick()
-{
+HRESULT CBDebugger::OnGameTick() {
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::OnLog(unsigned int ErrorCode, const char* Text)
-{
+HRESULT CBDebugger::OnLog(unsigned int ErrorCode, const char *Text) {
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::OnScriptInit(CScScript* Script)
-{
+HRESULT CBDebugger::OnScriptInit(CScScript *Script) {
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::OnScriptEventThreadInit(CScScript* Script, CScScript* ParentScript, const char* Name)
-{
+HRESULT CBDebugger::OnScriptEventThreadInit(CScScript *Script, CScScript *ParentScript, const char *Name) {
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::OnScriptMethodThreadInit(CScScript* Script, CScScript* ParentScript, const char* Name)
-{
+HRESULT CBDebugger::OnScriptMethodThreadInit(CScScript *Script, CScScript *ParentScript, const char *Name) {
 	return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::OnScriptShutdown(CScScript* Script)
-{
+HRESULT CBDebugger::OnScriptShutdown(CScScript *Script) {
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::OnScriptChangeLine(CScScript* Script, int Line)
-{
+HRESULT CBDebugger::OnScriptChangeLine(CScScript *Script, int Line) {
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::OnScriptChangeScope(CScScript* Script, CScValue* Scope)
-{
+HRESULT CBDebugger::OnScriptChangeScope(CScScript *Script, CScValue *Scope) {
 	return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::OnScriptShutdownScope(CScScript* Script, CScValue* Scope)
-{
+HRESULT CBDebugger::OnScriptShutdownScope(CScScript *Script, CScValue *Scope) {
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::OnVariableInit(EWmeDebuggerVariableType Type, CScScript* Script, CScValue* Scope, CScValue* Var, const char* VariableName)
-{
+HRESULT CBDebugger::OnVariableInit(EWmeDebuggerVariableType Type, CScScript *Script, CScValue *Scope, CScValue *Var, const char *VariableName) {
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::OnVariableChangeValue(CScValue* Var, CScValue* Value)
-{
+HRESULT CBDebugger::OnVariableChangeValue(CScValue *Var, CScValue *Value) {
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDebugger::OnScriptHitBreakpoint(CScScript* Script)
-{
+HRESULT CBDebugger::OnScriptHitBreakpoint(CScScript *Script) {
 	return S_OK;
 }
 
 //////////////////////////////////////////////////////////////////////////
 // IWmeDebugServer interface implementation
-bool CBDebugger::AttachClient(IWmeDebugClient* Client)
-{
+bool CBDebugger::AttachClient(IWmeDebugClient *Client) {
 	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBDebugger::DetachClient(IWmeDebugClient* Client)
-{
-	return false;
-}
-
-
-//////////////////////////////////////////////////////////////////////////
-bool CBDebugger::QueryData(IWmeDebugClient* Client)
-{
+bool CBDebugger::DetachClient(IWmeDebugClient *Client) {
 	return false;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-int CBDebugger::GetPropInt(const char* PropName)
-{
+bool CBDebugger::QueryData(IWmeDebugClient *Client) {
+	return false;
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+int CBDebugger::GetPropInt(const char *PropName) {
 	return 0;
 }
 
 //////////////////////////////////////////////////////////////////////////
-double CBDebugger::GetPropFloat(const char* PropName)
-{
+double CBDebugger::GetPropFloat(const char *PropName) {
 	return 0.0;
 }
 
 //////////////////////////////////////////////////////////////////////////
-const char* CBDebugger::GetPropString(const char* PropName)
-{
+const char *CBDebugger::GetPropString(const char *PropName) {
 	return "";
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBDebugger::GetPropBool(const char* PropName)
-{
+bool CBDebugger::GetPropBool(const char *PropName) {
 	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBDebugger::SetProp(const char* PropName, int PropValue)
-{
+bool CBDebugger::SetProp(const char *PropName, int PropValue) {
 	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBDebugger::SetProp(const char* PropName, double PropValue)
-{
+bool CBDebugger::SetProp(const char *PropName, double PropValue) {
 	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBDebugger::SetProp(const char* PropName, const char* PropValue)
-{
+bool CBDebugger::SetProp(const char *PropName, const char *PropValue) {
 	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBDebugger::SetProp(const char* PropName, bool PropValue)
-{
+bool CBDebugger::SetProp(const char *PropName, bool PropValue) {
 	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBDebugger::ResolveFilename(const char* RelativeFilename, char* AbsFilenameBuf, int AbsBufSize)
-{
+bool CBDebugger::ResolveFilename(const char *RelativeFilename, char *AbsFilenameBuf, int AbsBufSize) {
 	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBDebugger::AddBreakpoint(const char* ScriptFilename, int Line)
-{
+bool CBDebugger::AddBreakpoint(const char *ScriptFilename, int Line) {
 	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBDebugger::RemoveBreakpoint(const char* ScriptFilename, int Line)
-{
+bool CBDebugger::RemoveBreakpoint(const char *ScriptFilename, int Line) {
 	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CBDebugger::ContinueExecution()
-{
+bool CBDebugger::ContinueExecution() {
 	return false;
 }

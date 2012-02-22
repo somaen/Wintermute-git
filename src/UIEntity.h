@@ -27,25 +27,24 @@ THE SOFTWARE.
 #define __WmeUiEntity_H__
 
 
-class CUIEntity : public CUIObject  
-{
+class CUIEntity : public CUIObject {
 public:
 	DECLARE_PERSISTENT(CUIEntity, CUIObject);
-	CUIEntity(CBGame* inGame);
+	CUIEntity(CBGame *inGame);
 	virtual ~CUIEntity();
-	HRESULT LoadFile(char* Filename);
-	HRESULT LoadBuffer(BYTE* Buffer, bool Complete);
-	virtual HRESULT SaveAsText(CBDynBuffer* Buffer, int Indent);
+	HRESULT LoadFile(char *Filename);
+	HRESULT LoadBuffer(BYTE *Buffer, bool Complete);
+	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 
-	virtual HRESULT Display(int OffsetX=0, int OffsetY=0);
-	CAdEntity* m_Entity;
-	HRESULT SetEntity(char* Filename);
+	virtual HRESULT Display(int OffsetX = 0, int OffsetY = 0);
+	CAdEntity *m_Entity;
+	HRESULT SetEntity(char *Filename);
 
 	// scripting interface
-	virtual CScValue* ScGetProperty(char* Name);
+	virtual CScValue *ScGetProperty(char *Name);
 	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
-	virtual HRESULT ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name);
-	virtual char* ScToString();
+	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
+	virtual char *ScToString();
 };
 
 #endif

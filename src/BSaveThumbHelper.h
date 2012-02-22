@@ -29,15 +29,14 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
-class CBSaveThumbHelper : public CBBase
-{
+class CBSaveThumbHelper : public CBBase {
 public:
-	CBSaveThumbHelper(CBGame* inGame);
+	CBSaveThumbHelper(CBGame *inGame);
 	virtual ~CBSaveThumbHelper(void);
-	HRESULT StoreThumbnail(bool DoFlip=false);
+	HRESULT StoreThumbnail(bool DoFlip = false);
 
-	CBImage* m_Thumbnail;
-	CBImage* m_RichThumbnail;
+	CBImage *m_Thumbnail;
+	CBImage *m_RichThumbnail;
 };
 
 #endif

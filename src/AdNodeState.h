@@ -29,25 +29,24 @@ THE SOFTWARE.
 
 class CAdEntity;
 
-class CAdNodeState : public CBBase  
-{
+class CAdNodeState : public CBBase {
 public:
-	HRESULT TransferEntity(CAdEntity* Entity, bool IncludingSprites, bool Saving);
-	void SetName(char* Name);
-	void SetFilename(char* Filename);
-	void SetCursor(char* Filename);
+	HRESULT TransferEntity(CAdEntity *Entity, bool IncludingSprites, bool Saving);
+	void SetName(char *Name);
+	void SetFilename(char *Filename);
+	void SetCursor(char *Filename);
 	DECLARE_PERSISTENT(CAdNodeState, CBBase);
-	CAdNodeState(CBGame* inGame);
+	CAdNodeState(CBGame *inGame);
 	virtual ~CAdNodeState();
-	char* m_Name;
+	char *m_Name;
 	bool m_Active;
-	char* m_Caption[7];
+	char *m_Caption[7];
 	void SetCaption(char *Caption, int Case);
-	char* GetCaption(int Case);
+	char *GetCaption(int Case);
 	DWORD m_AlphaColor;
-	char* m_Filename;
-	char* m_Cursor;
-	
+	char *m_Filename;
+	char *m_Cursor;
+
 };
 
 #endif

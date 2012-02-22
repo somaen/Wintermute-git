@@ -29,13 +29,12 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
-class CBQuickMsg : public CBBase  
-{
+class CBQuickMsg : public CBBase {
 public:
-	char* GetText();
+	char *GetText();
 	DWORD m_StartTime;
-	char* m_Text;
-	CBQuickMsg(CBGame* inGame, char* Text);
+	char *m_Text;
+	CBQuickMsg(CBGame *inGame, char *Text);
 	virtual ~CBQuickMsg();
 
 };

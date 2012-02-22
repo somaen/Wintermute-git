@@ -26,12 +26,11 @@ THE SOFTWARE.
 #ifndef __WmeMathUtil_H__
 #define __WmeMathUtil_H__
 
-	class MathUtil
-	{
-	public:
-		static float Round(float val);
-		static float RoundUp(float val);
-	};
+class MathUtil {
+public:
+	static float Round(float val);
+	static float RoundUp(float val);
+};
 
 
 #endif // __WmeMathUtil_H__

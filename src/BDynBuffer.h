@@ -29,24 +29,23 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
-class CBDynBuffer : public CBBase  
-{
+class CBDynBuffer : public CBBase {
 public:
 	bool m_Initialized;
 	void PutText(LPCSTR fmt, ...);
-	void PutTextIndent(int Indent, LPCSTR fmt, ...);	
+	void PutTextIndent(int Indent, LPCSTR fmt, ...);
 	DWORD GetDWORD();
 	void PutDWORD(DWORD Val);
-	char* GetString();
-	void PutString(const char* Val);
-	HRESULT GetBytes(BYTE* Buffer, DWORD Size);
-	HRESULT PutBytes(BYTE* Buffer, DWORD Size);
+	char *GetString();
+	void PutString(const char *Val);
+	HRESULT GetBytes(BYTE *Buffer, DWORD Size);
+	HRESULT PutBytes(BYTE *Buffer, DWORD Size);
 	DWORD GetSize();
-	HRESULT Init(DWORD InitSize=0);
+	HRESULT Init(DWORD InitSize = 0);
 	void Cleanup();
 	DWORD m_Size;
-	BYTE* m_Buffer;
-	CBDynBuffer(CBGame* inGame, DWORD InitSize=1000, DWORD GrowBy=1000);
+	BYTE *m_Buffer;
+	CBDynBuffer(CBGame *inGame, DWORD InitSize = 1000, DWORD GrowBy = 1000);
 	virtual ~CBDynBuffer();
 
 private:

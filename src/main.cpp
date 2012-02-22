@@ -24,11 +24,11 @@ THE SOFTWARE.
 */
 
 #ifdef _MSC_VER
-#	ifdef _DEBUG
-#		define _CRTDBG_MAP_ALLOC
-#		include <stdlib.h>
-#		include <crtdbg.h>
-#	endif
+#   ifdef _DEBUG
+#       define _CRTDBG_MAP_ALLOC
+#       include <stdlib.h>
+#       include <crtdbg.h>
+#   endif
 #endif
 
 #include "SDL.h"
@@ -36,18 +36,17 @@ THE SOFTWARE.
 #include "dcgf.h"
 
 #ifdef __WIN32__
-#	include "../visualc/resource.h"
+#   include "../visualc/resource.h"
 #endif
 
 //////////////////////////////////////////////////////////////////////
-int main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
 #ifdef _MSC_VER
-#	ifdef _DEBUG
-	_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	_CrtSetReportMode( _CRT_ERROR, _CRTDBG_MODE_DEBUG );
+#   ifdef _DEBUG
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
 	//_CrtSetBreakAlloc(53403);
-#	endif
+#   endif
 #endif
 
 #ifndef __WIN32__
@@ -55,12 +54,11 @@ int main(int argc, char* argv[])
 #endif
 	int ret = 1;
 
-	CAdGame* Game = new CAdGame;
+	CAdGame *Game = new CAdGame;
 	Game->m_SmartCache = true;
 
 	ret = CBPlatform::Initialize(Game, argc, argv);
-	if (ret == 0)
-	{
+	if (ret == 0) {
 		ret = CBPlatform::MessageLoop();
 	}
 

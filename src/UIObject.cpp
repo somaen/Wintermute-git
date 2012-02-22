@@ -31,8 +31,7 @@ THE SOFTWARE.
 IMPLEMENT_PERSISTENT(CUIObject, false);
 
 //////////////////////////////////////////////////////////////////////////
-CUIObject::CUIObject(CBGame* inGame):CBObject(inGame)
-{
+CUIObject::CUIObject(CBGame *inGame): CBObject(inGame) {
 	m_Back = NULL;
 	m_Image = NULL;
 	m_Font = NULL;
@@ -61,45 +60,41 @@ CUIObject::CUIObject(CBGame* inGame):CBObject(inGame)
 
 
 //////////////////////////////////////////////////////////////////////////
-CUIObject::~CUIObject()
-{
-	if(!Game->m_LoadInProgress) CSysClassRegistry::GetInstance()->EnumInstances(CBGame::InvalidateValues, "CScValue", (void*)this);
+CUIObject::~CUIObject() {
+	if (!Game->m_LoadInProgress) CSysClassRegistry::GetInstance()->EnumInstances(CBGame::InvalidateValues, "CScValue", (void *)this);
 
-	if(m_Back) delete m_Back;
-	if(m_Font && !m_SharedFonts) Game->m_FontStorage->RemoveFont(m_Font);
+	if (m_Back) delete m_Back;
+	if (m_Font && !m_SharedFonts) Game->m_FontStorage->RemoveFont(m_Font);
 
-	if(m_Image && !m_SharedImages) delete m_Image;
+	if (m_Image && !m_SharedImages) delete m_Image;
 
-	if(m_Text) delete [] m_Text;
+	if (m_Text) delete [] m_Text;
 
 	m_FocusedWidget = NULL; // ref only
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-void CUIObject::SetText(const char *Text)
-{
-	if(m_Text) delete [] m_Text;
-	m_Text = new char [strlen(Text)+1];
-	if(m_Text){
+void CUIObject::SetText(const char *Text) {
+	if (m_Text) delete [] m_Text;
+	m_Text = new char [strlen(Text) + 1];
+	if (m_Text) {
 		strcpy(m_Text, Text);
-		for(int i=0; i<strlen(m_Text); i++){
-			if(m_Text[i]=='|') m_Text[i]='\n';
+		for (int i = 0; i < strlen(m_Text); i++) {
+			if (m_Text[i] == '|') m_Text[i] = '\n';
 		}
 	}
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CUIObject::Display(int OffsetX, int OffsetY)
-{
+HRESULT CUIObject::Display(int OffsetX, int OffsetY) {
 	return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-void CUIObject::SetListener(CBScriptHolder *Object, CBScriptHolder* ListenerObject, DWORD ListenerParam)
-{
+void CUIObject::SetListener(CBScriptHolder *Object, CBScriptHolder *ListenerObject, DWORD ListenerParam) {
 	m_ListenerObject = Object;
 	m_ListenerParamObject = ListenerObject;
 	m_ListenerParamDWORD = ListenerParam;
@@ -107,26 +102,24 @@ void CUIObject::SetListener(CBScriptHolder *Object, CBScriptHolder* ListenerObje
 
 
 //////////////////////////////////////////////////////////////////////////
-void CUIObject::CorrectSize()
-{
+void CUIObject::CorrectSize() {
 	RECT rect;
 
-	if(m_Width<=0){
-		if(m_Image){
+	if (m_Width <= 0) {
+		if (m_Image) {
 			m_Image->GetBoundingRect(&rect, 0, 0);
 			m_Width = rect.right - rect.left;
-		}
-		else m_Width = 100;
+		} else m_Width = 100;
 	}
 
-	if(m_Height<=0){
-		if(m_Image){
+	if (m_Height <= 0) {
+		if (m_Image) {
 			m_Image->GetBoundingRect(&rect, 0, 0);
 			m_Height = rect.bottom - rect.top;
-		}		
+		}
 	}
 
-	if(m_Back) m_Back->CorrectSize(&m_Width, &m_Height);
+	if (m_Back) m_Back->CorrectSize(&m_Width, &m_Height);
 }
 
 
@@ -134,25 +127,21 @@ void CUIObject::CorrectSize()
 //////////////////////////////////////////////////////////////////////////
 // high level scripting interface
 //////////////////////////////////////////////////////////////////////////
-HRESULT CUIObject::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *ThisStack, char *Name)
-{
+HRESULT CUIObject::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name) {
 	//////////////////////////////////////////////////////////////////////////
 	// SetFont
 	//////////////////////////////////////////////////////////////////////////
-	if(strcmp(Name, "SetFont")==0){
+	if (strcmp(Name, "SetFont") == 0) {
 		Stack->CorrectParams(1);
-		CScValue* Val = Stack->Pop();
+		CScValue *Val = Stack->Pop();
 
-		if(m_Font) Game->m_FontStorage->RemoveFont(m_Font);
-		if(Val->IsNULL())
-		{
+		if (m_Font) Game->m_FontStorage->RemoveFont(m_Font);
+		if (Val->IsNULL()) {
 			m_Font = NULL;
 			Stack->PushBool(true);
-		}
-		else
-		{
+		} else {
 			m_Font = Game->m_FontStorage->AddFont(Val->GetString());
-			Stack->PushBool(m_Font!=NULL);
+			Stack->PushBool(m_Font != NULL);
 		}
 		return S_OK;
 	}
@@ -160,24 +149,23 @@ HRESULT CUIObject::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 	//////////////////////////////////////////////////////////////////////////
 	// SetImage
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "SetImage")==0){
+	else if (strcmp(Name, "SetImage") == 0) {
 		Stack->CorrectParams(1);
-		CScValue* Val = Stack->Pop();
+		CScValue *Val = Stack->Pop();
 
-		char* Filename = Val->GetString();
+		char *Filename = Val->GetString();
 
-		SAFE_DELETE(m_Image);		
-		if(Val->IsNULL()){
+		SAFE_DELETE(m_Image);
+		if (Val->IsNULL()) {
 			Stack->PushBool(true);
 			return S_OK;
 		}
-		
+
 		m_Image = new CBSprite(Game);
-		if(!m_Image || FAILED(m_Image->LoadFile(Val->GetString()))){
+		if (!m_Image || FAILED(m_Image->LoadFile(Val->GetString()))) {
 			SAFE_DELETE(m_Image);
-			Stack->PushBool(false);			
-		}
-		else Stack->PushBool(true);
+			Stack->PushBool(false);
+		} else Stack->PushBool(true);
 
 		return S_OK;
 	}
@@ -185,9 +173,9 @@ HRESULT CUIObject::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 	//////////////////////////////////////////////////////////////////////////
 	// GetImage
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "GetImage")==0){
+	else if (strcmp(Name, "GetImage") == 0) {
 		Stack->CorrectParams(0);
-		if(!m_Image || !m_Image->m_Filename) Stack->PushNULL();
+		if (!m_Image || !m_Image->m_Filename) Stack->PushNULL();
 		else Stack->PushString(m_Image->m_Filename);
 
 		return S_OK;
@@ -196,9 +184,9 @@ HRESULT CUIObject::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 	//////////////////////////////////////////////////////////////////////////
 	// GetImageObject
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "GetImageObject")==0){
+	else if (strcmp(Name, "GetImageObject") == 0) {
 		Stack->CorrectParams(0);
-		if(!m_Image) Stack->PushNULL();
+		if (!m_Image) Stack->PushNULL();
 		else Stack->PushNative(m_Image, true);
 
 		return S_OK;
@@ -207,7 +195,7 @@ HRESULT CUIObject::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 	//////////////////////////////////////////////////////////////////////////
 	// Focus
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Focus")==0){
+	else if (strcmp(Name, "Focus") == 0) {
 		Stack->CorrectParams(0);
 		Focus();
 		Stack->PushNULL();
@@ -217,57 +205,55 @@ HRESULT CUIObject::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 	//////////////////////////////////////////////////////////////////////////
 	// MoveAfter / MoveBefore
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "MoveAfter")==0 || strcmp(Name, "MoveBefore")==0){
+	else if (strcmp(Name, "MoveAfter") == 0 || strcmp(Name, "MoveBefore") == 0) {
 		Stack->CorrectParams(1);
 
-		if(m_Parent && m_Parent->m_Type == UI_WINDOW){
-			CUIWindow* win = (CUIWindow*)m_Parent;
+		if (m_Parent && m_Parent->m_Type == UI_WINDOW) {
+			CUIWindow *win = (CUIWindow *)m_Parent;
 
 			int i;
-			bool found = false;			
-			CScValue* val = Stack->Pop();
+			bool found = false;
+			CScValue *val = Stack->Pop();
 			// find directly
-			if(val->IsNative()){
-				CUIObject* widget = (CUIObject*)val->GetNative();
-				for(i=0; i<win->m_Widgets.GetSize(); i++){
-					if(win->m_Widgets[i]==widget){
+			if (val->IsNative()) {
+				CUIObject *widget = (CUIObject *)val->GetNative();
+				for (i = 0; i < win->m_Widgets.GetSize(); i++) {
+					if (win->m_Widgets[i] == widget) {
 						found = true;
 						break;
 					}
 				}
 			}
 			// find by name
-			else{
-				char* name = val->GetString();
-				for(i=0; i<win->m_Widgets.GetSize(); i++){
-					if(CBPlatform::stricmp(win->m_Widgets[i]->m_Name, name)==0){
+			else {
+				char *name = val->GetString();
+				for (i = 0; i < win->m_Widgets.GetSize(); i++) {
+					if (CBPlatform::stricmp(win->m_Widgets[i]->m_Name, name) == 0) {
 						found = true;
 						break;
 					}
 				}
 			}
 
-			if(found){
-				bool done=false;
-				for(int j=0; j<win->m_Widgets.GetSize(); j++){
-					if(win->m_Widgets[j]==this){
-						if(strcmp(Name, "MoveAfter")==0) i++;
-						if(j>=i) j++;
+			if (found) {
+				bool done = false;
+				for (int j = 0; j < win->m_Widgets.GetSize(); j++) {
+					if (win->m_Widgets[j] == this) {
+						if (strcmp(Name, "MoveAfter") == 0) i++;
+						if (j >= i) j++;
 
 						win->m_Widgets.InsertAt(i, this);
-						win->m_Widgets.RemoveAt(j);						
+						win->m_Widgets.RemoveAt(j);
 
 						done = true;
 						Stack->PushBool(true);
 						break;
 					}
 				}
-				if(!done) Stack->PushBool(false);
-			}
-			else Stack->PushBool(false);
+				if (!done) Stack->PushBool(false);
+			} else Stack->PushBool(false);
 
-		}
-		else Stack->PushBool(false);
+		} else Stack->PushBool(false);
 
 		return S_OK;
 	}
@@ -275,21 +261,20 @@ HRESULT CUIObject::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 	//////////////////////////////////////////////////////////////////////////
 	// MoveToBottom
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "MoveToBottom")==0){
+	else if (strcmp(Name, "MoveToBottom") == 0) {
 		Stack->CorrectParams(0);
 
-		if(m_Parent && m_Parent->m_Type == UI_WINDOW){
-			CUIWindow* win = (CUIWindow*)m_Parent;
-			for(int i=0; i<win->m_Widgets.GetSize(); i++){
-				if(win->m_Widgets[i]==this){
+		if (m_Parent && m_Parent->m_Type == UI_WINDOW) {
+			CUIWindow *win = (CUIWindow *)m_Parent;
+			for (int i = 0; i < win->m_Widgets.GetSize(); i++) {
+				if (win->m_Widgets[i] == this) {
 					win->m_Widgets.RemoveAt(i);
 					win->m_Widgets.InsertAt(0, this);
 					break;
 				}
 			}
 			Stack->PushBool(true);
-		}
-		else Stack->PushBool(false);
+		} else Stack->PushBool(false);
 
 		return S_OK;
 	}
@@ -297,21 +282,20 @@ HRESULT CUIObject::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 	//////////////////////////////////////////////////////////////////////////
 	// MoveToTop
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "MoveToTop")==0){
+	else if (strcmp(Name, "MoveToTop") == 0) {
 		Stack->CorrectParams(0);
 
-		if(m_Parent && m_Parent->m_Type == UI_WINDOW){
-			CUIWindow* win = (CUIWindow*)m_Parent;
-			for(int i=0; i<win->m_Widgets.GetSize(); i++){
-				if(win->m_Widgets[i]==this){
+		if (m_Parent && m_Parent->m_Type == UI_WINDOW) {
+			CUIWindow *win = (CUIWindow *)m_Parent;
+			for (int i = 0; i < win->m_Widgets.GetSize(); i++) {
+				if (win->m_Widgets[i] == this) {
 					win->m_Widgets.RemoveAt(i);
 					win->m_Widgets.Add(this);
 					break;
 				}
 			}
 			Stack->PushBool(true);
-		}
-		else Stack->PushBool(false);
+		} else Stack->PushBool(false);
 
 		return S_OK;
 	}
@@ -321,14 +305,13 @@ HRESULT CUIObject::ScCallMethod(CScScript* Script, CScStack *Stack, CScStack *Th
 
 
 //////////////////////////////////////////////////////////////////////////
-CScValue* CUIObject::ScGetProperty(char *Name)
-{
+CScValue *CUIObject::ScGetProperty(char *Name) {
 	m_ScValue->SetNULL();
 
 	//////////////////////////////////////////////////////////////////////////
 	// Type
 	//////////////////////////////////////////////////////////////////////////
-	if(strcmp(Name, "Type")==0){
+	if (strcmp(Name, "Type") == 0) {
 		m_ScValue->SetString("ui_object");
 		return m_ScValue;
 	}
@@ -336,7 +319,7 @@ CScValue* CUIObject::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// Name
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Name")==0){
+	else if (strcmp(Name, "Name") == 0) {
 		m_ScValue->SetString(m_Name);
 		return m_ScValue;
 	}
@@ -344,7 +327,7 @@ CScValue* CUIObject::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// Parent (RO)
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Parent")==0){
+	else if (strcmp(Name, "Parent") == 0) {
 		m_ScValue->SetNative(m_Parent, true);
 		return m_ScValue;
 	}
@@ -352,7 +335,7 @@ CScValue* CUIObject::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// ParentNotify
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "ParentNotify")==0){
+	else if (strcmp(Name, "ParentNotify") == 0) {
 		m_ScValue->SetBool(m_ParentNotify);
 		return m_ScValue;
 	}
@@ -360,7 +343,7 @@ CScValue* CUIObject::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// Width
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Width")==0){
+	else if (strcmp(Name, "Width") == 0) {
 		m_ScValue->SetInt(m_Width);
 		return m_ScValue;
 	}
@@ -368,7 +351,7 @@ CScValue* CUIObject::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// Height
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Height")==0){
+	else if (strcmp(Name, "Height") == 0) {
 		m_ScValue->SetInt(m_Height);
 		return m_ScValue;
 	}
@@ -376,7 +359,7 @@ CScValue* CUIObject::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// Visible
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Visible")==0){
+	else if (strcmp(Name, "Visible") == 0) {
 		m_ScValue->SetBool(m_Visible);
 		return m_ScValue;
 	}
@@ -384,7 +367,7 @@ CScValue* CUIObject::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// Disabled
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Disabled")==0){
+	else if (strcmp(Name, "Disabled") == 0) {
 		m_ScValue->SetBool(m_Disable);
 		return m_ScValue;
 	}
@@ -392,7 +375,7 @@ CScValue* CUIObject::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// Text
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Text")==0){
+	else if (strcmp(Name, "Text") == 0) {
 		m_ScValue->SetString(m_Text);
 		return m_ScValue;
 	}
@@ -400,17 +383,16 @@ CScValue* CUIObject::ScGetProperty(char *Name)
 	//////////////////////////////////////////////////////////////////////////
 	// NextSibling (RO) / PrevSibling (RO)
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "NextSibling")==0 || strcmp(Name, "PrevSibling")==0){
+	else if (strcmp(Name, "NextSibling") == 0 || strcmp(Name, "PrevSibling") == 0) {
 		m_ScValue->SetNULL();
-		if(m_Parent && m_Parent->m_Type == UI_WINDOW){
-			CUIWindow* win = (CUIWindow*)m_Parent;
-			for(int i=0; i<win->m_Widgets.GetSize(); i++){
-				if(win->m_Widgets[i] == this){
-					if(strcmp(Name, "NextSibling")==0){
-						if(i<win->m_Widgets.GetSize()-1) m_ScValue->SetNative(win->m_Widgets[i+1], true);
-					}
-					else{
-						if(i>0) m_ScValue->SetNative(win->m_Widgets[i-1], true);
+		if (m_Parent && m_Parent->m_Type == UI_WINDOW) {
+			CUIWindow *win = (CUIWindow *)m_Parent;
+			for (int i = 0; i < win->m_Widgets.GetSize(); i++) {
+				if (win->m_Widgets[i] == this) {
+					if (strcmp(Name, "NextSibling") == 0) {
+						if (i < win->m_Widgets.GetSize() - 1) m_ScValue->SetNative(win->m_Widgets[i + 1], true);
+					} else {
+						if (i > 0) m_ScValue->SetNative(win->m_Widgets[i - 1], true);
 					}
 					break;
 				}
@@ -424,12 +406,11 @@ CScValue* CUIObject::ScGetProperty(char *Name)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CUIObject::ScSetProperty(char *Name, CScValue *Value)
-{
+HRESULT CUIObject::ScSetProperty(char *Name, CScValue *Value) {
 	//////////////////////////////////////////////////////////////////////////
 	// Name
 	//////////////////////////////////////////////////////////////////////////
-	if(strcmp(Name, "Name")==0){
+	if (strcmp(Name, "Name") == 0) {
 		SetName(Value->GetString());
 		return S_OK;
 	}
@@ -437,7 +418,7 @@ HRESULT CUIObject::ScSetProperty(char *Name, CScValue *Value)
 	//////////////////////////////////////////////////////////////////////////
 	// ParentNotify
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "ParentNotify")==0){
+	else if (strcmp(Name, "ParentNotify") == 0) {
 		m_ParentNotify = Value->GetBool();
 		return S_OK;
 	}
@@ -445,7 +426,7 @@ HRESULT CUIObject::ScSetProperty(char *Name, CScValue *Value)
 	//////////////////////////////////////////////////////////////////////////
 	// Width
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Width")==0){
+	else if (strcmp(Name, "Width") == 0) {
 		m_Width = Value->GetInt();
 		return S_OK;
 	}
@@ -453,7 +434,7 @@ HRESULT CUIObject::ScSetProperty(char *Name, CScValue *Value)
 	//////////////////////////////////////////////////////////////////////////
 	// Height
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Height")==0){
+	else if (strcmp(Name, "Height") == 0) {
 		m_Height = Value->GetInt();
 		return S_OK;
 	}
@@ -461,7 +442,7 @@ HRESULT CUIObject::ScSetProperty(char *Name, CScValue *Value)
 	//////////////////////////////////////////////////////////////////////////
 	// Visible
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Visible")==0){
+	else if (strcmp(Name, "Visible") == 0) {
 		m_Visible = Value->GetBool();
 		return S_OK;
 	}
@@ -469,7 +450,7 @@ HRESULT CUIObject::ScSetProperty(char *Name, CScValue *Value)
 	//////////////////////////////////////////////////////////////////////////
 	// Disabled
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Disabled")==0){
+	else if (strcmp(Name, "Disabled") == 0) {
 		m_Disable = Value->GetBool();
 		return S_OK;
 	}
@@ -477,7 +458,7 @@ HRESULT CUIObject::ScSetProperty(char *Name, CScValue *Value)
 	//////////////////////////////////////////////////////////////////////////
 	// Text
 	//////////////////////////////////////////////////////////////////////////
-	else if(strcmp(Name, "Text")==0){
+	else if (strcmp(Name, "Text") == 0) {
 		SetText(Value->GetString());
 		return S_OK;
 	}
@@ -487,21 +468,19 @@ HRESULT CUIObject::ScSetProperty(char *Name, CScValue *Value)
 
 
 //////////////////////////////////////////////////////////////////////////
-char* CUIObject::ScToString()
-{
+char *CUIObject::ScToString() {
 	return "[ui_object]";
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-bool CUIObject::IsFocused()
-{
-	if(!Game->m_FocusedWindow) return false;
-	if(Game->m_FocusedWindow==this) return true;
+bool CUIObject::IsFocused() {
+	if (!Game->m_FocusedWindow) return false;
+	if (Game->m_FocusedWindow == this) return true;
 
-	CUIObject* obj = Game->m_FocusedWindow;
-	while(obj){
-		if(obj==this) return true;
+	CUIObject *obj = Game->m_FocusedWindow;
+	while (obj) {
+		if (obj == this) return true;
 		else obj = obj->m_FocusedWidget;
 	}
 	return false;
@@ -509,10 +488,9 @@ bool CUIObject::IsFocused()
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CUIObject::HandleMouse(TMouseEvent Event, TMouseButton Button)
-{
+HRESULT CUIObject::HandleMouse(TMouseEvent Event, TMouseButton Button) {
 	// handle focus change
-	if(Event==MOUSE_CLICK && Button==MOUSE_BUTTON_LEFT){
+	if (Event == MOUSE_CLICK && Button == MOUSE_BUTTON_LEFT) {
 		Focus();
 	}
 	return CBObject::HandleMouse(Event, Button);
@@ -520,25 +498,23 @@ HRESULT CUIObject::HandleMouse(TMouseEvent Event, TMouseButton Button)
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CUIObject::Focus()
-{
-	CUIObject* obj = this;
+HRESULT CUIObject::Focus() {
+	CUIObject *obj = this;
 	bool disabled = false;
-	while(obj){
-		if(obj->m_Disable && obj->m_Type==UI_WINDOW){
+	while (obj) {
+		if (obj->m_Disable && obj->m_Type == UI_WINDOW) {
 			disabled = true;
 			break;
 		}
 		obj = obj->m_Parent;
 	}
-	if(!disabled){
+	if (!disabled) {
 		obj = this;
-		while(obj){
-			if(obj->m_Parent){
-				if(!obj->m_Disable && obj->m_CanFocus) obj->m_Parent->m_FocusedWidget = obj;
-			}
-			else{
-				if(obj->m_Type==UI_WINDOW) Game->FocusWindow((CUIWindow*)obj);
+		while (obj) {
+			if (obj->m_Parent) {
+				if (!obj->m_Disable && obj->m_CanFocus) obj->m_Parent->m_FocusedWidget = obj;
+			} else {
+				if (obj->m_Type == UI_WINDOW) Game->FocusWindow((CUIWindow *)obj);
 			}
 
 			obj = obj->m_Parent;
@@ -549,26 +525,25 @@ HRESULT CUIObject::Focus()
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CUIObject::GetTotalOffset(int *OffsetX, int *OffsetY)
-{
-	int OffX=0, OffY=0;
+HRESULT CUIObject::GetTotalOffset(int *OffsetX, int *OffsetY) {
+	int OffX = 0, OffY = 0;
 
-	CUIObject* obj = m_Parent;
-	while(obj){
+	CUIObject *obj = m_Parent;
+	while (obj) {
 		OffX += obj->m_PosX;
 		OffY += obj->m_PosY;
 
 		obj = obj->m_Parent;
 	}
-	if(OffsetX) *OffsetX = OffX;
-	if(OffsetY) *OffsetY = OffY;
+	if (OffsetX) *OffsetX = OffX;
+	if (OffsetY) *OffsetY = OffY;
 
 	return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CUIObject::Persist(CBPersistMgr* PersistMgr){
+HRESULT CUIObject::Persist(CBPersistMgr *PersistMgr) {
 
 	CBObject::Persist(PersistMgr);
 
@@ -595,7 +570,6 @@ HRESULT CUIObject::Persist(CBPersistMgr* PersistMgr){
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CUIObject::SaveAsText(CBDynBuffer* Buffer, int Indent)
-{	
+HRESULT CUIObject::SaveAsText(CBDynBuffer *Buffer, int Indent) {
 	return E_FAIL;
 }
