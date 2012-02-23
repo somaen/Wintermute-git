@@ -29,6 +29,7 @@ THE SOFTWARE.
 
 #include "SDL.h"
 
+namespace WinterMute {
 
 class CBSprite;
 class CBSound;
@@ -130,5 +131,7 @@ public:
 	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
 	virtual char *ScToString();
 };
+
+} // end of namespace WinterMute
 
 #endif

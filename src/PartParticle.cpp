@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "PartEmitter.h"
 #include <math.h>
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CPartParticle::CPartParticle(CBGame *inGame) : CBBase(inGame) {
@@ -238,3 +239,5 @@ HRESULT CPartParticle::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

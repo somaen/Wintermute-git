@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdPathPoint.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdPathPoint, false);
 
@@ -67,3 +68,5 @@ HRESULT CAdPathPoint::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

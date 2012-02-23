@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeSysInstance_H__
 #define __WmeSysInstance_H__
 
+namespace WinterMute {
 
 class CSysClass;
 
@@ -58,5 +59,7 @@ private:
 	void *m_Instance;
 	CSysClass *m_Class;
 };
+
+} // end of namespace WinterMute
 
 #endif

@@ -33,7 +33,9 @@ THE SOFTWARE.
 #include <string>
 #include "wme_debugger.h"
 
-using namespace std;
+using namespace std; //FIXME: Don't do this in a header
+
+namespace WinterMute {
 
 class CScValue : public CBBase, public IWmeDebugProp {
 public:
@@ -127,5 +129,6 @@ public:
 	virtual bool DbgGetDescription(char *Buf, int BufSize);
 };
 
+} // end of namespace WinterMute
 
 #endif

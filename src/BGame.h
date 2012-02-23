@@ -34,6 +34,8 @@ THE SOFTWARE.
 #include "SXStore.h"
 #include "SDL.h"
 
+namespace WinterMute {
+
 typedef void (*ENGINE_LOG_CALLBACK)(char *Text, HRESULT Result, void *Data);
 
 
@@ -351,5 +353,7 @@ public:
 
 
 };
+
+} // end of namespace WinterMute
 
 #endif

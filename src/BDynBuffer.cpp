@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BDynBuffer.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CBDynBuffer::CBDynBuffer(CBGame *inGame, DWORD InitSize, DWORD GrowBy): CBBase(inGame) {
@@ -184,3 +185,5 @@ void CBDynBuffer::PutTextForm(const char *format, va_list argptr) {
 	vsprintf(buff, format, argptr);
 	PutBytes((BYTE *)buff, strlen(buff));
 }
+
+} // end of namespace WinterMute

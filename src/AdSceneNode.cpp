@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdSceneNode.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdSceneNode, false);
 
@@ -74,3 +75,5 @@ HRESULT CAdSceneNode::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

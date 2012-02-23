@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include "BBase.h"
 #include "wme_debugger.h"
 
+namespace WinterMute {
+
 typedef BYTE *(*DLL_COMPILE_BUFFER)(BYTE *Buffer, char *Source, DWORD BufferSize, DWORD *CompiledSize);
 typedef BYTE *(*DLL_COMPILE_FILE)(char *Filename, DWORD *CompiledSize);
 typedef void (*DLL_RELEASE_BUFFER)(unsigned char *Buffer);
@@ -161,5 +163,7 @@ private:
 	ScriptTimes m_ScriptTimes;
 
 };
+
+} // end of namespace WinterMute
 
 #endif

@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeAdObject_H__
 #define __WmeAdObject_H__
 
+namespace WinterMute {
 
 class CAdWaypointGroup;
 class CAdRegion;
@@ -106,5 +107,7 @@ private:
 protected:
 	HRESULT GetScale(float *ScaleX, float *ScaleY);
 };
+
+} // end of namespace WinterMute
 
 #endif

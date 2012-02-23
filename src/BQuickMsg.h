@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
+namespace WinterMute {
+
 class CBQuickMsg : public CBBase {
 public:
 	char *GetText();
@@ -38,5 +40,7 @@ public:
 	virtual ~CBQuickMsg();
 
 };
+
+} // end of namespace WinterMute
 
 #endif

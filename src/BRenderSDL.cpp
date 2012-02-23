@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "FreeImage.h"
 #include "MathUtil.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CBRenderSDL::CBRenderSDL(CBGame *inGame) : CBRenderer(inGame) {
@@ -394,3 +395,5 @@ void CBRenderSDL::DumpData(char *Filename) {
 	Game->LOG(0, "Texture Stats Dump completed.");
 	Game->QuickMessage("Texture Stats Dump completed.");
 }
+
+} // end of namespace WinterMute

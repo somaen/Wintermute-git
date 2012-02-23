@@ -26,6 +26,8 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BDebugger.h"
 
+namespace WinterMute {
+
 //////////////////////////////////////////////////////////////////////////
 CBDebugger::CBDebugger(CBGame *inGame) : CBBase(inGame) {
 	m_Enabled = false;
@@ -195,3 +197,5 @@ bool CBDebugger::RemoveBreakpoint(const char *ScriptFilename, int Line) {
 bool CBDebugger::ContinueExecution() {
 	return false;
 }
+
+} // end of namespace WinterMute

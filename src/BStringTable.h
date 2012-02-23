@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include <map>
 #include "BBase.h"
 
+namespace WinterMute {
+
 class CBStringTable : public CBBase {
 public:
 	const char *ExpandStatic(const char *String, bool ForceExpand = false);
@@ -44,5 +46,7 @@ private:
 	map<string, string>::iterator m_StringsIter;
 
 };
+
+} // end of namespace WinterMute
 
 #endif

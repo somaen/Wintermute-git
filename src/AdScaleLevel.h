@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BObject.h"
 
+namespace WinterMute {
+
 class CAdScaleLevel : public CBObject {
 public:
 	DECLARE_PERSISTENT(CAdScaleLevel, CBObject);
@@ -39,5 +41,7 @@ public:
 	HRESULT LoadFile(char *Filename);
 	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
 };
+
+} // end of namespace WinterMute
 
 #endif

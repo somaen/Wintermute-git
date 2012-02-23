@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "coll_templ.h"
 
+namespace WinterMute {
+
 class CBSurfaceStorage : public CBBase {
 public:
 	DWORD m_LastCleanupTime;
@@ -46,5 +48,7 @@ public:
 
 	CBArray<CBSurface *, CBSurface *> m_Surfaces;
 };
+
+} // end of namespace WinterMute
 
 #endif

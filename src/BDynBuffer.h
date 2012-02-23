@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
+namespace WinterMute {
+
 class CBDynBuffer : public CBBase {
 public:
 	bool m_Initialized;
@@ -55,5 +57,7 @@ private:
 	DWORD m_Offset;
 	void PutTextForm(const char *format, va_list argptr);
 };
+
+} // end of namespace WinterMute
 
 #endif

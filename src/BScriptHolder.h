@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeBScriptHolder_H__
 #define __WmeBScriptHolder_H__
 
+namespace WinterMute {
 
 class CBScriptHolder : public CBScriptable {
 public:
@@ -63,5 +64,7 @@ public:
 public:
 	virtual bool SendEvent(const char *EventName);
 };
+
+} // end of namespace WinterMute
 
 #endif

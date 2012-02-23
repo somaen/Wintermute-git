@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "UIText.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CUIText, false);
 
@@ -460,3 +461,5 @@ HRESULT CUIText::SizeToFit() {
 	}
 	return S_OK;
 }
+
+} // end of namespace WinterMute

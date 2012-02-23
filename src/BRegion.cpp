@@ -26,7 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BRegion.h"
 
-
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBRegion, false);
 
@@ -491,3 +491,5 @@ HRESULT CBRegion::Mimic(CBRegion *Region, float Scale, int X, int Y) {
 
 	return CreateRegion() ? S_OK : E_FAIL;
 }
+
+} // end of namespace WinterMute

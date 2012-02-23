@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeAdTalkNode_H__
 #define __WmeAdTalkNode_H__
 
+namespace WinterMute {
 
 class CAdTalkNode : public CBBase {
 public:
@@ -49,5 +50,7 @@ public:
 	char *m_Comment;
 
 };
+
+} // end of namespace WinterMute
 
 #endif

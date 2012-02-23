@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
+namespace WinterMute {
+
 class CBNamedObject : public CBBase {
 public:
 	CBNamedObject(CBGame *inGame);
@@ -39,5 +41,7 @@ public:
 	char *m_Name;
 	void SetName(char *Name);
 };
+
+} // end of namespace WinterMute
 
 #endif

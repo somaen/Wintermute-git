@@ -30,8 +30,9 @@ THE SOFTWARE.
 #include <list>
 #include <vector>
 
-using namespace std;
+using namespace std; //FIXME: Don't do this in a header
 
+namespace WinterMute {
 
 typedef std::string AnsiString;
 typedef std::string Utf8String;
@@ -174,5 +175,6 @@ enum TShadowType {
     SHADOW_NONE = 0, SHADOW_SIMPLE = 1, SHADOW_FLAT = 2, SHADOW_STENCIL = 3
 };
 
+} // end of namespace WinterMute
 
 #endif // DCTYPES_H

@@ -26,6 +26,8 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BFader.h"
 
+namespace WinterMute {
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -164,3 +166,5 @@ HRESULT CBFader::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

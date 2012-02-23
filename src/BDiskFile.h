@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BFile.h"
 
+namespace WinterMute {
+
 class CBDiskFile : public CBFile {
 public:
 	CBDiskFile(CBGame *inGame);
@@ -44,5 +46,7 @@ private:
 	bool m_Compressed;
 	DWORD m_PrefixSize;
 };
+
+} // end of namespace WinterMute
 
 #endif

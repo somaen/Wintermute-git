@@ -34,6 +34,8 @@ THE SOFTWARE.
 
 #include <time.h>
 
+namespace WinterMute {
+
 typedef struct {
 	DWORD Magic1;
 	DWORD Magic2;
@@ -72,5 +74,6 @@ v2:    DWORD TimeDate1
 
 */
 
+} // end of namespace WinterMute
 
 #endif // _DCPACKAGE_H_

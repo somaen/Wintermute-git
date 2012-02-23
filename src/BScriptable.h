@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include "BNamedObject.h"
 #include "wme_debugger.h"
 
+namespace WinterMute {
+
 class CScValue;
 class CScStack;
 class CScScript;
@@ -68,5 +70,7 @@ public:
 	IWmeDebugProp *DbgGetProperty(const char *Name);
 
 };
+
+} // end of namespace WinterMute
 
 #endif

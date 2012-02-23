@@ -43,6 +43,7 @@ THE SOFTWARE.
 #   include "wintypes.h"
 #endif // __WIN32__
 
+namespace WinterMute {
 
 class CBGame;
 
@@ -94,5 +95,6 @@ private:
 	static CBGame *Game;
 };
 
+} // end of namespace WinterMute
 
 #endif

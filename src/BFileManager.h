@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include <map>
 #include "coll_templ.h"
 
+namespace WinterMute {
+
 class CBFileManager: CBBase {
 public:
 	bool FindPackageSignature(FILE *f, DWORD *Offset);
@@ -68,5 +70,7 @@ private:
 	bool IsValidPackage(const AnsiString &fileName) const;
 
 };
+
+} // end of namespace WinterMute
 
 #endif

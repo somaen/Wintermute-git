@@ -30,11 +30,13 @@ THE SOFTWARE.
 #include "BBase.h"
 #include "Vector2.h"
 
+namespace WinterMute {
+
 class CPartEmitter;
 
 class CPartParticle : public CBBase {
 public:
-	typedef enum TParticleState {
+	enum TParticleState {
 	    PARTICLE_NORMAL, PARTICLE_FADEIN, PARTICLE_FADEOUT
 	};
 
@@ -76,5 +78,7 @@ private:
 	int m_CurrentAlpha;
 	int m_FadeStartAlpha;
 };
+
+} // end of namespace WinterMute
 
 #endif

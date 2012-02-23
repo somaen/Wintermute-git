@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdResponseContext.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdResponseContext, false);
 
@@ -59,3 +60,5 @@ void CAdResponseContext::SetContext(char *Context) {
 		if (m_Context) strcpy(m_Context, Context);
 	}
 }
+
+} // end of namespace WinterMute

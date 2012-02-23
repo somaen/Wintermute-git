@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BScriptable.h"
 
+namespace WinterMute {
+
 class CSXDate : public CBScriptable {
 public:
 	int ScCompare(CBScriptable *Value);
@@ -42,5 +44,7 @@ public:
 	char *m_String;
 	struct tm m_tm;
 };
+
+} // end of namespace WinterMute
 
 #endif

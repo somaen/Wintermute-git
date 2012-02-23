@@ -27,6 +27,8 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "StringUtil.h"
 
+namespace WinterMute {
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -1005,3 +1007,5 @@ bool CScValue::DbgGetDescription(char *Buf, int BufSize) {
 	}
 	return true;
 }
+
+} // end of namespace WinterMute

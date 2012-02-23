@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "UIObject.h"
 
+namespace WinterMute {
+
 class CUITiledImage : public CBObject {
 public:
 	DECLARE_PERSISTENT(CUITiledImage, CBObject);
@@ -51,5 +53,7 @@ public:
 	RECT m_DownMiddle;
 	RECT m_DownRight;
 };
+
+} // end of namespace WinterMute
 
 #endif

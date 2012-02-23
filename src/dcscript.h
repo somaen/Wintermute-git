@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef _DCSCRIPT_H_
 #define _DCSCRIPT_H_
 
+namespace WinterMute {
 
 #define SCRIPT_MAGIC   0xDEC0ADDE
 #define SCRIPT_VERSION 0x0102
@@ -138,5 +139,7 @@ typedef struct {
 	DLL_ADD_ERROR *Dll_AddError;
 	DLL_PARSE_ELEMENT *Dll_ParseElement;
 } CALLBACKS;
+
+} // end of namespace WinterMute
 
 #endif

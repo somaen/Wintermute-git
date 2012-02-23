@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdEntity.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdEntity, false);
 
@@ -929,3 +930,5 @@ HRESULT CAdEntity::SetSprite(char *Filename) {
 		return S_OK;
 	}
 }
+
+} // end of namespace WinterMute

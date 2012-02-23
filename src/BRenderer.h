@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "coll_templ.h"
 
+namespace WinterMute {
+
 class CBImage;
 
 class CBRenderer: public CBBase {
@@ -110,5 +112,7 @@ public:
 
 	CBArray<CBActiveRect *, CBActiveRect *> m_RectList;
 };
+
+} // end of namespace WinterMute
 
 #endif

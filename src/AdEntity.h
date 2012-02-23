@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeAdEntity_H__
 #define __WmeAdEntity_H__
 
+namespace WinterMute {
 
 class CAdEntity : public CAdTalkHolder {
 public:
@@ -55,5 +56,7 @@ public:
 	virtual char *ScToString();
 
 };
+
+} // end of namespace WinterMute
 
 #endif

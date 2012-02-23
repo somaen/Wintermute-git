@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BRenderSDL.h"
 #include "SdlUtil.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CBSurfaceSDL::CBSurfaceSDL(CBGame *inGame) : CBSurface(inGame) {
@@ -399,3 +400,5 @@ long CBSurfaceSDL::TellProc(fi_handle handle) {
 	CBFile *file = static_cast<CBFile *>(handle);
 	return file->GetPos();
 }
+
+} // end of namespace WinterMute

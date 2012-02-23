@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BSurface.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////
 CBSurface::CBSurface(CBGame *inGame): CBBase(inGame) {
@@ -186,3 +187,5 @@ void CBSurface::SetSize(int Width, int Height) {
 	m_Width = Width;
 	m_Height = Height;
 }
+
+} // end of namespace WinterMute

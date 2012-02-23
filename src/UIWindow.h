@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "UIObject.h"
 
+namespace WinterMute {
+
 class CUIWindow : public CUIObject {
 public:
 	HRESULT GetWindowObjects(CBArray<CUIObject *, CUIObject *>& Objects, bool InteractiveOnly);
@@ -79,5 +81,7 @@ public:
 	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
 	virtual char *ScToString();
 };
+
+} // end of namespace WinterMute
 
 #endif

@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdRegion.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdRegion, false);
 
@@ -380,3 +381,5 @@ HRESULT CAdRegion::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BNamedObject.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CBNamedObject::CBNamedObject(CBGame *inGame) : CBBase(inGame) {
@@ -56,3 +57,5 @@ void CBNamedObject::SetName(char *Name) {
 	m_Name = new char [strlen(Name) + 1];
 	if (m_Name != NULL) strcpy(m_Name, Name);
 }
+
+} // end of namespace WinterMute

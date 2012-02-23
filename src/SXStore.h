@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BObject.h"
 
+namespace WinterMute {
+
 class CSXStore : public CBObject {
 public:
 
@@ -164,5 +166,7 @@ private:
 	CBArray<CBStoreTransaction *, CBStoreTransaction *> m_Transactions;
 
 };
+
+} // end of namespace WinterMute
 
 #endif

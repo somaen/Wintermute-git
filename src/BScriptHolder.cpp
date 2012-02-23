@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BScriptHolder.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBScriptHolder, false);
 
@@ -452,3 +453,5 @@ void CBScriptHolder::ScDebuggerDesc(char *Buf, int BufSize) {
 bool CBScriptHolder::SendEvent(const char *EventName) {
 	return SUCCEEDED(ApplyEvent((char *)EventName));
 }
+
+} // end of namespace WinterMute

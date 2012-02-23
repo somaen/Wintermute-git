@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "UIButton.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CUIButton, false);
 
@@ -1006,3 +1007,5 @@ HRESULT CUIButton::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

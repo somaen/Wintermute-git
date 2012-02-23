@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "AdSentence.h"
 #include "PathUtil.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdSentence, false);
 
@@ -293,3 +294,5 @@ bool CAdSentence::CanSkip() {
 	// prevent accidental sentence skipping (TODO make configurable)
 	return (Game->m_Timer - m_StartTime) > 300;
 }
+
+} // end of namespace WinterMute

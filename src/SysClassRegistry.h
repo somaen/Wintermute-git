@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeSysClassRegistry_H__
 #define __WmeSysClassRegistry_H__
 
+namespace WinterMute {
 
 class CBGame;
 
@@ -70,5 +71,7 @@ public:
 	SavedInstanceMap m_SavedInstanceMap;
 
 };
+
+} // end of namespace WinterMute
 
 #endif

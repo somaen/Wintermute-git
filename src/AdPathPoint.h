@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BPoint.h"
 
+namespace WinterMute {
+
 class CAdPathPoint : public CBPoint {
 public:
 	DECLARE_PERSISTENT(CAdPathPoint, CBPoint);
@@ -39,5 +41,7 @@ public:
 	bool m_Marked;
 	int m_Distance;
 };
+
+} // end of namespace WinterMute
 
 #endif

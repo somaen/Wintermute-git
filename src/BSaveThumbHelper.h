@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
+namespace WinterMute {
+
 class CBSaveThumbHelper : public CBBase {
 public:
 	CBSaveThumbHelper(CBGame *inGame);
@@ -38,5 +40,7 @@ public:
 	CBImage *m_Thumbnail;
 	CBImage *m_RichThumbnail;
 };
+
+} // end of namespace WinterMute
 
 #endif

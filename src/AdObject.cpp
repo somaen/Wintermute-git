@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdObject.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdObject, false);
 
@@ -1160,3 +1161,5 @@ HRESULT CAdObject::UpdatePartEmitter() {
 	}
 	return m_PartEmitter->Update();
 }
+
+} // end of namespace WinterMute

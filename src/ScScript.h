@@ -31,6 +31,8 @@ THE SOFTWARE.
 #include "dcscript.h"   // Added by ClassView
 #include "wme_debugger.h"
 
+namespace WinterMute {
+
 class CScEngine;
 class CScScript : public CBBase, public IWmeDebugScript {
 public:
@@ -170,5 +172,7 @@ public:
 	virtual bool DbgSetTracingMode(bool IsTracing);
 	virtual bool DbgGetTracingMode();
 };
+
+} // end of namespace WinterMute
 
 #endif

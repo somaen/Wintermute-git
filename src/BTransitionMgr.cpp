@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BTransitionMgr.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CBTransitionMgr::CBTransitionMgr(CBGame *inGame): CBBase(inGame) {
@@ -116,3 +117,5 @@ HRESULT CBTransitionMgr::Update() {
 	}
 	return S_OK;
 }
+
+} // end of namespace WinterMute

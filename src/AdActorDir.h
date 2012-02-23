@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeAdActorDir_H__
 #define __WmeAdActorDir_H__
 
+namespace WinterMute {
 
 class CAdActorDir : public CBBase {
 public:
@@ -34,5 +35,6 @@ public:
 	virtual ~CAdActorDir(void);
 };
 
+} // end of namespace WinterMute
 
 #endif // __WmeAdActorDir_H__

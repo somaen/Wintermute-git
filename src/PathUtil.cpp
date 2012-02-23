@@ -42,6 +42,7 @@ THE SOFTWARE.
 #   include "ios_utils.h"
 #endif
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 AnsiString PathUtil::UnifySeparators(const AnsiString &path) {
@@ -188,3 +189,5 @@ AnsiString PathUtil::GetUserDirectory() {
 
 	return userDir;
 }
+
+} // end of namespace WinterMute

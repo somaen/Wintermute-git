@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeBActiveRect_H__
 #define __WmeBActiveRect_H__
 
+namespace WinterMute {
 
 class CBActiveRect: CBBase {
 public:
@@ -45,5 +46,7 @@ public:
 	virtual ~CBActiveRect();
 
 };
+
+} // end of namespace WinterMute
 
 #endif

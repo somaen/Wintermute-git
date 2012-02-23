@@ -32,6 +32,8 @@ THE SOFTWARE.
 
 #define COMPRESSED_BUFFER_SIZE 4096
 
+namespace WinterMute {
+
 class CBPkgFile : public CBFile {
 public:
 	CBPkgFile(CBGame *inGame);
@@ -49,5 +51,7 @@ private:
 	BYTE m_CompBuffer[COMPRESSED_BUFFER_SIZE];
 	FILE *m_File;
 };
+
+} // end of namespace WinterMute
 
 #endif

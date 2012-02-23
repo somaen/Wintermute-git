@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "MathUtil.h"
 #include <math.h>
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 float MathUtil::Round(float val) {
@@ -41,3 +42,5 @@ float MathUtil::RoundUp(float val) {
 	if (val - result > 0) result += 1.0;
 	return result;
 }
+
+} // end of namespace WinterMute

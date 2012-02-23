@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeBFrame_H__
 #define __WmeBFrame_H__
 
+namespace WinterMute {
 
 class CBFrame: public CBScriptable {
 public:
@@ -56,5 +57,7 @@ public:
 	virtual char *ScToString();
 
 };
+
+} // end of namespace WinterMute
 
 #endif

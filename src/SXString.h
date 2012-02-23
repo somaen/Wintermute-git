@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BScriptable.h"
 
+namespace WinterMute {
+
 class CSXString : public CBScriptable {
 public:
 	virtual int ScCompare(CBScriptable *Val);
@@ -44,5 +46,7 @@ public:
 	virtual ~CSXString();
 	int m_Capacity;
 };
+
+} // end of namespace WinterMute
 
 #endif

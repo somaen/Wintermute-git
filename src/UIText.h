@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "UIObject.h"
 
+namespace WinterMute {
+
 class CUIText : public CUIObject {
 public:
 	HRESULT SizeToFit();
@@ -48,5 +50,7 @@ public:
 	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
 	virtual char *ScToString();
 };
+
+} // end of namespace WinterMute
 
 #endif

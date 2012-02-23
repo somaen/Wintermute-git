@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "SysClassRegistry.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CSysClassRegistry::CSysClassRegistry() {
@@ -277,3 +278,5 @@ void CSysClassRegistry::DumpClasses(FILE *stream) {
 	for (it = m_Classes.begin(); it != m_Classes.end(); ++it)
 		(*it)->Dump(stream);
 }
+
+} // end of namespace WinterMute

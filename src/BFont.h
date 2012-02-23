@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #define NUM_CHARACTERS 256
 
+namespace WinterMute {
+
 class CBFont: public CBObject {
 public:
 	DECLARE_PERSISTENT(CBFont, CBObject);
@@ -49,5 +51,7 @@ private:
 	//HRESULT LoadFile(char* Filename);
 	static bool IsTrueType(CBGame *Game, char *Filename);
 };
+
+} // end of namespace WinterMute
 
 #endif

@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "ScStack.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CScStack, false);
 
@@ -217,3 +218,5 @@ HRESULT CScStack::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

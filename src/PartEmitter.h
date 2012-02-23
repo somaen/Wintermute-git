@@ -31,6 +31,8 @@ THE SOFTWARE.
 #include "PartParticle.h"
 #include "PartForce.h"
 
+namespace WinterMute {
+
 class CPartEmitter : public CBObject {
 public:
 	DECLARE_PERSISTENT(CPartEmitter, CBObject);
@@ -127,5 +129,7 @@ private:
 	CBArray<CPartParticle *, CPartParticle *> m_Particles;
 	CBArray<char *, char *> m_Sprites;
 };
+
+} // end of namespace WinterMute
 
 #endif

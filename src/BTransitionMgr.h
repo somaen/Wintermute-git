@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeBTransitionMgr_H__
 #define __WmeBTransitionMgr_H__
 
+namespace WinterMute {
 
 class CBTransitionMgr : public CBBase {
 public:
@@ -42,5 +43,7 @@ public:
 	TTransitionType m_Type;
 
 };
+
+} // end of namespace WinterMute
 
 #endif

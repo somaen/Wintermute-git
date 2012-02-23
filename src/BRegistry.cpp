@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include "StringUtil.h"
 #include "tinyxml.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CBRegistry::CBRegistry(CBGame *inGame): CBBase(inGame) {
@@ -216,3 +217,5 @@ void CBRegistry::SaveXml(const AnsiString fileName, PathValueMap &values) {
 		stream.close();
 	}
 }
+
+} // end of namespace WinterMute

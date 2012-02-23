@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include <map>
 #include <string>
 
+namespace WinterMute {
+
 class CBGame;
 class CBDynBuffer;
 
@@ -49,5 +51,7 @@ public:
 	map<string, string> m_EditorProps;
 	map<string, string>::iterator m_EditorPropsIter;
 };
+
+} // end of namespace WinterMute
 
 #endif

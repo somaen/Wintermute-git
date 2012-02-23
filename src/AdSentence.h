@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include "BBase.h"
 #include "dctypes.h"    // Added by ClassView
 
+namespace WinterMute {
+
 class CAdSentence : public CBBase {
 public:
 	bool m_Freezable;
@@ -68,5 +70,7 @@ private:
 	char *GetStance(int Stance);
 
 };
+
+} // end of namespace WinterMute
 
 #endif

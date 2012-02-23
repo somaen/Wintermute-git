@@ -42,6 +42,7 @@ THE SOFTWARE.
 #   include "ios_utils.h"
 #endif
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -4365,3 +4366,5 @@ AnsiString CBGame::GetDeviceType() const {
 	return "computer";
 #endif
 }
+
+} // end of namespace WinterMute

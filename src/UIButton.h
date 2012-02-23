@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include "UIObject.h"
 #include "dctypes.h"    // Added by ClassView
 
+namespace WinterMute {
+
 class CUIButton : public CUIObject {
 public:
 	bool m_PixelPerfect;
@@ -68,5 +70,7 @@ public:
 	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
 	virtual char *ScToString();
 };
+
+} // end of namespace WinterMute
 
 #endif

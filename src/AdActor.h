@@ -34,6 +34,8 @@ THE SOFTWARE.
 #pragma once
 #endif // _MSC_VER > 1000
 
+namespace WinterMute {
+
 class CAdActor : public CAdTalkHolder {
 public:
 	TDirection AngleToDirection(int Angle);
@@ -91,5 +93,7 @@ private:
 	double m_PFY;
 	int m_PFCount;
 };
+
+} // end of namespace WinterMute
 
 #endif // __WmeAdActor_H__

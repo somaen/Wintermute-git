@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "BStringTable.h"
 #include "StringUtil.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CBStringTable::CBStringTable(CBGame *inGame): CBBase(inGame) {
@@ -218,3 +219,5 @@ HRESULT CBStringTable::LoadFile(char *Filename, bool ClearOld) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

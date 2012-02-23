@@ -40,6 +40,7 @@ THE SOFTWARE.
 
 using namespace boost::filesystem;
 
+namespace WinterMute {
 
 CBGame *CBPlatform::Game = NULL;
 
@@ -573,3 +574,5 @@ char *CBPlatform::strlwr(char *string) {
 	}
 	return string;
 }
+
+} // end of namespace WinterMute

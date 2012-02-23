@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include <new>
 #include "BPersistMgr.h"
 
+namespace WinterMute {
+
 /////////////////////////////////////////////////////////////////////////////
 template<class TYPE>
 inline void DCConstructElements(TYPE *pElements, int nCount) {
@@ -362,5 +364,6 @@ HRESULT CBArray<TYPE, ARG_TYPE>::Persist(CBPersistMgr *PersistMgr) {
 	return S_OK;
 }
 
+} // end of namespace WinterMute
 
 #endif // COLL_TEMPL_H

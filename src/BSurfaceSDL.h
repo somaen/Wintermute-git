@@ -31,6 +31,7 @@ THE SOFTWARE.
 #include "SDL.h"
 #include "FreeImage.h"
 
+namespace WinterMute {
 
 class CBSurfaceSDL : public CBSurface {
 public:
@@ -72,5 +73,6 @@ private:
 	BYTE *m_AlphaMask;
 };
 
+} // end of namespace WinterMute
 
 #endif // __WmeBSurfaceSDL_H__

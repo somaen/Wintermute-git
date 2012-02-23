@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "UITiledImage.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CUITiledImage, false);
 
@@ -353,3 +354,5 @@ HRESULT CUITiledImage::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "UIEntity.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CUIEntity, false);
 
@@ -323,3 +324,5 @@ HRESULT CUIEntity::Persist(CBPersistMgr *PersistMgr) {
 	PersistMgr->Transfer(TMEMBER(m_Entity));
 	return S_OK;
 }
+
+} // end of namespace WinterMute

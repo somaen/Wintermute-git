@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "AdTalkHolder.h"
 
+namespace WinterMute {
+
 class CAdItem : public CAdTalkHolder {
 public:
 	bool m_DisplayAmount;
@@ -59,5 +61,7 @@ public:
 	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
 	virtual char *ScToString();
 };
+
+} // end of namespace WinterMute
 
 #endif

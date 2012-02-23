@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "Vector2.h"
 #include "Matrix4.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CPartEmitter, false);
 
@@ -1180,3 +1181,5 @@ HRESULT CPartEmitter::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

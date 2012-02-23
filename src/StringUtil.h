@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeStringUtil_H__
 #define __WmeStringUtil_H__
 
+namespace WinterMute {
 
 class StringUtil {
 public:
@@ -58,5 +59,7 @@ public:
 
 	static void Split(const AnsiString &list, const AnsiString &delimiters, AnsiStringArray &result, bool keepEmptyItems = false);
 };
+
+} // end of namespace WinterMute
 
 #endif // __WmeStringUtil_H__

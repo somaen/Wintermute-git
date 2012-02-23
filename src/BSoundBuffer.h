@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include "BBase.h"
 #include "bass.h"
 
+namespace WinterMute {
+
 class CBSoundBuffer : public CBBase {
 public:
 
@@ -83,5 +85,7 @@ public:
 	static DWORD CALLBACK FileReadProc(void *buffer, DWORD length, void *user);
 	static BOOL CALLBACK FileSeekProc(QWORD offset, void *user);
 };
+
+} // end of namespace WinterMute
 
 #endif

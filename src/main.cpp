@@ -39,6 +39,8 @@ THE SOFTWARE.
 #   include "../visualc/resource.h"
 #endif
 
+using namespace WinterMute;
+
 //////////////////////////////////////////////////////////////////////
 int main(int argc, char *argv[]) {
 #ifdef _MSC_VER

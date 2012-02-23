@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
+namespace WinterMute {
+
 class CBSubFrame : public CBScriptable {
 public:
 	bool m_MirrorX;
@@ -72,5 +74,7 @@ public:
 	virtual char *ScToString();
 
 };
+
+} // end of namespace WinterMute
 
 #endif

@@ -26,6 +26,8 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BSaveThumbFile.h"
 
+namespace WinterMute {
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -133,3 +135,5 @@ HRESULT CBSaveThumbFile::Seek(DWORD Pos, TSeek Origin) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

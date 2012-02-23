@@ -27,7 +27,7 @@ THE SOFTWARE.
 #include "UIEdit.h"
 #include "StringUtil.h"
 
-
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CUIEdit, false);
 
@@ -830,3 +830,5 @@ HRESULT CUIEdit::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

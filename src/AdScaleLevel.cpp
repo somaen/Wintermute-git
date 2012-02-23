@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdScaleLevel.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdScaleLevel, false);
 
@@ -145,3 +146,5 @@ HRESULT CAdScaleLevel::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

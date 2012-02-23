@@ -29,7 +29,7 @@ THE SOFTWARE.
 #include <algorithm>
 #include <vector>
 
-
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CScEngine, true);
 
@@ -827,3 +827,5 @@ void CScEngine::DumpStats() {
 		Game->LOG(0, "  %-40s %fs (%f%%)", tit->second.c_str(), (float)tit->first / 1000, (float)tit->first / (float)totalTime * 100);
 	}
 }
+
+} // end of namespace WinterMute

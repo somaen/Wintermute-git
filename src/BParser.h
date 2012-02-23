@@ -49,7 +49,7 @@ THE SOFTWARE.
 #define PARSERR_EOF             -2
 #define PARSERR_TOKENNOTFOUND   -1
 
-
+namespace WinterMute {
 
 class CBParser : public CBBase {
 public:
@@ -76,5 +76,7 @@ public:
 	virtual ~CBParser();
 	char *m_WhiteSpace;
 };
+
+} // end of namespace WinterMute
 
 #endif

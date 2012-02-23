@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "AdActor.h"
 #include <math.h>
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdActor, false);
 
@@ -1281,3 +1282,5 @@ HRESULT CAdActor::PlayAnim(char *Filename) {
 	// otherwise call the standard handler
 	return CAdTalkHolder::PlayAnim(Filename);
 }
+
+} // end of namespace WinterMute

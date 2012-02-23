@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeAdRotLevel_H__
 #define __WmeAdRotLevel_H__
 
+namespace WinterMute {
 
 class CAdRotLevel : public CBObject {
 public:
@@ -37,5 +38,7 @@ public:
 	HRESULT LoadFile(char *Filename);
 	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
 };
+
+} // end of namespace WinterMute
 
 #endif

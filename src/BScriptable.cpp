@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BScriptable.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBScriptable, false);
 
@@ -176,3 +177,5 @@ const char *CBScriptable::DbgGetNativeClass() {
 IWmeDebugProp *CBScriptable::DbgGetProperty(const char *Name) {
 	return ScGetProperty((char *)Name);
 }
+
+} // end of namespace WinterMute

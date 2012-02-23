@@ -30,9 +30,11 @@ THE SOFTWARE.
 #include "BBase.h"
 #include "Vector2.h"
 
+namespace WinterMute {
+
 class CPartForce : public CBNamedObject {
 public:
-	typedef enum TForceType {
+	enum TForceType {
 	    FORCE_POINT, FORCE_GLOBAL
 	};
 
@@ -45,5 +47,7 @@ public:
 
 	HRESULT Persist(CBPersistMgr *PersistMgr);
 };
+
+} // end of namespace WinterMute
 
 #endif

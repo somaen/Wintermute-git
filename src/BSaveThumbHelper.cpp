@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BSaveThumbHelper.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CBSaveThumbHelper::CBSaveThumbHelper(CBGame *inGame): CBBase(inGame) {
@@ -66,3 +67,5 @@ HRESULT CBSaveThumbHelper::StoreThumbnail(bool DoFlip) {
 	}
 	return S_OK;
 }
+
+} // end of namespace WinterMute

@@ -78,6 +78,8 @@ THE SOFTWARE.
 
 #include "coll_templ.h"
 
+namespace WinterMute {
+
 class CBPersistMgr;
 
 // persistence support
@@ -127,6 +129,7 @@ typedef HRESULT(WINAPI *PERSISTLOAD)(void *, CBPersistMgr *);
 
 typedef void (*SYS_INSTANCE_CALLBACK)(void *Instance, void *Data);
 
+} // end of namespace WinterMute
 
 // classes/instances registry
 #include "SysInstance.h"

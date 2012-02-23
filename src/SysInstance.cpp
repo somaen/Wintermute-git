@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "SysInstance.h"
 #include "SysClass.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CSysInstance::CSysInstance(void *Instance, int ID, CSysClass *sysClass) {
@@ -38,7 +39,8 @@ CSysInstance::CSysInstance(void *Instance, int ID, CSysClass *sysClass) {
 	m_Used = false;
 }
 
-
 //////////////////////////////////////////////////////////////////////////
 CSysInstance::~CSysInstance() {
 }
+
+} // end of namespace WinterMute

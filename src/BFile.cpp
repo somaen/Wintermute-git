@@ -26,6 +26,8 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BFile.h"
 
+namespace WinterMute {
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -48,3 +50,5 @@ CBFile::~CBFile() {
 bool CBFile::IsEOF() {
 	return m_Pos == m_Size;
 }
+
+} // end of namespace WinterMute

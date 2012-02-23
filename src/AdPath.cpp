@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdPath.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdPath, false);
 
@@ -103,3 +104,5 @@ HRESULT CAdPath::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

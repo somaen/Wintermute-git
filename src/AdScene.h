@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeAdScene_H__
 #define __WmeAdScene_H__
 
+namespace WinterMute {
 
 class CAdScene : public CBObject {
 public:
@@ -158,5 +159,7 @@ private:
 	int m_OffsetLeft;
 
 };
+
+} // end of namespace WinterMute
 
 #endif

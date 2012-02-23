@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "Vector2.h"
 #include "StringUtil.h"
 
+namespace WinterMute {
 
 #define SAVE_BUFFER_INIT_SIZE 100000
 #define SAVE_BUFFER_GROW_BY   50000
@@ -472,3 +473,5 @@ bool CBPersistMgr::CheckVersion(BYTE VerMajor, BYTE VerMinor, BYTE VerBuild) {
 
 	return true;
 }
+
+} // end of namespace WinterMute

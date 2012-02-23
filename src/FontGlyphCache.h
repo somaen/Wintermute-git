@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "SDL.h"
 
+namespace WinterMute {
+
 //////////////////////////////////////////////////////////////////////////
 class GlyphInfo {
 public:
@@ -112,5 +114,6 @@ private:
 	GlyphInfoMap m_Glyphs;
 };
 
+} // end of namespace WinterMute
 
 #endif // __WmeFontGlyphCache_H__

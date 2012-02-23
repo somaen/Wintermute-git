@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeAdTypes_H__
 #define __WmeAdTypes_H__
 
+namespace WinterMute {
 
 typedef enum {
     GAME_NORMAL, GAME_WAITING_RESPONSE
@@ -84,5 +85,6 @@ typedef enum {
     GEOM_WAYPOINT, GEOM_WALKPLANE, GEOM_BLOCKED, GEOM_GENERIC
 } TGeomNodeType;
 
+} // end of namespace WinterMute
 
 #endif // __WmeAdTypes_H__

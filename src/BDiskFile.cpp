@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BDiskFile.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CBDiskFile::CBDiskFile(CBGame *inGame): CBFile(inGame) {
@@ -198,3 +199,5 @@ void CBDiskFile::CorrectSlashes(char *fileName) {
 		if (fileName[i] == '\\') fileName[i] = '/';
 	}
 }
+
+} // end of namespace WinterMute

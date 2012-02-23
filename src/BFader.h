@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BObject.h"
 
+namespace WinterMute {
+
 class CBFader : public CBObject {
 public:
 	bool m_System;
@@ -51,5 +53,7 @@ public:
 	DWORD m_Duration;
 	DWORD m_StartTime;
 };
+
+} // end of namespace WinterMute
 
 #endif

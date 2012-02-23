@@ -28,6 +28,8 @@ THE SOFTWARE.
 
 #include "BObject.h"
 
+namespace WinterMute {
+
 class CAdInventoryBox : public CBObject {
 public:
 	bool m_HideSelected;
@@ -50,5 +52,7 @@ public:
 	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 };
+
+} // end of namespace WinterMute
 
 #endif

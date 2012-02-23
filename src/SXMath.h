@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BScriptable.h"
 
+namespace WinterMute {
+
 class CSXMath : public CBScriptable {
 public:
 	DECLARE_PERSISTENT(CSXMath, CBScriptable);
@@ -42,5 +44,7 @@ private:
 	double RadianToDegree(double Value);
 
 };
+
+} // end of namespace WinterMute
 
 #endif

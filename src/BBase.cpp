@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "BBase.h"
 #include "BParser.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////
 CBBase::CBBase(CBGame *GameOwner) {
@@ -157,3 +158,5 @@ HRESULT CBBase::SaveAsText(CBDynBuffer *Buffer, int Indent) {
 	}
 	return S_OK;
 }
+
+} // end of namespace WinterMute

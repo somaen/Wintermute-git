@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __WmePathUtils_H__
 #define __WmePathUtils_H__
 
+namespace WinterMute {
+
 class PathUtil {
 public:
 	static AnsiString UnifySeparators(const AnsiString &path);
@@ -43,5 +45,7 @@ public:
 	static AnsiString GetSafeLogFileName();
 	static AnsiString GetUserDirectory();
 };
+
+} // end of namespace WinterMute
 
 #endif // __WmePathUtils_H__

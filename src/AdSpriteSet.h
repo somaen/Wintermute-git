@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include "BObject.h"
 #include "BSprite.h"    // Added by ClassView
 
+namespace WinterMute {
+
 class CAdSpriteSet : public CBObject {
 public:
 	bool ContainsSprite(CBSprite *Sprite);
@@ -43,5 +45,7 @@ public:
 	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true, int LifeTime = -1, TSpriteCacheType CacheType = CACHE_ALL);
 	CBSprite *m_Sprites[NUM_DIRECTIONS];
 };
+
+} // end of namespace WinterMute
 
 #endif

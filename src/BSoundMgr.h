@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include "BBase.h"
 #include "bass.h"
 
+namespace WinterMute {
+
 class CBSoundMgr : public CBBase {
 public:
 	float PosToPan(int X, int Y);
@@ -58,5 +60,7 @@ public:
 	CBArray<CBSoundBuffer *, CBSoundBuffer *> m_Sounds;
 	void SaveSettings();
 };
+
+} // end of namespace WinterMute
 
 #endif

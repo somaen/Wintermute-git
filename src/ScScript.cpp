@@ -26,7 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "ScScript.h"
 
-
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CScScript, false);
 
@@ -1586,3 +1586,5 @@ void CScScript::AfterLoad() {
 		InitTables();
 	}
 }
+
+} // end of namespace WinterMute

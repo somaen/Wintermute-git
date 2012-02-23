@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BScriptable.h"
 
+namespace WinterMute {
+
 class CSXMemBuffer : public CBScriptable {
 public:
 	virtual int ScCompare(CBScriptable *Val);
@@ -48,5 +50,7 @@ private:
 	void Cleanup();
 	bool CheckBounds(CScScript *Script, int Start, int Length);
 };
+
+} // end of namespace WinterMute
 
 #endif

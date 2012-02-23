@@ -26,11 +26,14 @@ THE SOFTWARE.
 #ifndef __WmeMathUtil_H__
 #define __WmeMathUtil_H__
 
+namespace WinterMute {
+
 class MathUtil {
 public:
 	static float Round(float val);
 	static float RoundUp(float val);
 };
 
+} // end of namespace WinterMute
 
 #endif // __WmeMathUtil_H__

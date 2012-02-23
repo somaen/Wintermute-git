@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
+namespace WinterMute {
+
 class CAdPath : public CBBase {
 public:
 	DECLARE_PERSISTENT(CAdPath, CBBase);
@@ -44,5 +46,7 @@ public:
 	int m_CurrIndex;
 	bool m_Ready;
 };
+
+} // end of namespace WinterMute
 
 #endif

@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BActiveRect.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////
 CBActiveRect::CBActiveRect(CBGame *inGame): CBBase(inGame) {
@@ -96,3 +97,5 @@ void CBActiveRect::ClipRect() {
 
 	CBPlatform::IntersectRect(&m_Rect, &m_Rect, &rc);
 }
+
+} // end of namespace WinterMute

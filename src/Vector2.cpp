@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "Vector2.h"
 #include <math.h>
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 Vector2::Vector2() {
@@ -48,3 +49,5 @@ Vector2::~Vector2() {
 float Vector2::Length() const {
 	return sqrt(x * x + y * y);
 }
+
+} // end of namespace WinterMute

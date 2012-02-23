@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdTalkDef.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdTalkDef, false);
 
@@ -234,3 +235,5 @@ CBSprite *CAdTalkDef::GetDefaultSprite(TDirection Dir) {
 	else if (m_DefaultSpriteSet) return m_DefaultSpriteSet->GetSprite(Dir);
 	else return NULL;
 }
+
+} // end of namespace WinterMute

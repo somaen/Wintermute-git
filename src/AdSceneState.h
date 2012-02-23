@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeAdSceneState_H__
 #define __WmeAdSceneState_H__
 
+namespace WinterMute {
 
 class CAdSceneState : public CBBase {
 public:
@@ -37,5 +38,7 @@ public:
 	char *m_Filename;
 	CBArray<CAdNodeState *, CAdNodeState *> m_NodeStates;
 };
+
+} // end of namespace WinterMute
 
 #endif

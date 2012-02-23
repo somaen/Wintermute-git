@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdResponse.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdResponse, false);
 
@@ -123,3 +124,5 @@ HRESULT CAdResponse::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

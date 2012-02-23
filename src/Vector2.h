@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeVector2_H__
 #define __WmeVector2_H__
 
+namespace WinterMute {
+
 class Vector2 {
 public:
 	Vector2();
@@ -65,5 +67,6 @@ public:
 	float y;
 };
 
+} // end of namespace WinterMute
 
 #endif // __WmeVector2_H__

@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "coll_templ.h"
 
+namespace WinterMute {
+
 class CBSprite: public CBScriptHolder {
 public:
 	HRESULT KillAllSounds();
@@ -76,5 +78,7 @@ public:
 	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
 	virtual char *ScToString();
 };
+
+} // end of namespace WinterMute
 
 #endif

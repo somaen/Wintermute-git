@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "SdlUtil.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 SDL_Texture *SdlUtil::CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surface) {
@@ -114,3 +115,5 @@ SDL_Texture *SdlUtil::CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surfa
 	}
 	return texture;
 }
+
+} // end of namespace WinterMute

@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "StringUtil.h"
 #include "PathUtil.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBSprite, false);
 
@@ -733,3 +734,5 @@ HRESULT CBSprite::KillAllSounds() {
 	}
 	return S_OK;
 }
+
+} // end of namespace WinterMute

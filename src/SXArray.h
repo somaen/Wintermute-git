@@ -28,6 +28,8 @@ THE SOFTWARE.
 
 #include "BScriptable.h"
 
+namespace WinterMute {
+
 class CSXArray : public CBScriptable {
 public:
 	HRESULT Push(CScValue *Val);
@@ -43,5 +45,7 @@ public:
 	int m_Length;
 	CScValue *m_Values;
 };
+
+} // end of namespace WinterMute
 
 #endif

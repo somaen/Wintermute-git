@@ -26,9 +26,13 @@ THE SOFTWARE.
 #ifndef __WmeBResources_H__
 #define __WmeBResources_H__
 
+namespace WinterMute {
+
 class CBResources {
 public:
 	static bool GetFile(const char *fileName, BYTE*& buffer, DWORD &size);
 };
+
+} // end of namespace WinterMute
 
 #endif

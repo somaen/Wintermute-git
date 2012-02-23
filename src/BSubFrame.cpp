@@ -26,7 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BSubFrame.h"
 
-
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBSubFrame, false);
 
@@ -569,3 +569,5 @@ HRESULT CBSubFrame::SetSurfaceSimple() {
 	if (m_Surface) return S_OK;
 	else return E_FAIL;
 }
+
+} // end of namespace WinterMute

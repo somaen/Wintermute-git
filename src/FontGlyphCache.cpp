@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "FontGlyphCache.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 FontGlyphCache::FontGlyphCache() {
@@ -92,4 +93,4 @@ void GlyphInfo::SetGlyphImage(size_t width, size_t height, size_t stride, BYTE *
 	SDL_UnlockSurface(m_Image);
 }
 
-
+} // end of namespace WinterMute

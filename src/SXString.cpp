@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "StringUtil.h"
 #include <vector>
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CSXString, false);
 
@@ -378,3 +379,5 @@ HRESULT CSXString::Persist(CBPersistMgr *PersistMgr) {
 int CSXString::ScCompare(CBScriptable *Val) {
 	return strcmp(m_String, ((CSXString *)Val)->m_String);
 }
+
+} // end of namespace WinterMute

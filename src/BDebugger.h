@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include "BBase.h"
 #include "wme_debugger.h"
 
+namespace WinterMute {
+
 class CBDebugger : public CBBase, public IWmeDebugServer {
 public:
 	CBDebugger(CBGame *inGame);
@@ -81,5 +83,7 @@ public:
 	virtual bool ContinueExecution();
 private:
 };
+
+} // end of namespace WinterMute
 
 #endif

@@ -31,6 +31,8 @@ THE SOFTWARE.
 #include "AdRegion.h"   // Added by ClassView
 #include "AdEntity.h"
 
+namespace WinterMute {
+
 class CAdSceneNode : public CBObject {
 public:
 	DECLARE_PERSISTENT(CAdSceneNode, CBObject);
@@ -43,5 +45,7 @@ public:
 	virtual ~CAdSceneNode();
 
 };
+
+}
 
 #endif

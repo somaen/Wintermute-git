@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
+namespace WinterMute {
+
 class CBRegistry : public CBBase {
 public:
 	void SetIniName(char *Name);
@@ -66,5 +68,7 @@ private:
 
 	AnsiString GetValue(PathValueMap &values, const AnsiString path, const AnsiString &key, bool &found);
 };
+
+} // end of namespace WinterMute
 
 #endif

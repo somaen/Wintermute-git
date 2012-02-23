@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdRotLevel.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdRotLevel, false);
 
@@ -146,3 +147,5 @@ HRESULT CAdRotLevel::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BFileEntry.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CBFileEntry::CBFileEntry(CBGame *inGame): CBBase(inGame) {
@@ -43,3 +44,5 @@ CBFileEntry::CBFileEntry(CBGame *inGame): CBBase(inGame) {
 CBFileEntry::~CBFileEntry() {
 	m_Package = NULL; // ref only
 }
+
+} // end of namespace WinterMute

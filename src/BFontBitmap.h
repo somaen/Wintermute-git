@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BFont.h"
 
+namespace WinterMute {
+
 class CBFontBitmap : public CBFont {
 public:
 	DECLARE_PERSISTENT(CBFontBitmap, CBFont);
@@ -61,5 +63,7 @@ private:
 	int TextHeightDraw(BYTE *text, int x, int y, int width, TTextAlign align, bool draw, int max_height = -1, int MaxLenght = -1);
 
 };
+
+} // end of namespace WinterMute
 
 #endif

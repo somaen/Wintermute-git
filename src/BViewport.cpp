@@ -26,7 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BViewport.h"
 
-
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBViewport, false);
 
@@ -90,3 +90,5 @@ int CBViewport::GetWidth() {
 int CBViewport::GetHeight() {
 	return m_Rect.bottom - m_Rect.top;
 }
+
+} // end of namespace WinterMute

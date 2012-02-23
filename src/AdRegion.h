@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeAdRegion_H__
 #define __WmeAdRegion_H__
 
+namespace WinterMute {
 
 class CAdRegion : public CBRegion {
 public:
@@ -46,5 +47,7 @@ public:
 	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
 	virtual char *ScToString();
 };
+
+} // end of namespace WinterMute
 
 #endif

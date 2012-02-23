@@ -27,6 +27,8 @@ THE SOFTWARE.
 #include "SXMath.h"
 #include <math.h>
 
+namespace WinterMute {
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -279,3 +281,5 @@ HRESULT CSXMath::Persist(CBPersistMgr *PersistMgr) {
 	CBScriptable::Persist(PersistMgr);
 	return S_OK;
 }
+
+} // end of namespace WinterMute

@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdNodeState.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdNodeState, false);
 
@@ -147,3 +148,5 @@ HRESULT CAdNodeState::TransferEntity(CAdEntity *Entity, bool IncludingSprites, b
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

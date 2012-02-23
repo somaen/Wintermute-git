@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "BFontBitmap.h"
 #include "StringUtil.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -515,3 +516,5 @@ HRESULT CBFontBitmap::GetWidths() {
 int CBFontBitmap::GetLetterHeight() {
 	return m_TileHeight;
 }
+
+} // end of namespace WinterMute

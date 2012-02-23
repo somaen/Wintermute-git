@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include "BObject.h"
 #include "dctypes.h"    // Added by ClassView
 
+namespace WinterMute {
+
 class CUITiledImage;
 
 class CUIObject : public CBObject {
@@ -72,5 +74,7 @@ public:
 	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
 	virtual char *ScToString();
 };
+
+} // end of namespace WinterMute
 
 #endif

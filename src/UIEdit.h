@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "UIObject.h"
 
+namespace WinterMute {
+
 class CUIEdit : public CUIObject {
 public:
 	DECLARE_PERSISTENT(CUIEdit, CUIObject);
@@ -60,5 +62,7 @@ public:
 	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
 	virtual char *ScToString();
 };
+
+} // end of namespace WinterMute
 
 #endif

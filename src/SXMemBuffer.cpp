@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "SXMemBuffer.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CSXMemBuffer, false);
 
@@ -464,3 +465,5 @@ int CSXMemBuffer::ScCompare(CBScriptable *Val) {
 	if (m_Buffer == Val->ScToMemBuffer()) return 0;
 	else return 1;
 }
+
+} // end of namespace WinterMute

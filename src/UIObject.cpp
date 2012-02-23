@@ -26,7 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "UIObject.h"
 
-
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CUIObject, false);
 
@@ -573,3 +573,5 @@ HRESULT CUIObject::Persist(CBPersistMgr *PersistMgr) {
 HRESULT CUIObject::SaveAsText(CBDynBuffer *Buffer, int Indent) {
 	return E_FAIL;
 }
+
+} // end of namespace WinterMute

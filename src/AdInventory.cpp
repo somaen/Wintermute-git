@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdInventory.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdInventory, false);
 
@@ -108,3 +109,5 @@ HRESULT CAdInventory::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+    
+} // end of namespace WinterMute

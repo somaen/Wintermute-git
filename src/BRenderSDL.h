@@ -29,6 +29,8 @@ THE SOFTWARE.
 #include "BRenderer.h"
 #include "SDL.h"
 
+namespace WinterMute {
+
 class CBRenderSDL : public CBRenderer {
 public:
 	CBRenderSDL(CBGame *inGame);
@@ -85,5 +87,6 @@ private:
 	float m_RatioY;
 };
 
+} // end of namespace WinterMute
 
 #endif // __WmeBRenderSDL_H__

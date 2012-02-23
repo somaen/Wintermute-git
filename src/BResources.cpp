@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BResources.h"
 
+namespace WinterMute {
 
 unsigned char invalid[] = {
 	0x42, 0x4d, 0x36, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x36, 0x04, 0x00, 0x00, 0x28, 0x00,
@@ -2821,3 +2822,5 @@ bool CBResources::GetFile(const char *fileName, BYTE*& buffer, DWORD &size) {
 
 	return false;
 }
+
+} // end of namespace WinterMute

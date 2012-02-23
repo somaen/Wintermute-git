@@ -26,12 +26,15 @@ THE SOFTWARE.
 #ifndef __WmeSdlUtil_H__
 #define __WmeSdlUtil_H__
 
-#include "SDL.h"
+#include <SDL.h>
+
+namespace WinterMute {
 
 class SdlUtil {
 public:
 	static SDL_Texture *CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surface);
 };
 
+} // end of namespace WinterMute
 
 #endif // __WmeSdlUtil_H__

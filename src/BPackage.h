@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
+namespace WinterMute {
+
 class CBPackage : public CBBase {
 public:
 	FILE *GetFilePointer();
@@ -46,5 +48,7 @@ public:
 	virtual ~CBPackage();
 
 };
+
+} // end of namespace WinterMute
 
 #endif

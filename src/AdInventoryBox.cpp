@@ -28,6 +28,8 @@ THE SOFTWARE.
 #include <math.h>
 
 
+namespace WinterMute {
+
 IMPLEMENT_PERSISTENT(CAdInventoryBox, false);
 
 //////////////////////////////////////////////////////////////////////////
@@ -348,3 +350,5 @@ HRESULT CAdInventoryBox::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

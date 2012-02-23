@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeMatrix4_H__
 #define __WmeMatrix4_H__
 
+namespace WinterMute {
 
 class Vector2;
 
@@ -50,5 +51,6 @@ public:
 
 };
 
+} // end of namespace WinterMute
 
 #endif // __WmeMatrix4_H__

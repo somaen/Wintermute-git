@@ -28,8 +28,9 @@ THE SOFTWARE.
 
 
 #include <set>
-using namespace std;
+using namespace std; //FIXME: Don't do this in a header
 
+namespace WinterMute {
 
 class CSysClass {
 public:
@@ -91,5 +92,7 @@ private:
 	typedef std::map<void *, CSysInstance *> InstanceMap;
 	InstanceMap m_InstanceMap;
 };
+
+} // end of namespace WinterMute
 
 #endif

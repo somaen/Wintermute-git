@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeAdNodeState_H__
 #define __WmeAdNodeState_H__
 
+namespace WinterMute {
 
 class CAdEntity;
 
@@ -48,5 +49,7 @@ public:
 	char *m_Cursor;
 
 };
+
+} // end of namespace WinterMute
 
 #endif

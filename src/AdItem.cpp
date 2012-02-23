@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdItem.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdItem, false);
 
@@ -721,3 +722,5 @@ bool CAdItem::GetExtendedFlag(char *FlagName) {
 	else if (strcmp(FlagName, "usable") == 0) return true;
 	else return CAdObject::GetExtendedFlag(FlagName);
 }
+
+} // end of namespace WinterMute

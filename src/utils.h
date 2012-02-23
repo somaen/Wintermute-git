@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeUtils_H__
 #define __WmeUtils_H__
 
+namespace WinterMute {
 
 class CBGame;
 
@@ -59,5 +60,7 @@ public:
 private:
 	static float Hue2RGB(float v1, float v2, float vH);
 };
+
+} // end of namespace WinterMute
 
 #endif

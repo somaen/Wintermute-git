@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BFrame.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBFrame, false);
 
@@ -683,3 +684,5 @@ HRESULT CBFrame::ScSetProperty(char *Name, CScValue *Value) {
 char *CBFrame::ScToString() {
 	return "[frame]";
 }
+
+} // end of namespace WinterMute

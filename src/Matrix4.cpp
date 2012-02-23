@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "Vector2.h"
 #include <math.h>
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 Matrix4::Matrix4() {
@@ -74,3 +75,5 @@ void Matrix4::TransformVector2(Vector2 &vec) {
 	vec.x = x;
 	vec.y = y;
 }
+
+} // end of namespace WinterMute

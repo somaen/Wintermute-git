@@ -32,6 +32,8 @@ THE SOFTWARE.
 
 #include "dcscript.h"
 
+namespace WinterMute {
+
 class IWmeDebugClient;
 class IWmeDebugObject;
 
@@ -156,5 +158,7 @@ public:
 
 typedef bool (*WMEDBG_INITIALIZE)(IWmeDebugServer *Server);
 typedef bool (*WMEDBG_SHUTDOWN)(IWmeDebugServer *Server);
+
+} // end of namespace WinterMute
 
 #endif // WME_DEBUGGER_H

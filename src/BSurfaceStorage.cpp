@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "BSurfaceStorage.h"
 #include "BSurfaceSDL.h"
 
+namespace WinterMute {
 
 //IMPLEMENT_PERSISTENT(CBSurfaceStorage, true);
 
@@ -180,3 +181,5 @@ int CBSurfaceStorage::SurfaceSortCB(const void *arg1, const void *arg2) {
 	else if (s1->m_LastUsedTime < s2->m_LastUsedTime) return -1;
 	else return 0;
 }
+
+} // end of namespace WinterMute

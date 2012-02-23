@@ -31,6 +31,7 @@ THE SOFTWARE.
 #   include "IOS_StoreKit_interface.h"
 #endif
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CSXStore, false);
 
@@ -499,3 +500,5 @@ void StoreKit_RestoreFinishedCallback(void *data, int error) {
 }
 
 #endif // __IPHONEOS__
+
+} // end of namespace WinterMute

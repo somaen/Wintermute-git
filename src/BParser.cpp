@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #define WHITESPACE " \t\n\r"
 
+namespace WinterMute {
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -424,3 +426,5 @@ int CBParser::ScanStr(const char *in, const char *format, ...) {
 
 	return num;
 }
+
+} // end of namespace WinterMute

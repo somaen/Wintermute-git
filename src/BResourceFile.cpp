@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "BResourceFile.h"
 #include "BResources.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CBResourceFile::CBResourceFile(CBGame *inGame): CBFile(inGame) {
@@ -95,3 +96,5 @@ HRESULT CBResourceFile::Seek(DWORD Pos, TSeek Origin) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

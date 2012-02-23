@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "BRenderSDL.h"
 #include "BSurfaceSDL.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBFontTT, false);
 
@@ -833,3 +834,5 @@ void CBFontTT::CacheGlyph(wchar_t ch) {
 
 	if (tempBuffer) delete [] tempBuffer;
 }
+
+} // end of namespace WinterMute

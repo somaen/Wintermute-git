@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "FreeImage.h"
 
+namespace WinterMute {
+
 class CBImage: CBBase {
 
 public:
@@ -47,5 +49,7 @@ public:
 private:
 	FIBITMAP *m_Bitmap;
 };
+
+} // end of namespace WinterMute
 
 #endif

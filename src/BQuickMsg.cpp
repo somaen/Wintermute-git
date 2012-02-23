@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BQuickMsg.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CBQuickMsg::CBQuickMsg(CBGame *inGame, char *Text): CBBase(inGame) {
@@ -45,3 +46,5 @@ CBQuickMsg::~CBQuickMsg() {
 char *CBQuickMsg::GetText() {
 	return m_Text;
 }
+
+} // end of namespace WinterMute

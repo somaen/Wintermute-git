@@ -31,6 +31,8 @@ THE SOFTWARE.
 
 #define NUM_CACHED_TEXTS 30
 
+namespace WinterMute {
+
 class FontGlyphCache;
 
 class CBFontTT : public CBFont {
@@ -176,5 +178,7 @@ public:
 	void ClearCache();
 
 };
+
+} // end of namespace WinterMute
 
 #endif

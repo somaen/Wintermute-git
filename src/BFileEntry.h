@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
+namespace WinterMute {
+
 class CBPackage;
 
 class CBFileEntry : public CBBase {
@@ -46,5 +48,7 @@ public:
 	virtual ~CBFileEntry();
 
 };
+
+} // end of namespace WinterMute
 
 #endif

@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BScriptable.h"
 
+namespace WinterMute {
+
 class CSXFile : public CBScriptable {
 public:
 	DECLARE_PERSISTENT(CSXFile, CBScriptable);
@@ -50,5 +52,7 @@ private:
 	bool SetPos(DWORD Pos, TSeek Origin = SEEK_TO_BEGIN);
 	char *m_Filename;
 };
+
+} // end of namespace WinterMute
 
 #endif

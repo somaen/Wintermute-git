@@ -54,6 +54,7 @@ extern "C"
 #include "zlib.h"
 }
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -719,3 +720,5 @@ bool CBFileManager::FindPackageSignature(FILE *f, DWORD *Offset) {
 	return false;
 
 }
+
+} // end of namespace WinterMute

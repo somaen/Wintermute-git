@@ -26,6 +26,8 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BFont.h"
 
+namespace WinterMute {
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -192,3 +194,5 @@ bool CBFont::IsTrueType(CBGame *Game, char *Filename) {
 	delete [] Buffer;
 	return Ret;
 }
+
+} // end of namespace WinterMute

@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BKeyboardState.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBKeyboardState, false);
 
@@ -233,3 +234,5 @@ SDL_Keycode CBKeyboardState::VKeyToKeyCode(DWORD vkey) {
 	// todo
 	return (SDL_Keycode)vkey;
 }
+
+} // end of namespace WinterMute

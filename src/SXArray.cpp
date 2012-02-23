@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "SXArray.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CSXArray, false);
 
@@ -222,3 +223,5 @@ HRESULT CSXArray::Push(CScValue *Val) {
 	m_Values->SetProp(ParamName, Val, true);
 	return S_OK;
 }
+
+} // end of namespace WinterMute

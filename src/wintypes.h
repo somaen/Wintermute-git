@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeWintypes_H__
 #define __WmeWintypes_H__
 
+namespace WinterMute {
+
 #ifndef __WIN32__
 
 #define WINAPI
@@ -63,8 +65,6 @@ typedef CONST PSTR *PCZPSTR;
 typedef CONST CHAR *LPCSTR, *PCSTR;
 typedef PCSTR *PZPCSTR;
 
-
-
 typedef struct tagRECT {
 	LONG    left;
 	LONG    top;
@@ -94,5 +94,7 @@ typedef long HRESULT;
 
 
 #endif // !__WIN32__
+
+} // end of namespace WinterMute
 
 #endif // __WmeWintypes_H__

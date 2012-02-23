@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdResponseBox.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdResponseBox, false);
 
@@ -607,3 +608,5 @@ HRESULT CAdResponseBox::GetObjects(CBArray<CUIObject *, CUIObject *>& Objects, b
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

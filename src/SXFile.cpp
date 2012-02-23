@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "SXFile.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CSXFile, false);
 
@@ -705,3 +706,5 @@ HRESULT CSXFile::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

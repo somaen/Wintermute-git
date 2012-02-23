@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BObject.h"
 
+namespace WinterMute {
+
 class CSXObject : public CBObject {
 public:
 	DECLARE_PERSISTENT(CSXObject, CBObject);
@@ -36,5 +38,7 @@ public:
 	virtual ~CSXObject();
 
 };
+
+} // end of namespace WinterMute
 
 #endif

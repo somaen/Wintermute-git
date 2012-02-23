@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 using namespace boost::filesystem;
 
+namespace WinterMute {
+
 //////////////////////////////////////////////////////////////////////
 static inline unsigned Sqr(int x) {
 	return (x * x);
@@ -329,3 +331,5 @@ float CBUtils::Hue2RGB(float v1, float v2, float vH) {
 	if ((3.0f * vH) < 2.0f) return (v1 + (v2 - v1) * ((2.0f / 3.0f) - vH) * 6.0f);
 	return (v1);
 }
+
+} // end of namespace WinterMute

@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeAdResponseContext_H__
 #define __WmeAdResponseContext_H__
 
+namespace WinterMute {
 
 class CAdResponseContext : public CBBase {
 public:
@@ -37,5 +38,7 @@ public:
 	virtual ~CAdResponseContext();
 
 };
+
+} // end of namespace WinterMute
 
 #endif

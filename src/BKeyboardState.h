@@ -28,7 +28,9 @@ THE SOFTWARE.
 
 
 #include "BBase.h"
-#include "SDL.h"
+#include <SDL.h>
+
+namespace WinterMute {
 
 class CBKeyboardState : public CBScriptable {
 public:
@@ -59,5 +61,7 @@ private:
 	DWORD KeyCodeToVKey(SDL_Event *event);
 	SDL_Keycode VKeyToKeyCode(DWORD vkey);
 };
+
+} // end of namespace WinterMute
 
 #endif

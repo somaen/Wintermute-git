@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeBPoint_H__
 #define __WmeBPoint_H__
 
+namespace WinterMute {
 
 class CBPoint: public CBBase {
 public:
@@ -37,5 +38,7 @@ public:
 	virtual ~CBPoint();
 
 };
+
+} // end of namespace WinterMute
 
 #endif

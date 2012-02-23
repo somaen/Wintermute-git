@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeUiEntity_H__
 #define __WmeUiEntity_H__
 
+namespace WinterMute {
 
 class CUIEntity : public CUIObject {
 public:
@@ -46,5 +47,7 @@ public:
 	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
 	virtual char *ScToString();
 };
+
+} // end of namespace WinterMute
 
 #endif

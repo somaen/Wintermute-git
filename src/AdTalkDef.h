@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeAdTalkDef_H__
 #define __WmeAdTalkDef_H__
 
+namespace WinterMute {
 
 class CAdTalkDef : public CBObject {
 public:
@@ -44,5 +45,7 @@ public:
 	CBSprite *m_DefaultSprite;
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent = 0);
 };
+
+} // end of namespace WinterMute
 
 #endif

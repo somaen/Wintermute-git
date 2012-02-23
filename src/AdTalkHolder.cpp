@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdTalkHolder.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdTalkHolder, false);
 
@@ -336,3 +337,5 @@ HRESULT CAdTalkHolder::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

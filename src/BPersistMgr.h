@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
+namespace WinterMute {
+
 class Vector2;
 
 class CBPersistMgr : public CBBase {
@@ -78,5 +80,7 @@ public:
 	BYTE *m_ThumbnailData;
 
 };
+
+} // end of namespace WinterMute
 
 #endif

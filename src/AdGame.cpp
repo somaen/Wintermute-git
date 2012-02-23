@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "AdGame.h"
 #include "PartEmitter.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdGame, true);
 
@@ -2002,3 +2003,5 @@ HRESULT CAdGame::OnScriptShutdown(CScScript *Script) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

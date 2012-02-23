@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BRenderer.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////
 CBRenderer::CBRenderer(CBGame *inGame): CBBase(inGame) {
@@ -246,3 +247,5 @@ bool CBRenderer::PointInViewport(POINT *P) {
 
 	return true;
 }
+
+} // end of namespace WinterMute

@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BSound.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBSound, false);
 
@@ -255,3 +256,5 @@ HRESULT CBSound::ApplyFX(TSFXType Type, float Param1, float Param2, float Param3
 	}
 	return S_OK;
 }
+
+} // end of namespace WinterMute

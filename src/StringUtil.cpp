@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "StringUtil.h"
 #include "ConvertUTF.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 void StringUtil::ToLowerCase(AnsiString &str) {
@@ -314,3 +315,5 @@ void StringUtil::Split(const AnsiString &list, const AnsiString &delimiters, Ans
 		result.push_back(*it);
 	}
 }
+
+} // end of namespace WinterMute

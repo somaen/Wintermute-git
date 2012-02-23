@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "SXDate.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CSXDate, false);
 
@@ -258,3 +259,5 @@ int CSXDate::ScCompare(CBScriptable *Value) {
 	else if (time1 > time2) return 1;
 	else return 0;
 }
+
+} // end of namespace WinterMute

@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BObject.h"
 
+namespace WinterMute {
+
 class CAdResponseBox : public CBObject {
 public:
 	CBObject *GetNextAccessObject(CBObject *CurrObject);
@@ -70,5 +72,7 @@ public:
 	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 };
+
+} // end of namespace WinterMute
 
 #endif

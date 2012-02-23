@@ -28,6 +28,8 @@ THE SOFTWARE.
 
 #include "BGame.h"
 
+namespace WinterMute {
+
 class CAdGame : public CBGame {
 public:
 	virtual HRESULT OnScriptShutdown(CScScript *Script);
@@ -142,5 +144,7 @@ public:
 	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
 	bool ValidMouse();
 };
+
+} // end of namespace WinterMute
 
 #endif

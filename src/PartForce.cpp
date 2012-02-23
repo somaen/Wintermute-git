@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "PartForce.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CPartForce::CPartForce(CBGame *inGame) : CBNamedObject(inGame) {
@@ -49,3 +50,5 @@ HRESULT CPartForce::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

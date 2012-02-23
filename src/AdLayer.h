@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeAdLayer_H__
 #define __WmeAdLayer_H__
 
+namespace WinterMute {
 
 class CAdLayer : public CBObject {
 public:
@@ -48,5 +49,7 @@ public:
 	virtual HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
 	virtual char *ScToString();
 };
+
+} // end of namespace WinterMute
 
 #endif

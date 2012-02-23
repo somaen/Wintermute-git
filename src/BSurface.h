@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeBSurface_H__
 #define __WmeBSurface_H__
 
+namespace WinterMute {
 
 class CBSurface: public CBBase {
 public:
@@ -81,5 +82,7 @@ protected:
 	int m_Width;
 
 };
+
+} // end of namespace WinterMute
 
 #endif

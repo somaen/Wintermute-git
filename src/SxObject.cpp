@@ -26,6 +26,8 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "SxObject.h"
 
+namespace WinterMute {
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -54,3 +56,4 @@ HRESULT CSXObject::Persist(CBPersistMgr *PersistMgr) {
 	return S_OK;
 }
 
+} // end of namespace WinterMute

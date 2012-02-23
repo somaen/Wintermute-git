@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BPoint.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBPoint, false);
 
@@ -55,3 +56,5 @@ HRESULT CBPoint::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

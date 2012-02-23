@@ -28,7 +28,7 @@ THE SOFTWARE.
 #include <math.h>
 #include <limits.h>
 
-
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdScene, false);
 
@@ -2712,3 +2712,5 @@ HRESULT CAdScene::GetRegionObjects(CAdRegion *Region, CBArray<CAdObject *, CAdOb
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

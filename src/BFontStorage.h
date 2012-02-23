@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
+namespace WinterMute {
 
 class CBFont;
 
@@ -54,5 +55,7 @@ private:
 	void InitFreeType();
 	FT_Library m_FTLibrary;
 };
+
+} // end of namespace WinterMute
 
 #endif

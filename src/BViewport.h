@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
+namespace WinterMute {
+
 class CBViewport : public CBBase {
 public:
 	int GetHeight();
@@ -44,5 +46,7 @@ public:
 private:
 	RECT m_Rect;
 };
+
+} // end of namespace WinterMute
 
 #endif

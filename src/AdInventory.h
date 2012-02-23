@@ -28,6 +28,8 @@ THE SOFTWARE.
 
 #include "BObject.h"
 
+namespace WinterMute {
+
 class CAdItem;
 
 class CAdInventory : public CBObject {
@@ -41,5 +43,7 @@ public:
 	CBArray<CAdItem *, CAdItem *> m_TakenItems;
 	int m_ScrollOffset;
 };
+
+} // end of namespace WinterMute
 
 #endif

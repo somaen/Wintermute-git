@@ -26,7 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "SysClass.h"
 
-
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CSysClass::CSysClass(const AnsiString &name, PERSISTBUILD build, PERSISTLOAD load, bool persistent_class) {
@@ -192,3 +192,5 @@ void CSysClass::InstanceCallback(SYS_INSTANCE_CALLBACK lpCallback, void *lpData)
 		lpCallback((*it)->GetInstance(), lpData);
 	}
 }
+
+} // end of namespace WinterMute

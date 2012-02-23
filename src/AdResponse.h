@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BObject.h"
 
+namespace WinterMute {
+
 class CAdResponse : public CBObject {
 public:
 	DECLARE_PERSISTENT(CAdResponse, CBObject);
@@ -49,5 +51,7 @@ public:
 	TResponseType m_ResponseType;
 
 };
+
+} // end of namespace WinterMute
 
 #endif

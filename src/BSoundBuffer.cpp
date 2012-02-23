@@ -26,6 +26,8 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BSoundBuffer.h"
 
+namespace WinterMute {
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -336,3 +338,5 @@ BOOL CBSoundBuffer::FileSeekProc(QWORD offset, void *user) {
 	CBFile *file = static_cast<CBFile *>(user);
 	return SUCCEEDED(file->Seek(offset));
 }
+
+} // end of namespace WinterMute

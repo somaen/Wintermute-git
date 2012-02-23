@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdSpriteSet.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdSpriteSet, false);
 
@@ -292,3 +293,5 @@ bool CAdSpriteSet::ContainsSprite(CBSprite *Sprite) {
 	}
 	return false;
 }
+
+} // end of namespace WinterMute

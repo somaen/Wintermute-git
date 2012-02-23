@@ -26,7 +26,8 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdLayer.h"
 
-
+namespace WinterMute {
+    
 IMPLEMENT_PERSISTENT(CAdLayer, false);
 
 //////////////////////////////////////////////////////////////////////////
@@ -512,3 +513,5 @@ HRESULT CAdLayer::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

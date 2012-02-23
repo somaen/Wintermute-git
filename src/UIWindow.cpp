@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "UIWindow.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CUIWindow, false);
 
@@ -1277,3 +1278,5 @@ HRESULT CUIWindow::GetWindowObjects(CBArray<CUIObject *, CUIObject *>& Objects, 
 	}
 	return S_OK;
 }
+
+} // end of namespace WinterMute

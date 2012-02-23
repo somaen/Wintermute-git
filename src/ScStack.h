@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
+namespace WinterMute {
+
 class CScStack : public CBBase {
 public:
 	CScValue *GetAt(int Index);
@@ -50,5 +52,7 @@ public:
 	int m_SP;
 
 };
+
+} // end of namespace WinterMute
 
 #endif

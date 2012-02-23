@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeAdWaypointGroup_H__
 #define __WmeAdWaypointGroup_H__
 
+namespace WinterMute {
 
 class CAdWaypointGroup : public CBObject {
 public:
@@ -46,5 +47,7 @@ public:
 	virtual CScValue *ScGetProperty(char *Name);
 	virtual HRESULT ScSetProperty(char *Name, CScValue *Value);
 };
+
+} // end of namespace WinterMute
 
 #endif

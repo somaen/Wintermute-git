@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include "BBase.h"
 #include "dctypes.h"    // Added by ClassView
 
+namespace WinterMute {
+
 class CBEvent : public CBBase {
 public:
 	DECLARE_PERSISTENT(CBEvent, CBBase);
@@ -45,5 +47,7 @@ public:
 	HRESULT LoadFile(char *Filename);
 	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
 };
+
+} // end of namespace WinterMute
 
 #endif

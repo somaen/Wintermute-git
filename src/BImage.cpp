@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BImage.h"
 
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////
 CBImage::CBImage(CBGame *inGame, FIBITMAP *bitmap): CBBase(inGame) {
@@ -98,3 +99,5 @@ HRESULT CBImage::CopyFrom(CBImage *OrigImage, int NewWidth, int NewHeight) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

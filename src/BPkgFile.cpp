@@ -38,7 +38,7 @@ extern "C" {
 #include "zlib.h"
 }
 
-
+namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
 CBPkgFile::CBPkgFile(CBGame *inGame): CBFile(inGame) {
@@ -219,3 +219,5 @@ HRESULT CBPkgFile::SeekToPos(DWORD NewPos) {
 	m_Pos = NewPos;
 	return ret;
 }
+
+} // end of namespace WinterMute

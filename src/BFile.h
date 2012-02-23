@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BBase.h"
 
+namespace WinterMute {
+
 class CBFile : public CBBase {
 public:
 	DWORD m_Pos;
@@ -47,5 +49,7 @@ public:
 	CBFile(CBGame *inGame);
 	virtual ~CBFile();
 };
+
+} // end of namespace WinterMute
 
 #endif

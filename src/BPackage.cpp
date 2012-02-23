@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BPackage.h"
 
+namespace WinterMute {
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -92,3 +93,5 @@ void CBPackage::CloseFilePointer(FILE*& file) {
 	if (file) fclose(file);
 	file = NULL;
 }
+
+} // end of namespace WinterMute

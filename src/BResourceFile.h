@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include "BFile.h"
 
+namespace WinterMute {
+
 class CBResourceFile : public CBFile {
 public:
 	CBResourceFile(CBGame *inGame);
@@ -40,5 +42,7 @@ public:
 private:
 	BYTE *m_Data;
 };
+
+} // end of namespace WinterMute
 
 #endif

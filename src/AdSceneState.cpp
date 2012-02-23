@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdSceneState.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdSceneState, false);
 
@@ -75,3 +76,5 @@ CAdNodeState *CAdSceneState::GetNodeState(char *Name, bool Saving) {
 		return ret;
 	} else return NULL;
 }
+
+} // end of namespace WinterMute

@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "BObject.h"
 #include "BParser.h"
 
+namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBObject, false);
 
@@ -1086,3 +1087,5 @@ void CBObject::SetSoundEvent(char *EventName) {
 HRESULT CBObject::AfterMove() {
 	return S_OK;
 }
+
+} // end of namespace WinterMute

@@ -26,7 +26,8 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdWaypointGroup.h"
 
-
+namespace WinterMute {
+	
 IMPLEMENT_PERSISTENT(CAdWaypointGroup, false);
 
 //////////////////////////////////////////////////////////////////////////
@@ -248,3 +249,5 @@ HRESULT CAdWaypointGroup::Mimic(CAdWaypointGroup *Wpt, float Scale, int X, int Y
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute

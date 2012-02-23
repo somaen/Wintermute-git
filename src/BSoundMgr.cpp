@@ -28,6 +28,8 @@ THE SOFTWARE.
 #include "PathUtil.h"
 #include "StringUtil.h"
 
+namespace WinterMute {
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -303,3 +305,5 @@ float CBSoundMgr::PosToPan(int X, int Y) {
 
 	return minPan + relPos * (maxPan - minPan);
 }
+
+} // end of namespace WinterMute

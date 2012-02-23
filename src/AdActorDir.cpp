@@ -26,6 +26,8 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdActorDir.h"
 
+namespace WinterMute {
+
 IMPLEMENT_PERSISTENT(CAdActorDir, false);
 
 
@@ -45,3 +47,5 @@ HRESULT CAdActorDir::Persist(CBPersistMgr *PersistMgr) {
 
 	return S_OK;
 }
+
+} // end of namespace WinterMute
