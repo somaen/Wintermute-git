@@ -45,30 +45,30 @@ typedef std::vector<WideString> WideStringArray;
 typedef std::vector<AnsiString> AnsiStringArray;
 
 
-typedef enum {
+enum TGameState {
     GAME_RUNNING, GAME_FROZEN, GAME_SEMI_FROZEN
-} TGameState;
+};
 
 
-typedef enum { IMG_PALETTED8, IMG_TRUECOLOR } TImageType;
+enum TImageType { IMG_PALETTED8, IMG_TRUECOLOR } ;
 
 
-typedef enum {
+enum TTextAlign {
     TAL_LEFT = 0, TAL_RIGHT, TAL_CENTER, NUM_TEXT_ALIGN
-} TTextAlign;
+};
 
 
-typedef enum {
+enum TVerticalAlign {
     VAL_TOP = 0, VAL_CENTER, VAL_BOTTOM, NUM_VERTICAL_ALIGN
-} TVerticalAlign;
+};
 
 
-typedef enum {
+enum TDirection {
     DI_UP = 0, DI_UPRIGHT = 1, DI_RIGHT = 2, DI_DOWNRIGHT = 3, DI_DOWN = 4, DI_DOWNLEFT = 5, DI_LEFT = 6, DI_UPLEFT = 7, NUM_DIRECTIONS = 8, DI_NONE = 9
-} TDirection;
+};
 
 
-typedef enum {
+enum TEventType {
     EVENT_NONE           = 0,
     EVENT_INIT           = 1,
     EVENT_SHUTDOWN       = 2,
@@ -83,96 +83,96 @@ typedef enum {
     EVENT_RIGHT_RELEASE  = 11,
     EVENT_MIDDLE_RELEASE = 12,
     NUM_EVENTS
-} TEventType;
+};
 
 
-typedef enum {
+enum TUIObjectType {
     UI_UNKNOWN, UI_BUTTON, UI_WINDOW, UI_STATIC, UI_EDIT, UI_HTML, UI_CUSTOM
-} TUIObjectType;
+};
 
 
-typedef enum {
+enum TRendererState {
     RSTATE_3D, RSTATE_2D, RSTATE_LINES, RSTATE_NONE
-} TRendererState;
+};
 
 
-typedef enum {
+enum TDynamicConstructor {
     DYNAMIC_CONSTRUCTOR
-} TDynamicConstructor;
+};
 
-typedef enum TSeek {
+enum TSeek {
     SEEK_TO_BEGIN   = SEEK_SET,
     SEEK_TO_CURRENT = SEEK_CUR,
     SEEK_TO_END     = SEEK_END
 };
 
-typedef enum TSoundType {
+enum TSoundType {
     SOUND_SFX, SOUND_MUSIC, SOUND_SPEECH
 };
 
-typedef enum TVideoMode {
+enum TVideoMode {
     VIDEO_WINDOW, VIDEO_FULLSCREEN, VIDEO_ANY
 };
 
 
-typedef enum TVideoPlayback {
+enum TVideoPlayback {
     VID_PLAY_POS = 0,
     VID_PLAY_STRETCH = 1,
     VID_PLAY_CENTER = 2
 };
 
 
-typedef enum TMouseEvent {
+enum TMouseEvent {
     MOUSE_CLICK, MOUSE_RELEASE, MOUSE_DBLCLICK
 };
 
 
-typedef enum TMouseButton {
+enum TMouseButton {
     MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT, MOUSE_BUTTON_MIDDLE
 };
 
 
-typedef enum {
+enum TTransMgrState{
     TRANS_MGR_RUNNING, TRANS_MGR_READY
-} TTransMgrState;
+};
 
 
-typedef enum {
+enum TTransitionType{
     TRANSITION_NONE = 0,
     TRANSITION_FADE_OUT = 1,
     TRANSITION_FADE_IN = 2,
     NUM_TRANSITION_TYPES
-} TTransitionType;
+};
 
 
-typedef enum {
+enum TWindowMode {
     WINDOW_NORMAL, WINDOW_EXCLUSIVE, WINDOW_SYSTEM_EXCLUSIVE
-} TWindowMode;
+};
 
-typedef enum {
+enum TSFXType {
     SFX_NONE, SFX_ECHO, SFX_REVERB
-} TSFXType;
+};
 
 
-typedef enum {
+enum TSpriteCacheType {
     CACHE_ALL, CACHE_HALF
-} TSpriteCacheType;
+};
 
-typedef enum {
+enum TTextEncoding {
     TEXT_ANSI = 0, TEXT_UTF8 = 1, NUM_TEXT_ENCODINGS
-} TTextEncoding;
+};
 
-typedef enum {
+enum TSpriteBlendMode {
     BLEND_UNKNOWN = -1, BLEND_NORMAL = 0, BLEND_ADDITIVE = 1, BLEND_SUBTRACTIVE = 2, NUM_BLEND_MODES
-} TSpriteBlendMode;
+};
 
-typedef enum {
+enum TTTSType {
     TTS_CAPTION = 0, TTS_TALK, TTS_KEYPRESS
-} TTTSType;
+};
 
-typedef enum {
+enum TShadowType {
     SHADOW_NONE = 0, SHADOW_SIMPLE = 1, SHADOW_FLAT = 2, SHADOW_STENCIL = 3
-} TShadowType;
+};
 
 
 #endif // DCTYPES_H
