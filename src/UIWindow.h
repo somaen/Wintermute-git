@@ -55,7 +55,7 @@ public:
 	virtual HRESULT HandleMouse(TMouseEvent Event, TMouseButton Button);
 	POINT m_DragFrom;
 	bool m_Dragging;
-	DECLARE_PERSISTENT(CUIWindow, CUIObject);
+	DECLARE_PERSISTENT(CUIWindow, CUIObject)
 	bool m_Transparent;
 	HRESULT ShowWidget(char *Name, bool Visible = true);
 	HRESULT EnableWidget(char *Name, bool Enable = true);

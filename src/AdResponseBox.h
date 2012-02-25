@@ -41,7 +41,7 @@ public:
 	void SetLastResponseText(char *Text, char *TextOrig);
 	char *m_LastResponseText;
 	char *m_LastResponseTextOrig;
-	DECLARE_PERSISTENT(CAdResponseBox, CBObject);
+	DECLARE_PERSISTENT(CAdResponseBox, CBObject)
 	CScScript *m_WaitingScript;
 	virtual HRESULT Listen(CBScriptHolder *param1, DWORD param2);
 	typedef enum {

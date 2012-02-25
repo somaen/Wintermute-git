@@ -33,7 +33,7 @@ namespace WinterMute {
 
 class CAdResponse : public CBObject {
 public:
-	DECLARE_PERSISTENT(CAdResponse, CBObject);
+	DECLARE_PERSISTENT(CAdResponse, CBObject)
 	HRESULT SetIcon(char *Filename);
 	HRESULT SetFont(char *Filename);
 	HRESULT SetIconHover(char *Filename);

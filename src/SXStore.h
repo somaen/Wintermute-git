@@ -123,7 +123,7 @@ public:
 	};
 
 
-	DECLARE_PERSISTENT(CSXStore, CBObject);
+	DECLARE_PERSISTENT(CSXStore, CBObject)
 	CSXStore(CBGame *inGame);
 	virtual ~CSXStore();
 	virtual CScValue *ScGetProperty(char *name);

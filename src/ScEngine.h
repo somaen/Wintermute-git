@@ -121,7 +121,7 @@ public:
 	HRESULT ResetScript(CScScript *Script);
 	HRESULT EmptyScriptCache();
 	BYTE *GetCompiledScript(char *Filename, DWORD *OutSize, bool IgnoreCache = false);
-	DECLARE_PERSISTENT(CScEngine, CBBase);
+	DECLARE_PERSISTENT(CScEngine, CBBase)
 	HRESULT Cleanup();
 	int GetNumScripts(int *Running = NULL, int *Waiting = NULL, int *Persistent = NULL);
 	HRESULT Tick();

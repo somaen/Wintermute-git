@@ -31,7 +31,7 @@ namespace WinterMute {
 class CAdLayer : public CBObject {
 public:
 	bool m_CloseUp;
-	DECLARE_PERSISTENT(CAdLayer, CBObject);
+	DECLARE_PERSISTENT(CAdLayer, CBObject)
 	bool m_Active;
 	int m_Height;
 	int m_Width;

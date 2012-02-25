@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
     
-IMPLEMENT_PERSISTENT(CAdLayer, false);
+IMPLEMENT_PERSISTENT(CAdLayer, false)
 
 //////////////////////////////////////////////////////////////////////////
 CAdLayer::CAdLayer(CBGame *inGame): CBObject(inGame) {

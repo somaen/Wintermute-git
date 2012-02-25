@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CAdPathPoint, false);
+IMPLEMENT_PERSISTENT(CAdPathPoint, false)
 
 //////////////////////////////////////////////////////////////////////////
 CAdPathPoint::CAdPathPoint() {

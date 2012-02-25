@@ -39,7 +39,7 @@ class CScScript;
 class CBScriptable : public CBNamedObject, public IWmeDebugObject {
 public:
 	virtual CScScript *InvokeMethodThread(char *MethodName);
-	DECLARE_PERSISTENT(CBScriptable, CBNamedObject);
+	DECLARE_PERSISTENT(CBScriptable, CBNamedObject)
 
 	CBScriptable(CBGame *inGame, bool NoValue = false, bool Persistable = true);
 	virtual ~CBScriptable();

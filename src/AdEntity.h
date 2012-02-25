@@ -36,7 +36,7 @@ public:
 	TDirection m_WalkToDir;
 	void SetItem(char *ItemName);
 	char *m_Item;
-	DECLARE_PERSISTENT(CAdEntity, CAdTalkHolder);
+	DECLARE_PERSISTENT(CAdEntity, CAdTalkHolder)
 	void UpdatePosition();
 	virtual int GetHeight();
 	CBRegion *m_Region;

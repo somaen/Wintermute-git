@@ -48,7 +48,7 @@ namespace WinterMute {
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-IMPLEMENT_PERSISTENT(CBGame, true);
+IMPLEMENT_PERSISTENT(CBGame, true)
 
 
 //////////////////////////////////////////////////////////////////////
@@ -4317,7 +4317,7 @@ bool CBGame::IsDoubleClick(int buttonIndex) {
 	maxDoubleCLickTime = GetDoubleClickTime();
 	maxMoveX = GetSystemMetrics(SM_CXDOUBLECLK);
 	maxMoveY = GetSystemMetrics(SM_CYDOUBLECLK);
-#else if __IPHONEOS__
+#elif __IPHONEOS__
 	maxMoveX = 16;
 	maxMoveY = 16;
 #endif

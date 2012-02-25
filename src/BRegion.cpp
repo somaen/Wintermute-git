@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CBRegion, false);
+IMPLEMENT_PERSISTENT(CBRegion, false)
 
 //////////////////////////////////////////////////////////////////////////
 CBRegion::CBRegion(CBGame *inGame): CBObject(inGame) {

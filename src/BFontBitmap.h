@@ -33,7 +33,7 @@ namespace WinterMute {
 
 class CBFontBitmap : public CBFont {
 public:
-	DECLARE_PERSISTENT(CBFontBitmap, CBFont);
+	DECLARE_PERSISTENT(CBFontBitmap, CBFont)
 	HRESULT LoadBuffer(BYTE *Buffer);
 	HRESULT LoadFile(char *Filename);
 	virtual int GetTextWidth(BYTE *text, int MaxLength = -1);

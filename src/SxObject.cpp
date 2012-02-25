@@ -32,7 +32,7 @@ namespace WinterMute {
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-IMPLEMENT_PERSISTENT(CSXObject, false);
+IMPLEMENT_PERSISTENT(CSXObject, false)
 
 //////////////////////////////////////////////////////////////////////////
 CSXObject::CSXObject(CBGame *inGame, CScStack *Stack): CBObject(inGame) {

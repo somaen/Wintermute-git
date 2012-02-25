@@ -29,7 +29,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CUIEdit, false);
+IMPLEMENT_PERSISTENT(CUIEdit, false)
 
 //////////////////////////////////////////////////////////////////////////
 CUIEdit::CUIEdit(CBGame *inGame): CUIObject(inGame) {

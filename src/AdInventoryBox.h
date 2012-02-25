@@ -33,7 +33,7 @@ namespace WinterMute {
 class CAdInventoryBox : public CBObject {
 public:
 	bool m_HideSelected;
-	DECLARE_PERSISTENT(CAdInventoryBox, CBObject);
+	DECLARE_PERSISTENT(CAdInventoryBox, CBObject)
 	bool m_Exclusive;
 	int m_ScrollBy;
 	int m_ItemHeight;

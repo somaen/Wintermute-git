@@ -30,7 +30,7 @@ namespace WinterMute {
 
 class CAdActorDir : public CBBase {
 public:
-	DECLARE_PERSISTENT(CAdActorDir, CBBase);
+	DECLARE_PERSISTENT(CAdActorDir, CBBase)
 	CAdActorDir(CBGame *inGame);
 	virtual ~CAdActorDir(void);
 };

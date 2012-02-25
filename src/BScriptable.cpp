@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CBScriptable, false);
+IMPLEMENT_PERSISTENT(CBScriptable, false)
 
 //////////////////////////////////////////////////////////////////////////
 CBScriptable::CBScriptable(CBGame *inGame, bool NoValue, bool Persistable): CBNamedObject(inGame) {

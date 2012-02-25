@@ -29,7 +29,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CBObject, false);
+IMPLEMENT_PERSISTENT(CBObject, false)
 
 //////////////////////////////////////////////////////////////////////
 CBObject::CBObject(CBGame *inGame): CBScriptHolder(inGame) {

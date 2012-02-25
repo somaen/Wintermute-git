@@ -61,7 +61,7 @@ public:
 	bool m_Initialized;
 	HRESULT CorrectTargetPoint(int StartX, int StartY, int *X, int *Y, bool CheckFreeObjects = false, CBObject *Requester = NULL);
 	HRESULT CorrectTargetPoint2(int StartX, int StartY, int *TargetX, int *TargetY, bool CheckFreeObjects, CBObject *Requester);
-	DECLARE_PERSISTENT(CAdScene, CBObject);
+	DECLARE_PERSISTENT(CAdScene, CBObject)
 	HRESULT DisplayRegionContent(CAdRegion *Region = NULL, bool Display3DOnly = false);
 	HRESULT DisplayRegionContentOld(CAdRegion *Region = NULL);
 	static int CompareObjs(const void *Obj1, const void *Obj2);

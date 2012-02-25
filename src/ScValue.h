@@ -45,7 +45,7 @@ public:
 	static int CompareStrict(CScValue *Val1, CScValue *Val2);
 	TValType GetTypeTolerant();
 	void Cleanup(bool IgnoreNatives = false);
-	DECLARE_PERSISTENT(CScValue, CBBase);
+	DECLARE_PERSISTENT(CScValue, CBBase)
 
 	bool m_IsConstVar;
 	HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);

@@ -49,7 +49,7 @@ public:
 	bool m_SoundLooping;
 	DWORD m_SoundLoopStart;
 	DWORD m_SoundPosition;
-	DECLARE_PERSISTENT(CBSound, CBBase);
+	DECLARE_PERSISTENT(CBSound, CBBase)
 	HRESULT Resume();
 	HRESULT Pause(bool FreezePaused = false);
 	HRESULT Stop();

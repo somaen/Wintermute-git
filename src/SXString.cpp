@@ -31,7 +31,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CSXString, false);
+IMPLEMENT_PERSISTENT(CSXString, false)
 
 //////////////////////////////////////////////////////////////////////////
 CSXString::CSXString(CBGame *inGame, CScStack *Stack): CBScriptable(inGame) {

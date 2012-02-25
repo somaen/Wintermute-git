@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CAdScene, false);
+IMPLEMENT_PERSISTENT(CAdScene, false)
 
 //////////////////////////////////////////////////////////////////////////
 CAdScene::CAdScene(CBGame *inGame): CBObject(inGame) {

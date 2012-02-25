@@ -29,7 +29,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CAdSentence, false);
+IMPLEMENT_PERSISTENT(CAdSentence, false)
 
 //////////////////////////////////////////////////////////////////////////
 CAdSentence::CAdSentence(CBGame *inGame): CBBase(inGame) {

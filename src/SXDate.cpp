@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CSXDate, false);
+IMPLEMENT_PERSISTENT(CSXDate, false)
 
 //////////////////////////////////////////////////////////////////////////
 CSXDate::CSXDate(CBGame *inGame, CScStack *Stack): CBScriptable(inGame) {

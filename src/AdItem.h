@@ -42,7 +42,7 @@ public:
 
 
 	HRESULT Update();
-	DECLARE_PERSISTENT(CAdItem, CAdTalkHolder);
+	DECLARE_PERSISTENT(CAdItem, CAdTalkHolder)
 	HRESULT Display(int X, int Y);
 	bool GetExtendedFlag(char *FlagName);
 	bool m_InInventory;

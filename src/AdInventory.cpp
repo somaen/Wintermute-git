@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CAdInventory, false);
+IMPLEMENT_PERSISTENT(CAdInventory, false)
 
 //////////////////////////////////////////////////////////////////////////
 CAdInventory::CAdInventory(CBGame *inGame): CBObject(inGame) {

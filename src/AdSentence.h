@@ -40,7 +40,7 @@ public:
 	char *m_CurrentSkelAnim;
 	HRESULT Update(TDirection Dir = DI_DOWN);
 	HRESULT SetupTalkFile(char *SoundFilename);
-	DECLARE_PERSISTENT(CAdSentence, CBBase);
+	DECLARE_PERSISTENT(CAdSentence, CBBase)
 	HRESULT Finish();
 	void SetSound(CBSound *Sound);
 	bool m_SoundStarted;

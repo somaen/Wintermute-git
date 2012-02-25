@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CAdPath, false);
+IMPLEMENT_PERSISTENT(CAdPath, false)
 
 //////////////////////////////////////////////////////////////////////////
 CAdPath::CAdPath(CBGame *inGame): CBBase(inGame) {

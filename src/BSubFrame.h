@@ -38,7 +38,7 @@ public:
 	bool m_Decoration;
 	HRESULT SetSurface(char *Filename, bool default_ck = true, BYTE ck_red = 0, BYTE ck_green = 0, BYTE ck_blue = 0, int LifeTime = -1, bool KeepLoaded = false);
 	HRESULT SetSurfaceSimple();
-	DECLARE_PERSISTENT(CBSubFrame, CBScriptable);
+	DECLARE_PERSISTENT(CBSubFrame, CBScriptable)
 	void SetDefaultRect();
 	DWORD m_Transparent;
 	HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent, bool Complete = true);

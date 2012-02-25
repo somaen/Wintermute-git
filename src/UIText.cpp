@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CUIText, false);
+IMPLEMENT_PERSISTENT(CUIText, false)
 
 //////////////////////////////////////////////////////////////////////////
 CUIText::CUIText(CBGame *inGame): CUIObject(inGame) {

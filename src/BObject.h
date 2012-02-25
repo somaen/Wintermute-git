@@ -85,7 +85,7 @@ public:
 	bool m_EditorAlwaysRegister;
 	bool m_EditorOnly;
 	bool m_Is3D;
-	DECLARE_PERSISTENT(CBObject, CBScriptHolder);
+	DECLARE_PERSISTENT(CBObject, CBScriptHolder)
 	virtual HRESULT ShowCursor();
 	CBSprite *m_Cursor;
 	bool m_SharedCursors;

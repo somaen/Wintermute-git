@@ -35,7 +35,7 @@ namespace WinterMute {
 
 class CAdSceneNode : public CBObject {
 public:
-	DECLARE_PERSISTENT(CAdSceneNode, CBObject);
+	DECLARE_PERSISTENT(CAdSceneNode, CBObject)
 	HRESULT SetRegion(CAdRegion *Region);
 	HRESULT SetEntity(CAdEntity *Entity);
 	CAdEntity *m_Entity;

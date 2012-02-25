@@ -33,7 +33,7 @@ namespace WinterMute {
 
 class CAdPath : public CBBase {
 public:
-	DECLARE_PERSISTENT(CAdPath, CBBase);
+	DECLARE_PERSISTENT(CAdPath, CBBase)
 	CBPoint *GetCurrent();
 	bool SetReady(bool ready = true);
 	void AddPoint(CBPoint *point);

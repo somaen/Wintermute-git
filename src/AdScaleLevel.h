@@ -33,7 +33,7 @@ namespace WinterMute {
 
 class CAdScaleLevel : public CBObject {
 public:
-	DECLARE_PERSISTENT(CAdScaleLevel, CBObject);
+	DECLARE_PERSISTENT(CAdScaleLevel, CBObject)
 	float m_Scale;
 	CAdScaleLevel(CBGame *inGame);
 	virtual ~CAdScaleLevel();

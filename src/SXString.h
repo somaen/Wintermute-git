@@ -34,7 +34,7 @@ namespace WinterMute {
 class CSXString : public CBScriptable {
 public:
 	virtual int ScCompare(CBScriptable *Val);
-	DECLARE_PERSISTENT(CSXString, CBScriptable);
+	DECLARE_PERSISTENT(CSXString, CBScriptable)
 	CScValue *ScGetProperty(char *Name);
 	HRESULT ScSetProperty(char *Name, CScValue *Value);
 	HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);

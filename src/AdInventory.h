@@ -34,7 +34,7 @@ class CAdItem;
 
 class CAdInventory : public CBObject {
 public:
-	DECLARE_PERSISTENT(CAdInventory, CBObject);
+	DECLARE_PERSISTENT(CAdInventory, CBObject)
 	HRESULT RemoveItem(char *Name);
 	HRESULT RemoveItem(CAdItem *Item);
 	HRESULT InsertItem(char *Name, char *InsertAfter = NULL);

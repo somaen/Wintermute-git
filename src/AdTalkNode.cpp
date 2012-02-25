@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CAdTalkNode, false);
+IMPLEMENT_PERSISTENT(CAdTalkNode, false)
 
 //////////////////////////////////////////////////////////////////////////
 CAdTalkNode::CAdTalkNode(CBGame *inGame): CBBase(inGame) {

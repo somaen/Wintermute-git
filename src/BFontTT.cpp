@@ -34,7 +34,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CBFontTT, false);
+IMPLEMENT_PERSISTENT(CBFontTT, false)
 
 //////////////////////////////////////////////////////////////////////////
 CBFontTT::CBFontTT(CBGame *inGame): CBFont(inGame) {

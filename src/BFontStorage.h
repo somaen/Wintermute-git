@@ -38,7 +38,7 @@ class CBFont;
 
 class CBFontStorage : public CBBase {
 public:
-	DECLARE_PERSISTENT(CBFontStorage, CBBase);
+	DECLARE_PERSISTENT(CBFontStorage, CBBase)
 	HRESULT Cleanup(bool Warn = false);
 	HRESULT RemoveFont(CBFont *Font);
 	CBFont *AddFont(char *Filename);

@@ -33,7 +33,7 @@ namespace WinterMute {
 
 class CSXMath : public CBScriptable {
 public:
-	DECLARE_PERSISTENT(CSXMath, CBScriptable);
+	DECLARE_PERSISTENT(CSXMath, CBScriptable)
 	CSXMath(CBGame *inGame);
 	virtual ~CSXMath();
 	virtual CScValue *ScGetProperty(char *Name);

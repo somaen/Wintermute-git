@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CScStack, false);
+IMPLEMENT_PERSISTENT(CScStack, false)
 
 //////////////////////////////////////////////////////////////////////////
 CScStack::CScStack(CBGame *inGame): CBBase(inGame) {

@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CSXArray, false);
+IMPLEMENT_PERSISTENT(CSXArray, false)
 
 //////////////////////////////////////////////////////////////////////////
 CSXArray::CSXArray(CBGame *inGame, CScStack *Stack): CBScriptable(inGame) {

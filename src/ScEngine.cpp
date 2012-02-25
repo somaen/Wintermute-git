@@ -31,7 +31,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CScEngine, true);
+IMPLEMENT_PERSISTENT(CScEngine, true)
 
 #define COMPILER_DLL "dcscomp.dll"
 //////////////////////////////////////////////////////////////////////////

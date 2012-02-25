@@ -33,7 +33,7 @@ namespace WinterMute {
 
 class CSXFile : public CBScriptable {
 public:
-	DECLARE_PERSISTENT(CSXFile, CBScriptable);
+	DECLARE_PERSISTENT(CSXFile, CBScriptable)
 	CScValue *ScGetProperty(char *Name);
 	HRESULT ScSetProperty(char *Name, CScValue *Value);
 	HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);

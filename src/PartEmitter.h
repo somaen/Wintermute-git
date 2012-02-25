@@ -35,7 +35,7 @@ namespace WinterMute {
 
 class CPartEmitter : public CBObject {
 public:
-	DECLARE_PERSISTENT(CPartEmitter, CBObject);
+	DECLARE_PERSISTENT(CPartEmitter, CBObject)
 
 	CPartEmitter(CBGame *inGame, CBScriptHolder *Owner);
 	virtual ~CPartEmitter(void);

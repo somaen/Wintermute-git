@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CScScript, false);
+IMPLEMENT_PERSISTENT(CScScript, false)
 
 //////////////////////////////////////////////////////////////////////////
 CScScript::CScScript(CBGame *inGame, CScEngine *Engine): CBBase(inGame) {

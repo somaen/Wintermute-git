@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CBSound, false);
+IMPLEMENT_PERSISTENT(CBSound, false)
 
 //////////////////////////////////////////////////////////////////////////
 CBSound::CBSound(CBGame *inGame): CBBase(inGame) {

@@ -33,7 +33,7 @@ namespace WinterMute {
 
 class CUIEdit : public CUIObject {
 public:
-	DECLARE_PERSISTENT(CUIEdit, CUIObject);
+	DECLARE_PERSISTENT(CUIEdit, CUIObject)
 	int m_MaxLength;
 	int InsertChars(int Pos, BYTE *Chars, int Num);
 	int DeleteChars(int Start, int End);

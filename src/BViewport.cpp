@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CBViewport, false);
+IMPLEMENT_PERSISTENT(CBViewport, false)
 
 //////////////////////////////////////////////////////////////////////////
 CBViewport::CBViewport(CBGame *inGame): CBBase(inGame) {

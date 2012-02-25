@@ -34,7 +34,7 @@ public:
 	CAdSpriteSet *m_DefaultSpriteSet;
 	CBSprite *GetDefaultSprite(TDirection Dir);
 	HRESULT LoadDefaultSprite();
-	DECLARE_PERSISTENT(CAdTalkDef, CBObject);
+	DECLARE_PERSISTENT(CAdTalkDef, CBObject)
 
 	CAdTalkDef(CBGame *inGame);
 	virtual ~CAdTalkDef();

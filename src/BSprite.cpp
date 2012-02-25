@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CBSprite, false);
+IMPLEMENT_PERSISTENT(CBSprite, false)
 
 //////////////////////////////////////////////////////////////////////
 CBSprite::CBSprite(CBGame *inGame, CBObject *Owner): CBScriptHolder(inGame) {

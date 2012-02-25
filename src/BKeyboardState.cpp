@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CBKeyboardState, false);
+IMPLEMENT_PERSISTENT(CBKeyboardState, false)
 
 //////////////////////////////////////////////////////////////////////////
 CBKeyboardState::CBKeyboardState(CBGame *inGame): CBScriptable(inGame) {

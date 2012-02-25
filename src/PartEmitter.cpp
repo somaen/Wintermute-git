@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CPartEmitter, false);
+IMPLEMENT_PERSISTENT(CPartEmitter, false)
 
 //////////////////////////////////////////////////////////////////////////
 CPartEmitter::CPartEmitter(CBGame *inGame, CBScriptHolder *Owner) : CBObject(inGame) {

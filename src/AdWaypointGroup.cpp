@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 	
-IMPLEMENT_PERSISTENT(CAdWaypointGroup, false);
+IMPLEMENT_PERSISTENT(CAdWaypointGroup, false)
 
 //////////////////////////////////////////////////////////////////////////
 CAdWaypointGroup::CAdWaypointGroup(CBGame *inGame): CBObject(inGame) {

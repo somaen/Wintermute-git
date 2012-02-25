@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CUITiledImage, false);
+IMPLEMENT_PERSISTENT(CUITiledImage, false)
 
 //////////////////////////////////////////////////////////////////////////
 CUITiledImage::CUITiledImage(CBGame *inGame): CBObject(inGame) {

@@ -43,7 +43,7 @@ typedef void (*ENGINE_LOG_CALLBACK)(char *Text, HRESULT Result, void *Data);
 
 class CBGame: public CBObject {
 public:
-	DECLARE_PERSISTENT(CBGame, CBObject);
+	DECLARE_PERSISTENT(CBGame, CBObject)
 
 	virtual HRESULT OnScriptShutdown(CScScript *Script);
 

@@ -37,7 +37,7 @@ public:
 	HRESULT Mimic(CBRegion *Region, float Scale = 100.0f, int X = 0, int Y = 0);
 	HRESULT GetBoundingRect(RECT *Rect);
 	bool PtInPolygon(int X, int Y);
-	DECLARE_PERSISTENT(CBRegion, CBObject);
+	DECLARE_PERSISTENT(CBRegion, CBObject)
 	bool m_Active;
 	int m_EditorSelectedPoint;
 	CBRegion(CBGame *inGame);

@@ -34,7 +34,7 @@ class CSXArray : public CBScriptable {
 public:
 	HRESULT Push(CScValue *Val);
 	bool ValidNumber(const char *OrigStr, char *OutStr);
-	DECLARE_PERSISTENT(CSXArray, CBScriptable);
+	DECLARE_PERSISTENT(CSXArray, CBScriptable)
 	CSXArray(CBGame *inGame, CScStack *Stack);
 	CSXArray(CBGame *inGame);
 	virtual ~CSXArray();

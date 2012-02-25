@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CAdInventoryBox, false);
+IMPLEMENT_PERSISTENT(CAdInventoryBox, false)
 
 //////////////////////////////////////////////////////////////////////////
 CAdInventoryBox::CAdInventoryBox(CBGame *inGame): CBObject(inGame) {

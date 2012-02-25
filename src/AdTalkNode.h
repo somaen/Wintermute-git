@@ -35,7 +35,7 @@ public:
 	CBSprite *GetSprite(TDirection Dir);
 	bool IsInTimeInterval(DWORD Time, TDirection Dir);
 	HRESULT LoadSprite();
-	DECLARE_PERSISTENT(CAdTalkNode, CBBase);
+	DECLARE_PERSISTENT(CAdTalkNode, CBBase)
 
 	CAdTalkNode(CBGame *inGame);
 	virtual ~CAdTalkNode();

@@ -33,7 +33,7 @@ public:
 	void SetContext(char *Context);
 	int m_ID;
 	char *m_Context;
-	DECLARE_PERSISTENT(CAdResponseContext, CBBase);
+	DECLARE_PERSISTENT(CAdResponseContext, CBBase)
 	CAdResponseContext(CBGame *inGame);
 	virtual ~CAdResponseContext();
 

@@ -33,7 +33,7 @@ namespace WinterMute {
 
 class CUITiledImage : public CBObject {
 public:
-	DECLARE_PERSISTENT(CUITiledImage, CBObject);
+	DECLARE_PERSISTENT(CUITiledImage, CBObject)
 	void CorrectSize(int *Width, int *Height);
 	HRESULT LoadFile(char *Filename);
 	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);

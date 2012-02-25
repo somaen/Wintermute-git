@@ -29,7 +29,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CAdActor, false);
+IMPLEMENT_PERSISTENT(CAdActor, false)
 
 
 //////////////////////////////////////////////////////////////////////////

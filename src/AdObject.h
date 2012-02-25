@@ -58,7 +58,7 @@ public:
 	virtual HRESULT ResetSoundPan();
 	virtual HRESULT UpdateSounds();
 	HRESULT Reset();
-	DECLARE_PERSISTENT(CAdObject, CBObject);
+	DECLARE_PERSISTENT(CAdObject, CBObject)
 	virtual void Talk(char *Text, char *Sound = NULL, DWORD Duration = 0, char *Stances = NULL, TTextAlign Align = TAL_CENTER);
 	virtual int GetHeight();
 	CAdSentence *m_Sentence;

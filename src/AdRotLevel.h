@@ -30,7 +30,7 @@ namespace WinterMute {
 
 class CAdRotLevel : public CBObject {
 public:
-	DECLARE_PERSISTENT(CAdRotLevel, CBObject);
+	DECLARE_PERSISTENT(CAdRotLevel, CBObject)
 	CAdRotLevel(CBGame *inGame);
 	virtual ~CAdRotLevel();
 	float m_Rotation;

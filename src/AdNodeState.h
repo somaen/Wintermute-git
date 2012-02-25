@@ -36,7 +36,7 @@ public:
 	void SetName(char *Name);
 	void SetFilename(char *Filename);
 	void SetCursor(char *Filename);
-	DECLARE_PERSISTENT(CAdNodeState, CBBase);
+	DECLARE_PERSISTENT(CAdNodeState, CBBase)
 	CAdNodeState(CBGame *inGame);
 	virtual ~CAdNodeState();
 	char *m_Name;

@@ -56,7 +56,7 @@ typedef enum {
     STATE_TURNING,
     STATE_TALKING,
     STATE_DIRECT_CONTROL,
-    STATE_PLAYING_ANIM_SET,
+    STATE_PLAYING_ANIM_SET
 } TObjectState;
 
 typedef enum {

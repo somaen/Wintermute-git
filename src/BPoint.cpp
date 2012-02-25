@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CBPoint, false);
+IMPLEMENT_PERSISTENT(CBPoint, false)
 
 //////////////////////////////////////////////////////////////////////////
 CBPoint::CBPoint() {

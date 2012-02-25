@@ -29,7 +29,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CAdGame, true);
+IMPLEMENT_PERSISTENT(CAdGame, true)
 
 //////////////////////////////////////////////////////////////////////////
 CAdGame::CAdGame(): CBGame() {
@@ -1799,7 +1799,7 @@ HRESULT CAdGame::DeleteItem(CAdItem *Item) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdGame::AddSpeechDir(char *Dir) {
+HRESULT CAdGame::AddSpeechDir(const char *Dir) {
 	if (!Dir || Dir[0] == '\0') return E_FAIL;
 
 	char *Temp = new char[strlen(Dir) + 2];

@@ -30,7 +30,7 @@ namespace WinterMute {
 
 class CUIEntity : public CUIObject {
 public:
-	DECLARE_PERSISTENT(CUIEntity, CUIObject);
+	DECLARE_PERSISTENT(CUIEntity, CUIObject)
 	CUIEntity(CBGame *inGame);
 	virtual ~CUIEntity();
 	HRESULT LoadFile(char *Filename);

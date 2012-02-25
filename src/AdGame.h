@@ -49,7 +49,7 @@ public:
 	bool m_SmartItemCursor;
 
 	CBArray<char *, char *> m_SpeechDirs;
-	HRESULT AddSpeechDir(char *Dir);
+	HRESULT AddSpeechDir(const char *Dir);
 	HRESULT RemoveSpeechDir(char *Dir);
 	char *FindSpeechFile(char *StringID);
 
@@ -103,7 +103,7 @@ public:
 	virtual HRESULT LoadGame(char *Filename);
 	CAdItem *m_SelectedItem;
 	HRESULT Cleanup();
-	DECLARE_PERSISTENT(CAdGame, CBGame);
+	DECLARE_PERSISTENT(CAdGame, CBGame)
 
 	void FinishSentences();
 	HRESULT ShowCursor();

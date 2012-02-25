@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CAdResponseContext, false);
+IMPLEMENT_PERSISTENT(CAdResponseContext, false)
 
 //////////////////////////////////////////////////////////////////////////
 CAdResponseContext::CAdResponseContext(CBGame *inGame): CBBase(inGame) {

@@ -30,7 +30,7 @@ namespace WinterMute {
 
 class CBPoint: public CBBase {
 public:
-	DECLARE_PERSISTENT(CBPoint, CBBase);
+	DECLARE_PERSISTENT(CBPoint, CBBase)
 	CBPoint();
 	CBPoint(int initX, int initY);
 	int y;

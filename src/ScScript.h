@@ -67,7 +67,7 @@ public:
 	HRESULT CreateMethodThread(CScScript *Original, const char *MethodName);
 	CScScript *InvokeEventHandler(const char *EventName, bool Unbreakable = false);
 	DWORD m_TimeSlice;
-	DECLARE_PERSISTENT(CScScript, CBBase);
+	DECLARE_PERSISTENT(CScScript, CBBase)
 	void RuntimeError(LPCSTR fmt, ...);
 	HRESULT Run();
 	HRESULT Finish(bool IncludingThreads = false);

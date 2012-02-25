@@ -43,7 +43,7 @@ public:
 	virtual HRESULT HandleMouse(TMouseEvent Event, TMouseButton Button);
 	bool IsFocused();
 	bool m_ParentNotify;
-	DECLARE_PERSISTENT(CUIObject, CBObject);
+	DECLARE_PERSISTENT(CUIObject, CBObject)
 	CUIObject *m_Parent;
 	virtual HRESULT Display(int OffsetX = 0, int OffsetY = 0);
 	virtual void CorrectSize();

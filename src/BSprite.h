@@ -44,7 +44,7 @@ public:
 	void Cleanup();
 	void SetDefaults();
 	bool m_Precise;
-	DECLARE_PERSISTENT(CBSprite, CBScriptHolder);
+	DECLARE_PERSISTENT(CBSprite, CBScriptHolder)
 
 	bool m_EditorAllFrames;
 	bool GetBoundingRect(LPRECT Rect, int X, int Y, float ScaleX = 100, float ScaleY = 100);

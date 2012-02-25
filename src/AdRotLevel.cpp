@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CAdRotLevel, false);
+IMPLEMENT_PERSISTENT(CAdRotLevel, false)
 
 
 //////////////////////////////////////////////////////////////////////////

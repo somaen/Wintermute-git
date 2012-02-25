@@ -33,7 +33,7 @@ public:
 	bool m_KillSound;
 	bool m_Keyframe;
 	HRESULT OneTimeDisplay(CBObject *Owner, bool Muted = false);
-	DECLARE_PERSISTENT(CBFrame, CBScriptable);
+	DECLARE_PERSISTENT(CBFrame, CBScriptable)
 	CBSound *m_Sound;
 	bool m_EditorExpanded;
 	bool GetBoundingRect(LPRECT Rect, int X, int Y, float ScaleX = 100, float ScaleY = 100);

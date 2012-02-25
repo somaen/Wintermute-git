@@ -32,7 +32,7 @@ namespace WinterMute {
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-IMPLEMENT_PERSISTENT(CBFontStorage, true);
+IMPLEMENT_PERSISTENT(CBFontStorage, true)
 
 //////////////////////////////////////////////////////////////////////////
 CBFontStorage::CBFontStorage(CBGame *inGame): CBBase(inGame) {

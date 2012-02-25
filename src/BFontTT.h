@@ -108,7 +108,7 @@ public:
 
 
 public:
-	DECLARE_PERSISTENT(CBFontTT, CBFont);
+	DECLARE_PERSISTENT(CBFontTT, CBFont)
 	CBFontTT(CBGame *inGame);
 	virtual ~CBFontTT(void);
 

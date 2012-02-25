@@ -39,7 +39,7 @@ namespace WinterMute {
 class CAdActor : public CAdTalkHolder {
 public:
 	TDirection AngleToDirection(int Angle);
-	DECLARE_PERSISTENT(CAdActor, CAdTalkHolder);
+	DECLARE_PERSISTENT(CAdActor, CAdTalkHolder)
 	virtual int GetHeight();
 	CBSprite *GetTalkStance(char *Stance);
 	virtual void GoTo(int X, int Y, TDirection AfterWalkDir = DI_NONE);

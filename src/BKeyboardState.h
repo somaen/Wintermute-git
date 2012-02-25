@@ -42,7 +42,7 @@ public:
 	bool m_CurrentAlt;
 	bool m_CurrentControl;
 
-	DECLARE_PERSISTENT(CBKeyboardState, CBScriptable);
+	DECLARE_PERSISTENT(CBKeyboardState, CBScriptable)
 	CBKeyboardState(CBGame *inGame);
 	virtual ~CBKeyboardState();
 	HRESULT ReadKey(SDL_Event *event);

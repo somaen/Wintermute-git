@@ -33,7 +33,7 @@ namespace WinterMute {
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-IMPLEMENT_PERSISTENT(CBFontBitmap, false);
+IMPLEMENT_PERSISTENT(CBFontBitmap, false)
 
 //////////////////////////////////////////////////////////////////////
 CBFontBitmap::CBFontBitmap(CBGame *inGame): CBFont(inGame) {

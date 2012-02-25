@@ -33,7 +33,7 @@ namespace WinterMute {
 
 class CBFont: public CBObject {
 public:
-	DECLARE_PERSISTENT(CBFont, CBObject);
+	DECLARE_PERSISTENT(CBFont, CBObject)
 	virtual int GetTextWidth(BYTE *text, int MaxLenght = -1);
 	virtual int GetTextHeight(BYTE *text, int width);
 	virtual void DrawText(BYTE *text, int x, int y, int width, TTextAlign align = TAL_LEFT, int max_height = -1, int MaxLenght = -1);

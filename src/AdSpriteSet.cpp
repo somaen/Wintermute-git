@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CAdSpriteSet, false);
+IMPLEMENT_PERSISTENT(CAdSpriteSet, false)
 
 //////////////////////////////////////////////////////////////////////////
 CAdSpriteSet::CAdSpriteSet(CBGame *inGame, CBObject *Owner): CBObject(inGame) {

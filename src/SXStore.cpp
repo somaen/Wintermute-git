@@ -33,7 +33,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-IMPLEMENT_PERSISTENT(CSXStore, false);
+IMPLEMENT_PERSISTENT(CSXStore, false)
 
 //////////////////////////////////////////////////////////////////////////
 CSXStore::CSXStore(CBGame *inGame) : CBObject(inGame) {

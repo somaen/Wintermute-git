@@ -30,7 +30,7 @@ namespace WinterMute {
 
 class CBScriptHolder : public CBScriptable {
 public:
-	DECLARE_PERSISTENT(CBScriptHolder, CBScriptable);
+	DECLARE_PERSISTENT(CBScriptHolder, CBScriptable)
 
 	CBScriptHolder(CBGame *inGame);
 	virtual ~CBScriptHolder();

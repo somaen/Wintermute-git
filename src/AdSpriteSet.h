@@ -37,7 +37,7 @@ public:
 	bool ContainsSprite(CBSprite *Sprite);
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent = 0);
 	CBSprite *GetSprite(TDirection Direction);
-	DECLARE_PERSISTENT(CAdSpriteSet, CBObject);
+	DECLARE_PERSISTENT(CAdSpriteSet, CBObject)
 	CBObject *m_Owner;
 	CAdSpriteSet(CBGame *inGame, CBObject *Owner = NULL);
 	virtual ~CAdSpriteSet();

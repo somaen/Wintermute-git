@@ -40,7 +40,7 @@ public:
 	HRESULT Deactivate();
 	HRESULT Display();
 	HRESULT Update();
-	DECLARE_PERSISTENT(CBFader, CBObject);
+	DECLARE_PERSISTENT(CBFader, CBObject)
 	CBFader(CBGame *inGame);
 	virtual ~CBFader();
 	bool m_Active;

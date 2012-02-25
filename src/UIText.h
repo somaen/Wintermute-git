@@ -35,7 +35,7 @@ class CUIText : public CUIObject {
 public:
 	HRESULT SizeToFit();
 	virtual HRESULT Display(int OffsetX, int OffsetY);
-	DECLARE_PERSISTENT(CUIText, CUIObject);
+	DECLARE_PERSISTENT(CUIText, CUIObject)
 	CUIText(CBGame *inGame = NULL);
 	virtual ~CUIText();
 	TTextAlign m_TextAlign;

@@ -30,7 +30,7 @@ namespace WinterMute {
 
 class CAdTalkHolder : public CAdObject {
 public:
-	DECLARE_PERSISTENT(CAdTalkHolder, CAdObject);
+	DECLARE_PERSISTENT(CAdTalkHolder, CAdObject)
 	virtual CBSprite *GetTalkStance(char *Stance);
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 	CBSprite *m_Sprite;

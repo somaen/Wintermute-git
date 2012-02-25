@@ -35,7 +35,7 @@ class CScStack : public CBBase {
 public:
 	CScValue *GetAt(int Index);
 	CScValue *GetPushValue();
-	DECLARE_PERSISTENT(CScStack, CBBase);
+	DECLARE_PERSISTENT(CScStack, CBBase)
 	void PushNative(CBScriptable *Val, bool Persistent);
 	void PushString(const char *Val);
 	void PushBool(bool Val);

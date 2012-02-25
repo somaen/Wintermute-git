@@ -37,7 +37,7 @@ public:
 	int GetWidth();
 	RECT *GetRect();
 	HRESULT SetRect(int left, int top, int right, int bottom, bool NoCheck = false);
-	DECLARE_PERSISTENT(CBViewport, CBBase);
+	DECLARE_PERSISTENT(CBViewport, CBBase)
 	int m_OffsetY;
 	int m_OffsetX;
 	CBObject *m_MainObject;

@@ -34,7 +34,7 @@ namespace WinterMute {
 class CSXMemBuffer : public CBScriptable {
 public:
 	virtual int ScCompare(CBScriptable *Val);
-	DECLARE_PERSISTENT(CSXMemBuffer, CBScriptable);
+	DECLARE_PERSISTENT(CSXMemBuffer, CBScriptable)
 	CScValue *ScGetProperty(char *Name);
 	HRESULT ScSetProperty(char *Name, CScValue *Value);
 	HRESULT ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisStack, char *Name);
