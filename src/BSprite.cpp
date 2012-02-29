@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "BSprite.h"
 #include "StringUtil.h"
 #include "PathUtil.h"
+#include "BParser.h"
 
 namespace WinterMute {
 

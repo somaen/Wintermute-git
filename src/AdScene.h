@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeAdScene_H__
 #define __WmeAdScene_H__
 
+#include "BFader.h"
+
 namespace WinterMute {
 
 class CAdScene : public CBObject {

@@ -24,6 +24,7 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "BParser.h"
 #include "BFrame.h"
 
 namespace WinterMute {

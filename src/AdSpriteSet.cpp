@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "AdSpriteSet.h"
+#include "BParser.h"
 
 namespace WinterMute {
 

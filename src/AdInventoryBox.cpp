@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "AdInventoryBox.h"
+#include "BParser.h"
 #include <math.h>
 
 

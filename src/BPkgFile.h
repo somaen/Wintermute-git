@@ -28,6 +28,7 @@ THE SOFTWARE.
 
 
 #include "BFile.h"
+#include "BFileEntry.h"
 #include "zlib.h"   // Added by ClassView
 
 #define COMPRESSED_BUFFER_SIZE 4096

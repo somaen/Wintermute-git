@@ -32,6 +32,11 @@ THE SOFTWARE.
 #include "dctypes.h"    // Added by ClassView
 #include "BSaveThumbHelper.h"
 #include "SXStore.h"
+#include "SXMath.h"
+#include "BSoundMgr.h"
+#include "BFader.h"
+#include "BRenderer.h"
+#include "BSurfaceStorage.h"
 #include "SDL.h"
 
 namespace WinterMute {

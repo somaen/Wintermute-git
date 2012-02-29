@@ -26,10 +26,11 @@ THE SOFTWARE.
 #ifndef __WmeBSound_H__
 #define __WmeBSound_H__
 
-namespace WinterMute {
-
 #include "BBase.h"
 #include "dctypes.h"    // Added by ClassView
+#include "BSoundBuffer.h"
+
+namespace WinterMute {
 
 class CBSound : public CBBase {
 public:

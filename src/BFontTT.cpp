@@ -31,6 +31,7 @@ THE SOFTWARE.
 #include "MathUtil.h"
 #include "BRenderSDL.h"
 #include "BSurfaceSDL.h"
+#include "BParser.h"
 
 namespace WinterMute {
 

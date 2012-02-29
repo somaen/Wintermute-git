@@ -25,6 +25,8 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "AdEntity.h"
+#include "BParser.h"
+#include "BSurfaceStorage.h"
 
 namespace WinterMute {
 

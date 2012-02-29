@@ -28,6 +28,7 @@ THE SOFTWARE.
 
 
 #include "BBase.h"
+#include "BSoundBuffer.h"
 #include "bass.h"
 
 namespace WinterMute {

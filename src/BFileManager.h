@@ -29,6 +29,7 @@ THE SOFTWARE.
 
 #include <map>
 #include "coll_templ.h"
+#include "BFileEntry.h"
 
 namespace WinterMute {
 

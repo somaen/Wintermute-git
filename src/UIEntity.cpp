@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "UIEntity.h"
+#include "BParser.h"
 
 namespace WinterMute {
 

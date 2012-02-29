@@ -27,6 +27,10 @@ THE SOFTWARE.
 #include "BFileManager.h"
 #include "StringUtil.h"
 #include "PathUtil.h"
+#include "BDiskFile.h"
+#include "BResourceFile.h"
+#include "BSaveThumbFile.h"
+#include "BFileEntry.h"
 #include <boost/filesystem.hpp>
 
 #ifdef __WIN32__

@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeAdObject_H__
 #define __WmeAdObject_H__
 
+#include "PartEmitter.h"
+
 namespace WinterMute {
 
 class CAdWaypointGroup;

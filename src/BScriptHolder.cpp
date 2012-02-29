@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BScriptHolder.h"
+#include "BParser.h"
 
 namespace WinterMute {
 
