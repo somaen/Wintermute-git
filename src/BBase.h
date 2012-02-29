@@ -41,7 +41,7 @@ public:
 	HRESULT SetEditorProp(const char *PropName, const char *PropValue);
 	const char *GetEditorProp(const char *PropName, const char *InitVal = NULL);
 	CBBase(TDynamicConstructor, TDynamicConstructor) {};
-	HRESULT ParseEditorProperty(BYTE *Buffer, bool Complete = true);
+	HRESULT ParseEditorProperty(byte  *Buffer, bool Complete = true);
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent = 0);
 	CBBase();
 	CBGame *Game;

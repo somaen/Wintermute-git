@@ -176,7 +176,7 @@ TOKEN_DEF(HIDE_SELECTED)
 TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdInventoryBox::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CAdInventoryBox::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(INVENTORY_BOX)
 	TOKEN_TABLE(TEMPLATE)

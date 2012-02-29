@@ -83,7 +83,7 @@ TOKEN_DEF(DEFAULT_SPRITE)
 TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdTalkDef::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CAdTalkDef::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(TALK)
 	TOKEN_TABLE(TEMPLATE)

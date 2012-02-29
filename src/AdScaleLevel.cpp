@@ -73,7 +73,7 @@ TOKEN_DEF(SCALE)
 TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdScaleLevel::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CAdScaleLevel::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(SCALE_LEVEL)
 	TOKEN_TABLE(TEMPLATE)

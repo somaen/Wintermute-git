@@ -166,7 +166,7 @@ public:
 	FILE *m_DEBUG_LogFile;
 	int m_Sequence;
 	virtual HRESULT LoadFile(const char *Filename);
-	virtual HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	virtual HRESULT LoadBuffer(byte  *Buffer, bool Complete = true);
 	CBArray<CBQuickMsg *, CBQuickMsg *> m_QuickMessages;
 	CBArray<CUIWindow *, CUIWindow *> m_Windows;
 	CBArray<CBViewport *, CBViewport *> m_ViewportStack;
@@ -228,7 +228,7 @@ public:
 	void SetWindowTitle();
 	virtual bool HandleMouseWheel(int Delta);
 	bool m_Quitting;
-	virtual HRESULT GetVersion(BYTE *VerMajor, BYTE *VerMinor, BYTE *ExtMajor, BYTE *ExtMinor);
+	virtual HRESULT GetVersion(byte  *VerMajor, byte *VerMinor, byte *ExtMajor, byte *ExtMinor);
 	virtual bool HandleKeypress(SDL_Event *event);
 	int m_FreezeLevel;
 	HRESULT Unfreeze();

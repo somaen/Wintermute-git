@@ -40,7 +40,7 @@ public:
 	virtual HRESULT Close();
 	virtual HRESULT Open(const char *Filename);
 private:
-	BYTE *m_Data;
+	byte *m_Data;
 };
 
 } // end of namespace WinterMute

@@ -46,7 +46,7 @@ public:
 	virtual HRESULT Listen(CBScriptHolder *param1, DWORD param2);
 	HRESULT ApplyEvent(const char *EventName, bool Unbreakable = false);
 	void SetFilename(char *Filename);
-	HRESULT ParseProperty(BYTE *Buffer, bool Complete = true);
+	HRESULT ParseProperty(byte  *Buffer, bool Complete = true);
 
 	char *m_Filename;
 	bool m_Freezable;

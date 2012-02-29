@@ -67,7 +67,7 @@ TOKEN_DEF(PRECACHE)
 TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdTalkNode::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CAdTalkNode::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(ACTION)
 	TOKEN_TABLE(SPRITESET_FILE)

@@ -77,7 +77,7 @@ BYTE *CBImage::CreateBMPBuffer(DWORD *BufferSize) {
 	FreeImage_AcquireMemory(fiMem, &data, &size);
 
 
-	BYTE *Buffer = new BYTE[size];
+	BYTE *Buffer = new byte[size];
 	memcpy(Buffer, data, size);
 
 	FreeImage_CloseMemory(fiMem);

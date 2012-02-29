@@ -66,7 +66,7 @@ HRESULT CBResourceFile::Close() {
 HRESULT CBResourceFile::Read(void *Buffer, DWORD Size) {
 	if (!m_Data || m_Pos + Size > m_Size) return E_FAIL;
 
-	memcpy(Buffer, (BYTE *)m_Data + m_Pos, Size);
+	memcpy(Buffer, (byte  *)m_Data + m_Pos, Size);
 	m_Pos += Size;
 
 	return S_OK;

@@ -60,7 +60,7 @@ public:
 	bool m_Changed;
 	bool m_Paused;
 	bool m_Finished;
-	HRESULT LoadBuffer(BYTE *Buffer, bool Compete = true, int LifeTime = -1, TSpriteCacheType CacheType = CACHE_ALL);
+	HRESULT LoadBuffer(byte  *Buffer, bool Compete = true, int LifeTime = -1, TSpriteCacheType CacheType = CACHE_ALL);
 	HRESULT LoadFile(char *Filename, int LifeTime = -1, TSpriteCacheType CacheType = CACHE_ALL);
 	DWORD m_LastFrameTime;
 	HRESULT Draw(int X, int Y, CBObject *Register = NULL, float ZoomX = 100, float ZoomY = 100, DWORD Alpha = 0xFFFFFFFF);

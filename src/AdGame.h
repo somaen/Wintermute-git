@@ -92,7 +92,7 @@ public:
 
 	TTalkSkipButton m_TalkSkipButton;
 
-	virtual HRESULT GetVersion(BYTE *VerMajor, BYTE *VerMinor, BYTE *ExtMajor, BYTE *ExtMinor);
+	virtual HRESULT GetVersion(byte  *VerMajor, byte *VerMinor, byte *ExtMajor, byte *ExtMinor);
 	HRESULT ScheduleChangeScene(char *Filename, bool FadeIn);
 	char *m_ScheduledScene;
 	bool m_ScheduledFadeIn;
@@ -129,10 +129,10 @@ public:
 	CBArray<CAdResponseContext *, CAdResponseContext *> m_ResponsesGame;
 
 	virtual HRESULT LoadFile(const char *Filename);
-	virtual HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	virtual HRESULT LoadBuffer(byte  *Buffer, bool Complete = true);
 
 	HRESULT LoadItemsFile(char *Filename, bool Merge = false);
-	HRESULT LoadItemsBuffer(BYTE *Buffer, bool Merge = false);
+	HRESULT LoadItemsBuffer(byte  *Buffer, bool Merge = false);
 
 
 	virtual void PublishNatives();

@@ -118,7 +118,7 @@ TOKEN_DEF(EDIT)
 TOKEN_DEF(CAPTION)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CUIEdit::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CUIEdit::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(TEMPLATE)
 	TOKEN_TABLE(DISABLED)
@@ -549,13 +549,13 @@ HRESULT CUIEdit::Display(int OffsetX, int OffsetY) {
 	m_SelEnd   = MIN(m_SelEnd,   strlen(m_Text));
 
 	//int CursorWidth = font->GetCharWidth(m_CursorChar[0]);
-	int CursorWidth = font->GetTextWidth((BYTE *)m_CursorChar);
+	int CursorWidth = font->GetTextWidth((byte  *)m_CursorChar);
 
 	int s1, s2;
 	bool CurFirst;
 	// modify scroll offset
 	if (m_SelStart >= m_SelEnd) {
-		while (font->GetTextWidth((BYTE *)m_Text + m_ScrollOffset, max(0, m_SelEnd - m_ScrollOffset)) > m_Width - CursorWidth - 2 * m_FrameWidth) {
+		while (font->GetTextWidth((byte  *)m_Text + m_ScrollOffset, max(0, m_SelEnd - m_ScrollOffset)) > m_Width - CursorWidth - 2 * m_FrameWidth) {
 			m_ScrollOffset++;
 			if (m_ScrollOffset >= strlen(m_Text)) break;
 		}
@@ -566,8 +566,8 @@ HRESULT CUIEdit::Display(int OffsetX, int OffsetY) {
 		s2 = m_SelStart;
 		CurFirst = true;
 	} else {
-		while (font->GetTextWidth((BYTE *)m_Text + m_ScrollOffset, max(0, m_SelStart - m_ScrollOffset)) +
-		        sfont->GetTextWidth((BYTE *)(m_Text + max(m_ScrollOffset, m_SelStart)), m_SelEnd - max(m_ScrollOffset, m_SelStart))
+		while (font->GetTextWidth((byte  *)m_Text + m_ScrollOffset, max(0, m_SelStart - m_ScrollOffset)) +
+		        sfont->GetTextWidth((byte  *)(m_Text + max(m_ScrollOffset, m_SelStart)), m_SelEnd - max(m_ScrollOffset, m_SelStart))
 
 		        > m_Width - CursorWidth - 2 * m_FrameWidth) {
 			m_ScrollOffset++;
@@ -601,9 +601,9 @@ HRESULT CUIEdit::Display(int OffsetX, int OffsetY) {
 
 		// unselected 1
 		if (s1 > m_ScrollOffset) {
-			if (Count) font->DrawText((BYTE *)m_Text + m_ScrollOffset, xxx, yyy, width - xxx, Align, height, s1 - m_ScrollOffset);
-			xxx += font->GetTextWidth((BYTE *)m_Text + m_ScrollOffset, s1 - m_ScrollOffset);
-			AlignOffset += font->GetTextWidth((BYTE *)m_Text + m_ScrollOffset, s1 - m_ScrollOffset);
+			if (Count) font->DrawText((byte  *)m_Text + m_ScrollOffset, xxx, yyy, width - xxx, Align, height, s1 - m_ScrollOffset);
+			xxx += font->GetTextWidth((byte  *)m_Text + m_ScrollOffset, s1 - m_ScrollOffset);
+			AlignOffset += font->GetTextWidth((byte  *)m_Text + m_ScrollOffset, s1 - m_ScrollOffset);
 		}
 
 		// cursor
@@ -614,7 +614,7 @@ HRESULT CUIEdit::Display(int OffsetX, int OffsetY) {
 					m_CursorVisible = !m_CursorVisible;
 				}
 				if (m_CursorVisible)
-					font->DrawText((BYTE *)m_CursorChar, xxx, yyy, width - xxx, Align, height, 1);
+					font->DrawText((byte  *)m_CursorChar, xxx, yyy, width - xxx, Align, height, 1);
 			}
 			xxx += CursorWidth;
 			AlignOffset += CursorWidth;
@@ -624,9 +624,9 @@ HRESULT CUIEdit::Display(int OffsetX, int OffsetY) {
 		int s3 = max(s1, m_ScrollOffset);
 
 		if (s2 - s3 > 0) {
-			if (Count) sfont->DrawText((BYTE *)m_Text + s3, xxx, yyy, width - xxx, Align, height, s2 - s3);
-			xxx += sfont->GetTextWidth((BYTE *)m_Text + s3, s2 - s3);
-			AlignOffset += sfont->GetTextWidth((BYTE *)m_Text + s3, s2 - s3);
+			if (Count) sfont->DrawText((byte  *)m_Text + s3, xxx, yyy, width - xxx, Align, height, s2 - s3);
+			xxx += sfont->GetTextWidth((byte  *)m_Text + s3, s2 - s3);
+			AlignOffset += sfont->GetTextWidth((byte  *)m_Text + s3, s2 - s3);
 		}
 
 		// cursor
@@ -637,15 +637,15 @@ HRESULT CUIEdit::Display(int OffsetX, int OffsetY) {
 					m_CursorVisible = !m_CursorVisible;
 				}
 				if (m_CursorVisible)
-					font->DrawText((BYTE *)m_CursorChar, xxx, yyy, width - xxx, Align, height, 1);
+					font->DrawText((byte  *)m_CursorChar, xxx, yyy, width - xxx, Align, height, 1);
 			}
 			xxx += CursorWidth;
 			AlignOffset += CursorWidth;
 		}
 
 		// unselected 2
-		if (Count) font->DrawText((BYTE *)m_Text + s2, xxx, yyy, width - xxx, Align, height);
-		AlignOffset += font->GetTextWidth((BYTE *)m_Text + s2);
+		if (Count) font->DrawText((byte  *)m_Text + s2, xxx, yyy, width - xxx, Align, height);
+		AlignOffset += font->GetTextWidth((byte  *)m_Text + s2);
 
 		AlignOffset = (m_Width - 2 * m_FrameWidth) - AlignOffset;
 		if (AlignOffset < 0) AlignOffset = 0;
@@ -749,7 +749,7 @@ bool CUIEdit::HandleKeypress(SDL_Event *event) {
 		if (m_SelStart != m_SelEnd) DeleteChars(m_SelStart, m_SelEnd);
 
 		WideString wstr = StringUtil::Utf8ToWide(event->text.text);
-		m_SelEnd += InsertChars(m_SelEnd, (BYTE *)StringUtil::WideToAnsi(wstr).c_str(), 1);
+		m_SelEnd += InsertChars(m_SelEnd, (byte  *)StringUtil::WideToAnsi(wstr).c_str(), 1);
 
 		if (Game->m_TextRTL) m_SelEnd = m_SelStart;
 		else m_SelStart = m_SelEnd;
@@ -784,7 +784,7 @@ int CUIEdit::DeleteChars(int Start, int End) {
 
 
 //////////////////////////////////////////////////////////////////////////
-int CUIEdit::InsertChars(int Pos, BYTE *Chars, int Num) {
+int CUIEdit::InsertChars(int Pos, byte *Chars, int Num) {
 	if (strlen(m_Text) + Num > m_MaxLength) {
 		Num -= (strlen(m_Text) + Num - m_MaxLength);
 	}

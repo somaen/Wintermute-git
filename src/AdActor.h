@@ -60,7 +60,7 @@ public:
 	CAdActor(CBGame *inGame/*=NULL*/);
 	virtual ~CAdActor();
 	HRESULT LoadFile(char *Filename);
-	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	HRESULT LoadBuffer(byte  *Buffer, bool Complete = true);
 
 	// new anim system
 	char *m_TalkAnimName;

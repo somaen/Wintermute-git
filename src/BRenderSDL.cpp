@@ -200,7 +200,7 @@ HRESULT CBRenderSDL::Flip() {
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRenderSDL::Fill(BYTE r, BYTE g, BYTE b, RECT *rect) {
+HRESULT CBRenderSDL::Fill(byte  r, byte g, byte b, RECT *rect) {
 	SDL_SetRenderDrawColor(m_Renderer, r, g, b, 0xFF);
 	SDL_RenderClear(m_Renderer);
 
@@ -287,7 +287,7 @@ CBImage *CBRenderSDL::TakeScreenshot() {
 
 	for (unsigned y = 0; y < FreeImage_GetHeight(dib); y++) {
 		BYTE *bits = FreeImage_GetScanLine(dib, y);
-		BYTE *src = (BYTE *)surface->pixels + (viewport.h - y - 1) * surface->pitch;
+		BYTE *src = (byte  *)surface->pixels + (viewport.h - y - 1) * surface->pitch;
 		memcpy(bits, src, bytespp * viewport.w);
 	}
 

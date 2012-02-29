@@ -60,7 +60,7 @@ GlyphInfo *FontGlyphCache::GetGlyph(wchar_t ch) {
 }
 
 //////////////////////////////////////////////////////////////////////////
-void FontGlyphCache::AddGlyph(wchar_t ch, int glyphIndex, FT_GlyphSlot glyphSlot, size_t width, size_t height, BYTE *pixels, size_t stride) {
+void FontGlyphCache::AddGlyph(wchar_t ch, int glyphIndex, FT_GlyphSlot glyphSlot, size_t width, size_t height, byte *pixels, size_t stride) {
 	if (stride == 0) stride = width;
 
 	m_Glyphs[ch] = new GlyphInfo(glyphIndex);
@@ -70,7 +70,7 @@ void FontGlyphCache::AddGlyph(wchar_t ch, int glyphIndex, FT_GlyphSlot glyphSlot
 
 
 //////////////////////////////////////////////////////////////////////////
-void GlyphInfo::SetGlyphImage(size_t width, size_t height, size_t stride, BYTE *pixels) {
+void GlyphInfo::SetGlyphImage(size_t width, size_t height, size_t stride, byte *pixels) {
 	if (m_Image) SDL_FreeSurface(m_Image);
 
 	m_Image = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, 32, 0x000000FF, 0x0000FF00, 0x00FF0000, 0xFF000000);

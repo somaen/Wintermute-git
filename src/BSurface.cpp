@@ -56,7 +56,7 @@ CBSurface::~CBSurface() {
 
 
 //////////////////////////////////////////////////////////////////////
-HRESULT CBSurface::Create(char *Filename, bool default_ck, BYTE ck_red, BYTE ck_green, BYTE ck_blue, int LifeTime, bool KeepLoaded) {
+HRESULT CBSurface::Create(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime, bool KeepLoaded) {
 	return E_FAIL;
 }
 
@@ -132,19 +132,19 @@ HRESULT CBSurface::EndPixelOp() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurface::GetPixel(int X, int Y, BYTE *R, BYTE *G, BYTE *B, BYTE *A) {
+HRESULT CBSurface::GetPixel(int X, int Y, byte *R, byte *G, byte *B, byte *A) {
 	return E_FAIL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurface::PutPixel(int X, int Y, BYTE R, BYTE G, BYTE B, int A) {
+HRESULT CBSurface::PutPixel(int X, int Y, byte R, byte G, byte B, int A) {
 	return E_FAIL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-bool CBSurface::ComparePixel(int X, int Y, BYTE R, BYTE G, BYTE B, int A) {
+bool CBSurface::ComparePixel(int X, int Y, byte R, byte G, byte B, int A) {
 	return false;
 }
 

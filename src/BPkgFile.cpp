@@ -121,7 +121,7 @@ HRESULT CBPkgFile::Read(void *Buffer, DWORD Size) {
 		DWORD InitOut = m_Stream.total_out;
 
 		m_Stream.avail_out = Size;
-		m_Stream.next_out = (BYTE *)Buffer;
+		m_Stream.next_out = (byte  *)Buffer;
 
 		while (m_Stream.total_out - InitOut < Size && m_Stream.total_in < m_FileEntry->m_CompressedLength) {
 			// needs to read more data?
@@ -141,7 +141,7 @@ HRESULT CBPkgFile::Read(void *Buffer, DWORD Size) {
 
 
 	} else {
-		ret = m_FileEntry->m_Package->Read(m_File, m_FileEntry->m_Offset + m_Pos, (BYTE *)Buffer, Size);
+		ret = m_FileEntry->m_Package->Read(m_File, m_FileEntry->m_Offset + m_Pos, (byte  *)Buffer, Size);
 	}
 
 	m_Pos += Size;

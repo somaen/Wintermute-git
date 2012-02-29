@@ -68,7 +68,7 @@ public:
 	CBArray<CUIObject *, CUIObject *> m_Widgets;
 	TTextAlign m_TitleAlign;
 	HRESULT LoadFile(char *Filename);
-	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	HRESULT LoadBuffer(byte  *Buffer, bool Complete = true);
 	CUITiledImage *m_BackInactive;
 	CBFont *m_FontInactive;
 	CBSprite *m_ImageInactive;

@@ -37,8 +37,8 @@ public:
 	void CloseFilePointer(FILE*& file);
 
 	bool m_BoundToExe;
-	BYTE m_Priority;
-	HRESULT Read(FILE *file, DWORD offset, BYTE *buffer, DWORD size);
+	byte m_Priority;
+	HRESULT Read(FILE *file, DWORD offset, byte *buffer, DWORD size);
 	HRESULT Close();
 	HRESULT Open();
 	char *m_Name;

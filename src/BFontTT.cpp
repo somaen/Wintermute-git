@@ -104,7 +104,7 @@ void CBFontTT::InitLoop() {
 }
 
 //////////////////////////////////////////////////////////////////////////
-int CBFontTT::GetTextWidth(BYTE *Text, int MaxLength) {
+int CBFontTT::GetTextWidth(byte  *Text, int MaxLength) {
 	WideString text;
 
 	if (Game->m_TextEncoding == TEXT_UTF8) text = StringUtil::Utf8ToWide((char *)Text);
@@ -119,7 +119,7 @@ int CBFontTT::GetTextWidth(BYTE *Text, int MaxLength) {
 }
 
 //////////////////////////////////////////////////////////////////////////
-int CBFontTT::GetTextHeight(BYTE *Text, int Width) {
+int CBFontTT::GetTextHeight(byte  *Text, int Width) {
 	WideString text;
 
 	if (Game->m_TextEncoding == TEXT_UTF8) text = StringUtil::Utf8ToWide((char *)Text);
@@ -134,7 +134,7 @@ int CBFontTT::GetTextHeight(BYTE *Text, int Width) {
 
 
 //////////////////////////////////////////////////////////////////////////
-void CBFontTT::DrawText(BYTE *Text, int X, int Y, int Width, TTextAlign Align, int MaxHeight, int MaxLength) {
+void CBFontTT::DrawText(byte  *Text, int X, int Y, int Width, TTextAlign Align, int MaxHeight, int MaxLength) {
 	if (Text == NULL || strcmp((char *)Text, "") == 0) return;
 
 	WideString text;
@@ -379,7 +379,7 @@ TOKEN_DEF(OFFSET_X)
 TOKEN_DEF(OFFSET_Y)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////
-HRESULT CBFontTT::LoadBuffer(BYTE *Buffer) {
+HRESULT CBFontTT::LoadBuffer(byte  *Buffer) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(TTFONT)
 	TOKEN_TABLE(SIZE)
@@ -403,7 +403,7 @@ HRESULT CBFontTT::LoadBuffer(BYTE *Buffer) {
 		Game->LOG(0, "'TTFONT' keyword expected.");
 		return E_FAIL;
 	}
-	Buffer = (BYTE *)params;
+	Buffer = (byte  *)params;
 
 	DWORD BaseColor = 0x00000000;
 
@@ -457,7 +457,7 @@ HRESULT CBFontTT::LoadBuffer(BYTE *Buffer) {
 
 		case TOKEN_LAYER: {
 			CBTTFontLayer *Layer = new CBTTFontLayer;
-			if (Layer && SUCCEEDED(ParseLayer(Layer, (BYTE *)params))) m_Layers.Add(Layer);
+			if (Layer && SUCCEEDED(ParseLayer(Layer, (byte  *)params))) m_Layers.Add(Layer);
 			else {
 				SAFE_DELETE(Layer);
 				cmd = PARSERR_TOKENNOTFOUND;
@@ -486,7 +486,7 @@ HRESULT CBFontTT::LoadBuffer(BYTE *Buffer) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFontTT::ParseLayer(CBTTFontLayer *Layer, BYTE *Buffer) {
+HRESULT CBFontTT::ParseLayer(CBTTFontLayer *Layer, byte *Buffer) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(OFFSET_X)
 	TOKEN_TABLE(OFFSET_Y)
@@ -592,7 +592,7 @@ HRESULT CBFontTT::InitFont() {
 	float horDpi = 96.0;
 
 
-	m_FTStream = (FT_Stream)new BYTE[sizeof(*m_FTStream)];
+	m_FTStream = (FT_Stream)new byte[sizeof(*m_FTStream)];
 	memset(m_FTStream, 0, sizeof(*m_FTStream));
 
 	m_FTStream->read = CBFontTT::FTReadSeekProc;
@@ -814,7 +814,7 @@ void CBFontTT::CacheGlyph(wchar_t ch) {
 	// convert from monochrome to grayscale if needed
 	BYTE *tempBuffer = NULL;
 	if (pixels != NULL && m_FTFace->glyph->bitmap.pixel_mode == FT_PIXEL_MODE_MONO) {
-		tempBuffer = new BYTE[m_FTFace->glyph->bitmap.width * m_FTFace->glyph->bitmap.rows];
+		tempBuffer = new byte[m_FTFace->glyph->bitmap.width * m_FTFace->glyph->bitmap.rows];
 		for (int j = 0; j < m_FTFace->glyph->bitmap.rows; j++) {
 			int rowOffset = stride * j;
 			for (int i = 0; i < m_FTFace->glyph->bitmap.width; i++) {

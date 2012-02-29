@@ -45,7 +45,7 @@ public:
 	CBEvent(CBGame *inGame, TEventType Type, char *Script);
 	virtual ~CBEvent();
 	HRESULT LoadFile(char *Filename);
-	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	HRESULT LoadBuffer(byte  *Buffer, bool Complete = true);
 };
 
 } // end of namespace WinterMute

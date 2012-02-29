@@ -98,7 +98,7 @@ crcSlow(unsigned char const message[], int nBytes) {
 	/*
 	 * Perform modulo-2 division, a byte at a time.
 	 */
-	for (byte = 0; byte < nBytes; ++byte) {
+	for (byte  = 0; byte < nBytes; ++byte) {
 		/*
 		 * Bring the next byte into the remainder.
 		 */
@@ -203,7 +203,7 @@ crcFast(unsigned char const message[], int nBytes) {
 	/*
 	 * Divide the message by the polynomial, a byte at a time.
 	 */
-	for (byte = 0; byte < nBytes; ++byte) {
+	for (byte  = 0; byte < nBytes; ++byte) {
 		data = (unsigned char)(REFLECT_DATA(message[byte]) ^ (remainder >> (WIDTH - 8)));
 		remainder = crcTable[data] ^ (remainder << 8);
 	}
@@ -224,7 +224,7 @@ crc crc_initialize(void) {
 
 crc crc_process_byte(unsigned char byte, crc remainder) {
 	unsigned char  data;
-	data = (unsigned char)(REFLECT_DATA(byte) ^ (remainder >> (WIDTH - 8)));
+	data = (unsigned char)(REFLECT_DATA(byte ) ^ (remainder >> (WIDTH - 8)));
 	remainder = crcTable[data] ^ (remainder << 8);
 	return remainder;
 }

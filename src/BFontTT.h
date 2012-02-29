@@ -112,12 +112,12 @@ public:
 	CBFontTT(CBGame *inGame);
 	virtual ~CBFontTT(void);
 
-	virtual int GetTextWidth(BYTE *text, int MaxLenght = -1);
-	virtual int GetTextHeight(BYTE *text, int width);
-	virtual void DrawText(BYTE *text, int x, int y, int width, TTextAlign align = TAL_LEFT, int max_height = -1, int MaxLenght = -1);
+	virtual int GetTextWidth(byte  *text, int MaxLenght = -1);
+	virtual int GetTextHeight(byte  *text, int width);
+	virtual void DrawText(byte  *text, int x, int y, int width, TTextAlign align = TAL_LEFT, int max_height = -1, int MaxLenght = -1);
 	virtual int GetLetterHeight();
 
-	HRESULT LoadBuffer(BYTE *Buffer);
+	HRESULT LoadBuffer(byte  *Buffer);
 	HRESULT LoadFile(char *Filename);
 
 	static unsigned long FTReadSeekProc(FT_Stream stream, unsigned long offset, unsigned char *buffer, unsigned long count);
@@ -135,7 +135,7 @@ public:
 	void InitLoop();
 
 private:
-	HRESULT ParseLayer(CBTTFontLayer *Layer, BYTE *Buffer);
+	HRESULT ParseLayer(CBTTFontLayer *Layer, byte *Buffer);
 
 	void WrapText(const WideString &text, int maxWidth, int maxHeight, TextLineList &lines);
 	void MeasureText(const WideString &text, int maxWidth, int maxHeight, int &textWidth, int &textHeight);

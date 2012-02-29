@@ -116,7 +116,7 @@ TOKEN_DEF(EDITOR_SELECTED_POINT)
 TOKEN_DEF(PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRegion::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CBRegion::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(REGION)
 	TOKEN_TABLE(TEMPLATE)

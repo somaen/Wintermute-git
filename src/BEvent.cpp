@@ -135,7 +135,7 @@ TOKEN_DEF(NAME)
 TOKEN_DEF(SCRIPT)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBEvent::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CBEvent::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(EVENT)
 	TOKEN_TABLE(NAME)

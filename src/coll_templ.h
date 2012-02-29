@@ -186,7 +186,7 @@ template<class TYPE, class ARG_TYPE>
 CBArray<TYPE, ARG_TYPE>::~CBArray() {
 	if (m_pData != NULL) {
 		DCDestructElements<TYPE>(m_pData, m_nSize);
-		delete[](BYTE *)m_pData;
+		delete[](byte  *)m_pData;
 	}
 }
 
@@ -200,13 +200,13 @@ void CBArray<TYPE, ARG_TYPE>::SetSize(int nNewSize, int nGrowBy) {
 		// shrink to nothing
 		if (m_pData != NULL) {
 			DCDestructElements<TYPE>(m_pData, m_nSize);
-			delete[](BYTE *)m_pData;
+			delete[](byte  *)m_pData;
 			m_pData = NULL;
 		}
 		m_nSize = m_nMaxSize = 0;
 	} else if (m_pData == NULL) {
 		// create one with exact size
-		m_pData = (TYPE *) new BYTE[nNewSize * sizeof(TYPE)];
+		m_pData = (TYPE *) new byte[nNewSize * sizeof(TYPE)];
 		DCConstructElements<TYPE>(m_pData, nNewSize);
 		m_nSize = m_nMaxSize = nNewSize;
 	} else if (nNewSize <= m_nMaxSize) {
@@ -234,7 +234,7 @@ void CBArray<TYPE, ARG_TYPE>::SetSize(int nNewSize, int nGrowBy) {
 		else
 			nNewMax = nNewSize;  // no slush
 
-		TYPE *pNewData = (TYPE *) new BYTE[nNewMax * sizeof(TYPE)];
+		TYPE *pNewData = (TYPE *) new byte[nNewMax * sizeof(TYPE)];
 
 		// copy new data from old
 		memcpy(pNewData, m_pData, m_nSize * sizeof(TYPE));
@@ -243,7 +243,7 @@ void CBArray<TYPE, ARG_TYPE>::SetSize(int nNewSize, int nGrowBy) {
 		DCConstructElements<TYPE>(&pNewData[m_nSize], nNewSize - m_nSize);
 
 		// get rid of old stuff (note: no destructors called)
-		delete[](BYTE *)m_pData;
+		delete[](byte  *)m_pData;
 		m_pData = pNewData;
 		m_nSize = nNewSize;
 		m_nMaxSize = nNewMax;
@@ -273,13 +273,13 @@ void CBArray<TYPE, ARG_TYPE>::FreeExtra() {
 		// shrink to desired size
 		TYPE *pNewData = NULL;
 		if (m_nSize != 0) {
-			pNewData = (TYPE *) new BYTE[m_nSize * sizeof(TYPE)];
+			pNewData = (TYPE *) new byte[m_nSize * sizeof(TYPE)];
 			// copy new data from old
 			memcpy(pNewData, m_pData, m_nSize * sizeof(TYPE));
 		}
 
 		// get rid of old stuff (note: no destructors called)
-		delete[](BYTE *)m_pData;
+		delete[](byte  *)m_pData;
 		m_pData = pNewData;
 		m_nMaxSize = m_nSize;
 	}

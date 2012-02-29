@@ -130,7 +130,7 @@ void CBRenderer::OnWindowChange() {
 
 
 //////////////////////////////////////////////////////////////////////
-HRESULT CBRenderer::Fill(BYTE r, BYTE g, BYTE b, RECT *rect) {
+HRESULT CBRenderer::Fill(byte  r, byte g, byte b, RECT *rect) {
 	return E_FAIL;
 }
 

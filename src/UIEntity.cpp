@@ -79,7 +79,7 @@ TOKEN_DEF(SCRIPT)
 TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CUIEntity::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CUIEntity::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(ENTITY_CONTAINER)
 	TOKEN_TABLE(TEMPLATE)

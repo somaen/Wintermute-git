@@ -183,7 +183,7 @@ BYTE *WINAPI CScEngine::LoadFile(void *Data, char *Filename, DWORD *Size) {
 
 
 //////////////////////////////////////////////////////////////////////////
-void WINAPI CScEngine::CloseFile(void *Data, BYTE *Buffer) {
+void WINAPI CScEngine::CloseFile(void *Data, byte *Buffer) {
 	delete [] Buffer;
 }
 

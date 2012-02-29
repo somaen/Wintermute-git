@@ -69,7 +69,7 @@ public:
 	int m_VerticalAlign;
 	TTextAlign m_Align;
 	HRESULT LoadFile(char *Filename);
-	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	HRESULT LoadBuffer(byte  *Buffer, bool Complete = true);
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 };
 

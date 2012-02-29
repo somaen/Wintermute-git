@@ -74,7 +74,7 @@ TOKEN_DEF(ROTATION)
 TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdRotLevel::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CAdRotLevel::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(ROTATION_LEVEL)
 	TOKEN_TABLE(TEMPLATE)

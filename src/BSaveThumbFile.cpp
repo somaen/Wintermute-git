@@ -80,7 +80,7 @@ HRESULT CBSaveThumbFile::Open(const char *Filename) {
 	HRESULT res;
 
 	if (pm->m_ThumbnailDataSize != 0) {
-		m_Data = new BYTE[pm->m_ThumbnailDataSize];
+		m_Data = new byte[pm->m_ThumbnailDataSize];
 		memcpy(m_Data, pm->m_ThumbnailData, pm->m_ThumbnailDataSize);
 		m_Size = pm->m_ThumbnailDataSize;
 		res = S_OK;
@@ -105,7 +105,7 @@ HRESULT CBSaveThumbFile::Close() {
 HRESULT CBSaveThumbFile::Read(void *Buffer, DWORD Size) {
 	if (!m_Data || m_Pos + Size > m_Size) return E_FAIL;
 
-	memcpy(Buffer, (BYTE *)m_Data + m_Pos, Size);
+	memcpy(Buffer, (byte  *)m_Data + m_Pos, Size);
 	m_Pos += Size;
 
 	return S_OK;

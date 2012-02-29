@@ -1106,7 +1106,7 @@ TOKEN_DEF(STARTUP_SCENE)
 TOKEN_DEF(DEBUG_STARTUP_SCENE)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdGame::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CAdGame::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(GAME)
 	TOKEN_TABLE(AD_GAME)
@@ -1323,7 +1323,7 @@ HRESULT CAdGame::ScheduleChangeScene(char *Filename, bool FadeIn) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdGame::GetVersion(BYTE *VerMajor, BYTE *VerMinor, BYTE *ExtMajor, BYTE *ExtMinor) {
+HRESULT CAdGame::GetVersion(byte  *VerMajor, byte *VerMinor, byte *ExtMajor, byte *ExtMinor) {
 	CBGame::GetVersion(VerMajor, VerMinor, NULL, NULL);
 
 	if (ExtMajor) *ExtMajor = 0;
@@ -1356,7 +1356,7 @@ HRESULT CAdGame::LoadItemsFile(char *Filename, bool Merge) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdGame::LoadItemsBuffer(BYTE *Buffer, bool Merge) {
+HRESULT CAdGame::LoadItemsBuffer(byte  *Buffer, bool Merge) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(ITEM)
 	TOKEN_TABLE_END
@@ -1445,7 +1445,7 @@ HRESULT CAdGame::WindowLoadHook(CUIWindow *Win, char **Buffer, char **params) {
 	switch (cmd) {
 	case TOKEN_ENTITY_CONTAINER: {
 		CUIEntity *ent = new CUIEntity(Game);
-		if (!ent || FAILED(ent->LoadBuffer((BYTE *)*params, false))) {
+		if (!ent || FAILED(ent->LoadBuffer((byte  *)*params, false))) {
 			SAFE_DELETE(ent);
 			cmd = PARSERR_GENERIC;
 		} else {
@@ -1987,10 +1987,10 @@ HRESULT CAdGame::DisplayDebugInfo() {
 	char str[100];
 	if (Game->m_DEBUG_DebugMode) {
 		sprintf(str, "Mouse: %d, %d (scene: %d, %d)", m_MousePos.x, m_MousePos.y, m_MousePos.x + m_Scene->GetOffsetLeft(), m_MousePos.y + m_Scene->GetOffsetTop());
-		m_SystemFont->DrawText((BYTE *)str, 0, 90, m_Renderer->m_Width, TAL_RIGHT);
+		m_SystemFont->DrawText((byte  *)str, 0, 90, m_Renderer->m_Width, TAL_RIGHT);
 
 		sprintf(str, "Scene: %s (prev: %s)", (m_Scene && m_Scene->m_Name) ? m_Scene->m_Name : "???", m_PrevSceneName ? m_PrevSceneName : "???");
-		m_SystemFont->DrawText((BYTE *)str, 0, 110, m_Renderer->m_Width, TAL_RIGHT);
+		m_SystemFont->DrawText((byte  *)str, 0, 110, m_Renderer->m_Width, TAL_RIGHT);
 	}
 	return CBGame::DisplayDebugInfo();
 }

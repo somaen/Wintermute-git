@@ -90,7 +90,7 @@ HRESULT CBSurfaceStorage::RemoveSurface(CBSurface *surface) {
 
 
 //////////////////////////////////////////////////////////////////////
-CBSurface *CBSurfaceStorage::AddSurface(char *Filename, bool default_ck, BYTE ck_red, BYTE ck_green, BYTE ck_blue, int LifeTime, bool KeepLoaded) {
+CBSurface *CBSurfaceStorage::AddSurface(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime, bool KeepLoaded) {
 	for (int i = 0; i < m_Surfaces.GetSize(); i++) {
 		if (CBPlatform::stricmp(m_Surfaces[i]->m_Filename, Filename) == 0) {
 			m_Surfaces[i]->m_ReferenceCount++;

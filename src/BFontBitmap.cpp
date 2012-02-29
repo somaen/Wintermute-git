@@ -56,19 +56,19 @@ CBFontBitmap::~CBFontBitmap() {
 
 
 //////////////////////////////////////////////////////////////////////
-void CBFontBitmap::DrawText(BYTE *text, int x, int y, int width, TTextAlign align, int max_height, int MaxLenght) {
+void CBFontBitmap::DrawText(byte  *text, int x, int y, int width, TTextAlign align, int max_height, int MaxLenght) {
 	TextHeightDraw(text, x, y, width, align, true, max_height, MaxLenght);
 }
 
 
 //////////////////////////////////////////////////////////////////////
-int CBFontBitmap::GetTextHeight(BYTE *text, int width) {
+int CBFontBitmap::GetTextHeight(byte  *text, int width) {
 	return TextHeightDraw(text, 0, 0, width, TAL_LEFT, false);
 }
 
 
 //////////////////////////////////////////////////////////////////////
-int CBFontBitmap::GetTextWidth(BYTE *text, int MaxLength) {
+int CBFontBitmap::GetTextWidth(byte  *text, int MaxLength) {
 	AnsiString str;
 
 	if (Game->m_TextEncoding == TEXT_UTF8) {
@@ -90,7 +90,7 @@ int CBFontBitmap::GetTextWidth(BYTE *text, int MaxLength) {
 
 
 //////////////////////////////////////////////////////////////////////
-int CBFontBitmap::TextHeightDraw(BYTE *text, int x, int y, int width, TTextAlign align, bool draw, int max_height, int MaxLenght) {
+int CBFontBitmap::TextHeightDraw(byte  *text, int x, int y, int width, TTextAlign align, bool draw, int max_height, int MaxLenght) {
 	if (MaxLenght == 0) return 0;
 
 	if (text == NULL || text[0] == '\0') return m_TileHeight;
@@ -196,7 +196,7 @@ int CBFontBitmap::TextHeightDraw(BYTE *text, int x, int y, int width, TTextAlign
 
 
 //////////////////////////////////////////////////////////////////////
-void CBFontBitmap::DrawChar(BYTE c, int x, int y) {
+void CBFontBitmap::DrawChar(byte  c, int x, int y) {
 	if (m_FontextFix) c--;
 
 	int row, col;
@@ -265,7 +265,7 @@ TOKEN_DEF(WIDTHS_FRAME)
 TOKEN_DEF(PAINT_WHOLE_CELL)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////
-HRESULT CBFontBitmap::LoadBuffer(BYTE *Buffer) {
+HRESULT CBFontBitmap::LoadBuffer(byte  *Buffer) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(FONTEXT_FIX)
 	TOKEN_TABLE(FONT)
@@ -293,7 +293,7 @@ HRESULT CBFontBitmap::LoadBuffer(BYTE *Buffer) {
 		Game->LOG(0, "'FONT' keyword expected.");
 		return E_FAIL;
 	}
-	Buffer = (BYTE *)params;
+	Buffer = (byte  *)params;
 
 	int widths[300];
 	int num = 0, default_width = 8;
@@ -327,7 +327,7 @@ HRESULT CBFontBitmap::LoadBuffer(BYTE *Buffer) {
 		case TOKEN_WIDTHS:
 			parser.ScanStr(params, "%D", widths, &num);
 			for (i = 0; last_width < NUM_CHARACTERS, num > 0; last_width++, num--, i++) {
-				m_Widths[last_width] = (BYTE)widths[i];
+				m_Widths[last_width] = (byte )widths[i];
 			}
 			break;
 
@@ -372,7 +372,7 @@ HRESULT CBFontBitmap::LoadBuffer(BYTE *Buffer) {
 			break;
 
 		case TOKEN_EDITOR_PROPERTY:
-			ParseEditorProperty((BYTE *)params, false);
+			ParseEditorProperty((byte  *)params, false);
 			break;
 		}
 
@@ -410,7 +410,7 @@ HRESULT CBFontBitmap::LoadBuffer(BYTE *Buffer) {
 				int NewWidth = (int)m_Widths[i] + ExpandWidth;
 				if (NewWidth < 0) NewWidth = 0;
 
-				m_Widths[i] = (BYTE)NewWidth;
+				m_Widths[i] = (byte )NewWidth;
 			}
 		}
 
@@ -460,7 +460,7 @@ HRESULT CBFontBitmap::Persist(CBPersistMgr *PersistMgr) {
 
 
 //////////////////////////////////////////////////////////////////////////
-int CBFontBitmap::GetCharWidth(BYTE Index) {
+int CBFontBitmap::GetCharWidth(byte  Index) {
 	if (m_FontextFix) Index--;
 	return m_Widths[Index];
 }

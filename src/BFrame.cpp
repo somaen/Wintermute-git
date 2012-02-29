@@ -117,7 +117,7 @@ TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF(KILL_SOUND)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////
-HRESULT CBFrame::LoadBuffer(BYTE *Buffer, int LifeTime, bool KeepLoaded) {
+HRESULT CBFrame::LoadBuffer(byte  *Buffer, int LifeTime, bool KeepLoaded) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(DELAY)
 	TOKEN_TABLE(IMAGE)
@@ -224,7 +224,7 @@ HRESULT CBFrame::LoadBuffer(BYTE *Buffer, int LifeTime, bool KeepLoaded) {
 
 		case TOKEN_SUBFRAME: {
 			CBSubFrame *subframe = new CBSubFrame(Game);
-			if (!subframe || FAILED(subframe->LoadBuffer((BYTE *)params, LifeTime, KeepLoaded))) {
+			if (!subframe || FAILED(subframe->LoadBuffer((byte  *)params, LifeTime, KeepLoaded))) {
 				delete subframe;
 				cmd = PARSERR_GENERIC;
 			} else m_Subframes.Add(subframe);
@@ -259,7 +259,7 @@ HRESULT CBFrame::LoadBuffer(BYTE *Buffer, int LifeTime, bool KeepLoaded) {
 			break;
 
 		case TOKEN_EDITOR_PROPERTY:
-			ParseEditorProperty((BYTE *)params, false);
+			ParseEditorProperty((byte  *)params, false);
 			break;
 		}
 	}

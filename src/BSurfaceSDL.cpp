@@ -49,7 +49,7 @@ CBSurfaceSDL::~CBSurfaceSDL() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSurfaceSDL::Create(char *Filename, bool default_ck, BYTE ck_red, BYTE ck_green, BYTE ck_blue, int LifeTime, bool KeepLoaded) {
+HRESULT CBSurfaceSDL::Create(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime, bool KeepLoaded) {
 	CBRenderSDL *renderer = static_cast<CBRenderSDL *>(Game->m_Renderer);
 
 
@@ -166,7 +166,7 @@ void CBSurfaceSDL::GenAlphaMask(SDL_Surface *surface) {
 		SDL_GetRGB(colorKey, surface->format, &ckRed, &ckGreen, &ckBlue);
 	} else hasColorKey = false;
 
-	m_AlphaMask = new BYTE[surface->w * surface->h];
+	m_AlphaMask = new byte[surface->w * surface->h];
 
 	bool hasTransparency = false;
 	for (int y = 0; y < surface->h; y++) {

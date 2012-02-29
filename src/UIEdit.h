@@ -35,7 +35,7 @@ class CUIEdit : public CUIObject {
 public:
 	DECLARE_PERSISTENT(CUIEdit, CUIObject)
 	int m_MaxLength;
-	int InsertChars(int Pos, BYTE *Chars, int Num);
+	int InsertChars(int Pos, byte *Chars, int Num);
 	int DeleteChars(int Start, int End);
 	bool m_CursorVisible;
 	DWORD m_LastBlinkTime;
@@ -53,7 +53,7 @@ public:
 	virtual ~CUIEdit();
 
 	HRESULT LoadFile(char *Filename);
-	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	HRESULT LoadBuffer(byte  *Buffer, bool Complete = true);
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 
 	// scripting interface

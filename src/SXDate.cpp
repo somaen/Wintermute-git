@@ -242,9 +242,9 @@ HRESULT CSXDate::Persist(CBPersistMgr *PersistMgr) {
 	CBScriptable::Persist(PersistMgr);
 
 	if (PersistMgr->m_Saving)
-		PersistMgr->PutBytes((BYTE *)&m_tm, sizeof(m_tm));
+		PersistMgr->PutBytes((byte  *)&m_tm, sizeof(m_tm));
 	else
-		PersistMgr->GetBytes((BYTE *)&m_tm, sizeof(m_tm));
+		PersistMgr->GetBytes((byte  *)&m_tm, sizeof(m_tm));
 
 	return S_OK;
 }

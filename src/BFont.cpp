@@ -46,18 +46,18 @@ CBFont::~CBFont() {
 
 
 //////////////////////////////////////////////////////////////////////
-void CBFont::DrawText(BYTE *text, int x, int y, int width, TTextAlign align, int max_height, int MaxLenght) {
+void CBFont::DrawText(byte  *text, int x, int y, int width, TTextAlign align, int max_height, int MaxLenght) {
 }
 
 
 //////////////////////////////////////////////////////////////////////
-int CBFont::GetTextHeight(BYTE *text, int width) {
+int CBFont::GetTextHeight(byte  *text, int width) {
 	return 0;
 }
 
 
 //////////////////////////////////////////////////////////////////////
-int CBFont::GetTextWidth(BYTE *text, int MaxLenght) {
+int CBFont::GetTextWidth(byte  *text, int MaxLenght) {
 	return 0;
 }
 
@@ -88,7 +88,7 @@ TOKEN_DEF_START
   TOKEN_DEF (FONT)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////
-HRESULT CBFont::LoadBuffer(BYTE * Buffer)
+HRESULT CBFont::LoadBuffer(byte  * Buffer)
 {
     TOKEN_TABLE_START(commands)
         TOKEN_TABLE (FONT)
@@ -102,7 +102,7 @@ HRESULT CBFont::LoadBuffer(BYTE * Buffer)
         Game->LOG(0, "'FONT' keyword expected.");
         return E_FAIL;
     }
-    Buffer = (BYTE*)params;
+    Buffer = (byte *)params;
 
     while ((cmd = parser.GetCommand ((char**)&Buffer, commands, (char**)&params)) > 0)
     {

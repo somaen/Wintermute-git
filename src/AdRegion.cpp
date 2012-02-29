@@ -86,7 +86,7 @@ TOKEN_DEF(PROPERTY)
 TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdRegion::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CAdRegion::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(REGION)
 	TOKEN_TABLE(TEMPLATE)

@@ -77,7 +77,7 @@ TOKEN_DEF(NAME)
 TOKEN_DEF(VALUE)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBBase::ParseEditorProperty(BYTE *Buffer, bool Complete) {
+HRESULT CBBase::ParseEditorProperty(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(EDITOR_PROPERTY)
 	TOKEN_TABLE(NAME)

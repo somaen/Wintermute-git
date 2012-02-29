@@ -40,13 +40,13 @@ public:
 	void PutDWORD(DWORD Val);
 	char *GetString();
 	void PutString(const char *Val);
-	HRESULT GetBytes(BYTE *Buffer, DWORD Size);
-	HRESULT PutBytes(BYTE *Buffer, DWORD Size);
+	HRESULT GetBytes(byte  *Buffer, DWORD Size);
+	HRESULT PutBytes(byte  *Buffer, DWORD Size);
 	DWORD GetSize();
 	HRESULT Init(DWORD InitSize = 0);
 	void Cleanup();
 	DWORD m_Size;
-	BYTE *m_Buffer;
+	byte *m_Buffer;
 	CBDynBuffer(CBGame *inGame, DWORD InitSize = 1000, DWORD GrowBy = 1000);
 	virtual ~CBDynBuffer();
 

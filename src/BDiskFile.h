@@ -42,7 +42,7 @@ public:
 private:
 	void CorrectSlashes(char *fileName);
 	FILE *m_File;
-	BYTE *m_Data;
+	byte *m_Data;
 	bool m_Compressed;
 	DWORD m_PrefixSize;
 };

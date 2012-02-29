@@ -40,9 +40,9 @@ public:
 	HRESULT Cleanup();
 	//DECLARE_PERSISTENT(CBSoundMgr, CBBase);
 	BYTE GetMasterVolumePercent();
-	HRESULT SetMasterVolumePercent(BYTE Percent);
+	HRESULT SetMasterVolumePercent(byte  Percent);
 	BYTE GetVolumePercent(TSoundType Type);
-	HRESULT SetVolumePercent(TSoundType Type, BYTE Percent);
+	HRESULT SetVolumePercent(TSoundType Type, byte Percent);
 	HRESULT SetVolume(TSoundType Type, int Volume);
 	DWORD m_VolumeOriginal;
 	int m_VolumeMaster;

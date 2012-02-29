@@ -68,7 +68,7 @@ HRESULT CBPackage::Close() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBPackage::Read(FILE *file, DWORD offset, BYTE *buffer, DWORD size) {
+HRESULT CBPackage::Read(FILE *file, DWORD offset, byte *buffer, DWORD size) {
 	HRESULT ret;
 	if (FAILED(ret = Open())) return ret;
 	else {

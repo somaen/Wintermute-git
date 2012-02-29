@@ -251,10 +251,10 @@ typedef void (*SYS_INSTANCE_CALLBACK)(void *Instance, void *Data);
 #define MIN(a,b)            (((a) < (b)) ? (a) : (b))
 #endif
 
-#define D3DCOLGetB(rgb)  ((BYTE)(rgb))
-#define D3DCOLGetG(rgb)  ((BYTE)(((WORD)(rgb)) >> 8))
-#define D3DCOLGetR(rgb)  ((BYTE)((rgb)>>16))
-#define D3DCOLGetA(rgb)  ((BYTE)((rgb)>>24))
+#define D3DCOLGetB(rgb)  ((byte )(rgb))
+#define D3DCOLGetG(rgb)  ((byte )(((WORD)(rgb)) >> 8))
+#define D3DCOLGetR(rgb)  ((byte )((rgb)>>16))
+#define D3DCOLGetA(rgb)  ((byte )((rgb)>>24))
 
 
 #endif // _DCGF_H_

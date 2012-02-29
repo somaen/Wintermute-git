@@ -200,7 +200,7 @@ TOKEN_DEF(VERTICAL_ALIGN)
 TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdResponseBox::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CAdResponseBox::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(RESPONSE_BOX)
 	TOKEN_TABLE(TEMPLATE)

@@ -44,12 +44,12 @@ public:
 	CBFader(CBGame *inGame);
 	virtual ~CBFader();
 	bool m_Active;
-	BYTE m_Red;
-	BYTE m_Green;
-	BYTE m_Blue;
-	BYTE m_CurrentAlpha;
-	BYTE m_TargetAlpha;
-	BYTE m_SourceAlpha;
+	byte m_Red;
+	byte m_Green;
+	byte m_Blue;
+	byte m_CurrentAlpha;
+	byte m_TargetAlpha;
+	byte m_SourceAlpha;
 	DWORD m_Duration;
 	DWORD m_StartTime;
 };

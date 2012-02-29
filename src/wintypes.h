@@ -52,7 +52,7 @@ typedef char CHAR;
 typedef short SHORT;
 typedef int32_t LONG;
 
-typedef uint8_t BYTE;
+typedef uint8_t byte;
 typedef uint16_t WORD;
 typedef uint32_t DWORD;
 typedef uint64_t QWORD;

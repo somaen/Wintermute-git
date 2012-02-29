@@ -45,7 +45,7 @@ public:
 	bool PointInRegion(int X, int Y);
 	bool CreateRegion();
 	HRESULT LoadFile(char *Filename);
-	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	HRESULT LoadBuffer(byte  *Buffer, bool Complete = true);
 	RECT m_Rect;
 	CBArray<CBPoint *, CBPoint *> m_Points;
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent, char *NameOverride = NULL);

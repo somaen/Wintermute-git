@@ -34,7 +34,7 @@ public:
 	CUIEntity(CBGame *inGame);
 	virtual ~CUIEntity();
 	HRESULT LoadFile(char *Filename);
-	HRESULT LoadBuffer(BYTE *Buffer, bool Complete);
+	HRESULT LoadBuffer(byte  *Buffer, bool Complete);
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 
 	virtual HRESULT Display(int OffsetX = 0, int OffsetY = 0);

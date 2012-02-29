@@ -323,7 +323,7 @@ const char* TiXmlBase::SkipWhiteSpace( const char* p, TiXmlEncoding encoding )
 		{
 			const unsigned char* pU = (const unsigned char*)p;
 			
-			// Skip the stupid Microsoft UTF-8 Byte order marks
+			// Skip the stupid Microsoft UTF-8 byte order marks
 			if (	*(pU+0)==TIXML_UTF_LEAD_0
 				 && *(pU+1)==TIXML_UTF_LEAD_1 
 				 && *(pU+2)==TIXML_UTF_LEAD_2 )

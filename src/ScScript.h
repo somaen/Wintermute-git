@@ -133,10 +133,10 @@ public:
 	DWORD GetDWORD();
 	double GetFloat();
 	void Cleanup();
-	HRESULT Create(char *Filename, BYTE *Buffer, DWORD Size, CBScriptHolder *Owner);
+	HRESULT Create(char *Filename, byte *Buffer, DWORD Size, CBScriptHolder *Owner);
 	DWORD m_IP;
 	DWORD m_BufferSize;
-	BYTE *m_Buffer;
+	byte *m_Buffer;
 	CScScript(CBGame *inGame, CScEngine *Engine);
 	virtual ~CScScript();
 	char *m_Filename;

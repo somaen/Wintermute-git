@@ -335,7 +335,7 @@ TOKEN_DEF(NAME)
 TOKEN_DEF(VALUE)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBScriptHolder::ParseProperty(BYTE *Buffer, bool Complete) {
+HRESULT CBScriptHolder::ParseProperty(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(PROPERTY)
 	TOKEN_TABLE(NAME)

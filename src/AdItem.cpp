@@ -112,7 +112,7 @@ TOKEN_DEF(AMOUNT_STRING)
 TOKEN_DEF(AMOUNT)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdItem::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CAdItem::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(ITEM)
 	TOKEN_TABLE(TEMPLATE)
@@ -387,11 +387,11 @@ HRESULT CAdItem::Display(int X, int Y) {
 
 		CBFont *Font = m_Font ? m_Font : Game->m_SystemFont;
 		if (Font) {
-			if (m_AmountString) Font->DrawText((BYTE *)m_AmountString, AmountX, AmountY, Width, m_AmountAlign);
+			if (m_AmountString) Font->DrawText((byte  *)m_AmountString, AmountX, AmountY, Width, m_AmountAlign);
 			else {
 				char Str[256];
 				sprintf(Str, "%d", m_Amount);
-				Font->DrawText((BYTE *)Str, AmountX, AmountY, Width, m_AmountAlign);
+				Font->DrawText((byte  *)Str, AmountX, AmountY, Width, m_AmountAlign);
 			}
 		}
 	}

@@ -171,7 +171,7 @@ TOKEN_DEF(EDITOR_BG_ALPHA)
 TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////
-HRESULT CBSprite::LoadBuffer(BYTE *Buffer, bool Complete, int LifeTime, TSpriteCacheType CacheType) {
+HRESULT CBSprite::LoadBuffer(byte  *Buffer, bool Complete, int LifeTime, TSpriteCacheType CacheType) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(CONTINUOUS)
 	TOKEN_TABLE(SPRITE)

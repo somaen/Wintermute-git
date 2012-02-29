@@ -138,7 +138,7 @@ BYTE *CBFileManager::ReadWholeFile(const char *Filename, DWORD *Size, bool MustE
 	*/
 
 
-	buffer = new BYTE[File->GetSize() + 1];
+	buffer = new byte[File->GetSize() + 1];
 	if (buffer == NULL) {
 		Game->LOG(0, "Error allocating buffer for file '%s' (%d bytes)", Filename, File->GetSize() + 1);
 		CloseFile(File);
@@ -161,7 +161,7 @@ BYTE *CBFileManager::ReadWholeFile(const char *Filename, DWORD *Size, bool MustE
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFileManager::SaveFile(char *Filename, BYTE *Buffer, DWORD BufferSize, bool Compressed, BYTE *PrefixBuffer, DWORD PrefixSize) {
+HRESULT CBFileManager::SaveFile(char *Filename, byte *Buffer, DWORD BufferSize, bool Compressed, byte *PrefixBuffer, DWORD PrefixSize) {
 	RestoreCurrentDir();
 
 	CBUtils::CreatePath(Filename, false);
@@ -178,7 +178,7 @@ HRESULT CBFileManager::SaveFile(char *Filename, BYTE *Buffer, DWORD BufferSize, 
 
 	if (Compressed) {
 		DWORD CompSize = BufferSize + (BufferSize / 100) + 12; // 1% extra space
-		BYTE *CompBuffer = new BYTE[CompSize];
+		BYTE *CompBuffer = new byte[CompSize];
 		if (!CompBuffer) {
 			Game->LOG(0, "Error allocating compression buffer while saving '%s'", Filename);
 			Compressed = false;
@@ -426,10 +426,10 @@ HRESULT CBFileManager::RegisterPackage(const char *Path, const char *Name, bool 
 
 		// read package info
 		BYTE NameLength;
-		fread(&NameLength, sizeof(BYTE), 1, f);
+		fread(&NameLength, sizeof(byte ), 1, f);
 		pkg->m_Name = new char[NameLength];
 		fread(pkg->m_Name, NameLength, 1, f);
-		fread(&pkg->m_CD, sizeof(BYTE), 1, f);
+		fread(&pkg->m_CD, sizeof(byte ), 1, f);
 		pkg->m_Priority = hdr.Priority;
 
 		if (!hdr.MasterIndex) pkg->m_CD = 0; // override CD to fixed disk
@@ -444,14 +444,14 @@ HRESULT CBFileManager::RegisterPackage(const char *Path, const char *Name, bool 
 			char *Name;
 			DWORD Offset, Length, CompLength, Flags, TimeDate1, TimeDate2;
 
-			fread(&NameLength, sizeof(BYTE), 1, f);
+			fread(&NameLength, sizeof(byte ), 1, f);
 			Name = new char[NameLength];
 			fread(Name, NameLength, 1, f);
 
 			// v2 - xor name
 			if (hdr.PackageVersion == PACKAGE_VERSION) {
 				for (int k = 0; k < NameLength; k++) {
-					((BYTE *)Name)[k] ^= 'D';
+					((byte  *)Name)[k] ^= 'D';
 				}
 			}
 

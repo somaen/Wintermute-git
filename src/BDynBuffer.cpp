@@ -71,7 +71,7 @@ HRESULT CBDynBuffer::Init(DWORD InitSize) {
 
 	if (InitSize == 0) InitSize = m_InitSize;
 
-	m_Buffer = (BYTE *)malloc(InitSize);
+	m_Buffer = (byte  *)malloc(InitSize);
 	if (!m_Buffer) {
 		Game->LOG(0, "CBDynBuffer::Init - Error allocating %d bytes", InitSize);
 		return E_FAIL;
@@ -85,12 +85,12 @@ HRESULT CBDynBuffer::Init(DWORD InitSize) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDynBuffer::PutBytes(BYTE *Buffer, DWORD Size) {
+HRESULT CBDynBuffer::PutBytes(byte  *Buffer, DWORD Size) {
 	if (!m_Initialized) Init();
 
 	while (m_Offset + Size > m_RealSize) {
 		m_RealSize += m_GrowBy;
-		m_Buffer = (BYTE *)realloc(m_Buffer, m_RealSize);
+		m_Buffer = (byte  *)realloc(m_Buffer, m_RealSize);
 		if (!m_Buffer) {
 			Game->LOG(0, "CBDynBuffer::PutBytes - Error reallocating buffer to %d bytes", m_RealSize);
 			return E_FAIL;
@@ -106,7 +106,7 @@ HRESULT CBDynBuffer::PutBytes(BYTE *Buffer, DWORD Size) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDynBuffer::GetBytes(BYTE *Buffer, DWORD Size) {
+HRESULT CBDynBuffer::GetBytes(byte  *Buffer, DWORD Size) {
 	if (!m_Initialized) Init();
 
 	if (m_Offset + Size > m_Size) {
@@ -123,14 +123,14 @@ HRESULT CBDynBuffer::GetBytes(BYTE *Buffer, DWORD Size) {
 
 //////////////////////////////////////////////////////////////////////////
 void CBDynBuffer::PutDWORD(DWORD Val) {
-	PutBytes((BYTE *)&Val, sizeof(DWORD));
+	PutBytes((byte  *)&Val, sizeof(DWORD));
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 DWORD CBDynBuffer::GetDWORD() {
 	DWORD ret;
-	GetBytes((BYTE *)&ret, sizeof(DWORD));
+	GetBytes((byte  *)&ret, sizeof(DWORD));
 	return ret;
 }
 
@@ -140,7 +140,7 @@ void CBDynBuffer::PutString(const char *Val) {
 	if (!Val) PutString("(null)");
 	else {
 		PutDWORD(strlen(Val) + 1);
-		PutBytes((BYTE *)Val, strlen(Val) + 1);
+		PutBytes((byte  *)Val, strlen(Val) + 1);
 	}
 }
 
@@ -183,7 +183,7 @@ void CBDynBuffer::PutTextIndent(int Indent, LPCSTR fmt, ...) {
 void CBDynBuffer::PutTextForm(const char *format, va_list argptr) {
 	char buff[32768];
 	vsprintf(buff, format, argptr);
-	PutBytes((BYTE *)buff, strlen(buff));
+	PutBytes((byte  *)buff, strlen(buff));
 }
 
 } // end of namespace WinterMute

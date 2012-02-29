@@ -37,11 +37,11 @@ class CBPersistMgr : public CBBase {
 public:
 	char *m_SavedDescription;
 	time_t m_SavedTimestamp;
-	BYTE m_SavedVerMajor;
-	BYTE m_SavedVerMinor;
-	BYTE m_SavedVerBuild;
-	BYTE m_SavedExtMajor;
-	BYTE m_SavedExtMinor;
+	byte m_SavedVerMajor;
+	byte m_SavedVerMinor;
+	byte m_SavedVerBuild;
+	byte m_SavedExtMajor;
+	byte m_SavedExtMinor;
 	HRESULT SaveFile(char *Filename);
 	DWORD GetDWORD();
 	void PutDWORD(DWORD Val);
@@ -50,15 +50,15 @@ public:
 	void Cleanup();
 	HRESULT InitLoad(char *Filename);
 	HRESULT InitSave(char *Desc);
-	HRESULT GetBytes(BYTE *Buffer, DWORD Size);
-	HRESULT PutBytes(BYTE *Buffer, DWORD Size);
+	HRESULT GetBytes(byte  *Buffer, DWORD Size);
+	HRESULT PutBytes(byte  *Buffer, DWORD Size);
 	DWORD m_Offset;
 	DWORD m_BufferSize;
-	BYTE *m_Buffer;
+	byte *m_Buffer;
 	bool m_Saving;
 
 	DWORD m_RichBufferSize;
-	BYTE *m_RichBuffer;
+	byte *m_RichBuffer;
 
 	HRESULT Transfer(const char *Name, void *Val);
 	HRESULT Transfer(const char *Name, int *Val);
@@ -66,7 +66,7 @@ public:
 	HRESULT Transfer(const char *Name, float *Val);
 	HRESULT Transfer(const char *Name, double *Val);
 	HRESULT Transfer(const char *Name, bool *Val);
-	HRESULT Transfer(const char *Name, BYTE *Val);
+	HRESULT Transfer(const char *Name, byte *Val);
 	HRESULT Transfer(const char *Name, RECT *Val);
 	HRESULT Transfer(const char *Name, POINT *Val);
 	HRESULT Transfer(const char *Name, char **Val);
@@ -74,10 +74,10 @@ public:
 	HRESULT Transfer(const char *Name, AnsiStringArray &Val);
 	CBPersistMgr(CBGame *inGame = NULL);
 	virtual ~CBPersistMgr();
-	bool CheckVersion(BYTE VerMajor, BYTE VerMinor, BYTE VerBuild);
+	bool CheckVersion(byte  VerMajor, byte VerMinor, byte VerBuild);
 
 	DWORD m_ThumbnailDataSize;
-	BYTE *m_ThumbnailData;
+	byte *m_ThumbnailData;
 
 };
 

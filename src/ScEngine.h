@@ -32,8 +32,8 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-typedef BYTE *(*DLL_COMPILE_BUFFER)(BYTE *Buffer, char *Source, DWORD BufferSize, DWORD *CompiledSize);
-typedef BYTE *(*DLL_COMPILE_FILE)(char *Filename, DWORD *CompiledSize);
+typedef byte *(*DLL_COMPILE_BUFFER)(byte  *Buffer, char *Source, DWORD BufferSize, DWORD *CompiledSize);
+typedef byte *(*DLL_COMPILE_FILE)(char *Filename, DWORD *CompiledSize);
 typedef void (*DLL_RELEASE_BUFFER)(unsigned char *Buffer);
 typedef void (*DLL_SET_CALLBACKS)(CALLBACKS *callbacks, void *Data);
 typedef int (*DLL_DEFINE_FUNCTION)(char *Name);
@@ -48,9 +48,9 @@ class CScEngine : public CBBase {
 public:
 	class CScCachedScript {
 	public:
-		CScCachedScript(char *Filename, BYTE *Buffer, DWORD Size) {
+		CScCachedScript(char *Filename, byte *Buffer, DWORD Size) {
 			m_Timestamp = CBPlatform::GetTime();
-			m_Buffer = new BYTE[Size];
+			m_Buffer = new byte[Size];
 			if (m_Buffer) memcpy(m_Buffer, Buffer, Size);
 			m_Size = Size;
 			m_Filename = new char[strlen(Filename) + 1];
@@ -63,7 +63,7 @@ public:
 		};
 
 		DWORD m_Timestamp;
-		BYTE *m_Buffer;
+		byte *m_Buffer;
 		DWORD m_Size;
 		char *m_Filename;
 	};
@@ -132,8 +132,8 @@ public:
 	CScEngine(CBGame *inGame);
 	virtual ~CScEngine();
 	static void WINAPI AddError(void *Data, int Line, char *Text);
-	static BYTE *WINAPI LoadFile(void *Data, char *Filename, DWORD *Size);
-	static void  WINAPI CloseFile(void *Data, BYTE *Buffer);
+	static byte *WINAPI LoadFile(void *Data, char *Filename, DWORD *Size);
+	static void  WINAPI CloseFile(void *Data, byte *Buffer);
 	static void WINAPI ParseElement(void *Data, int Line, int Type, void *ElementData);
 	DLL_COMPILE_BUFFER  ExtCompileBuffer;
 	DLL_COMPILE_FILE    ExtCompileFile;

@@ -40,7 +40,7 @@ public:
 	bool m_Active;
 	CAdWaypointGroup(CBGame *inGame);
 	HRESULT LoadFile(char *Filename);
-	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	HRESULT LoadBuffer(byte  *Buffer, bool Complete = true);
 	virtual ~CAdWaypointGroup();
 	CBArray<CBPoint *, CBPoint *> m_Points;
 	int m_EditorSelectedPoint;

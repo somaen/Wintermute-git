@@ -38,7 +38,7 @@ public:
 	CBSurfaceSDL(CBGame *inGame);
 	~CBSurfaceSDL();
 
-	HRESULT Create(char *Filename, bool default_ck, BYTE ck_red, BYTE ck_green, BYTE ck_blue, int LifeTime = -1, bool KeepLoaded = false);
+	HRESULT Create(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime = -1, bool KeepLoaded = false);
 	HRESULT Create(int Width, int Height);
 
 	HRESULT CreateFromSDLSurface(SDL_Surface *surface);
@@ -70,7 +70,7 @@ private:
 
 	void *m_LockPixels;
 	int m_LockPitch;
-	BYTE *m_AlphaMask;
+	byte *m_AlphaMask;
 };
 
 } // end of namespace WinterMute

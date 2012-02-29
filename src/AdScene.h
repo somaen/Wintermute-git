@@ -108,7 +108,7 @@ public:
 	CBArray<CAdObject *, CAdObject *> m_Objects;
 	CBArray<CAdWaypointGroup *, CAdWaypointGroup *> m_WaypointGroups;
 	HRESULT LoadFile(char *Filename);
-	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	HRESULT LoadBuffer(byte  *Buffer, bool Complete = true);
 	int m_Width;
 	int m_Height;
 	HRESULT AddObject(CAdObject *Object);

@@ -42,7 +42,7 @@ public:
 	CAdSpriteSet(CBGame *inGame, CBObject *Owner = NULL);
 	virtual ~CAdSpriteSet();
 	HRESULT LoadFile(char *Filename, int LifeTime = -1, TSpriteCacheType CacheType = CACHE_ALL);
-	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true, int LifeTime = -1, TSpriteCacheType CacheType = CACHE_ALL);
+	HRESULT LoadBuffer(byte  *Buffer, bool Complete = true, int LifeTime = -1, TSpriteCacheType CacheType = CACHE_ALL);
 	CBSprite *m_Sprites[NUM_DIRECTIONS];
 };
 

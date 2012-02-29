@@ -147,7 +147,7 @@ TOKEN_DEF(HORIZONTAL_TILES)
 TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CUITiledImage::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CUITiledImage::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(TILED_IMAGE)
 	TOKEN_TABLE(TEMPLATE)

@@ -170,7 +170,7 @@ TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF(ANIMATION)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdActor::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CAdActor::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(ACTOR)
 	TOKEN_TABLE(X)

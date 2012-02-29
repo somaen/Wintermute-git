@@ -44,7 +44,7 @@ public:
 	static bool StartsWith(const AnsiString &str, const AnsiString &pattern, bool ignoreCase = false);
 	static bool EndsWith(const AnsiString &str, const AnsiString &pattern, bool ignoreCase = false);
 
-	static bool IsUtf8BOM(const BYTE *buffer, DWORD bufferSize);
+	static bool IsUtf8BOM(const byte *buffer, DWORD bufferSize);
 
 	static AnsiString Replace(const AnsiString &str, const AnsiString &from, const AnsiString &to);
 	static AnsiString Trim(const AnsiString &str, bool fromLeft = true, bool fromRight = true, const AnsiString &chars = " \n\r\t");

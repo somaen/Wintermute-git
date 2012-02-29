@@ -117,7 +117,7 @@ TOKEN_DEF(WALK_TO_DIR)
 TOKEN_DEF(SAVE_STATE)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdEntity::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CAdEntity::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(ENTITY)
 	TOKEN_TABLE(SPRITE)

@@ -34,11 +34,11 @@ namespace WinterMute {
 class CBFontBitmap : public CBFont {
 public:
 	DECLARE_PERSISTENT(CBFontBitmap, CBFont)
-	HRESULT LoadBuffer(BYTE *Buffer);
+	HRESULT LoadBuffer(byte  *Buffer);
 	HRESULT LoadFile(char *Filename);
-	virtual int GetTextWidth(BYTE *text, int MaxLength = -1);
-	virtual int GetTextHeight(BYTE *text, int width);
-	virtual void DrawText(BYTE *text, int x, int y, int width, TTextAlign align = TAL_LEFT, int max_height = -1, int MaxLenght = -1);
+	virtual int GetTextWidth(byte  *text, int MaxLength = -1);
+	virtual int GetTextHeight(byte  *text, int width);
+	virtual void DrawText(byte  *text, int x, int y, int width, TTextAlign align = TAL_LEFT, int max_height = -1, int MaxLenght = -1);
 	virtual int GetLetterHeight();
 
 	CBFontBitmap(CBGame *inGame);
@@ -52,15 +52,15 @@ public:
 	int m_NumColumns;
 	int m_TileHeight;
 	int m_TileWidth;
-	BYTE m_Widths[NUM_CHARACTERS];
+	byte m_Widths[NUM_CHARACTERS];
 	CBSubFrame *m_Subframe;
 	bool m_WholeCell;
 
 private:
-	int GetCharWidth(BYTE Index);
-	void DrawChar(BYTE c, int x, int y);
+	int GetCharWidth(byte  Index);
+	void DrawChar(byte  c, int x, int y);
 
-	int TextHeightDraw(BYTE *text, int x, int y, int width, TTextAlign align, bool draw, int max_height = -1, int MaxLenght = -1);
+	int TextHeightDraw(byte  *text, int x, int y, int width, TTextAlign align, bool draw, int max_height = -1, int MaxLenght = -1);
 
 };
 

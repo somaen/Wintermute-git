@@ -223,7 +223,7 @@ bool StringUtil::EndsWith(const AnsiString &str, const AnsiString &pattern, bool
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool StringUtil::IsUtf8BOM(const BYTE *Buffer, DWORD BufferSize) {
+bool StringUtil::IsUtf8BOM(const byte *Buffer, DWORD BufferSize) {
 	if (BufferSize > 3 && Buffer[0] == 0xEF && Buffer[1] == 0xBB && Buffer[2] == 0xBF) return true;
 	else return false;
 }

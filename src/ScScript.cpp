@@ -216,7 +216,7 @@ HRESULT CScScript::InitTables() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CScScript::Create(char *Filename, BYTE *Buffer, DWORD Size, CBScriptHolder *Owner) {
+HRESULT CScScript::Create(char *Filename, byte *Buffer, DWORD Size, CBScriptHolder *Owner) {
 	Cleanup();
 
 	m_Thread = false;
@@ -226,7 +226,7 @@ HRESULT CScScript::Create(char *Filename, BYTE *Buffer, DWORD Size, CBScriptHold
 	m_Filename = new char[strlen(Filename) + 1];
 	if (m_Filename) strcpy(m_Filename, Filename);
 
-	m_Buffer = new BYTE [Size];
+	m_Buffer = new byte [Size];
 	if (!m_Buffer) return E_FAIL;
 
 	memcpy(m_Buffer, Buffer, Size);
@@ -259,7 +259,7 @@ HRESULT CScScript::CreateThread(CScScript *Original, DWORD InitIP, const char *E
 	if (m_Filename) strcpy(m_Filename, Original->m_Filename);
 
 	// copy buffer
-	m_Buffer = new BYTE [Original->m_BufferSize];
+	m_Buffer = new byte [Original->m_BufferSize];
 	if (!m_Buffer) return E_FAIL;
 
 	memcpy(m_Buffer, Original->m_Buffer, Original->m_BufferSize);
@@ -305,7 +305,7 @@ HRESULT CScScript::CreateMethodThread(CScScript *Original, const char *MethodNam
 	if (m_Filename) strcpy(m_Filename, Original->m_Filename);
 
 	// copy buffer
-	m_Buffer = new BYTE [Original->m_BufferSize];
+	m_Buffer = new byte [Original->m_BufferSize];
 	if (!m_Buffer) return E_FAIL;
 
 	memcpy(m_Buffer, Original->m_Buffer, Original->m_BufferSize);
@@ -1160,7 +1160,7 @@ HRESULT CScScript::Persist(CBPersistMgr *PersistMgr) {
 	} else {
 		PersistMgr->Transfer(TMEMBER(m_BufferSize));
 		if (m_BufferSize > 0) {
-			m_Buffer = new BYTE[m_BufferSize];
+			m_Buffer = new byte[m_BufferSize];
 			PersistMgr->GetBytes(m_Buffer, m_BufferSize);
 			InitTables();
 		} else m_Buffer = NULL;
@@ -1312,7 +1312,7 @@ HRESULT CScScript::ExternalCall(CScStack *Stack, CScStack *ThisStack, CScScript:
 					Buffer->PutDWORD(Val->GetInt());
 					break;
 				case TYPE_BYTE:
-					Buffer->PutDWORD((BYTE)Val->GetInt());
+					Buffer->PutDWORD((byte )Val->GetInt());
 					break;
 				case TYPE_STRING:
 					if (Val->IsNULL()) Buffer->PutDWORD(0);
@@ -1353,13 +1353,13 @@ HRESULT CScScript::ExternalCall(CScStack *Stack, CScStack *ThisStack, CScScript:
 			// return
 			switch (Function->returns) {
 			case TYPE_BOOL:
-				Stack->PushBool((BYTE)ret != 0);
+				Stack->PushBool((byte )ret != 0);
 				break;
 			case TYPE_LONG:
 				Stack->PushInt(ret);
 				break;
 			case TYPE_BYTE:
-				Stack->PushInt((BYTE)ret);
+				Stack->PushInt((byte )ret);
 				break;
 				break;
 			case TYPE_STRING:
@@ -1580,7 +1580,7 @@ void CScScript::AfterLoad() {
 			return;
 		}
 
-		m_Buffer = new BYTE [m_BufferSize];
+		m_Buffer = new byte [m_BufferSize];
 		memcpy(m_Buffer, buffer, m_BufferSize);
 
 		InitTables();

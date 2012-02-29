@@ -681,7 +681,7 @@ TOKEN_DEF(GUID)
 TOKEN_DEF(COMPAT_KILL_METHOD_THREADS)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBGame::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CBGame::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(GAME)
 	TOKEN_TABLE(TEMPLATE)
@@ -1444,7 +1444,7 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "SetGlobalSFXVolume") == 0) {
 		Stack->CorrectParams(1);
-		Game->m_SoundMgr->SetVolumePercent(SOUND_SFX, (BYTE)Stack->Pop()->GetInt());
+		Game->m_SoundMgr->SetVolumePercent(SOUND_SFX, (byte )Stack->Pop()->GetInt());
 		Stack->PushNULL();
 		return S_OK;
 	}
@@ -1454,7 +1454,7 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "SetGlobalSpeechVolume") == 0) {
 		Stack->CorrectParams(1);
-		Game->m_SoundMgr->SetVolumePercent(SOUND_SPEECH, (BYTE)Stack->Pop()->GetInt());
+		Game->m_SoundMgr->SetVolumePercent(SOUND_SPEECH, (byte )Stack->Pop()->GetInt());
 		Stack->PushNULL();
 		return S_OK;
 	}
@@ -1464,7 +1464,7 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "SetGlobalMusicVolume") == 0) {
 		Stack->CorrectParams(1);
-		Game->m_SoundMgr->SetVolumePercent(SOUND_MUSIC, (BYTE)Stack->Pop()->GetInt());
+		Game->m_SoundMgr->SetVolumePercent(SOUND_MUSIC, (byte )Stack->Pop()->GetInt());
 		Stack->PushNULL();
 		return S_OK;
 	}
@@ -1474,7 +1474,7 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "SetGlobalMasterVolume") == 0) {
 		Stack->CorrectParams(1);
-		Game->m_SoundMgr->SetMasterVolumePercent((BYTE)Stack->Pop()->GetInt());
+		Game->m_SoundMgr->SetMasterVolumePercent((byte )Stack->Pop()->GetInt());
 		Stack->PushNULL();
 		return S_OK;
 	}
@@ -2458,7 +2458,7 @@ HRESULT CBGame::ScSetProperty(char *Name, CScValue *Value) {
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "SFXVolume") == 0) {
 		Game->LOG(0, "**Warning** The SFXVolume attribute is obsolete");
-		Game->m_SoundMgr->SetVolumePercent(SOUND_SFX, (BYTE)Value->GetInt());
+		Game->m_SoundMgr->SetVolumePercent(SOUND_SFX, (byte )Value->GetInt());
 		return S_OK;
 	}
 
@@ -2467,7 +2467,7 @@ HRESULT CBGame::ScSetProperty(char *Name, CScValue *Value) {
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "SpeechVolume") == 0) {
 		Game->LOG(0, "**Warning** The SpeechVolume attribute is obsolete");
-		Game->m_SoundMgr->SetVolumePercent(SOUND_SPEECH, (BYTE)Value->GetInt());
+		Game->m_SoundMgr->SetVolumePercent(SOUND_SPEECH, (byte )Value->GetInt());
 		return S_OK;
 	}
 
@@ -2476,7 +2476,7 @@ HRESULT CBGame::ScSetProperty(char *Name, CScValue *Value) {
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "MusicVolume") == 0) {
 		Game->LOG(0, "**Warning** The MusicVolume attribute is obsolete");
-		Game->m_SoundMgr->SetVolumePercent(SOUND_MUSIC, (BYTE)Value->GetInt());
+		Game->m_SoundMgr->SetVolumePercent(SOUND_MUSIC, (byte )Value->GetInt());
 		return S_OK;
 	}
 
@@ -2485,7 +2485,7 @@ HRESULT CBGame::ScSetProperty(char *Name, CScValue *Value) {
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "MasterVolume") == 0) {
 		Game->LOG(0, "**Warning** The MasterVolume attribute is obsolete");
-		Game->m_SoundMgr->SetMasterVolumePercent((BYTE)Value->GetInt());
+		Game->m_SoundMgr->SetMasterVolumePercent((byte )Value->GetInt());
 		return S_OK;
 	}
 
@@ -2620,8 +2620,8 @@ HRESULT CBGame::DisplayQuickMsg() {
 
 	// display
 	for (i = 0; i < m_QuickMessages.GetSize(); i++) {
-		m_SystemFont->DrawText((BYTE *)m_QuickMessages[i]->GetText(), 0, PosY, m_Renderer->m_Width);
-		PosY += m_SystemFont->GetTextHeight((BYTE *)m_QuickMessages[i]->GetText(), m_Renderer->m_Width);
+		m_SystemFont->DrawText((byte  *)m_QuickMessages[i]->GetText(), 0, PosY, m_Renderer->m_Width);
+		PosY += m_SystemFont->GetTextHeight((byte  *)m_QuickMessages[i]->GetText(), m_Renderer->m_Width);
 	}
 	return S_OK;
 }
@@ -3670,7 +3670,7 @@ bool CBGame::HandleMouseWheel(int Delta) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBGame::GetVersion(BYTE *VerMajor, BYTE *VerMinor, BYTE *ExtMajor, BYTE *ExtMinor) {
+HRESULT CBGame::GetVersion(byte  *VerMajor, byte *VerMinor, byte *ExtMajor, byte *ExtMinor) {
 	if (VerMajor) *VerMajor = DCGF_VER_MAJOR;
 	if (VerMinor) *VerMinor = DCGF_VER_MINOR;
 
@@ -4200,7 +4200,7 @@ HRESULT CBGame::DisplayDebugInfo() {
 
 	if (m_DEBUG_ShowFPS) {
 		sprintf(str, "FPS: %d", Game->m_Fps);
-		m_SystemFont->DrawText((BYTE *)str, 0, 0, 100, TAL_LEFT);
+		m_SystemFont->DrawText((byte  *)str, 0, 0, 100, TAL_LEFT);
 	}
 
 	if (Game->m_DEBUG_DebugMode) {
@@ -4212,23 +4212,23 @@ HRESULT CBGame::DisplayDebugInfo() {
 		strcat(str, " (");
 		strcat(str, m_Renderer->GetName());
 		strcat(str, ")");
-		m_SystemFont->DrawText((BYTE *)str, 0, 0, m_Renderer->m_Width, TAL_RIGHT);
+		m_SystemFont->DrawText((byte  *)str, 0, 0, m_Renderer->m_Width, TAL_RIGHT);
 
 		m_Renderer->DisplayDebugInfo();
 
 		int ScrTotal, ScrRunning, ScrWaiting, ScrPersistent;
 		ScrTotal = m_ScEngine->GetNumScripts(&ScrRunning, &ScrWaiting, &ScrPersistent);
 		sprintf(str, "Running scripts: %d (r:%d w:%d p:%d)", ScrTotal, ScrRunning, ScrWaiting, ScrPersistent);
-		m_SystemFont->DrawText((BYTE *)str, 0, 70, m_Renderer->m_Width, TAL_RIGHT);
+		m_SystemFont->DrawText((byte  *)str, 0, 70, m_Renderer->m_Width, TAL_RIGHT);
 
 
 		sprintf(str, "Timer: %d", m_Timer);
-		Game->m_SystemFont->DrawText((BYTE *)str, 0, 130, m_Renderer->m_Width, TAL_RIGHT);
+		Game->m_SystemFont->DrawText((byte  *)str, 0, 130, m_Renderer->m_Width, TAL_RIGHT);
 
-		if (m_ActiveObject != NULL) m_SystemFont->DrawText((BYTE *)m_ActiveObject->m_Name, 0, 150, m_Renderer->m_Width, TAL_RIGHT);
+		if (m_ActiveObject != NULL) m_SystemFont->DrawText((byte  *)m_ActiveObject->m_Name, 0, 150, m_Renderer->m_Width, TAL_RIGHT);
 
 		sprintf(str, "GfxMem: %dMB", m_UsedMem / (1024 * 1024));
-		m_SystemFont->DrawText((BYTE *)str, 0, 170, m_Renderer->m_Width, TAL_RIGHT);
+		m_SystemFont->DrawText((byte  *)str, 0, 170, m_Renderer->m_Width, TAL_RIGHT);
 
 	}
 

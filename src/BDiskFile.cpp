@@ -78,14 +78,14 @@ HRESULT CBDiskFile::Open(const char *Filename) {
 			fread(&CompSize, sizeof(DWORD), 1, m_File);
 			fread(&UncompSize, sizeof(DWORD), 1, m_File);
 
-			BYTE *CompBuffer = new BYTE[CompSize];
+			BYTE *CompBuffer = new byte[CompSize];
 			if (!CompBuffer) {
 				Game->LOG(0, "Error allocating memory for compressed file '%s'", Filename);
 				Close();
 				return E_FAIL;
 			}
 
-			m_Data = new BYTE[UncompSize];
+			m_Data = new byte[UncompSize];
 			if (!m_Data) {
 				Game->LOG(0, "Error allocating buffer for file '%s'", Filename);
 				delete [] CompBuffer;

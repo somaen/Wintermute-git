@@ -87,7 +87,7 @@ TOKEN_DEF(CLOSE_UP)
 TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdLayer::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CAdLayer::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(LAYER)
 	TOKEN_TABLE(TEMPLATE)

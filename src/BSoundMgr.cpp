@@ -231,7 +231,7 @@ HRESULT CBSoundMgr::SetVolume(TSoundType Type, int Volume) {
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSoundMgr::SetVolumePercent(TSoundType Type, BYTE Percent) {
+HRESULT CBSoundMgr::SetVolumePercent(TSoundType Type, byte Percent) {
 	return SetVolume(Type, Percent);
 }
 
@@ -251,12 +251,12 @@ BYTE CBSoundMgr::GetVolumePercent(TSoundType Type) {
 		break;
 	}
 
-	return (BYTE)Volume;
+	return (byte )Volume;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSoundMgr::SetMasterVolumePercent(BYTE Percent) {
+HRESULT CBSoundMgr::SetMasterVolumePercent(byte  Percent) {
 	m_VolumeMaster = Percent;
 	BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, (DWORD)(10000.0f / 100.0f * (float)Percent));
 	return S_OK;

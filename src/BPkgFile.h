@@ -48,7 +48,7 @@ private:
 	bool m_Compressed;
 	CBFileEntry *m_FileEntry;
 	z_stream m_Stream;
-	BYTE m_CompBuffer[COMPRESSED_BUFFER_SIZE];
+	byte m_CompBuffer[COMPRESSED_BUFFER_SIZE];
 	FILE *m_File;
 };
 

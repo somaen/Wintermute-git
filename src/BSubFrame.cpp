@@ -77,7 +77,7 @@ TOKEN_DEF(EDITOR_SELECTED)
 TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////
-HRESULT CBSubFrame::LoadBuffer(BYTE *Buffer, int LifeTime, bool KeepLoaded) {
+HRESULT CBSubFrame::LoadBuffer(byte  *Buffer, int LifeTime, bool KeepLoaded) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(IMAGE)
 	TOKEN_TABLE(TRANSPARENT)
@@ -158,7 +158,7 @@ HRESULT CBSubFrame::LoadBuffer(BYTE *Buffer, int LifeTime, bool KeepLoaded) {
 			break;
 
 		case TOKEN_EDITOR_PROPERTY:
-			ParseEditorProperty((BYTE *)params, false);
+			ParseEditorProperty((byte  *)params, false);
 			break;
 		}
 	}
@@ -534,7 +534,7 @@ char *CBSubFrame::ScToString() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSubFrame::SetSurface(char *Filename, bool default_ck, BYTE ck_red, BYTE ck_green, BYTE ck_blue, int LifeTime, bool KeepLoaded) {
+HRESULT CBSubFrame::SetSurface(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime, bool KeepLoaded) {
 	if (m_Surface) {
 		Game->m_SurfaceStorage->RemoveSurface(m_Surface);
 		m_Surface = NULL;

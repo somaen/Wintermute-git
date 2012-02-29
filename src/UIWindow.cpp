@@ -156,7 +156,7 @@ HRESULT CUIWindow::Display(int OffsetX, int OffsetY) {
 	if (image) image->Draw(m_PosX + OffsetX, m_PosY + OffsetY, m_Transparent ? NULL : this);
 
 	if (!CBPlatform::IsRectEmpty(&m_TitleRect) && font && m_Text) {
-		font->DrawText((BYTE *)m_Text, m_PosX + OffsetX + m_TitleRect.left, m_PosY + OffsetY + m_TitleRect.top, m_TitleRect.right - m_TitleRect.left, m_TitleAlign, m_TitleRect.bottom - m_TitleRect.top);
+		font->DrawText((byte  *)m_Text, m_PosX + OffsetX + m_TitleRect.left, m_PosY + OffsetY + m_TitleRect.top, m_TitleRect.right - m_TitleRect.left, m_TitleAlign, m_TitleRect.bottom - m_TitleRect.top);
 	}
 
 	if (!m_Transparent && !image) Game->m_Renderer->m_RectList.Add(new CBActiveRect(Game, this, NULL, m_PosX + OffsetX, m_PosY + OffsetY, m_Width, m_Height, 100, 100, false));
@@ -233,7 +233,7 @@ TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF(EDIT)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CUIWindow::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CUIWindow::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(WINDOW)
 	TOKEN_TABLE(ALPHA_COLOR)

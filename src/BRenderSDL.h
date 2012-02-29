@@ -40,7 +40,7 @@ public:
 
 	HRESULT InitRenderer(int width, int height, bool windowed);
 	HRESULT Flip();
-	HRESULT Fill(BYTE r, BYTE g, BYTE b, RECT *rect);
+	HRESULT Fill(byte  r, byte g, byte b, RECT *rect);
 
 	HRESULT Fade(WORD Alpha);
 	HRESULT FadeToColor(DWORD Color, RECT *rect = NULL);

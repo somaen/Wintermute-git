@@ -39,7 +39,7 @@ public:
 
 	CAdTalkNode(CBGame *inGame);
 	virtual ~CAdTalkNode();
-	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	HRESULT LoadBuffer(byte  *Buffer, bool Complete = true);
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent = 0);
 	char *m_SpriteFilename;
 	CBSprite *m_Sprite;

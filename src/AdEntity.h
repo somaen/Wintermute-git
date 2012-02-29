@@ -46,7 +46,7 @@ public:
 	CAdEntity(CBGame *inGame);
 	virtual ~CAdEntity();
 	HRESULT LoadFile(char *Filename);
-	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	HRESULT LoadBuffer(byte  *Buffer, bool Complete = true);
 	TEntityType m_Subtype;
 
 	// scripting interface

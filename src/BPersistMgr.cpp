@@ -99,7 +99,7 @@ HRESULT CBPersistMgr::InitSave(char *Desc) {
 	Cleanup();
 	m_Saving = true;
 
-	m_Buffer = (BYTE *)malloc(SAVE_BUFFER_INIT_SIZE);
+	m_Buffer = (byte  *)malloc(SAVE_BUFFER_INIT_SIZE);
 	if (m_Buffer) {
 		m_BufferSize = SAVE_BUFFER_INIT_SIZE;
 		res = S_OK;
@@ -190,7 +190,7 @@ HRESULT CBPersistMgr::InitLoad(char *Filename) {
 			m_SavedExtMinor = HIBYTE(HIWORD(Version));
 
 			if (Magic == SAVE_MAGIC_2) {
-				m_SavedVerBuild = (BYTE)GetDWORD();
+				m_SavedVerBuild = (byte )GetDWORD();
 				char *SavedName = GetString();
 				if (SavedName == NULL || CBPlatform::stricmp(SavedName, Game->m_Name) != 0) {
 					Game->LOG(0, "ERROR: Saved game name doesn't match current game");
@@ -200,7 +200,7 @@ HRESULT CBPersistMgr::InitLoad(char *Filename) {
 				// load thumbnail
 				m_ThumbnailDataSize = GetDWORD();
 				if (m_ThumbnailDataSize > 0) {
-					m_ThumbnailData = new BYTE[m_ThumbnailDataSize];
+					m_ThumbnailData = new byte[m_ThumbnailDataSize];
 					if (m_ThumbnailData) {
 						GetBytes(m_ThumbnailData, m_ThumbnailDataSize);
 					} else m_ThumbnailDataSize = 0;
@@ -259,10 +259,10 @@ HRESULT CBPersistMgr::SaveFile(char *Filename) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBPersistMgr::PutBytes(BYTE *Buffer, DWORD Size) {
+HRESULT CBPersistMgr::PutBytes(byte  *Buffer, DWORD Size) {
 	while (m_Offset + Size > m_BufferSize) {
 		m_BufferSize += SAVE_BUFFER_GROW_BY;
-		m_Buffer = (BYTE *)realloc(m_Buffer, m_BufferSize);
+		m_Buffer = (byte  *)realloc(m_Buffer, m_BufferSize);
 		if (!m_Buffer) {
 			Game->LOG(0, "Error reallocating save buffer to %d bytes", m_BufferSize);
 			return E_FAIL;
@@ -277,7 +277,7 @@ HRESULT CBPersistMgr::PutBytes(BYTE *Buffer, DWORD Size) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBPersistMgr::GetBytes(BYTE *Buffer, DWORD Size) {
+HRESULT CBPersistMgr::GetBytes(byte  *Buffer, DWORD Size) {
 	if (m_Offset + Size > m_BufferSize) {
 		Game->LOG(0, "Fatal: Save buffer underflow");
 		return E_FAIL;
@@ -292,14 +292,14 @@ HRESULT CBPersistMgr::GetBytes(BYTE *Buffer, DWORD Size) {
 
 //////////////////////////////////////////////////////////////////////////
 void CBPersistMgr::PutDWORD(DWORD Val) {
-	PutBytes((BYTE *)&Val, sizeof(DWORD));
+	PutBytes((byte  *)&Val, sizeof(DWORD));
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 DWORD CBPersistMgr::GetDWORD() {
 	DWORD ret;
-	GetBytes((BYTE *)&ret, sizeof(DWORD));
+	GetBytes((byte  *)&ret, sizeof(DWORD));
 	return ret;
 }
 
@@ -309,7 +309,7 @@ void CBPersistMgr::PutString(const char *Val) {
 	if (!Val) PutString("(null)");
 	else {
 		PutDWORD(strlen(Val) + 1);
-		PutBytes((BYTE *)Val, strlen(Val) + 1);
+		PutBytes((byte  *)Val, strlen(Val) + 1);
 	}
 }
 
@@ -327,40 +327,40 @@ char *CBPersistMgr::GetString() {
 //////////////////////////////////////////////////////////////////////////
 // bool
 HRESULT CBPersistMgr::Transfer(const char *Name, bool *Val) {
-	if (m_Saving) return PutBytes((BYTE *)Val, sizeof(bool));
-	else return GetBytes((BYTE *)Val, sizeof(bool));
+	if (m_Saving) return PutBytes((byte  *)Val, sizeof(bool));
+	else return GetBytes((byte  *)Val, sizeof(bool));
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 // int
 HRESULT CBPersistMgr::Transfer(const char *Name, int *Val) {
-	if (m_Saving) return PutBytes((BYTE *)Val, sizeof(int));
-	else return GetBytes((BYTE *)Val, sizeof(int));
+	if (m_Saving) return PutBytes((byte  *)Val, sizeof(int));
+	else return GetBytes((byte  *)Val, sizeof(int));
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 // DWORD
 HRESULT CBPersistMgr::Transfer(const char *Name, DWORD *Val) {
-	if (m_Saving) return PutBytes((BYTE *)Val, sizeof(DWORD));
-	else return GetBytes((BYTE *)Val, sizeof(DWORD));
+	if (m_Saving) return PutBytes((byte  *)Val, sizeof(DWORD));
+	else return GetBytes((byte  *)Val, sizeof(DWORD));
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 // float
 HRESULT CBPersistMgr::Transfer(const char *Name, float *Val) {
-	if (m_Saving) return PutBytes((BYTE *)Val, sizeof(float));
-	else return GetBytes((BYTE *)Val, sizeof(float));
+	if (m_Saving) return PutBytes((byte  *)Val, sizeof(float));
+	else return GetBytes((byte  *)Val, sizeof(float));
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 // double
 HRESULT CBPersistMgr::Transfer(const char *Name, double *Val) {
-	if (m_Saving) return PutBytes((BYTE *)Val, sizeof(double));
-	else return GetBytes((BYTE *)Val, sizeof(double));
+	if (m_Saving) return PutBytes((byte  *)Val, sizeof(double));
+	else return GetBytes((byte  *)Val, sizeof(double));
 }
 
 
@@ -387,14 +387,14 @@ HRESULT CBPersistMgr::Transfer(const char *Name, AnsiStringArray &Val) {
 
 	if (m_Saving) {
 		size = Val.size();
-		PutBytes((BYTE *)&size, sizeof(size_t));
+		PutBytes((byte  *)&size, sizeof(size_t));
 
 		for (AnsiStringArray::iterator it = Val.begin(); it != Val.end(); ++it) {
 			PutString((*it).c_str());
 		}
 	} else {
 		Val.clear();
-		GetBytes((BYTE *)&size, sizeof(size_t));
+		GetBytes((byte  *)&size, sizeof(size_t));
 
 		for (size_t i = 0; i < size; i++) {
 			char *str = GetString();
@@ -407,33 +407,33 @@ HRESULT CBPersistMgr::Transfer(const char *Name, AnsiStringArray &Val) {
 
 //////////////////////////////////////////////////////////////////////////
 // BYTE
-HRESULT CBPersistMgr::Transfer(const char *Name, BYTE *Val) {
-	if (m_Saving) return PutBytes((BYTE *)Val, sizeof(BYTE));
-	else return GetBytes((BYTE *)Val, sizeof(BYTE));
+HRESULT CBPersistMgr::Transfer(const char *Name, byte *Val) {
+	if (m_Saving) return PutBytes((byte  *)Val, sizeof(byte ));
+	else return GetBytes((byte  *)Val, sizeof(byte ));
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 // RECT
 HRESULT CBPersistMgr::Transfer(const char *Name, RECT *Val) {
-	if (m_Saving) return PutBytes((BYTE *)Val, sizeof(RECT));
-	else return GetBytes((BYTE *)Val, sizeof(RECT));
+	if (m_Saving) return PutBytes((byte  *)Val, sizeof(RECT));
+	else return GetBytes((byte  *)Val, sizeof(RECT));
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 // POINT
 HRESULT CBPersistMgr::Transfer(const char *Name, POINT *Val) {
-	if (m_Saving) return PutBytes((BYTE *)Val, sizeof(POINT));
-	else return GetBytes((BYTE *)Val, sizeof(POINT));
+	if (m_Saving) return PutBytes((byte  *)Val, sizeof(POINT));
+	else return GetBytes((byte  *)Val, sizeof(POINT));
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 // Vector2
 HRESULT CBPersistMgr::Transfer(const char *Name, Vector2 *Val) {
-	if (m_Saving) return PutBytes((BYTE *)Val, sizeof(Vector2));
-	else return GetBytes((BYTE *)Val, sizeof(Vector2));
+	if (m_Saving) return PutBytes((byte  *)Val, sizeof(Vector2));
+	else return GetBytes((byte  *)Val, sizeof(Vector2));
 }
 
 
@@ -462,7 +462,7 @@ HRESULT CBPersistMgr::Transfer(const char *Name, void *Val) {
 
 
 //////////////////////////////////////////////////////////////////////////
-bool CBPersistMgr::CheckVersion(BYTE VerMajor, BYTE VerMinor, BYTE VerBuild) {
+bool CBPersistMgr::CheckVersion(byte  VerMajor, byte VerMinor, byte VerBuild) {
 	if (m_Saving) return true;
 
 	// it's ok if we are same or newer than the saved game

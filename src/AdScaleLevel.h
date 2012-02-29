@@ -39,7 +39,7 @@ public:
 	virtual ~CAdScaleLevel();
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 	HRESULT LoadFile(char *Filename);
-	HRESULT LoadBuffer(BYTE *Buffer, bool Complete = true);
+	HRESULT LoadBuffer(byte  *Buffer, bool Complete = true);
 };
 
 } // end of namespace WinterMute

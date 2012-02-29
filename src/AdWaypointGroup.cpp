@@ -87,7 +87,7 @@ TOKEN_DEF(PROPERTY)
 TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdWaypointGroup::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CAdWaypointGroup::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(WAYPOINTS)
 	TOKEN_TABLE(TEMPLATE)

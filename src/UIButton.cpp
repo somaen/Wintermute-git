@@ -138,7 +138,7 @@ TOKEN_DEF(PIXEL_PERFECT)
 TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CUIButton::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CUIButton::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(BUTTON)
 	TOKEN_TABLE(TEMPLATE)
@@ -534,8 +534,8 @@ void CUIButton::CorrectSize() {
 
 	if (m_Text) {
 		int text_height;
-		if (m_Font) text_height = m_Font->GetTextHeight((BYTE *)m_Text, m_Width);
-		else text_height = Game->m_SystemFont->GetTextHeight((BYTE *)m_Text, m_Width);
+		if (m_Font) text_height = m_Font->GetTextHeight((byte  *)m_Text, m_Width);
+		else text_height = Game->m_SystemFont->GetTextHeight((byte  *)m_Text, m_Width);
 
 		if (text_height > m_Height) m_Height = text_height;
 	}
@@ -603,8 +603,8 @@ HRESULT CUIButton::Display(int OffsetX, int OffsetY) {
 	if (image) image->Draw(ImageX + ((m_Press || m_OneTimePress) && back ? 1 : 0), ImageY + ((m_Press || m_OneTimePress) && back ? 1 : 0), m_PixelPerfect ? this : NULL);
 
 	if (font && m_Text) {
-		int text_offset = (m_Height - font->GetTextHeight((BYTE *)m_Text, m_Width)) / 2;
-		font->DrawText((BYTE *)m_Text, OffsetX + m_PosX + ((m_Press || m_OneTimePress) ? 1 : 0), OffsetY + m_PosY + text_offset + ((m_Press || m_OneTimePress) ? 1 : 0), m_Width, m_Align);
+		int text_offset = (m_Height - font->GetTextHeight((byte  *)m_Text, m_Width)) / 2;
+		font->DrawText((byte  *)m_Text, OffsetX + m_PosX + ((m_Press || m_OneTimePress) ? 1 : 0), OffsetY + m_PosY + text_offset + ((m_Press || m_OneTimePress) ? 1 : 0), m_Width, m_Align);
 	}
 
 	if (!m_PixelPerfect || !m_Image) Game->m_Renderer->m_RectList.Add(new CBActiveRect(Game, this, NULL, OffsetX + m_PosX, OffsetY + m_PosY, m_Width, m_Height, 100, 100, false));

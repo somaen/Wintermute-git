@@ -36,7 +36,7 @@ public:
 	bool m_MirrorX;
 	bool m_MirrorY;
 	bool m_Decoration;
-	HRESULT SetSurface(char *Filename, bool default_ck = true, BYTE ck_red = 0, BYTE ck_green = 0, BYTE ck_blue = 0, int LifeTime = -1, bool KeepLoaded = false);
+	HRESULT SetSurface(char *Filename, bool default_ck = true, byte ck_red = 0, byte ck_green = 0, byte ck_blue = 0, int LifeTime = -1, bool KeepLoaded = false);
 	HRESULT SetSurfaceSimple();
 	DECLARE_PERSISTENT(CBSubFrame, CBScriptable)
 	void SetDefaultRect();
@@ -45,7 +45,7 @@ public:
 	bool m_EditorSelected;
 	CBSubFrame(CBGame *inGame);
 	virtual ~CBSubFrame();
-	HRESULT LoadBuffer(BYTE *Buffer, int LifeTime, bool KeepLoaded);
+	HRESULT LoadBuffer(byte  *Buffer, int LifeTime, bool KeepLoaded);
 	HRESULT Draw(int X, int Y, CBObject *Register = NULL, float ZoomX = 100, float ZoomY = 100, bool Precise = true, DWORD Alpha = 0xFFFFFFFF, float Rotate = 0.0f, TSpriteBlendMode BlendMode = BLEND_NORMAL);
 	bool GetBoundingRect(LPRECT Rect, int X, int Y, float ScaleX = 100, float ScaleY = 100);
 
@@ -55,9 +55,9 @@ public:
 	RECT m_Rect;
 
 	bool m_CKDefault;
-	BYTE m_CKRed;
-	BYTE m_CKGreen;
-	BYTE m_CKBlue;
+	byte m_CKRed;
+	byte m_CKGreen;
+	byte m_CKBlue;
 	int m_LifeTime;
 	bool m_KeepLoaded;
 	char *m_SurfaceFilename;

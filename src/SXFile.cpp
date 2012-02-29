@@ -190,7 +190,7 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 			return S_OK;
 		}
 		DWORD BufSize = FILE_BUFFER_SIZE;
-		BYTE *Buf = (BYTE *)malloc(BufSize);
+		BYTE *Buf = (byte  *)malloc(BufSize);
 		DWORD Counter = 0;
 		BYTE b;
 		bool FoundNewLine = false;
@@ -200,7 +200,7 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 			if (FAILED(Ret)) break;
 
 			if (Counter > BufSize) {
-				Buf = (BYTE *)realloc(Buf, BufSize + FILE_BUFFER_SIZE);
+				Buf = (byte  *)realloc(Buf, BufSize + FILE_BUFFER_SIZE);
 				BufSize += FILE_BUFFER_SIZE;
 			}
 			if (b == '\n') {
@@ -215,7 +215,7 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 		} while (SUCCEEDED(Ret));
 
 		if (Counter > BufSize) {
-			Buf = (BYTE *)realloc(Buf, BufSize + FILE_BUFFER_SIZE);
+			Buf = (byte  *)realloc(Buf, BufSize + FILE_BUFFER_SIZE);
 			BufSize += FILE_BUFFER_SIZE;
 		}
 		Buf[Counter] = '\0';
@@ -241,7 +241,7 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 			return S_OK;
 		}
 		DWORD BufSize = FILE_BUFFER_SIZE;
-		BYTE *Buf = (BYTE *)malloc(BufSize);
+		BYTE *Buf = (byte  *)malloc(BufSize);
 		DWORD Counter = 0;
 		BYTE b;
 
@@ -251,7 +251,7 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 			if (FAILED(Ret)) break;
 
 			if (Counter > BufSize) {
-				Buf = (BYTE *)realloc(Buf, BufSize + FILE_BUFFER_SIZE);
+				Buf = (byte  *)realloc(Buf, BufSize + FILE_BUFFER_SIZE);
 				BufSize += FILE_BUFFER_SIZE;
 			}
 			if (b == 0x0D) continue;
@@ -262,7 +262,7 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 		}
 
 		if (Counter > BufSize) {
-			Buf = (BYTE *)realloc(Buf, BufSize + FILE_BUFFER_SIZE);
+			Buf = (byte  *)realloc(Buf, BufSize + FILE_BUFFER_SIZE);
 			BufSize += FILE_BUFFER_SIZE;
 		}
 		Buf[Counter] = '\0';
@@ -325,7 +325,7 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 			return S_OK;
 		}
 		BYTE Val;
-		if (SUCCEEDED(m_ReadFile->Read(&Val, sizeof(BYTE)))) Stack->PushInt(Val);
+		if (SUCCEEDED(m_ReadFile->Read(&Val, sizeof(byte )))) Stack->PushInt(Val);
 		else Stack->PushNULL();
 
 		return S_OK;
@@ -411,7 +411,7 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 		}
 		DWORD Size;
 		if (SUCCEEDED(m_ReadFile->Read(&Size, sizeof(DWORD)))) {
-			BYTE *Str = new BYTE[Size + 1];
+			BYTE *Str = new byte[Size + 1];
 			if (Str) {
 				if (SUCCEEDED(m_ReadFile->Read(Str, Size))) {
 					Str[Size] = '\0';

@@ -63,12 +63,12 @@ HRESULT CUIText::Display(int OffsetX, int OffsetY) {
 			text_offset = 0;
 			break;
 		case VAL_BOTTOM:
-			text_offset = m_Height - font->GetTextHeight((BYTE *)m_Text, m_Width);
+			text_offset = m_Height - font->GetTextHeight((byte  *)m_Text, m_Width);
 			break;
 		default:
-			text_offset = (m_Height - font->GetTextHeight((BYTE *)m_Text, m_Width)) / 2;
+			text_offset = (m_Height - font->GetTextHeight((byte  *)m_Text, m_Width)) / 2;
 		}
-		font->DrawText((BYTE *)m_Text, OffsetX + m_PosX, OffsetY + m_PosY + text_offset, m_Width, m_TextAlign, m_Height);
+		font->DrawText((byte  *)m_Text, OffsetX + m_PosX, OffsetY + m_PosY + text_offset, m_Width, m_TextAlign, m_Height);
 	}
 
 	//Game->m_Renderer->m_RectList.Add(new CBActiveRect(Game, this, NULL, OffsetX + m_PosX, OffsetY + m_PosY, m_Width, m_Height, 100, 100, false));
@@ -122,7 +122,7 @@ TOKEN_DEF(PARENT_NOTIFY)
 TOKEN_DEF(EDITOR_PROPERTY)
 TOKEN_DEF_END
 //////////////////////////////////////////////////////////////////////////
-HRESULT CUIText::LoadBuffer(BYTE *Buffer, bool Complete) {
+HRESULT CUIText::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_START(commands)
 	TOKEN_TABLE(STATIC)
 	TOKEN_TABLE(TEMPLATE)
@@ -368,7 +368,7 @@ HRESULT CUIText::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "HeightToFit") == 0) {
 		Stack->CorrectParams(0);
-		if (m_Font && m_Text) m_Height = m_Font->GetTextHeight((BYTE *)m_Text, m_Width);
+		if (m_Font && m_Text) m_Height = m_Font->GetTextHeight((byte  *)m_Text, m_Width);
 		Stack->PushNULL();
 		return S_OK;
 	}
@@ -456,8 +456,8 @@ HRESULT CUIText::Persist(CBPersistMgr *PersistMgr) {
 //////////////////////////////////////////////////////////////////////////
 HRESULT CUIText::SizeToFit() {
 	if (m_Font && m_Text) {
-		m_Width = m_Font->GetTextWidth((BYTE *)m_Text);
-		m_Height = m_Font->GetTextHeight((BYTE *)m_Text, m_Width);
+		m_Width = m_Font->GetTextWidth((byte  *)m_Text);
+		m_Height = m_Font->GetTextHeight((byte  *)m_Text, m_Width);
 	}
 	return S_OK;
 }

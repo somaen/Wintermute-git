@@ -363,11 +363,11 @@ HRESULT CSXString::Persist(CBPersistMgr *PersistMgr) {
 	PersistMgr->Transfer(TMEMBER(m_Capacity));
 
 	if (PersistMgr->m_Saving) {
-		if (m_Capacity > 0) PersistMgr->PutBytes((BYTE *)m_String, m_Capacity);
+		if (m_Capacity > 0) PersistMgr->PutBytes((byte  *)m_String, m_Capacity);
 	} else {
 		if (m_Capacity > 0) {
 			m_String = new char[m_Capacity];
-			PersistMgr->GetBytes((BYTE *)m_String, m_Capacity);
+			PersistMgr->GetBytes((byte  *)m_String, m_Capacity);
 		} else m_String = NULL;
 	}
 

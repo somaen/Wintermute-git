@@ -41,8 +41,8 @@ typedef struct {
 	DWORD Magic2;
 	DWORD PackageVersion;
 	DWORD GameVersion;
-	BYTE Priority;
-	BYTE CD;
+	byte Priority;
+	byte CD;
 	bool MasterIndex;
 #ifdef __WIN32__
 	__time32_t CreationTime;
@@ -57,13 +57,13 @@ typedef struct {
 v2:  DWORD DirOffset
 
 
-Dir: BYTE NameLength
+Dir: byte NameLength
      char Name [NameLength]
-     BYTE CD;
+     byte CD;
      DWORD NumEntries
 
 
-Entry: BYTE NameLength
+Entry: byte NameLength
        char Name [NameLength]
        DWORD Offset
        DWORD Length
