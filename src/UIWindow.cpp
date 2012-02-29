@@ -1020,7 +1020,7 @@ HRESULT CUIWindow::ScSetProperty(char *Name, CScValue *Value) {
 	// FadeColor
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "FadeColor") == 0) {
-		m_FadeColor = (DWORD)Value->GetInt();
+		m_FadeColor = (uint32)Value->GetInt();
 		m_FadeBackground = (m_FadeColor != 0);
 		return S_OK;
 	}
@@ -1231,7 +1231,7 @@ HRESULT CUIWindow::Close() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CUIWindow::Listen(CBScriptHolder *param1, DWORD param2) {
+HRESULT CUIWindow::Listen(CBScriptHolder *param1, uint32 param2) {
 	CUIObject *obj = (CUIObject *)param1;
 
 	switch (obj->m_Type) {

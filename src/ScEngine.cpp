@@ -176,7 +176,7 @@ HRESULT CScEngine::Cleanup() {
 
 
 //////////////////////////////////////////////////////////////////////////
-BYTE *WINAPI CScEngine::LoadFile(void *Data, char *Filename, DWORD *Size) {
+BYTE *WINAPI CScEngine::LoadFile(void *Data, char *Filename, uint32 *Size) {
 	CBGame *Game = (CBGame *)Data;
 	return Game->m_FileManager->ReadWholeFile(Filename, Size);
 }
@@ -221,7 +221,7 @@ void WINAPI CScEngine::ParseElement(void *Data, int Line, int Type, void *Elemen
 //////////////////////////////////////////////////////////////////////////
 CScScript *CScEngine::RunScript(char *Filename, CBScriptHolder *Owner) {
 	BYTE *CompBuffer;
-	DWORD CompSize;
+	uint32 CompSize;
 
 	// get script from cache
 	CompBuffer = GetCompiledScript(Filename, &CompSize);
@@ -252,7 +252,7 @@ CScScript *CScEngine::RunScript(char *Filename, CBScriptHolder *Owner) {
 
 
 //////////////////////////////////////////////////////////////////////////
-BYTE *CScEngine::GetCompiledScript(char *Filename, DWORD *OutSize, bool IgnoreCache) {
+BYTE *CScEngine::GetCompiledScript(char *Filename, uint32 *OutSize, bool IgnoreCache) {
 	int i;
 
 	// is script in cache?
@@ -268,10 +268,10 @@ BYTE *CScEngine::GetCompiledScript(char *Filename, DWORD *OutSize, bool IgnoreCa
 
 	// nope, load it
 	BYTE *CompBuffer;
-	DWORD CompSize;
+	uint32 CompSize;
 	bool CompiledNow = false;
 
-	DWORD Size;
+	uint32 Size;
 
 	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename, &Size);
 	if (!Buffer) {
@@ -280,7 +280,7 @@ BYTE *CScEngine::GetCompiledScript(char *Filename, DWORD *OutSize, bool IgnoreCa
 	}
 
 	// needs to be compiled?
-	if (*(DWORD *)Buffer == SCRIPT_MAGIC) {
+	if (*(uint32 *)Buffer == SCRIPT_MAGIC) {
 		CompBuffer = Buffer;
 		CompSize = Size;
 	} else {
@@ -318,7 +318,7 @@ BYTE *CScEngine::GetCompiledScript(char *Filename, DWORD *OutSize, bool IgnoreCa
 	CScCachedScript *CachedScript = new CScCachedScript(Filename, CompBuffer, CompSize);
 	if (CachedScript) {
 		int index;
-		DWORD MinTime = CBPlatform::GetTime();
+		uint32 MinTime = CBPlatform::GetTime();
 		for (i = 0; i < MAX_CACHED_SCRIPTS; i++) {
 			if (m_CachedScripts[i] == NULL) {
 				index = i;
@@ -415,7 +415,7 @@ HRESULT CScEngine::Tick() {
 
 		// time sliced script
 		if (m_Scripts[i]->m_TimeSlice > 0) {
-			DWORD StartTime = CBPlatform::GetTime();
+			uint32 StartTime = CBPlatform::GetTime();
 			while (m_Scripts[i]->m_State == SCRIPT_RUNNING && CBPlatform::GetTime() - StartTime < m_Scripts[i]->m_TimeSlice) {
 				m_CurrentScript = m_Scripts[i];
 				m_Scripts[i]->ExecuteInstruction();
@@ -425,7 +425,7 @@ HRESULT CScEngine::Tick() {
 
 		// normal script
 		else {
-			DWORD StartTime;
+			uint32 StartTime;
 			bool isProfiling = m_IsProfiling;
 			if (isProfiling) StartTime = CBPlatform::GetTime();
 
@@ -757,7 +757,7 @@ HRESULT CScEngine::LoadBreakpoints() {
 
 	int Count = Game->m_Registry->ReadInt("Debug", "NumBreakpoints", 0);
 	for (int i = 1; i <= Count; i++) {
-		DWORD BufSize = 512;
+		uint32 BufSize = 512;
 		sprintf(Key, "Breakpoint%d", i);
 		AnsiString breakpoint = Game->m_Registry->ReadString("Debug", Key, "");
 
@@ -774,7 +774,7 @@ HRESULT CScEngine::LoadBreakpoints() {
 
 
 //////////////////////////////////////////////////////////////////////////
-void CScEngine::AddScriptTime(const char *Filename, DWORD Time) {
+void CScEngine::AddScriptTime(const char *Filename, uint32 Time) {
 	if (!m_IsProfiling) return;
 
 	AnsiString fileName = Filename;
@@ -806,14 +806,14 @@ void CScEngine::DisableProfiling() {
 
 //////////////////////////////////////////////////////////////////////////
 void CScEngine::DumpStats() {
-	DWORD totalTime = CBPlatform::GetTime() - m_ProfilingStartTime;
+	uint32 totalTime = CBPlatform::GetTime() - m_ProfilingStartTime;
 
-	typedef vector <pair<DWORD, std::string> > TimeVector;
+	typedef vector <pair<uint32, std::string> > TimeVector;
 	TimeVector times;
 
 	ScriptTimes::iterator it;
 	for (it = m_ScriptTimes.begin(); it != m_ScriptTimes.end(); it++) {
-		times.push_back(pair<DWORD, std::string> (it->second, it->first));
+		times.push_back(pair<uint32, std::string> (it->second, it->first));
 	}
 	std::sort(times.begin(), times.end());
 

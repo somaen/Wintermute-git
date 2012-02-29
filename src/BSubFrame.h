@@ -40,18 +40,18 @@ public:
 	HRESULT SetSurfaceSimple();
 	DECLARE_PERSISTENT(CBSubFrame, CBScriptable)
 	void SetDefaultRect();
-	DWORD m_Transparent;
+	uint32 m_Transparent;
 	HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent, bool Complete = true);
 	bool m_EditorSelected;
 	CBSubFrame(CBGame *inGame);
 	virtual ~CBSubFrame();
 	HRESULT LoadBuffer(byte  *Buffer, int LifeTime, bool KeepLoaded);
-	HRESULT Draw(int X, int Y, CBObject *Register = NULL, float ZoomX = 100, float ZoomY = 100, bool Precise = true, DWORD Alpha = 0xFFFFFFFF, float Rotate = 0.0f, TSpriteBlendMode BlendMode = BLEND_NORMAL);
+	HRESULT Draw(int X, int Y, CBObject *Register = NULL, float ZoomX = 100, float ZoomY = 100, bool Precise = true, uint32 Alpha = 0xFFFFFFFF, float Rotate = 0.0f, TSpriteBlendMode BlendMode = BLEND_NORMAL);
 	bool GetBoundingRect(LPRECT Rect, int X, int Y, float ScaleX = 100, float ScaleY = 100);
 
 	int m_HotspotX;
 	int m_HotspotY;
-	DWORD m_Alpha;
+	uint32 m_Alpha;
 	RECT m_Rect;
 
 	bool m_CKDefault;

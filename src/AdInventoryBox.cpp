@@ -60,7 +60,7 @@ CAdInventoryBox::~CAdInventoryBox() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CAdInventoryBox::Listen(CBScriptHolder *param1, DWORD param2) {
+HRESULT CAdInventoryBox::Listen(CBScriptHolder *param1, uint32 param2) {
 	CUIObject *obj = (CUIObject *)param1;
 
 	switch (obj->m_Type) {

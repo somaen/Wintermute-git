@@ -46,9 +46,9 @@ public:
 	virtual HRESULT SetViewport(RECT *Rect);
 	virtual HRESULT SetScreenViewport();
 	virtual HRESULT Fade(WORD Alpha);
-	virtual HRESULT FadeToColor(DWORD Color, RECT *rect = NULL);
-	virtual HRESULT DrawLine(int X1, int Y1, int X2, int Y2, DWORD Color);
-	virtual HRESULT DrawRect(int X1, int Y1, int X2, int Y2, DWORD Color, int Width = 1);
+	virtual HRESULT FadeToColor(uint32 Color, RECT *rect = NULL);
+	virtual HRESULT DrawLine(int X1, int Y1, int X2, int Y2, uint32 Color);
+	virtual HRESULT DrawRect(int X1, int Y1, int X2, int Y2, uint32 Color, int Width = 1);
 	CBRenderer(CBGame *inGame = NULL);
 	virtual ~CBRenderer();
 	virtual HRESULT SetProjection() {
@@ -95,7 +95,7 @@ public:
 		return S_OK;
 	};
 	bool PointInViewport(POINT *P);
-	DWORD m_ForceAlphaColor;
+	uint32 m_ForceAlphaColor;
 	HINSTANCE m_Instance;
 	HWND m_Window;
 	HWND m_ClipperWindow;

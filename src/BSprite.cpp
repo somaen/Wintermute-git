@@ -86,7 +86,7 @@ void CBSprite::Cleanup() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSprite::Draw(int X, int Y, CBObject *Register, float ZoomX, float ZoomY, DWORD Alpha) {
+HRESULT CBSprite::Draw(int X, int Y, CBObject *Register, float ZoomX, float ZoomY, uint32 Alpha) {
 	GetCurrentFrame(ZoomX, ZoomY);
 	if (m_CurrentFrame < 0 || m_CurrentFrame >= m_Frames.GetSize()) return S_OK;
 
@@ -320,7 +320,7 @@ bool CBSprite::GetCurrentFrame(float ZoomX, float ZoomY) {
 
 	if (m_CurrentFrame == -1) return false;
 
-	DWORD timer;
+	uint32 timer;
 	if (m_Owner && m_Owner->m_Freezable) timer = Game->m_Timer;
 	else timer = Game->m_LiveTimer;
 
@@ -367,7 +367,7 @@ bool CBSprite::GetCurrentFrame(float ZoomX, float ZoomY) {
 
 
 //////////////////////////////////////////////////////////////////////
-HRESULT CBSprite::Display(int X, int Y, CBObject *Register, float ZoomX, float ZoomY, DWORD Alpha, float Rotate, TSpriteBlendMode BlendMode) {
+HRESULT CBSprite::Display(int X, int Y, CBObject *Register, float ZoomX, float ZoomY, uint32 Alpha, float Rotate, TSpriteBlendMode BlendMode) {
 	if (m_CurrentFrame < 0 || m_CurrentFrame >= m_Frames.GetSize()) return S_OK;
 
 	// on change...

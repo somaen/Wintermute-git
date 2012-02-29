@@ -47,9 +47,9 @@ private:
 	bool m_TextMode;
 	void Close();
 	void Cleanup();
-	DWORD GetPos();
-	DWORD GetLength();
-	bool SetPos(DWORD Pos, TSeek Origin = SEEK_TO_BEGIN);
+	uint32 GetPos();
+	uint32 GetLength();
+	bool SetPos(uint32 Pos, TSeek Origin = SEEK_TO_BEGIN);
 	char *m_Filename;
 };
 

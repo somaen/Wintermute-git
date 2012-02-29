@@ -59,7 +59,7 @@ HRESULT CBFader::Update() {
 
 	int AlphaDelta = m_TargetAlpha - m_SourceAlpha;
 
-	DWORD time;
+	uint32 time;
 
 	if (m_System) time = CBPlatform::GetTime() - m_StartTime;
 	else time = Game->m_Timer - m_StartTime;
@@ -95,7 +95,7 @@ HRESULT CBFader::Deactivate() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFader::FadeIn(DWORD SourceColor, DWORD Duration, bool System) {
+HRESULT CBFader::FadeIn(uint32 SourceColor, uint32 Duration, bool System) {
 	m_Ready = false;
 	m_Active = true;
 
@@ -117,7 +117,7 @@ HRESULT CBFader::FadeIn(DWORD SourceColor, DWORD Duration, bool System) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFader::FadeOut(DWORD TargetColor, DWORD Duration, bool System) {
+HRESULT CBFader::FadeOut(uint32 TargetColor, uint32 Duration, bool System) {
 	m_Ready = false;
 	m_Active = true;
 
@@ -141,7 +141,7 @@ HRESULT CBFader::FadeOut(DWORD TargetColor, DWORD Duration, bool System) {
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBFader::GetCurrentColor() {
+uint32 CBFader::GetCurrentColor() {
 	return DRGBA(m_Red, m_Green, m_Blue, m_CurrentAlpha);
 }
 

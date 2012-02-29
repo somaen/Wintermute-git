@@ -37,10 +37,10 @@ THE SOFTWARE.
 namespace WinterMute {
 
 typedef struct {
-	DWORD Magic1;
-	DWORD Magic2;
-	DWORD PackageVersion;
-	DWORD GameVersion;
+	uint32 Magic1;
+	uint32 Magic2;
+	uint32 PackageVersion;
+	uint32 GameVersion;
 	byte Priority;
 	byte CD;
 	bool MasterIndex;
@@ -50,27 +50,27 @@ typedef struct {
 	time_t CreationTime;
 #endif
 	char Desc[100];
-	DWORD NumDirs;
+	uint32 NumDirs;
 } TPackageHeader;
 
 /*
-v2:  DWORD DirOffset
+v2:  uint32 DirOffset
 
 
 Dir: byte NameLength
      char Name [NameLength]
      byte CD;
-     DWORD NumEntries
+     uint32 NumEntries
 
 
 Entry: byte NameLength
        char Name [NameLength]
-       DWORD Offset
-       DWORD Length
-       DWORD CompLength
-       DWORD Flags
-v2:    DWORD TimeDate1
-       DWORD TimeDate2  // not used
+       uint32 Offset
+       uint32 Length
+       uint32 CompLength
+       uint32 Flags
+v2:    uint32 TimeDate1
+       uint32 TimeDate2  // not used
 
 */
 

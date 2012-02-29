@@ -55,10 +55,10 @@ public:
 	void SetStances(char *Stances);
 	void SetText(char *Text);
 	int m_CurrentStance;
-	DWORD m_StartTime;
+	uint32 m_StartTime;
 	char *m_Stances;
 	char *m_Text;
-	DWORD m_Duration;
+	uint32 m_Duration;
 	CAdSentence(CBGame *inGame);
 	virtual ~CAdSentence();
 	CAdTalkDef *m_TalkDef;

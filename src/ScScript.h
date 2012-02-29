@@ -50,9 +50,9 @@ public:
 	void AfterLoad();
 
 #ifdef __WIN32__
-	static DWORD Call_cdecl(const void *args, size_t sz, DWORD func, bool *StackCorrupt);
-	static DWORD Call_stdcall(const void *args, size_t sz, DWORD func, bool *StackCorrupt);
-	static DWORD GetST0(void);
+	static uint32 Call_cdecl(const void *args, size_t sz, uint32 func, bool *StackCorrupt);
+	static uint32 Call_stdcall(const void *args, size_t sz, uint32 func, bool *StackCorrupt);
+	static uint32 GetST0(void);
 	static double GetST0Double(void);
 #endif
 
@@ -63,52 +63,52 @@ public:
 	HRESULT Pause();
 	bool CanHandleEvent(char *EventName);
 	bool CanHandleMethod(char *MethodName);
-	HRESULT CreateThread(CScScript *Original, DWORD InitIP, const char *EventName);
+	HRESULT CreateThread(CScScript *Original, uint32 InitIP, const char *EventName);
 	HRESULT CreateMethodThread(CScScript *Original, const char *MethodName);
 	CScScript *InvokeEventHandler(const char *EventName, bool Unbreakable = false);
-	DWORD m_TimeSlice;
+	uint32 m_TimeSlice;
 	DECLARE_PERSISTENT(CScScript, CBBase)
 	void RuntimeError(LPCSTR fmt, ...);
 	HRESULT Run();
 	HRESULT Finish(bool IncludingThreads = false);
-	HRESULT Sleep(DWORD Duration);
+	HRESULT Sleep(uint32 Duration);
 	HRESULT WaitForExclusive(CBObject *Object);
 	HRESULT WaitFor(CBObject *Object);
-	DWORD m_WaitTime;
+	uint32 m_WaitTime;
 	bool m_WaitFrozen;
 	CBObject *m_WaitObject;
 	CScScript *m_WaitScript;
 	TScriptState m_State;
 	TScriptState m_OrigState;
 	CScValue *GetVar(char *Name);
-	DWORD GetFuncPos(const char *Name);
-	DWORD GetEventPos(const char *Name);
-	DWORD GetMethodPos(const char *Name);
+	uint32 GetFuncPos(const char *Name);
+	uint32 GetEventPos(const char *Name);
+	uint32 GetMethodPos(const char *Name);
 	typedef struct {
-		DWORD magic;
-		DWORD version;
-		DWORD code_start;
-		DWORD func_table;
-		DWORD symbol_table;
-		DWORD event_table;
-		DWORD externals_table;
-		DWORD method_table;
+		uint32 magic;
+		uint32 version;
+		uint32 code_start;
+		uint32 func_table;
+		uint32 symbol_table;
+		uint32 event_table;
+		uint32 externals_table;
+		uint32 method_table;
 	} TScriptHeader;
 
 
 	typedef struct {
 		char *name;
-		DWORD pos;
+		uint32 pos;
 	} TFunctionPos;
 
 	typedef struct {
 		char *name;
-		DWORD pos;
+		uint32 pos;
 	} TMethodPos;
 
 	typedef struct {
 		char *name;
-		DWORD pos;
+		uint32 pos;
 	} TEventPos;
 
 	typedef struct {
@@ -130,12 +130,12 @@ public:
 	int m_CurrentLine;
 	HRESULT ExecuteInstruction();
 	char *GetString();
-	DWORD GetDWORD();
+	uint32 GetDWORD();
 	double GetFloat();
 	void Cleanup();
-	HRESULT Create(char *Filename, byte *Buffer, DWORD Size, CBScriptHolder *Owner);
-	DWORD m_IP;
-	DWORD m_BufferSize;
+	HRESULT Create(char *Filename, byte *Buffer, uint32 Size, CBScriptHolder *Owner);
+	uint32 m_IP;
+	uint32 m_BufferSize;
 	byte *m_Buffer;
 	CScScript(CBGame *inGame, CScEngine *Engine);
 	virtual ~CScScript();

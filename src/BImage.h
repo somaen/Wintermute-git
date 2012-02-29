@@ -38,7 +38,7 @@ public:
 	~CBImage();
 
 
-	BYTE *CreateBMPBuffer(DWORD *BufferSize = NULL);
+	BYTE *CreateBMPBuffer(uint32 *BufferSize = NULL);
 	HRESULT Resize(int NewWidth, int NewHeight);
 	HRESULT SaveBMPFile(char *Filename);
 	HRESULT CopyFrom(CBImage *OrigImage, int NewWidth = 0, int NewHeight = 0);

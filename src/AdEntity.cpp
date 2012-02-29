@@ -441,7 +441,7 @@ HRESULT CAdEntity::Display() {
 	if (m_Active) {
 		UpdateSounds();
 
-		DWORD Alpha;
+		uint32 Alpha;
 		if (m_AlphaColor != 0) Alpha = m_AlphaColor;
 		else Alpha = m_Shadowable ? ((CAdGame *)Game)->m_Scene->GetAlphaAt(m_PosX, m_PosY) : 0xFFFFFFFF;
 

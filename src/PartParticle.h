@@ -58,22 +58,22 @@ public:
 	Vector2 m_Velocity;
 	float m_Scale;
 	CBSprite *m_Sprite;
-	DWORD m_CreationTime;
+	uint32 m_CreationTime;
 	int m_LifeTime;
 	bool m_IsDead;
 	TParticleState m_State;
 
-	HRESULT Update(CPartEmitter *Emitter, DWORD CurrentTime, DWORD TimerDelta);
+	HRESULT Update(CPartEmitter *Emitter, uint32 CurrentTime, uint32 TimerDelta);
 	HRESULT Display(CPartEmitter *Emitter);
 
 	HRESULT SetSprite(char *Filename);
 
-	HRESULT FadeIn(DWORD CurrentTime, int FadeTime);
-	HRESULT FadeOut(DWORD CurrentTime, int FadeTime);
+	HRESULT FadeIn(uint32 CurrentTime, int FadeTime);
+	HRESULT FadeOut(uint32 CurrentTime, int FadeTime);
 
 	HRESULT Persist(CBPersistMgr *PersistMgr);
 private:
-	DWORD m_FadeStart;
+	uint32 m_FadeStart;
 	int m_FadeTime;
 	int m_CurrentAlpha;
 	int m_FadeStartAlpha;

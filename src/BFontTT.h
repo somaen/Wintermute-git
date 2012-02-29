@@ -83,7 +83,7 @@ public:
 
 		int m_OffsetX;
 		int m_OffsetY;
-		DWORD m_Color;
+		uint32 m_Color;
 	};
 
 	//////////////////////////////////////////////////////////////////////////

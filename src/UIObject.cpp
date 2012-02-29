@@ -94,7 +94,7 @@ HRESULT CUIObject::Display(int OffsetX, int OffsetY) {
 
 
 //////////////////////////////////////////////////////////////////////////
-void CUIObject::SetListener(CBScriptHolder *Object, CBScriptHolder *ListenerObject, DWORD ListenerParam) {
+void CUIObject::SetListener(CBScriptHolder *Object, CBScriptHolder *ListenerObject, uint32 ListenerParam) {
 	m_ListenerObject = Object;
 	m_ListenerParamObject = ListenerObject;
 	m_ListenerParamDWORD = ListenerParam;

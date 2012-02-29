@@ -141,7 +141,7 @@ char *CBObject::GetCaption(int Case) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBObject::Listen(CBScriptHolder *param1, DWORD param2) {
+HRESULT CBObject::Listen(CBScriptHolder *param1, uint32 param2) {
 	return E_FAIL;
 }
 
@@ -264,7 +264,7 @@ HRESULT CBObject::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 
 		char *Filename;
 		bool Looping;
-		DWORD LoopStart;
+		uint32 LoopStart;
 
 		CScValue *val1 = Stack->Pop();
 		CScValue *val2 = Stack->Pop();
@@ -361,7 +361,7 @@ HRESULT CBObject::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 	else if (strcmp(Name, "SetSoundPosition") == 0) {
 		Stack->CorrectParams(1);
 
-		DWORD Time = Stack->Pop()->GetInt();
+		uint32 Time = Stack->Pop()->GetInt();
 		if (FAILED(SetSFXTime(Time))) Stack->PushBool(false);
 		else Stack->PushBool(true);
 		return S_OK;
@@ -708,7 +708,7 @@ HRESULT CBObject::ScSetProperty(char *Name, CScValue *Value) {
 	// AlphaColor
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "AlphaColor") == 0) {
-		m_AlphaColor = (DWORD)Value->GetInt();
+		m_AlphaColor = (uint32)Value->GetInt();
 		return S_OK;
 	}
 
@@ -946,7 +946,7 @@ bool CBObject::HandleMouseWheel(int Delta) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBObject::PlaySFX(char *Filename, bool Looping, bool PlayNow, char *EventName, DWORD LoopStart) {
+HRESULT CBObject::PlaySFX(char *Filename, bool Looping, bool PlayNow, char *EventName, uint32 LoopStart) {
 	// just play loaded sound
 	if (Filename == NULL && m_SFX) {
 		if (Game->m_EditorMode || m_SFXStart) {
@@ -1011,7 +1011,7 @@ HRESULT CBObject::ResumeSFX() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBObject::SetSFXTime(DWORD Time) {
+HRESULT CBObject::SetSFXTime(uint32 Time) {
 	m_SFXStart = Time;
 	if (m_SFX && m_SFX->IsPlaying()) return m_SFX->SetPositionTime(Time);
 	else return S_OK;

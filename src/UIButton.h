@@ -38,7 +38,7 @@ public:
 	bool m_StayPressed;
 	bool m_CenterImage;
 	bool m_OneTimePress;
-	DWORD m_OneTimePressTime;
+	uint32 m_OneTimePressTime;
 	DECLARE_PERSISTENT(CUIButton, CUIObject)
 	void Press();
 	virtual HRESULT Display(int OffsetX = 0, int OffsetY = 0);

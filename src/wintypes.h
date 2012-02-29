@@ -54,7 +54,7 @@ typedef int32_t LONG;
 
 typedef uint8_t byte;
 typedef uint16_t WORD;
-typedef uint32_t DWORD;
+typedef uint32_t uint32;
 typedef uint64_t QWORD;
 typedef int      INT;
 typedef unsigned int UINT;
@@ -79,9 +79,9 @@ typedef struct tagPOINT {
 } POINT, *LPPOINT;
 
 
-typedef DWORD HINSTANCE;
-typedef DWORD HMODULE;
-typedef DWORD HWND;
+typedef uint32 HINSTANCE;
+typedef uint32 HMODULE;
+typedef uint32 HWND;
 
 typedef long HRESULT;
 

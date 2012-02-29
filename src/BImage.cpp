@@ -67,12 +67,12 @@ HRESULT CBImage::Resize(int NewWidth, int NewHeight) {
 
 
 //////////////////////////////////////////////////////////////////////////
-BYTE *CBImage::CreateBMPBuffer(DWORD *BufferSize) {
+BYTE *CBImage::CreateBMPBuffer(uint32 *BufferSize) {
 	if (!m_Bitmap) return NULL;
 
 	FIMEMORY *fiMem = FreeImage_OpenMemory();
 	FreeImage_SaveToMemory(FIF_PNG, m_Bitmap, fiMem);
-	DWORD size;
+	uint32 size;
 	BYTE *data;
 	FreeImage_AcquireMemory(fiMem, &data, &size);
 

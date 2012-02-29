@@ -32,8 +32,8 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
-typedef byte *(*DLL_COMPILE_BUFFER)(byte  *Buffer, char *Source, DWORD BufferSize, DWORD *CompiledSize);
-typedef byte *(*DLL_COMPILE_FILE)(char *Filename, DWORD *CompiledSize);
+typedef byte *(*DLL_COMPILE_BUFFER)(byte  *Buffer, char *Source, uint32 BufferSize, uint32 *CompiledSize);
+typedef byte *(*DLL_COMPILE_FILE)(char *Filename, uint32 *CompiledSize);
 typedef void (*DLL_RELEASE_BUFFER)(unsigned char *Buffer);
 typedef void (*DLL_SET_CALLBACKS)(CALLBACKS *callbacks, void *Data);
 typedef int (*DLL_DEFINE_FUNCTION)(char *Name);
@@ -48,7 +48,7 @@ class CScEngine : public CBBase {
 public:
 	class CScCachedScript {
 	public:
-		CScCachedScript(char *Filename, byte *Buffer, DWORD Size) {
+		CScCachedScript(char *Filename, byte *Buffer, uint32 Size) {
 			m_Timestamp = CBPlatform::GetTime();
 			m_Buffer = new byte[Size];
 			if (m_Buffer) memcpy(m_Buffer, Buffer, Size);
@@ -62,9 +62,9 @@ public:
 			if (m_Filename) delete [] m_Filename;
 		};
 
-		DWORD m_Timestamp;
+		uint32 m_Timestamp;
 		byte *m_Buffer;
-		DWORD m_Size;
+		uint32 m_Size;
 		char *m_Filename;
 	};
 
@@ -120,7 +120,7 @@ public:
 	HRESULT ResetObject(CBObject *Object);
 	HRESULT ResetScript(CScScript *Script);
 	HRESULT EmptyScriptCache();
-	BYTE *GetCompiledScript(char *Filename, DWORD *OutSize, bool IgnoreCache = false);
+	BYTE *GetCompiledScript(char *Filename, uint32 *OutSize, bool IgnoreCache = false);
 	DECLARE_PERSISTENT(CScEngine, CBBase)
 	HRESULT Cleanup();
 	int GetNumScripts(int *Running = NULL, int *Waiting = NULL, int *Persistent = NULL);
@@ -132,7 +132,7 @@ public:
 	CScEngine(CBGame *inGame);
 	virtual ~CScEngine();
 	static void WINAPI AddError(void *Data, int Line, char *Text);
-	static byte *WINAPI LoadFile(void *Data, char *Filename, DWORD *Size);
+	static byte *WINAPI LoadFile(void *Data, char *Filename, uint32 *Size);
 	static void  WINAPI CloseFile(void *Data, byte *Buffer);
 	static void WINAPI ParseElement(void *Data, int Line, int Type, void *ElementData);
 	DLL_COMPILE_BUFFER  ExtCompileBuffer;
@@ -150,14 +150,14 @@ public:
 		return m_IsProfiling;
 	}
 
-	void AddScriptTime(const char *Filename, DWORD Time);
+	void AddScriptTime(const char *Filename, uint32 Time);
 	void DumpStats();
 
 private:
 
 	CScCachedScript *m_CachedScripts[MAX_CACHED_SCRIPTS];
 	bool m_IsProfiling;
-	DWORD m_ProfilingStartTime;
+	uint32 m_ProfilingStartTime;
 
 	typedef std::map<std::string, DWORD> ScriptTimes;
 	ScriptTimes m_ScriptTimes;

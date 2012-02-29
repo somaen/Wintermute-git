@@ -60,7 +60,7 @@ CBFrame::~CBFrame() {
 
 
 //////////////////////////////////////////////////////////////////////
-HRESULT CBFrame::Draw(int X, int Y, CBObject *Register, float ZoomX, float ZoomY, bool Precise, DWORD Alpha, bool AllFrames, float Rotate, TSpriteBlendMode BlendMode) {
+HRESULT CBFrame::Draw(int X, int Y, CBObject *Register, float ZoomX, float ZoomY, bool Precise, uint32 Alpha, bool AllFrames, float Rotate, TSpriteBlendMode BlendMode) {
 	HRESULT res;
 
 	for (int i = 0; i < m_Subframes.GetSize(); i++) {

@@ -34,9 +34,9 @@ namespace WinterMute {
 class CBFader : public CBObject {
 public:
 	bool m_System;
-	DWORD GetCurrentColor();
-	HRESULT FadeOut(DWORD TargetColor, DWORD Duration, bool System = false);
-	HRESULT FadeIn(DWORD SourceColor, DWORD Duration, bool System = false);
+	uint32 GetCurrentColor();
+	HRESULT FadeOut(uint32 TargetColor, uint32 Duration, bool System = false);
+	HRESULT FadeIn(uint32 SourceColor, uint32 Duration, bool System = false);
 	HRESULT Deactivate();
 	HRESULT Display();
 	HRESULT Update();
@@ -50,8 +50,8 @@ public:
 	byte m_CurrentAlpha;
 	byte m_TargetAlpha;
 	byte m_SourceAlpha;
-	DWORD m_Duration;
-	DWORD m_StartTime;
+	uint32 m_Duration;
+	uint32 m_StartTime;
 };
 
 } // end of namespace WinterMute

@@ -33,7 +33,7 @@ public:
 	char *m_SpriteSetFilename;
 	CAdSpriteSet *m_SpriteSet;
 	CBSprite *GetSprite(TDirection Dir);
-	bool IsInTimeInterval(DWORD Time, TDirection Dir);
+	bool IsInTimeInterval(uint32 Time, TDirection Dir);
 	HRESULT LoadSprite();
 	DECLARE_PERSISTENT(CAdTalkNode, CBBase)
 
@@ -43,8 +43,8 @@ public:
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent = 0);
 	char *m_SpriteFilename;
 	CBSprite *m_Sprite;
-	DWORD m_StartTime;
-	DWORD m_EndTime;
+	uint32 m_StartTime;
+	uint32 m_EndTime;
 	bool m_PlayToEnd;
 	bool m_PreCache;
 	char *m_Comment;

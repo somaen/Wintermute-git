@@ -107,7 +107,7 @@ HRESULT CBPkgFile::Close() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBPkgFile::Read(void *Buffer, DWORD Size) {
+HRESULT CBPkgFile::Read(void *Buffer, uint32 Size) {
 	if (!m_FileEntry) return E_FAIL;
 
 	HRESULT ret = S_OK;
@@ -118,7 +118,7 @@ HRESULT CBPkgFile::Read(void *Buffer, DWORD Size) {
 	}
 
 	if (m_Compressed) {
-		DWORD InitOut = m_Stream.total_out;
+		uint32 InitOut = m_Stream.total_out;
 
 		m_Stream.avail_out = Size;
 		m_Stream.next_out = (byte  *)Buffer;
@@ -151,10 +151,10 @@ HRESULT CBPkgFile::Read(void *Buffer, DWORD Size) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBPkgFile::Seek(DWORD Pos, TSeek Origin) {
+HRESULT CBPkgFile::Seek(uint32 Pos, TSeek Origin) {
 	if (!m_FileEntry) return E_FAIL;
 
-	DWORD NewPos = 0;
+	uint32 NewPos = 0;
 
 	switch (Origin) {
 	case SEEK_TO_BEGIN:
@@ -176,7 +176,7 @@ HRESULT CBPkgFile::Seek(DWORD Pos, TSeek Origin) {
 
 #define STREAM_BUFFER_SIZE 4096
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBPkgFile::SeekToPos(DWORD NewPos) {
+HRESULT CBPkgFile::SeekToPos(uint32 NewPos) {
 	HRESULT ret = S_OK;
 
 	// seek compressed stream to NewPos

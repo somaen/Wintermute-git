@@ -245,7 +245,7 @@ char *CBUtils::GetFilename(char *Filename) {
 }
 
 //////////////////////////////////////////////////////////////////////////
-void CBUtils::RGBtoHSL(DWORD RGBColor, byte *OutH, byte *OutS, byte *OutL) {
+void CBUtils::RGBtoHSL(uint32 RGBColor, byte *OutH, byte *OutS, byte *OutL) {
 	float var_R = (D3DCOLGetR(RGBColor) / 255.0f);
 	float var_G = (D3DCOLGetG(RGBColor) / 255.0f);
 	float var_B = (D3DCOLGetB(RGBColor) / 255.0f);
@@ -294,7 +294,7 @@ void CBUtils::RGBtoHSL(DWORD RGBColor, byte *OutH, byte *OutS, byte *OutL) {
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBUtils::HSLtoRGB(byte  InH, byte InS, byte InL) {
+uint32 CBUtils::HSLtoRGB(byte  InH, byte InS, byte InL) {
 	float H = InH / 255.0f;
 	float S = InS / 255.0f;
 	float L = InL / 255.0f;

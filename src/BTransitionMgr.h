@@ -31,7 +31,7 @@ namespace WinterMute {
 class CBTransitionMgr : public CBBase {
 public:
 	bool m_Started;
-	DWORD m_LastTime;
+	uint32 m_LastTime;
 	bool m_OrigInteractive;
 	bool m_PreserveInteractive;
 	HRESULT Update();

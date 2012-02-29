@@ -44,7 +44,7 @@ public:
 	int m_Spacing;
 	int m_ScrollOffset;
 	RECT m_ItemsArea;
-	HRESULT Listen(CBScriptHolder *param1, DWORD param2);
+	HRESULT Listen(CBScriptHolder *param1, uint32 param2);
 	CUIWindow *m_Window;
 	CAdInventoryBox(CBGame *inGame);
 	virtual ~CAdInventoryBox();

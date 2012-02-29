@@ -168,7 +168,7 @@ HRESULT CBStringTable::LoadFile(char *Filename, bool ClearOld) {
 
 	if (ClearOld) m_Strings.clear();
 
-	DWORD Size;
+	uint32 Size;
 	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename, &Size);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CBStringTable::LoadFile failed for file '%s'", Filename);

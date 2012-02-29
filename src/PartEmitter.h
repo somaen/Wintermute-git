@@ -123,9 +123,9 @@ public:
 private:
 	CPartForce *AddForceByName(char *Name);
 	int static CompareZ(const void *Obj1, const void *Obj2);
-	HRESULT InitParticle(CPartParticle *Particle, DWORD CurrentTime, DWORD TimerDelta);
-	HRESULT UpdateInternal(DWORD CurrentTime, DWORD TimerDelta);
-	DWORD m_LastGenTime;
+	HRESULT InitParticle(CPartParticle *Particle, uint32 CurrentTime, uint32 TimerDelta);
+	HRESULT UpdateInternal(uint32 CurrentTime, uint32 TimerDelta);
+	uint32 m_LastGenTime;
 	CBArray<CPartParticle *, CPartParticle *> m_Particles;
 	CBArray<char *, char *> m_Sprites;
 };

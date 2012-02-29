@@ -42,7 +42,7 @@ public:
 	void PushInt(int Val);
 	void PushFloat(double Val);
 	void PushNULL();
-	void CorrectParams(DWORD expected_params);
+	void CorrectParams(uint32 expected_params);
 	CScValue *GetTop();
 	void Push(CScValue *Val);
 	CScValue *Pop();

@@ -218,7 +218,7 @@ bool CBKeyboardState::IsAltDown() {
 }
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBKeyboardState::KeyCodeToVKey(SDL_Event *event) {
+uint32 CBKeyboardState::KeyCodeToVKey(SDL_Event *event) {
 	if (event->type != SDL_KEYDOWN) return 0;
 
 	switch (event->key.keysym.sym) {
@@ -230,7 +230,7 @@ DWORD CBKeyboardState::KeyCodeToVKey(SDL_Event *event) {
 }
 
 //////////////////////////////////////////////////////////////////////////
-SDL_Keycode CBKeyboardState::VKeyToKeyCode(DWORD vkey) {
+SDL_Keycode CBKeyboardState::VKeyToKeyCode(uint32 vkey) {
 	// todo
 	return (SDL_Keycode)vkey;
 }

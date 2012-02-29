@@ -44,7 +44,7 @@ public:
 	char *m_Caption[7];
 	void SetCaption(char *Caption, int Case);
 	char *GetCaption(int Case);
-	DWORD m_AlphaColor;
+	uint32 m_AlphaColor;
 	char *m_Filename;
 	char *m_Cursor;
 

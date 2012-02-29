@@ -43,26 +43,26 @@ public:
 	byte m_SavedExtMajor;
 	byte m_SavedExtMinor;
 	HRESULT SaveFile(char *Filename);
-	DWORD GetDWORD();
-	void PutDWORD(DWORD Val);
+	uint32 GetDWORD();
+	void PutDWORD(uint32 Val);
 	char *GetString();
 	void PutString(const char *Val);
 	void Cleanup();
 	HRESULT InitLoad(char *Filename);
 	HRESULT InitSave(char *Desc);
-	HRESULT GetBytes(byte  *Buffer, DWORD Size);
-	HRESULT PutBytes(byte  *Buffer, DWORD Size);
-	DWORD m_Offset;
-	DWORD m_BufferSize;
+	HRESULT GetBytes(byte  *Buffer, uint32 Size);
+	HRESULT PutBytes(byte  *Buffer, uint32 Size);
+	uint32 m_Offset;
+	uint32 m_BufferSize;
 	byte *m_Buffer;
 	bool m_Saving;
 
-	DWORD m_RichBufferSize;
+	uint32 m_RichBufferSize;
 	byte *m_RichBuffer;
 
 	HRESULT Transfer(const char *Name, void *Val);
 	HRESULT Transfer(const char *Name, int *Val);
-	HRESULT Transfer(const char *Name, DWORD *Val);
+	HRESULT Transfer(const char *Name, uint32 *Val);
 	HRESULT Transfer(const char *Name, float *Val);
 	HRESULT Transfer(const char *Name, double *Val);
 	HRESULT Transfer(const char *Name, bool *Val);
@@ -76,7 +76,7 @@ public:
 	virtual ~CBPersistMgr();
 	bool CheckVersion(byte  VerMajor, byte VerMinor, byte VerBuild);
 
-	DWORD m_ThumbnailDataSize;
+	uint32 m_ThumbnailDataSize;
 	byte *m_ThumbnailData;
 
 };

@@ -139,11 +139,11 @@ HRESULT CScScript::InitScript() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CScScript::InitTables() {
-	DWORD OrigIP = m_IP;
+	uint32 OrigIP = m_IP;
 
 	TScriptHeader *Header = (TScriptHeader *)m_Buffer;
 
-	DWORD i;
+	uint32 i;
 
 	// load symbol table
 	m_IP = Header->symbol_table;
@@ -151,7 +151,7 @@ HRESULT CScScript::InitTables() {
 	m_NumSymbols = GetDWORD();
 	m_Symbols = new char*[m_NumSymbols];
 	for (i = 0; i < m_NumSymbols; i++) {
-		DWORD index = GetDWORD();
+		uint32 index = GetDWORD();
 		m_Symbols[index] = GetString();
 	}
 
@@ -216,7 +216,7 @@ HRESULT CScScript::InitTables() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CScScript::Create(char *Filename, byte *Buffer, DWORD Size, CBScriptHolder *Owner) {
+HRESULT CScScript::Create(char *Filename, byte *Buffer, uint32 Size, CBScriptHolder *Owner) {
 	Cleanup();
 
 	m_Thread = false;
@@ -246,7 +246,7 @@ HRESULT CScScript::Create(char *Filename, byte *Buffer, DWORD Size, CBScriptHold
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CScScript::CreateThread(CScScript *Original, DWORD InitIP, const char *EventName) {
+HRESULT CScScript::CreateThread(CScScript *Original, uint32 InitIP, const char *EventName) {
 	Cleanup();
 
 	m_Thread = true;
@@ -290,7 +290,7 @@ HRESULT CScScript::CreateThread(CScScript *Original, DWORD InitIP, const char *E
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CScScript::CreateMethodThread(CScScript *Original, const char *MethodName) {
-	DWORD IP = Original->GetMethodPos(MethodName);
+	uint32 IP = Original->GetMethodPos(MethodName);
 	if (IP == 0) return E_FAIL;
 
 	Cleanup();
@@ -400,9 +400,9 @@ void CScScript::Cleanup() {
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CScScript::GetDWORD() {
-	DWORD ret = *(DWORD *)(m_Buffer + m_IP);
-	m_IP += sizeof(DWORD);
+uint32 CScScript::GetDWORD() {
+	uint32 ret = *(uint32 *)(m_Buffer + m_IP);
+	m_IP += sizeof(uint32);
 
 	return ret;
 }
@@ -431,7 +431,7 @@ char *CScScript::GetString() {
 HRESULT CScScript::ExecuteInstruction() {
 	HRESULT ret = S_OK;
 
-	DWORD dw;
+	uint32 dw;
 	char *str;
 
 	//CScValue* op = new CScValue(Game);
@@ -440,7 +440,7 @@ HRESULT CScScript::ExecuteInstruction() {
 	CScValue *op1;
 	CScValue *op2;
 
-	DWORD inst = GetDWORD();
+	uint32 inst = GetDWORD();
 	switch (inst) {
 
 	case II_DEF_VAR:
@@ -478,7 +478,7 @@ HRESULT CScScript::ExecuteInstruction() {
 			Game->GetDebugMgr()->OnScriptShutdownScope(this, m_ScopeStack->GetTop());
 
 			m_ScopeStack->Pop();
-			m_IP = (DWORD)m_CallStack->Pop()->GetInt();
+			m_IP = (uint32)m_CallStack->Pop()->GetInt();
 
 			if (m_ScopeStack->m_SP < 0) Game->GetDebugMgr()->OnScriptChangeScope(this, NULL);
 			else Game->GetDebugMgr()->OnScriptChangeScope(this, m_ScopeStack->GetTop());
@@ -585,7 +585,7 @@ HRESULT CScScript::ExecuteInstruction() {
 	break;
 
 	case II_EXTERNAL_CALL: {
-		DWORD SymbolIndex = GetDWORD();
+		uint32 SymbolIndex = GetDWORD();
 
 		TExternalFunction *f = GetExternal(m_Symbols[SymbolIndex]);
 		if (f) {
@@ -1000,7 +1000,7 @@ HRESULT CScScript::ExecuteInstruction() {
 
 	}
 	default:
-		Game->LOG(0, "Fatal: Invalid instruction %d ('%s', line %d, IP:0x%x)\n", inst, m_Filename, m_CurrentLine, m_IP - sizeof(DWORD));
+		Game->LOG(0, "Fatal: Invalid instruction %d ('%s', line %d, IP:0x%x)\n", inst, m_Filename, m_CurrentLine, m_IP - sizeof(uint32));
 		m_State = SCRIPT_FINISHED;
 		ret = E_FAIL;
 	} // switch(instruction)
@@ -1012,7 +1012,7 @@ HRESULT CScScript::ExecuteInstruction() {
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CScScript::GetFuncPos(const char *Name) {
+uint32 CScScript::GetFuncPos(const char *Name) {
 	for (int i = 0; i < m_NumFunctions; i++) {
 		if (strcmp(Name, m_Functions[i].name) == 0) return m_Functions[i].pos;
 	}
@@ -1021,7 +1021,7 @@ DWORD CScScript::GetFuncPos(const char *Name) {
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CScScript::GetMethodPos(const char *Name) {
+uint32 CScScript::GetMethodPos(const char *Name) {
 	for (int i = 0; i < m_NumMethods; i++) {
 		if (strcmp(Name, m_Methods[i].name) == 0) return m_Methods[i].pos;
 	}
@@ -1088,7 +1088,7 @@ HRESULT CScScript::WaitForExclusive(CBObject *Object) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CScScript::Sleep(DWORD Duration) {
+HRESULT CScScript::Sleep(uint32 Duration) {
 	if (m_Unbreakable) {
 		RuntimeError("Script cannot be interrupted.");
 		return S_OK;
@@ -1204,7 +1204,7 @@ HRESULT CScScript::Persist(CBPersistMgr *PersistMgr) {
 CScScript *CScScript::InvokeEventHandler(const char *EventName, bool Unbreakable) {
 	//if(m_State!=SCRIPT_PERSISTENT) return NULL;
 
-	DWORD pos = GetEventPos(EventName);
+	uint32 pos = GetEventPos(EventName);
 	if (!pos) return NULL;
 
 	CScScript *thread = new CScScript(Game, m_Engine);
@@ -1225,7 +1225,7 @@ CScScript *CScScript::InvokeEventHandler(const char *EventName, bool Unbreakable
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CScScript::GetEventPos(const char *Name) {
+uint32 CScScript::GetEventPos(const char *Name) {
 	for (int i = m_NumEvents - 1; i >= 0; i--) {
 		if (CBPlatform::stricmp(Name, m_Events[i].name) == 0) return m_Events[i].pos;
 	}
@@ -1300,13 +1300,13 @@ HRESULT CScScript::ExternalCall(CScStack *Stack, CScStack *ThisStack, CScScript:
 			int i;
 			Success = true;
 			Stack->CorrectParams(Function->num_params);
-			CBDynBuffer *Buffer = new CBDynBuffer(Game, 20 * sizeof(DWORD));
+			CBDynBuffer *Buffer = new CBDynBuffer(Game, 20 * sizeof(uint32));
 
 			for (i = 0; i < Function->num_params; i++) {
 				CScValue *Val = Stack->Pop();
 				switch (Function->params[i]) {
 				case TYPE_BOOL:
-					Buffer->PutDWORD((DWORD)Val->GetBool());
+					Buffer->PutDWORD((uint32)Val->GetBool());
 					break;
 				case TYPE_LONG:
 					Buffer->PutDWORD(Val->GetInt());
@@ -1316,20 +1316,20 @@ HRESULT CScScript::ExternalCall(CScStack *Stack, CScStack *ThisStack, CScScript:
 					break;
 				case TYPE_STRING:
 					if (Val->IsNULL()) Buffer->PutDWORD(0);
-					else Buffer->PutDWORD((DWORD)Val->GetString());
+					else Buffer->PutDWORD((uint32)Val->GetString());
 					break;
 				case TYPE_MEMBUFFER:
 					if (Val->IsNULL()) Buffer->PutDWORD(0);
-					else Buffer->PutDWORD((DWORD)Val->GetMemBuffer());
+					else Buffer->PutDWORD((uint32)Val->GetMemBuffer());
 					break;
 				case TYPE_FLOAT: {
 					float f = Val->GetFloat();
-					Buffer->PutDWORD(*((DWORD *)&f));
+					Buffer->PutDWORD(*((uint32 *)&f));
 					break;
 				}
 				case TYPE_DOUBLE: {
 					double d = Val->GetFloat();
-					DWORD *pd = (DWORD *)&d;
+					uint32 *pd = (uint32 *)&d;
 
 					Buffer->PutDWORD(pd[0]);
 					Buffer->PutDWORD(pd[1]);
@@ -1339,14 +1339,14 @@ HRESULT CScScript::ExternalCall(CScStack *Stack, CScStack *ThisStack, CScScript:
 			}
 
 			// call
-			DWORD ret;
+			uint32 ret;
 			bool StackCorrupted = false;
 			switch (Function->call_type) {
 			case CALL_CDECL:
-				ret = Call_cdecl(Buffer->m_Buffer, Buffer->GetSize(), (DWORD)pFunc, &StackCorrupted);
+				ret = Call_cdecl(Buffer->m_Buffer, Buffer->GetSize(), (uint32)pFunc, &StackCorrupted);
 				break;
 			default:
-				ret = Call_stdcall(Buffer->m_Buffer, Buffer->GetSize(), (DWORD)pFunc, &StackCorrupted);
+				ret = Call_stdcall(Buffer->m_Buffer, Buffer->GetSize(), (uint32)pFunc, &StackCorrupted);
 			}
 			delete Buffer;
 
@@ -1371,7 +1371,7 @@ HRESULT CScScript::ExternalCall(CScStack *Stack, CScStack *ThisStack, CScScript:
 			}
 			break;
 			case TYPE_FLOAT: {
-				DWORD dw = GetST0();
+				uint32 dw = GetST0();
 				Stack->PushFloat(*((float *)&dw));
 				break;
 			}
@@ -1400,9 +1400,9 @@ HRESULT CScScript::ExternalCall(CScStack *Stack, CScStack *ThisStack, CScScript:
 
 #ifdef __WIN32__
 //////////////////////////////////////////////////////////////////////////
-DWORD CScScript::Call_cdecl(const void *args, size_t sz, DWORD func, bool *StackCorrupt) {
-	DWORD rc;               // here's our return value...
-	DWORD OrigESP;
+uint32 CScScript::Call_cdecl(const void *args, size_t sz, uint32 func, bool *StackCorrupt) {
+	uint32 rc;               // here's our return value...
+	uint32 OrigESP;
 	bool StkCorrupt = false;
 	__asm {
 		mov   OrigESP, esp
@@ -1429,9 +1429,9 @@ DWORD CScScript::Call_cdecl(const void *args, size_t sz, DWORD func, bool *Stack
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CScScript::Call_stdcall(const void *args, size_t sz, DWORD func, bool *StackCorrupt) {
-	DWORD rc;               // here's our return value...
-	DWORD OrigESP;
+uint32 CScScript::Call_stdcall(const void *args, size_t sz, uint32 func, bool *StackCorrupt) {
+	uint32 rc;               // here's our return value...
+	uint32 OrigESP;
 	bool StkCorrupt = false;
 
 	__asm {
@@ -1457,11 +1457,11 @@ DWORD CScScript::Call_stdcall(const void *args, size_t sz, DWORD func, bool *Sta
 
 
 //////////////////////////////////////////////////////////////////////////
-__declspec(naked) DWORD CScScript::GetST0(void) {
-	DWORD f;                // temp var
+__declspec(naked) uint32 CScScript::GetST0(void) {
+	uint32 f;                // temp var
 	__asm {
-		fstp dword ptr [f]      // pop ST0 into f
-		mov eax, dword ptr [f]  // copy into eax
+		fstp uint32 ptr [f]      // pop ST0 into f
+		mov eax, uint32 ptr [f]  // copy into eax
 		ret                     // done
 	}
 }

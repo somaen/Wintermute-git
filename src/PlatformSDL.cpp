@@ -141,7 +141,7 @@ int CBPlatform::Initialize(CBGame *inGame, int argc, char *argv[]) {
 
 
 	// load game
-	DWORD DataInitStart = GetTime();
+	uint32 DataInitStart = GetTime();
 
 	if (FAILED(Game->LoadFile(Game->m_SettingsGameFile ? Game->m_SettingsGameFile : "default.game"))) {
 		Game->LOG(ret, "Error loading game file. Exiting.");
@@ -343,7 +343,7 @@ void CBPlatform::OutputDebugString(LPCSTR lpOutputString) {
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBPlatform::GetTime() {
+uint32 CBPlatform::GetTime() {
 	return SDL_GetTicks();
 }
 

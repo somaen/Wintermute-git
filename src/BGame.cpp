@@ -1046,7 +1046,7 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 		bool Looping = ValLooping->IsNULL() ? true : ValLooping->GetBool();
 
 		CScValue *ValLoopStart = Stack->Pop();
-		DWORD LoopStart = (DWORD)(ValLoopStart->IsNULL() ? 0 : ValLoopStart->GetInt());
+		uint32 LoopStart = (uint32)(ValLoopStart->IsNULL() ? 0 : ValLoopStart->GetInt());
 
 
 		if (FAILED(PlayMusic(Channel, Filename, Looping, LoopStart))) Stack->PushBool(false);
@@ -1133,7 +1133,7 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 			Channel = Stack->Pop()->GetInt();
 		}
 
-		DWORD Time = Stack->Pop()->GetInt();
+		uint32 Time = Stack->Pop()->GetInt();
 
 		if (FAILED(SetMusicStartTime(Channel, Time))) Stack->PushBool(false);
 		else Stack->PushBool(true);
@@ -1217,7 +1217,7 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 		Stack->CorrectParams(4);
 		int Channel1 = Stack->Pop()->GetInt(0);
 		int Channel2 = Stack->Pop()->GetInt(0);
-		DWORD FadeLength = (DWORD)Stack->Pop()->GetInt(0);
+		uint32 FadeLength = (uint32)Stack->Pop()->GetInt(0);
 		bool Swap = Stack->Pop()->GetBool(true);
 
 		if (m_MusicCrossfadeRunning) {
@@ -1592,7 +1592,7 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "FadeOut") == 0 || strcmp(Name, "FadeOutAsync") == 0 || strcmp(Name, "SystemFadeOut") == 0 || strcmp(Name, "SystemFadeOutAsync") == 0) {
 		Stack->CorrectParams(5);
-		DWORD Duration = Stack->Pop()->GetInt(500);
+		uint32 Duration = Stack->Pop()->GetInt(500);
 		BYTE Red = Stack->Pop()->GetInt(0);
 		BYTE Green = Stack->Pop()->GetInt(0);
 		BYTE Blue = Stack->Pop()->GetInt(0);
@@ -1612,7 +1612,7 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "FadeIn") == 0 || strcmp(Name, "FadeInAsync") == 0 || strcmp(Name, "SystemFadeIn") == 0 || strcmp(Name, "SystemFadeInAsync") == 0) {
 		Stack->CorrectParams(5);
-		DWORD Duration = Stack->Pop()->GetInt(500);
+		uint32 Duration = Stack->Pop()->GetInt(500);
 		BYTE Red = Stack->Pop()->GetInt(0);
 		BYTE Green = Stack->Pop()->GetInt(0);
 		BYTE Blue = Stack->Pop()->GetInt(0);
@@ -2846,7 +2846,7 @@ HRESULT CBGame::ExternalCall(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	else if (strcmp(Name, "Sleep") == 0) {
 		Stack->CorrectParams(1);
 
-		Script->Sleep((DWORD)Stack->Pop()->GetInt());
+		Script->Sleep((uint32)Stack->Pop()->GetInt());
 		Stack->PushNULL();
 	}
 
@@ -2879,7 +2879,7 @@ HRESULT CBGame::ExternalCall(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	else if (strcmp(Name, "SetScriptTimeSlice") == 0) {
 		Stack->CorrectParams(1);
 
-		Script->m_TimeSlice = (DWORD)Stack->Pop()->GetInt();
+		Script->m_TimeSlice = (uint32)Stack->Pop()->GetInt();
 		Stack->PushNULL();
 	}
 
@@ -2917,7 +2917,7 @@ HRESULT CBGame::ExternalCall(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	else if (strcmp(Name, "GetRValue") == 0) {
 		Stack->CorrectParams(1);
 
-		DWORD rgba = (DWORD)Stack->Pop()->GetInt();
+		uint32 rgba = (uint32)Stack->Pop()->GetInt();
 		Stack->PushInt(D3DCOLGetR(rgba));
 	}
 
@@ -2927,7 +2927,7 @@ HRESULT CBGame::ExternalCall(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	else if (strcmp(Name, "GetGValue") == 0) {
 		Stack->CorrectParams(1);
 
-		DWORD rgba = (DWORD)Stack->Pop()->GetInt();
+		uint32 rgba = (uint32)Stack->Pop()->GetInt();
 		Stack->PushInt(D3DCOLGetG(rgba));
 	}
 
@@ -2937,7 +2937,7 @@ HRESULT CBGame::ExternalCall(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	else if (strcmp(Name, "GetBValue") == 0) {
 		Stack->CorrectParams(1);
 
-		DWORD rgba = (DWORD)Stack->Pop()->GetInt();
+		uint32 rgba = (uint32)Stack->Pop()->GetInt();
 		Stack->PushInt(D3DCOLGetB(rgba));
 	}
 
@@ -2947,7 +2947,7 @@ HRESULT CBGame::ExternalCall(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	else if (strcmp(Name, "GetAValue") == 0) {
 		Stack->CorrectParams(1);
 
-		DWORD rgba = (DWORD)Stack->Pop()->GetInt();
+		uint32 rgba = (uint32)Stack->Pop()->GetInt();
 		Stack->PushInt(D3DCOLGetA(rgba));
 	}
 
@@ -2956,7 +2956,7 @@ HRESULT CBGame::ExternalCall(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "GetHValue") == 0) {
 		Stack->CorrectParams(1);
-		DWORD rgb = (DWORD)Stack->Pop()->GetInt();
+		uint32 rgb = (uint32)Stack->Pop()->GetInt();
 
 		BYTE H, S, L;
 		CBUtils::RGBtoHSL(rgb, &H, &S, &L);
@@ -2968,7 +2968,7 @@ HRESULT CBGame::ExternalCall(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "GetSValue") == 0) {
 		Stack->CorrectParams(1);
-		DWORD rgb = (DWORD)Stack->Pop()->GetInt();
+		uint32 rgb = (uint32)Stack->Pop()->GetInt();
 
 		BYTE H, S, L;
 		CBUtils::RGBtoHSL(rgb, &H, &S, &L);
@@ -2980,7 +2980,7 @@ HRESULT CBGame::ExternalCall(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "GetLValue") == 0) {
 		Stack->CorrectParams(1);
-		DWORD rgb = (DWORD)Stack->Pop()->GetInt();
+		uint32 rgb = (uint32)Stack->Pop()->GetInt();
 
 		BYTE H, S, L;
 		CBUtils::RGBtoHSL(rgb, &H, &S, &L);
@@ -3251,7 +3251,7 @@ HRESULT CBGame::DisplayWindows(bool InGame) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBGame::PlayMusic(int Channel, char *Filename, bool Looping, DWORD LoopStart) {
+HRESULT CBGame::PlayMusic(int Channel, char *Filename, bool Looping, uint32 LoopStart) {
 	if (Channel >= NUM_MUSIC_CHANNELS) {
 		Game->LOG(0, "**Error** Attempting to use music channel %d (max num channels: %d)", Channel, NUM_MUSIC_CHANNELS);
 		return E_FAIL;
@@ -3314,7 +3314,7 @@ HRESULT CBGame::ResumeMusic(int Channel) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBGame::SetMusicStartTime(int Channel, DWORD Time) {
+HRESULT CBGame::SetMusicStartTime(int Channel, uint32 Time) {
 
 	if (Channel >= NUM_MUSIC_CHANNELS) {
 		Game->LOG(0, "**Error** Attempting to use music channel %d (max num channels: %d)", Channel, NUM_MUSIC_CHANNELS);
@@ -3941,7 +3941,7 @@ HRESULT CBGame::UpdateMusicCrossfade() {
 	if (!m_Music[m_MusicCrossfadeChannel1]->IsPlaying()) m_Music[m_MusicCrossfadeChannel1]->Play();
 	if (!m_Music[m_MusicCrossfadeChannel2]->IsPlaying()) m_Music[m_MusicCrossfadeChannel2]->Play();
 
-	DWORD CurrentTime = Game->m_LiveTimer - m_MusicCrossfadeStartTime;
+	uint32 CurrentTime = Game->m_LiveTimer - m_MusicCrossfadeStartTime;
 
 	if (CurrentTime >= m_MusicCrossfadeLength) {
 		m_MusicCrossfadeRunning = false;
@@ -4309,7 +4309,7 @@ bool CBGame::IsRightDoubleClick() {
 
 //////////////////////////////////////////////////////////////////////////
 bool CBGame::IsDoubleClick(int buttonIndex) {
-	DWORD maxDoubleCLickTime = 500;
+	uint32 maxDoubleCLickTime = 500;
 	int maxMoveX = 4;
 	int maxMoveY = 4;
 

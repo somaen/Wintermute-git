@@ -85,7 +85,7 @@ HRESULT CPartParticle::SetSprite(char *Filename) {
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CPartParticle::Update(CPartEmitter *Emitter, DWORD CurrentTime, DWORD TimerDelta) {
+HRESULT CPartParticle::Update(CPartEmitter *Emitter, uint32 CurrentTime, uint32 TimerDelta) {
 	if (m_State == PARTICLE_FADEIN) {
 		if (CurrentTime - m_FadeStart >= m_FadeTime) {
 			m_State = PARTICLE_NORMAL;
@@ -184,7 +184,7 @@ HRESULT CPartParticle::Display(CPartEmitter *Emitter) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CPartParticle::FadeIn(DWORD CurrentTime, int FadeTime) {
+HRESULT CPartParticle::FadeIn(uint32 CurrentTime, int FadeTime) {
 	m_CurrentAlpha = 0;
 	m_FadeStart = CurrentTime;
 	m_FadeTime = FadeTime;
@@ -194,7 +194,7 @@ HRESULT CPartParticle::FadeIn(DWORD CurrentTime, int FadeTime) {
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CPartParticle::FadeOut(DWORD CurrentTime, int FadeTime) {
+HRESULT CPartParticle::FadeOut(uint32 CurrentTime, int FadeTime) {
 	//m_CurrentAlpha = 255;
 	m_FadeStartAlpha = m_CurrentAlpha;
 	m_FadeStart = CurrentTime;

@@ -137,7 +137,7 @@ HRESULT CPartEmitter::RemoveSprite(char *Filename) {
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CPartEmitter::InitParticle(CPartParticle *Particle, DWORD CurrentTime, DWORD TimerDelta) {
+HRESULT CPartEmitter::InitParticle(CPartParticle *Particle, uint32 CurrentTime, uint32 TimerDelta) {
 	if (!Particle) return E_FAIL;
 	if (m_Sprites.GetSize() == 0) return E_FAIL;
 
@@ -218,7 +218,7 @@ HRESULT CPartEmitter::Update() {
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CPartEmitter::UpdateInternal(DWORD CurrentTime, DWORD TimerDelta) {
+HRESULT CPartEmitter::UpdateInternal(uint32 CurrentTime, uint32 TimerDelta) {
 	int NumLive = 0;
 
 	for (int i = 0; i < m_Particles.GetSize(); i++) {
@@ -300,9 +300,9 @@ HRESULT CPartEmitter::Start() {
 
 
 	if (m_OverheadTime > 0) {
-		DWORD Delta = 500;
+		uint32 Delta = 500;
 		int Steps = m_OverheadTime / Delta;
-		DWORD CurrentTime = Game->m_Timer - m_OverheadTime;
+		uint32 CurrentTime = Game->m_Timer - m_OverheadTime;
 
 		for (int i = 0; i < Steps; i++) {
 			UpdateInternal(CurrentTime, Delta);

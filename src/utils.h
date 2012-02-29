@@ -54,8 +54,8 @@ public:
 	static char *GetPath(char *Filename);
 	static char *GetFilename(char *Filename);
 
-	static void RGBtoHSL(DWORD RGBColor, byte *OutH, byte *OutS, byte *OutL);
-	static DWORD HSLtoRGB(byte  H, byte S, byte L);
+	static void RGBtoHSL(uint32 RGBColor, byte *OutH, byte *OutS, byte *OutL);
+	static uint32 HSLtoRGB(byte  H, byte S, byte L);
 
 private:
 	static float Hue2RGB(float v1, float v2, float vH);

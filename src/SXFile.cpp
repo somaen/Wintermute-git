@@ -189,9 +189,9 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 			Stack->PushNULL();
 			return S_OK;
 		}
-		DWORD BufSize = FILE_BUFFER_SIZE;
+		uint32 BufSize = FILE_BUFFER_SIZE;
 		BYTE *Buf = (byte  *)malloc(BufSize);
-		DWORD Counter = 0;
+		uint32 Counter = 0;
 		BYTE b;
 		bool FoundNewLine = false;
 		HRESULT Ret = E_FAIL;
@@ -240,9 +240,9 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 			Stack->PushNULL();
 			return S_OK;
 		}
-		DWORD BufSize = FILE_BUFFER_SIZE;
+		uint32 BufSize = FILE_BUFFER_SIZE;
 		BYTE *Buf = (byte  *)malloc(BufSize);
-		DWORD Counter = 0;
+		uint32 Counter = 0;
 		BYTE b;
 
 		HRESULT Ret = E_FAIL;
@@ -409,8 +409,8 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 			Stack->PushNULL();
 			return S_OK;
 		}
-		DWORD Size;
-		if (SUCCEEDED(m_ReadFile->Read(&Size, sizeof(DWORD)))) {
+		uint32 Size;
+		if (SUCCEEDED(m_ReadFile->Read(&Size, sizeof(uint32)))) {
 			BYTE *Str = new byte[Size + 1];
 			if (Str) {
 				if (SUCCEEDED(m_ReadFile->Read(Str, Size))) {
@@ -545,7 +545,7 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 			return S_OK;
 		}
 
-		DWORD Size = strlen(Val);
+		uint32 Size = strlen(Val);
 		fwrite(&Size, sizeof(Size), 1, m_WriteFile);
 		fwrite(Val, Size, 1, m_WriteFile);
 
@@ -638,24 +638,24 @@ HRESULT CSXFile::ScSetProperty(char *Name, CScValue *Value) {
 }
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CSXFile::GetPos() {
+uint32 CSXFile::GetPos() {
 	if (m_Mode == 1 && m_ReadFile) return m_ReadFile->GetPos();
 	else if ((m_Mode == 2 || m_Mode == 3) && m_WriteFile) return ftell(m_WriteFile);
 	else return 0;
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool CSXFile::SetPos(DWORD Pos, TSeek Origin) {
+bool CSXFile::SetPos(uint32 Pos, TSeek Origin) {
 	if (m_Mode == 1 && m_ReadFile) return SUCCEEDED(m_ReadFile->Seek(Pos, Origin));
 	else if ((m_Mode == 2 || m_Mode == 3) && m_WriteFile) return fseek(m_WriteFile, Pos, (int)Origin) == 0;
 	else return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CSXFile::GetLength() {
+uint32 CSXFile::GetLength() {
 	if (m_Mode == 1 && m_ReadFile) return m_ReadFile->GetSize();
 	else if ((m_Mode == 2 || m_Mode == 3) && m_WriteFile) {
-		DWORD CurrentPos = ftell(m_WriteFile);
+		uint32 CurrentPos = ftell(m_WriteFile);
 		fseek(m_WriteFile, 0, SEEK_END);
 		int Ret = ftell(m_WriteFile);
 		fseek(m_WriteFile, CurrentPos, SEEK_SET);
@@ -672,7 +672,7 @@ HRESULT CSXFile::Persist(CBPersistMgr *PersistMgr) {
 	PersistMgr->Transfer(TMEMBER(m_Mode));
 	PersistMgr->Transfer(TMEMBER(m_TextMode));
 
-	DWORD Pos = 0;
+	uint32 Pos = 0;
 	if (PersistMgr->m_Saving) {
 		Pos = GetPos();
 		PersistMgr->Transfer(TMEMBER(Pos));

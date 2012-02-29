@@ -38,7 +38,7 @@ public:
 
 	bool m_BoundToExe;
 	byte m_Priority;
-	HRESULT Read(FILE *file, DWORD offset, byte *buffer, DWORD size);
+	HRESULT Read(FILE *file, uint32 offset, byte *buffer, uint32 size);
 	HRESULT Close();
 	HRESULT Open();
 	char *m_Name;

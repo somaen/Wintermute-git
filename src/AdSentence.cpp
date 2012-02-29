@@ -254,7 +254,7 @@ HRESULT CAdSentence::SetupTalkFile(char *SoundFilename) {
 HRESULT CAdSentence::Update(TDirection Dir) {
 	if (!m_TalkDef) return S_OK;
 
-	DWORD CurrentTime;
+	uint32 CurrentTime;
 	// if sound is available, synchronize with sound, otherwise use timer
 
 	/*

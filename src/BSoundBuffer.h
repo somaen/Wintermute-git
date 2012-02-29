@@ -40,19 +40,19 @@ public:
 
 
 	HRESULT Pause();
-	HRESULT Play(bool Looping = false, DWORD StartSample = 0);
+	HRESULT Play(bool Looping = false, uint32 StartSample = 0);
 	HRESULT Resume();
 	HRESULT Stop();
 	bool IsPlaying();
 
 	void SetLooping(bool looping);
 
-	DWORD GetPosition();
-	HRESULT SetPosition(DWORD Pos);
-	DWORD GetLength();
+	uint32 GetPosition();
+	HRESULT SetPosition(uint32 Pos);
+	uint32 GetLength();
 
-	HRESULT SetLoopStart(DWORD Pos);
-	DWORD GetLoopStart() const {
+	HRESULT SetLoopStart(uint32 Pos);
+	uint32 GetLoopStart() const {
 		return m_LoopStart;
 	}
 
@@ -63,14 +63,14 @@ public:
 	void SetType(TSoundType Type);
 
 	HRESULT LoadFromFile(const char *Filename, bool ForceReload = false);
-	void SetStreaming(bool Streamed, DWORD NumBlocks = 0, DWORD BlockSize = 0);
+	void SetStreaming(bool Streamed, uint32 NumBlocks = 0, uint32 BlockSize = 0);
 	HRESULT ApplyFX(TSFXType Type, float Param1, float Param2, float Param3, float Param4);
 
 	HSTREAM m_Stream;
 	HSYNC m_Sync;
 
 	bool m_FreezePaused;
-	DWORD m_LoopStart;
+	uint32 m_LoopStart;
 	TSoundType m_Type;
 	bool m_Looping;
 	CBFile *m_File;
@@ -78,11 +78,11 @@ public:
 	bool m_Streamed;
 	int m_PrivateVolume;
 
-	static void CALLBACK LoopSyncProc(HSYNC handle, DWORD channel, DWORD data, void *user);
+	static void CALLBACK LoopSyncProc(HSYNC handle, uint32 channel, uint32 data, void *user);
 
 	static void CALLBACK FileCloseProc(void *user);
 	static QWORD CALLBACK FileLenProc(void *user);
-	static DWORD CALLBACK FileReadProc(void *buffer, DWORD length, void *user);
+	static uint32 CALLBACK FileReadProc(void *buffer, uint32 length, void *user);
 	static BOOL CALLBACK FileSeekProc(QWORD offset, void *user);
 };
 

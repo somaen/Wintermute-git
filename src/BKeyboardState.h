@@ -34,8 +34,8 @@ namespace WinterMute {
 
 class CBKeyboardState : public CBScriptable {
 public:
-	DWORD m_CurrentKeyData;
-	DWORD m_CurrentCharCode;
+	uint32 m_CurrentKeyData;
+	uint32 m_CurrentCharCode;
 	bool m_CurrentPrintable;
 
 	bool m_CurrentShift;
@@ -58,8 +58,8 @@ public:
 	virtual char *ScToString();
 
 private:
-	DWORD KeyCodeToVKey(SDL_Event *event);
-	SDL_Keycode VKeyToKeyCode(DWORD vkey);
+	uint32 KeyCodeToVKey(SDL_Event *event);
+	SDL_Keycode VKeyToKeyCode(uint32 vkey);
 };
 
 } // end of namespace WinterMute

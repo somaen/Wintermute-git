@@ -72,7 +72,7 @@ public:
 	HRESULT SortScaleLevels();
 	HRESULT SortRotLevels();
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
-	DWORD GetAlphaAt(int X, int Y, bool ColorCheck = false);
+	uint32 GetAlphaAt(int X, int Y, bool ColorCheck = false);
 	bool m_ParalaxScrolling;
 	void SkipTo(int OffsetX, int OffsetY);
 	void SetDefaults();
@@ -86,15 +86,15 @@ public:
 	int m_TargetOffsetLeft;
 
 	int m_ScrollPixelsV;
-	DWORD m_ScrollTimeV;
-	DWORD m_LastTimeV;
+	uint32 m_ScrollTimeV;
+	uint32 m_LastTimeV;
 
 	int m_ScrollPixelsH;
-	DWORD m_ScrollTimeH;
-	DWORD m_LastTimeH;
+	uint32 m_ScrollTimeH;
+	uint32 m_LastTimeH;
 
 	virtual HRESULT Display();
-	DWORD m_PFMaxTime;
+	uint32 m_PFMaxTime;
 	HRESULT InitLoop();
 	void PathFinderStep();
 	bool IsBlockedAt(int X, int Y, bool CheckFreeObjects = false, CBObject *Requester = NULL);
@@ -115,18 +115,18 @@ public:
 	HRESULT RemoveObject(CAdObject *Object);
 	int m_EditorMarginH;
 	int m_EditorMarginV;
-	DWORD m_EditorColFrame;
-	DWORD m_EditorColEntity;
-	DWORD m_EditorColRegion;
-	DWORD m_EditorColBlocked;
-	DWORD m_EditorColWaypoints;
-	DWORD m_EditorColEntitySel;
-	DWORD m_EditorColRegionSel;
-	DWORD m_EditorColBlockedSel;
-	DWORD m_EditorColWaypointsSel;
-	DWORD m_EditorColScale;
-	DWORD m_EditorColDecor;
-	DWORD m_EditorColDecorSel;
+	uint32 m_EditorColFrame;
+	uint32 m_EditorColEntity;
+	uint32 m_EditorColRegion;
+	uint32 m_EditorColBlocked;
+	uint32 m_EditorColWaypoints;
+	uint32 m_EditorColEntitySel;
+	uint32 m_EditorColRegionSel;
+	uint32 m_EditorColBlockedSel;
+	uint32 m_EditorColWaypointsSel;
+	uint32 m_EditorColScale;
+	uint32 m_EditorColDecor;
+	uint32 m_EditorColDecorSel;
 
 	bool m_EditorShowRegions;
 	bool m_EditorShowBlocked;

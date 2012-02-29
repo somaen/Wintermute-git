@@ -91,7 +91,7 @@ HRESULT CBScriptHolder::ApplyEvent(const char *EventName, bool Unbreakable) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBScriptHolder::Listen(CBScriptHolder *param1, DWORD param2) {
+HRESULT CBScriptHolder::Listen(CBScriptHolder *param1, uint32 param2) {
 	return E_FAIL;
 }
 

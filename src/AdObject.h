@@ -59,7 +59,7 @@ public:
 	virtual HRESULT UpdateSounds();
 	HRESULT Reset();
 	DECLARE_PERSISTENT(CAdObject, CBObject)
-	virtual void Talk(char *Text, char *Sound = NULL, DWORD Duration = 0, char *Stances = NULL, TTextAlign Align = TAL_CENTER);
+	virtual void Talk(char *Text, char *Sound = NULL, uint32 Duration = 0, char *Stances = NULL, TTextAlign Align = TAL_CENTER);
 	virtual int GetHeight();
 	CAdSentence *m_Sentence;
 	HRESULT SetFont(char *Filename);

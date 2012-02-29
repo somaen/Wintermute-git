@@ -33,7 +33,7 @@ namespace WinterMute {
 
 class CBSurfaceStorage : public CBBase {
 public:
-	DWORD m_LastCleanupTime;
+	uint32 m_LastCleanupTime;
 	HRESULT InitLoop();
 	HRESULT SortSurfaces();
 	static int SurfaceSortCB(const void *arg1, const void *arg2);

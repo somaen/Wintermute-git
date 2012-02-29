@@ -29,7 +29,7 @@ THE SOFTWARE.
 namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////////
-CBDynBuffer::CBDynBuffer(CBGame *inGame, DWORD InitSize, DWORD GrowBy): CBBase(inGame) {
+CBDynBuffer::CBDynBuffer(CBGame *inGame, uint32 InitSize, uint32 GrowBy): CBBase(inGame) {
 	m_Buffer = NULL;
 	m_Size = 0;
 	m_RealSize = 0;
@@ -60,13 +60,13 @@ void CBDynBuffer::Cleanup() {
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBDynBuffer::GetSize() {
+uint32 CBDynBuffer::GetSize() {
 	return m_Size;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDynBuffer::Init(DWORD InitSize) {
+HRESULT CBDynBuffer::Init(uint32 InitSize) {
 	Cleanup();
 
 	if (InitSize == 0) InitSize = m_InitSize;
@@ -85,7 +85,7 @@ HRESULT CBDynBuffer::Init(DWORD InitSize) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDynBuffer::PutBytes(byte  *Buffer, DWORD Size) {
+HRESULT CBDynBuffer::PutBytes(byte  *Buffer, uint32 Size) {
 	if (!m_Initialized) Init();
 
 	while (m_Offset + Size > m_RealSize) {
@@ -106,7 +106,7 @@ HRESULT CBDynBuffer::PutBytes(byte  *Buffer, DWORD Size) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDynBuffer::GetBytes(byte  *Buffer, DWORD Size) {
+HRESULT CBDynBuffer::GetBytes(byte  *Buffer, uint32 Size) {
 	if (!m_Initialized) Init();
 
 	if (m_Offset + Size > m_Size) {
@@ -122,15 +122,15 @@ HRESULT CBDynBuffer::GetBytes(byte  *Buffer, DWORD Size) {
 
 
 //////////////////////////////////////////////////////////////////////////
-void CBDynBuffer::PutDWORD(DWORD Val) {
-	PutBytes((byte  *)&Val, sizeof(DWORD));
+void CBDynBuffer::PutDWORD(uint32 Val) {
+	PutBytes((byte  *)&Val, sizeof(uint32));
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBDynBuffer::GetDWORD() {
-	DWORD ret;
-	GetBytes((byte  *)&ret, sizeof(DWORD));
+uint32 CBDynBuffer::GetDWORD() {
+	uint32 ret;
+	GetBytes((byte  *)&ret, sizeof(uint32));
 	return ret;
 }
 
@@ -147,7 +147,7 @@ void CBDynBuffer::PutString(const char *Val) {
 
 //////////////////////////////////////////////////////////////////////////
 char *CBDynBuffer::GetString() {
-	DWORD len = GetDWORD();
+	uint32 len = GetDWORD();
 	char *ret = (char *)(m_Buffer + m_Offset);
 	m_Offset += len;
 

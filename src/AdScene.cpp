@@ -259,10 +259,10 @@ float CAdScene::GetZoomAt(int X, int Y) {
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CAdScene::GetAlphaAt(int X, int Y, bool ColorCheck) {
+uint32 CAdScene::GetAlphaAt(int X, int Y, bool ColorCheck) {
 	if (!Game->m_DEBUG_DebugMode) ColorCheck = false;
 
-	DWORD ret;
+	uint32 ret;
 	if (ColorCheck) ret = 0xFFFF0000;
 	else ret = 0xFFFFFFFF;
 
@@ -452,14 +452,14 @@ void CAdScene::PathFinderStep() {
 HRESULT CAdScene::InitLoop() {
 #ifdef _DEBUGxxxx
 	int num_steps = 0;
-	DWORD start = Game->m_CurrentTime;
+	uint32 start = Game->m_CurrentTime;
 	while (!m_PFReady && CBPlatform::GetTime() - start <= m_PFMaxTime) {
 		PathFinderStep();
 		num_steps++;
 	}
 	if (num_steps > 0) Game->LOG(0, "STAT: PathFinder iterations in one loop: %d (%s)  m_PFMaxTime=%d", num_steps, m_PFReady ? "finished" : "not yet done", m_PFMaxTime);
 #else
-	DWORD start = Game->m_CurrentTime;
+	uint32 start = Game->m_CurrentTime;
 	while (!m_PFReady && CBPlatform::GetTime() - start <= m_PFMaxTime) PathFinderStep();
 #endif
 
@@ -1468,7 +1468,7 @@ HRESULT CAdScene::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "FadeOut") == 0 || strcmp(Name, "FadeOutAsync") == 0) {
 		Stack->CorrectParams(5);
-		DWORD Duration = Stack->Pop()->GetInt(500);
+		uint32 Duration = Stack->Pop()->GetInt(500);
 		BYTE Red = Stack->Pop()->GetInt(0);
 		BYTE Green = Stack->Pop()->GetInt(0);
 		BYTE Blue = Stack->Pop()->GetInt(0);
@@ -1486,7 +1486,7 @@ HRESULT CAdScene::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "FadeIn") == 0 || strcmp(Name, "FadeInAsync") == 0) {
 		Stack->CorrectParams(5);
-		DWORD Duration = Stack->Pop()->GetInt(500);
+		uint32 Duration = Stack->Pop()->GetInt(500);
 		BYTE Red = Stack->Pop()->GetInt(0);
 		BYTE Green = Stack->Pop()->GetInt(0);
 		BYTE Blue = Stack->Pop()->GetInt(0);

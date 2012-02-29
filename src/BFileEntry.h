@@ -35,14 +35,14 @@ class CBPackage;
 
 class CBFileEntry : public CBBase {
 public:
-	DWORD m_TimeDate2;
-	DWORD m_TimeDate1;
-	DWORD m_Flags;
-	DWORD m_JournalTime;
+	uint32 m_TimeDate2;
+	uint32 m_TimeDate1;
+	uint32 m_Flags;
+	uint32 m_JournalTime;
 	string m_Filename;
-	DWORD m_CompressedLength;
-	DWORD m_Length;
-	DWORD m_Offset;
+	uint32 m_CompressedLength;
+	uint32 m_Length;
+	uint32 m_Offset;
 	CBPackage *m_Package;
 	CBFileEntry(CBGame *inGame);
 	virtual ~CBFileEntry();

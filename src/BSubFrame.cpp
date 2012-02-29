@@ -190,7 +190,7 @@ HRESULT CBSubFrame::LoadBuffer(byte  *Buffer, int LifeTime, bool KeepLoaded) {
 
 
 //////////////////////////////////////////////////////////////////////
-HRESULT CBSubFrame::Draw(int X, int Y, CBObject *Register, float ZoomX, float ZoomY, bool Precise, DWORD Alpha, float Rotate, TSpriteBlendMode BlendMode) {
+HRESULT CBSubFrame::Draw(int X, int Y, CBObject *Register, float ZoomX, float ZoomY, bool Precise, uint32 Alpha, float Rotate, TSpriteBlendMode BlendMode) {
 	if (!m_Surface) return S_OK;
 
 	if (Register != NULL && !m_Decoration) {
@@ -463,7 +463,7 @@ HRESULT CBSubFrame::ScSetProperty(char *Name, CScValue *Value) {
 	// AlphaColor
 	//////////////////////////////////////////////////////////////////////////
 	if (strcmp(Name, "AlphaColor") == 0) {
-		m_Alpha = (DWORD)Value->GetInt();
+		m_Alpha = (uint32)Value->GetInt();
 		return S_OK;
 	}
 

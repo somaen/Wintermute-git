@@ -198,8 +198,8 @@ void CBFontTT::DrawText(byte  *Text, int X, int Y, int Width, TTextAlign Align, 
 		RECT rc;
 		CBPlatform::SetRect(&rc, 0, 0, Surface->GetWidth(), Surface->GetHeight());
 		for (int i = 0; i < m_Layers.GetSize(); i++) {
-			DWORD Color = m_Layers[i]->m_Color;
-			DWORD OrigForceAlpha = m_Renderer->m_ForceAlphaColor;
+			uint32 Color = m_Layers[i]->m_Color;
+			uint32 OrigForceAlpha = m_Renderer->m_ForceAlphaColor;
 			if (m_Renderer->m_ForceAlphaColor != 0) {
 				Color = DRGBA(D3DCOLGetR(Color), D3DCOLGetG(Color), D3DCOLGetB(Color), D3DCOLGetA(m_Renderer->m_ForceAlphaColor));
 				m_Renderer->m_ForceAlphaColor = 0;
@@ -405,7 +405,7 @@ HRESULT CBFontTT::LoadBuffer(byte  *Buffer) {
 	}
 	Buffer = (byte  *)params;
 
-	DWORD BaseColor = 0x00000000;
+	uint32 BaseColor = 0x00000000;
 
 	while ((cmd = parser.GetCommand((char **)&Buffer, commands, (char **)&params)) > 0) {
 		switch (cmd) {
@@ -656,7 +656,7 @@ unsigned long CBFontTT::FTReadSeekProc(FT_Stream stream, unsigned long offset,  
 
 	f->Seek(offset, SEEK_TO_BEGIN);
 	if (count) {
-		DWORD oldPos = f->GetPos();
+		uint32 oldPos = f->GetPos();
 		f->Read(buffer, count);
 		return f->GetPos() - oldPos;
 	} else return 0;

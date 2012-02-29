@@ -45,7 +45,7 @@ public:
 	float m_Rotate;
 	void SetSoundEvent(char *EventName);
 	bool m_Rotatable;
-	DWORD m_AlphaColor;
+	uint32 m_AlphaColor;
 	float m_Scale;
 	float m_ScaleX;
 	float m_ScaleY;
@@ -56,14 +56,14 @@ public:
 	virtual HRESULT UpdateSounds();
 	HRESULT UpdateOneSound(CBSound *Sound);
 	bool m_AutoSoundPanning;
-	DWORD m_SFXStart;
+	uint32 m_SFXStart;
 	int m_SFXVolume;
-	HRESULT SetSFXTime(DWORD Time);
+	HRESULT SetSFXTime(uint32 Time);
 	HRESULT SetSFXVolume(int Volume);
 	HRESULT ResumeSFX();
 	HRESULT PauseSFX();
 	HRESULT StopSFX(bool DeleteSound = true);
-	HRESULT PlaySFX(char *Filename, bool Looping = false, bool PlayNow = true, char *EventName = NULL, DWORD LoopStart = 0);
+	HRESULT PlaySFX(char *Filename, bool Looping = false, bool PlayNow = true, char *EventName = NULL, uint32 LoopStart = 0);
 	CBSound *m_SFX;
 
 	TSFXType m_SFXType;
@@ -91,7 +91,7 @@ public:
 	bool m_SharedCursors;
 	CBSprite *m_ActiveCursor;
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
-	virtual HRESULT Listen(CBScriptHolder *param1, DWORD param2);
+	virtual HRESULT Listen(CBScriptHolder *param1, uint32 param2);
 	bool m_Ready;
 	bool m_Registrable;
 	bool m_Zoomable;

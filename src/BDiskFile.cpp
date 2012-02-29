@@ -65,18 +65,18 @@ HRESULT CBDiskFile::Open(const char *Filename) {
 	}
 
 	if (m_File) {
-		DWORD magic1, magic2;
-		fread(&magic1, sizeof(DWORD), 1, m_File);
-		fread(&magic2, sizeof(DWORD), 1, m_File);
+		uint32 magic1, magic2;
+		fread(&magic1, sizeof(uint32), 1, m_File);
+		fread(&magic2, sizeof(uint32), 1, m_File);
 
 
 		if (magic1 == DCGF_MAGIC && magic2 == COMPRESSED_FILE_MAGIC) m_Compressed = true;
 
 		if (m_Compressed) {
-			DWORD DataOffset, CompSize, UncompSize;
-			fread(&DataOffset, sizeof(DWORD), 1, m_File);
-			fread(&CompSize, sizeof(DWORD), 1, m_File);
-			fread(&UncompSize, sizeof(DWORD), 1, m_File);
+			uint32 DataOffset, CompSize, UncompSize;
+			fread(&DataOffset, sizeof(uint32), 1, m_File);
+			fread(&CompSize, sizeof(uint32), 1, m_File);
+			fread(&UncompSize, sizeof(uint32), 1, m_File);
 
 			BYTE *CompBuffer = new byte[CompSize];
 			if (!CompBuffer) {
@@ -135,7 +135,7 @@ HRESULT CBDiskFile::Close() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDiskFile::Read(void *Buffer, DWORD Size) {
+HRESULT CBDiskFile::Read(void *Buffer, uint32 Size) {
 	if (m_Compressed) {
 		memcpy(Buffer, m_Data + m_Pos, Size);
 		m_Pos += Size;
@@ -151,9 +151,9 @@ HRESULT CBDiskFile::Read(void *Buffer, DWORD Size) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDiskFile::Seek(DWORD Pos, TSeek Origin) {
+HRESULT CBDiskFile::Seek(uint32 Pos, TSeek Origin) {
 	if (m_Compressed) {
-		DWORD NewPos = 0;
+		uint32 NewPos = 0;
 
 		switch (Origin) {
 		case SEEK_TO_BEGIN:

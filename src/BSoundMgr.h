@@ -44,7 +44,7 @@ public:
 	BYTE GetVolumePercent(TSoundType Type);
 	HRESULT SetVolumePercent(TSoundType Type, byte Percent);
 	HRESULT SetVolume(TSoundType Type, int Volume);
-	DWORD m_VolumeOriginal;
+	uint32 m_VolumeOriginal;
 	int m_VolumeMaster;
 	int m_VolumeMusic;
 	int m_VolumeSpeech;

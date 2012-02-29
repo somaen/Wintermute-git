@@ -72,7 +72,7 @@ CBSoundBuffer::~CBSoundBuffer() {
 
 
 //////////////////////////////////////////////////////////////////////////
-void CBSoundBuffer::SetStreaming(bool Streamed, DWORD NumBlocks, DWORD BlockSize) {
+void CBSoundBuffer::SetStreaming(bool Streamed, uint32 NumBlocks, uint32 BlockSize) {
 	m_Streamed = Streamed;
 }
 
@@ -151,7 +151,7 @@ HRESULT CBSoundBuffer::LoadFromFile(const char *Filename, bool ForceReload) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSoundBuffer::Play(bool Looping, DWORD StartSample) {
+HRESULT CBSoundBuffer::Play(bool Looping, uint32 StartSample) {
 	if (m_Stream) {
 		SetLooping(Looping);
 		BASS_ChannelPlay(m_Stream, TRUE);
@@ -195,7 +195,7 @@ HRESULT CBSoundBuffer::Pause() {
 }
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBSoundBuffer::GetLength() {
+uint32 CBSoundBuffer::GetLength() {
 	QWORD len = BASS_ChannelGetLength(m_Stream, BASS_POS_BYTE);
 	return 1000 * BASS_ChannelBytes2Seconds(m_Stream, len);
 }
@@ -242,7 +242,7 @@ bool CBSoundBuffer::IsPlaying() {
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBSoundBuffer::GetPosition() {
+uint32 CBSoundBuffer::GetPosition() {
 	if (m_Stream) {
 		QWORD len = BASS_ChannelGetPosition(m_Stream, BASS_POS_BYTE);
 		return 1000 * BASS_ChannelBytes2Seconds(m_Stream, len);
@@ -251,7 +251,7 @@ DWORD CBSoundBuffer::GetPosition() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSoundBuffer::SetPosition(DWORD Pos) {
+HRESULT CBSoundBuffer::SetPosition(uint32 Pos) {
 	if (m_Stream) {
 		QWORD pos = BASS_ChannelSeconds2Bytes(m_Stream, (float)Pos / 1000.0f);
 		BASS_ChannelSetPosition(m_Stream, pos, BASS_POS_BYTE);
@@ -260,7 +260,7 @@ HRESULT CBSoundBuffer::SetPosition(DWORD Pos) {
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSoundBuffer::SetLoopStart(DWORD Pos) {
+HRESULT CBSoundBuffer::SetLoopStart(uint32 Pos) {
 	m_LoopStart = Pos;
 
 	if (m_Stream) {
@@ -278,7 +278,7 @@ HRESULT CBSoundBuffer::SetLoopStart(DWORD Pos) {
 }
 
 //////////////////////////////////////////////////////////////////////////
-void CBSoundBuffer::LoopSyncProc(HSYNC handle, DWORD channel, DWORD data, void *user) {
+void CBSoundBuffer::LoopSyncProc(HSYNC handle, uint32 channel, uint32 data, void *user) {
 	CBSoundBuffer *soundBuf = static_cast<CBSoundBuffer *>(user);
 	QWORD pos = BASS_ChannelSeconds2Bytes(channel, (float)soundBuf->GetLoopStart() / 1000.0f);
 
@@ -326,9 +326,9 @@ QWORD CBSoundBuffer::FileLenProc(void *user) {
 }
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBSoundBuffer::FileReadProc(void *buffer, DWORD length, void *user) {
+uint32 CBSoundBuffer::FileReadProc(void *buffer, uint32 length, void *user) {
 	CBFile *file = static_cast<CBFile *>(user);
-	DWORD oldPos = file->GetPos();
+	uint32 oldPos = file->GetPos();
 	file->Read(buffer, length);
 	return file->GetPos() - oldPos;
 }

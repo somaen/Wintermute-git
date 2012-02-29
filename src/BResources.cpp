@@ -2803,7 +2803,7 @@ unsigned char systemfont[] = {
 
 
 //////////////////////////////////////////////////////////////////////////
-bool CBResources::GetFile(const char *fileName, BYTE*& buffer, DWORD &size) {
+bool CBResources::GetFile(const char *fileName, BYTE*& buffer, uint32 &size) {
 	// better!
 	if (CBPlatform::stricmp(fileName, "invalid.bmp") == 0) {
 		buffer = invalid;

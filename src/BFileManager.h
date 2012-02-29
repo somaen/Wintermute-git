@@ -34,7 +34,7 @@ namespace WinterMute {
 
 class CBFileManager: CBBase {
 public:
-	bool FindPackageSignature(FILE *f, DWORD *Offset);
+	bool FindPackageSignature(FILE *f, uint32 *Offset);
 	HRESULT Cleanup();
 	HRESULT SetBasePath(char *Path);
 	HRESULT RestoreCurrentDir();
@@ -54,8 +54,8 @@ public:
 	} TPathType;
 	HRESULT AddPath(TPathType Type, const char *Path);
 	HRESULT RequestCD(int CD, char *PackageFile, char *Filename);
-	HRESULT SaveFile(char *Filename, byte *Buffer, DWORD BufferSize, bool Compressed = false, byte *PrefixBuffer = NULL, DWORD PrefixSize = 0);
-	byte *ReadWholeFile(const char *Filename, DWORD *Size = NULL, bool MustExist = true);
+	HRESULT SaveFile(char *Filename, byte *Buffer, uint32 BufferSize, bool Compressed = false, byte *PrefixBuffer = NULL, uint32 PrefixSize = 0);
+	byte *ReadWholeFile(const char *Filename, uint32 *Size = NULL, bool MustExist = true);
 	CBFileManager(CBGame *inGame = NULL);
 	virtual ~CBFileManager();
 	CBArray<char *, char *> m_SinglePaths;

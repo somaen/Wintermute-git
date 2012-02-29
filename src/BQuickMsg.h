@@ -34,7 +34,7 @@ namespace WinterMute {
 class CBQuickMsg : public CBBase {
 public:
 	char *GetText();
-	DWORD m_StartTime;
+	uint32 m_StartTime;
 	char *m_Text;
 	CBQuickMsg(CBGame *inGame, char *Text);
 	virtual ~CBQuickMsg();

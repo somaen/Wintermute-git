@@ -119,7 +119,7 @@ HRESULT CBFileManager::Cleanup() {
 
 #define MAX_FILE_SIZE 10000000
 //////////////////////////////////////////////////////////////////////
-BYTE *CBFileManager::ReadWholeFile(const char *Filename, DWORD *Size, bool MustExist) {
+BYTE *CBFileManager::ReadWholeFile(const char *Filename, uint32 *Size, bool MustExist) {
 
 	BYTE *buffer = NULL;
 
@@ -161,7 +161,7 @@ BYTE *CBFileManager::ReadWholeFile(const char *Filename, DWORD *Size, bool MustE
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBFileManager::SaveFile(char *Filename, byte *Buffer, DWORD BufferSize, bool Compressed, byte *PrefixBuffer, DWORD PrefixSize) {
+HRESULT CBFileManager::SaveFile(char *Filename, byte *Buffer, uint32 BufferSize, bool Compressed, byte *PrefixBuffer, uint32 PrefixSize) {
 	RestoreCurrentDir();
 
 	CBUtils::CreatePath(Filename, false);
@@ -177,23 +177,23 @@ HRESULT CBFileManager::SaveFile(char *Filename, byte *Buffer, DWORD BufferSize, 
 	}
 
 	if (Compressed) {
-		DWORD CompSize = BufferSize + (BufferSize / 100) + 12; // 1% extra space
+		uint32 CompSize = BufferSize + (BufferSize / 100) + 12; // 1% extra space
 		BYTE *CompBuffer = new byte[CompSize];
 		if (!CompBuffer) {
 			Game->LOG(0, "Error allocating compression buffer while saving '%s'", Filename);
 			Compressed = false;
 		} else {
 			if (compress(CompBuffer, (uLongf *)&CompSize, Buffer, BufferSize) == Z_OK) {
-				DWORD magic = DCGF_MAGIC;
-				fwrite(&magic, sizeof(DWORD), 1, f);
+				uint32 magic = DCGF_MAGIC;
+				fwrite(&magic, sizeof(uint32), 1, f);
 				magic = COMPRESSED_FILE_MAGIC;
-				fwrite(&magic, sizeof(DWORD), 1, f);
+				fwrite(&magic, sizeof(uint32), 1, f);
 
-				DWORD DataOffset = 5 * sizeof(DWORD);
-				fwrite(&DataOffset, sizeof(DWORD), 1, f);
+				uint32 DataOffset = 5 * sizeof(uint32);
+				fwrite(&DataOffset, sizeof(uint32), 1, f);
 
-				fwrite(&CompSize, sizeof(DWORD), 1, f);
-				fwrite(&BufferSize, sizeof(DWORD), 1, f);
+				fwrite(&CompSize, sizeof(uint32), 1, f);
+				fwrite(&BufferSize, sizeof(uint32), 1, f);
 
 				fwrite(CompBuffer, CompSize, 1, f);
 			} else {
@@ -383,11 +383,11 @@ HRESULT CBFileManager::RegisterPackage(const char *Path, const char *Name, bool 
 		return S_OK;
 	}
 
-	DWORD AbosulteOffset = 0;
+	uint32 AbosulteOffset = 0;
 	bool BoundToExe = false;
 
 	if (SearchSignature) {
-		DWORD Offset;
+		uint32 Offset;
 		if (!FindPackageSignature(f, &Offset)) {
 			fclose(f);
 			return S_OK;
@@ -412,8 +412,8 @@ HRESULT CBFileManager::RegisterPackage(const char *Path, const char *Name, bool 
 
 	// new in v2
 	if (hdr.PackageVersion == PACKAGE_VERSION) {
-		DWORD DirOffset;
-		fread(&DirOffset, sizeof(DWORD), 1, f);
+		uint32 DirOffset;
+		fread(&DirOffset, sizeof(uint32), 1, f);
 		DirOffset += AbosulteOffset;
 		fseek(f, DirOffset, SEEK_SET);
 	}
@@ -437,12 +437,12 @@ HRESULT CBFileManager::RegisterPackage(const char *Path, const char *Name, bool 
 
 
 		// read file entries
-		DWORD NumFiles;
-		fread(&NumFiles, sizeof(DWORD), 1, f);
+		uint32 NumFiles;
+		fread(&NumFiles, sizeof(uint32), 1, f);
 
 		for (int j = 0; j < NumFiles; j++) {
 			char *Name;
-			DWORD Offset, Length, CompLength, Flags, TimeDate1, TimeDate2;
+			uint32 Offset, Length, CompLength, Flags, TimeDate1, TimeDate2;
 
 			fread(&NameLength, sizeof(byte ), 1, f);
 			Name = new char[NameLength];
@@ -462,15 +462,15 @@ HRESULT CBFileManager::RegisterPackage(const char *Path, const char *Name, bool 
 
 			CBPlatform::strupr(Name);
 
-			fread(&Offset, sizeof(DWORD), 1, f);
+			fread(&Offset, sizeof(uint32), 1, f);
 			Offset += AbosulteOffset;
-			fread(&Length, sizeof(DWORD), 1, f);
-			fread(&CompLength, sizeof(DWORD), 1, f);
-			fread(&Flags, sizeof(DWORD), 1, f);
+			fread(&Length, sizeof(uint32), 1, f);
+			fread(&CompLength, sizeof(uint32), 1, f);
+			fread(&Flags, sizeof(uint32), 1, f);
 
 			if (hdr.PackageVersion == PACKAGE_VERSION) {
-				fread(&TimeDate1, sizeof(DWORD), 1, f);
-				fread(&TimeDate2, sizeof(DWORD), 1, f);
+				fread(&TimeDate1, sizeof(uint32), 1, f);
+				fread(&TimeDate2, sizeof(uint32), 1, f);
 			}
 
 			m_FilesIter = m_Files.find(Name);
@@ -687,15 +687,15 @@ HRESULT CBFileManager::SetBasePath(char *Path) {
 
 
 //////////////////////////////////////////////////////////////////////////
-bool CBFileManager::FindPackageSignature(FILE *f, DWORD *Offset) {
+bool CBFileManager::FindPackageSignature(FILE *f, uint32 *Offset) {
 	BYTE buf[32768];
 
 	BYTE Signature[8];
-	((DWORD *)Signature)[0] = PACKAGE_MAGIC_1;
-	((DWORD *)Signature)[1] = PACKAGE_MAGIC_2;
+	((uint32 *)Signature)[0] = PACKAGE_MAGIC_1;
+	((uint32 *)Signature)[1] = PACKAGE_MAGIC_2;
 
 	fseek(f, 0, SEEK_END);
-	DWORD FileSize = ftell(f);
+	uint32 FileSize = ftell(f);
 
 	int StartPos = 1024 * 1024;
 

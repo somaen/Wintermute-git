@@ -38,12 +38,12 @@ public:
 	int InsertChars(int Pos, byte *Chars, int Num);
 	int DeleteChars(int Start, int End);
 	bool m_CursorVisible;
-	DWORD m_LastBlinkTime;
+	uint32 m_LastBlinkTime;
 	virtual HRESULT Display(int OffsetX, int OffsetY);
 	virtual bool HandleKeypress(SDL_Event *event);
 	int m_ScrollOffset;
 	int m_FrameWidth;
-	DWORD m_CursorBlinkRate;
+	uint32 m_CursorBlinkRate;
 	void SetCursorChar(char *Char);
 	char *m_CursorChar;
 	int m_SelEnd;

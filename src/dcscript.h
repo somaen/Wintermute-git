@@ -128,7 +128,7 @@ typedef enum {
 
 
 // compiler interface
-typedef byte *(WINAPI DLL_LOAD_FILE)(void *Data, char *Filename, DWORD *Size);
+typedef byte *(WINAPI DLL_LOAD_FILE)(void *Data, char *Filename, uint32 *Size);
 typedef void (WINAPI DLL_CLOSE_FILE)(void *Data, byte *Buffer);
 typedef void (WINAPI DLL_ADD_ERROR)(void *Data, int Line, char *Text);
 typedef void (WINAPI DLL_PARSE_ELEMENT)(void *Data, int Line, int Type, void *ElementData);

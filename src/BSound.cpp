@@ -97,7 +97,7 @@ HRESULT CBSound::SetSoundSimple() {
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBSound::GetLength() {
+uint32 CBSound::GetLength() {
 	if (m_Sound) return m_Sound->GetLength();
 	else return 0;
 }
@@ -186,7 +186,7 @@ bool CBSound::IsPaused() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSound::SetPositionTime(DWORD Time) {
+HRESULT CBSound::SetPositionTime(uint32 Time) {
 	if (!m_Sound) return E_FAIL;
 	m_SoundPosition = Time;
 	HRESULT ret = m_Sound->SetPosition(m_SoundPosition);
@@ -196,7 +196,7 @@ HRESULT CBSound::SetPositionTime(DWORD Time) {
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBSound::GetPositionTime() {
+uint32 CBSound::GetPositionTime() {
 	if (!m_Sound) return 0;
 
 	if (!m_Sound->IsPlaying()) return 0;
@@ -224,7 +224,7 @@ int CBSound::GetVolume() {
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSound::SetLoopStart(DWORD Pos) {
+HRESULT CBSound::SetLoopStart(uint32 Pos) {
 	if (!m_Sound) return E_FAIL;
 	else {
 		m_Sound->SetLoopStart(Pos);

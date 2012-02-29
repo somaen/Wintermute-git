@@ -209,13 +209,13 @@ HRESULT CBRenderSDL::Fill(byte  r, byte g, byte b, RECT *rect) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBRenderSDL::Fade(WORD Alpha) {
-	DWORD dwAlpha = 255 - Alpha;
+	uint32 dwAlpha = 255 - Alpha;
 	return FadeToColor(dwAlpha << 24);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRenderSDL::FadeToColor(DWORD Color, RECT *rect) {
+HRESULT CBRenderSDL::FadeToColor(uint32 Color, RECT *rect) {
 	SDL_Rect fillRect;
 
 	if (rect) {
@@ -246,7 +246,7 @@ HRESULT CBRenderSDL::FadeToColor(DWORD Color, RECT *rect) {
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRenderSDL::DrawLine(int X1, int Y1, int X2, int Y2, DWORD Color) {
+HRESULT CBRenderSDL::DrawLine(int X1, int Y1, int X2, int Y2, uint32 Color) {
 	BYTE r = D3DCOLGetR(Color);
 	BYTE g = D3DCOLGetG(Color);
 	BYTE b = D3DCOLGetB(Color);

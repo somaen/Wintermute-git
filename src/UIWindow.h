@@ -43,7 +43,7 @@ public:
 	bool m_InGame;
 	bool m_IsMenu;
 	bool m_FadeBackground;
-	DWORD m_FadeColor;
+	uint32 m_FadeColor;
 	virtual bool HandleMouseWheel(int Delta);
 	CUIWindow *m_ShieldWindow;
 	CUIButton *m_ShieldButton;
@@ -72,7 +72,7 @@ public:
 	CUITiledImage *m_BackInactive;
 	CBFont *m_FontInactive;
 	CBSprite *m_ImageInactive;
-	virtual HRESULT Listen(CBScriptHolder *param1, DWORD param2);
+	virtual HRESULT Listen(CBScriptHolder *param1, uint32 param2);
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);
 
 	// scripting interface

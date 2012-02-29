@@ -36,25 +36,25 @@ public:
 	bool m_Initialized;
 	void PutText(LPCSTR fmt, ...);
 	void PutTextIndent(int Indent, LPCSTR fmt, ...);
-	DWORD GetDWORD();
-	void PutDWORD(DWORD Val);
+	uint32 GetDWORD();
+	void PutDWORD(uint32 Val);
 	char *GetString();
 	void PutString(const char *Val);
-	HRESULT GetBytes(byte  *Buffer, DWORD Size);
-	HRESULT PutBytes(byte  *Buffer, DWORD Size);
-	DWORD GetSize();
-	HRESULT Init(DWORD InitSize = 0);
+	HRESULT GetBytes(byte  *Buffer, uint32 Size);
+	HRESULT PutBytes(byte  *Buffer, uint32 Size);
+	uint32 GetSize();
+	HRESULT Init(uint32 InitSize = 0);
 	void Cleanup();
-	DWORD m_Size;
+	uint32 m_Size;
 	byte *m_Buffer;
-	CBDynBuffer(CBGame *inGame, DWORD InitSize = 1000, DWORD GrowBy = 1000);
+	CBDynBuffer(CBGame *inGame, uint32 InitSize = 1000, uint32 GrowBy = 1000);
 	virtual ~CBDynBuffer();
 
 private:
-	DWORD m_RealSize;
-	DWORD m_GrowBy;
-	DWORD m_InitSize;
-	DWORD m_Offset;
+	uint32 m_RealSize;
+	uint32 m_GrowBy;
+	uint32 m_InitSize;
+	uint32 m_Offset;
 	void PutTextForm(const char *format, va_list argptr);
 };
 

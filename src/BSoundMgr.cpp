@@ -258,14 +258,14 @@ BYTE CBSoundMgr::GetVolumePercent(TSoundType Type) {
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBSoundMgr::SetMasterVolumePercent(byte  Percent) {
 	m_VolumeMaster = Percent;
-	BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, (DWORD)(10000.0f / 100.0f * (float)Percent));
+	BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, (uint32)(10000.0f / 100.0f * (float)Percent));
 	return S_OK;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 BYTE CBSoundMgr::GetMasterVolumePercent() {
-	DWORD val = BASS_GetConfig(BASS_CONFIG_GVOL_STREAM);
+	uint32 val = BASS_GetConfig(BASS_CONFIG_GVOL_STREAM);
 	return (float)val / 10000.0f * 100.0f;
 }
 

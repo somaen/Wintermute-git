@@ -239,7 +239,7 @@ typedef void (*SYS_INSTANCE_CALLBACK)(void *Instance, void *Data);
 #define RELEASE(obj) if(obj) { obj->Release(); obj = NULL; } else 0
 #define SAFE_DELETE(obj)  if(obj) { delete obj; obj = NULL; } else 0
 #define SAFE_DELETE_ARRAY(obj)  if(obj) { delete [] obj; obj = NULL; } else 0
-#define DRGBA(r,g,b,a) ((DWORD)((((a)&0xff)<<24)|(((r)&0xff)<<16)|(((g)&0xff)<<8)|((b)&0xff)))
+#define DRGBA(r,g,b,a) ((uint32)((((a)&0xff)<<24)|(((r)&0xff)<<16)|(((g)&0xff)<<8)|((b)&0xff)))
 #define DegToRad(_val) (_val*PI*(1.0f/180.0f))
 #define RadToDeg(_val) (_val*(180/PI))
 

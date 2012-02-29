@@ -63,7 +63,7 @@ HRESULT CBResourceFile::Close() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBResourceFile::Read(void *Buffer, DWORD Size) {
+HRESULT CBResourceFile::Read(void *Buffer, uint32 Size) {
 	if (!m_Data || m_Pos + Size > m_Size) return E_FAIL;
 
 	memcpy(Buffer, (byte  *)m_Data + m_Pos, Size);
@@ -74,10 +74,10 @@ HRESULT CBResourceFile::Read(void *Buffer, DWORD Size) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBResourceFile::Seek(DWORD Pos, TSeek Origin) {
+HRESULT CBResourceFile::Seek(uint32 Pos, TSeek Origin) {
 	if (!m_Data) return E_FAIL;
 
-	DWORD NewPos = 0;
+	uint32 NewPos = 0;
 
 	switch (Origin) {
 	case SEEK_TO_BEGIN:

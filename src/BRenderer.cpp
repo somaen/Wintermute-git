@@ -153,13 +153,13 @@ HRESULT CBRenderer::SetupLines() {
 }
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRenderer::DrawLine(int X1, int Y1, int X2, int Y2, DWORD Color) {
+HRESULT CBRenderer::DrawLine(int X1, int Y1, int X2, int Y2, uint32 Color) {
 	return E_FAIL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRenderer::DrawRect(int X1, int Y1, int X2, int Y2, DWORD Color, int Width) {
+HRESULT CBRenderer::DrawRect(int X1, int Y1, int X2, int Y2, uint32 Color, int Width) {
 	for (int i = 0; i < Width; i++) {
 		DrawLine(X1 + i, Y1 + i, X2 - i,   Y1 + i,   Color); // up
 		DrawLine(X1 + i, Y2 - i, X2 - i + 1, Y2 - i, Color); // down
@@ -178,7 +178,7 @@ HRESULT CBRenderer::Fade(WORD Alpha) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBRenderer::FadeToColor(DWORD Color, RECT *rect) {
+HRESULT CBRenderer::FadeToColor(uint32 Color, RECT *rect) {
 	return E_FAIL;
 }
 

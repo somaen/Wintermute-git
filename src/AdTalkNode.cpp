@@ -225,7 +225,7 @@ HRESULT CAdTalkNode::LoadSprite() {
 
 
 //////////////////////////////////////////////////////////////////////////
-bool CAdTalkNode::IsInTimeInterval(DWORD Time, TDirection Dir) {
+bool CAdTalkNode::IsInTimeInterval(uint32 Time, TDirection Dir) {
 	if (Time >= m_StartTime) {
 		if (m_PlayToEnd) {
 			if ((m_SpriteFilename && m_Sprite == NULL) || (m_Sprite && m_Sprite->m_Finished == false)) return true;

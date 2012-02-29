@@ -43,11 +43,11 @@ public:
 	HRESULT Fill(byte  r, byte g, byte b, RECT *rect);
 
 	HRESULT Fade(WORD Alpha);
-	HRESULT FadeToColor(DWORD Color, RECT *rect = NULL);
+	HRESULT FadeToColor(uint32 Color, RECT *rect = NULL);
 
 	HRESULT SwitchFullscreen();
 
-	HRESULT DrawLine(int X1, int Y1, int X2, int Y2, DWORD Color);
+	HRESULT DrawLine(int X1, int Y1, int X2, int Y2, uint32 Color);
 
 	CBImage *TakeScreenshot();
 

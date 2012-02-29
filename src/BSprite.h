@@ -50,7 +50,7 @@ public:
 	bool GetBoundingRect(LPRECT Rect, int X, int Y, float ScaleX = 100, float ScaleY = 100);
 	int m_MoveY;
 	int m_MoveX;
-	HRESULT Display(int X, int Y, CBObject *Register = NULL, float ZoomX = 100, float ZoomY = 100, DWORD Alpha = 0xFFFFFFFF, float Rotate = 0.0f, TSpriteBlendMode BlendMode = BLEND_NORMAL);
+	HRESULT Display(int X, int Y, CBObject *Register = NULL, float ZoomX = 100, float ZoomY = 100, uint32 Alpha = 0xFFFFFFFF, float Rotate = 0.0f, TSpriteBlendMode BlendMode = BLEND_NORMAL);
 	bool GetCurrentFrame(float ZoomX = 100, float ZoomY = 100);
 	bool m_CanBreak;
 	bool m_EditorMuted;
@@ -62,11 +62,11 @@ public:
 	bool m_Finished;
 	HRESULT LoadBuffer(byte  *Buffer, bool Compete = true, int LifeTime = -1, TSpriteCacheType CacheType = CACHE_ALL);
 	HRESULT LoadFile(char *Filename, int LifeTime = -1, TSpriteCacheType CacheType = CACHE_ALL);
-	DWORD m_LastFrameTime;
-	HRESULT Draw(int X, int Y, CBObject *Register = NULL, float ZoomX = 100, float ZoomY = 100, DWORD Alpha = 0xFFFFFFFF);
+	uint32 m_LastFrameTime;
+	HRESULT Draw(int X, int Y, CBObject *Register = NULL, float ZoomX = 100, float ZoomY = 100, uint32 Alpha = 0xFFFFFFFF);
 	bool m_Looping;
 	int m_CurrentFrame;
-	HRESULT AddFrame(char *Filename, DWORD Delay = 0, int HotspotX = 0, int HotspotY = 0, RECT *Rect = NULL);
+	HRESULT AddFrame(char *Filename, uint32 Delay = 0, int HotspotX = 0, int HotspotY = 0, RECT *Rect = NULL);
 	CBSprite(CBGame *inGame, CBObject *Owner = NULL);
 	virtual ~CBSprite();
 	CBArray<CBFrame *, CBFrame *> m_Frames;

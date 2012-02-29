@@ -61,9 +61,9 @@ public:
 	int m_Height;
 	TUIObjectType m_Type;
 	CBSprite *m_Image;
-	void SetListener(CBScriptHolder *Object, CBScriptHolder *ListenerObject, DWORD ListenerParam);
+	void SetListener(CBScriptHolder *Object, CBScriptHolder *ListenerObject, uint32 ListenerParam);
 	CBScriptHolder *m_ListenerParamObject;
-	DWORD m_ListenerParamDWORD;
+	uint32 m_ListenerParamDWORD;
 	CBScriptHolder *m_ListenerObject;
 	CUIObject *m_FocusedWidget;
 	virtual HRESULT SaveAsText(CBDynBuffer *Buffer, int Indent);

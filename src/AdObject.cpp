@@ -789,7 +789,7 @@ int CAdObject::GetHeight() {
 
 
 //////////////////////////////////////////////////////////////////////////
-void CAdObject::Talk(char *Text, char *Sound, DWORD Duration, char *Stances, TTextAlign Align) {
+void CAdObject::Talk(char *Text, char *Sound, uint32 Duration, char *Stances, TTextAlign Align) {
 	if (!m_Sentence) m_Sentence = new CAdSentence(Game);
 	if (!m_Sentence) return;
 
@@ -828,7 +828,7 @@ void CAdObject::Talk(char *Text, char *Sound, DWORD Duration, char *Stances, TTe
 		if (snd && SUCCEEDED(snd->SetSound(Sound, SOUND_SPEECH, true))) {
 			m_Sentence->SetSound(snd);
 			if (m_Sentence->m_Duration <= 0) {
-				DWORD Length = snd->GetLength();
+				uint32 Length = snd->GetLength();
 				if (Length != 0) m_Sentence->m_Duration = Length;
 			}
 		} else delete snd;

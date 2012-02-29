@@ -35,8 +35,8 @@ class CBDiskFile : public CBFile {
 public:
 	CBDiskFile(CBGame *inGame);
 	virtual ~CBDiskFile();
-	virtual HRESULT Seek(DWORD Pos, TSeek Origin = SEEK_TO_BEGIN);
-	virtual HRESULT Read(void *Buffer, DWORD Size);
+	virtual HRESULT Seek(uint32 Pos, TSeek Origin = SEEK_TO_BEGIN);
+	virtual HRESULT Read(void *Buffer, uint32 Size);
 	virtual HRESULT Close();
 	virtual HRESULT Open(const char *Filename);
 private:
@@ -44,7 +44,7 @@ private:
 	FILE *m_File;
 	byte *m_Data;
 	bool m_Compressed;
-	DWORD m_PrefixSize;
+	uint32 m_PrefixSize;
 };
 
 } // end of namespace WinterMute

@@ -63,7 +63,7 @@ public:
 	bool IsRightDoubleClick();
 
 	bool m_AutorunDisabled;
-	DWORD m_LastMiniUpdate;
+	uint32 m_LastMiniUpdate;
 	bool m_MiniUpdateEnabled;
 	virtual HRESULT MiniUpdate();
 
@@ -96,7 +96,7 @@ public:
 
 
 	bool m_IndicatorDisplay;
-	DWORD m_IndicatorColor;
+	uint32 m_IndicatorColor;
 	int m_IndicatorProgress;
 	int m_IndicatorX;
 	int m_IndicatorY;
@@ -139,8 +139,8 @@ public:
 	CBObject *m_MainObject;
 	HRESULT InitInput(HINSTANCE hInst, HWND hWnd);
 	HRESULT InitLoop();
-	DWORD m_CurrentTime;
-	DWORD m_DeltaTime;
+	uint32 m_CurrentTime;
+	uint32 m_DeltaTime;
 	CBFont *m_SystemFont;
 	CBFont *m_VideoFont;
 	HRESULT Initialize1();
@@ -207,16 +207,16 @@ public:
 
 private:
 	// FPS stuff
-	DWORD m_LastTime;
-	DWORD m_FpsTime;
-	DWORD m_FramesRendered;
+	uint32 m_LastTime;
+	uint32 m_FpsTime;
+	uint32 m_FramesRendered;
 
 public:
-	DWORD m_SurfaceGCCycleTime;
+	uint32 m_SurfaceGCCycleTime;
 	bool m_SmartCache;
 	bool m_VideoSubtitles;
 	bool m_Subtitles;
-	DWORD m_MusicStartTime[NUM_MUSIC_CHANNELS];
+	uint32 m_MusicStartTime[NUM_MUSIC_CHANNELS];
 	bool m_CompressedSavegames;
 	int m_ScheduledLoadSlot;
 	bool m_Loading;
@@ -245,15 +245,15 @@ public:
 	static void InvalidateValues(void *Value, void *Data);
 	HRESULT LoadSettings(char *Filename);
 	HRESULT ResumeMusic(int Channel);
-	HRESULT SetMusicStartTime(int Channel, DWORD Time);
+	HRESULT SetMusicStartTime(int Channel, uint32 Time);
 	HRESULT PauseMusic(int Channel);
 	HRESULT StopMusic(int Channel);
-	HRESULT PlayMusic(int Channel, char *Filename, bool Looping = true, DWORD LoopStart = 0);
+	HRESULT PlayMusic(int Channel, char *Filename, bool Looping = true, uint32 LoopStart = 0);
 	CBSound *m_Music[NUM_MUSIC_CHANNELS];
 	bool m_MusicCrossfadeRunning;
 	bool m_MusicCrossfadeSwap;
-	DWORD m_MusicCrossfadeStartTime;
-	DWORD m_MusicCrossfadeLength;
+	uint32 m_MusicCrossfadeStartTime;
+	uint32 m_MusicCrossfadeLength;
 	int m_MusicCrossfadeChannel1;
 	int m_MusicCrossfadeChannel2;
 	HRESULT DisplayWindows(bool InGame = false);
@@ -271,13 +271,13 @@ public:
 	TGameState m_State;
 	TGameState m_OrigState;
 	bool m_OrigInteractive;
-	DWORD m_Timer;
-	DWORD m_TimerDelta;
-	DWORD m_TimerLast;
+	uint32 m_Timer;
+	uint32 m_TimerDelta;
+	uint32 m_TimerLast;
 
-	DWORD m_LiveTimer;
-	DWORD m_LiveTimerDelta;
-	DWORD m_LiveTimerLast;
+	uint32 m_LiveTimer;
+	uint32 m_LiveTimerDelta;
+	uint32 m_LiveTimerLast;
 
 	CBObject *m_CapturedObject;
 	POINT m_MousePos;
@@ -287,7 +287,7 @@ public:
 	void QuickMessage(char *Text);
 	void QuickMessageForm(LPSTR fmt, ...);
 	HRESULT DisplayQuickMsg();
-	DWORD m_Fps;
+	uint32 m_Fps;
 	HRESULT UpdateMusicCrossfade();
 
 	CBArray<CBObject *, CBObject *> m_RegObjects;
@@ -333,12 +333,12 @@ private:
 
 		int PosX;
 		int PosY;
-		DWORD Time;
+		uint32 Time;
 	};
 
 	LastClickInfo m_LastClick[2];
 	bool IsDoubleClick(int buttonIndex);
-	DWORD m_UsedMem;
+	uint32 m_UsedMem;
 
 
 

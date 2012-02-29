@@ -31,7 +31,7 @@ namespace WinterMute {
 class CAdRegion : public CBRegion {
 public:
 	DECLARE_PERSISTENT(CAdRegion, CBRegion)
-	DWORD m_Alpha;
+	uint32 m_Alpha;
 	float m_Zoom;
 	bool m_Blocked;
 	bool m_Decoration;

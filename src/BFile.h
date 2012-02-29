@@ -33,16 +33,16 @@ namespace WinterMute {
 
 class CBFile : public CBBase {
 public:
-	DWORD m_Pos;
-	DWORD m_Size;
-	virtual DWORD GetSize() {
+	uint32 m_Pos;
+	uint32 m_Size;
+	virtual uint32 GetSize() {
 		return m_Size;
 	};
-	virtual DWORD GetPos() {
+	virtual uint32 GetPos() {
 		return m_Pos;
 	};
-	virtual HRESULT Seek(DWORD Pos, TSeek Origin = SEEK_TO_BEGIN) = 0;
-	virtual HRESULT Read(void *Buffer, DWORD Size) = 0;
+	virtual HRESULT Seek(uint32 Pos, TSeek Origin = SEEK_TO_BEGIN) = 0;
+	virtual HRESULT Read(void *Buffer, uint32 Size) = 0;
 	virtual HRESULT Close() = 0;
 	virtual HRESULT Open(const char *Filename) = 0;
 	virtual bool IsEOF();

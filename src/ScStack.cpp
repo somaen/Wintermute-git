@@ -106,7 +106,7 @@ CScValue *CScStack::GetAt(int Index) {
 
 
 //////////////////////////////////////////////////////////////////////////
-void CScStack::CorrectParams(DWORD expected_params) {
+void CScStack::CorrectParams(uint32 expected_params) {
 	int num_params = Pop()->GetInt();
 
 	if (expected_params < num_params) { // too many params

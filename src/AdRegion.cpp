@@ -324,7 +324,7 @@ HRESULT CAdRegion::ScSetProperty(char *Name, CScValue *Value) {
 	// AlphaColor
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "AlphaColor") == 0) {
-		m_Alpha = (DWORD)Value->GetInt();
+		m_Alpha = (uint32)Value->GetInt();
 		return S_OK;
 	}
 

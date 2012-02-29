@@ -61,7 +61,7 @@ public:
 	// Win32 API bindings
 	static HINSTANCE ShellExecute(HWND hwnd, LPCSTR lpOperation, LPCSTR lpFile, LPCSTR lpParameters, LPCSTR lpDirectory, INT nShowCmd);
 	static void OutputDebugString(LPCSTR lpOutputString);
-	static DWORD GetTime();
+	static uint32 GetTime();
 	static BOOL GetCursorPos(LPPOINT lpPoint);
 	static BOOL SetCursorPos(int X, int Y);
 	static BOOL ShowWindow(HWND hWnd, int nCmdShow);

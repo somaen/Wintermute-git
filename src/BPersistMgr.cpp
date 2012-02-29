@@ -116,7 +116,7 @@ HRESULT CBPersistMgr::InitSave(char *Desc) {
 		}
 
 
-		DWORD magic = DCGF_MAGIC;
+		uint32 magic = DCGF_MAGIC;
 		PutDWORD(magic);
 
 		magic = SAVE_MAGIC_2;
@@ -124,11 +124,11 @@ HRESULT CBPersistMgr::InitSave(char *Desc) {
 
 		BYTE VerMajor, VerMinor, ExtMajor, ExtMinor;
 		Game->GetVersion(&VerMajor, &VerMinor, &ExtMajor, &ExtMinor);
-		DWORD Version = MAKELONG(MAKEWORD(VerMajor, VerMinor), MAKEWORD(ExtMajor, ExtMinor));
+		uint32 Version = MAKELONG(MAKEWORD(VerMajor, VerMinor), MAKEWORD(ExtMajor, ExtMinor));
 		PutDWORD(Version);
 
 		// new in ver 2
-		PutDWORD((DWORD)DCGF_VER_BUILD);
+		PutDWORD((uint32)DCGF_VER_BUILD);
 		PutString(Game->m_Name);
 
 		// thumbnail data size
@@ -136,7 +136,7 @@ HRESULT CBPersistMgr::InitSave(char *Desc) {
 
 		if (Game->m_CachedThumbnail) {
 			if (Game->m_CachedThumbnail->m_Thumbnail) {
-				DWORD Size = 0;
+				uint32 Size = 0;
 				BYTE *Buffer = Game->m_CachedThumbnail->m_Thumbnail->CreateBMPBuffer(&Size);
 
 				PutDWORD(Size);
@@ -152,17 +152,17 @@ HRESULT CBPersistMgr::InitSave(char *Desc) {
 		SAFE_DELETE(Game->m_CachedThumbnail);
 
 
-		DWORD DataOffset = m_Offset +
-		                   sizeof(DWORD) + // data offset
-		                   sizeof(DWORD) + strlen(Desc) + 1 + // description
-		                   sizeof(DWORD); // timestamp
+		uint32 DataOffset = m_Offset +
+		                   sizeof(uint32) + // data offset
+		                   sizeof(uint32) + strlen(Desc) + 1 + // description
+		                   sizeof(uint32); // timestamp
 
 		PutDWORD(DataOffset);
 		PutString(Desc);
 
 		time_t Timestamp;
 		time(&Timestamp);
-		PutDWORD((DWORD)Timestamp);
+		PutDWORD((uint32)Timestamp);
 	}
 	return res;
 }
@@ -176,14 +176,14 @@ HRESULT CBPersistMgr::InitLoad(char *Filename) {
 
 	m_Buffer = Game->m_FileManager->ReadWholeFile(Filename, &m_BufferSize);
 	if (m_Buffer) {
-		DWORD Magic;
+		uint32 Magic;
 		Magic = GetDWORD();
 		if (Magic != DCGF_MAGIC) goto init_fail;
 
 		Magic = GetDWORD();
 
 		if (Magic == SAVE_MAGIC || Magic == SAVE_MAGIC_2) {
-			DWORD Version = GetDWORD();
+			uint32 Version = GetDWORD();
 			m_SavedVerMajor = LOBYTE(LOWORD(Version));
 			m_SavedVerMinor = HIBYTE(LOWORD(Version));
 			m_SavedExtMajor = LOBYTE(HIWORD(Version));
@@ -236,7 +236,7 @@ HRESULT CBPersistMgr::InitLoad(char *Filename) {
 		} else goto init_fail;
 
 
-		DWORD DataOffset = GetDWORD();
+		uint32 DataOffset = GetDWORD();
 
 		m_SavedDescription = GetString();
 		m_SavedTimestamp = (time_t)GetDWORD();
@@ -259,7 +259,7 @@ HRESULT CBPersistMgr::SaveFile(char *Filename) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBPersistMgr::PutBytes(byte  *Buffer, DWORD Size) {
+HRESULT CBPersistMgr::PutBytes(byte  *Buffer, uint32 Size) {
 	while (m_Offset + Size > m_BufferSize) {
 		m_BufferSize += SAVE_BUFFER_GROW_BY;
 		m_Buffer = (byte  *)realloc(m_Buffer, m_BufferSize);
@@ -277,7 +277,7 @@ HRESULT CBPersistMgr::PutBytes(byte  *Buffer, DWORD Size) {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBPersistMgr::GetBytes(byte  *Buffer, DWORD Size) {
+HRESULT CBPersistMgr::GetBytes(byte  *Buffer, uint32 Size) {
 	if (m_Offset + Size > m_BufferSize) {
 		Game->LOG(0, "Fatal: Save buffer underflow");
 		return E_FAIL;
@@ -291,15 +291,15 @@ HRESULT CBPersistMgr::GetBytes(byte  *Buffer, DWORD Size) {
 
 
 //////////////////////////////////////////////////////////////////////////
-void CBPersistMgr::PutDWORD(DWORD Val) {
-	PutBytes((byte  *)&Val, sizeof(DWORD));
+void CBPersistMgr::PutDWORD(uint32 Val) {
+	PutBytes((byte  *)&Val, sizeof(uint32));
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-DWORD CBPersistMgr::GetDWORD() {
-	DWORD ret;
-	GetBytes((byte  *)&ret, sizeof(DWORD));
+uint32 CBPersistMgr::GetDWORD() {
+	uint32 ret;
+	GetBytes((byte  *)&ret, sizeof(uint32));
 	return ret;
 }
 
@@ -316,7 +316,7 @@ void CBPersistMgr::PutString(const char *Val) {
 
 //////////////////////////////////////////////////////////////////////////
 char *CBPersistMgr::GetString() {
-	DWORD len = GetDWORD();
+	uint32 len = GetDWORD();
 	char *ret = (char *)(m_Buffer + m_Offset);
 	m_Offset += len;
 
@@ -342,9 +342,9 @@ HRESULT CBPersistMgr::Transfer(const char *Name, int *Val) {
 
 //////////////////////////////////////////////////////////////////////////
 // DWORD
-HRESULT CBPersistMgr::Transfer(const char *Name, DWORD *Val) {
-	if (m_Saving) return PutBytes((byte  *)Val, sizeof(DWORD));
-	else return GetBytes((byte  *)Val, sizeof(DWORD));
+HRESULT CBPersistMgr::Transfer(const char *Name, uint32 *Val) {
+	if (m_Saving) return PutBytes((byte  *)Val, sizeof(uint32));
+	else return GetBytes((byte  *)Val, sizeof(uint32));
 }
 
 
