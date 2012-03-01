@@ -48,26 +48,21 @@ typedef int BOOL;
 
 #define CONST const
 
-
 #define MAX_PATH 512
 
 typedef char CHAR;
 typedef short SHORT;
 typedef int32_t LONG;
 
-//typedef uint8_t byte;
 typedef uint16 WORD;
-//typedef uint16_t WORD;
-//typedef uint32_t uint32;
-//typedef uint64_t QWORD;
 typedef uint64_t QWORD;
 typedef int      INT;
 typedef unsigned int UINT;
 
 typedef CHAR *NPSTR, *LPSTR, *PSTR;
 typedef PSTR *PZPSTR;
-typedef CONST PSTR *PCZPSTR;
-typedef CONST CHAR *LPCSTR, *PCSTR;
+typedef const PSTR *PCZPSTR;
+typedef const CHAR *LPCSTR, *PCSTR;
 typedef PCSTR *PZPCSTR;
 
 typedef struct tagRECT {

@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BSaveThumbHelper.h"
+#include "BImage.h"
 
 namespace WinterMute {
 

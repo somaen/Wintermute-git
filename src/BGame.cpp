@@ -38,6 +38,8 @@ THE SOFTWARE.
 #include "crc.h"
 #include "StringUtil.h"
 #include "BParser.h"
+#include "BImage.h"
+#include "UIWindow.h"
 
 #ifdef __IPHONEOS__
 #   include "ios_utils.h"

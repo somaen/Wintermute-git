@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BImage.h"
+#include "FreeImage.h"
 
 namespace WinterMute {
 

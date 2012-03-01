@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdScene.h"
 #include "BParser.h"
+#include "UIWindow.h"
 #include <math.h>
 #include <limits.h>
 

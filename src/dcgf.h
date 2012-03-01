@@ -45,6 +45,7 @@ THE SOFTWARE.
 
 #define COMPRESSED_FILE_MAGIC 0x504D435A // ZCMP
 
+/*
 #ifdef _MSC_VER
 #   pragma warning (disable: 4786) // symbols longer than 255 chars (STL)
 #   pragma warning (disable: 4355) // this in base member initialization
@@ -55,7 +56,7 @@ THE SOFTWARE.
 #   pragma warning (disable: 4701) // No EMMS at end of function ...
 #   pragma warning (disable: 4200) // nonstandard extension used : zero-sized array in struct/union
 #endif
-
+*/
 
 
 #include "PlatformSDL.h"
@@ -69,8 +70,6 @@ THE SOFTWARE.
 #undef GetClassName
 #endif
 
-
-#include "SDL.h"
 #include "dctypes.h"
 #include "dcpackage.h"
 #include "utils.h"
@@ -96,29 +95,20 @@ THE SOFTWARE.
 #include "BPkgFile.h"
 #include "BFileManager.h"
 #include "BEvent.h"
-#include "BPoint.h"
 #include "BObject.h"
 #include "BViewport.h"
 #include "BRegion.h"
 #include "BSurface.h"
 #include "BSubFrame.h"
 #include "BFrame.h"
-#include "BActiveRect.h"
 #include "BFontStorage.h"
-#include "BFontBitmap.h"
 #include "BFontTT.h"
-#include "BImage.h"
 #include "BQuickMsg.h"
 #include "BTransitionMgr.h"
 #include "BKeyboardState.h"
 
 // UI classes
-#include "UITiledImage.h"
-#include "UIObject.h"
-#include "UIButton.h"
-#include "UIEdit.h"
-#include "UIText.h"
-#include "UIWindow.h"
+//#include "UIWindow.h"
 
 // scripting classes
 #include "dcscript.h"
@@ -160,7 +150,7 @@ THE SOFTWARE.
 
 
 // big boss
-#include "BGame.h"
+//#include "BGame.h"
 
 #define PI ((float) 3.141592653589793f)
 

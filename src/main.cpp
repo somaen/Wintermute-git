@@ -39,6 +39,8 @@ THE SOFTWARE.
 #   include "../visualc/resource.h"
 #endif
 
+#include "FreeImage.h"
+
 using namespace WinterMute;
 
 //////////////////////////////////////////////////////////////////////

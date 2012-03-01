@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BSaveThumbHelper.h"
 #include "Vector2.h"
 #include "StringUtil.h"
+#include "BImage.h"
 
 namespace WinterMute {
 
@@ -122,7 +123,7 @@ HRESULT CBPersistMgr::InitSave(char *Desc) {
 		magic = SAVE_MAGIC_2;
 		PutDWORD(magic);
 
-		BYTE VerMajor, VerMinor, ExtMajor, ExtMinor;
+		byte VerMajor, VerMinor, ExtMajor, ExtMinor;
 		Game->GetVersion(&VerMajor, &VerMinor, &ExtMajor, &ExtMinor);
 		uint32 Version = MAKELONG(MAKEWORD(VerMajor, VerMinor), MAKEWORD(ExtMajor, ExtMinor));
 		PutDWORD(Version);
@@ -137,7 +138,7 @@ HRESULT CBPersistMgr::InitSave(char *Desc) {
 		if (Game->m_CachedThumbnail) {
 			if (Game->m_CachedThumbnail->m_Thumbnail) {
 				uint32 Size = 0;
-				BYTE *Buffer = Game->m_CachedThumbnail->m_Thumbnail->CreateBMPBuffer(&Size);
+				byte *Buffer = Game->m_CachedThumbnail->m_Thumbnail->CreateBMPBuffer(&Size);
 
 				PutDWORD(Size);
 				if (Size > 0) PutBytes(Buffer, Size);

@@ -31,6 +31,8 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
+class CBImage;
+
 class CBSaveThumbHelper : public CBBase {
 public:
 	CBSaveThumbHelper(CBGame *inGame);

@@ -433,7 +433,7 @@ BOOL CBPlatform::SetRectEmpty(LPRECT lprc) {
 }
 
 //////////////////////////////////////////////////////////////////////////
-BOOL CBPlatform::IsRectEmpty(CONST LPRECT lprc) {
+BOOL CBPlatform::IsRectEmpty(const LPRECT lprc) {
 	return (lprc->left >= lprc->right) || (lprc->top >= lprc->bottom);
 }
 

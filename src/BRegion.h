@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeBRegion_H__
 #define __WmeBRegion_H__
 
+#include "BPoint.h"
+
 namespace WinterMute {
 
 class CBRegion : public CBObject {

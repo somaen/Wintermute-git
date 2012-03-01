@@ -120,7 +120,7 @@ public:
 	HRESULT ResetObject(CBObject *Object);
 	HRESULT ResetScript(CScScript *Script);
 	HRESULT EmptyScriptCache();
-	BYTE *GetCompiledScript(char *Filename, uint32 *OutSize, bool IgnoreCache = false);
+	byte *GetCompiledScript(char *Filename, uint32 *OutSize, bool IgnoreCache = false);
 	DECLARE_PERSISTENT(CScEngine, CBBase)
 	HRESULT Cleanup();
 	int GetNumScripts(int *Running = NULL, int *Waiting = NULL, int *Persistent = NULL);
@@ -159,7 +159,7 @@ private:
 	bool m_IsProfiling;
 	uint32 m_ProfilingStartTime;
 
-	typedef std::map<std::string, DWORD> ScriptTimes;
+	typedef std::map<std::string, uint32> ScriptTimes;
 	ScriptTimes m_ScriptTimes;
 
 };

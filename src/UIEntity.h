@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeUiEntity_H__
 #define __WmeUiEntity_H__
 
+#include "UIObject.h"
+
 namespace WinterMute {
 
 class CUIEntity : public CUIObject {

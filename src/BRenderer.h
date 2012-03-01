@@ -32,6 +32,7 @@ THE SOFTWARE.
 namespace WinterMute {
 
 class CBImage;
+class CBActiveRect;
 
 class CBRenderer: public CBBase {
 public:

@@ -26,6 +26,11 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "UIWindow.h"
 #include "BParser.h"
+#include "BActiveRect.h"
+#include "UIButton.h"
+#include "UIEdit.h"
+#include "UIText.h"
+#include "UITiledImage.h"
 
 namespace WinterMute {
 

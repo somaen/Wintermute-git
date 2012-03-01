@@ -30,6 +30,8 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
+class CUIWindow;
+
 class CAdScene : public CBObject {
 public:
 

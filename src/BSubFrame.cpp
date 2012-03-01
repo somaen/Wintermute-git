@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BParser.h"
 #include "BSubFrame.h"
+#include "BActiveRect.h"
 
 namespace WinterMute {
 

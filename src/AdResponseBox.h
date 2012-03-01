@@ -31,6 +31,10 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
+class CUIButton;
+class CUIWindow;
+class CUIObject;
+
 class CAdResponseBox : public CBObject {
 public:
 	CBObject *GetNextAccessObject(CBObject *CurrObject);

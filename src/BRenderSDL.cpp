@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BRenderSDL.h"
 #include "BSurfaceSDL.h"
+#include "BImage.h"
 #include "FreeImage.h"
 #include "MathUtil.h"
 

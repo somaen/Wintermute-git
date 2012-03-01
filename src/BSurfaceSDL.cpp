@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "BSurfaceSDL.h"
 #include "BRenderSDL.h"
 #include "SdlUtil.h"
+#include "FreeImage.h"
 
 namespace WinterMute {
 

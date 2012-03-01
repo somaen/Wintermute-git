@@ -24,7 +24,7 @@ THE SOFTWARE.
 */
 
 #include "MathUtil.h"
-#include <math.h>
+#include <cmath>
 
 namespace WinterMute {
 

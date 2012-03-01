@@ -27,7 +27,7 @@ THE SOFTWARE.
 #define __WmePlatformSDL_H__
 
 
-#include "SDL.h"
+//#include "SDL.h"
 #include "dctypes.h"
 
 
@@ -42,6 +42,8 @@ THE SOFTWARE.
 #else
 #   include "wintypes.h"
 #endif // __WIN32__
+
+union SDL_Event;
 
 namespace WinterMute {
 
@@ -72,10 +74,10 @@ public:
 	static BOOL SetForegroundWindow(HWND hWnd);
 
 	static BOOL SetRectEmpty(LPRECT lprc);
-	static BOOL IsRectEmpty(CONST LPRECT lprc);
+	static BOOL IsRectEmpty(const LPRECT lprc);
 	static BOOL PtInRect(LPRECT lprc, POINT p);
 	static BOOL SetRect(LPRECT lprc, int left, int top, int right, int bottom);
-	static BOOL IntersectRect(LPRECT lprcDst, CONST LPRECT lprcSrc1, CONST LPRECT lprcSrc2);
+	static BOOL IntersectRect(LPRECT lprcDst, const LPRECT lprcSrc1, const LPRECT lprcSrc2);
 	static BOOL UnionRect(LPRECT lprcDst, RECT *lprcSrc1, RECT *lprcSrc2);
 	static BOOL CopyRect(LPRECT lprcDst, RECT *lprcSrc);
 	static BOOL OffsetRect(LPRECT lprc, int dx, int dy);

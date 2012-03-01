@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "PartEmitter.h"
 #include "BParser.h"
 #include "BSurfaceStorage.h"
+#include "UIWindow.h"
 
 namespace WinterMute {
 

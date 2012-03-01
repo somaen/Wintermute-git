@@ -26,7 +26,9 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdInventoryBox.h"
 #include "BParser.h"
-#include <math.h>
+#include "UIButton.h"
+#include "UIWindow.h"
+#include <cmath>
 
 
 namespace WinterMute {

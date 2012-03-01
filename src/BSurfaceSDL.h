@@ -26,9 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeBSurfaceSDL_H__
 #define __WmeBSurfaceSDL_H__
 
-
 #include "BSurface.h"
-#include "SDL.h"
 #include "FreeImage.h"
 
 namespace WinterMute {

@@ -27,6 +27,8 @@ THE SOFTWARE.
 #include "AdResponseBox.h"
 #include "BParser.h"
 #include "BSurfaceStorage.h"
+#include "UIButton.h"
+#include "UIWindow.h"
 
 namespace WinterMute {
 

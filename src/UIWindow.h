@@ -31,6 +31,8 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
+class CUIButton;
+
 class CUIWindow : public CUIObject {
 public:
 	HRESULT GetWindowObjects(CBArray<CUIObject *, CUIObject *>& Objects, bool InteractiveOnly);

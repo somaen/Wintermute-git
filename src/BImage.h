@@ -27,7 +27,11 @@ THE SOFTWARE.
 #define __WmeBImage_H__
 
 
-#include "FreeImage.h"
+//#include "FreeImage.h"
+#include "BBase.h"
+#include "common/endian.h"
+
+struct FIBITMAP;
 
 namespace WinterMute {
 
@@ -38,7 +42,7 @@ public:
 	~CBImage();
 
 
-	BYTE *CreateBMPBuffer(uint32 *BufferSize = NULL);
+	byte *CreateBMPBuffer(uint32 *BufferSize = NULL);
 	HRESULT Resize(int NewWidth, int NewHeight);
 	HRESULT SaveBMPFile(char *Filename);
 	HRESULT CopyFrom(CBImage *OrigImage, int NewWidth = 0, int NewHeight = 0);
