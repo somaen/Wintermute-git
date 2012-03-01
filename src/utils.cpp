@@ -24,6 +24,9 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "utils.h"
+#include "PlatformSDL.h"
+#include "wintypes.h"
 #include "PathUtil.h"
 #include "boost/filesystem.hpp"
 

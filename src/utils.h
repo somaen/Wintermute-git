@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeUtils_H__
 #define __WmeUtils_H__
 
+#include "wintypes.h"
+
 namespace WinterMute {
 
 class CBGame;

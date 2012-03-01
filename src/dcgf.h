@@ -60,9 +60,9 @@ THE SOFTWARE.
 
 #include "PlatformSDL.h"
 
-#include <stdio.h>
+#include <cstdio>
 
-#include <assert.h>
+#include <cassert>
 
 
 #ifdef GetClassName
@@ -78,58 +78,7 @@ THE SOFTWARE.
 
 #include "coll_templ.h"
 
-namespace WinterMute {
-
-class CBPersistMgr;
-
-// persistence support
-typedef void *(WINAPI *PERSISTBUILD)(void);
-typedef HRESULT(WINAPI *PERSISTLOAD)(void *, CBPersistMgr *);
-
-#define DECLARE_PERSISTENT(class_name, parent_class)\
-	static const char m_ClassName[];\
-	static void* WINAPI PersistBuild(void);\
-	virtual const char* GetClassName();\
-	static HRESULT WINAPI PersistLoad(void* Instance, CBPersistMgr* PersistMgr);\
-	class_name(TDynamicConstructor p1, TDynamicConstructor p2):parent_class(p1, p2){ /*memset(this, 0, sizeof(class_name));*/ };\
-	virtual HRESULT Persist(CBPersistMgr* PersistMgr);\
-	void* operator new (size_t size);\
-	void operator delete(void* p);\
-	 
-
-#define IMPLEMENT_PERSISTENT(class_name, persistent_class)\
-	const char class_name::m_ClassName[] = #class_name;\
-	void* class_name::PersistBuild(){\
-		return ::new class_name(DYNAMIC_CONSTRUCTOR, DYNAMIC_CONSTRUCTOR);\
-	}\
-	\
-	HRESULT class_name::PersistLoad(void* Instance, CBPersistMgr* PersistMgr){\
-		return ((class_name*)Instance)->Persist(PersistMgr);\
-	}\
-	\
-	const char* class_name::GetClassName(){\
-		return #class_name;\
-	}\
-	\
-	CSysClass Register##class_name(class_name::m_ClassName, class_name::PersistBuild, class_name::PersistLoad, persistent_class);\
-	\
-	void* class_name::operator new (size_t size){\
-		void* ret = ::operator new(size);\
-		CSysClassRegistry::GetInstance()->RegisterInstance(#class_name, ret);\
-		return ret;\
-	}\
-	\
-	void class_name::operator delete (void* p){\
-		CSysClassRegistry::GetInstance()->UnregisterInstance(#class_name, p);\
-		::operator delete(p);\
-	}\
-	 
-#define TMEMBER(member_name) #member_name, &member_name
-#define TMEMBER_INT(member_name) #member_name, (int*)&member_name
-
-typedef void (*SYS_INSTANCE_CALLBACK)(void *Instance, void *Data);
-
-} // end of namespace WinterMute
+#include "persistent.h"
 
 // classes/instances registry
 #include "SysInstance.h"
@@ -137,21 +86,13 @@ typedef void (*SYS_INSTANCE_CALLBACK)(void *Instance, void *Data);
 #include "SysClassRegistry.h"
 
 // base classes
-//#include "BBase.h"
-//#include "BNamedObject.h"
-//#include "BParser.h"
 #include "BDynBuffer.h"
 #include "BStringTable.h"
 #include "BRegistry.h"
 #include "BPersistMgr.h"
 #include "BScriptable.h"
 #include "BScriptHolder.h"
-//#include "BFileEntry.h"
 #include "BPackage.h"
-//#include "BFile.h"
-//#include "BResourceFile.h"
-//#include "BSaveThumbFile.h"
-//#include "BDiskFile.h"
 #include "BPkgFile.h"
 #include "BFileManager.h"
 #include "BEvent.h"
@@ -160,28 +101,16 @@ typedef void (*SYS_INSTANCE_CALLBACK)(void *Instance, void *Data);
 #include "BViewport.h"
 #include "BRegion.h"
 #include "BSurface.h"
-//#include "BSurfaceStorage.h"
-//#include "BSoundBuffer.h"
-//#include "BSoundMgr.h"
-//#include "BSound.h"
 #include "BSubFrame.h"
 #include "BFrame.h"
 #include "BActiveRect.h"
-//#include "BSprite.h"
 #include "BFontStorage.h"
-//#include "BFont.h"
 #include "BFontBitmap.h"
 #include "BFontTT.h"
-//#include "BRenderer.h"
 #include "BImage.h"
 #include "BQuickMsg.h"
 #include "BTransitionMgr.h"
 #include "BKeyboardState.h"
-//#include "BFader.h"
-//#include "SXMath.h"
-//#include "SXMemBuffer.h"
-//#include "SXFile.h"
-//#include "PartEmitter.h"
 
 // UI classes
 #include "UITiledImage.h"

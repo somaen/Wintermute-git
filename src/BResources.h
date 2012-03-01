@@ -30,7 +30,7 @@ namespace WinterMute {
 
 class CBResources {
 public:
-	static bool GetFile(const char *fileName, BYTE*& buffer, uint32 &size);
+	static bool GetFile(const char *fileName, byte*& buffer, uint32 &size);
 };
 
 } // end of namespace WinterMute

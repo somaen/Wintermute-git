@@ -24,9 +24,9 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
-#include "PlatformSDL.h"
 #include "BRenderSDL.h"
 #include "PathUtil.h"
+#include "PlatformSDL.h"
 #include <boost/filesystem.hpp>
 
 #ifdef __WIN32__
@@ -54,7 +54,7 @@ int CBPlatform::Initialize(CBGame *inGame, int argc, char *argv[]) {
 	if (!Game) return 1;
 
 
-	bool windowedMode = false;
+	bool windowedMode = true;
 
 
 	// parse command line

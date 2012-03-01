@@ -26,7 +26,10 @@ THE SOFTWARE.
 #ifndef __WmeWintypes_H__
 #define __WmeWintypes_H__
 
-namespace WinterMute {
+#define FORBIDDEN_SYMBOL_ALLOW_ALL
+#include "common/scummsys.h"
+
+//namespace WinterMute {
 
 #ifndef __WIN32__
 
@@ -52,9 +55,11 @@ typedef char CHAR;
 typedef short SHORT;
 typedef int32_t LONG;
 
-typedef uint8_t byte;
-typedef uint16_t WORD;
-typedef uint32_t uint32;
+//typedef uint8_t byte;
+typedef uint16 WORD;
+//typedef uint16_t WORD;
+//typedef uint32_t uint32;
+//typedef uint64_t QWORD;
 typedef uint64_t QWORD;
 typedef int      INT;
 typedef unsigned int UINT;
@@ -83,18 +88,19 @@ typedef uint32 HINSTANCE;
 typedef uint32 HMODULE;
 typedef uint32 HWND;
 
+//typedef uint32 HRESULT;
 typedef long HRESULT;
 
 #define SUCCEEDED(hr) (((HRESULT)(hr)) >= 0)
 #define FAILED(hr) (((HRESULT)(hr)) < 0)
 
-#define S_OK      ((HRESULT)0L)
-#define S_FALSE   ((HRESULT)1L)
-#define E_FAIL   ((HRESULT)-1L)
+#define S_OK      ((HRESULT)0)
+//#define S_FALSE   ((HRESULT)1)
+#define E_FAIL   ((HRESULT)-1)
 
 
 #endif // !__WIN32__
 
-} // end of namespace WinterMute
+//} // end of namespace WinterMute
 
 #endif // __WmeWintypes_H__
