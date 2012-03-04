@@ -53,6 +53,211 @@ CBSurfaceSDL::~CBSurfaceSDL() {
 	Game->AddMem(-m_Width * m_Height * 4);
 }
 
+HRESULT CBSurfaceSDL::loadWithFreeImage(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime, bool KeepLoaded) {
+	CBRenderSDL *renderer = static_cast<CBRenderSDL *>(Game->m_Renderer);
+	Common::String strFileName(Filename);
+	warning("Legacy-loading %s", Filename);
+	
+	FreeImageIO io;
+	io.read_proc = CBSurfaceSDL::ReadProc;
+	io.write_proc = NULL;
+	io.seek_proc = CBSurfaceSDL::SeekProc;
+	io.tell_proc = CBSurfaceSDL::TellProc;
+	
+	
+	CBFile *file = Game->m_FileManager->OpenFile(Filename);
+	if (!file) return E_FAIL;
+	
+	
+	if (default_ck) {
+		ck_red   = 255;
+		ck_green = 0;
+		ck_blue  = 255;
+	}
+	
+	
+	FREE_IMAGE_FORMAT imgFormat = FreeImage_GetFileTypeFromHandle(&io, (fi_handle)file, 0);
+	FIBITMAP *img = FreeImage_LoadFromHandle(imgFormat, &io, (fi_handle)file, 0);
+	Game->m_FileManager->CloseFile(file);
+	
+	if (!img) return E_FAIL;
+	
+	m_Width = FreeImage_GetWidth(img);
+	m_Height = FreeImage_GetHeight(img);
+	
+	
+	bool isSaveGameGrayscale = CBPlatform::strnicmp(Filename, "savegame:", 9) == 0 && (Filename[strlen(Filename) - 1] == 'g' || Filename[strlen(Filename) - 1] == 'G');
+	if (isSaveGameGrayscale) {
+		FIBITMAP *newImg = FreeImage_ConvertToGreyscale(img);
+		if (newImg) {
+			FreeImage_Unload(img);
+			img = newImg;
+		}
+	}
+	
+	// convert 32-bit BMPs to 24-bit or they appear totally transparent (does any app actually write alpha in BMP properly?)
+	if (FreeImage_GetBPP(img) != 32 || (imgFormat == FIF_BMP && FreeImage_GetBPP(img) != 24)) {
+		FIBITMAP *newImg = FreeImage_ConvertTo24Bits(img);
+		if (newImg) {
+			FreeImage_Unload(img);
+			img = newImg;
+		} else {
+			FreeImage_Unload(img);
+			return -1;
+		}
+	}
+	
+	FreeImage_FlipVertical(img);
+	
+	
+	void *inPtr = FreeImage_GetBits(img);
+	SDL_Surface *surf = SDL_CreateRGBSurfaceFrom(inPtr, m_Width, m_Height, FreeImage_GetBPP(img), FreeImage_GetPitch(img), FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK, FI_RGBA_ALPHA_MASK);
+	
+	// no alpha, set color key
+	if (FreeImage_GetBPP(img) != 32)
+		SDL_SetColorKey(surf, SDL_TRUE, SDL_MapRGB(surf->format, ck_red, ck_green, ck_blue));
+	
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
+	//m_Texture = SdlUtil::CreateTextureFromSurface(renderer->GetSdlRenderer(), surf);
+	m_Texture = SDL_CreateTextureFromSurface(renderer->GetSdlRenderer(), surf);
+	if (!m_Texture) {
+		SDL_FreeSurface(surf);
+		FreeImage_Unload(img);
+		return E_FAIL;
+	}
+	
+	GenAlphaMask(surf);
+	
+	SDL_FreeSurface(surf);
+	FreeImage_Unload(img);
+	
+	
+	m_CKDefault = default_ck;
+	m_CKRed = ck_red;
+	m_CKGreen = ck_green;
+	m_CKBlue = ck_blue;
+	
+	
+	if (!m_Filename || CBPlatform::stricmp(m_Filename, Filename) != 0) {
+		SetFilename(Filename);
+	}
+	
+	if (m_LifeTime == 0 || LifeTime == -1 || LifeTime > m_LifeTime)
+		m_LifeTime = LifeTime;
+	
+	m_KeepLoaded = KeepLoaded;
+	if (m_KeepLoaded) m_LifeTime = -1;
+	
+	m_Valid = true;
+	
+	Game->AddMem(m_Width * m_Height * 4);
+	
+	
+	return S_OK;
+}
+
+HRESULT CBSurfaceSDL::CreateBMP(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime, bool KeepLoaded) {
+	CBRenderSDL *renderer = static_cast<CBRenderSDL *>(Game->m_Renderer);
+
+	CBFile *file = Game->m_FileManager->OpenFile(Filename);
+	if (!file) return E_FAIL;
+	Common::SeekableReadStream *stream = file->getMemStream();
+	Graphics::PixelFormat format(4,8,8,8,0,24,16,8,0);
+	Graphics::Surface *surface = Graphics::ImageDecoder::loadFile(*stream, format);
+	
+	if (!surface)
+		return loadWithFreeImage(Filename, default_ck, ck_red, ck_green, ck_blue, LifeTime, KeepLoaded);
+	
+	if (default_ck) {
+		ck_red   = 255;
+		ck_green = 0;
+		ck_blue  = 255;
+	}
+	
+	Game->m_FileManager->CloseFile(file);
+	
+	m_Width = surface->w;
+	m_Height = surface->h;
+	
+	//if (!img) return E_FAIL;
+	
+	bool isSaveGameGrayscale = CBPlatform::strnicmp(Filename, "savegame:", 9) == 0 && (Filename[strlen(Filename) - 1] == 'g' || Filename[strlen(Filename) - 1] == 'G');
+	if (isSaveGameGrayscale) {
+		warning("TODO: Implement grayscale-conversion!");
+/*		FIBITMAP *newImg = FreeImage_ConvertToGreyscale(img);
+		if (newImg) {
+			FreeImage_Unload(img);
+			img = newImg;
+		}*/
+	}
+	
+	// convert 32-bit BMPs to 24-bit or they appear totally transparent (does any app actually write alpha in BMP properly?)
+/*	if (FreeImage_GetBPP(img) != 32 || (imgFormat == FIF_BMP && FreeImage_GetBPP(img) != 24)) {
+		FIBITMAP *newImg = FreeImage_ConvertTo24Bits(img);
+		if (newImg) {
+			FreeImage_Unload(img);
+			img = newImg;
+		} else {
+			FreeImage_Unload(img);
+			return -1;
+		}
+	}*/
+	
+	//FreeImage_FlipVertical(img);
+	// TODO: This swap is just here for testing-purposes. HACK!
+	for (int i = 0; i < m_Height - 1; i++) {
+		for (int j = 0; j < m_Width; j++) {
+			uint32 pixel = ((uint32*)surface->pixels)[m_Width * i + j];
+			((uint32*)surface->pixels)[m_Width * i + j] = ((uint32*)surface->pixels)[m_Width * i + (m_Width -j)];
+			((uint32*)surface->pixels)[m_Width * i + (m_Width - j)] = pixel;
+			
+		}
+	}
+	
+	SDL_Surface *surf = SDL_CreateRGBSurfaceFrom(surface->pixels, m_Width, m_Height, surface->format.bytesPerPixel*8, surface->pitch, 0, 0, 0, 0);
+
+	// no alpha, set color key
+	if (false) // TODO: We currently can't load anything but 24bpp
+		SDL_SetColorKey(surf, SDL_TRUE, SDL_MapRGB(surf->format, ck_red, ck_green, ck_blue));
+	
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
+	//m_Texture = SdlUtil::CreateTextureFromSurface(renderer->GetSdlRenderer(), surf);
+	m_Texture = SDL_CreateTextureFromSurface(renderer->GetSdlRenderer(), surf);
+	if (!m_Texture) {
+		SDL_FreeSurface(surf);
+		delete surface;
+		return E_FAIL;
+	}
+	
+	GenAlphaMask(surf);
+	
+	SDL_FreeSurface(surf);
+	delete surface;	
+	
+	m_CKDefault = default_ck;
+	m_CKRed = ck_red;
+	m_CKGreen = ck_green;
+	m_CKBlue = ck_blue;
+	
+	
+	if (!m_Filename || CBPlatform::stricmp(m_Filename, Filename) != 0) {
+		SetFilename(Filename);
+	}
+	
+	if (m_LifeTime == 0 || LifeTime == -1 || LifeTime > m_LifeTime)
+		m_LifeTime = LifeTime;
+	
+	m_KeepLoaded = KeepLoaded;
+	if (m_KeepLoaded) m_LifeTime = -1;
+	
+	m_Valid = true;
+	
+	Game->AddMem(m_Width * m_Height * 4);
+	
+	
+	return S_OK;
+}
+
 HRESULT CBSurfaceSDL::CreatePNG(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime, bool KeepLoaded) {
 	CBRenderSDL *renderer = static_cast<CBRenderSDL *>(Game->m_Renderer);
 	Graphics::PNG pngImage;
@@ -65,6 +270,10 @@ HRESULT CBSurfaceSDL::CreatePNG(char *Filename, bool default_ck, byte ck_red, by
 	Graphics::Surface *surface = pngImage.getSurface(Graphics::PixelFormat(4,8,8,8,8,24,16,8,0));
 	Game->m_FileManager->CloseFile(file);
 
+	if (!surface) {
+		return E_FAIL;
+	}
+	
 	m_Width = surface->w;
 	m_Height = surface->h;
 
@@ -123,12 +332,12 @@ HRESULT CBSurfaceSDL::CreatePNG(char *Filename, bool default_ck, byte ck_red, by
 HRESULT CBSurfaceSDL::Create(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime, bool KeepLoaded) {
 	CBRenderSDL *renderer = static_cast<CBRenderSDL *>(Game->m_Renderer);
 	Common::String strFileName(Filename);
-	warning("Loading %s", Filename);
 	// TODO: Remerge this:
 	if (strFileName.hasSuffix(".png")) {
 		return CreatePNG(Filename, default_ck, ck_red, ck_green, ck_blue, LifeTime, KeepLoaded);
 	} else if (strFileName.hasSuffix(".bmp")) {
-		//return CreateBMP(Filename, default_ck, ck_red, ck_green, ck_blue, LifeTime, KeepLoaded);
+		warning("Loading %s", Filename);
+		return CreateBMP(Filename, default_ck, ck_red, ck_green, ck_blue, LifeTime, KeepLoaded);
 	} else {
 		warning("CBSurfaceSDL::Create : Unsupported fileformat %s", Filename);
 	}

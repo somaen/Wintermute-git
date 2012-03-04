@@ -33,6 +33,8 @@ namespace WinterMute {
 
 class CBSurfaceSDL : public CBSurface {
 	HRESULT CreatePNG(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime = -1, bool KeepLoaded = false);
+	HRESULT CreateBMP(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime = -1, bool KeepLoaded = false);
+	HRESULT loadWithFreeImage(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime = -1, bool KeepLoaded = false);
 public:
 	CBSurfaceSDL(CBGame *inGame);
 	~CBSurfaceSDL();
