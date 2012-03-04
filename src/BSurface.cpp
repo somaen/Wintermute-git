@@ -174,7 +174,7 @@ HRESULT CBSurface::PrepareToDraw() {
 
 
 //////////////////////////////////////////////////////////////////////////
-void CBSurface::SetFilename(char *Filename) {
+void CBSurface::SetFilename(const char *Filename) {
 	SAFE_DELETE_ARRAY(m_Filename);
 	if (!Filename) return;
 

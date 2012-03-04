@@ -28,6 +28,11 @@ THE SOFTWARE.
 #include "BRenderSDL.h"
 #include "SdlUtil.h"
 #include "FreeImage.h"
+#include "graphics/png.h"
+#include "graphics/imagedec.h"
+#include "graphics/pixelformat.h"
+#include "graphics/surface.h"
+#include "stream.h"
 
 namespace WinterMute {
 
@@ -48,12 +53,85 @@ CBSurfaceSDL::~CBSurfaceSDL() {
 	Game->AddMem(-m_Width * m_Height * 4);
 }
 
+HRESULT CBSurfaceSDL::CreatePNG(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime, bool KeepLoaded) {
+	CBRenderSDL *renderer = static_cast<CBRenderSDL *>(Game->m_Renderer);
+	Graphics::PNG pngImage;
+	
+	CBFile *file = Game->m_FileManager->OpenFile(Filename);
+	
+	pngImage.read(file->getMemStream());
+	Graphics::PNGHeader headerInfo = pngImage.getHeader();
+	
+	Graphics::Surface *surface = pngImage.getSurface(Graphics::PixelFormat(4,8,8,8,8,24,16,8,0));
+	Game->m_FileManager->CloseFile(file);
+
+	m_Width = surface->w;
+	m_Height = surface->h;
+
+//TODO: This is rather endian-specific, but should be replaced by non-SDL-code anyhow:
+	uint32 rmask = surface->format.rMax() << surface->format.rShift;
+	uint32 gmask = surface->format.gMax() << surface->format.gShift;
+	uint32 bmask = surface->format.bMax() << surface->format.bShift;
+	uint32 amask = surface->format.aMax();
+	
+	SDL_Surface *surf = SDL_CreateRGBSurfaceFrom(surface->pixels, m_Width, m_Height, surface->format.bytesPerPixel*8, surface->pitch, rmask, gmask, bmask, amask);
+	
+	// no alpha, set color key
+// TODO: Figure this
+/*	if (headerInfo.bitDepth != 32)
+		SDL_SetColorKey(surf, SDL_TRUE, SDL_MapRGB(surf->format, ck_red, ck_green, ck_blue));*/
+
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
+	//m_Texture = SdlUtil::CreateTextureFromSurface(renderer->GetSdlRenderer(), surf);
+	m_Texture = SDL_CreateTextureFromSurface(renderer->GetSdlRenderer(), surf);
+	if (!m_Texture) {
+		SDL_FreeSurface(surf);
+		delete surface;
+		delete file;
+		return E_FAIL;
+	}
+	
+	GenAlphaMask(surf);
+	
+	SDL_FreeSurface(surf);
+	
+	m_CKDefault = default_ck;
+	m_CKRed = ck_red;
+	m_CKGreen = ck_green;
+	m_CKBlue = ck_blue;
+	
+	
+	if (!m_Filename || CBPlatform::stricmp(m_Filename, Filename) != 0) {
+		SetFilename(Filename);
+	}
+	
+	if (m_LifeTime == 0 || LifeTime == -1 || LifeTime > m_LifeTime)
+		m_LifeTime = LifeTime;
+	
+	m_KeepLoaded = KeepLoaded;
+	if (m_KeepLoaded) m_LifeTime = -1;
+	
+	m_Valid = true;
+	
+	Game->AddMem(m_Width * m_Height * 4);
+	
+	return S_OK;
+	
+}
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBSurfaceSDL::Create(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime, bool KeepLoaded) {
 	CBRenderSDL *renderer = static_cast<CBRenderSDL *>(Game->m_Renderer);
-
-
+	Common::String strFileName(Filename);
+	warning("Loading %s", Filename);
+	// TODO: Remerge this:
+	if (strFileName.hasSuffix(".png")) {
+		return CreatePNG(Filename, default_ck, ck_red, ck_green, ck_blue, LifeTime, KeepLoaded);
+	} else if (strFileName.hasSuffix(".bmp")) {
+		//return CreateBMP(Filename, default_ck, ck_red, ck_green, ck_blue, LifeTime, KeepLoaded);
+	} else {
+		warning("CBSurfaceSDL::Create : Unsupported fileformat %s", Filename);
+	}
 	FreeImageIO io;
 	io.read_proc = CBSurfaceSDL::ReadProc;
 	io.write_proc = NULL;

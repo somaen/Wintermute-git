@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BFile.h"
+#include "common/memstream.h"
 
 namespace WinterMute {
 
@@ -50,5 +51,16 @@ CBFile::~CBFile() {
 bool CBFile::IsEOF() {
 	return m_Pos == m_Size;
 }
+
+Common::SeekableReadStream *CBFile::getMemStream() {
+	uint32 oldPos = GetPos();
+	Seek(0);
+	byte *data = new byte[GetSize()];
+	Read(data, GetSize());
+	Seek(oldPos);
+	Common::MemoryReadStream *memStream = new Common::MemoryReadStream(data, GetSize(), DisposeAfterUse::YES);
+	return memStream;
+}
+
 
 } // end of namespace WinterMute

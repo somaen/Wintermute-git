@@ -30,6 +30,10 @@ THE SOFTWARE.
 #include "BBase.h"
 #include "common/str.h"
 
+namespace Common {
+	class SeekableReadStream;
+}
+
 namespace WinterMute {
 
 class CBFile : public CBBase {
@@ -49,6 +53,8 @@ public:
 	virtual bool IsEOF();
 	CBFile(CBGame *inGame);
 	virtual ~CBFile();
+	// Temporary solution to allow usage in ScummVM-code:
+	virtual Common::SeekableReadStream *getMemStream();
 };
 
 } // end of namespace WinterMute
