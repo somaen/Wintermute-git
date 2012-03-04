@@ -27,14 +27,10 @@ THE SOFTWARE.
 #define __WmeBSurfaceSDL_H__
 
 #include "BSurface.h"
-#include "FreeImage.h"
 
 namespace WinterMute {
 
 class CBSurfaceSDL : public CBSurface {
-	HRESULT CreatePNG(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime = -1, bool KeepLoaded = false);
-	HRESULT CreateBMP(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime = -1, bool KeepLoaded = false);
-	HRESULT loadWithFreeImage(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime = -1, bool KeepLoaded = false);
 public:
 	CBSurfaceSDL(CBGame *inGame);
 	~CBSurfaceSDL();
@@ -58,9 +54,9 @@ public:
 	HRESULT DisplayZoom(int X, int Y, RECT rect, float ZoomX, float ZoomY, uint32 Alpha = 0xFFFFFFFF, bool Transparent = false, TSpriteBlendMode BlendMode = BLEND_NORMAL, bool MirrorX = false, bool MirrorY = false);
 	HRESULT DisplayTransform(int X, int Y, int HotX, int HotY, RECT Rect, float ZoomX, float ZoomY, uint32 Alpha, float Rotate, TSpriteBlendMode BlendMode = BLEND_NORMAL, bool MirrorX = false, bool MirrorY = false);
 
-	static unsigned DLL_CALLCONV ReadProc(void *buffer, unsigned size, unsigned count, fi_handle handle);
+/*	static unsigned DLL_CALLCONV ReadProc(void *buffer, unsigned size, unsigned count, fi_handle handle);
 	static int DLL_CALLCONV SeekProc(fi_handle handle, long offset, int origin);
-	static long DLL_CALLCONV TellProc(fi_handle handle);
+	static long DLL_CALLCONV TellProc(fi_handle handle);*/
 
 private:
 	SDL_Texture *m_Texture;
