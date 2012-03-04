@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BDiskFile.h"
+#include "common/stream.h"
 
 namespace WinterMute {
 
@@ -53,30 +54,30 @@ HRESULT CBDiskFile::Open(const char *Filename) {
 		sprintf(FullPath, "%s%s", Game->m_FileManager->m_SinglePaths[i], Filename);
 		CorrectSlashes(FullPath);
 
-		m_File = fopen(FullPath, "rb");
-		if (m_File != NULL) break;
+		m_File = Common::createFileStream(FullPath);
+		if (m_File != NULL) 
+			break;
 	}
 
 	// if we didn't find it in search paths, try to open directly
 	if (!m_File) {
 		strcpy(FullPath, Filename);
 		CorrectSlashes(FullPath);
-		m_File = fopen(FullPath, "rb");
+		m_File = Common::createFileStream(FullPath);
 	}
 
 	if (m_File) {
 		uint32 magic1, magic2;
-		fread(&magic1, sizeof(uint32), 1, m_File);
-		fread(&magic2, sizeof(uint32), 1, m_File);
-
+		magic1 = m_File->readUint32LE();
+		magic2 = m_File->readUint32LE();
 
 		if (magic1 == DCGF_MAGIC && magic2 == COMPRESSED_FILE_MAGIC) m_Compressed = true;
 
 		if (m_Compressed) {
 			uint32 DataOffset, CompSize, UncompSize;
-			fread(&DataOffset, sizeof(uint32), 1, m_File);
-			fread(&CompSize, sizeof(uint32), 1, m_File);
-			fread(&UncompSize, sizeof(uint32), 1, m_File);
+			DataOffset = m_File->readUint32LE();
+			CompSize = m_File->readUint32LE();
+			UncompSize = m_File->readUint32LE();
 
 			BYTE *CompBuffer = new byte[CompSize];
 			if (!CompBuffer) {
@@ -92,9 +93,8 @@ HRESULT CBDiskFile::Open(const char *Filename) {
 				Close();
 				return E_FAIL;
 			}
-
-			fseek(m_File, DataOffset + m_PrefixSize, SEEK_SET);
-			fread(CompBuffer, CompSize, 1, m_File);
+			m_File->seek(DataOffset + m_PrefixSize, SEEK_SET);
+			m_File->read(CompBuffer, CompSize);
 
 			if (uncompress(m_Data, (uLongf *)&UncompSize, CompBuffer, CompSize) != Z_OK) {
 				Game->LOG(0, "Error uncompressing file '%s'", Filename);
@@ -106,13 +106,13 @@ HRESULT CBDiskFile::Open(const char *Filename) {
 			delete [] CompBuffer;
 			m_Size = UncompSize;
 			m_Pos = 0;
-			fclose(m_File);
+			delete m_File;
 			m_File = NULL;
 		} else {
 			m_Pos = 0;
-			fseek(m_File, 0, SEEK_END);
-			m_Size = ftell(m_File) - m_PrefixSize;
-			fseek(m_File, m_PrefixSize, SEEK_SET);
+			m_File->seek(0, SEEK_END);
+			m_Size = m_File->pos() - m_PrefixSize;
+			m_File->seek(m_PrefixSize,SEEK_SET);
 		}
 
 		return S_OK;
@@ -122,7 +122,9 @@ HRESULT CBDiskFile::Open(const char *Filename) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBDiskFile::Close() {
-	if (m_File) fclose(m_File);
+	if (m_File) {
+		delete m_File;
+	}	
 	m_File = NULL;
 	m_Pos = 0;
 	m_Size = 0;
@@ -141,8 +143,9 @@ HRESULT CBDiskFile::Read(void *Buffer, uint32 Size) {
 		m_Pos += Size;
 		return S_OK;
 	} else {
+
 		if (m_File) {
-			size_t count = fread(Buffer, 1, Size, m_File);
+			size_t count = m_File->read(Buffer, Size);
 			m_Pos += count;
 			return S_OK;
 		} else return E_FAIL;
@@ -172,22 +175,21 @@ HRESULT CBDiskFile::Seek(uint32 Pos, TSeek Origin) {
 		return S_OK;
 	} else {
 		if (!m_File) return E_FAIL;
-
 		int ret = 1;
 
 		switch (Origin) {
 		case SEEK_TO_BEGIN:
-			ret = fseek(m_File, m_PrefixSize + Pos, SEEK_SET);
+			ret = m_File->seek(m_PrefixSize + Pos, SEEK_SET);
 			break;
 		case SEEK_TO_END:
-			ret = fseek(m_File, Pos, SEEK_END);
+			ret = m_File->seek(Pos, SEEK_END);
 			break;
 		case SEEK_TO_CURRENT:
-			ret = fseek(m_File, Pos, SEEK_CUR);
+			ret = m_File->seek(Pos, SEEK_CUR);
 			break;
 		}
 		if (ret == 0) {
-			m_Pos = ftell(m_File - m_PrefixSize);
+			m_Pos = m_File->pos() - m_PrefixSize;
 			return S_OK;
 		} else return E_FAIL;
 	}

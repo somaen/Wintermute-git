@@ -29,6 +29,10 @@ THE SOFTWARE.
 
 #include "BFile.h"
 
+namespace Common {
+	class SeekableReadStream;
+}
+
 namespace WinterMute {
 
 class CBDiskFile : public CBFile {
@@ -41,7 +45,7 @@ public:
 	virtual HRESULT Open(const char *Filename);
 private:
 	void CorrectSlashes(char *fileName);
-	FILE *m_File;
+	Common::SeekableReadStream *m_File;
 	byte *m_Data;
 	bool m_Compressed;
 	uint32 m_PrefixSize;
