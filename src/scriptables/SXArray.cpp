@@ -60,7 +60,7 @@ CSXArray::CSXArray(CBGame *inGame): CBScriptable(inGame) {
 
 //////////////////////////////////////////////////////////////////////////
 CSXArray::~CSXArray() {
-	delete[] m_Values;
+	delete m_Values;
 	m_Values = NULL;
 }
 

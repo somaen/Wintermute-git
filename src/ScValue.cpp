@@ -124,7 +124,10 @@ void CScValue::Cleanup(bool IgnoreNatives) {
 	if (!IgnoreNatives) {
 		if (m_ValNative && !m_Persistent) {
 			m_ValNative->m_RefCount--;
-			if (m_ValNative->m_RefCount <= 0) delete m_ValNative;
+			if (m_ValNative->m_RefCount <= 0) {
+				delete m_ValNative;
+				m_ValNative = NULL;
+			}
 		}
 	}
 
