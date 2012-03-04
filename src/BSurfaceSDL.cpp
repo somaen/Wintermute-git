@@ -28,8 +28,8 @@ THE SOFTWARE.
 #include "BRenderSDL.h"
 #include "SdlUtil.h"
 #include "FreeImage.h"
-#include "graphics/png.h"
-#include "graphics/imagedec.h"
+#include "graphics/decoders/png.h"
+#include "graphics/decoders/bmp.h"
 #include "graphics/pixelformat.h"
 #include "graphics/surface.h"
 #include "stream.h"
@@ -163,7 +163,10 @@ HRESULT CBSurfaceSDL::CreateBMP(char *Filename, bool default_ck, byte ck_red, by
 	if (!file) return E_FAIL;
 	Common::SeekableReadStream *stream = file->getMemStream();
 	Graphics::PixelFormat format(4,8,8,8,0,24,16,8,0);
-	Graphics::Surface *surface = Graphics::ImageDecoder::loadFile(*stream, format);
+	Graphics::BitmapDecoder bmpDecoder;
+	bmpDecoder.loadStream(*stream);
+	const Graphics::Surface *surface = bmpDecoder.getSurface();
+	//Graphics::Surface *surface = Graphics::ImageDecoder::loadFile(*stream, format);
 	
 	if (!surface)
 		return loadWithFreeImage(Filename, default_ck, ck_red, ck_green, ck_blue, LifeTime, KeepLoaded);
@@ -225,14 +228,14 @@ HRESULT CBSurfaceSDL::CreateBMP(char *Filename, bool default_ck, byte ck_red, by
 	m_Texture = SDL_CreateTextureFromSurface(renderer->GetSdlRenderer(), surf);
 	if (!m_Texture) {
 		SDL_FreeSurface(surf);
-		delete surface;
+		//delete surface;
 		return E_FAIL;
 	}
 	
 	GenAlphaMask(surf);
 	
 	SDL_FreeSurface(surf);
-	delete surface;	
+	//delete surface;	
 	
 	m_CKDefault = default_ck;
 	m_CKRed = ck_red;
@@ -260,14 +263,14 @@ HRESULT CBSurfaceSDL::CreateBMP(char *Filename, bool default_ck, byte ck_red, by
 
 HRESULT CBSurfaceSDL::CreatePNG(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime, bool KeepLoaded) {
 	CBRenderSDL *renderer = static_cast<CBRenderSDL *>(Game->m_Renderer);
-	Graphics::PNG pngImage;
+	Graphics::PNGDecoder pngImage;
 	
 	CBFile *file = Game->m_FileManager->OpenFile(Filename);
 	
-	pngImage.read(file->getMemStream());
-	Graphics::PNGHeader headerInfo = pngImage.getHeader();
-	
-	Graphics::Surface *surface = pngImage.getSurface(Graphics::PixelFormat(4,8,8,8,8,24,16,8,0));
+	pngImage.loadStream(*file->getMemStream());
+	//Graphics::PNGHeader headerInfo = pngImage.getHeader();
+	//Graphics::PixelFormat(4,8,8,8,8,24,16,8,0)
+	const Graphics::Surface *surface = pngImage.getSurface();
 	Game->m_FileManager->CloseFile(file);
 
 	if (!surface) {
