@@ -37,9 +37,6 @@ THE SOFTWARE.
 #endif
 
 
-
-using namespace boost::filesystem;
-
 namespace WinterMute {
 
 CBGame *CBPlatform::Game = NULL;
@@ -391,8 +388,8 @@ bool CBPlatform::DeleteFile(const char *lpFileName) {
 //////////////////////////////////////////////////////////////////////////
 bool CBPlatform::CopyFile(const char *from, const char *to, bool failIfExists) {
 	try {
-		if (failIfExists && exists(to)) return false;
-		copy_file(from, to);
+		if (failIfExists && boost::filesystem::exists(to)) return false;
+		boost::filesystem::copy_file(from, to);
 		return true;
 	} catch (...) {
 		return false;

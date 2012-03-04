@@ -27,7 +27,7 @@ THE SOFTWARE.
 #include <algorithm>
 #include <string>
 #include <sstream>
-#include <boost/lexical_cast.hpp>
+//#include <boost/lexical_cast.hpp>
 #include <boost/tokenizer.hpp>
 #include "StringUtil.h"
 #include "ConvertUTF.h"

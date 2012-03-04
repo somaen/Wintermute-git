@@ -30,8 +30,6 @@ THE SOFTWARE.
 #include "PathUtil.h"
 #include "boost/filesystem.hpp"
 
-using namespace boost::filesystem;
-
 namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////
@@ -101,7 +99,7 @@ void CBUtils::CreatePath(const char *Path, bool PathOnly) {
 	else path = Path;
 
 	try {
-		create_directories(path);
+		boost::filesystem::create_directories(path);
 	} catch (...) {
 		return;
 	}
@@ -231,7 +229,7 @@ bool CBUtils::MatchesPattern(const char *Pattern, const char *String) {
 //////////////////////////////////////////////////////////////////////////
 char *CBUtils::GetPath(char *Filename) {
 	AnsiString path = PathUtil::GetDirectoryName(Filename);
-	path = system_complete(path).string();
+	path = boost::filesystem::system_complete(path).string();
 
 	char *ret = new char[path.length() + 1];
 	strcpy(ret, path.c_str());
