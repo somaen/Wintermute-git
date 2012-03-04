@@ -37,12 +37,24 @@ THE SOFTWARE.
 #include "BFader.h"
 #include "BRenderer.h"
 #include "BSurfaceStorage.h"
+#include "coll_templ.h"
 #include "SDL.h"
 
 namespace WinterMute {
 
 typedef void (*ENGINE_LOG_CALLBACK)(char *Text, HRESULT Result, void *Data);
 
+class CBFont;
+class CBFileManager;
+class CBTransitionMgr;
+class CScEngine;
+class CBFontStorage;
+class CBStringTable;
+class CBQuickMsg;
+class CUIWindow;
+class CBViewport;
+class CBRegistry;
+class CBKeyboardState;
 
 #define NUM_MUSIC_CHANNELS 5
 

@@ -28,12 +28,14 @@ THE SOFTWARE.
 
 
 #include "SDL.h"
+#include "BScriptHolder.h"
 
 namespace WinterMute {
 
 class CBSprite;
 class CBSound;
 class CBSurface;
+class CBScriptHolder;
 
 
 class CBObject : public CBScriptHolder {

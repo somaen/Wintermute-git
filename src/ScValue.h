@@ -35,6 +35,9 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
+class CScScript;
+class CBScriptable;
+
 class CScValue : public CBBase, public IWmeDebugProp {
 public:
 	HRESULT DbgSendVariables(IWmeDebugClient *Client, EWmeDebuggerVariableType Type, CScScript *Script, unsigned int ScopeID);

@@ -28,8 +28,13 @@ THE SOFTWARE.
 
 
 #include "BBase.h"
+#include "coll_templ.h"
+#include "persistent.h"
 
 namespace WinterMute {
+
+class CScValue;
+class CBScriptable;
 
 class CScStack : public CBBase {
 public:

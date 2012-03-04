@@ -23,7 +23,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "dcgf.h"
+#include "ScStack.h"
+#include "ScScript.h"
+#include "ScValue.h"
 #include "scriptables/SXMemBuffer.h"
 
 namespace WinterMute {
@@ -263,7 +265,7 @@ HRESULT CSXMemBuffer::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack 
 	else if (strcmp(Name, "SetByte") == 0) {
 		Stack->CorrectParams(2);
 		int Start = Stack->Pop()->GetInt();
-		BYTE Val = (byte )Stack->Pop()->GetInt();
+		byte Val = (byte )Stack->Pop()->GetInt();
 
 		if (!CheckBounds(Script, Start, sizeof(byte ))) Stack->PushBool(false);
 		else {

@@ -26,6 +26,8 @@
 #ifndef WINTERMUTE_PERSISTENT_H
 #define WINTERMUTE_PERSISTENT_H
 
+#include "wintypes.h"
+
 namespace WinterMute {
 	
 	class CBPersistMgr;
@@ -33,7 +35,14 @@ namespace WinterMute {
 	// persistence support
 	typedef void *(WINAPI *PERSISTBUILD)(void);
 	typedef HRESULT(WINAPI *PERSISTLOAD)(void *, CBPersistMgr *);
+	typedef void (*SYS_INSTANCE_CALLBACK)(void *Instance, void *Data);
+} // end of namespace WinterMute
+
+#include "SysClass.h"
+#include "SysClassRegistry.h"
+namespace WinterMute {
 	
+
 #define DECLARE_PERSISTENT(class_name, parent_class)\
 static const char m_ClassName[];\
 static void* WINAPI PersistBuild(void);\
@@ -74,8 +83,6 @@ CSysClassRegistry::GetInstance()->UnregisterInstance(#class_name, p);\
 
 #define TMEMBER(member_name) #member_name, &member_name
 #define TMEMBER_INT(member_name) #member_name, (int*)&member_name
-	
-	typedef void (*SYS_INSTANCE_CALLBACK)(void *Instance, void *Data);
 	
 } // end of namespace WinterMute
 

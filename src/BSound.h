@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "BBase.h"
 #include "dctypes.h"    // Added by ClassView
 #include "BSoundBuffer.h"
+#include "persistent.h"
 
 namespace WinterMute {
 

@@ -23,7 +23,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "dcgf.h"
+#include "persistent.h"
+#include "ScValue.h"
+#include "ScStack.h"
+#include "SysInstance.h"
 #include "scriptables/SXArray.h"
 
 namespace WinterMute {
@@ -57,7 +60,8 @@ CSXArray::CSXArray(CBGame *inGame): CBScriptable(inGame) {
 
 //////////////////////////////////////////////////////////////////////////
 CSXArray::~CSXArray() {
-	SAFE_DELETE(m_Values);
+	delete[] m_Values;
+	m_Values = NULL;
 }
 
 

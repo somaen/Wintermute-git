@@ -26,9 +26,18 @@ THE SOFTWARE.
 #ifndef __WmeSysClassRegistry_H__
 #define __WmeSysClassRegistry_H__
 
+#include "wintypes.h"
+#include "dctypes.h"
+#include "persistent.h"
+#include <set>
+#include <map>
+
 namespace WinterMute {
 
 class CBGame;
+class CBPersistMgr;
+class CSysClass;
+class CSysInstance;
 
 class CSysClassRegistry {
 public:

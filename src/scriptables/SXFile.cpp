@@ -23,7 +23,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "dcgf.h"
+#include "SysClassRegistry.h"
+#include "SysClass.h"
+#include "ScStack.h"
+#include "ScValue.h"
+#include "ScScript.h"
+#include "utils.h"
+#include "BGame.h"
+#include "BFile.h"
+#include "BFileManager.h"
+#include "PlatformSDL.h"
 #include "scriptables/SXFile.h"
 
 namespace WinterMute {
@@ -53,7 +62,8 @@ CSXFile::~CSXFile() {
 
 //////////////////////////////////////////////////////////////////////////
 void CSXFile::Cleanup() {
-	SAFE_DELETE_ARRAY(m_Filename);
+	delete[] m_Filename;
+	m_Filename = NULL;
 	Close();
 }
 

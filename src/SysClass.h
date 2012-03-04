@@ -26,11 +26,14 @@ THE SOFTWARE.
 #ifndef __WmeSysClass_H__
 #define __WmeSysClass_H__
 
-
 #include <set>
+#include <map>
+#include "dctypes.h"
 
 namespace WinterMute {
-
+class CSysInstance;
+class CBGame;
+class CBPersistMgr;
 class CSysClass {
 public:
 	CSysClass(const AnsiString &name, PERSISTBUILD build, PERSISTLOAD load, bool persistent_class);

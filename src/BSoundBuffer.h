@@ -32,6 +32,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
+class CBFile;
 class CBSoundBuffer : public CBBase {
 public:
 

@@ -30,7 +30,8 @@ THE SOFTWARE.
 #include "common/scummsys.h"
 
 //namespace WinterMute {
-
+#include <cstdio>
+#include <stdio.h>
 #ifndef __WIN32__
 
 #define WINAPI
@@ -45,6 +46,7 @@ typedef int BOOL;
 #   define FALSE 0
 #endif
 
+#define PI ((float) 3.141592653589793f)
 
 #define CONST const
 
@@ -55,7 +57,7 @@ typedef short SHORT;
 typedef int32_t LONG;
 
 typedef uint16 WORD;
-typedef uint64_t QWORD;
+//typedef uint32 QWORD; // HACK for now
 typedef int      INT;
 typedef unsigned int UINT;
 

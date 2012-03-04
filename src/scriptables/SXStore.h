@@ -25,8 +25,8 @@ THE SOFTWARE.
 
 #ifndef __WmeSXStore_H__
 #define __WmeSXStore_H__
-
-
+#include "BPersistMgr.h"
+#include "utils.h"
 #include "BObject.h"
 
 namespace WinterMute {

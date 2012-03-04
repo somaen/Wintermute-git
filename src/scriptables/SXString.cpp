@@ -23,7 +23,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "dcgf.h"
+//#include "dcgf.h"
+#include "BGame.h"
+#include "ScStack.h"
+#include "ScValue.h"
+#include "utils.h"
 #include "scriptables/SXString.h"
 #include "scriptables/SXArray.h"
 #include "StringUtil.h"
@@ -66,7 +70,8 @@ void CSXString::SetStringVal(const char *Val) {
 	int Len = strlen(Val);
 	if (Len >= m_Capacity) {
 		m_Capacity = Len + 1;
-		SAFE_DELETE_ARRAY(m_String);
+		delete[] m_String;
+		m_String = NULL;
 		m_String = new char[m_Capacity];
 		memset(m_String, 0, m_Capacity);
 	}
@@ -284,7 +289,8 @@ HRESULT CSXString::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 				Val = new CScValue(Game, StringUtil::WideToAnsi(part).c_str());
 
 			Array->Push(Val);
-			SAFE_DELETE(Val);
+			delete[] Val;
+			Val = NULL;
 		}
 
 		Stack->PushNative(Array, false);
@@ -343,7 +349,7 @@ HRESULT CSXString::ScSetProperty(char *Name, CScValue *Value) {
 			if (NewStr) {
 				memset(NewStr, 0, NewCap);
 				strcpy(NewStr, m_String);
-				SAFE_DELETE_ARRAY(m_String);
+				delete[] m_String;
 				m_String = NewStr;
 				m_Capacity = NewCap;
 			}

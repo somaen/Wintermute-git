@@ -23,8 +23,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "dcgf.h"
+//#include "dcgf.h"
+#include "PlatformSDL.h"
+#include "BDynBuffer.h"
+#include "BGame.h"
 #include "ScValue.h"
+#include "ScScript.h"
 #include "StringUtil.h"
 
 namespace WinterMute {

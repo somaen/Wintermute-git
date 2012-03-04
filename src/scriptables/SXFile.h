@@ -31,6 +31,8 @@ THE SOFTWARE.
 
 namespace WinterMute {
 
+class CBFile;
+
 class CSXFile : public CBScriptable {
 public:
 	DECLARE_PERSISTENT(CSXFile, CBScriptable)

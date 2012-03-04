@@ -26,6 +26,9 @@ THE SOFTWARE.
 #ifndef __WmeBScriptHolder_H__
 #define __WmeBScriptHolder_H__
 
+#include "coll_templ.h"
+#include "BScriptable.h"
+
 namespace WinterMute {
 
 class CBScriptHolder : public CBScriptable {

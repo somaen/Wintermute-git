@@ -31,7 +31,8 @@ THE SOFTWARE.
 #include "wme_debugger.h"
 
 namespace WinterMute {
-
+class CScScript;
+class CScValue;
 class CBDebugger : public CBBase, public IWmeDebugServer {
 public:
 	CBDebugger(CBGame *inGame);

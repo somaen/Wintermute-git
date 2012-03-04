@@ -152,8 +152,6 @@ THE SOFTWARE.
 // big boss
 //#include "BGame.h"
 
-#define PI ((float) 3.141592653589793f)
-
 // macros
 #define RELEASE(obj) if(obj) { obj->Release(); obj = NULL; } else 0
 #define SAFE_DELETE(obj)  if(obj) { delete obj; obj = NULL; } else 0

@@ -32,7 +32,8 @@ THE SOFTWARE.
 #include "wme_debugger.h"
 
 namespace WinterMute {
-
+class CBScriptHolder;
+class CBObject;
 class CScEngine;
 class CScScript : public CBBase, public IWmeDebugScript {
 public:
