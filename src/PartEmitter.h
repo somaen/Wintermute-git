@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "PartForce.h"
 
 namespace WinterMute {
+class CBRegion;
 
 class CPartEmitter : public CBObject {
 public:

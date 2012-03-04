@@ -31,7 +31,16 @@ THE SOFTWARE.
 namespace WinterMute {
 
 class CUIWindow;
-
+class CAdObject;
+class CAdRegion;
+class CBViewport;
+class CAdLayer;
+class CBPoint;
+class CAdWaypointGroup;
+class CAdPath;
+class CAdScaleLevel;
+class CAdRotLevel;
+class CAdPathPoint;
 class CAdScene : public CBObject {
 public:
 

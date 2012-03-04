@@ -47,6 +47,12 @@ typedef int BOOL;
 #endif
 
 #define PI ((float) 3.141592653589793f)
+#define DRGBA(r,g,b,a) ((uint32)((((a)&0xff)<<24)|(((r)&0xff)<<16)|(((g)&0xff)<<8)|((b)&0xff)))
+
+#define D3DCOLGetB(rgb)  ((byte )(rgb))
+#define D3DCOLGetG(rgb)  ((byte )(((WORD)(rgb)) >> 8))
+#define D3DCOLGetR(rgb)  ((byte )((rgb)>>16))
+#define D3DCOLGetA(rgb)  ((byte )((rgb)>>24))
 
 #define CONST const
 

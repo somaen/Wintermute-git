@@ -29,12 +29,16 @@ THE SOFTWARE.
 
 #include "dctypes.h"    // Added by ClassView
 #include "AdTypes.h"    // Added by ClassView
+#include "AdTalkHolder.h"
 #include "BPoint.h" // Added by ClassView
+#include "persistent.h"
+
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
 
 namespace WinterMute {
+class CAdSpriteSet;
 
 class CAdActor : public CAdTalkHolder {
 public:

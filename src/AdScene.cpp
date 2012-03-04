@@ -23,9 +23,36 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "dcgf.h"
 #include "AdScene.h"
+#include "AdActor.h"
+#include "AdEntity.h"
+#include "AdGame.h"
+#include "AdLayer.h"
+#include "AdNodeState.h"
+#include "AdObject.h"
+#include "AdPath.h"
+#include "AdPathPoint.h"
+#include "AdRotLevel.h"
+#include "AdScaleLevel.h"
+#include "AdSceneNode.h"
+#include "AdSceneState.h"
+#include "AdSentence.h"
+#include "AdWaypointGroup.h"
+#include "BDynBuffer.h"
+#include "BFileManager.h"
+#include "BFont.h"
+#include "BGame.h"
+#include "BObject.h"
 #include "BParser.h"
+#include "BPoint.h"
+#include "BRegion.h"
+#include "BScriptable.h"
+#include "BSprite.h"
+#include "BViewport.h"
+#include "PlatformSDL.h"
+#include "ScStack.h"
+#include "ScValue.h"
+#include "ScScript.h"
 #include "UIWindow.h"
 #include <math.h>
 #include <limits.h>
@@ -45,7 +72,8 @@ CAdScene::CAdScene(CBGame *inGame): CBObject(inGame) {
 CAdScene::~CAdScene() {
 	Cleanup();
 	Game->UnregisterObject(m_Fader);
-	SAFE_DELETE(m_PFTarget);
+	delete m_PFTarget;
+	m_PFTarget = NULL;
 }
 
 
@@ -112,7 +140,8 @@ void CAdScene::Cleanup() {
 
 	int i;
 
-	SAFE_DELETE(m_ShieldWindow);
+	delete m_ShieldWindow;
+	m_ShieldWindow = NULL;
 
 	Game->UnregisterObject(m_Fader);
 	m_Fader = NULL;
@@ -144,7 +173,8 @@ void CAdScene::Cleanup() {
 		Game->UnregisterObject(m_Objects[i]);
 	m_Objects.RemoveAll();
 
-	SAFE_DELETE(m_Viewport);
+	delete m_Viewport;
+	m_Viewport = NULL;
 
 	SetDefaults();
 }
@@ -479,7 +509,7 @@ HRESULT CAdScene::LoadFile(char *Filename) {
 
 	HRESULT ret;
 
-	SAFE_DELETE_ARRAY(m_Filename);
+	delete[] m_Filename;
 	m_Filename = new char [strlen(Filename) + 1];
 	strcpy(m_Filename, Filename);
 
@@ -612,7 +642,8 @@ HRESULT CAdScene::LoadBuffer(byte  *Buffer, bool Complete) {
 			CAdLayer *layer = new CAdLayer(Game);
 			if (!layer || FAILED(layer->LoadBuffer(params, false))) {
 				cmd = PARSERR_GENERIC;
-				SAFE_DELETE(layer);
+				delete layer;
+				layer = NULL;
 			} else {
 				Game->RegisterObject(layer);
 				m_Layers.Add(layer);
@@ -629,7 +660,8 @@ HRESULT CAdScene::LoadBuffer(byte  *Buffer, bool Complete) {
 			CAdWaypointGroup *wpt = new CAdWaypointGroup(Game);
 			if (!wpt || FAILED(wpt->LoadBuffer(params, false))) {
 				cmd = PARSERR_GENERIC;
-				SAFE_DELETE(wpt);
+				delete wpt;
+				wpt = NULL;
 			} else {
 				Game->RegisterObject(wpt);
 				m_WaypointGroups.Add(wpt);
@@ -641,7 +673,8 @@ HRESULT CAdScene::LoadBuffer(byte  *Buffer, bool Complete) {
 			CAdScaleLevel *sl = new CAdScaleLevel(Game);
 			if (!sl || FAILED(sl->LoadBuffer(params, false))) {
 				cmd = PARSERR_GENERIC;
-				SAFE_DELETE(sl);
+				delete sl;
+				sl = NULL;
 			} else {
 				Game->RegisterObject(sl);
 				m_ScaleLevels.Add(sl);
@@ -653,7 +686,8 @@ HRESULT CAdScene::LoadBuffer(byte  *Buffer, bool Complete) {
 			CAdRotLevel *rl = new CAdRotLevel(Game);
 			if (!rl || FAILED(rl->LoadBuffer(params, false))) {
 				cmd = PARSERR_GENERIC;
-				SAFE_DELETE(rl);
+				delete rl;
+				rl = NULL;
 			} else {
 				Game->RegisterObject(rl);
 				m_RotLevels.Add(rl);
@@ -665,7 +699,8 @@ HRESULT CAdScene::LoadBuffer(byte  *Buffer, bool Complete) {
 			CAdEntity *entity = new CAdEntity(Game);
 			if (!entity || FAILED(entity->LoadBuffer(params, false))) {
 				cmd = PARSERR_GENERIC;
-				SAFE_DELETE(entity);
+				delete entity;
+				entity = NULL;
 			} else {
 				AddObject(entity);
 			}
@@ -673,10 +708,11 @@ HRESULT CAdScene::LoadBuffer(byte  *Buffer, bool Complete) {
 		break;
 
 		case TOKEN_CURSOR:
-			SAFE_DELETE(m_Cursor);
+			delete m_Cursor;
 			m_Cursor = new CBSprite(Game);
 			if (!m_Cursor || FAILED(m_Cursor->LoadFile((char *)params))) {
-				SAFE_DELETE(m_Cursor);
+				delete m_Cursor;
+				m_Cursor = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
@@ -1217,7 +1253,8 @@ HRESULT CAdScene::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 			AddObject(act);
 			Stack->PushNative(act, true);
 		} else {
-			SAFE_DELETE(act);
+			delete act;
+			act = NULL;
 			Stack->PushNULL();
 		}
 		return S_OK;
@@ -1233,7 +1270,8 @@ HRESULT CAdScene::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 			AddObject(ent);
 			Stack->PushNative(ent, true);
 		} else {
-			SAFE_DELETE(ent);
+			delete ent;
+			ent = NULL;
 			Stack->PushNULL();
 		}
 		return S_OK;

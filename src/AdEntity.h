@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeAdEntity_H__
 #define __WmeAdEntity_H__
 
+#include "AdTalkHolder.h"
+
 namespace WinterMute {
 
 class CAdEntity : public CAdTalkHolder {

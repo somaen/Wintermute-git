@@ -30,7 +30,7 @@ THE SOFTWARE.
 #include "coll_templ.h"
 
 namespace WinterMute {
-
+class CBFrame;
 class CBSprite: public CBScriptHolder {
 public:
 	HRESULT KillAllSounds();

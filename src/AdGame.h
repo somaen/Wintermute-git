@@ -26,10 +26,18 @@ THE SOFTWARE.
 #ifndef __WmeAdGame_H__
 #define __WmeAdGame_H__
 
+#include "AdTypes.h"
 #include "BGame.h"
 
 namespace WinterMute {
-
+class CAdItem;
+class CAdInventory;
+class CAdSceneState;
+class CAdItem;
+class CAdSentence;
+class CAdInventoryBox;
+class CAdResponseContext;
+class CAdResponseBox;
 class CAdGame : public CBGame {
 public:
 	virtual HRESULT OnScriptShutdown(CScScript *Script);

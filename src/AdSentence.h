@@ -31,6 +31,7 @@ THE SOFTWARE.
 #include "dctypes.h"    // Added by ClassView
 
 namespace WinterMute {
+class CAdTalkDef;
 
 class CAdSentence : public CBBase {
 public:

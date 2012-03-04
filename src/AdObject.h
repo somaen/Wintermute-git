@@ -26,12 +26,17 @@ THE SOFTWARE.
 #ifndef __WmeAdObject_H__
 #define __WmeAdObject_H__
 
+#include "AdTypes.h"
 #include "PartEmitter.h"
 
 namespace WinterMute {
 
 class CAdWaypointGroup;
 class CAdRegion;
+class CAdSentence;
+class CBFont;
+class CBRegion;
+class CAdInventory;
 
 #define MAX_NUM_REGIONS 10
 

@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeAdRegion_H__
 #define __WmeAdRegion_H__
 
+#include "BRegion.h"
+
 namespace WinterMute {
 
 class CAdRegion : public CBRegion {

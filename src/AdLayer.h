@@ -27,7 +27,7 @@ THE SOFTWARE.
 #define __WmeAdLayer_H__
 
 namespace WinterMute {
-
+class CAdSceneNode;
 class CAdLayer : public CBObject {
 public:
 	bool m_CloseUp;
