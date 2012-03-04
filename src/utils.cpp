@@ -254,12 +254,12 @@ void CBUtils::RGBtoHSL(uint32 RGBColor, byte *OutH, byte *OutS, byte *OutL) {
 	float var_B = (D3DCOLGetB(RGBColor) / 255.0f);
 
 	//Min. value of RGB
-	float var_Min = min(var_R, var_G);
-	var_Min = min(var_Min, var_B);
+	float var_Min = std::min(var_R, var_G);
+	var_Min = std::min(var_Min, var_B);
 
 	//Max. value of RGB
-	float var_Max = max(var_R, var_G);
-	var_Max = max(var_Max, var_B);
+	float var_Max = std::max(var_R, var_G);
+	var_Max = std::max(var_Max, var_B);
 
 	//Delta RGB value
 	float del_Max = var_Max - var_Min;

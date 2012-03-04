@@ -39,7 +39,7 @@ public:
 	uint32 m_TimeDate1;
 	uint32 m_Flags;
 	uint32 m_JournalTime;
-	string m_Filename;
+	std::string m_Filename;
 	uint32 m_CompressedLength;
 	uint32 m_Length;
 	uint32 m_Offset;

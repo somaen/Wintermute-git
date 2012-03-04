@@ -25,6 +25,9 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "scriptables/SXMath.h"
+#include "ScStack.h"
+#include "ScValue.h"
+#include "persistent.h"
 #include <math.h>
 
 namespace WinterMute {

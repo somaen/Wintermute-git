@@ -28,7 +28,6 @@ THE SOFTWARE.
 
 
 #include <set>
-using namespace std; //FIXME: Don't do this in a header
 
 namespace WinterMute {
 

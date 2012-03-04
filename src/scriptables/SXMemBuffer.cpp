@@ -37,7 +37,7 @@ CSXMemBuffer::CSXMemBuffer(CBGame *inGame, CScStack *Stack): CBScriptable(inGame
 	m_Size = 0;
 
 	int NewSize = Stack->Pop()->GetInt();
-	Resize(max(0, NewSize));
+	Resize(std::max(0, NewSize));
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -118,7 +118,7 @@ HRESULT CSXMemBuffer::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack 
 	if (strcmp(Name, "SetSize") == 0) {
 		Stack->CorrectParams(1);
 		int NewSize = Stack->Pop()->GetInt();
-		NewSize = max(0, NewSize);
+		NewSize = std::max(0, NewSize);
 		if (SUCCEEDED(Resize(NewSize))) Stack->PushBool(true);
 		else Stack->PushBool(false);
 

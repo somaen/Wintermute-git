@@ -33,8 +33,6 @@ THE SOFTWARE.
 #include <string>
 #include "wme_debugger.h"
 
-using namespace std; //FIXME: Don't do this in a header
-
 namespace WinterMute {
 
 class CScValue : public CBBase, public IWmeDebugProp {
@@ -94,8 +92,8 @@ public:
 	CScValue(CBGame *inGame, double Val);
 	CScValue(CBGame *inGame, const char *Val);
 	virtual ~CScValue();
-	map<string, CScValue *> m_ValObject;
-	map<string, CScValue *>::iterator m_ValIter;
+	std::map<std::string, CScValue *> m_ValObject;
+	std::map<std::string, CScValue *>::iterator m_ValIter;
 
 	bool SetProperty(const char *PropName, int Value);
 	bool SetProperty(const char *PropName, const char *Value);

@@ -64,10 +64,10 @@ public:
 	CBArray<CBPackage *, CBPackage *> m_Packages;
 	CBArray<CBFile *, CBFile *> m_OpenFiles;
 
-	map<string, CBFileEntry *> m_Files;
+	std::map<std::string, CBFileEntry *> m_Files;
 private:
 	HRESULT RegisterPackage(const char *Path, const char *Name, bool SearchSignature = false);
-	map<string, CBFileEntry *>::iterator m_FilesIter;
+	std::map<std::string, CBFileEntry *>::iterator m_FilesIter;
 	bool IsValidPackage(const AnsiString &fileName) const;
 
 };

@@ -40,10 +40,10 @@ public:
 	HRESULT AddString(const char *Key, const char *Val, bool ReportDuplicities = true);
 	CBStringTable(CBGame *inGame);
 	virtual ~CBStringTable();
-	map<string, string> m_Strings;
+	std::map<std::string, std::string> m_Strings;
 	char *GetKey(const char *Str);
 private:
-	map<string, string>::iterator m_StringsIter;
+	std::map<std::string, std::string>::iterator m_StringsIter;
 
 };
 

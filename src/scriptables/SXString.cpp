@@ -42,7 +42,7 @@ CSXString::CSXString(CBGame *inGame, CScStack *Stack): CBScriptable(inGame) {
 	CScValue *Val = Stack->Pop();
 
 	if (Val->IsInt()) {
-		m_Capacity = max(0, Val->GetInt());
+		m_Capacity = std::max(0, Val->GetInt());
 		if (m_Capacity > 0) {
 			m_String = new char[m_Capacity];
 			memset(m_String, 0, m_Capacity);
@@ -255,7 +255,7 @@ HRESULT CSXString::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 		else
 			delims = StringUtil::AnsiToWide(Separators);
 
-		vector<WideString> parts;
+		std::vector<WideString> parts;
 
 
 		size_t start, pos;
@@ -275,7 +275,7 @@ HRESULT CSXString::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 
 		} while (pos != WideString::npos);
 
-		for (vector<WideString>::iterator it = parts.begin(); it != parts.end(); ++it) {
+		for (std::vector<WideString>::iterator it = parts.begin(); it != parts.end(); ++it) {
 			WideString &part = (*it);
 
 			if (Game->m_TextEncoding == TEXT_UTF8)

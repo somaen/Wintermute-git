@@ -808,12 +808,12 @@ void CScEngine::DisableProfiling() {
 void CScEngine::DumpStats() {
 	uint32 totalTime = CBPlatform::GetTime() - m_ProfilingStartTime;
 
-	typedef vector <pair<uint32, std::string> > TimeVector;
+	typedef std::vector <std::pair<uint32, std::string> > TimeVector;
 	TimeVector times;
 
 	ScriptTimes::iterator it;
 	for (it = m_ScriptTimes.begin(); it != m_ScriptTimes.end(); it++) {
-		times.push_back(pair<uint32, std::string> (it->second, it->first));
+		times.push_back(std::pair<uint32, std::string> (it->second, it->first));
 	}
 	std::sort(times.begin(), times.end());
 

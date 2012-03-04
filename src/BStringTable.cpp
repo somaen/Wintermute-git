@@ -52,7 +52,7 @@ HRESULT CBStringTable::AddString(const char *Key, const char *Val, bool ReportDu
 		return S_OK;
 	}
 
-	string final_key = Key;
+	std::string final_key = Key;
 	StringUtil::ToLowerCase(final_key);
 
 	m_StringsIter = m_Strings.find(final_key);

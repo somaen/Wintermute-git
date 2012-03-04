@@ -30,8 +30,6 @@ THE SOFTWARE.
 #include <list>
 #include <vector>
 
-using namespace std; //FIXME: Don't do this in a header
-
 namespace WinterMute {
 
 typedef std::string AnsiString;

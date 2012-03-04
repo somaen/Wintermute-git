@@ -29,6 +29,7 @@ THE SOFTWARE.
 
 #include "BNamedObject.h"
 #include "wme_debugger.h"
+#include "persistent.h"
 
 namespace WinterMute {
 

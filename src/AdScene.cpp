@@ -401,7 +401,7 @@ int CAdScene::GetPointsDist(CBPoint p1, CBPoint p2, CBObject *requester) {
 			X += xStep;
 		}
 	}
-	return max(xLength, yLength);
+	return std::max(xLength, yLength);
 }
 
 
@@ -855,10 +855,10 @@ HRESULT CAdScene::TraverseNodes(bool Update) {
 				m_LastTimeH = Game->m_Timer;
 				if (m_OffsetLeft < m_TargetOffsetLeft) {
 					m_OffsetLeft += m_ScrollPixelsH;
-					m_OffsetLeft = min(m_OffsetLeft, m_TargetOffsetLeft);
+					m_OffsetLeft = std::min(m_OffsetLeft, m_TargetOffsetLeft);
 				} else if (m_OffsetLeft > m_TargetOffsetLeft) {
 					m_OffsetLeft -= m_ScrollPixelsH;
-					m_OffsetLeft = max(m_OffsetLeft, m_TargetOffsetLeft);
+					m_OffsetLeft = std::max(m_OffsetLeft, m_TargetOffsetLeft);
 				}
 			}
 
@@ -867,10 +867,10 @@ HRESULT CAdScene::TraverseNodes(bool Update) {
 				m_LastTimeV = Game->m_Timer;
 				if (m_OffsetTop < m_TargetOffsetTop) {
 					m_OffsetTop += m_ScrollPixelsV;
-					m_OffsetTop = min(m_OffsetTop, m_TargetOffsetTop);
+					m_OffsetTop = std::min(m_OffsetTop, m_TargetOffsetTop);
 				} else if (m_OffsetTop > m_TargetOffsetTop) {
 					m_OffsetTop -= m_ScrollPixelsV;
-					m_OffsetTop = max(m_OffsetTop, m_TargetOffsetTop);
+					m_OffsetTop = std::max(m_OffsetTop, m_TargetOffsetTop);
 				}
 			}
 
@@ -1158,11 +1158,11 @@ void CAdScene::ScrollTo(int OffsetX, int OffsetY) {
 	int OrigOffsetLeft = m_TargetOffsetLeft;
 	int OrigOffsetTop = m_TargetOffsetTop;
 
-	m_TargetOffsetLeft = max(0, OffsetX - ViewportWidth / 2);
-	m_TargetOffsetLeft = min(m_TargetOffsetLeft, m_Width - ViewportWidth);
+	m_TargetOffsetLeft = std::max(0, OffsetX - ViewportWidth / 2);
+	m_TargetOffsetLeft = std::min(m_TargetOffsetLeft, m_Width - ViewportWidth);
 
-	m_TargetOffsetTop = max(0, OffsetY - ViewportHeight / 2);
-	m_TargetOffsetTop = min(m_TargetOffsetTop, m_Height - ViewportHeight);
+	m_TargetOffsetTop = std::max(0, OffsetY - ViewportHeight / 2);
+	m_TargetOffsetTop = std::min(m_TargetOffsetTop, m_Height - ViewportHeight);
 
 
 	if (Game->m_MainObject && Game->m_MainObject->m_Is3D) {
@@ -1192,11 +1192,11 @@ void CAdScene::SkipTo(int OffsetX, int OffsetY) {
 	int ViewportWidth, ViewportHeight;
 	GetViewportSize(&ViewportWidth, &ViewportHeight);
 
-	m_OffsetLeft = max(0, OffsetX - ViewportWidth / 2);
-	m_OffsetLeft = min(m_OffsetLeft, m_Width - ViewportWidth);
+	m_OffsetLeft = std::max(0, OffsetX - ViewportWidth / 2);
+	m_OffsetLeft = std::min(m_OffsetLeft, m_Width - ViewportWidth);
 
-	m_OffsetTop = max(0, OffsetY - ViewportHeight / 2);
-	m_OffsetTop = min(m_OffsetTop, m_Height - ViewportHeight);
+	m_OffsetTop = std::max(0, OffsetY - ViewportHeight / 2);
+	m_OffsetTop = std::min(m_OffsetTop, m_Height - ViewportHeight);
 
 	m_TargetOffsetLeft = m_OffsetLeft;
 	m_TargetOffsetTop = m_OffsetTop;
@@ -1872,8 +1872,8 @@ HRESULT CAdScene::ScSetProperty(char *Name, CScValue *Value) {
 		int ViewportWidth, ViewportHeight;
 		GetViewportSize(&ViewportWidth, &ViewportHeight);
 
-		m_OffsetLeft = max(0, m_OffsetLeft - ViewportWidth / 2);
-		m_OffsetLeft = min(m_OffsetLeft, m_Width - ViewportWidth);
+		m_OffsetLeft = std::max(0, m_OffsetLeft - ViewportWidth / 2);
+		m_OffsetLeft = std::min(m_OffsetLeft, m_Width - ViewportWidth);
 		m_TargetOffsetLeft = m_OffsetLeft;
 
 		return S_OK;
@@ -1888,8 +1888,8 @@ HRESULT CAdScene::ScSetProperty(char *Name, CScValue *Value) {
 		int ViewportWidth, ViewportHeight;
 		GetViewportSize(&ViewportWidth, &ViewportHeight);
 
-		m_OffsetTop = max(0, m_OffsetTop - ViewportHeight / 2);
-		m_OffsetTop = min(m_OffsetTop, m_Height - ViewportHeight);
+		m_OffsetTop = std::max(0, m_OffsetTop - ViewportHeight / 2);
+		m_OffsetTop = std::min(m_OffsetTop, m_Height - ViewportHeight);
 		m_TargetOffsetTop = m_OffsetTop;
 
 		return S_OK;

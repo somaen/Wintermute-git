@@ -757,8 +757,8 @@ void CAdActor::GetNextStep() {
 	MaxStepX = abs(m_CurrentSprite->m_MoveX);
 	MaxStepY = abs(m_CurrentSprite->m_MoveY);
 
-	MaxStepX = max(MaxStepX, MaxStepY);
-	MaxStepX = max(MaxStepX, 1);
+	MaxStepX = std::max(MaxStepX, MaxStepY);
+	MaxStepX = std::max(MaxStepX, 1);
 
 	while (m_PFCount > 0 && MaxStepX >= 0) {
 		m_PFX += m_PFStepX;
@@ -803,7 +803,7 @@ void CAdActor::GetNextStep() {
 
 //////////////////////////////////////////////////////////////////////////
 void CAdActor::InitLine(CBPoint StartPt, CBPoint EndPt) {
-	m_PFCount = max((abs(EndPt.x - StartPt.x)) , (abs(EndPt.y - StartPt.y)));
+	m_PFCount = std::max((abs(EndPt.x - StartPt.x)) , (abs(EndPt.y - StartPt.y)));
 
 	m_PFStepX = (double)(EndPt.x - StartPt.x) / m_PFCount;
 	m_PFStepY = (double)(EndPt.y - StartPt.y) / m_PFCount;

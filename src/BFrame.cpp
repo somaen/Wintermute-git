@@ -637,7 +637,7 @@ HRESULT CBFrame::ScSetProperty(char *Name, CScValue *Value) {
 	// Delay
 	//////////////////////////////////////////////////////////////////////////
 	if (strcmp(Name, "Delay") == 0) {
-		m_Delay = max(0, Value->GetInt());
+		m_Delay = std::max(0, Value->GetInt());
 		return S_OK;
 	}
 

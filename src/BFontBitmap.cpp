@@ -493,7 +493,7 @@ HRESULT CBFontBitmap::GetWidths() {
 				if (xxx + col < 0 || xxx + col >= surf->GetWidth() || yyy + row < 0 || yyy + row >= surf->GetHeight()) continue;
 				if (!surf->IsTransparentAtLite(xxx + col, yyy + row)) {
 					//min_col = col;
-					min_col = max(col, min_col);
+					min_col = std::max(col, min_col);
 					break;
 				}
 			}

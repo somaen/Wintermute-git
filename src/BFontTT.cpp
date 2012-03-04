@@ -251,7 +251,7 @@ CBSurface *CBFontTT::RenderTextToTexture(const WideString &text, int width, TTex
 			GlyphInfo *glyph = m_GlyphCache->GetGlyph(ch);
 			if (!glyph) continue;
 
-			textOffset = max(textOffset, glyph->GetBearingY());
+			textOffset = std::max(textOffset, glyph->GetBearingY());
 		}
 
 
@@ -767,7 +767,7 @@ void CBFontTT::MeasureText(const WideString &text, int maxWidth, int maxHeight, 
 	TextLineList::iterator it;
 	for (it = lines.begin(); it != lines.end(); ++it) {
 		TextLine *line = (*it);
-		textWidth = max(textWidth, line->GetWidth());
+		textWidth = std::max(textWidth, line->GetWidth());
 		SAFE_DELETE(line);
 	}
 }

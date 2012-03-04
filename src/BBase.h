@@ -26,7 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeBBase_H__
 #define __WmeBBase_H__
 
-
+#include "wintypes.h"
+#include "dctypes.h"
 #include <map>
 #include <string>
 
@@ -48,8 +49,8 @@ public:
 	CBBase(CBGame *GameOwner);
 	virtual ~CBBase();
 
-	map<string, string> m_EditorProps;
-	map<string, string>::iterator m_EditorPropsIter;
+	std::map<std::string, std::string> m_EditorProps;
+	std::map<std::string, std::string>::iterator m_EditorPropsIter;
 };
 
 } // end of namespace WinterMute

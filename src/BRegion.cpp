@@ -431,9 +431,9 @@ bool CBRegion::PtInPolygon(int X, int Y) {
 		p2.x = (double)m_Points[i % m_Points.GetSize()]->x;
 		p2.y = (double)m_Points[i % m_Points.GetSize()]->y;
 
-		if (p.y > min(p1.y, p2.y)) {
-			if (p.y <= max(p1.y, p2.y)) {
-				if (p.x <= max(p1.x, p2.x)) {
+		if (p.y > std::min(p1.y, p2.y)) {
+			if (p.y <= std::max(p1.y, p2.y)) {
+				if (p.x <= std::max(p1.x, p2.x)) {
 					if (p1.y != p2.y) {
 						xinters = (p.y - p1.y) * (p2.x - p1.x) / (p2.y - p1.y) + p1.x;
 						if (p1.x == p2.x || p.x <= xinters)
@@ -459,11 +459,11 @@ HRESULT CBRegion::GetBoundingRect(RECT *Rect) {
 		int MinX = INT_MAX, MinY = INT_MAX, MaxX = INT_MIN, MaxY = INT_MIN;
 
 		for (int i = 0; i < m_Points.GetSize(); i++) {
-			MinX = min(MinX, m_Points[i]->x);
-			MinY = min(MinY, m_Points[i]->y);
+			MinX = std::min(MinX, m_Points[i]->x);
+			MinY = std::min(MinY, m_Points[i]->y);
 
-			MaxX = max(MaxX, m_Points[i]->x);
-			MaxY = max(MaxY, m_Points[i]->y);
+			MaxX = std::max(MaxX, m_Points[i]->x);
+			MaxY = std::max(MaxY, m_Points[i]->y);
 		}
 		CBPlatform::SetRect(Rect, MinX, MinY, MaxX, MaxY);
 	}

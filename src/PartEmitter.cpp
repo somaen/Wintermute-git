@@ -239,7 +239,7 @@ HRESULT CPartEmitter::UpdateInternal(uint32 CurrentTime, uint32 TimerDelta) {
 				return S_OK;
 			}
 
-			int ToGen = min(m_GenAmount, m_MaxParticles - NumLive);
+			int ToGen = std::min(m_GenAmount, m_MaxParticles - NumLive);
 			while (ToGen > 0) {
 				int FirstDeadIndex = -1;
 				for (int i = 0; i < m_Particles.GetSize(); i++) {

@@ -72,7 +72,7 @@ HRESULT CAdInventoryBox::Listen(CBScriptHolder *param1, uint32 param2) {
 			m_Visible = false;
 		} else if (CBPlatform::stricmp(obj->m_Name, "prev") == 0) {
 			m_ScrollOffset -= m_ScrollBy;
-			m_ScrollOffset = max(m_ScrollOffset, 0);
+			m_ScrollOffset = std::max(m_ScrollOffset, 0);
 		} else if (CBPlatform::stricmp(obj->m_Name, "next") == 0) {
 			m_ScrollOffset += m_ScrollBy;
 		} else return CBObject::Listen(param1, param2);

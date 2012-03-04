@@ -460,10 +460,10 @@ BOOL CBPlatform::IntersectRect(LPRECT lprcDst, CONST LPRECT lprcSrc1, CONST LPRE
 		SetRectEmpty(lprcDst);
 		return FALSE;
 	}
-	lprcDst->left   = max(lprcSrc1->left, lprcSrc2->left);
-	lprcDst->right  = min(lprcSrc1->right, lprcSrc2->right);
-	lprcDst->top    = max(lprcSrc1->top, lprcSrc2->top);
-	lprcDst->bottom = min(lprcSrc1->bottom, lprcSrc2->bottom);
+	lprcDst->left   = std::max(lprcSrc1->left, lprcSrc2->left);
+	lprcDst->right  = std::min(lprcSrc1->right, lprcSrc2->right);
+	lprcDst->top    = std::max(lprcSrc1->top, lprcSrc2->top);
+	lprcDst->bottom = std::min(lprcSrc1->bottom, lprcSrc2->bottom);
 
 	return TRUE;
 }
@@ -481,10 +481,10 @@ BOOL CBPlatform::UnionRect(LPRECT lprcDst, RECT *lprcSrc1, RECT *lprcSrc2) {
 		if (IsRectEmpty(lprcSrc2)) {
 			*lprcDst = *lprcSrc1;
 		} else {
-			lprcDst->left   = min(lprcSrc1->left, lprcSrc2->left);
-			lprcDst->top    = min(lprcSrc1->top, lprcSrc2->top);
-			lprcDst->right  = max(lprcSrc1->right, lprcSrc2->right);
-			lprcDst->bottom = max(lprcSrc1->bottom, lprcSrc2->bottom);
+			lprcDst->left   = std::min(lprcSrc1->left, lprcSrc2->left);
+			lprcDst->top    = std::min(lprcSrc1->top, lprcSrc2->top);
+			lprcDst->right  = std::max(lprcSrc1->right, lprcSrc2->right);
+			lprcDst->bottom = std::max(lprcSrc1->bottom, lprcSrc2->bottom);
 		}
 	}
 

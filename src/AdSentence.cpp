@@ -166,9 +166,9 @@ HRESULT CAdSentence::Display() {
 		}
 
 
-		x = max(x, 0);
-		x = min(x, Game->m_Renderer->m_Width - m_Width);
-		y = max(y, 0);
+		x = std::max(x, 0);
+		x = std::min(x, Game->m_Renderer->m_Width - m_Width);
+		y = std::max(y, 0);
 
 		m_Font->DrawText((byte  *)m_Text, x, y, m_Width, m_Align);
 	}
