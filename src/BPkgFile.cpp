@@ -61,11 +61,11 @@ CBPkgFile::~CBPkgFile() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBPkgFile::Open(const char *Filename) {
+HRESULT CBPkgFile::Open(Common::String Filename) {
 	Close();
 
 	char fileName[MAX_PATH];
-	strcpy(fileName, Filename);
+	strcpy(fileName, Filename.c_str());
 
 	// correct slashes
 	for (int i = 0; i < strlen(fileName); i++) {

@@ -42,10 +42,10 @@ CBResourceFile::~CBResourceFile() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBResourceFile::Open(const char *Filename) {
+HRESULT CBResourceFile::Open(Common::String Filename) {
 	Close();
 
-	if (CBResources::GetFile(Filename, m_Data, m_Size)) {
+	if (CBResources::GetFile(Filename.c_str(), m_Data, m_Size)) {
 		m_Pos = 0;
 		return S_OK;
 	}

@@ -45,13 +45,13 @@ CBDiskFile::~CBDiskFile() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBDiskFile::Open(const char *Filename) {
+HRESULT CBDiskFile::Open(Common::String Filename) {
 	Close();
 
 	char FullPath[MAX_PATH];
 
 	for (int i = 0; i < Game->m_FileManager->m_SinglePaths.GetSize(); i++) {
-		sprintf(FullPath, "%s%s", Game->m_FileManager->m_SinglePaths[i], Filename);
+		sprintf(FullPath, "%s%s", Game->m_FileManager->m_SinglePaths[i], Filename.c_str());
 		CorrectSlashes(FullPath);
 
 		m_File = Common::createFileStream(FullPath);
@@ -61,7 +61,7 @@ HRESULT CBDiskFile::Open(const char *Filename) {
 
 	// if we didn't find it in search paths, try to open directly
 	if (!m_File) {
-		strcpy(FullPath, Filename);
+		strcpy(FullPath, Filename.c_str());
 		CorrectSlashes(FullPath);
 		m_File = Common::createFileStream(FullPath);
 	}
@@ -81,14 +81,14 @@ HRESULT CBDiskFile::Open(const char *Filename) {
 
 			BYTE *CompBuffer = new byte[CompSize];
 			if (!CompBuffer) {
-				Game->LOG(0, "Error allocating memory for compressed file '%s'", Filename);
+				Game->LOG(0, "Error allocating memory for compressed file '%s'", Filename.c_str());
 				Close();
 				return E_FAIL;
 			}
 
 			m_Data = new byte[UncompSize];
 			if (!m_Data) {
-				Game->LOG(0, "Error allocating buffer for file '%s'", Filename);
+				Game->LOG(0, "Error allocating buffer for file '%s'", Filename.c_str());
 				delete [] CompBuffer;
 				Close();
 				return E_FAIL;
@@ -97,7 +97,7 @@ HRESULT CBDiskFile::Open(const char *Filename) {
 			m_File->read(CompBuffer, CompSize);
 
 			if (uncompress(m_Data, (uLongf *)&UncompSize, CompBuffer, CompSize) != Z_OK) {
-				Game->LOG(0, "Error uncompressing file '%s'", Filename);
+				Game->LOG(0, "Error uncompressing file '%s'", Filename.c_str());
 				delete [] CompBuffer;
 				Close();
 				return E_FAIL;

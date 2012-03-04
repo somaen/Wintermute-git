@@ -46,13 +46,13 @@ CBSaveThumbFile::~CBSaveThumbFile() {
 
 
 //////////////////////////////////////////////////////////////////////////
-HRESULT CBSaveThumbFile::Open(const char *Filename) {
+HRESULT CBSaveThumbFile::Open(Common::String Filename) {
 	Close();
 
-	if (CBPlatform::strnicmp(Filename, "savegame:", 9) != 0) return E_FAIL;
+	if (CBPlatform::strnicmp(Filename.c_str(), "savegame:", 9) != 0) return E_FAIL;
 
-	char *TempFilename = new char[strlen(Filename) - 8];
-	strcpy(TempFilename, Filename + 9);
+	char *TempFilename = new char[strlen(Filename.c_str()) - 8];
+	strcpy(TempFilename, Filename.c_str() + 9);
 	for (int i = 0; i < strlen(TempFilename); i++) {
 		if (TempFilename[i] < '0' || TempFilename[i] > '9') {
 			TempFilename[i] = '\0';

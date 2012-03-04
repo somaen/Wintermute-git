@@ -28,6 +28,7 @@ THE SOFTWARE.
 
 
 #include "BBase.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -44,7 +45,7 @@ public:
 	virtual HRESULT Seek(uint32 Pos, TSeek Origin = SEEK_TO_BEGIN) = 0;
 	virtual HRESULT Read(void *Buffer, uint32 Size) = 0;
 	virtual HRESULT Close() = 0;
-	virtual HRESULT Open(const char *Filename) = 0;
+	virtual HRESULT Open(Common::String Filename) = 0;
 	virtual bool IsEOF();
 	CBFile(CBGame *inGame);
 	virtual ~CBFile();
