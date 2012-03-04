@@ -24,7 +24,7 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
-#include "SXFile.h"
+#include "scriptables/SXFile.h"
 
 namespace WinterMute {
 

@@ -24,7 +24,7 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
-#include "SXArray.h"
+#include "scriptables/SXArray.h"
 
 namespace WinterMute {
 

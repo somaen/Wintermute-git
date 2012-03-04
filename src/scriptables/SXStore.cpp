@@ -24,7 +24,7 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
-#include "SXStore.h"
+#include "scriptables/SXStore.h"
 #include "StringUtil.h"
 
 #ifdef __IPHONEOS__

@@ -24,8 +24,8 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
-#include "SXString.h"
-#include "SXArray.h"
+#include "scriptables/SXString.h"
+#include "scriptables/SXArray.h"
 #include "StringUtil.h"
 #include <vector>
 
