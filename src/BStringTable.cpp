@@ -23,7 +23,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "dcgf.h"
+#include "PlatformSDL.h"
+#include "BFileManager.h"
+#include "BGame.h"
 #include "BStringTable.h"
 #include "StringUtil.h"
 
