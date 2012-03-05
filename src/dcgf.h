@@ -110,7 +110,6 @@ THE SOFTWARE.
 #include "AdActor.h"
 #include "AdEntity.h"
 #include "AdSceneNode.h"
-#include "AdRegion.h"
 #include "AdWaypointGroup.h"
 
 // macros
