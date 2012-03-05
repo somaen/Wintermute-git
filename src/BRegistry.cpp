@@ -23,8 +23,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "dcgf.h"
 #include <fstream>
+#include "BGame.h"
 #include "BRegistry.h"
 #include "PathUtil.h"
 #include "StringUtil.h"
@@ -44,7 +44,8 @@ CBRegistry::CBRegistry(CBGame *inGame): CBBase(inGame) {
 //////////////////////////////////////////////////////////////////////////
 CBRegistry::~CBRegistry() {
 	SaveValues();
-	SAFE_DELETE_ARRAY(m_IniName);
+	delete[] m_IniName;
+	m_IniName = NULL;
 }
 
 
@@ -112,7 +113,8 @@ bool CBRegistry::WriteBool(const AnsiString &subKey, const AnsiString &key, bool
 
 //////////////////////////////////////////////////////////////////////////
 void CBRegistry::SetIniName(char *Name) {
-	SAFE_DELETE_ARRAY(m_IniName);
+	delete[] m_IniName;
+	m_IniName = NULL;
 
 	if (strchr(Name, '\\') == NULL && strchr(Name, '/') == NULL) {
 		m_IniName = new char [strlen(Name) + 3];
