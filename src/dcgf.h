@@ -76,7 +76,6 @@ THE SOFTWARE.
 
 // base classes
 #include "BStringTable.h"
-#include "BRegistry.h"
 #include "BPersistMgr.h"
 #include "BScriptable.h"
 #include "BScriptHolder.h"

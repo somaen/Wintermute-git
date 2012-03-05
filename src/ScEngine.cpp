@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "ScEngine.h"
 #include "StringUtil.h"
 #include "ScValue.h"
+#include "BRegistry.h"
 #include <algorithm>
 #include <vector>
 

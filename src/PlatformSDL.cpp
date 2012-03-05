@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "BRenderSDL.h"
 #include "PathUtil.h"
 #include "PlatformSDL.h"
+#include "BRegistry.h"
 #include <boost/filesystem.hpp>
 
 #ifdef __WIN32__

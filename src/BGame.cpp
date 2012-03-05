@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BGame.h"
 #include "BFile.h"
+#include "BRegistry.h"
 #include "BRenderSDL.h"
 #include "BSurfaceSDL.h"
 #include "BQuickMsg.h"

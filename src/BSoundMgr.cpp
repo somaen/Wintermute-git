@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BSoundMgr.h"
+#include "BRegistry.h"
 #include "PathUtil.h"
 #include "StringUtil.h"
 
