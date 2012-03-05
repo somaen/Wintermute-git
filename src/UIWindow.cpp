@@ -40,6 +40,7 @@ THE SOFTWARE.
 #include "BFont.h"
 #include "BStringTable.h"
 #include "ScScript.h"
+#include "ScStack.h"
 #include "BSprite.h"
 #include "BFileManager.h"
 

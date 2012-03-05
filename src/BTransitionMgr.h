@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeBTransitionMgr_H__
 #define __WmeBTransitionMgr_H__
 
+#include "BBase.h"
+
 namespace WinterMute {
 
 class CBTransitionMgr : public CBBase {

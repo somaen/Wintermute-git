@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "ScEngine.h"
 #include "ScScript.h"
+#include "ScStack.h"
 
 namespace WinterMute {
 

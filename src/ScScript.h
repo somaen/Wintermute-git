@@ -29,12 +29,15 @@ THE SOFTWARE.
 
 #include "BBase.h"
 #include "dcscript.h"   // Added by ClassView
+#include "coll_templ.h"
+
 #include "wme_debugger.h"
 
 namespace WinterMute {
 class CBScriptHolder;
 class CBObject;
 class CScEngine;
+class CScStack;
 class CScScript : public CBBase, public IWmeDebugScript {
 public:
 	HRESULT DbgSendScript(IWmeDebugClient *Client);

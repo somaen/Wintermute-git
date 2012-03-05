@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "AdResponseContext.h"
+#include "BPersistMgr.h"
 
 namespace WinterMute {
 

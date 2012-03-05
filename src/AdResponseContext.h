@@ -26,6 +26,9 @@ THE SOFTWARE.
 #ifndef __WmeAdResponseContext_H__
 #define __WmeAdResponseContext_H__
 
+#include "persistent.h"
+#include "BBase.h"
+
 namespace WinterMute {
 
 class CAdResponseContext : public CBBase {

@@ -26,7 +26,9 @@ THE SOFTWARE.
 #ifndef __WmeAdSceneState_H__
 #define __WmeAdSceneState_H__
 
+#include "persistent.h"
 #include "BBase.h"
+#include "coll_templ.h"
 
 namespace WinterMute {
 class CAdNodeState;

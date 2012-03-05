@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "BObject.h"
 #include "BParser.h"
 #include "ScValue.h"
+#include "ScStack.h"
 #include "BSound.h"
 #include "BSoundMgr.h"
 #include "BGame.h"

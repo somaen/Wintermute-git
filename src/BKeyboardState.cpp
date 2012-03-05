@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BKeyboardState.h"
 #include "ScValue.h"
+#include "ScStack.h"
 
 namespace WinterMute {
 

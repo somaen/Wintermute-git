@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "StringUtil.h"
 #include "ScValue.h"
 #include "ScScript.h"
+#include "ScStack.h"
 #include "SXMath.h"
 #include "BRegistry.h"
 #include "BGame.h"

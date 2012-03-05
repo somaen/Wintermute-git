@@ -28,6 +28,7 @@ THE SOFTWARE.
 
 
 #include "BBase.h"
+#include "persistent.h"
 #include "dcscript.h"   // Added by ClassView
 #include <map>
 #include <string>

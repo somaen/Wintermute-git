@@ -24,7 +24,9 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "persistent.h"
 #include "PartForce.h"
+#include "BPersistMgr.h"
 
 namespace WinterMute {
 

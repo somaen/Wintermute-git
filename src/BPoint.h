@@ -26,6 +26,9 @@ THE SOFTWARE.
 #ifndef __WmeBPoint_H__
 #define __WmeBPoint_H__
 
+#include "persistent.h"
+#include "BBase.h"
+
 namespace WinterMute {
 
 class CBPoint: public CBBase {

@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BDynBuffer.h"
 #include "ScValue.h"
 #include "ScScript.h"
+#include "ScStack.h"
 #include "BGame.h"
 #include "BSprite.h"
 

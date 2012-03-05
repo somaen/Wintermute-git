@@ -31,6 +31,7 @@ THE SOFTWARE.
 #include "AdGame.h"
 #include "BParser.h"
 #include "ScValue.h"
+#include "ScStack.h"
 #include "BObject.h"
 #include "BSound.h"
 #include "AdScene.h"
@@ -43,6 +44,7 @@ THE SOFTWARE.
 #include "ScScript.h"
 #include "BRegion.h"
 #include "BFileManager.h"
+#include "AdPath.h"
 #include <math.h>
 
 namespace WinterMute {

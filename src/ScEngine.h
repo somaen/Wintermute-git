@@ -26,7 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeScEngine_H__
 #define __WmeScEngine_H__
 
-
+#include "persistent.h"
+#include "coll_templ.h"
 #include "BBase.h"
 #include "wme_debugger.h"
 
@@ -44,6 +45,7 @@ typedef void (*PARSE_ELEMENT_CALLBACK)(int Line, int Type, void *ElementData, vo
 
 #define MAX_CACHED_SCRIPTS 20
 class CScScript;
+class CScValue;
 class CBObject;
 class CBScriptHolder;
 class CScEngine : public CBBase {

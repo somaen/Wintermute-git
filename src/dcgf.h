@@ -45,36 +45,13 @@ THE SOFTWARE.
 
 #define COMPRESSED_FILE_MAGIC 0x504D435A // ZCMP
 
-/*
-#ifdef _MSC_VER
-#   pragma warning (disable: 4786) // symbols longer than 255 chars (STL)
-#   pragma warning (disable: 4355) // this in base member initialization
-#   pragma warning (disable: 4018) // signed/unsigned match
-#   pragma warning (disable: 4244) // conversion from float to int
-#   pragma warning (disable: 4996) // CRT deprecate
-#   pragma warning (disable: 4799) // No EMMS at end of function ...
-#   pragma warning (disable: 4701) // No EMMS at end of function ...
-#   pragma warning (disable: 4200) // nonstandard extension used : zero-sized array in struct/union
-#endif
-*/
-
-
 #include "PlatformSDL.h"
 
 #ifdef GetClassName
 #undef GetClassName
 #endif
 
-#include "dcpackage.h"
 #include "utils.h"
-
-#include "coll_templ.h"
-
-#include "persistent.h"
-
-// scripting classes
-#include "ScStack.h"
-#include "AdPath.h"
 
 // macros
 #define RELEASE(obj) if(obj) { obj->Release(); obj = NULL; } else 0

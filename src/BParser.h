@@ -49,6 +49,9 @@ THE SOFTWARE.
 #define PARSERR_EOF             -2
 #define PARSERR_TOKENNOTFOUND   -1
 
+#include "BBase.h"
+#include "coll_templ.h"
+
 namespace WinterMute {
 
 class CBParser : public CBBase {

@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "Vector2.h"
 #include "Matrix4.h"
 #include "ScValue.h"
+#include "ScStack.h"
 #include "BGame.h"
 #include "BRegion.h"
 #include "BFileManager.h"

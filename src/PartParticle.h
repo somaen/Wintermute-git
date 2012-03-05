@@ -34,6 +34,7 @@ namespace WinterMute {
 
 class CPartEmitter;
 class CBSprite;
+class CBPersistMgr;
 
 class CPartParticle : public CBBase {
 public:

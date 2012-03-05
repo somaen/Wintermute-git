@@ -35,6 +35,7 @@ THE SOFTWARE.
 #include "BPackage.h"
 #include "BRegistry.h"
 #include "BGame.h"
+#include "dcpackage.h"
 #include <boost/filesystem.hpp>
 
 #ifdef __WIN32__

@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "scriptables/SXStore.h"
 #include "ScValue.h"
 #include "ScScript.h"
+#include "ScStack.h"
 #include "StringUtil.h"
 
 #ifdef __IPHONEOS__

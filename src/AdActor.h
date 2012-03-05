@@ -39,7 +39,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 class CAdSpriteSet;
-
+class CAdPath;
 class CAdActor : public CAdTalkHolder {
 public:
 	TDirection AngleToDirection(int Angle);

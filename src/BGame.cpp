@@ -60,6 +60,8 @@ THE SOFTWARE.
 #include "BRegion.h"
 #include "BSprite.h"
 #include "BFileManager.h"
+#include "ScStack.h"
+
 #ifdef __IPHONEOS__
 #   include "ios_utils.h"
 #endif

@@ -27,6 +27,7 @@ THE SOFTWARE.
 #define __WmeBFrame_H__
 
 #include "BScriptable.h"
+#include "coll_templ.h"
 
 namespace WinterMute {
 class CBSound;

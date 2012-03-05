@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "SxObject.h"
 #include "ScValue.h"
+#include "ScStack.h"
 
 namespace WinterMute {
 

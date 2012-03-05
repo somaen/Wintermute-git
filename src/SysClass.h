@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeSysClass_H__
 #define __WmeSysClass_H__
 
+#include "persistent.h"
 #include <set>
 #include <map>
 #include "dctypes.h"

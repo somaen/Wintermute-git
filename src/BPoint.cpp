@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BPoint.h"
+#include "BPersistMgr.h"
 
 namespace WinterMute {
 

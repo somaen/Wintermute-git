@@ -26,7 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeAdPathPoint_H__
 #define __WmeAdPathPoint_H__
 
-
+#include "persistent.h"
 #include "BPoint.h"
 
 namespace WinterMute {

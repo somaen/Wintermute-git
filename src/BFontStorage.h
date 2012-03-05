@@ -28,6 +28,8 @@ THE SOFTWARE.
 
 
 #include "BBase.h"
+#include "persistent.h"
+#include "coll_templ.h"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H

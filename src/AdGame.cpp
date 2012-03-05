@@ -50,6 +50,7 @@ THE SOFTWARE.
 #include "AdSentence.h"
 #include "AdResponse.h"
 #include "ScScript.h"
+#include "ScStack.h"
 #include "BSprite.h"
 #include "BFileManager.h"
 

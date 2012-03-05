@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "BGame.h"
 #include "ScScript.h"
+#include "ScStack.h"
 #include "BFileManager.h"
 namespace WinterMute {
 

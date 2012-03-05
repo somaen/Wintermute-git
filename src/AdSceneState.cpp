@@ -24,6 +24,7 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "persistent.h"
 #include "AdSceneState.h"
 #include "AdNodeState.h"
 

@@ -39,6 +39,7 @@ THE SOFTWARE.
 #include "BFont.h"
 #include "AdSentence.h"
 #include "ScScript.h"
+#include "ScStack.h"
 #include "BRegion.h"
 #include "BSprite.h"
 #include "BFileManager.h"

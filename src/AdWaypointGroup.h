@@ -29,7 +29,7 @@ THE SOFTWARE.
 #include "BObject.h"
 
 namespace WinterMute {
-
+class CBPoint;
 class CAdWaypointGroup : public CBObject {
 public:
 	float m_LastMimicScale;

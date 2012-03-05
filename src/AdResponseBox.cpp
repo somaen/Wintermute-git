@@ -35,6 +35,7 @@ THE SOFTWARE.
 #include "BFont.h"
 #include "AdResponse.h"
 #include "ScScript.h"
+#include "ScStack.h"
 #include "BSprite.h"
 #include "BFileManager.h"
 namespace WinterMute {

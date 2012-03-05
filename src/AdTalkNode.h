@@ -26,6 +26,9 @@ THE SOFTWARE.
 #ifndef __WmeAdTalkNode_H__
 #define __WmeAdTalkNode_H__
 
+#include "persistent.h"
+#include "BBase.h"
+
 namespace WinterMute {
 class CAdSpriteSet;
 class CBSprite;

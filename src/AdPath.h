@@ -26,7 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeAdPath_H__
 #define __WmeAdPath_H__
 
-
+#include "persistent.h"
+#include "coll_templ.h"
 #include "BBase.h"
 
 namespace WinterMute {

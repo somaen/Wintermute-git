@@ -26,6 +26,9 @@ THE SOFTWARE.
 #ifndef __WmeAdActorDir_H__
 #define __WmeAdActorDir_H__
 
+#include "persistent.h"
+#include "BBase.h"
+
 namespace WinterMute {
 
 class CAdActorDir : public CBBase {
