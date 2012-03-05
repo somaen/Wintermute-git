@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "ScStack.h"
 #include "BGame.h"
+#include "PlatformSDL.h"
 
 namespace WinterMute {
 

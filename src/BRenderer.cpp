@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "BSurface.h"
 #include "BSubFrame.h"
 #include "BRegion.h"
+#include "PlatformSDL.h"
 
 namespace WinterMute {
 

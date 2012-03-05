@@ -38,6 +38,9 @@ THE SOFTWARE.
 #include "ScStack.h"
 #include "BSprite.h"
 #include "BFileManager.h"
+#include "utils.h"
+#include "PlatformSDL.h"
+
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdResponseBox, false)

@@ -32,6 +32,8 @@ THE SOFTWARE.
 #include "BSprite.h"
 #include "AdSpriteSet.h"
 #include "BFileManager.h"
+#include "utils.h"
+
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdTalkDef, false)

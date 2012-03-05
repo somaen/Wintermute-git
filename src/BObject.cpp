@@ -33,6 +33,7 @@ THE SOFTWARE.
 #include "BGame.h"
 #include "BStringTable.h"
 #include "BSprite.h"
+#include "PlatformSDL.h"
 
 namespace WinterMute {
 

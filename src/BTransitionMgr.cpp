@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BTransitionMgr.h"
 #include "BGame.h"
+#include "PlatformSDL.h"
 
 namespace WinterMute {
 

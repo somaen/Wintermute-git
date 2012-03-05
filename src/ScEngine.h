@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include "coll_templ.h"
 #include "BBase.h"
 #include "wme_debugger.h"
+#include "utils.h"
+#include "PlatformSDL.h"
 
 namespace WinterMute {
 

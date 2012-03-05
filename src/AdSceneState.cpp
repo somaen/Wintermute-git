@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "persistent.h"
 #include "AdSceneState.h"
 #include "AdNodeState.h"
+#include "PlatformSDL.h"
 
 namespace WinterMute {
 

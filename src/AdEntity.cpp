@@ -43,6 +43,9 @@ THE SOFTWARE.
 #include "BRegion.h"
 #include "BSprite.h"
 #include "BFileManager.h"
+#include "PlatformSDL.h"
+#include "utils.h"
+
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdEntity, false)

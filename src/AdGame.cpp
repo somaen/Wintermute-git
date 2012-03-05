@@ -53,6 +53,7 @@ THE SOFTWARE.
 #include "ScStack.h"
 #include "BSprite.h"
 #include "BFileManager.h"
+#include "utils.h"
 
 namespace WinterMute {
 

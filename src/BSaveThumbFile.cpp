@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BGame.h"
 #include "BSaveThumbFile.h"
+#include "PlatformSDL.h"
 
 namespace WinterMute {
 

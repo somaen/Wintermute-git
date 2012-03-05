@@ -29,6 +29,8 @@ THE SOFTWARE.
 #include "AdEntity.h"
 #include "BStringTable.h"
 #include "BSprite.h"
+#include "utils.h"
+#include "PlatformSDL.h"
 
 namespace WinterMute {
 

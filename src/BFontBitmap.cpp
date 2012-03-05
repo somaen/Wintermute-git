@@ -34,6 +34,8 @@ THE SOFTWARE.
 #include "BFrame.h"
 #include "BSprite.h"
 #include "BFileManager.h"
+#include "PlatformSDL.h"
+
 namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////

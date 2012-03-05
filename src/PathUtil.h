@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __WmePathUtils_H__
 #define __WmePathUtils_H__
 
+#include "PlatformSDL.h"
+
 namespace WinterMute {
 
 class PathUtil {

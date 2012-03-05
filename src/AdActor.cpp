@@ -45,6 +45,8 @@ THE SOFTWARE.
 #include "BRegion.h"
 #include "BFileManager.h"
 #include "AdPath.h"
+#include "utils.h"
+#include "PlatformSDL.h"
 #include <math.h>
 
 namespace WinterMute {

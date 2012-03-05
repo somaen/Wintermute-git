@@ -35,6 +35,7 @@ THE SOFTWARE.
 #include "graphics/surface.h"
 #include "stream.h"
 #include "BFileManager.h"
+#include "PlatformSDL.h"
 
 namespace WinterMute {
 

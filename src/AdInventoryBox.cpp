@@ -35,6 +35,7 @@ THE SOFTWARE.
 #include "AdItem.h"
 #include "BViewport.h"
 #include "BFileManager.h"
+#include "PlatformSDL.h"
 #include <cmath>
 
 

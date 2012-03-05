@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BSurfaceSDL.h"
 #include "BGame.h"
 #include "BFileManager.h"
+#include "PlatformSDL.h"
 
 namespace WinterMute {
 

@@ -36,6 +36,9 @@ THE SOFTWARE.
 #include "BRegistry.h"
 #include "BGame.h"
 #include "dcpackage.h"
+#include "utils.h"
+#include "PlatformSDL.h"
+
 #include <boost/filesystem.hpp>
 
 #ifdef __WIN32__

@@ -38,6 +38,7 @@ THE SOFTWARE.
 #include "BSprite.h"
 #include "BFileManager.h"
 #include "ScStack.h"
+#include "PlatformSDL.h"
 
 namespace WinterMute {
 

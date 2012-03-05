@@ -28,6 +28,8 @@ THE SOFTWARE.
 #include "PartEmitter.h"
 #include "BSprite.h"
 #include "BGame.h"
+#include "utils.h"
+#include "PlatformSDL.h"
 #include <math.h>
 
 namespace WinterMute {

@@ -45,13 +45,9 @@ THE SOFTWARE.
 
 #define COMPRESSED_FILE_MAGIC 0x504D435A // ZCMP
 
-#include "PlatformSDL.h"
-
 #ifdef GetClassName
 #undef GetClassName
 #endif
-
-#include "utils.h"
 
 // macros
 #define RELEASE(obj) if(obj) { obj->Release(); obj = NULL; } else 0

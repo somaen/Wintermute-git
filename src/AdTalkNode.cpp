@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include "BGame.h"
 #include "BSprite.h"
 #include "AdSpriteSet.h"
+#include "utils.h"
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdTalkNode, false)

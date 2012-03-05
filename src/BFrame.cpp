@@ -34,6 +34,7 @@ THE SOFTWARE.
 #include "BSubFrame.h"
 #include "ScScript.h"
 #include "ScStack.h"
+#include "PlatformSDL.h"
 
 namespace WinterMute {
 

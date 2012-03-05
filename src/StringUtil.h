@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeStringUtil_H__
 #define __WmeStringUtil_H__
 
+#include "PlatformSDL.h"
+
 namespace WinterMute {
 
 class StringUtil {

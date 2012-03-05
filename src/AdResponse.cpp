@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BGame.h"
 #include "BFontStorage.h"
 #include "BSprite.h"
+#include "utils.h"
 
 namespace WinterMute {
 

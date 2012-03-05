@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "BActiveRect.h"
 #include "BGame.h"
 #include "BRegion.h"
+#include "PlatformSDL.h"
 
 namespace WinterMute {
 

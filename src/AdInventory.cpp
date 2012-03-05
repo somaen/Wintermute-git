@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "AdInventory.h"
 #include "ADGame.h"
 #include "AdItem.h"
+#include "PlatformSDL.h"
 
 namespace WinterMute {
 

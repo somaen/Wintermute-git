@@ -38,6 +38,8 @@ THE SOFTWARE.
 #include "ScScript.h"
 #include "ScStack.h"
 #include "BFileManager.h"
+#include "PlatformSDL.h"
+
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBSprite, false)

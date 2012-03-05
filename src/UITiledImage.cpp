@@ -31,6 +31,8 @@ THE SOFTWARE.
 #include "BGame.h"
 #include "BSubFrame.h"
 #include "BFileManager.h"
+#include "PlatformSDL.h"
+
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CUITiledImage, false)

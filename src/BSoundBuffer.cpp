@@ -29,6 +29,8 @@ THE SOFTWARE.
 #include "BSoundMgr.h"
 #include "BSoundBuffer.h"
 #include "BFileManager.h"
+#include "utils.h"
+
 namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////
