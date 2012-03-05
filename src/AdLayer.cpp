@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BGame.h"
 #include "AdLayer.h"
+#include "AdSceneNode.h"
 #include "BParser.h"
 #include "BDynBuffer.h"
 #include "ScValue.h"

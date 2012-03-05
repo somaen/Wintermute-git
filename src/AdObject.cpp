@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "AdGame.h"
 #include "AdLayer.h"
+#include "AdSceneNode.h"
 
 namespace WinterMute {
 
