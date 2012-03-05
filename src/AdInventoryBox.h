@@ -29,6 +29,8 @@ THE SOFTWARE.
 #include "BObject.h"
 
 namespace WinterMute {
+class CUIButton;
+class CUIWindow;
 
 class CAdInventoryBox : public CBObject {
 public:
