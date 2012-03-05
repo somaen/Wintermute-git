@@ -33,6 +33,7 @@ namespace WinterMute {
 class CAdItem;
 class CAdInventory;
 class CAdSceneState;
+class CAdScene;
 class CAdItem;
 class CAdSentence;
 class CAdInventoryBox;
