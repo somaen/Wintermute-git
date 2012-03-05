@@ -107,16 +107,21 @@ HRESULT CBObject::Cleanup() {
 	if (Game && Game->m_ActiveObject == this) Game->m_ActiveObject = NULL;
 
 	CBScriptHolder::Cleanup();
-	SAFE_DELETE_ARRAY(m_SoundEvent);
+	delete[] m_SoundEvent;
+	m_SoundEvent = NULL;
 
 	if (!m_SharedCursors) {
-		SAFE_DELETE(m_Cursor);
-		SAFE_DELETE(m_ActiveCursor);
+		delete m_Cursor;
+		delete m_ActiveCursor;
+		m_Cursor = NULL;
+		m_ActiveCursor = NULL;
 	}
-	SAFE_DELETE(m_SFX);
+	delete m_SFX;
+	m_SFX = NULL;
 
 	for (int i = 0; i < 7; i++) {
-		SAFE_DELETE_ARRAY(m_Caption[i]);
+		delete[] m_Caption[i];
+		m_Caption[i] = NULL;
 	}
 
 	m_SFXType = SFX_NONE;
@@ -131,7 +136,7 @@ void CBObject::SetCaption(char *Caption, int Case) {
 	if (Case == 0) Case = 1;
 	if (Case < 1 || Case > 7) return;
 
-	SAFE_DELETE_ARRAY(m_Caption[Case - 1]);
+	delete[] m_Caption[Case - 1];
 	m_Caption[Case - 1] = new char[strlen(Caption) + 1];
 	if (m_Caption[Case - 1]) {
 		strcpy(m_Caption[Case - 1], Caption);
@@ -198,8 +203,13 @@ HRESULT CBObject::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "RemoveCursor") == 0) {
 		Stack->CorrectParams(0);
-		if (!m_SharedCursors) SAFE_DELETE(m_Cursor);
-		else m_Cursor = NULL;
+		if (!m_SharedCursors) {
+			delete m_Cursor;
+			m_Cursor = NULL;
+		} else {
+			m_Cursor = NULL;
+	
+		}
 		Stack->PushNULL();
 
 		return S_OK;
@@ -907,12 +917,16 @@ HRESULT CBObject::Persist(CBPersistMgr *PersistMgr) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBObject::SetCursor(char *Filename) {
-	if (!m_SharedCursors) SAFE_DELETE(m_Cursor);
+	if (!m_SharedCursors) {
+		delete m_Cursor;
+		m_Cursor = NULL;
+	}
 
 	m_SharedCursors = false;
 	m_Cursor = new CBSprite(Game);
 	if (!m_Cursor || FAILED(m_Cursor->LoadFile(Filename))) {
-		SAFE_DELETE(m_Cursor);
+		delete m_Cursor;
+		m_Cursor = NULL;
 		return E_FAIL;
 	} else return S_OK;
 }
@@ -920,10 +934,11 @@ HRESULT CBObject::SetCursor(char *Filename) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBObject::SetActiveCursor(char *Filename) {
-	SAFE_DELETE(m_ActiveCursor);
+	delete m_ActiveCursor;
 	m_ActiveCursor = new CBSprite(Game);
 	if (!m_ActiveCursor || FAILED(m_ActiveCursor->LoadFile(Filename))) {
-		SAFE_DELETE(m_ActiveCursor);
+		delete m_ActiveCursor;
+		m_ActiveCursor = NULL;
 		return E_FAIL;
 	} else return S_OK;
 }
@@ -972,7 +987,7 @@ HRESULT CBObject::PlaySFX(char *Filename, bool Looping, bool PlayNow, char *Even
 	if (Filename == NULL) return E_FAIL;
 
 	// create new sound
-	SAFE_DELETE(m_SFX);
+	delete m_SFX;
 
 	m_SFX = new CBSound(Game);
 	if (m_SFX && SUCCEEDED(m_SFX->SetSound(Filename, SOUND_SFX, true))) {
@@ -988,7 +1003,8 @@ HRESULT CBObject::PlaySFX(char *Filename, bool Looping, bool PlayNow, char *Even
 			return m_SFX->Play(Looping);
 		} else return S_OK;
 	} else {
-		SAFE_DELETE(m_SFX);
+		delete m_SFX;
+		m_SFX = NULL;
 		return E_FAIL;
 	}
 }
@@ -998,7 +1014,10 @@ HRESULT CBObject::PlaySFX(char *Filename, bool Looping, bool PlayNow, char *Even
 HRESULT CBObject::StopSFX(bool DeleteSound) {
 	if (m_SFX) {
 		m_SFX->Stop();
-		if (DeleteSound) SAFE_DELETE(m_SFX);
+		if (DeleteSound) {
+			delete m_SFX;
+			m_SFX = NULL;
+		}
 		return S_OK;
 	} else return E_FAIL;
 }
@@ -1084,7 +1103,8 @@ bool CBObject::IsReady() {
 
 //////////////////////////////////////////////////////////////////////////
 void CBObject::SetSoundEvent(char *EventName) {
-	SAFE_DELETE_ARRAY(m_SoundEvent);
+	delete[] m_SoundEvent;
+	m_SoundEvent = NULL;
 	if (EventName) {
 		m_SoundEvent = new char[strlen(EventName) + 1];
 		if (m_SoundEvent) strcpy(m_SoundEvent, EventName);
