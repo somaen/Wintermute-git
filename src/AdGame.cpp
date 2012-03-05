@@ -38,6 +38,7 @@ THE SOFTWARE.
 #include "UIEntity.h"
 #include "AdScene.h"
 #include "AdEntity.h"
+#include "AdActor.h"
 
 namespace WinterMute {
 

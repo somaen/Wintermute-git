@@ -107,7 +107,6 @@ THE SOFTWARE.
 #include "AdTalkHolder.h"
 #include "AdItem.h"
 #include "AdActorDir.h"
-#include "AdActor.h"
 #include "AdWaypointGroup.h"
 
 // macros
