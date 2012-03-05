@@ -59,7 +59,7 @@ THE SOFTWARE.
 #include "ScScript.h"
 #include "BRegion.h"
 #include "BSprite.h"
-
+#include "BFileManager.h"
 #ifdef __IPHONEOS__
 #   include "ios_utils.h"
 #endif

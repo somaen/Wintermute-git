@@ -41,7 +41,7 @@ THE SOFTWARE.
 #include "ScScript.h"
 #include "BRegion.h"
 #include "BSprite.h"
-
+#include "BFileManager.h"
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdEntity, false)

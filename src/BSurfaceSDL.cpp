@@ -34,6 +34,7 @@ THE SOFTWARE.
 #include "graphics/pixelformat.h"
 #include "graphics/surface.h"
 #include "stream.h"
+#include "BFileManager.h"
 
 namespace WinterMute {
 

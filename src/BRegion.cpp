@@ -30,7 +30,7 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "BGame.h"
 #include "ScScript.h"
-
+#include "BFileManager.h"
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBRegion, false)

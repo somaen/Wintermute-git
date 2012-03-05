@@ -36,7 +36,7 @@ THE SOFTWARE.
 #include "BSound.h"
 #include "BSubFrame.h"
 #include "ScScript.h"
-
+#include "BFileManager.h"
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBSprite, false)

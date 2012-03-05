@@ -27,7 +27,7 @@ THE SOFTWARE.
 #include "BPackage.h"
 #include "BPkgFile.h"
 #include "BGame.h"
-
+#include "BFileManager.h"
 
 #if _DEBUG
 #pragma comment(lib, "zlib_d.lib")

@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "BDynBuffer.h"
 #include "BGame.h"
 #include "BSprite.h"
+#include "BFileManager.h"
 
 namespace WinterMute {
 

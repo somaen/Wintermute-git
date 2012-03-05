@@ -42,7 +42,7 @@ THE SOFTWARE.
 #include "AdPath.h"
 #include "ScScript.h"
 #include "BRegion.h"
-
+#include "BFileManager.h"
 #include <math.h>
 
 namespace WinterMute {

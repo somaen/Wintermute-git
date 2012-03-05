@@ -31,7 +31,7 @@ THE SOFTWARE.
 #include "BDynBuffer.h"
 #include "ScValue.h"
 #include "ScScript.h"
-
+#include "BFileManager.h"
 namespace WinterMute {
     
 IMPLEMENT_PERSISTENT(CAdLayer, false)

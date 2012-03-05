@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "BPkgFile.h"
 #include "BDiskFile.h"
 #include "common/stream.h"
+#include "BFileManager.h"
 
 namespace WinterMute {
 

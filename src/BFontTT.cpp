@@ -34,7 +34,7 @@ THE SOFTWARE.
 #include "BSurfaceSDL.h"
 #include "BParser.h"
 #include "BGame.h"
-
+#include "BFileManager.h"
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBFontTT, false)

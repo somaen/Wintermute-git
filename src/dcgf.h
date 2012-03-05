@@ -72,9 +72,6 @@ THE SOFTWARE.
 
 #include "persistent.h"
 
-// base classes
-#include "BFileManager.h"
-
 // scripting classes
 #include "ScStack.h"
 #include "AdPath.h"

@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "BRegistry.h"
 #include "BGame.h"
 #include "BSound.h"
+#include "BFileManager.h"
 #include <algorithm>
 #include <vector>
 

@@ -33,7 +33,7 @@ THE SOFTWARE.
 #include "BSubFrame.h"
 #include "BFrame.h"
 #include "BSprite.h"
-
+#include "BFileManager.h"
 namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////

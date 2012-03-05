@@ -30,7 +30,7 @@ THE SOFTWARE.
 #include "BParser.h"
 #include "BGame.h"
 #include "BSubFrame.h"
-
+#include "BFileManager.h"
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CUITiledImage, false)
