@@ -23,7 +23,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "dcgf.h"
+#include "BGame.h"
+#include "BFileManager.h"
 #include "BEvent.h"
 #include "BParser.h"
 
@@ -54,8 +55,10 @@ CBEvent::CBEvent(CBGame *inGame, TEventType Type, char *Script): CBBase(inGame) 
 
 //////////////////////////////////////////////////////////////////////////
 CBEvent::~CBEvent() {
-	SAFE_DELETE_ARRAY(m_Script);
-	SAFE_DELETE_ARRAY(m_Name);
+	delete[] m_Script;
+	m_Script = NULL;
+	delete[] m_Name;
+	m_Name = NULL;
 }
 
 
@@ -114,7 +117,7 @@ void CBEvent::SetName(char *Name) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBEvent::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CBEvent::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
