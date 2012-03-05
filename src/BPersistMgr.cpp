@@ -24,8 +24,11 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "BFileManager.h"
+#include "BGame.h"
 #include "BPersistMgr.h"
 #include "BSaveThumbHelper.h"
+#include "PlatformSDL.h"
 #include "Vector2.h"
 #include "StringUtil.h"
 #include "BImage.h"
@@ -75,7 +78,8 @@ void CBPersistMgr::Cleanup() {
 	m_BufferSize = 0;
 	m_Offset = 0;
 
-	SAFE_DELETE_ARRAY(m_RichBuffer);
+	delete[] m_RichBuffer;
+	m_RichBuffer = NULL;
 	m_RichBufferSize = 0;
 
 	m_SavedDescription = NULL; // ref to buffer
@@ -112,7 +116,8 @@ HRESULT CBPersistMgr::InitSave(char *Desc) {
 		if (!Game->m_CachedThumbnail) {
 			Game->m_CachedThumbnail = new CBSaveThumbHelper(Game);
 			if (FAILED(Game->m_CachedThumbnail->StoreThumbnail(true))) {
-				SAFE_DELETE(Game->m_CachedThumbnail);
+				delete Game->m_CachedThumbnail;
+				Game->m_CachedThumbnail = NULL;
 			}
 		}
 
@@ -150,8 +155,8 @@ HRESULT CBPersistMgr::InitSave(char *Desc) {
 		if (!ThumbnailOK) PutDWORD(0);
 
 		// in any case, destroy the cached thumbnail once used
-		SAFE_DELETE(Game->m_CachedThumbnail);
-
+		delete Game->m_CachedThumbnail;
+		Game->m_CachedThumbnail = NULL;
 
 		uint32 DataOffset = m_Offset +
 		                   sizeof(uint32) + // data offset
