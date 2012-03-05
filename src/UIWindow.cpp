@@ -93,9 +93,13 @@ CUIWindow::~CUIWindow() {
 
 //////////////////////////////////////////////////////////////////////////
 void CUIWindow::Cleanup() {
-	SAFE_DELETE(m_ShieldWindow);
-	SAFE_DELETE(m_ShieldButton);
-	SAFE_DELETE(m_Viewport);
+	delete m_ShieldWindow;
+	delete m_ShieldButton;
+	delete m_Viewport;
+	m_ShieldWindow = NULL;
+	m_ShieldButton = NULL;
+	m_Viewport = NULL;
+
 	if (m_BackInactive) delete m_BackInactive;
 	if (!m_SharedFonts && m_FontInactive) Game->m_FontStorage->RemoveFont(m_FontInactive);
 	if (!m_SharedImages && m_ImageInactive) delete m_ImageInactive;
@@ -715,11 +719,12 @@ HRESULT CUIWindow::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 	else if (strcmp(Name, "SetInactiveImage") == 0) {
 		Stack->CorrectParams(1);
 
-		SAFE_DELETE(m_ImageInactive);
+		delete m_ImageInactive;
 		m_ImageInactive = new CBSprite(Game);
 		char *Filename = Stack->Pop()->GetString();
 		if (!m_ImageInactive || FAILED(m_ImageInactive->LoadFile(Filename))) {
-			SAFE_DELETE(m_ImageInactive);
+			delete m_ImageInactive;
+			m_ImageInactive = NULL;
 			Stack->PushBool(false);
 		} else Stack->PushBool(true);
 

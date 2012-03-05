@@ -67,11 +67,15 @@ CAdItem::CAdItem(CBGame *inGame): CAdTalkHolder(inGame) {
 
 //////////////////////////////////////////////////////////////////////////
 CAdItem::~CAdItem() {
-	SAFE_DELETE(m_SpriteHover);
-	SAFE_DELETE(m_CursorNormal);
-	SAFE_DELETE(m_CursorHover);
+	delete m_SpriteHover;
+	delete m_CursorNormal;
+	delete m_CursorHover;
+	m_SpriteHover = NULL;
+	m_CursorNormal = NULL;
+	m_CursorHover = NULL;
 
-	SAFE_DELETE_ARRAY(m_AmountString);
+	delete[] m_AmountString;
+	m_AmountString = NULL;
 }
 
 
@@ -189,20 +193,20 @@ HRESULT CAdItem::LoadBuffer(byte  *Buffer, bool Complete) {
 
 		case TOKEN_IMAGE:
 		case TOKEN_SPRITE:
-			SAFE_DELETE(m_Sprite);
+			delete m_Sprite;
 			m_Sprite = new CBSprite(Game, this);
 			if (!m_Sprite || FAILED(m_Sprite->LoadFile((char *)params, ((CAdGame *)Game)->m_TexItemLifeTime))) {
-				SAFE_DELETE(m_Sprite);
+				delete m_Sprite;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
 
 		case TOKEN_IMAGE_HOVER:
 		case TOKEN_SPRITE_HOVER:
-			SAFE_DELETE(m_SpriteHover);
+			delete m_SpriteHover;
 			m_SpriteHover = new CBSprite(Game, this);
 			if (!m_SpriteHover || FAILED(m_SpriteHover->LoadFile((char *)params, ((CAdGame *)Game)->m_TexItemLifeTime))) {
-				SAFE_DELETE(m_SpriteHover);
+				delete m_SpriteHover;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
@@ -248,19 +252,21 @@ HRESULT CAdItem::LoadBuffer(byte  *Buffer, bool Complete) {
 		break;
 
 		case TOKEN_CURSOR:
-			SAFE_DELETE(m_CursorNormal);
+			delete m_CursorNormal;
 			m_CursorNormal = new CBSprite(Game);
 			if (!m_CursorNormal || FAILED(m_CursorNormal->LoadFile((char *)params, ((CAdGame *)Game)->m_TexItemLifeTime))) {
-				SAFE_DELETE(m_CursorNormal);
+				delete m_CursorNormal;
+				m_CursorNormal = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
 
 		case TOKEN_CURSOR_HOVER:
-			SAFE_DELETE(m_CursorHover);
+			delete m_CursorHover;
 			m_CursorHover = new CBSprite(Game);
 			if (!m_CursorHover || FAILED(m_CursorHover->LoadFile((char *)params, ((CAdGame *)Game)->m_TexItemLifeTime))) {
-				SAFE_DELETE(m_CursorHover);
+				delete m_CursorHover;
+				m_CursorHover = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
@@ -313,7 +319,8 @@ HRESULT CAdItem::Update() {
 	m_CurrentSprite = NULL;
 
 	if (m_State == STATE_READY && m_AnimSprite) {
-		SAFE_DELETE(m_AnimSprite);
+		delete m_AnimSprite;
+		m_AnimSprite = NULL;
 	}
 
 	// finished playing animation?
@@ -429,7 +436,8 @@ HRESULT CAdItem::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 
 		char *Filename = Stack->Pop()->GetString();
 
-		SAFE_DELETE(m_SpriteHover);
+		delete m_SpriteHover;
+		m_SpriteHover = NULL;
 		CBSprite *spr = new CBSprite(Game, this);
 		if (!spr || FAILED(spr->LoadFile(Filename))) {
 			Stack->PushBool(false);
@@ -471,7 +479,8 @@ HRESULT CAdItem::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 
 		char *Filename = Stack->Pop()->GetString();
 
-		SAFE_DELETE(m_CursorNormal);
+		delete m_CursorNormal;
+		m_CursorNormal = NULL;
 		CBSprite *spr = new CBSprite(Game);
 		if (!spr || FAILED(spr->LoadFile(Filename))) {
 			Stack->PushBool(false);
@@ -513,7 +522,8 @@ HRESULT CAdItem::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 
 		char *Filename = Stack->Pop()->GetString();
 
-		SAFE_DELETE(m_CursorHover);
+		delete m_CursorHover;
+		m_CursorHover = NULL;
 		CBSprite *spr = new CBSprite(Game);
 		if (!spr || FAILED(spr->LoadFile(Filename))) {
 			Stack->PushBool(false);

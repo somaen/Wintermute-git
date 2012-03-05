@@ -96,13 +96,19 @@ HRESULT CAdActor::SetDefaultAnimNames() {
 
 //////////////////////////////////////////////////////////////////////////
 CAdActor::~CAdActor() {
-	SAFE_DELETE(m_Path);
-	SAFE_DELETE(m_TargetPoint);
+	delete m_Path;
+	delete m_TargetPoint;
+	m_Path = NULL;
+	m_TargetPoint = NULL;
 
-	SAFE_DELETE(m_WalkSprite);
-	SAFE_DELETE(m_StandSprite);
-	SAFE_DELETE(m_TurnLeftSprite);
-	SAFE_DELETE(m_TurnRightSprite);
+	delete m_WalkSprite;
+	delete m_StandSprite;
+	delete m_TurnLeftSprite;
+	delete m_TurnRightSprite;
+	m_WalkSprite = NULL;
+	m_StandSprite = NULL;
+	m_TurnLeftSprite = NULL;
+	m_TurnRightSprite = NULL;
 
 	m_AnimSprite2 = NULL; // ref only
 
