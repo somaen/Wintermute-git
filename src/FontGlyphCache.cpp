@@ -23,7 +23,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "dcgf.h"
 #include "FontGlyphCache.h"
 
 namespace WinterMute {
@@ -37,7 +36,8 @@ FontGlyphCache::~FontGlyphCache() {
 	GlyphInfoMap::iterator it;
 
 	for (it = m_Glyphs.begin(); it != m_Glyphs.end(); ++it) {
-		SAFE_DELETE(it->second);
+		delete it->second;
+		it->second = NULL;
 	}
 }
 

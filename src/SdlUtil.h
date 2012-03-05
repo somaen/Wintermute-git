@@ -26,7 +26,9 @@ THE SOFTWARE.
 #ifndef __WmeSdlUtil_H__
 #define __WmeSdlUtil_H__
 
-#include <SDL.h>
+class SDL_Texture;
+class SDL_Renderer;
+class SDL_Surface;
 
 namespace WinterMute {
 

@@ -33,7 +33,6 @@ THE SOFTWARE.
 
 #include "SDL.h"
 #include "PlatformSDL.h"
-#include "dcgf.h"
 
 #ifdef __WIN32__
 #   include "../visualc/resource.h"
