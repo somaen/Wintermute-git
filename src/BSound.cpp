@@ -23,7 +23,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "dcgf.h"
 #include "BSound.h"
 #include "BGame.h"
 
@@ -55,8 +54,9 @@ CBSound::CBSound(CBGame *inGame): CBBase(inGame) {
 CBSound::~CBSound() {
 	if (m_Sound) Game->m_SoundMgr->RemoveSound(m_Sound);
 	m_Sound = NULL;
-
-	SAFE_DELETE_ARRAY(m_SoundFilename);
+	
+	delete[] m_SoundFilename;
+	m_SoundFilename = NULL;
 }
 
 
@@ -66,7 +66,8 @@ HRESULT CBSound::SetSound(char *Filename, TSoundType Type, bool Streamed) {
 		Game->m_SoundMgr->RemoveSound(m_Sound);
 		m_Sound = NULL;
 	}
-	SAFE_DELETE_ARRAY(m_SoundFilename);
+	delete[] m_SoundFilename;
+	m_SoundFilename = NULL;
 
 	m_Sound = Game->m_SoundMgr->AddSound(Filename, Type, Streamed);
 	if (m_Sound) {
