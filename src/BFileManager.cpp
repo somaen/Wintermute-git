@@ -372,8 +372,10 @@ HRESULT CBFileManager::RegisterPackages() {
 
 				if (!IsValidPackage(fileName)) continue;
 
+				warning("%s", fileName.c_str());
 				//printf("%s\n", fileName.c_str());
 				if (!StringUtil::CompareNoCase(extension, PathUtil::GetExtension(fileName))) continue;
+				warning("Registered");
 				RegisterPackage(absPath.string().c_str(), dit->path().filename().string().c_str());
 			}
 		}
