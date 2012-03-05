@@ -33,6 +33,7 @@ THE SOFTWARE.
 #include "AdGame.h"
 #include "AdLayer.h"
 #include "AdSceneNode.h"
+#include "AdInventory.h"
 
 namespace WinterMute {
 

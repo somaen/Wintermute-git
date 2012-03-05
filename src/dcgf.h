@@ -102,8 +102,6 @@ THE SOFTWARE.
 #include "AdResponse.h"
 #include "AdPath.h"
 #include "AdSentence.h"
-#include "AdInventory.h"
-#include "AdObject.h"
 #include "AdTalkHolder.h"
 #include "AdItem.h"
 #include "AdActorDir.h"

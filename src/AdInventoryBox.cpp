@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "AdInventoryBox.h"
+#include "AdInventory.h"
 #include "BParser.h"
 #include "UIButton.h"
 #include "UIWindow.h"
