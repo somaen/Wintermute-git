@@ -103,7 +103,6 @@ THE SOFTWARE.
 #include "AdTypes.h"
 
 #include "AdSpriteSet.h"
-#include "AdTalkNode.h"
 #include "AdResponseContext.h"
 #include "AdNodeState.h"
 #include "AdSceneState.h"

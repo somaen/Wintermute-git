@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "AdTalkDef.h"
+#include "AdTalkNode.h"
 #include "BParser.h"
 
 namespace WinterMute {

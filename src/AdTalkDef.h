@@ -26,8 +26,11 @@ THE SOFTWARE.
 #ifndef __WmeAdTalkDef_H__
 #define __WmeAdTalkDef_H__
 
-namespace WinterMute {
+#include "coll_templ.h"
+#include "BObject.h"
 
+namespace WinterMute {
+class CAdTalkNode;
 class CAdTalkDef : public CBObject {
 public:
 	char *m_DefaultSpriteSetFilename;
