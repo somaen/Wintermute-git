@@ -28,7 +28,6 @@ THE SOFTWARE.
 #include "BRegistry.h"
 #include "BSurfaceSDL.h"
 #include "BImage.h"
-#include "FreeImage.h"
 #include "MathUtil.h"
 #include "BGame.h"
 #include "BSprite.h"
@@ -237,10 +236,10 @@ HRESULT CBRenderSDL::FadeToColor(uint32 Color, RECT *rect) {
 	}
 	ModTargetRect(&fillRect);
 
-	BYTE r = D3DCOLGetR(Color);
-	BYTE g = D3DCOLGetG(Color);
-	BYTE b = D3DCOLGetB(Color);
-	BYTE a = D3DCOLGetA(Color);
+	byte r = D3DCOLGetR(Color);
+	byte g = D3DCOLGetG(Color);
+	byte b = D3DCOLGetB(Color);
+	byte a = D3DCOLGetA(Color);
 
 	SDL_SetRenderDrawColor(m_Renderer, r, g, b, a);
 	SDL_SetRenderDrawBlendMode(m_Renderer, SDL_BLENDMODE_BLEND);
@@ -251,10 +250,10 @@ HRESULT CBRenderSDL::FadeToColor(uint32 Color, RECT *rect) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBRenderSDL::DrawLine(int X1, int Y1, int X2, int Y2, uint32 Color) {
-	BYTE r = D3DCOLGetR(Color);
-	BYTE g = D3DCOLGetG(Color);
-	BYTE b = D3DCOLGetB(Color);
-	BYTE a = D3DCOLGetA(Color);
+	byte r = D3DCOLGetR(Color);
+	byte g = D3DCOLGetG(Color);
+	byte b = D3DCOLGetB(Color);
+	byte a = D3DCOLGetA(Color);
 
 	SDL_SetRenderDrawColor(m_Renderer, r, g, b, a);
 	SDL_SetRenderDrawBlendMode(m_Renderer, SDL_BLENDMODE_BLEND);
@@ -275,6 +274,8 @@ HRESULT CBRenderSDL::DrawLine(int X1, int Y1, int X2, int Y2, uint32 Color) {
 
 //////////////////////////////////////////////////////////////////////////
 CBImage *CBRenderSDL::TakeScreenshot() {
+// TODO: Fix this
+#if 0
 	SDL_Rect viewport;
 
 	SDL_RenderGetViewport(m_Renderer, &viewport);
@@ -284,18 +285,19 @@ CBImage *CBRenderSDL::TakeScreenshot() {
 
 	if (SDL_RenderReadPixels(m_Renderer, NULL, surface->format->format, surface->pixels, surface->pitch) < 0) return NULL;
 
-
 	FIBITMAP *dib = FreeImage_Allocate(viewport.w, viewport.h, 24, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK);
 
 	int bytespp = FreeImage_GetLine(dib) / FreeImage_GetWidth(dib);
 
 	for (unsigned y = 0; y < FreeImage_GetHeight(dib); y++) {
-		BYTE *bits = FreeImage_GetScanLine(dib, y);
-		BYTE *src = (byte  *)surface->pixels + (viewport.h - y - 1) * surface->pitch;
+		byte *bits = FreeImage_GetScanLine(dib, y);
+		byte *src = (byte  *)surface->pixels + (viewport.h - y - 1) * surface->pitch;
 		memcpy(bits, src, bytespp * viewport.w);
 	}
 
 	return new CBImage(Game, dib);
+#endif
+	return NULL;
 }
 
 //////////////////////////////////////////////////////////////////////////

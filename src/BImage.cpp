@@ -25,33 +25,42 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BImage.h"
-#include "FreeImage.h"
+//#include "FreeImage.h"
 
 namespace WinterMute {
 
 //////////////////////////////////////////////////////////////////////
 CBImage::CBImage(CBGame *inGame, FIBITMAP *bitmap): CBBase(inGame) {
+#if 0
 	m_Bitmap = bitmap;
+#endif
+	m_Bitmap = NULL;
 }
 
 
 //////////////////////////////////////////////////////////////////////
 CBImage::~CBImage() {
+#if 0
 	if (m_Bitmap) FreeImage_Unload(m_Bitmap);
+#endif
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBImage::SaveBMPFile(char *Filename) {
+#if 0
 	if (!m_Bitmap) return E_FAIL;
 
 	if (FreeImage_Save(FIF_BMP, m_Bitmap, Filename)) return S_OK;
 	else return E_FAIL;
+#endif
+	return E_FAIL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBImage::Resize(int NewWidth, int NewHeight) {
+#if 0
 	if (!m_Bitmap) return E_FAIL;
 
 	if (NewWidth == 0) NewWidth = FreeImage_GetWidth(m_Bitmap);
@@ -64,21 +73,23 @@ HRESULT CBImage::Resize(int NewWidth, int NewHeight) {
 		m_Bitmap = newImg;
 		return S_OK;
 	} else return E_FAIL;
+#endif
+	return E_FAIL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
-BYTE *CBImage::CreateBMPBuffer(uint32 *BufferSize) {
+byte *CBImage::CreateBMPBuffer(uint32 *BufferSize) {
 	if (!m_Bitmap) return NULL;
-
+#if 0
 	FIMEMORY *fiMem = FreeImage_OpenMemory();
 	FreeImage_SaveToMemory(FIF_PNG, m_Bitmap, fiMem);
 	uint32 size;
-	BYTE *data;
+	byte *data;
 	FreeImage_AcquireMemory(fiMem, &data, &size);
 
 
-	BYTE *Buffer = new byte[size];
+	byte *Buffer = new byte[size];
 	memcpy(Buffer, data, size);
 
 	FreeImage_CloseMemory(fiMem);
@@ -86,18 +97,20 @@ BYTE *CBImage::CreateBMPBuffer(uint32 *BufferSize) {
 	if (BufferSize) *BufferSize = size;
 
 	return Buffer;
+#endif
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBImage::CopyFrom(CBImage *OrigImage, int NewWidth, int NewHeight) {
+#if 0
 	if (m_Bitmap) FreeImage_Unload(m_Bitmap);
 
 	if (NewWidth == 0) NewWidth = FreeImage_GetWidth(OrigImage->GetBitmap());
 	if (NewHeight == 0) NewHeight = FreeImage_GetHeight(OrigImage->GetBitmap());
 
 	m_Bitmap = FreeImage_Rescale(OrigImage->GetBitmap(), NewWidth, NewHeight, FILTER_BILINEAR);
-
+#endif
 	return S_OK;
 }
 

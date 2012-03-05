@@ -39,8 +39,6 @@ THE SOFTWARE.
 #endif
 #include "AdGame.h"
 
-#include "FreeImage.h"
-
 using namespace WinterMute;
 
 //////////////////////////////////////////////////////////////////////
@@ -53,9 +51,6 @@ int main(int argc, char *argv[]) {
 #   endif
 #endif
 
-#ifndef __WIN32__
-	FreeImage_Initialise();
-#endif
 	int ret = 1;
 
 	CAdGame *Game = new CAdGame;
@@ -65,13 +60,6 @@ int main(int argc, char *argv[]) {
 	if (ret == 0) {
 		ret = CBPlatform::MessageLoop();
 	}
-
-
-#ifndef __WIN32__
-	FreeImage_DeInitialise();
-#endif
-
-
 
 	return ret;
 }
