@@ -104,7 +104,6 @@ THE SOFTWARE.
 
 #include "AdSpriteSet.h"
 #include "AdTalkNode.h"
-#include "AdTalkDef.h"
 #include "AdResponseContext.h"
 #include "AdNodeState.h"
 #include "AdSceneState.h"
@@ -130,10 +129,6 @@ THE SOFTWARE.
 #include "AdScene.h"
 #include "AdGame.h"
 #include "UIEntity.h"
-
-
-// big boss
-//#include "BGame.h"
 
 // macros
 #define RELEASE(obj) if(obj) { obj->Release(); obj = NULL; } else 0
