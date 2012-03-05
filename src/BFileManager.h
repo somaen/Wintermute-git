@@ -32,7 +32,7 @@ THE SOFTWARE.
 #include "BFileEntry.h"
 
 namespace WinterMute {
-
+class CBFile;
 class CBFileManager: CBBase {
 public:
 	bool FindPackageSignature(FILE *f, uint32 *Offset);

@@ -31,6 +31,7 @@ THE SOFTWARE.
 #include "BResourceFile.h"
 #include "BSaveThumbFile.h"
 #include "BFileEntry.h"
+#include "BPkgFile.h"
 #include <boost/filesystem.hpp>
 
 #ifdef __WIN32__

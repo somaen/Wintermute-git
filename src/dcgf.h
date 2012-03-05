@@ -61,11 +61,6 @@ THE SOFTWARE.
 
 #include "PlatformSDL.h"
 
-#include <cstdio>
-
-#include <cassert>
-
-
 #ifdef GetClassName
 #undef GetClassName
 #endif
@@ -79,11 +74,6 @@ THE SOFTWARE.
 
 #include "persistent.h"
 
-// classes/instances registry
-#include "SysInstance.h"
-#include "SysClass.h"
-#include "SysClassRegistry.h"
-
 // base classes
 #include "BDynBuffer.h"
 #include "BStringTable.h"
@@ -92,7 +82,6 @@ THE SOFTWARE.
 #include "BScriptable.h"
 #include "BScriptHolder.h"
 #include "BPackage.h"
-#include "BPkgFile.h"
 #include "BFileManager.h"
 #include "BEvent.h"
 #include "BObject.h"
@@ -103,12 +92,6 @@ THE SOFTWARE.
 #include "BFrame.h"
 #include "BFontStorage.h"
 #include "BFontTT.h"
-#include "BQuickMsg.h"
-#include "BTransitionMgr.h"
-#include "BKeyboardState.h"
-
-// UI classes
-//#include "UIWindow.h"
 
 // scripting classes
 #include "dcscript.h"

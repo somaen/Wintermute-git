@@ -24,6 +24,7 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "BFile.h"
 #include "BSurfaceSDL.h"
 #include "BRenderSDL.h"
 #include "SdlUtil.h"

@@ -24,6 +24,7 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "BFile.h"
 #include "BFontTT.h"
 #include "FontGlyphCache.h"
 #include "PathUtil.h"

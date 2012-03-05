@@ -25,8 +25,10 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BGame.h"
+#include "BFile.h"
 #include "BRenderSDL.h"
 #include "BSurfaceSDL.h"
+#include "BQuickMsg.h"
 #include "scriptables/SXString.h"
 #include "scriptables/SXDate.h"
 #include "scriptables/SXArray.h"
@@ -39,6 +41,8 @@ THE SOFTWARE.
 #include "StringUtil.h"
 #include "BParser.h"
 #include "BImage.h"
+#include "BTransitionMgr.h"
+#include "BKeyboardState.h"
 #include "UIWindow.h"
 
 #ifdef __IPHONEOS__

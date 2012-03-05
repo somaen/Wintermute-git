@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "UITiledImage.h"
 #include "StringUtil.h"
 #include "BActiveRect.h"
+#include "BKeyboardState.h"
 #include "BParser.h"
 
 namespace WinterMute {
