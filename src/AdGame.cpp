@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "BSurfaceStorage.h"
 #include "BTransitionMgr.h"
 #include "BObject.h"
+#include "BSound.h"
 #include "UIWindow.h"
 #include "ScValue.h"
 
@@ -1079,7 +1080,7 @@ HRESULT CAdGame::ShowCursor() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdGame::LoadFile(const char *Filename) {
-	BYTE *Buffer = m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CAdGame::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -1128,8 +1129,8 @@ HRESULT CAdGame::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(DEBUG_STARTUP_SCENE)
 	TOKEN_TABLE_END
 
-	BYTE *params;
-	BYTE *params2;
+	byte *params;
+	byte *params2;
 	int cmd = 1;
 	CBParser parser(Game);
 

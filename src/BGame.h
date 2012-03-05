@@ -26,24 +26,18 @@ THE SOFTWARE.
 #ifndef __WmeBGame_H__
 #define __WmeBGame_H__
 
-
-#include "BSound.h" // Added by ClassView
 #include "BDebugger.h"
-#include "dctypes.h"    // Added by ClassView
 #include "BSaveThumbHelper.h"
-#include "SXStore.h"
-#include "SXMath.h"
-#include "BSoundMgr.h"
 #include "BFader.h"
 #include "BRenderer.h"
 #include "BSurfaceStorage.h"
 #include "coll_templ.h"
-#include "SDL.h"
 
 namespace WinterMute {
 
 typedef void (*ENGINE_LOG_CALLBACK)(char *Text, HRESULT Result, void *Data);
 
+class CBSoundMgr;
 class CBFont;
 class CBFileManager;
 class CBTransitionMgr;
@@ -54,6 +48,8 @@ class CBQuickMsg;
 class CUIWindow;
 class CBViewport;
 class CBRegistry;
+class CSXStore;
+class CSXMath;
 class CBKeyboardState;
 
 #define NUM_MUSIC_CHANNELS 5

@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "BGame.h"
 #include "AdGame.h"
+#include "BSound.h"
 
 namespace WinterMute {
 
@@ -59,7 +60,7 @@ CAdEntity::~CAdEntity() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdEntity::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CAdEntity::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -170,7 +171,7 @@ HRESULT CAdEntity::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(SAVE_STATE)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 

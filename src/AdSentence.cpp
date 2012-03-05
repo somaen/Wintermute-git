@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include "AdGame.h"
 #include "PathUtil.h"
 #include "BGame.h"
+#include "BSound.h"
 
 namespace WinterMute {
 

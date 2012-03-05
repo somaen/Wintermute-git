@@ -1575,7 +1575,7 @@ bool CScScript::DbgGetTracingMode() {
 //////////////////////////////////////////////////////////////////////////
 void CScScript::AfterLoad() {
 	if (m_Buffer == NULL) {
-		BYTE *buffer = m_Engine->GetCompiledScript(m_Filename, &m_BufferSize);
+		byte *buffer = m_Engine->GetCompiledScript(m_Filename, &m_BufferSize);
 		if (!buffer) {
 			Game->LOG(0, "Error reinitializing script '%s' after load. Script will be terminated.", m_Filename);
 			m_State = SCRIPT_ERROR;

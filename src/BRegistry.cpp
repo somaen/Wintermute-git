@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "PathUtil.h"
 #include "StringUtil.h"
 #include "tinyxml.h"
+#include "utils.h"
 
 namespace WinterMute {
 

@@ -810,12 +810,12 @@ void CBFontTT::CacheGlyph(wchar_t ch) {
 	error = FT_Render_Glyph(m_FTFace->glyph, FT_RENDER_MODE_NORMAL);
 	if (error) return;
 
-	BYTE *pixels = m_FTFace->glyph->bitmap.buffer;
+	byte *pixels = m_FTFace->glyph->bitmap.buffer;
 	size_t stride = m_FTFace->glyph->bitmap.pitch;
 
 
 	// convert from monochrome to grayscale if needed
-	BYTE *tempBuffer = NULL;
+	byte *tempBuffer = NULL;
 	if (pixels != NULL && m_FTFace->glyph->bitmap.pixel_mode == FT_PIXEL_MODE_MONO) {
 		tempBuffer = new byte[m_FTFace->glyph->bitmap.width * m_FTFace->glyph->bitmap.rows];
 		for (int j = 0; j < m_FTFace->glyph->bitmap.rows; j++) {
@@ -823,7 +823,7 @@ void CBFontTT::CacheGlyph(wchar_t ch) {
 			for (int i = 0; i < m_FTFace->glyph->bitmap.width; i++) {
 				int byteOffset = i / 8;
 				int bitOffset = 7 - (i % 8);
-				BYTE bit = (pixels[rowOffset + byteOffset] & (1 << bitOffset)) >> bitOffset;
+				byte bit = (pixels[rowOffset + byteOffset] & (1 << bitOffset)) >> bitOffset;
 				tempBuffer[m_FTFace->glyph->bitmap.width * j + i] = 255 * bit;
 			}
 		}

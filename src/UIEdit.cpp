@@ -41,6 +41,7 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "ScStack.h"
 #include "ScScript.h"
+#include "utils.h"
 
 namespace WinterMute {
 
@@ -159,7 +160,7 @@ HRESULT CUIEdit::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(CAPTION)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd = 2;
 	CBParser parser(Game);
 

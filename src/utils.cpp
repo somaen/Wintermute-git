@@ -301,7 +301,7 @@ uint32 CBUtils::HSLtoRGB(byte  InH, byte InS, byte InL) {
 	float S = InS / 255.0f;
 	float L = InL / 255.0f;
 
-	BYTE R, G, B;
+	byte R, G, B;
 
 
 	if (S == 0) {

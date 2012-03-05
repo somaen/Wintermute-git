@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "BSurface.h"
 #include "BGame.h"
+#include "BSound.h"
 
 namespace WinterMute {
 
@@ -195,7 +196,7 @@ HRESULT CBSprite::LoadBuffer(byte  *Buffer, bool Complete, int LifeTime, TSprite
 	TOKEN_TABLE(EDITOR_PROPERTY)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 

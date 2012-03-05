@@ -146,7 +146,7 @@ HRESULT CBEvent::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(SCRIPT)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 

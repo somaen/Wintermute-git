@@ -48,7 +48,7 @@ CAdScaleLevel::~CAdScaleLevel() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdScaleLevel::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CAdScaleLevel::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;

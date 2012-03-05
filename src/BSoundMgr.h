@@ -26,7 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeBSoundMgr_H__
 #define __WmeBSoundMgr_H__
 
-
+#include "coll_templ.h"
 #include "BBase.h"
 #include "BSoundBuffer.h"
 #include "bass.h"

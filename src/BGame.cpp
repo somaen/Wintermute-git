@@ -36,6 +36,8 @@ THE SOFTWARE.
 #include "SxObject.h"
 #include "scriptables/SXMemBuffer.h"
 #include "SXFile.h"
+#include "SXMath.h"
+#include "SXStore.h"
 #include "PathUtil.h"
 #include <time.h>
 #include "crc.h"
@@ -46,6 +48,8 @@ THE SOFTWARE.
 #include "BKeyboardState.h"
 #include "UIWindow.h"
 #include "ScValue.h"
+#include "BSoundMgr.h"
+#include "BSound.h"
 
 #ifdef __IPHONEOS__
 #   include "ios_utils.h"

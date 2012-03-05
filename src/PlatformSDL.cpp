@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "PathUtil.h"
 #include "PlatformSDL.h"
 #include "BRegistry.h"
+#include "BSoundMgr.h"
 #include <boost/filesystem.hpp>
 
 #ifdef __WIN32__

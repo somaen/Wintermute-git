@@ -54,6 +54,7 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "ScScript.h"
 #include "UIWindow.h"
+#include "utils.h"
 #include <math.h>
 #include <limits.h>
 
@@ -501,7 +502,7 @@ HRESULT CAdScene::InitLoop() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdScene::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CAdScene::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -608,7 +609,7 @@ HRESULT CAdScene::LoadBuffer(byte  *Buffer, bool Complete) {
 
 	Cleanup();
 
-	BYTE *params;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 
@@ -1509,10 +1510,10 @@ HRESULT CAdScene::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 	else if (strcmp(Name, "FadeOut") == 0 || strcmp(Name, "FadeOutAsync") == 0) {
 		Stack->CorrectParams(5);
 		uint32 Duration = Stack->Pop()->GetInt(500);
-		BYTE Red = Stack->Pop()->GetInt(0);
-		BYTE Green = Stack->Pop()->GetInt(0);
-		BYTE Blue = Stack->Pop()->GetInt(0);
-		BYTE Alpha = Stack->Pop()->GetInt(0xFF);
+		byte Red = Stack->Pop()->GetInt(0);
+		byte Green = Stack->Pop()->GetInt(0);
+		byte Blue = Stack->Pop()->GetInt(0);
+		byte Alpha = Stack->Pop()->GetInt(0xFF);
 
 		m_Fader->FadeOut(DRGBA(Red, Green, Blue, Alpha), Duration);
 		if (strcmp(Name, "FadeOutAsync") != 0) Script->WaitFor(m_Fader);
@@ -1527,10 +1528,10 @@ HRESULT CAdScene::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 	else if (strcmp(Name, "FadeIn") == 0 || strcmp(Name, "FadeInAsync") == 0) {
 		Stack->CorrectParams(5);
 		uint32 Duration = Stack->Pop()->GetInt(500);
-		BYTE Red = Stack->Pop()->GetInt(0);
-		BYTE Green = Stack->Pop()->GetInt(0);
-		BYTE Blue = Stack->Pop()->GetInt(0);
-		BYTE Alpha = Stack->Pop()->GetInt(0xFF);
+		byte Red = Stack->Pop()->GetInt(0);
+		byte Green = Stack->Pop()->GetInt(0);
+		byte Blue = Stack->Pop()->GetInt(0);
+		byte Alpha = Stack->Pop()->GetInt(0xFF);
 
 		m_Fader->FadeIn(DRGBA(Red, Green, Blue, Alpha), Duration);
 		if (strcmp(Name, "FadeInAsync") != 0) Script->WaitFor(m_Fader);

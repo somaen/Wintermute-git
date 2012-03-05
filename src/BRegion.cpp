@@ -133,7 +133,7 @@ HRESULT CBRegion::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(PROPERTY)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 

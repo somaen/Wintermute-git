@@ -82,7 +82,7 @@ HRESULT CBDiskFile::Open(Common::String Filename) {
 			CompSize = m_File->readUint32LE();
 			UncompSize = m_File->readUint32LE();
 
-			BYTE *CompBuffer = new byte[CompSize];
+			byte *CompBuffer = new byte[CompSize];
 			if (!CompBuffer) {
 				Game->LOG(0, "Error allocating memory for compressed file '%s'", Filename.c_str());
 				Close();

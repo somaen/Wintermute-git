@@ -27,8 +27,10 @@ THE SOFTWARE.
 #include "ScEngine.h"
 #include "StringUtil.h"
 #include "ScValue.h"
+#include "SXMath.h"
 #include "BRegistry.h"
 #include "BGame.h"
+#include "BSound.h"
 #include <algorithm>
 #include <vector>
 
@@ -179,7 +181,7 @@ HRESULT CScEngine::Cleanup() {
 
 
 //////////////////////////////////////////////////////////////////////////
-BYTE *WINAPI CScEngine::LoadFile(void *Data, char *Filename, uint32 *Size) {
+byte *WINAPI CScEngine::LoadFile(void *Data, char *Filename, uint32 *Size) {
 	CBGame *Game = (CBGame *)Data;
 	return Game->m_FileManager->ReadWholeFile(Filename, Size);
 }
@@ -223,7 +225,7 @@ void WINAPI CScEngine::ParseElement(void *Data, int Line, int Type, void *Elemen
 
 //////////////////////////////////////////////////////////////////////////
 CScScript *CScEngine::RunScript(char *Filename, CBScriptHolder *Owner) {
-	BYTE *CompBuffer;
+	byte *CompBuffer;
 	uint32 CompSize;
 
 	// get script from cache
@@ -270,13 +272,13 @@ BYTE *CScEngine::GetCompiledScript(char *Filename, uint32 *OutSize, bool IgnoreC
 	}
 
 	// nope, load it
-	BYTE *CompBuffer;
+	byte *CompBuffer;
 	uint32 CompSize;
 	bool CompiledNow = false;
 
 	uint32 Size;
 
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename, &Size);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename, &Size);
 	if (!Buffer) {
 		Game->LOG(0, "CScEngine::GetCompiledScript - error opening script '%s'", Filename);
 		return NULL;
@@ -315,7 +317,7 @@ BYTE *CScEngine::GetCompiledScript(char *Filename, uint32 *OutSize, bool IgnoreC
 		}
 	}
 
-	BYTE *ret = NULL;
+	byte *ret = NULL;
 
 	// add script to cache
 	CScCachedScript *CachedScript = new CScCachedScript(Filename, CompBuffer, CompSize);

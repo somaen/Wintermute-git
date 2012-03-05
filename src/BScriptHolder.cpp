@@ -108,7 +108,7 @@ HRESULT CBScriptHolder::ScCallMethod(CScScript *Script, CScStack *Stack, CScStac
 	//////////////////////////////////////////////////////////////////////////
 	if (strcmp(Name, "DEBUG_CrashMe") == 0) {
 		Stack->CorrectParams(0);
-		BYTE *p = 0;
+		byte *p = 0;
 		*p = 10;
 		Stack->PushNULL();
 
@@ -345,7 +345,7 @@ HRESULT CBScriptHolder::ParseProperty(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(VALUE)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 

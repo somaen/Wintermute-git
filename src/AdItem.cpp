@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "BGame.h"
 #include "AdGame.h"
+#include "BSound.h"
 
 namespace WinterMute {
 

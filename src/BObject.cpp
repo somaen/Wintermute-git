@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BParser.h"
 #include "ScValue.h"
 #include "BSound.h"
+#include "BSoundMgr.h"
 #include "BGame.h"
 
 namespace WinterMute {

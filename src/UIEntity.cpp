@@ -100,7 +100,7 @@ HRESULT CUIEntity::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(EDITOR_PROPERTY)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd = 2;
 	CBParser parser(Game);
 

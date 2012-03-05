@@ -145,7 +145,7 @@ HRESULT CAdInventoryBox::Display() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdInventoryBox::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CAdInventoryBox::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -200,7 +200,7 @@ HRESULT CAdInventoryBox::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(EDITOR_PROPERTY)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd = 2;
 	CBParser parser(Game);
 	bool always_visible = false;

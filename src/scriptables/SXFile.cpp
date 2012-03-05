@@ -200,9 +200,9 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 			return S_OK;
 		}
 		uint32 BufSize = FILE_BUFFER_SIZE;
-		BYTE *Buf = (byte  *)malloc(BufSize);
+		byte *Buf = (byte  *)malloc(BufSize);
 		uint32 Counter = 0;
-		BYTE b;
+		byte b;
 		bool FoundNewLine = false;
 		HRESULT Ret = E_FAIL;
 		do {
@@ -251,9 +251,9 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 			return S_OK;
 		}
 		uint32 BufSize = FILE_BUFFER_SIZE;
-		BYTE *Buf = (byte  *)malloc(BufSize);
+		byte *Buf = (byte  *)malloc(BufSize);
 		uint32 Counter = 0;
-		BYTE b;
+		byte b;
 
 		HRESULT Ret = E_FAIL;
 		while (Counter < TextLen) {
@@ -334,7 +334,7 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 			Stack->PushNULL();
 			return S_OK;
 		}
-		BYTE Val;
+		byte Val;
 		if (SUCCEEDED(m_ReadFile->Read(&Val, sizeof(byte )))) Stack->PushInt(Val);
 		else Stack->PushNULL();
 
@@ -421,7 +421,7 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 		}
 		uint32 Size;
 		if (SUCCEEDED(m_ReadFile->Read(&Size, sizeof(uint32)))) {
-			BYTE *Str = new byte[Size + 1];
+			byte *Str = new byte[Size + 1];
 			if (Str) {
 				if (SUCCEEDED(m_ReadFile->Read(Str, Size))) {
 					Str[Size] = '\0';
@@ -457,7 +457,7 @@ HRESULT CSXFile::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "WriteByte") == 0) {
 		Stack->CorrectParams(1);
-		BYTE Val = Stack->Pop()->GetInt();
+		byte Val = Stack->Pop()->GetInt();
 
 		if (m_TextMode || !m_WriteFile) {
 			Script->RuntimeError("File.%s: File must be open for writing in binary mode.", Name);

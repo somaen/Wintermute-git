@@ -182,7 +182,7 @@ HRESULT CBPkgFile::SeekToPos(uint32 NewPos) {
 
 	// seek compressed stream to NewPos
 	if (m_Compressed) {
-		BYTE StreamBuffer[STREAM_BUFFER_SIZE];
+		byte StreamBuffer[STREAM_BUFFER_SIZE];
 		if (m_InflateInit) inflateEnd(&m_Stream);
 		m_InflateInit = false;
 

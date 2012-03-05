@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "Vector2.h"
 #include "StringUtil.h"
 #include "BImage.h"
+#include "BSound.h"
 
 namespace WinterMute {
 

@@ -185,7 +185,7 @@ HRESULT CBFileManager::SaveFile(char *Filename, byte *Buffer, uint32 BufferSize,
 
 	if (Compressed) {
 		uint32 CompSize = BufferSize + (BufferSize / 100) + 12; // 1% extra space
-		BYTE *CompBuffer = new byte[CompSize];
+		byte *CompBuffer = new byte[CompSize];
 		if (!CompBuffer) {
 			Game->LOG(0, "Error allocating compression buffer while saving '%s'", Filename);
 			Compressed = false;
@@ -432,7 +432,7 @@ HRESULT CBFileManager::RegisterPackage(const char *Path, const char *Name, bool 
 		pkg->m_BoundToExe = BoundToExe;
 
 		// read package info
-		BYTE NameLength;
+		byte NameLength;
 		fread(&NameLength, sizeof(byte ), 1, f);
 		pkg->m_Name = new char[NameLength];
 		fread(pkg->m_Name, NameLength, 1, f);
@@ -695,9 +695,9 @@ HRESULT CBFileManager::SetBasePath(char *Path) {
 
 //////////////////////////////////////////////////////////////////////////
 bool CBFileManager::FindPackageSignature(FILE *f, uint32 *Offset) {
-	BYTE buf[32768];
+	byte buf[32768];
 
-	BYTE Signature[8];
+	byte Signature[8];
 	((uint32 *)Signature)[0] = PACKAGE_MAGIC_1;
 	((uint32 *)Signature)[1] = PACKAGE_MAGIC_2;
 

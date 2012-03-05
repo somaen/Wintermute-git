@@ -171,7 +171,7 @@ HRESULT CAdResponseBox::CreateButtons() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdResponseBox::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CAdResponseBox::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -223,7 +223,7 @@ HRESULT CAdResponseBox::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE_END
 
 
-	BYTE *params;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 

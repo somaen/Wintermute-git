@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "AdGame.h"
 #include "BParser.h"
 #include "ScValue.h"
+#include "BSound.h"
 #include <math.h>
 
 namespace WinterMute {
@@ -1241,14 +1242,14 @@ HRESULT CAdActor::MergeAnims(char *AnimsFilename) {
 	TOKEN_TABLE_END
 
 
-	BYTE *FileBuffer = Game->m_FileManager->ReadWholeFile(AnimsFilename);
+	byte *FileBuffer = Game->m_FileManager->ReadWholeFile(AnimsFilename);
 	if (FileBuffer == NULL) {
 		Game->LOG(0, "CAdActor::MergeAnims failed for file '%s'", AnimsFilename);
 		return E_FAIL;
 	}
 
-	BYTE *Buffer = FileBuffer;
-	BYTE *params;
+	byte *Buffer = FileBuffer;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 

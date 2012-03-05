@@ -185,7 +185,7 @@ HRESULT CUIWindow::Display(int OffsetX, int OffsetY) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CUIWindow::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CUIWindow::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -283,7 +283,7 @@ HRESULT CUIWindow::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(EDIT)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd = 2;
 	CBParser parser(Game);
 
