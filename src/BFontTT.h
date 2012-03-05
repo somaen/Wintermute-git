@@ -28,6 +28,7 @@ THE SOFTWARE.
 
 
 #include "BFont.h"
+#include "BSurface.h"
 
 #define NUM_CACHED_TEXTS 30
 class SDL_Surface;
