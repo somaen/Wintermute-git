@@ -23,15 +23,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "dcgf.h"
 #include "UIEdit.h"
+#include "UIObject.h"
 #include "UITiledImage.h"
 #include "StringUtil.h"
 #include "BActiveRect.h"
+#include "BFileManager.h"
+#include "BFont.h"
+#include "BFontStorage.h"
 #include "BKeyboardState.h"
 #include "BDynBuffer.h"
 #include "BParser.h"
+#include "BSprite.h"
+#include "BStringTable.h"
+#include "BGame.h"
+#include "PlatformSDL.h"
 #include "ScValue.h"
+#include "ScStack.h"
+#include "ScScript.h"
 
 namespace WinterMute {
 
@@ -73,14 +82,14 @@ CUIEdit::~CUIEdit() {
 		if (m_FontSelected)   Game->m_FontStorage->RemoveFont(m_FontSelected);
 	}
 
-	SAFE_DELETE_ARRAY(m_CursorChar);
-
+	delete[] m_CursorChar;
+	m_CursorChar = NULL;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CUIEdit::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CUIEdit::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -173,19 +182,21 @@ HRESULT CUIEdit::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_BACK:
-			SAFE_DELETE(m_Back);
+			delete m_Back;
 			m_Back = new CUITiledImage(Game);
 			if (!m_Back || FAILED(m_Back->LoadFile((char *)params))) {
-				SAFE_DELETE(m_Back);
+				delete m_Back;
+				m_Back = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
 
 		case TOKEN_IMAGE:
-			SAFE_DELETE(m_Image);
+			delete m_Image;
 			m_Image = new CBSprite(Game);
 			if (!m_Image || FAILED(m_Image->LoadFile((char *)params))) {
-				SAFE_DELETE(m_Image);
+				delete m_Image;
+				m_Image = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
@@ -232,10 +243,11 @@ HRESULT CUIEdit::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_CURSOR:
-			SAFE_DELETE(m_Cursor);
+			delete m_Cursor;
 			m_Cursor = new CBSprite(Game);
 			if (!m_Cursor || FAILED(m_Cursor->LoadFile((char *)params))) {
-				SAFE_DELETE(m_Cursor);
+				delete m_Cursor;
+				m_Cursor = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
@@ -518,7 +530,7 @@ char *CUIEdit::ScToString() {
 //////////////////////////////////////////////////////////////////////////
 void CUIEdit::SetCursorChar(char *Char) {
 	if (!Char) return;
-	SAFE_DELETE_ARRAY(m_CursorChar);
+	delete[] m_CursorChar;
 	m_CursorChar = new char [strlen(Char) + 1];
 	if (m_CursorChar) strcpy(m_CursorChar, Char);
 }
@@ -780,7 +792,7 @@ int CUIEdit::DeleteChars(int Start, int End) {
 		if (Start > 0) memcpy(str, m_Text, Start);
 		memcpy(str + std::max(0, Start), m_Text + End, strlen(m_Text) - End + 1);
 
-		SAFE_DELETE_ARRAY(m_Text);
+		delete[] m_Text;
 		m_Text = str;
 	}
 	if (m_ParentNotify && m_Parent) m_Parent->ApplyEvent(m_Name);
@@ -805,7 +817,7 @@ int CUIEdit::InsertChars(int Pos, byte *Chars, int Num) {
 
 		memcpy(str + Pos, Chars, Num);
 
-		SAFE_DELETE_ARRAY(m_Text);
+		delete[] m_Text;
 		m_Text = str;
 	}
 	if (m_ParentNotify && m_Parent) m_Parent->ApplyEvent(m_Name);

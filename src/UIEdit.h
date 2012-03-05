@@ -26,11 +26,11 @@ THE SOFTWARE.
 #ifndef __WmeUIEdit_H__
 #define __WmeUIEdit_H__
 
-
+#include "persistent.h"
 #include "UIObject.h"
 
 namespace WinterMute {
-
+class CBFont;
 class CUIEdit : public CUIObject {
 public:
 	DECLARE_PERSISTENT(CUIEdit, CUIObject)

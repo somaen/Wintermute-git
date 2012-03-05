@@ -33,7 +33,7 @@ THE SOFTWARE.
 namespace WinterMute {
 
 class CUITiledImage;
-
+class CBFont;
 class CUIObject : public CBObject {
 public:
 

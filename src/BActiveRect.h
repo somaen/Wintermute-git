@@ -26,8 +26,10 @@ THE SOFTWARE.
 #ifndef __WmeBActiveRect_H__
 #define __WmeBActiveRect_H__
 
-namespace WinterMute {
+#include "BBase.h"
 
+namespace WinterMute {
+class CBRegion;
 class CBActiveRect: CBBase {
 public:
 	void ClipRect();

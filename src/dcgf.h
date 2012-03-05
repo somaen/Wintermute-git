@@ -132,13 +132,4 @@ THE SOFTWARE.
 #define DegToRad(_val) (_val*PI*(1.0f/180.0f))
 #define RadToDeg(_val) (_val*(180/PI))
 
-#ifndef MAX
-#define MAX(a,b)            (((a) > (b)) ? (a) : (b))
-#endif
-
-#ifndef MIN
-#define MIN(a,b)            (((a) < (b)) ? (a) : (b))
-#endif
-
-
 #endif // _DCGF_H_

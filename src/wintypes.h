@@ -54,6 +54,14 @@ typedef int BOOL;
 #define D3DCOLGetR(rgb)  ((byte )((rgb)>>16))
 #define D3DCOLGetA(rgb)  ((byte )((rgb)>>24))
 
+#ifndef MAX
+#define MAX(a,b)            (((a) > (b)) ? (a) : (b))
+#endif
+
+#ifndef MIN
+#define MIN(a,b)            (((a) < (b)) ? (a) : (b))
+#endif
+
 #define CONST const
 
 #define MAX_PATH 512
