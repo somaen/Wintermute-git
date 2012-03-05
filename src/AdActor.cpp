@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "BSound.h"
 #include "AdScene.h"
+#include "AdEntity.h"
 #include <math.h>
 
 namespace WinterMute {

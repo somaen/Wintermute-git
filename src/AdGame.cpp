@@ -37,6 +37,7 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "UIEntity.h"
 #include "AdScene.h"
+#include "AdEntity.h"
 
 namespace WinterMute {
 
