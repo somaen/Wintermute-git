@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BParser.h"
 #include "UIButton.h"
 #include "UIWindow.h"
+#include "BDynBuffer.h"
 #include <cmath>
 
 

@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "UIWindow.h"
 #include "BParser.h"
 #include "BActiveRect.h"
+#include "BDynBuffer.h"
 #include "BKeyboardState.h"
 #include "UIButton.h"
 #include "UIEdit.h"

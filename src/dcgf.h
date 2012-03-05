@@ -75,7 +75,6 @@ THE SOFTWARE.
 #include "persistent.h"
 
 // base classes
-#include "BDynBuffer.h"
 #include "BStringTable.h"
 #include "BRegistry.h"
 #include "BPersistMgr.h"

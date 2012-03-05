@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "BSurfaceStorage.h"
 #include "UIButton.h"
 #include "UIWindow.h"
+#include "BDynBuffer.h"
 
 namespace WinterMute {
 

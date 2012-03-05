@@ -26,7 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdWaypointGroup.h"
 #include "BParser.h"
-
+#include "BDynBuffer.h"
 namespace WinterMute {
 	
 IMPLEMENT_PERSISTENT(CAdWaypointGroup, false)

@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdEntity.h"
 #include "BParser.h"
+#include "BDynBuffer.h"
 #include "BActiveRect.h"
 #include "BSurfaceStorage.h"
 

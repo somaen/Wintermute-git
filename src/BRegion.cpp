@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BRegion.h"
 #include "BParser.h"
+#include "BDynBuffer.h"
 
 namespace WinterMute {
 
