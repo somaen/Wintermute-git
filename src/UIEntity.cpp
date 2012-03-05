@@ -23,11 +23,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "dcgf.h"
+#include "AdEntity.h"
+#include "BGame.h"
+#include "BFileManager.h"
 #include "UIEntity.h"
 #include "BParser.h"
 #include "BDynBuffer.h"
 #include "ScValue.h"
+#include "ScScript.h"
+#include "ScStack.h"
 
 namespace WinterMute {
 
@@ -49,7 +53,7 @@ CUIEntity::~CUIEntity() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CUIEntity::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CUIEntity::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -205,7 +209,8 @@ HRESULT CUIEntity::SetEntity(char *Filename) {
 	if (m_Entity) Game->UnregisterObject(m_Entity);
 	m_Entity = new CAdEntity(Game);
 	if (!m_Entity || FAILED(m_Entity->LoadFile(Filename))) {
-		SAFE_DELETE(m_Entity);
+		delete m_Entity;
+		m_Entity = NULL;
 		return E_FAIL;
 	} else {
 		m_Entity->m_NonIntMouseEvents = true;
