@@ -38,6 +38,10 @@ THE SOFTWARE.
 #include "AdSpriteSet.h"
 #include "AdWaypointGroup.h"
 #include "AdPath.h"
+#include "AdSentence.h"
+#include "AdPath.h"
+#include "ScScript.h"
+
 #include <math.h>
 
 namespace WinterMute {

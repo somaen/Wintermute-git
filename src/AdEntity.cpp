@@ -37,6 +37,9 @@ THE SOFTWARE.
 #include "AdWaypointGroup.h"
 #include "BFontStorage.h"
 #include "BFont.h"
+#include "AdSentence.h"
+#include "ScScript.h"
+
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdEntity, false)

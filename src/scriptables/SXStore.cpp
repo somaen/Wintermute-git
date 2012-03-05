@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BRegistry.h"
 #include "scriptables/SXStore.h"
 #include "ScValue.h"
+#include "ScScript.h"
 #include "StringUtil.h"
 
 #ifdef __IPHONEOS__

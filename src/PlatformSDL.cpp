@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include "PlatformSDL.h"
 #include "BRegistry.h"
 #include "BSoundMgr.h"
+#include "ScEngine.h"
 #include <boost/filesystem.hpp>
 
 #ifdef __WIN32__

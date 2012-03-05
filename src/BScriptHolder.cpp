@@ -28,6 +28,8 @@ THE SOFTWARE.
 #include "BScriptHolder.h"
 #include "BParser.h"
 #include "ScValue.h"
+#include "ScEngine.h"
+#include "ScScript.h"
 
 namespace WinterMute {
 

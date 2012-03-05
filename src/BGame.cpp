@@ -54,6 +54,9 @@ THE SOFTWARE.
 #include "BViewport.h"
 #include "BFontStorage.h"
 #include "BFontTT.h"
+#include "ScEngine.h"
+#include "BStringTable.h"
+#include "ScScript.h"
 
 #ifdef __IPHONEOS__
 #   include "ios_utils.h"

@@ -33,6 +33,9 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "BFontStorage.h"
 #include "BFont.h"
+#include "BStringTable.h"
+#include "ScScript.h"
+
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CUIButton, false)

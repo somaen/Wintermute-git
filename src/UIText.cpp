@@ -32,6 +32,8 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "BFont.h"
 #include "BFontStorage.h"
+#include "BStringTable.h"
+#include "ScScript.h"
 
 namespace WinterMute {
 

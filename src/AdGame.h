@@ -35,6 +35,7 @@ class CAdInventory;
 class CAdSceneState;
 class CAdScene;
 class CAdItem;
+class CAdObject;
 class CAdSentence;
 class CAdInventoryBox;
 class CAdResponseContext;

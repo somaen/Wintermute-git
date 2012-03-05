@@ -26,8 +26,10 @@ THE SOFTWARE.
 #ifndef __WmeAdSceneState_H__
 #define __WmeAdSceneState_H__
 
-namespace WinterMute {
+#include "BBase.h"
 
+namespace WinterMute {
+class CAdNodeState;
 class CAdSceneState : public CBBase {
 public:
 	CAdNodeState *GetNodeState(char *Name, bool Saving);

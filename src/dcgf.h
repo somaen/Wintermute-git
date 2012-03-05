@@ -73,23 +73,14 @@ THE SOFTWARE.
 #include "persistent.h"
 
 // base classes
-#include "BStringTable.h"
-#include "BPersistMgr.h"
 #include "BFileManager.h"
 #include "BEvent.h"
 #include "BRegion.h"
 
 // scripting classes
 #include "ScStack.h"
-#include "ScScript.h"
-#include "ScEngine.h"
 #include "AdSpriteSet.h"
-#include "AdResponseContext.h"
-#include "AdNodeState.h"
-#include "AdResponse.h"
 #include "AdPath.h"
-#include "AdSentence.h"
-#include "AdTalkHolder.h"
 
 // macros
 #define RELEASE(obj) if(obj) { obj->Release(); obj = NULL; } else 0

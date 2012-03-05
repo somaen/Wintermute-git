@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include "BSound.h"
 #include "BSoundMgr.h"
 #include "BGame.h"
+#include "BStringTable.h"
 
 namespace WinterMute {
 

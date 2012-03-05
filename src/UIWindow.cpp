@@ -38,6 +38,9 @@ THE SOFTWARE.
 #include "BViewport.h"
 #include "BFontStorage.h"
 #include "BFont.h"
+#include "BStringTable.h"
+#include "ScScript.h"
+
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CUIWindow, false)

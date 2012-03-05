@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "AdTalkHolder.h"
 #include "BDynBuffer.h"
 #include "ScValue.h"
+#include "ScScript.h"
 #include "BGame.h"
 
 namespace WinterMute {

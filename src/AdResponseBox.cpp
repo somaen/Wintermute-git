@@ -33,6 +33,8 @@ THE SOFTWARE.
 #include "BDynBuffer.h"
 #include "BFontStorage.h"
 #include "BFont.h"
+#include "AdResponse.h"
+#include "ScScript.h"
 
 namespace WinterMute {
 

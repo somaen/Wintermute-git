@@ -29,7 +29,7 @@ THE SOFTWARE.
 #include "UIObject.h"
 
 namespace WinterMute {
-
+class CAdEntity;
 class CUIEntity : public CUIObject {
 public:
 	DECLARE_PERSISTENT(CUIEntity, CUIObject)

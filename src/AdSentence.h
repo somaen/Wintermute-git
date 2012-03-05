@@ -32,7 +32,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 class CAdTalkDef;
-
+class CBFont;
 class CAdSentence : public CBBase {
 public:
 	bool m_Freezable;

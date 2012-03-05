@@ -40,6 +40,10 @@ THE SOFTWARE.
 #include "BSubFrame.h"
 #include "BFont.h"
 #include "BFontStorage.h"
+#include "ScEngine.h"
+#include "BStringTable.h"
+#include "AdSentence.h"
+#include "ScScript.h"
 
 namespace WinterMute {
 
