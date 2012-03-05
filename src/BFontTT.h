@@ -30,7 +30,7 @@ THE SOFTWARE.
 #include "BFont.h"
 
 #define NUM_CACHED_TEXTS 30
-
+class SDL_Surface;
 namespace WinterMute {
 
 class FontGlyphCache;

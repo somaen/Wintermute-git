@@ -30,7 +30,7 @@ THE SOFTWARE.
 #include "BBase.h"
 
 namespace WinterMute {
-
+class CBObject;
 class CBViewport : public CBBase {
 public:
 	int GetHeight();

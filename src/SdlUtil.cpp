@@ -24,6 +24,7 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "SDL.h"
 #include "SdlUtil.h"
 
 namespace WinterMute {

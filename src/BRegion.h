@@ -27,6 +27,7 @@ THE SOFTWARE.
 #define __WmeBRegion_H__
 
 #include "BPoint.h"
+#include "BObject.h"
 
 namespace WinterMute {
 

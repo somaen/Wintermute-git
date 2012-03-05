@@ -68,7 +68,6 @@ THE SOFTWARE.
 #include "dcpackage.h"
 #include "utils.h"
 
-
 #include "coll_templ.h"
 
 #include "persistent.h"
@@ -81,7 +80,6 @@ THE SOFTWARE.
 #include "BPackage.h"
 #include "BFileManager.h"
 #include "BEvent.h"
-#include "BObject.h"
 #include "BViewport.h"
 #include "BRegion.h"
 #include "BSurface.h"

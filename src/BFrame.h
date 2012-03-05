@@ -27,7 +27,7 @@ THE SOFTWARE.
 #define __WmeBFrame_H__
 
 namespace WinterMute {
-
+class CBSound;
 class CBFrame: public CBScriptable {
 public:
 	bool m_KillSound;
