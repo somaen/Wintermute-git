@@ -108,14 +108,14 @@ HRESULT CBBase::ParseEditorProperty(byte  *Buffer, bool Complete) {
 	while ((cmd = parser.GetCommand((char **)&Buffer, commands, (char **)&params)) > 0) {
 		switch (cmd) {
 		case TOKEN_NAME:
-			SAFE_DELETE_ARRAY(PropName);
+			delete[] PropName;
 			PropName = new char[strlen((char *)params) + 1];
 			if (PropName) strcpy(PropName, (char *)params);
 			else cmd = PARSERR_GENERIC;
 			break;
 
 		case TOKEN_VALUE:
-			SAFE_DELETE_ARRAY(PropValue);
+			delete[] PropValue;
 			PropValue = new char[strlen((char *)params) + 1];
 			if (PropValue) strcpy(PropValue, (char *)params);
 			else cmd = PARSERR_GENERIC;
@@ -124,14 +124,18 @@ HRESULT CBBase::ParseEditorProperty(byte  *Buffer, bool Complete) {
 
 	}
 	if (cmd == PARSERR_TOKENNOTFOUND) {
-		SAFE_DELETE_ARRAY(PropName);
-		SAFE_DELETE_ARRAY(PropValue);
+		delete[] PropName;
+		delete[] PropValue;
+		PropName = NULL;
+		PropValue = NULL;
 		Game->LOG(0, "Syntax error in EDITOR_PROPERTY definition");
 		return E_FAIL;
 	}
 	if (cmd == PARSERR_GENERIC || PropName == NULL || PropValue == NULL) {
-		SAFE_DELETE_ARRAY(PropName);
-		SAFE_DELETE_ARRAY(PropValue);
+		delete[] PropName;
+		delete[] PropValue;
+		PropName = NULL;
+		PropValue = NULL;
 		Game->LOG(0, "Error loading EDITOR_PROPERTY definition");
 		return E_FAIL;
 	}
@@ -139,8 +143,10 @@ HRESULT CBBase::ParseEditorProperty(byte  *Buffer, bool Complete) {
 
 	SetEditorProp(PropName, PropValue);
 
-	SAFE_DELETE_ARRAY(PropName);
-	SAFE_DELETE_ARRAY(PropValue);
+	delete[] PropName;
+	delete[] PropValue;
+	PropName = NULL;
+	PropValue = NULL;
 
 	return S_OK;
 }

@@ -70,11 +70,16 @@ CAdSentence::CAdSentence(CBGame *inGame): CBBase(inGame) {
 
 //////////////////////////////////////////////////////////////////////////
 CAdSentence::~CAdSentence() {
-	SAFE_DELETE(m_Sound);
-	SAFE_DELETE_ARRAY(m_Text);
-	SAFE_DELETE_ARRAY(m_Stances);
-	SAFE_DELETE_ARRAY(m_TempStance);
-	SAFE_DELETE(m_TalkDef);
+	delete m_Sound;
+	delete[] m_Text;
+	delete[] m_Stances;
+	delete[] m_TempStance;
+	delete m_TalkDef;
+	m_Sound = NULL;
+	m_Text = NULL;
+	m_Stances = NULL;
+	m_TempStance = NULL;
+	m_TalkDef = NULL;
 
 	m_CurrentSprite = NULL; // ref only
 	m_CurrentSkelAnim = NULL;
@@ -189,7 +194,7 @@ HRESULT CAdSentence::Display() {
 //////////////////////////////////////////////////////////////////////////
 void CAdSentence::SetSound(CBSound *Sound) {
 	if (!Sound) return;
-	SAFE_DELETE(m_Sound);
+	delete m_Sound;
 	m_Sound = Sound;
 	m_SoundStarted = false;
 }
@@ -231,7 +236,8 @@ HRESULT CAdSentence::Persist(CBPersistMgr *PersistMgr) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdSentence::SetupTalkFile(char *SoundFilename) {
-	SAFE_DELETE(m_TalkDef);
+	delete m_TalkDef;
+	m_TalkDef = NULL;
 	m_CurrentSprite = NULL;
 
 	if (!SoundFilename) return S_OK;
@@ -250,7 +256,8 @@ HRESULT CAdSentence::SetupTalkFile(char *SoundFilename) {
 
 	m_TalkDef = new CAdTalkDef(Game);
 	if (!m_TalkDef || FAILED(m_TalkDef->LoadFile(talkDefFileName.c_str()))) {
-		SAFE_DELETE(m_TalkDef);
+		delete m_TalkDef;
+		m_TalkDef = NULL;
 		return E_FAIL;
 	}
 	//Game->LOG(0, "Using .talk file: %s", TalkDefFile);

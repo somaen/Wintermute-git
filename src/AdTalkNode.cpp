@@ -51,11 +51,16 @@ CAdTalkNode::CAdTalkNode(CBGame *inGame): CBBase(inGame) {
 
 //////////////////////////////////////////////////////////////////////////
 CAdTalkNode::~CAdTalkNode() {
-	SAFE_DELETE_ARRAY(m_SpriteFilename);
-	SAFE_DELETE(m_Sprite);
-	SAFE_DELETE_ARRAY(m_SpriteSetFilename);
-	SAFE_DELETE(m_SpriteSet);
-	SAFE_DELETE_ARRAY(m_Comment);
+	delete[] m_SpriteFilename;
+	delete m_Sprite;
+	delete[] m_SpriteSetFilename;
+	delete m_SpriteSet;
+	delete m_Comment;
+	m_SpriteFilename = NULL;
+	m_Sprite = NULL;
+	m_SpriteSetFilename = NULL;
+	m_SpriteSet = NULL;
+	m_Comment = NULL;
 }
 
 
@@ -112,10 +117,11 @@ HRESULT CAdTalkNode::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_SPRITESET: {
-			SAFE_DELETE(m_SpriteSet);
+			delete m_SpriteSet;
 			m_SpriteSet = new CAdSpriteSet(Game);
 			if (!m_SpriteSet || FAILED(m_SpriteSet->LoadBuffer(params, false))) {
-				SAFE_DELETE(m_SpriteSet);
+				delete m_SpriteSet;
+				m_SpriteSet = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 		}
@@ -156,13 +162,13 @@ HRESULT CAdTalkNode::LoadBuffer(byte  *Buffer, bool Complete) {
 	else m_PlayToEnd = false;
 
 	if (m_PreCache && m_SpriteFilename) {
-		SAFE_DELETE(m_Sprite);
+		delete m_Sprite;
 		m_Sprite = new CBSprite(Game);
 		if (!m_Sprite || FAILED(m_Sprite->LoadFile(m_SpriteFilename))) return E_FAIL;
 	}
 
 	if (m_PreCache && m_SpriteSetFilename) {
-		SAFE_DELETE(m_SpriteSet);
+		delete m_SpriteSet;
 		m_SpriteSet = new CAdSpriteSet(Game);
 		if (!m_SpriteSet || FAILED(m_SpriteSet->LoadFile(m_SpriteSetFilename))) return E_FAIL;
 	}
@@ -212,7 +218,8 @@ HRESULT CAdTalkNode::LoadSprite() {
 	if (m_SpriteFilename && !m_Sprite) {
 		m_Sprite = new CBSprite(Game);
 		if (!m_Sprite || FAILED(m_Sprite->LoadFile(m_SpriteFilename))) {
-			SAFE_DELETE(m_Sprite);
+			delete m_Sprite;
+			m_Sprite = NULL;
 			return E_FAIL;
 		} else return S_OK;
 	}
@@ -220,7 +227,8 @@ HRESULT CAdTalkNode::LoadSprite() {
 	else if (m_SpriteSetFilename && !m_SpriteSet) {
 		m_SpriteSet = new CAdSpriteSet(Game);
 		if (!m_SpriteSet || FAILED(m_SpriteSet->LoadFile(m_SpriteSetFilename))) {
-			SAFE_DELETE(m_SpriteSet);
+			delete m_SpriteSet;
+			m_SpriteSet = NULL;
 			return E_FAIL;
 		} else return S_OK;
 	}

@@ -50,32 +50,39 @@ CAdNodeState::CAdNodeState(CBGame *inGame): CBBase(inGame) {
 
 //////////////////////////////////////////////////////////////////////////
 CAdNodeState::~CAdNodeState() {
-	SAFE_DELETE_ARRAY(m_Name);
-	SAFE_DELETE_ARRAY(m_Filename);
-	SAFE_DELETE_ARRAY(m_Cursor);
+	delete[] m_Name;
+	delete[] m_Filename;
+	delete[] m_Cursor;
+	m_Name = NULL;
+	m_Filename = NULL;
+	m_Cursor = NULL;
 	for (int i = 0; i < 7; i++) {
-		SAFE_DELETE_ARRAY(m_Caption[i]);
+		delete[] m_Caption[i];
+		m_Caption[i] = NULL;
 	}
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 void CAdNodeState::SetName(char *Name) {
-	SAFE_DELETE_ARRAY(m_Name);
+	delete[] m_Name;
+	m_Name = NULL;
 	CBUtils::SetString(&m_Name, Name);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 void CAdNodeState::SetFilename(char *Filename) {
-	SAFE_DELETE_ARRAY(m_Filename);
+	delete[] m_Filename;
+	m_Filename = NULL;
 	CBUtils::SetString(&m_Filename, Filename);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 void CAdNodeState::SetCursor(char *Filename) {
-	SAFE_DELETE_ARRAY(m_Cursor);
+	delete[] m_Cursor;
+	m_Cursor = NULL;
 	CBUtils::SetString(&m_Cursor, Filename);
 }
 
@@ -100,7 +107,7 @@ void CAdNodeState::SetCaption(char *Caption, int Case) {
 	if (Case == 0) Case = 1;
 	if (Case < 1 || Case > 7) return;
 
-	SAFE_DELETE_ARRAY(m_Caption[Case - 1]);
+	delete[] m_Caption[Case - 1];
 	m_Caption[Case - 1] = new char[strlen(Caption) + 1];
 	if (m_Caption[Case - 1]) {
 		strcpy(m_Caption[Case - 1], Caption);

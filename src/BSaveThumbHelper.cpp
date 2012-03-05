@@ -37,12 +37,14 @@ CBSaveThumbHelper::CBSaveThumbHelper(CBGame *inGame): CBBase(inGame) {
 
 //////////////////////////////////////////////////////////////////////////
 CBSaveThumbHelper::~CBSaveThumbHelper(void) {
-	SAFE_DELETE(m_Thumbnail);
+	delete m_Thumbnail;
+	m_Thumbnail = NULL;
 }
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBSaveThumbHelper::StoreThumbnail(bool DoFlip) {
-	SAFE_DELETE(m_Thumbnail);
+	delete m_Thumbnail;
+	m_Thumbnail = NULL;
 
 	if (Game->m_ThumbnailWidth > 0 && Game->m_ThumbnailHeight > 0) {
 		if (DoFlip) {
@@ -65,7 +67,8 @@ HRESULT CBSaveThumbHelper::StoreThumbnail(bool DoFlip) {
 		}
 
 
-		SAFE_DELETE(Screenshot);
+		delete Screenshot;
+		Screenshot = NULL;
 	}
 	return S_OK;
 }

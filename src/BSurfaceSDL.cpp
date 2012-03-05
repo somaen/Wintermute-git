@@ -51,7 +51,8 @@ CBSurfaceSDL::CBSurfaceSDL(CBGame *inGame) : CBSurface(inGame) {
 //////////////////////////////////////////////////////////////////////////
 CBSurfaceSDL::~CBSurfaceSDL() {
 	if (m_Texture) SDL_DestroyTexture(m_Texture);
-	SAFE_DELETE_ARRAY(m_AlphaMask);
+	delete[] m_AlphaMask;
+	m_AlphaMask = NULL;
 
 	Game->AddMem(-m_Width * m_Height * 4);
 }
@@ -163,7 +164,8 @@ HRESULT CBSurfaceSDL::Create(char *Filename, bool default_ck, byte ck_red, byte 
 
 //////////////////////////////////////////////////////////////////////////
 void CBSurfaceSDL::GenAlphaMask(SDL_Surface *surface) {
-	SAFE_DELETE_ARRAY(m_AlphaMask);
+	delete[] m_AlphaMask;
+	m_AlphaMask = NULL;
 	if (!surface) return;
 
 	SDL_LockSurface(surface);
@@ -196,7 +198,10 @@ void CBSurfaceSDL::GenAlphaMask(SDL_Surface *surface) {
 
 	SDL_UnlockSurface(surface);
 
-	if (!hasTransparency) SAFE_DELETE_ARRAY(m_AlphaMask);
+	if (!hasTransparency) {
+		delete[] m_AlphaMask;
+		m_AlphaMask = NULL;
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////

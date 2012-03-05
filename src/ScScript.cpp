@@ -225,7 +225,9 @@ HRESULT CScScript::Create(char *Filename, byte *Buffer, uint32 Size, CBScriptHol
 
 	m_Thread = false;
 	m_MethodThread = false;
-	SAFE_DELETE_ARRAY(m_ThreadEvent);
+
+	delete[] m_ThreadEvent;
+	m_ThreadEvent = NULL;
 
 	m_Filename = new char[strlen(Filename) + 1];
 	if (m_Filename) strcpy(m_Filename, Filename);
@@ -385,12 +387,13 @@ void CScScript::Cleanup() {
 	m_Externals = NULL;
 	m_NumExternals = 0;
 
+	delete m_Operand;
+	delete m_Reg1;
+	m_Operand = NULL;
+	m_Reg1 = NULL;
 
-	SAFE_DELETE(m_Operand);
-	SAFE_DELETE(m_Reg1);
-
-	SAFE_DELETE_ARRAY(m_ThreadEvent);
-
+	delete[] m_ThreadEvent;
+	m_ThreadEvent = NULL;
 
 	m_State = SCRIPT_FINISHED;
 

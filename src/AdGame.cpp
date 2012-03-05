@@ -141,7 +141,9 @@ HRESULT CAdGame::Cleanup() {
 
 
 	// clear remaining inventories
-	SAFE_DELETE(m_InvObject);
+	delete m_InvObject;
+	m_InvObject = NULL;
+
 	for (i = 0; i < m_Inventories.GetSize(); i++) {
 		delete m_Inventories[i];
 	}
@@ -158,14 +160,20 @@ HRESULT CAdGame::Cleanup() {
 		m_InventoryBox = NULL;
 	}
 
-	SAFE_DELETE_ARRAY(m_PrevSceneName);
-	SAFE_DELETE_ARRAY(m_PrevSceneFilename);
-	SAFE_DELETE_ARRAY(m_ScheduledScene);
-	SAFE_DELETE_ARRAY(m_DebugStartupScene);
-	SAFE_DELETE_ARRAY(m_StartupScene);
-	SAFE_DELETE_ARRAY(m_ItemsFile);
+	delete[] m_PrevSceneName;
+	delete[] m_PrevSceneFilename;
+	delete[] m_ScheduledScene;
+	delete[] m_DebugStartupScene;
+	delete[] m_ItemsFile;
+	m_PrevSceneName = NULL;
+	m_PrevSceneFilename = NULL;
+	m_ScheduledScene = NULL;
+	m_DebugStartupScene = NULL;
+	m_StartupScene = NULL;
+	m_ItemsFile = NULL;
 
-	SAFE_DELETE(m_SceneViewport);
+	delete m_SceneViewport;
+	m_SceneViewport = NULL;
 
 	for (i = 0; i < m_SceneStates.GetSize(); i++) delete m_SceneStates[i];
 	m_SceneStates.RemoveAll();
@@ -336,7 +344,8 @@ HRESULT CAdGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 			AddObject(act);
 			Stack->PushNative(act, true);
 		} else {
-			SAFE_DELETE(act);
+			delete act;
+			act = NULL;
 			Stack->PushNULL();
 		}
 		return S_OK;
@@ -352,7 +361,8 @@ HRESULT CAdGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 			AddObject(ent);
 			Stack->PushNative(ent, true);
 		} else {
-			SAFE_DELETE(ent);
+			delete ent;
+			ent = NULL;
 			Stack->PushNULL();
 		}
 		return S_OK;
@@ -714,7 +724,8 @@ HRESULT CAdGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 			RegisterObject(m_InventoryBox);
 			Stack->PushBool(true);
 		} else {
-			SAFE_DELETE(m_InventoryBox);
+			delete m_InventoryBox;
+			m_InventoryBox = NULL;
 			Stack->PushBool(false);
 		}
 		return S_OK;
@@ -1020,7 +1031,8 @@ HRESULT CAdGame::ScSetProperty(char *Name, CScValue *Value) {
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "StartupScene") == 0) {
 		if (Value == NULL) {
-			SAFE_DELETE_ARRAY(m_StartupScene);
+			delete[] m_StartupScene;
+			m_StartupScene = NULL;
 		} else CBUtils::SetString(&m_StartupScene, Value->GetString());
 
 		return S_OK;
@@ -1165,23 +1177,25 @@ HRESULT CAdGame::LoadBuffer(byte  *Buffer, bool Complete) {
 			while (cmd > 0 && (cmd = parser.GetCommand((char **)&params, commands, (char **)&params2)) > 0) {
 				switch (cmd) {
 				case TOKEN_RESPONSE_BOX:
-					SAFE_DELETE(m_ResponseBox);
+					delete m_ResponseBox;
 					m_ResponseBox = new CAdResponseBox(Game);
 					if (m_ResponseBox && !FAILED(m_ResponseBox->LoadFile((char *)params2)))
 						RegisterObject(m_ResponseBox);
 					else {
-						SAFE_DELETE(m_ResponseBox);
+						delete m_ResponseBox;
+						m_ResponseBox = NULL;
 						cmd = PARSERR_GENERIC;
 					}
 					break;
 
 				case TOKEN_INVENTORY_BOX:
-					SAFE_DELETE(m_InventoryBox);
+					delete m_InventoryBox;
 					m_InventoryBox = new CAdInventoryBox(Game);
 					if (m_InventoryBox && !FAILED(m_InventoryBox->LoadFile((char *)params2)))
 						RegisterObject(m_InventoryBox);
 					else {
-						SAFE_DELETE(m_InventoryBox);
+						delete m_InventoryBox;
+						m_InventoryBox = NULL;
 						cmd = PARSERR_GENERIC;
 					}
 					break;
@@ -1190,7 +1204,8 @@ HRESULT CAdGame::LoadBuffer(byte  *Buffer, bool Complete) {
 					ItemsFound = true;
 					CBUtils::SetString(&m_ItemsFile, (char *)params2);
 					if (FAILED(LoadItemsFile(m_ItemsFile))) {
-						SAFE_DELETE_ARRAY(m_ItemsFile);
+						delete[] m_ItemsFile;
+						m_ItemsFile = NULL;
 						cmd = PARSERR_GENERIC;
 					}
 					break;
@@ -1316,7 +1331,8 @@ void CAdGame::AfterLoadScene(void *Scene, void *Data) {
 
 //////////////////////////////////////////////////////////////////////////
 void CAdGame::SetPrevSceneName(char *Name) {
-	SAFE_DELETE_ARRAY(m_PrevSceneName);
+	delete[] m_PrevSceneName;
+	m_PrevSceneName = NULL;
 	if (Name) {
 		m_PrevSceneName = new char[strlen(Name) + 1];
 		if (m_PrevSceneName) strcpy(m_PrevSceneName, Name);
@@ -1326,7 +1342,8 @@ void CAdGame::SetPrevSceneName(char *Name) {
 
 //////////////////////////////////////////////////////////////////////////
 void CAdGame::SetPrevSceneFilename(char *Name) {
-	SAFE_DELETE_ARRAY(m_PrevSceneFilename);
+	delete[] m_PrevSceneFilename;
+	m_PrevSceneFilename = NULL;
 	if (Name) {
 		m_PrevSceneFilename = new char[strlen(Name) + 1];
 		if (m_PrevSceneFilename) strcpy(m_PrevSceneFilename, Name);
@@ -1336,7 +1353,8 @@ void CAdGame::SetPrevSceneFilename(char *Name) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdGame::ScheduleChangeScene(char *Filename, bool FadeIn) {
-	SAFE_DELETE_ARRAY(m_ScheduledScene);
+	delete[] m_ScheduledScene;
+	m_ScheduledScene = NULL;
 
 	if (m_Scene && !m_Scene->m_Initialized) return ChangeScene(Filename, FadeIn);
 	else {
@@ -1409,7 +1427,8 @@ HRESULT CAdGame::LoadItemsBuffer(byte  *Buffer, bool Merge) {
 				}
 				AddItem(item);
 			} else {
-				SAFE_DELETE(item);
+				delete item;
+				item = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 		}
@@ -1474,7 +1493,8 @@ HRESULT CAdGame::WindowLoadHook(CUIWindow *Win, char **Buffer, char **params) {
 	case TOKEN_ENTITY_CONTAINER: {
 		CUIEntity *ent = new CUIEntity(Game);
 		if (!ent || FAILED(ent->LoadBuffer((byte  *)*params, false))) {
-			SAFE_DELETE(ent);
+			delete ent;
+			ent = NULL;
 			cmd = PARSERR_GENERIC;
 		} else {
 			ent->m_Parent = Win;
@@ -1703,7 +1723,10 @@ HRESULT CAdGame::DisplayContent(bool Update, bool DisplayAll) {
 
 	if (m_LoadingIcon) {
 		m_LoadingIcon->Display(m_LoadingIconX, m_LoadingIconY);
-		if (!m_LoadingIconPersistent) SAFE_DELETE(m_LoadingIcon);
+		if (!m_LoadingIconPersistent) {
+			delete m_LoadingIcon;
+			m_LoadingIcon = NULL;
+		}
 	}
 
 	return S_OK;

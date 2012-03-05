@@ -40,7 +40,8 @@ CAdResponseContext::CAdResponseContext(CBGame *inGame): CBBase(inGame) {
 
 //////////////////////////////////////////////////////////////////////////
 CAdResponseContext::~CAdResponseContext() {
-	SAFE_DELETE_ARRAY(m_Context);
+	delete[] m_Context;
+	m_Context = NULL;
 }
 
 
@@ -55,7 +56,8 @@ HRESULT CAdResponseContext::Persist(CBPersistMgr *PersistMgr) {
 
 //////////////////////////////////////////////////////////////////////////
 void CAdResponseContext::SetContext(char *Context) {
-	SAFE_DELETE_ARRAY(m_Context);
+	delete[] m_Context;
+	m_Context = NULL;
 	if (Context) {
 		m_Context = new char [strlen(Context) + 1];
 		if (m_Context) strcpy(m_Context, Context);

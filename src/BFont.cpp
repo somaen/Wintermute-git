@@ -27,6 +27,9 @@ THE SOFTWARE.
 #include "BFont.h"
 #include "BFontBitmap.h"
 #include "BParser.h"
+#include "BFileManager.h"
+#include "BFontTT.h"
+#include "BGame.h"
 
 namespace WinterMute {
 
@@ -181,10 +184,10 @@ bool CBFont::IsTrueType(CBGame *Game, char *Filename) {
 	TOKEN_TABLE_END
 
 
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) return false;
 
-	BYTE *WorkBuffer = Buffer;
+	byte *WorkBuffer = Buffer;
 
 	char *params;
 	CBParser parser(Game);

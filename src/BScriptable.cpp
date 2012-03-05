@@ -48,8 +48,10 @@ CBScriptable::CBScriptable(CBGame *inGame, bool NoValue, bool Persistable): CBNa
 //////////////////////////////////////////////////////////////////////////
 CBScriptable::~CBScriptable() {
 	//if(m_RefCount>0) Game->LOG(0, "Warning: Destroying object, m_RefCount=%d", m_RefCount);
-	SAFE_DELETE(m_ScValue);
-	SAFE_DELETE(m_ScProp);
+	delete m_ScValue;
+	delete m_ScProp;
+	m_ScValue = NULL;
+	m_ScProp = NULL;
 }
 
 

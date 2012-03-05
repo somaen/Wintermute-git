@@ -271,7 +271,9 @@ HRESULT CBRegion::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 		int Index = Stack->Pop()->GetInt();
 
 		if (Index >= 0 && Index < m_Points.GetSize()) {
-			SAFE_DELETE(m_Points[Index]);
+			delete m_Points[Index];
+			m_Points[Index] = NULL;
+
 			m_Points.RemoveAt(Index);
 			CreateRegion();
 

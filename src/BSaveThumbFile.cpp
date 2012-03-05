@@ -95,7 +95,9 @@ HRESULT CBSaveThumbFile::Open(Common::String Filename) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBSaveThumbFile::Close() {
-	SAFE_DELETE_ARRAY(m_Data);
+	delete[] m_Data;
+	m_Data = NULL;
+
 	m_Pos = 0;
 	m_Size = 0;
 

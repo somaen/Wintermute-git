@@ -53,11 +53,15 @@ CAdTalkDef::~CAdTalkDef() {
 	for (int i = 0; i < m_Nodes.GetSize(); i++) delete m_Nodes[i];
 	m_Nodes.RemoveAll();
 
-	SAFE_DELETE_ARRAY(m_DefaultSpriteFilename);
-	SAFE_DELETE(m_DefaultSprite);
+	delete[] m_DefaultSpriteFilename;
+	delete m_DefaultSprite;
+	m_DefaultSpriteFilename = NULL;
+	m_DefaultSprite = NULL;
 
-	SAFE_DELETE_ARRAY(m_DefaultSpriteSetFilename);
-	SAFE_DELETE(m_DefaultSpriteSet);
+	delete[] m_DefaultSpriteSetFilename;
+	delete m_DefaultSpriteSet;
+	m_DefaultSpriteSetFilename = NULL;
+	m_DefaultSpriteSet = NULL;
 }
 
 
@@ -124,7 +128,8 @@ HRESULT CAdTalkDef::LoadBuffer(byte  *Buffer, bool Complete) {
 			CAdTalkNode *Node = new CAdTalkNode(Game);
 			if (Node && SUCCEEDED(Node->LoadBuffer(params, false))) m_Nodes.Add(Node);
 			else {
-				SAFE_DELETE(Node);
+				delete Node;
+				Node = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 		}
@@ -139,10 +144,11 @@ HRESULT CAdTalkDef::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_DEFAULT_SPRITESET: {
-			SAFE_DELETE(m_DefaultSpriteSet);
+			delete m_DefaultSpriteSet;
 			m_DefaultSpriteSet = new CAdSpriteSet(Game);
 			if (!m_DefaultSpriteSet || FAILED(m_DefaultSpriteSet->LoadBuffer(params, false))) {
-				SAFE_DELETE(m_DefaultSpriteSet);
+				delete m_DefaultSpriteSet;
+				m_DefaultSpriteSet = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 		}
@@ -164,8 +170,10 @@ HRESULT CAdTalkDef::LoadBuffer(byte  *Buffer, bool Complete) {
 		return E_FAIL;
 	}
 
-	SAFE_DELETE(m_DefaultSprite);
-	SAFE_DELETE(m_DefaultSpriteSet);
+	delete m_DefaultSprite;
+	delete m_DefaultSpriteSet;
+	m_DefaultSprite = NULL;
+	m_DefaultSpriteSet = NULL;
 
 	if (m_DefaultSpriteFilename) {
 		m_DefaultSprite = new CBSprite(Game);
@@ -223,13 +231,15 @@ HRESULT CAdTalkDef::LoadDefaultSprite() {
 	if (m_DefaultSpriteFilename && !m_DefaultSprite) {
 		m_DefaultSprite = new CBSprite(Game);
 		if (!m_DefaultSprite || FAILED(m_DefaultSprite->LoadFile(m_DefaultSpriteFilename))) {
-			SAFE_DELETE(m_DefaultSprite);
+			delete m_DefaultSprite;
+			m_DefaultSprite = NULL;
 			return E_FAIL;
 		} else return S_OK;
 	} else if (m_DefaultSpriteSetFilename && !m_DefaultSpriteSet) {
 		m_DefaultSpriteSet = new CAdSpriteSet(Game);
 		if (!m_DefaultSpriteSet || FAILED(m_DefaultSpriteSet->LoadFile(m_DefaultSpriteSetFilename))) {
-			SAFE_DELETE(m_DefaultSpriteSet);
+			delete m_DefaultSpriteSet;
+			m_DefaultSpriteSet = NULL;
 			return E_FAIL;
 		} else return S_OK;
 	} else return S_OK;

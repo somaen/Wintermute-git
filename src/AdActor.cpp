@@ -123,14 +123,20 @@ CAdActor::~CAdActor() {
 	m_TalkSpritesEx.RemoveAll();
 
 
-	SAFE_DELETE_ARRAY(m_TalkAnimName);
-	SAFE_DELETE_ARRAY(m_IdleAnimName);
-	SAFE_DELETE_ARRAY(m_WalkAnimName);
-	SAFE_DELETE_ARRAY(m_TurnLeftAnimName);
-	SAFE_DELETE_ARRAY(m_TurnRightAnimName);
+	delete[] m_TalkAnimName;
+	delete[] m_IdleAnimName;
+	delete[] m_WalkAnimName;
+	delete[] m_TurnLeftAnimName;
+	delete[] m_TurnRightAnimName;
+	m_TalkAnimName = NULL;
+	m_IdleAnimName = NULL;
+	m_WalkAnimName = NULL;
+	m_TurnLeftAnimName = NULL;
+	m_TurnRightAnimName = NULL;
 
 	for (int i = 0; i < m_Anims.GetSize(); i++) {
-		SAFE_DELETE(m_Anims[i]);
+		delete m_Anims[i];
+		m_Anims[i] = NULL;
 	}
 	m_Anims.RemoveAll();
 
@@ -303,7 +309,8 @@ HRESULT CAdActor::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_WALK:
-			SAFE_DELETE(m_WalkSprite);
+			delete m_WalkSprite;
+			m_WalkSprite = NULL;
 			spr = new CAdSpriteSet(Game, this);
 			if (!spr || FAILED(spr->LoadBuffer(params, true, AdGame->m_TexWalkLifeTime, CACHE_HALF))) cmd = PARSERR_GENERIC;
 			else m_WalkSprite = spr;
@@ -322,21 +329,24 @@ HRESULT CAdActor::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_STAND:
-			SAFE_DELETE(m_StandSprite);
+			delete m_StandSprite;
+			m_StandSprite = NULL;
 			spr = new CAdSpriteSet(Game, this);
 			if (!spr || FAILED(spr->LoadBuffer(params, true, AdGame->m_TexStandLifeTime))) cmd = PARSERR_GENERIC;
 			else m_StandSprite = spr;
 			break;
 
 		case TOKEN_TURN_LEFT:
-			SAFE_DELETE(m_TurnLeftSprite);
+			delete m_TurnLeftSprite;
+			m_TurnLeftSprite = NULL;
 			spr = new CAdSpriteSet(Game, this);
 			if (!spr || FAILED(spr->LoadBuffer(params, true))) cmd = PARSERR_GENERIC;
 			else m_TurnLeftSprite = spr;
 			break;
 
 		case TOKEN_TURN_RIGHT:
-			SAFE_DELETE(m_TurnRightSprite);
+			delete m_TurnRightSprite;
+			m_TurnRightSprite = NULL;
 			spr = new CAdSpriteSet(Game, this);
 			if (!spr || FAILED(spr->LoadBuffer(params, true))) cmd = PARSERR_GENERIC;
 			else m_TurnRightSprite = spr;
@@ -347,10 +357,11 @@ HRESULT CAdActor::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_CURSOR:
-			SAFE_DELETE(m_Cursor);
+			delete m_Cursor;
 			m_Cursor = new CBSprite(Game);
 			if (!m_Cursor || FAILED(m_Cursor->LoadFile((char *)params))) {
-				SAFE_DELETE(m_Cursor);
+				delete m_Cursor;
+				m_Cursor = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
@@ -384,13 +395,17 @@ HRESULT CAdActor::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_BLOCKED_REGION: {
-			SAFE_DELETE(m_BlockRegion);
-			SAFE_DELETE(m_CurrentBlockRegion);
+			delete m_BlockRegion;
+			delete m_CurrentBlockRegion;
+			m_BlockRegion = NULL;
+			m_CurrentBlockRegion = NULL;
 			CBRegion *rgn = new CBRegion(Game);
 			CBRegion *crgn = new CBRegion(Game);
 			if (!rgn || !crgn || FAILED(rgn->LoadBuffer(params, false))) {
-				SAFE_DELETE(m_BlockRegion);
-				SAFE_DELETE(m_CurrentBlockRegion);
+				delete m_BlockRegion;
+				delete m_CurrentBlockRegion;
+				m_BlockRegion = NULL;
+				m_CurrentBlockRegion = NULL;
 				cmd = PARSERR_GENERIC;
 			} else {
 				m_BlockRegion = rgn;
@@ -401,13 +416,17 @@ HRESULT CAdActor::LoadBuffer(byte  *Buffer, bool Complete) {
 		break;
 
 		case TOKEN_WAYPOINTS: {
-			SAFE_DELETE(m_WptGroup);
-			SAFE_DELETE(m_CurrentWptGroup);
+			delete m_WptGroup;
+			delete m_CurrentWptGroup;
+			m_WptGroup = NULL;
+			m_CurrentWptGroup = NULL;
 			CAdWaypointGroup *wpt = new CAdWaypointGroup(Game);
 			CAdWaypointGroup *cwpt = new CAdWaypointGroup(Game);
 			if (!wpt || !cwpt || FAILED(wpt->LoadBuffer(params, false))) {
-				SAFE_DELETE(m_WptGroup);
-				SAFE_DELETE(m_CurrentWptGroup);
+				delete m_WptGroup;
+				delete m_CurrentWptGroup;
+				m_WptGroup = NULL;
+				m_CurrentWptGroup = NULL;
 				cmd = PARSERR_GENERIC;
 			} else {
 				m_WptGroup = wpt;
@@ -554,7 +573,8 @@ HRESULT CAdActor::Update() {
 
 	if (m_State == STATE_READY) {
 		if (m_AnimSprite) {
-			SAFE_DELETE(m_AnimSprite);
+			delete m_AnimSprite;
+			m_AnimSprite = NULL;
 		}
 		if (m_AnimSprite2) {
 			m_AnimSprite2 = NULL;
@@ -946,7 +966,8 @@ HRESULT CAdActor::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 				if (m_Anims[i]->ContainsSprite(m_CurrentSprite)) m_CurrentSprite = NULL;
 				if (m_Anims[i]->ContainsSprite(m_AnimSprite2)) m_AnimSprite2 = NULL;
 
-				SAFE_DELETE(m_Anims[i]);
+				delete m_Anims[i];
+				m_Anims[i] = NULL;
 				m_Anims.RemoveAt(i);
 				i--;
 				Found = true;
@@ -1103,13 +1124,14 @@ CBSprite *CAdActor::GetTalkStance(char *Stance) {
 	// forced stance?
 	if (m_ForcedTalkAnimName && !m_ForcedTalkAnimUsed) {
 		m_ForcedTalkAnimUsed = true;
-		SAFE_DELETE(m_AnimSprite);
+		delete m_AnimSprite;
 		m_AnimSprite = new CBSprite(Game, this);
 		if (m_AnimSprite) {
 			HRESULT res = m_AnimSprite->LoadFile(m_ForcedTalkAnimName);
 			if (FAILED(res)) {
 				Game->LOG(res, "CAdActor::GetTalkStance: error loading talk sprite (object:\"%s\" sprite:\"%s\")", m_Name, m_ForcedTalkAnimName);
-				SAFE_DELETE(m_AnimSprite);
+				delete m_AnimSprite;
+				m_AnimSprite = NULL;
 			} else return m_AnimSprite;
 		}
 	}

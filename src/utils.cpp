@@ -115,7 +115,7 @@ void CBUtils::DebugMessage(HWND hWnd, const char *Text) {
 
 //////////////////////////////////////////////////////////////////////////
 char *CBUtils::SetString(char **String, const char *Value) {
-	SAFE_DELETE_ARRAY(*String);
+	delete[] *String;
 	*String = new char[strlen(Value) + 1];
 	if (*String) strcpy(*String, Value);
 	return *String;

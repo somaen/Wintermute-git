@@ -105,7 +105,8 @@ CPartEmitter::~CPartEmitter(void) {
 	}
 	m_Sprites.RemoveAll();
 
-	SAFE_DELETE_ARRAY(m_EmitEvent);
+	delete[] m_EmitEvent;
+	m_EmitEvent = NULL;
 }
 
 //////////////////////////////////////////////////////////////////////////

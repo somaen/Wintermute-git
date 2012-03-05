@@ -47,11 +47,16 @@ CAdResponse::CAdResponse(CBGame *inGame): CBObject(inGame) {
 
 //////////////////////////////////////////////////////////////////////////
 CAdResponse::~CAdResponse() {
-	SAFE_DELETE_ARRAY(m_Text);
-	SAFE_DELETE_ARRAY(m_TextOrig);
-	SAFE_DELETE(m_Icon);
-	SAFE_DELETE(m_IconHover);
-	SAFE_DELETE(m_IconPressed);
+	delete[] m_Text;
+	delete[] m_TextOrig;
+	delete m_Icon;
+	delete m_IconHover;
+	delete m_IconPressed;
+	m_Text = NULL;
+	m_TextOrig = NULL;
+	m_Icon = NULL;
+	m_IconHover = NULL;
+	m_IconPressed = NULL;
 	if (m_Font) Game->m_FontStorage->RemoveFont(m_Font);
 }
 
@@ -65,11 +70,12 @@ void CAdResponse::SetText(char *Text) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdResponse::SetIcon(char *Filename) {
-	SAFE_DELETE(m_Icon);
+	delete m_Icon;
 	m_Icon = new CBSprite(Game);
 	if (!m_Icon || FAILED(m_Icon->LoadFile(Filename))) {
 		Game->LOG(0, "CAdResponse::SetIcon failed for file '%s'", Filename);
-		SAFE_DELETE(m_Icon);
+		delete m_Icon;
+		m_Icon = NULL;
 		return E_FAIL;
 	}
 	return S_OK;
@@ -88,11 +94,12 @@ HRESULT CAdResponse::SetFont(char *Filename) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdResponse::SetIconHover(char *Filename) {
-	SAFE_DELETE(m_IconHover);
+	delete m_IconHover;
 	m_IconHover = new CBSprite(Game);
 	if (!m_IconHover || FAILED(m_IconHover->LoadFile(Filename))) {
 		Game->LOG(0, "CAdResponse::SetIconHover failed for file '%s'", Filename);
-		SAFE_DELETE(m_IconHover);
+		delete m_IconHover;
+		m_IconHover = NULL;
 		return E_FAIL;
 	}
 	return S_OK;
@@ -101,11 +108,12 @@ HRESULT CAdResponse::SetIconHover(char *Filename) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdResponse::SetIconPressed(char *Filename) {
-	SAFE_DELETE(m_IconPressed);
+	delete m_IconPressed;
 	m_IconPressed = new CBSprite(Game);
 	if (!m_IconPressed || FAILED(m_IconPressed->LoadFile(Filename))) {
 		Game->LOG(0, "CAdResponse::SetIconPressed failed for file '%s'", Filename);
-		SAFE_DELETE(m_IconPressed);
+		delete m_IconPressed;
+		m_IconPressed = NULL;
 		return E_FAIL;
 	}
 	return S_OK;

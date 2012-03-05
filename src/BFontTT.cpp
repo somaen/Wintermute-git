@@ -71,15 +71,18 @@ CBFontTT::~CBFontTT(void) {
 	}
 	m_Layers.RemoveAll();
 
-	SAFE_DELETE_ARRAY(m_FontFile);
+	delete[] m_FontFile;
+	m_FontFile = NULL;
 
-	SAFE_DELETE(m_GlyphCache);
+	delete m_GlyphCache;
+	m_GlyphCache = NULL;
 
 	if (m_FTFace) {
 		FT_Done_Face(m_FTFace);
 		m_FTFace = NULL;
 	}
-	SAFE_DELETE_ARRAY(m_FTStream);
+	delete[] m_FTStream;
+	m_FTStream = NULL;
 
 }
 
@@ -302,10 +305,10 @@ CBSurface *CBFontTT::RenderTextToTexture(const WideString &text, int width, TTex
 
 		SDL_UnlockSurface(surface);
 
-		SAFE_DELETE(line);
+		delete line;
+		line = NULL;
 		posY += GetLineHeight();
 	}
-
 
 	CBSurfaceSDL *wmeSurface = new CBSurfaceSDL(Game);
 	if (SUCCEEDED(wmeSurface->CreateFromSDLSurface(surface))) {
@@ -465,7 +468,8 @@ HRESULT CBFontTT::LoadBuffer(byte  *Buffer) {
 			CBTTFontLayer *Layer = new CBTTFontLayer;
 			if (Layer && SUCCEEDED(ParseLayer(Layer, (byte  *)params))) m_Layers.Add(Layer);
 			else {
-				SAFE_DELETE(Layer);
+				delete Layer;
+				Layer = NULL;
 				cmd = PARSERR_TOKENNOTFOUND;
 			}
 		}

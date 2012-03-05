@@ -219,91 +219,101 @@ HRESULT CUIButton::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_BACK:
-			SAFE_DELETE(m_Back);
+			delete m_Back;
 			m_Back = new CUITiledImage(Game);
 			if (!m_Back || FAILED(m_Back->LoadFile((char *)params))) {
-				SAFE_DELETE(m_Back);
+				delete m_Back;
+				m_Back = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
 
 		case TOKEN_BACK_HOVER:
-			SAFE_DELETE(m_BackHover);
+			delete m_BackHover;
 			m_BackHover = new CUITiledImage(Game);
 			if (!m_BackHover || FAILED(m_BackHover->LoadFile((char *)params))) {
-				SAFE_DELETE(m_BackHover);
+				delete m_BackHover;
+				m_BackHover = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
 
 		case TOKEN_BACK_PRESS:
-			SAFE_DELETE(m_BackPress);
+			delete m_BackPress;
 			m_BackPress = new CUITiledImage(Game);
 			if (!m_BackPress || FAILED(m_BackPress->LoadFile((char *)params))) {
-				SAFE_DELETE(m_BackPress);
+				delete m_BackPress;
+				m_BackPress = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
 
 		case TOKEN_BACK_DISABLE:
-			SAFE_DELETE(m_BackDisable);
+			delete m_BackDisable;
 			m_BackDisable = new CUITiledImage(Game);
 			if (!m_BackDisable || FAILED(m_BackDisable->LoadFile((char *)params))) {
-				SAFE_DELETE(m_BackDisable);
+				delete m_BackDisable;
+				m_BackDisable = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
 
 		case TOKEN_BACK_FOCUS:
-			SAFE_DELETE(m_BackFocus);
+			delete m_BackFocus;
 			m_BackFocus = new CUITiledImage(Game);
 			if (!m_BackFocus || FAILED(m_BackFocus->LoadFile((char *)params))) {
-				SAFE_DELETE(m_BackFocus);
+				delete m_BackFocus;
+				m_BackFocus = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
 
 		case TOKEN_IMAGE:
-			SAFE_DELETE(m_Image);
+			delete m_Image;
 			m_Image = new CBSprite(Game);
 			if (!m_Image || FAILED(m_Image->LoadFile((char *)params))) {
-				SAFE_DELETE(m_Image);
+				delete m_Image;
+				m_Image = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
 
 		case TOKEN_IMAGE_HOVER:
-			SAFE_DELETE(m_ImageHover);
+			delete m_ImageHover;
 			m_ImageHover = new CBSprite(Game);
 			if (!m_ImageHover || FAILED(m_ImageHover->LoadFile((char *)params))) {
-				SAFE_DELETE(m_ImageHover);
+				delete m_ImageHover;
+				m_ImageHover = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
 
 		case TOKEN_IMAGE_PRESS:
-			SAFE_DELETE(m_ImagePress);
+			delete m_ImagePress;
 			m_ImagePress = new CBSprite(Game);
 			if (!m_ImagePress || FAILED(m_ImagePress->LoadFile((char *)params))) {
-				SAFE_DELETE(m_ImagePress);
+				delete m_ImagePress;
+				m_ImagePress = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
 
 		case TOKEN_IMAGE_DISABLE:
-			SAFE_DELETE(m_ImageDisable);
+			delete m_ImageDisable;
 			m_ImageDisable = new CBSprite(Game);
 			if (!m_ImageDisable || FAILED(m_ImageDisable->LoadFile((char *)params))) {
-				SAFE_DELETE(m_ImageDisable);
+				delete m_ImageDisable;
+				m_ImageDisable = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
 
 		case TOKEN_IMAGE_FOCUS:
-			SAFE_DELETE(m_ImageFocus);
+			delete m_ImageFocus;
 			m_ImageFocus = new CBSprite(Game);
 			if (!m_ImageFocus || FAILED(m_ImageFocus->LoadFile((char *)params))) {
-				SAFE_DELETE(m_ImageFocus);
+				delete m_ImageFocus;
+				m_ImageFocus = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
@@ -366,10 +376,11 @@ HRESULT CUIButton::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_CURSOR:
-			SAFE_DELETE(m_Cursor);
+			delete m_Cursor;
 			m_Cursor = new CBSprite(Game);
 			if (!m_Cursor || FAILED(m_Cursor->LoadFile((char *)params))) {
-				SAFE_DELETE(m_Cursor);
+				delete m_Cursor;
+				m_Cursor = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
@@ -728,11 +739,12 @@ HRESULT CUIButton::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 	else if (strcmp(Name, "SetDisabledImage") == 0) {
 		Stack->CorrectParams(1);
 
-		SAFE_DELETE(m_ImageDisable);
+		delete m_ImageDisable;
 		m_ImageDisable = new CBSprite(Game);
 		char *Filename = Stack->Pop()->GetString();
 		if (!m_ImageDisable || FAILED(m_ImageDisable->LoadFile(Filename))) {
-			SAFE_DELETE(m_ImageDisable);
+			delete m_ImageDisable;
+			m_ImageDisable = NULL;
 			Stack->PushBool(false);
 		} else Stack->PushBool(true);
 
@@ -768,11 +780,12 @@ HRESULT CUIButton::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 	else if (strcmp(Name, "SetHoverImage") == 0) {
 		Stack->CorrectParams(1);
 
-		SAFE_DELETE(m_ImageHover);
+		delete m_ImageHover;
 		m_ImageHover = new CBSprite(Game);
 		char *Filename = Stack->Pop()->GetString();
 		if (!m_ImageHover || FAILED(m_ImageHover->LoadFile(Filename))) {
-			SAFE_DELETE(m_ImageHover);
+			delete m_ImageHover;
+			m_ImageHover = NULL;
 			Stack->PushBool(false);
 		} else Stack->PushBool(true);
 
@@ -807,11 +820,12 @@ HRESULT CUIButton::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 	else if (strcmp(Name, "SetPressedImage") == 0) {
 		Stack->CorrectParams(1);
 
-		SAFE_DELETE(m_ImagePress);
+		delete m_ImagePress;
 		m_ImagePress = new CBSprite(Game);
 		char *Filename = Stack->Pop()->GetString();
 		if (!m_ImagePress || FAILED(m_ImagePress->LoadFile(Filename))) {
-			SAFE_DELETE(m_ImagePress);
+			delete m_ImagePress;
+			m_ImagePress = NULL;
 			Stack->PushBool(false);
 		} else Stack->PushBool(true);
 
@@ -846,11 +860,12 @@ HRESULT CUIButton::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 	else if (strcmp(Name, "SetFocusedImage") == 0) {
 		Stack->CorrectParams(1);
 
-		SAFE_DELETE(m_ImageFocus);
+		delete m_ImageFocus;
 		m_ImageFocus = new CBSprite(Game);
 		char *Filename = Stack->Pop()->GetString();
 		if (!m_ImageFocus || FAILED(m_ImageFocus->LoadFile(Filename))) {
-			SAFE_DELETE(m_ImageFocus);
+			delete m_ImageFocus;
+			m_ImageFocus = NULL;
 			Stack->PushBool(false);
 		} else Stack->PushBool(true);
 

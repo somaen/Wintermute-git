@@ -45,7 +45,8 @@ CAdSpriteSet::CAdSpriteSet(CBGame *inGame, CBObject *Owner): CBObject(inGame) {
 //////////////////////////////////////////////////////////////////////////
 CAdSpriteSet::~CAdSpriteSet() {
 	for (int i = 0; i < NUM_DIRECTIONS; i++) {
-		SAFE_DELETE(m_Sprites[i]);
+		delete m_Sprites[i];
+		m_Sprites[i] = NULL;
 	}
 
 	m_Owner = NULL;
@@ -125,56 +126,64 @@ HRESULT CAdSpriteSet::LoadBuffer(byte  *Buffer, bool Complete, int LifeTime, TSp
 			break;
 
 		case TOKEN_LEFT:
-			SAFE_DELETE(m_Sprites[DI_LEFT]);
+			delete m_Sprites[DI_LEFT];
+			m_Sprites[DI_LEFT] = NULL;
 			spr = new CBSprite(Game, m_Owner);
 			if (!spr || FAILED(spr->LoadFile((char *)params, LifeTime, CacheType))) cmd = PARSERR_GENERIC;
 			else m_Sprites[DI_LEFT] = spr;
 			break;
 
 		case TOKEN_RIGHT:
-			SAFE_DELETE(m_Sprites[DI_RIGHT]);
+			delete m_Sprites[DI_RIGHT];
+			m_Sprites[DI_RIGHT] = NULL;
 			spr = new CBSprite(Game, m_Owner);
 			if (!spr || FAILED(spr->LoadFile((char *)params, LifeTime, CacheType))) cmd = PARSERR_GENERIC;
 			else m_Sprites[DI_RIGHT] = spr;
 			break;
 
 		case TOKEN_UP:
-			SAFE_DELETE(m_Sprites[DI_UP]);
+			delete m_Sprites[DI_UP];
+			m_Sprites[DI_UP] = NULL;
 			spr = new CBSprite(Game, m_Owner);
 			if (!spr || FAILED(spr->LoadFile((char *)params, LifeTime, CacheType))) cmd = PARSERR_GENERIC;
 			else m_Sprites[DI_UP] = spr;
 			break;
 
 		case TOKEN_DOWN:
-			SAFE_DELETE(m_Sprites[DI_DOWN]);
+			delete m_Sprites[DI_DOWN];
+			m_Sprites[DI_DOWN] = NULL;
 			spr = new CBSprite(Game, m_Owner);
 			if (!spr || FAILED(spr->LoadFile((char *)params, LifeTime, CacheType))) cmd = PARSERR_GENERIC;
 			else m_Sprites[DI_DOWN] = spr;
 			break;
 
 		case TOKEN_UP_LEFT:
-			SAFE_DELETE(m_Sprites[DI_UPLEFT]);
+			delete m_Sprites[DI_UPLEFT];
+			m_Sprites[DI_UPLEFT] = NULL;
 			spr = new CBSprite(Game, m_Owner);
 			if (!spr || FAILED(spr->LoadFile((char *)params, LifeTime, CacheType))) cmd = PARSERR_GENERIC;
 			else m_Sprites[DI_UPLEFT] = spr;
 			break;
 
 		case TOKEN_UP_RIGHT:
-			SAFE_DELETE(m_Sprites[DI_UPRIGHT]);
+			delete m_Sprites[DI_UPRIGHT];
+			m_Sprites[DI_UPRIGHT] = NULL;
 			spr = new CBSprite(Game, m_Owner);
 			if (!spr || FAILED(spr->LoadFile((char *)params, LifeTime, CacheType))) cmd = PARSERR_GENERIC;
 			else m_Sprites[DI_UPRIGHT] = spr;
 			break;
 
 		case TOKEN_DOWN_LEFT:
-			SAFE_DELETE(m_Sprites[DI_DOWNLEFT]);
+			delete m_Sprites[DI_DOWNLEFT];
+			m_Sprites[DI_DOWNLEFT] = NULL;
 			spr = new CBSprite(Game, m_Owner);
 			if (!spr || FAILED(spr->LoadFile((char *)params, LifeTime, CacheType))) cmd = PARSERR_GENERIC;
 			else m_Sprites[DI_DOWNLEFT] = spr;
 			break;
 
 		case TOKEN_DOWN_RIGHT:
-			SAFE_DELETE(m_Sprites[DI_DOWNRIGHT]);
+			delete m_Sprites[DI_DOWNRIGHT];
+			m_Sprites[DI_DOWNRIGHT] = NULL;
 			spr = new CBSprite(Game, m_Owner);
 			if (!spr || FAILED(spr->LoadFile((char *)params, LifeTime, CacheType))) cmd = PARSERR_GENERIC;
 			else m_Sprites[DI_DOWNRIGHT] = spr;

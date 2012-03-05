@@ -122,7 +122,8 @@ HRESULT CBFileManager::Cleanup() {
 		delete m_Packages[i];
 	m_Packages.RemoveAll();
 
-	SAFE_DELETE_ARRAY(m_BasePath);
+	delete[] m_BasePath;
+	m_BasePath = NULL;
 
 	return S_OK;
 }
@@ -294,7 +295,8 @@ HRESULT CBFileManager::InitPaths() {
 		if (path && strlen(path) > 0) {
 			AddPath(PATH_SINGLE, path);
 		}
-		SAFE_DELETE_ARRAY(path);
+		delete[] path;
+		path = NULL;
 	}
 	AddPath(PATH_SINGLE, ".\\");
 
@@ -337,7 +339,8 @@ HRESULT CBFileManager::InitPaths() {
 		if (path && strlen(path) > 0) {
 			AddPath(PATH_PACKAGE, path);
 		}
-		SAFE_DELETE_ARRAY(path);
+		delete[] path;
+		path = NULL;
 	}
 	AddPath(PATH_PACKAGE, "data");
 

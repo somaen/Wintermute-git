@@ -103,7 +103,8 @@ int CBPlatform::Initialize(CBGame *inGame, int argc, char *argv[]) {
 
 	if (FAILED(Game->LoadSettings("startup.settings"))) {
 		Game->LOG(0, "Error loading game settings.");
-		SAFE_DELETE(Game);
+		delete Game;
+		Game = NULL;
 
 #ifdef __WIN32__
 		::MessageBox(NULL, "Some of the essential files are missing. Please reinstall.", NULL, MB_OK | MB_ICONERROR);
@@ -124,7 +125,9 @@ int CBPlatform::Initialize(CBGame *inGame, int argc, char *argv[]) {
 	ret = Game->m_Renderer->InitRenderer(Game->m_SettingsResWidth, Game->m_SettingsResHeight, windowedMode);
 	if (FAILED(ret)) {
 		Game->LOG(ret, "Error initializing renderer. Exiting.");
-		SAFE_DELETE(Game);
+
+		delete Game;
+		Game = NULL;
 		return 3;
 	}
 
@@ -146,7 +149,8 @@ int CBPlatform::Initialize(CBGame *inGame, int argc, char *argv[]) {
 
 	if (FAILED(Game->LoadFile(Game->m_SettingsGameFile ? Game->m_SettingsGameFile : "default.game"))) {
 		Game->LOG(ret, "Error loading game file. Exiting.");
-		SAFE_DELETE(Game);
+		delete Game;
+		Game = NULL;
 		return false;
 	}
 	Game->SetWindowTitle();
@@ -210,7 +214,8 @@ int CBPlatform::MessageLoop() {
 		}
 		*/
 
-		SAFE_DELETE(Game);
+		delete Game;
+		Game = NULL;
 	}
 	return 0;
 }

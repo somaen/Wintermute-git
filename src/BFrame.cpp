@@ -55,7 +55,8 @@ CBFrame::CBFrame(CBGame *inGame): CBScriptable(inGame, true) {
 
 //////////////////////////////////////////////////////////////////////
 CBFrame::~CBFrame() {
-	SAFE_DELETE(m_Sound);
+	delete m_Sound;
+	m_Sound = NULL;
 
 	int i;
 
@@ -243,12 +244,14 @@ HRESULT CBFrame::LoadBuffer(byte  *Buffer, int LifeTime, bool KeepLoaded) {
 
 		case TOKEN_SOUND: {
 			if (m_Sound) {
-				SAFE_DELETE(m_Sound);
+				delete m_Sound;
+				m_Sound = NULL;
 			}
 			m_Sound = new CBSound(Game);
 			if (!m_Sound || FAILED(m_Sound->SetSound(params, SOUND_SFX, false))) {
 				if (Game->m_SoundMgr->m_SoundAvailable) Game->LOG(0, "Error loading sound '%s'.", params);
-				SAFE_DELETE(m_Sound);
+				delete m_Sound;
+				m_Sound = NULL;
 			}
 		}
 		break;
@@ -413,13 +416,15 @@ HRESULT CBFrame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 	if (strcmp(Name, "SetSound") == 0) {
 		Stack->CorrectParams(1);
 		CScValue *Val = Stack->Pop();
-		SAFE_DELETE(m_Sound);
+		delete m_Sound;
+		m_Sound = NULL;
 
 		if (!Val->IsNULL()) {
 			m_Sound = new CBSound(Game);
 			if (!m_Sound || FAILED(m_Sound->SetSound(Val->GetString(), SOUND_SFX, false))) {
 				Stack->PushBool(false);
-				SAFE_DELETE(m_Sound);
+				delete m_Sound;
+				m_Sound = NULL;
 			} else Stack->PushBool(true);
 		} else Stack->PushBool(true);
 		return S_OK;

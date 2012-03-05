@@ -133,7 +133,9 @@ HRESULT CBDiskFile::Close() {
 	m_Pos = 0;
 	m_Size = 0;
 
-	SAFE_DELETE_ARRAY(m_Data);
+	delete[] m_Data;
+	m_Data = NULL;
+
 	m_Compressed = false;
 
 	return S_OK;

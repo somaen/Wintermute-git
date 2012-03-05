@@ -353,7 +353,7 @@ HRESULT CUIWindow::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_IMAGE_INACTIVE:
-			SAFE_DELETE(m_ImageInactive);
+			SAFE_DELETE(m_ImageInactive),
 			m_ImageInactive = new CBSprite(Game);
 			if (!m_ImageInactive || FAILED(m_ImageInactive->LoadFile((char *)params))) {
 				SAFE_DELETE(m_ImageInactive);

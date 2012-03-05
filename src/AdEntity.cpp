@@ -66,7 +66,8 @@ CAdEntity::CAdEntity(CBGame *inGame): CAdTalkHolder(inGame) {
 CAdEntity::~CAdEntity() {
 	Game->UnregisterObject(m_Region);
 
-	SAFE_DELETE_ARRAY(m_Item);
+	delete[] m_Item;
+	m_Item = NULL;
 }
 
 

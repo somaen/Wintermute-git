@@ -282,29 +282,49 @@ CBGame::~CBGame() {
 
 	Cleanup();
 
-	SAFE_DELETE_ARRAY(m_LocalSaveDir);
-	SAFE_DELETE_ARRAY(m_SettingsGameFile);
-	SAFE_DELETE_ARRAY(m_SavedGameExt);
+	delete[] m_LocalSaveDir;
+	delete[] m_SettingsGameFile;
+	delete[] m_SavedGameExt;
+	
+	delete m_CachedThumbnail;
 
-	SAFE_DELETE(m_CachedThumbnail);
+	delete m_SaveLoadImage;
+	delete m_MathClass;
 
-	SAFE_DELETE(m_SaveLoadImage);
-	SAFE_DELETE(m_MathClass);
-
-	SAFE_DELETE(m_TransMgr);
-	SAFE_DELETE(m_ScEngine);
-	SAFE_DELETE(m_FontStorage);
-	SAFE_DELETE(m_SurfaceStorage);
-	SAFE_DELETE(m_SoundMgr);
-	SAFE_DELETE(m_DebugMgr);
+	delete m_TransMgr;
+	delete m_ScEngine;
+	delete m_FontStorage;
+	delete m_SurfaceStorage;
+	delete m_SoundMgr;
+	delete m_DebugMgr;
 	//SAFE_DELETE(m_KeyboardState);
 
-	SAFE_DELETE(m_Renderer);
-	SAFE_DELETE(m_FileManager);
-	SAFE_DELETE(m_Registry);
-	SAFE_DELETE(m_StringTable);
+	delete m_Renderer;
+	delete m_FileManager;
+	delete m_Registry;
+	delete m_StringTable;
 
+	m_LocalSaveDir = NULL;
+	m_SettingsGameFile = NULL;
+	m_SavedGameExt = NULL;
 
+	m_CachedThumbnail = NULL;
+
+	m_SaveLoadImage = NULL;
+	m_MathClass = NULL;
+	
+	m_TransMgr = NULL;
+	m_ScEngine = NULL;
+	m_FontStorage = NULL;
+	m_SurfaceStorage = NULL;
+	m_SoundMgr = NULL;
+	m_DebugMgr = NULL;
+
+	m_Renderer = NULL;
+	m_FileManager = NULL;
+	m_Registry = NULL;
+	m_StringTable = NULL;
+	
 	DEBUG_DebugDisable();
 	CBPlatform::OutputDebugString("--- shutting down normally ---\n");
 }
@@ -314,13 +334,15 @@ CBGame::~CBGame() {
 HRESULT CBGame::Cleanup() {
 	int i;
 
-	SAFE_DELETE(m_LoadingIcon);
+	delete m_LoadingIcon;
+	m_LoadingIcon = NULL;
 
 	m_EngineLogCallback = NULL;
 	m_EngineLogCallbackData = NULL;
 
 	for (i = 0; i < NUM_MUSIC_CHANNELS; i++) {
-		SAFE_DELETE(m_Music[i]);
+		delete m_Music[i];
+		m_Music[i] = NULL;
 		m_MusicStartTime[i] = 0;
 	}
 
@@ -331,22 +353,30 @@ HRESULT CBGame::Cleanup() {
 	m_Fader = NULL;
 
 	for (i = 0; i < m_RegObjects.GetSize(); i++) {
-		SAFE_DELETE(m_RegObjects[i]);
+		delete m_RegObjects[i];
+		m_RegObjects[i] = NULL;
 	}
 	m_RegObjects.RemoveAll();
 
 	m_Windows.RemoveAll(); // refs only
 	m_FocusedWindow = NULL; // ref only
 
-	SAFE_DELETE_ARRAY(m_SaveImageName);
-	SAFE_DELETE_ARRAY(m_LoadImageName);
+	delete[] m_SaveImageName;
+	delete[] m_LoadImageName;
+	m_SaveImageName = NULL;
+	m_LoadImageName = NULL;
 
-	SAFE_DELETE(m_CursorNoninteractive);
-	SAFE_DELETE(m_Cursor);
-	SAFE_DELETE(m_ActiveCursor);
+	delete m_CursorNoninteractive;
+	delete m_Cursor;
+	delete m_ActiveCursor;
+	m_CursorNoninteractive = NULL;
+	m_Cursor = NULL;
+	m_ActiveCursor = NULL;
 
-	SAFE_DELETE(m_ScValue);
-	SAFE_DELETE(m_SFX);
+	delete m_ScValue;
+	delete m_SFX;
+	m_ScValue = NULL;
+	m_SFX = NULL;
 
 	for (i = 0; i < m_Scripts.GetSize(); i++) {
 		m_Scripts[i]->m_Owner = NULL;
@@ -366,16 +396,19 @@ HRESULT CBGame::Cleanup() {
 	m_ViewportStack.RemoveAll();
 	m_ViewportSP = -1;
 
-
-	SAFE_DELETE_ARRAY(m_Name);
-	SAFE_DELETE_ARRAY(m_Filename);
+	delete[] m_Name;
+	delete[] m_Filename;
+	m_Name = NULL;
+	m_Filename = NULL;
 	for (int i = 0; i < 7; i++) {
-		SAFE_DELETE_ARRAY(m_Caption[i]);
+		delete[] m_Caption[i];
+		m_Caption[i] = NULL;
 	}
 
 	m_LastCursor = NULL;
 
-	SAFE_DELETE(m_KeyboardState);
+	delete m_KeyboardState;
+	m_KeyboardState = NULL;
 
 	return S_OK;
 }
@@ -783,28 +816,32 @@ HRESULT CBGame::LoadBuffer(byte  *Buffer, bool Complete) {
 
 
 		case TOKEN_CURSOR:
-			SAFE_DELETE(m_Cursor);
+			delete m_Cursor;
 			m_Cursor = new CBSprite(Game);
 			if (!m_Cursor || FAILED(m_Cursor->LoadFile((char *)params))) {
-				SAFE_DELETE(m_Cursor);
+				delete m_Cursor;
+				m_Cursor = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
 
 		case TOKEN_ACTIVE_CURSOR:
-			SAFE_DELETE(m_ActiveCursor);
+			delete m_ActiveCursor;
+			m_ActiveCursor = NULL;
 			m_ActiveCursor = new CBSprite(Game);
 			if (!m_ActiveCursor || FAILED(m_ActiveCursor->LoadFile((char *)params))) {
-				SAFE_DELETE(m_ActiveCursor);
+				delete m_ActiveCursor;
+				m_ActiveCursor = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
 
 		case TOKEN_NONINTERACTIVE_CURSOR:
-			SAFE_DELETE(m_CursorNoninteractive);
+			delete m_CursorNoninteractive;
 			m_CursorNoninteractive = new CBSprite(Game);
 			if (!m_CursorNoninteractive || FAILED(m_CursorNoninteractive->LoadFile((char *)params))) {
-				SAFE_DELETE(m_CursorNoninteractive);
+				delete m_CursorNoninteractive;
+				m_CursorNoninteractive = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
@@ -1034,7 +1071,8 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 			RegisterObject(win);
 			Stack->PushNative(win, true);
 		} else {
-			SAFE_DELETE(win);
+			delete win;
+			win = NULL;
 			Stack->PushNULL();
 		}
 		return S_OK;
@@ -1274,7 +1312,8 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 		CBSound *Sound = new CBSound(Game);
 		if (Sound && SUCCEEDED(Sound->SetSound(Filename, SOUND_MUSIC, true))) {
 			Length = Sound->GetLength();
-			SAFE_DELETE(Sound);
+			delete Sound;
+			Sound = NULL;
 		}
 		Stack->PushInt(Length);
 		return S_OK;
@@ -1577,7 +1616,8 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "RemoveActiveCursor") == 0) {
 		Stack->CorrectParams(0);
-		SAFE_DELETE(m_ActiveCursor);
+		delete m_ActiveCursor;
+		m_ActiveCursor = NULL;
 		Stack->PushNULL();
 
 		return S_OK;
@@ -1777,9 +1817,12 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 		m_LoadImageX = Stack->Pop()->GetInt();
 		m_LoadImageY = Stack->Pop()->GetInt();
 
-		if (Val->IsNULL()) SAFE_DELETE_ARRAY(m_LoadImageName);
-		else CBUtils::SetString(&m_LoadImageName, Val->GetString());
-
+		if (Val->IsNULL()) {
+			delete[] m_LoadImageName;
+			m_LoadImageName = NULL;
+		} else {
+			CBUtils::SetString(&m_LoadImageName, Val->GetString());	
+		}
 		Stack->PushNULL();
 		return S_OK;
 	}
@@ -1793,9 +1836,12 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 		m_SaveImageX = Stack->Pop()->GetInt();
 		m_SaveImageY = Stack->Pop()->GetInt();
 
-		if (Val->IsNULL()) SAFE_DELETE_ARRAY(m_SaveImageName);
-		else CBUtils::SetString(&m_SaveImageName, Val->GetString());
-
+		if (Val->IsNULL()) {
+			delete[] m_SaveImageName;
+			m_SaveImageName = NULL;
+		} else {
+			CBUtils::SetString(&m_SaveImageName, Val->GetString());
+		}
 		Stack->PushNULL();
 		return S_OK;
 	}
@@ -1816,7 +1862,9 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "RemoveWaitCursor") == 0) {
 		Stack->CorrectParams(0);
-		SAFE_DELETE(m_CursorNoninteractive);
+		delete m_CursorNoninteractive;
+		m_CursorNoninteractive = NULL;
+
 		Stack->PushNULL();
 
 		return S_OK;
@@ -1864,10 +1912,11 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 		m_LoadingIconY = Stack->Pop()->GetInt();
 		m_LoadingIconPersistent = Stack->Pop()->GetBool();
 
-		SAFE_DELETE(m_LoadingIcon);
+		delete m_LoadingIcon;
 		m_LoadingIcon = new CBSprite(this);
 		if (!m_LoadingIcon || FAILED(m_LoadingIcon->LoadFile(Filename))) {
-			SAFE_DELETE(m_LoadingIcon);
+			delete m_LoadingIcon;
+			m_LoadingIcon = NULL;
 		} else {
 			DisplayContent(false, true);
 			Game->m_Renderer->Flip();
@@ -1883,7 +1932,8 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "HideLoadingIcon") == 0) {
 		Stack->CorrectParams(0);
-		SAFE_DELETE(m_LoadingIcon);
+		delete m_LoadingIcon;
+		m_LoadingIcon = NULL;
 		Stack->PushNULL();
 		return S_OK;
 	}
@@ -1919,10 +1969,11 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "StoreSaveThumbnail") == 0) {
 		Stack->CorrectParams(0);
-		SAFE_DELETE(m_CachedThumbnail);
+		delete m_CachedThumbnail;
 		m_CachedThumbnail = new CBSaveThumbHelper(this);
 		if (FAILED(m_CachedThumbnail->StoreThumbnail())) {
-			SAFE_DELETE(m_CachedThumbnail);
+			delete m_CachedThumbnail;
+			m_CachedThumbnail = NULL;
 			Stack->PushBool(false);
 		} else Stack->PushBool(true);
 
@@ -1934,7 +1985,8 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "DeleteSaveThumbnail") == 0) {
 		Stack->CorrectParams(0);
-		SAFE_DELETE(m_CachedThumbnail);
+		delete m_CachedThumbnail;
+		m_CachedThumbnail = NULL;
 		Stack->PushNULL();
 
 		return S_OK;
@@ -2994,7 +3046,7 @@ HRESULT CBGame::ExternalCall(CScScript *Script, CScStack *Stack, CScStack *ThisS
 		Stack->CorrectParams(1);
 		uint32 rgb = (uint32)Stack->Pop()->GetInt();
 
-		BYTE H, S, L;
+		byte H, S, L;
 		CBUtils::RGBtoHSL(rgb, &H, &S, &L);
 		Stack->PushInt(S);
 	}
@@ -3006,7 +3058,7 @@ HRESULT CBGame::ExternalCall(CScScript *Script, CScStack *Stack, CScStack *ThisS
 		Stack->CorrectParams(1);
 		uint32 rgb = (uint32)Stack->Pop()->GetInt();
 
-		BYTE H, S, L;
+		byte H, S, L;
 		CBUtils::RGBtoHSL(rgb, &H, &S, &L);
 		Stack->PushInt(L);
 	}
@@ -3109,12 +3161,14 @@ HRESULT CBGame::SaveGame(int slot, char *desc, bool quickSave) {
 	if (FAILED(ret = pm->InitSave(desc))) goto save_finish;
 
 	if (!quickSave) {
-		SAFE_DELETE(m_SaveLoadImage);
+		delete m_SaveLoadImage;
+		m_SaveLoadImage = NULL;
 		if (m_SaveImageName) {
 			m_SaveLoadImage = new CBSurfaceSDL(this);
 
 			if (!m_SaveLoadImage || FAILED(m_SaveLoadImage->Create(m_SaveImageName, true, 0, 0, 0))) {
-				SAFE_DELETE(m_SaveLoadImage);
+				delete m_SaveLoadImage;
+				m_SaveLoadImage = NULL;
 			}
 		}
 	}
@@ -3129,7 +3183,8 @@ save_finish:
 	delete pm;
 	m_IndicatorDisplay = false;
 
-	SAFE_DELETE(m_SaveLoadImage);
+	delete m_SaveLoadImage;
+	m_SaveLoadImage = NULL;
 
 	return ret;
 }
@@ -3156,12 +3211,14 @@ HRESULT CBGame::LoadGame(char *Filename) {
 
 	HRESULT ret;
 
-	SAFE_DELETE(m_SaveLoadImage);
+	delete m_SaveLoadImage;
+	m_SaveLoadImage = NULL;
 	if (m_LoadImageName) {
 		m_SaveLoadImage = new CBSurfaceSDL(this);
 
 		if (!m_SaveLoadImage || FAILED(m_SaveLoadImage->Create(m_LoadImageName, true, 0, 0, 0))) {
-			SAFE_DELETE(m_SaveLoadImage);
+			delete m_SaveLoadImage;
+			m_SaveLoadImage = NULL;
 		}
 	}
 
@@ -3194,7 +3251,8 @@ load_finish:
 	delete pm;
 	m_LoadInProgress = false;
 
-	SAFE_DELETE(m_SaveLoadImage);
+	delete m_SaveLoadImage;
+	m_SaveLoadImage = NULL;
 
 	//Game->LOG(0, "Load end %d", CBUtils::GetUsedMemMB());
 
@@ -3281,7 +3339,8 @@ HRESULT CBGame::PlayMusic(int Channel, char *Filename, bool Looping, uint32 Loop
 		return E_FAIL;
 	}
 
-	SAFE_DELETE(m_Music[Channel]);
+	delete m_Music[Channel];
+	m_Music[Channel] = NULL;
 
 	m_Music[Channel] = new CBSound(Game);
 	if (m_Music[Channel] && SUCCEEDED(m_Music[Channel]->SetSound(Filename, SOUND_MUSIC, true))) {
@@ -3292,7 +3351,8 @@ HRESULT CBGame::PlayMusic(int Channel, char *Filename, bool Looping, uint32 Loop
 		if (LoopStart) m_Music[Channel]->SetLoopStart(LoopStart);
 		return m_Music[Channel]->Play(Looping);
 	} else {
-		SAFE_DELETE(m_Music[Channel]);
+		delete m_Music[Channel];
+		m_Music[Channel] = NULL;
 		return E_FAIL;
 	}
 }
@@ -3307,7 +3367,8 @@ HRESULT CBGame::StopMusic(int Channel) {
 
 	if (m_Music[Channel]) {
 		m_Music[Channel]->Stop();
-		SAFE_DELETE(m_Music[Channel]);
+		delete m_Music[Channel];
+		m_Music[Channel] = NULL;
 		return S_OK;
 	} else return E_FAIL;
 }
@@ -4040,11 +4101,13 @@ HRESULT CBGame::RestoreDeviceObjects() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBGame::SetWaitCursor(char *Filename) {
-	SAFE_DELETE(m_CursorNoninteractive);
+	delete m_CursorNoninteractive;
+	m_CursorNoninteractive = NULL;
 
 	m_CursorNoninteractive = new CBSprite(Game);
 	if (!m_CursorNoninteractive || FAILED(m_CursorNoninteractive->LoadFile(Filename))) {
-		SAFE_DELETE(m_CursorNoninteractive);
+		delete m_CursorNoninteractive;
+		m_CursorNoninteractive = NULL;
 		return E_FAIL;
 	} else return S_OK;
 }

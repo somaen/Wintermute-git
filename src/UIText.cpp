@@ -186,19 +186,21 @@ HRESULT CUIText::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_BACK:
-			SAFE_DELETE(m_Back);
+			delete m_Back;
 			m_Back = new CUITiledImage(Game);
 			if (!m_Back || FAILED(m_Back->LoadFile((char *)params))) {
-				SAFE_DELETE(m_Back);
+				delete m_Back;
+				m_Back = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
 
 		case TOKEN_IMAGE:
-			SAFE_DELETE(m_Image);
+			delete m_Image;
 			m_Image = new CBSprite(Game);
 			if (!m_Image || FAILED(m_Image->LoadFile((char *)params))) {
-				SAFE_DELETE(m_Image);
+				delete m_Image;
+				m_Image = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;
@@ -243,10 +245,11 @@ HRESULT CUIText::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_CURSOR:
-			SAFE_DELETE(m_Cursor);
+			delete m_Cursor;
 			m_Cursor = new CBSprite(Game);
 			if (!m_Cursor || FAILED(m_Cursor->LoadFile((char *)params))) {
-				SAFE_DELETE(m_Cursor);
+				delete m_Cursor;
+				m_Cursor = NULL;
 				cmd = PARSERR_GENERIC;
 			}
 			break;

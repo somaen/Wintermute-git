@@ -166,8 +166,10 @@ HRESULT CAdLayer::LoadBuffer(byte  *Buffer, bool Complete) {
 			CAdSceneNode *node = new CAdSceneNode(Game);
 			if (!region || !node || FAILED(region->LoadBuffer(params, false))) {
 				cmd = PARSERR_GENERIC;
-				SAFE_DELETE(region);
-				SAFE_DELETE(node);
+				delete region;
+				delete node;
+				region = NULL;
+				node = NULL;
 			} else {
 				node->SetRegion(region);
 				m_Nodes.Add(node);
@@ -181,8 +183,10 @@ HRESULT CAdLayer::LoadBuffer(byte  *Buffer, bool Complete) {
 			if (entity) entity->m_Zoomable = false; // scene entites default to NOT zoom
 			if (!entity || !node || FAILED(entity->LoadBuffer(params, false))) {
 				cmd = PARSERR_GENERIC;
-				SAFE_DELETE(entity);
-				SAFE_DELETE(node);
+				delete entity;
+				delete node;
+				entity = NULL;
+				node = NULL;
 			} else {
 				node->SetEntity(entity);
 				m_Nodes.Add(node);
@@ -334,7 +338,8 @@ HRESULT CAdLayer::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 
 		for (int i = 0; i < m_Nodes.GetSize(); i++) {
 			if (m_Nodes[i] == ToDelete) {
-				SAFE_DELETE(m_Nodes[i]);
+				delete m_Nodes[i];
+				m_Nodes[i] = NULL;
 				m_Nodes.RemoveAt(i);
 				break;
 			}

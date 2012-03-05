@@ -45,7 +45,8 @@ CAdTalkHolder::CAdTalkHolder(CBGame *inGame): CAdObject(inGame) {
 
 //////////////////////////////////////////////////////////////////////////
 CAdTalkHolder::~CAdTalkHolder() {
-	SAFE_DELETE(m_Sprite);
+	delete m_Sprite;
+	m_Sprite = NULL;
 
 	int i;
 	for (i = 0; i < m_TalkSprites.GetSize(); i++) delete m_TalkSprites[i];
@@ -63,13 +64,14 @@ CBSprite *CAdTalkHolder::GetTalkStance(char *Stance) {
 	// forced stance?
 	if (m_ForcedTalkAnimName && !m_ForcedTalkAnimUsed) {
 		m_ForcedTalkAnimUsed = true;
-		SAFE_DELETE(m_AnimSprite);
+		delete m_AnimSprite;
 		m_AnimSprite = new CBSprite(Game, this);
 		if (m_AnimSprite) {
 			HRESULT res = m_AnimSprite->LoadFile(m_ForcedTalkAnimName);
 			if (FAILED(res)) {
 				Game->LOG(res, "CAdTalkHolder::GetTalkStance: error loading talk sprite (object:\"%s\" sprite:\"%s\")", m_Name, m_ForcedTalkAnimName);
-				SAFE_DELETE(m_AnimSprite);
+				delete m_AnimSprite;
+				m_AnimSprite = NULL;
 			} else return m_AnimSprite;
 		}
 	}
@@ -123,7 +125,8 @@ HRESULT CAdTalkHolder::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack
 		bool SetCurrent = false;
 		if (m_CurrentSprite && m_CurrentSprite == m_Sprite) SetCurrent = true;
 
-		SAFE_DELETE(m_Sprite);
+		delete m_Sprite;
+		m_Sprite = NULL;
 
 		if (Val->IsNULL()) {
 			m_Sprite = NULL;

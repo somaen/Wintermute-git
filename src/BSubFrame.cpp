@@ -65,7 +65,8 @@ CBSubFrame::CBSubFrame(CBGame *inGame): CBScriptable(inGame, true) {
 //////////////////////////////////////////////////////////////////////////
 CBSubFrame::~CBSubFrame() {
 	if (m_Surface) Game->m_SurfaceStorage->RemoveSurface(m_Surface);
-	SAFE_DELETE_ARRAY(m_SurfaceFilename);
+	delete[] m_SurfaceFilename;
+	m_SurfaceFilename = NULL;
 }
 
 
@@ -112,7 +113,8 @@ HRESULT CBSubFrame::LoadBuffer(byte  *Buffer, int LifeTime, bool KeepLoaded) {
 	CBPlatform::SetRectEmpty(&rect);
 	char *surface_file = NULL;
 
-	SAFE_DELETE(m_Surface);
+	delete m_Surface;
+	m_Surface = NULL;
 
 	while ((cmd = parser.GetCommand((char **)&Buffer, commands, &params)) > 0) {
 		switch (cmd) {
@@ -358,7 +360,8 @@ HRESULT CBSubFrame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *T
 
 		if (Val->IsNULL()) {
 			if (m_Surface) Game->m_SurfaceStorage->RemoveSurface(m_Surface);
-			SAFE_DELETE_ARRAY(m_SurfaceFilename);
+			delete[] m_SurfaceFilename;
+			m_SurfaceFilename = NULL;
 			Stack->PushBool(true);
 		} else {
 			char *Filename = Val->GetString();
@@ -548,7 +551,8 @@ HRESULT CBSubFrame::SetSurface(char *Filename, bool default_ck, byte ck_red, byt
 		m_Surface = NULL;
 	}
 
-	SAFE_DELETE_ARRAY(m_SurfaceFilename);
+	delete[] m_SurfaceFilename;
+	m_SurfaceFilename = NULL;
 
 	m_Surface = Game->m_SurfaceStorage->AddSurface(Filename, default_ck, ck_red, ck_green, ck_blue, LifeTime, KeepLoaded);
 	if (m_Surface) {
