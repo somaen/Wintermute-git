@@ -41,10 +41,13 @@ public:
 	void ScSetString(const char *Val);
 	char *ScToString();
 	void SetStringVal(const char *Val);
-	char *m_String;
+
 	CSXString(CBGame *inGame, CScStack *Stack);
 	virtual ~CSXString();
-	int m_Capacity;
+	
+private:
+	char *_string;
+	int _capacity;
 };
 
 } // end of namespace WinterMute

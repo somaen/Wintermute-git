@@ -39,49 +39,49 @@ IMPLEMENT_PERSISTENT(CSXString, false)
 
 //////////////////////////////////////////////////////////////////////////
 CSXString::CSXString(CBGame *inGame, CScStack *Stack): CBScriptable(inGame) {
-	m_String = NULL;
-	m_Capacity = 0;
+	_string = NULL;
+	_capacity = 0;
 
 	Stack->CorrectParams(1);
 	CScValue *Val = Stack->Pop();
 
 	if (Val->IsInt()) {
-		m_Capacity = std::max(0, Val->GetInt());
-		if (m_Capacity > 0) {
-			m_String = new char[m_Capacity];
-			memset(m_String, 0, m_Capacity);
+		_capacity = std::max(0, Val->GetInt());
+		if (_capacity > 0) {
+			_string = new char[_capacity];
+			memset(_string, 0, _capacity);
 		}
 	} else {
 		SetStringVal(Val->GetString());
 	}
 
-	if (m_Capacity == 0) SetStringVal("");
+	if (_capacity == 0) SetStringVal("");
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 CSXString::~CSXString() {
-	if (m_String) delete [] m_String;
+	if (_string) delete [] _string;
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 void CSXString::SetStringVal(const char *Val) {
 	int Len = strlen(Val);
-	if (Len >= m_Capacity) {
-		m_Capacity = Len + 1;
-		delete[] m_String;
-		m_String = NULL;
-		m_String = new char[m_Capacity];
-		memset(m_String, 0, m_Capacity);
+	if (Len >= _capacity) {
+		_capacity = Len + 1;
+		delete[] _string;
+		_string = NULL;
+		_string = new char[_capacity];
+		memset(_string, 0, _capacity);
 	}
-	strcpy(m_String, Val);
+	strcpy(_string, Val);
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 char *CSXString::ScToString() {
-	if (m_String) return m_String;
+	if (_string) return _string;
 	else return "[null string]";
 }
 
@@ -107,9 +107,9 @@ HRESULT CSXString::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 		try {
 			WideString str;
 			if (Game->m_TextEncoding == TEXT_UTF8)
-				str = StringUtil::Utf8ToWide(m_String);
+				str = StringUtil::Utf8ToWide(_string);
 			else
-				str = StringUtil::AnsiToWide(m_String);
+				str = StringUtil::AnsiToWide(_string);
 
 			WideString subStr = str.substr(start, end - start + 1);
 
@@ -139,14 +139,14 @@ HRESULT CSXString::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 			return S_OK;
 		}
 
-		if (val->IsNULL()) len = strlen(m_String) - start;
+		if (val->IsNULL()) len = strlen(_string) - start;
 
 		try {
 			WideString str;
 			if (Game->m_TextEncoding == TEXT_UTF8)
-				str = StringUtil::Utf8ToWide(m_String);
+				str = StringUtil::Utf8ToWide(_string);
 			else
-				str = StringUtil::AnsiToWide(m_String);
+				str = StringUtil::AnsiToWide(_string);
 
 			WideString subStr = str.substr(start, len);
 
@@ -169,9 +169,9 @@ HRESULT CSXString::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 
 		WideString str;
 		if (Game->m_TextEncoding == TEXT_UTF8)
-			str = StringUtil::Utf8ToWide(m_String);
+			str = StringUtil::Utf8ToWide(_string);
 		else
-			str = StringUtil::AnsiToWide(m_String);
+			str = StringUtil::AnsiToWide(_string);
 
 		StringUtil::ToUpperCase(str);
 
@@ -191,9 +191,9 @@ HRESULT CSXString::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 
 		WideString str;
 		if (Game->m_TextEncoding == TEXT_UTF8)
-			str = StringUtil::Utf8ToWide(m_String);
+			str = StringUtil::Utf8ToWide(_string);
 		else
-			str = StringUtil::AnsiToWide(m_String);
+			str = StringUtil::AnsiToWide(_string);
 
 		StringUtil::ToLowerCase(str);
 
@@ -216,9 +216,9 @@ HRESULT CSXString::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 
 		WideString str;
 		if (Game->m_TextEncoding == TEXT_UTF8)
-			str = StringUtil::Utf8ToWide(m_String);
+			str = StringUtil::Utf8ToWide(_string);
 		else
-			str = StringUtil::AnsiToWide(m_String);
+			str = StringUtil::AnsiToWide(_string);
 
 		WideString toFind;
 		if (Game->m_TextEncoding == TEXT_UTF8)
@@ -250,9 +250,9 @@ HRESULT CSXString::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 
 		WideString str;
 		if (Game->m_TextEncoding == TEXT_UTF8)
-			str = StringUtil::Utf8ToWide(m_String);
+			str = StringUtil::Utf8ToWide(_string);
 		else
-			str = StringUtil::AnsiToWide(m_String);
+			str = StringUtil::AnsiToWide(_string);
 
 		WideString delims;
 		if (Game->m_TextEncoding == TEXT_UTF8)
@@ -317,10 +317,10 @@ CScValue *CSXString::ScGetProperty(char *Name) {
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "Length") == 0) {
 		if (Game->m_TextEncoding == TEXT_UTF8) {
-			WideString wstr = StringUtil::Utf8ToWide(m_String);
+			WideString wstr = StringUtil::Utf8ToWide(_string);
 			m_ScValue->SetInt(wstr.length());
 		} else
-			m_ScValue->SetInt(strlen(m_String));
+			m_ScValue->SetInt(strlen(_string));
 
 		return m_ScValue;
 	}
@@ -328,7 +328,7 @@ CScValue *CSXString::ScGetProperty(char *Name) {
 	// Capacity
 	//////////////////////////////////////////////////////////////////////////
 	else if (strcmp(Name, "Capacity") == 0) {
-		m_ScValue->SetInt(m_Capacity);
+		m_ScValue->SetInt(_capacity);
 		return m_ScValue;
 	}
 
@@ -343,15 +343,15 @@ HRESULT CSXString::ScSetProperty(char *Name, CScValue *Value) {
 	//////////////////////////////////////////////////////////////////////////
 	if (strcmp(Name, "Capacity") == 0) {
 		int NewCap = Value->GetInt();
-		if (NewCap < strlen(m_String) + 1) Game->LOG(0, "Warning: cannot lower string capacity");
-		else if (NewCap != m_Capacity) {
+		if (NewCap < strlen(_string) + 1) Game->LOG(0, "Warning: cannot lower string capacity");
+		else if (NewCap != _capacity) {
 			char *NewStr = new char[NewCap];
 			if (NewStr) {
 				memset(NewStr, 0, NewCap);
-				strcpy(NewStr, m_String);
-				delete[] m_String;
-				m_String = NewStr;
-				m_Capacity = NewCap;
+				strcpy(NewStr, _string);
+				delete[] _string;
+				_string = NewStr;
+				_capacity = NewCap;
 			}
 		}
 		return S_OK;
@@ -366,15 +366,15 @@ HRESULT CSXString::Persist(CBPersistMgr *PersistMgr) {
 
 	CBScriptable::Persist(PersistMgr);
 
-	PersistMgr->Transfer(TMEMBER(m_Capacity));
+	PersistMgr->Transfer(TMEMBER(_capacity));
 
 	if (PersistMgr->m_Saving) {
-		if (m_Capacity > 0) PersistMgr->PutBytes((byte  *)m_String, m_Capacity);
+		if (_capacity > 0) PersistMgr->PutBytes((byte  *)_string, _capacity);
 	} else {
-		if (m_Capacity > 0) {
-			m_String = new char[m_Capacity];
-			PersistMgr->GetBytes((byte  *)m_String, m_Capacity);
-		} else m_String = NULL;
+		if (_capacity > 0) {
+			_string = new char[_capacity];
+			PersistMgr->GetBytes((byte  *)_string, _capacity);
+		} else _string = NULL;
 	}
 
 	return S_OK;
@@ -383,7 +383,7 @@ HRESULT CSXString::Persist(CBPersistMgr *PersistMgr) {
 
 //////////////////////////////////////////////////////////////////////////
 int CSXString::ScCompare(CBScriptable *Val) {
-	return strcmp(m_String, ((CSXString *)Val)->m_String);
+	return strcmp(_string, ((CSXString *)Val)->_string);
 }
 
 } // end of namespace WinterMute
