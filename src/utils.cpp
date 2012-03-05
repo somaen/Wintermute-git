@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "wintypes.h"
 #include "PathUtil.h"
 #include "BGame.h"
+#include "common/str.h"
 #include "boost/filesystem.hpp"
 
 namespace WinterMute {
@@ -79,7 +80,7 @@ void CBUtils::Swap(int *a, int *b) {
 
 //////////////////////////////////////////////////////////////////////////
 bool CBUtils::StrBeginsI(const char *String, const char *Fragment) {
-	return (CBPlatform::strnicmp(String, Fragment, strlen(Fragment)) == 0);
+	return (scumm_strnicmp(String, Fragment, strlen(Fragment)) == 0);
 }
 
 
@@ -207,7 +208,7 @@ bool CBUtils::MatchesPattern(const char *Pattern, const char *String) {
 				if (dot != NULL) {
 					String = dot;
 					if (strpbrk(Pattern, "*?[") == NULL && strchr(String + 1, '.') == NULL)
-						return(CBPlatform::stricmp(Pattern + 1, String + 1) == 0);
+						return(scumm_stricmp(Pattern + 1, String + 1) == 0);
 				}
 			}
 

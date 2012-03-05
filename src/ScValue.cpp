@@ -498,7 +498,7 @@ bool CScValue::GetBool(bool Default) {
 		return (m_ValFloat != 0.0f);
 
 	case VAL_STRING:
-		return (CBPlatform::stricmp(m_ValString, "1") == 0 || CBPlatform::stricmp(m_ValString, "yes") == 0 || CBPlatform::stricmp(m_ValString, "true") == 0);
+		return (scumm_stricmp(m_ValString, "1") == 0 || scumm_stricmp(m_ValString, "yes") == 0 || scumm_stricmp(m_ValString, "true") == 0);
 
 	default:
 		return Default;

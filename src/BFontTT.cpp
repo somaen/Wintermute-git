@@ -23,6 +23,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
 #include "dcgf.h"
 #include "BFile.h"
 #include "BFontTT.h"

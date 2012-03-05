@@ -54,6 +54,7 @@ THE SOFTWARE.
 #include "BSprite.h"
 #include "BFileManager.h"
 #include "utils.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -654,7 +655,7 @@ HRESULT CAdGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 					if (val->GetNative() == Inv->m_TakenItems[j]) {
 						Stack->PushBool(true);
 						return S_OK;
-					} else if (CBPlatform::stricmp(val->GetString(), Inv->m_TakenItems[j]->m_Name) == 0) {
+					} else if (scumm_stricmp(val->GetString(), Inv->m_TakenItems[j]->m_Name) == 0) {
 						Stack->PushBool(true);
 						return S_OK;
 					}
@@ -1211,8 +1212,8 @@ HRESULT CAdGame::LoadBuffer(byte  *Buffer, bool Complete) {
 					break;
 
 				case TOKEN_TALK_SKIP_BUTTON:
-					if (CBPlatform::stricmp((char *)params2, "right") == 0) m_TalkSkipButton = TALK_SKIP_RIGHT;
-					else if (CBPlatform::stricmp((char *)params2, "both") == 0) m_TalkSkipButton = TALK_SKIP_BOTH;
+					if (scumm_stricmp((char *)params2, "right") == 0) m_TalkSkipButton = TALK_SKIP_RIGHT;
+					else if (scumm_stricmp((char *)params2, "both") == 0) m_TalkSkipButton = TALK_SKIP_BOTH;
 					else m_TalkSkipButton = TALK_SKIP_LEFT;
 					break;
 
@@ -1458,7 +1459,7 @@ CAdSceneState *CAdGame::GetSceneState(char *Filename, bool Saving) {
 	}
 
 	for (int i = 0; i < m_SceneStates.GetSize(); i++) {
-		if (CBPlatform::stricmp(m_SceneStates[i]->m_Filename, FilenameCor) == 0) {
+		if (scumm_stricmp(m_SceneStates[i]->m_Filename, FilenameCor) == 0) {
 			delete [] FilenameCor;
 			return m_SceneStates[i];
 		}
@@ -1564,7 +1565,7 @@ HRESULT CAdGame::EndDlgBranch(const char *BranchName, const char *ScriptName, co
 	int StartIndex = -1;
 	int i;
 	for (i = m_DlgPendingBranches.GetSize() - 1; i >= 0; i--) {
-		if (CBPlatform::stricmp(Name, m_DlgPendingBranches[i]) == 0) {
+		if (scumm_stricmp(Name, m_DlgPendingBranches[i]) == 0) {
 			StartIndex = i;
 			break;
 		}
@@ -1593,7 +1594,7 @@ HRESULT CAdGame::EndDlgBranch(const char *BranchName, const char *ScriptName, co
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdGame::ClearBranchResponses(char *Name) {
 	for (int i = 0; i < m_ResponsesBranch.GetSize(); i++) {
-		if (CBPlatform::stricmp(Name, m_ResponsesBranch[i]->m_Context) == 0) {
+		if (scumm_stricmp(Name, m_ResponsesBranch[i]->m_Context) == 0) {
 			delete m_ResponsesBranch[i];
 			m_ResponsesBranch.RemoveAt(i);
 			i--;
@@ -1619,7 +1620,7 @@ bool CAdGame::BranchResponseUsed(int ID) {
 	char *Context = m_DlgPendingBranches.GetSize() > 0 ? m_DlgPendingBranches[m_DlgPendingBranches.GetSize() - 1] : NULL;
 	for (int i = 0; i < m_ResponsesBranch.GetSize(); i++) {
 		if (m_ResponsesBranch[i]->m_ID == ID) {
-			if ((Context == NULL && m_ResponsesBranch[i]->m_Context == NULL) || CBPlatform::stricmp(Context, m_ResponsesBranch[i]->m_Context) == 0) return true;
+			if ((Context == NULL && m_ResponsesBranch[i]->m_Context == NULL) || scumm_stricmp(Context, m_ResponsesBranch[i]->m_Context) == 0) return true;
 		}
 	}
 	return false;
@@ -1643,7 +1644,7 @@ bool CAdGame::GameResponseUsed(int ID) {
 	for (int i = 0; i < m_ResponsesGame.GetSize(); i++) {
 		CAdResponseContext *RespContext = m_ResponsesGame[i];
 		if (RespContext->m_ID == ID) {
-			if ((Context == NULL && RespContext->m_Context == NULL) || ((Context != NULL && RespContext->m_Context != NULL) && CBPlatform::stricmp(Context, RespContext->m_Context) == 0)) return true;
+			if ((Context == NULL && RespContext->m_Context == NULL) || ((Context != NULL && RespContext->m_Context != NULL) && scumm_stricmp(Context, RespContext->m_Context) == 0)) return true;
 		}
 	}
 	return false;
@@ -1658,7 +1659,7 @@ HRESULT CAdGame::ResetResponse(int ID) {
 
 	for (i = 0; i < m_ResponsesGame.GetSize(); i++) {
 		if (m_ResponsesGame[i]->m_ID == ID) {
-			if ((Context == NULL && m_ResponsesGame[i]->m_Context == NULL) || CBPlatform::stricmp(Context, m_ResponsesGame[i]->m_Context) == 0) {
+			if ((Context == NULL && m_ResponsesGame[i]->m_Context == NULL) || scumm_stricmp(Context, m_ResponsesGame[i]->m_Context) == 0) {
 				delete m_ResponsesGame[i];
 				m_ResponsesGame.RemoveAt(i);
 				break;
@@ -1668,7 +1669,7 @@ HRESULT CAdGame::ResetResponse(int ID) {
 
 	for (i = 0; i < m_ResponsesBranch.GetSize(); i++) {
 		if (m_ResponsesBranch[i]->m_ID == ID) {
-			if ((Context == NULL && m_ResponsesBranch[i]->m_Context == NULL) || CBPlatform::stricmp(Context, m_ResponsesBranch[i]->m_Context) == 0) {
+			if ((Context == NULL && m_ResponsesBranch[i]->m_Context == NULL) || scumm_stricmp(Context, m_ResponsesBranch[i]->m_Context) == 0) {
 				delete m_ResponsesBranch[i];
 				m_ResponsesBranch.RemoveAt(i);
 				break;
@@ -1763,7 +1764,7 @@ bool CAdGame::IsItemTaken(char *ItemName) {
 		CAdInventory *Inv = m_Inventories[i];
 
 		for (int j = 0; j < Inv->m_TakenItems.GetSize(); j++) {
-			if (CBPlatform::stricmp(ItemName, Inv->m_TakenItems[j]->m_Name) == 0) {
+			if (scumm_stricmp(ItemName, Inv->m_TakenItems[j]->m_Name) == 0) {
 				return true;
 			}
 		}
@@ -1774,7 +1775,7 @@ bool CAdGame::IsItemTaken(char *ItemName) {
 //////////////////////////////////////////////////////////////////////////
 CAdItem *CAdGame::GetItemByName(char *Name) {
 	for (int i = 0; i < m_Items.GetSize(); i++) {
-		if (CBPlatform::stricmp(m_Items[i]->m_Name, Name) == 0) return m_Items[i];
+		if (scumm_stricmp(m_Items[i]->m_Name, Name) == 0) return m_Items[i];
 	}
 	return NULL;
 }
@@ -1859,7 +1860,7 @@ HRESULT CAdGame::AddSpeechDir(const char *Dir) {
 		strcat(Temp, "\\");
 
 	for (int i = 0; i < m_SpeechDirs.GetSize(); i++) {
-		if (CBPlatform::stricmp(m_SpeechDirs[i], Temp) == 0) {
+		if (scumm_stricmp(m_SpeechDirs[i], Temp) == 0) {
 			delete [] Temp;
 			return S_OK;
 		}
@@ -1881,7 +1882,7 @@ HRESULT CAdGame::RemoveSpeechDir(char *Dir) {
 
 	bool Found = false;
 	for (int i = 0; i < m_SpeechDirs.GetSize(); i++) {
-		if (CBPlatform::stricmp(m_SpeechDirs[i], Temp) == 0) {
+		if (scumm_stricmp(m_SpeechDirs[i], Temp) == 0) {
 			delete [] m_SpeechDirs[i];
 			m_SpeechDirs.RemoveAt(i);
 			Found = true;

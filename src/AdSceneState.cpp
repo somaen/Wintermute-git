@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "AdSceneState.h"
 #include "AdNodeState.h"
 #include "PlatformSDL.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -68,7 +69,7 @@ void CAdSceneState::SetFilename(char *Filename) {
 //////////////////////////////////////////////////////////////////////////
 CAdNodeState *CAdSceneState::GetNodeState(char *Name, bool Saving) {
 	for (int i = 0; i < m_NodeStates.GetSize(); i++) {
-		if (CBPlatform::stricmp(m_NodeStates[i]->m_Name, Name) == 0) return m_NodeStates[i];
+		if (scumm_stricmp(m_NodeStates[i]->m_Name, Name) == 0) return m_NodeStates[i];
 	}
 
 	if (Saving) {

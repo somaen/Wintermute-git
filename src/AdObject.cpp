@@ -46,6 +46,7 @@ THE SOFTWARE.
 #include "ScScript.h"
 #include "BSprite.h"
 #include "ScStack.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -283,7 +284,7 @@ HRESULT CAdObject::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 		} else if (Val->IsString()) {
 			char *RegionName = Val->GetString();
 			for (i = 0; i < Main->m_Nodes.GetSize(); i++) {
-				if (Main->m_Nodes[i]->m_Type == OBJECT_REGION && Main->m_Nodes[i]->m_Region->m_Name && CBPlatform::stricmp(Main->m_Nodes[i]->m_Region->m_Name, RegionName) == 0) {
+				if (Main->m_Nodes[i]->m_Type == OBJECT_REGION && Main->m_Nodes[i]->m_Region->m_Name && scumm_stricmp(Main->m_Nodes[i]->m_Region->m_Name, RegionName) == 0) {
 					m_StickRegion = Main->m_Nodes[i]->m_Region;
 					RegFound = true;
 					break;
@@ -424,7 +425,7 @@ HRESULT CAdObject::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 				if (val->GetNative() == m_Inventory->m_TakenItems[i]) {
 					Stack->PushBool(true);
 					return S_OK;
-				} else if (CBPlatform::stricmp(val->GetString(), m_Inventory->m_TakenItems[i]->m_Name) == 0) {
+				} else if (scumm_stricmp(val->GetString(), m_Inventory->m_TakenItems[i]->m_Name) == 0) {
 					Stack->PushBool(true);
 					return S_OK;
 				}
@@ -525,7 +526,7 @@ HRESULT CAdObject::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 		} else {
 			char *Name = Val->GetString();
 			for (int i = 0; i < m_AttachmentsPre.GetSize(); i++) {
-				if (m_AttachmentsPre[i]->m_Name && CBPlatform::stricmp(m_AttachmentsPre[i]->m_Name, Name) == 0) {
+				if (m_AttachmentsPre[i]->m_Name && scumm_stricmp(m_AttachmentsPre[i]->m_Name, Name) == 0) {
 					Found = true;
 					Game->UnregisterObject(m_AttachmentsPre[i]);
 					m_AttachmentsPre.RemoveAt(i);
@@ -533,7 +534,7 @@ HRESULT CAdObject::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 				}
 			}
 			for (int i = 0; i < m_AttachmentsPost.GetSize(); i++) {
-				if (m_AttachmentsPost[i]->m_Name && CBPlatform::stricmp(m_AttachmentsPost[i]->m_Name, Name) == 0) {
+				if (m_AttachmentsPost[i]->m_Name && scumm_stricmp(m_AttachmentsPost[i]->m_Name, Name) == 0) {
 					Found = true;
 					Game->UnregisterObject(m_AttachmentsPost[i]);
 					m_AttachmentsPost.RemoveAt(i);
@@ -568,14 +569,14 @@ HRESULT CAdObject::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 		} else {
 			char *Name = Val->GetString();
 			for (int i = 0; i < m_AttachmentsPre.GetSize(); i++) {
-				if (m_AttachmentsPre[i]->m_Name && CBPlatform::stricmp(m_AttachmentsPre[i]->m_Name, Name) == 0) {
+				if (m_AttachmentsPre[i]->m_Name && scumm_stricmp(m_AttachmentsPre[i]->m_Name, Name) == 0) {
 					Ret = m_AttachmentsPre[i];
 					break;
 				}
 			}
 			if (!Ret) {
 				for (int i = 0; i < m_AttachmentsPost.GetSize(); i++) {
-					if (m_AttachmentsPost[i]->m_Name && CBPlatform::stricmp(m_AttachmentsPost[i]->m_Name, Name) == 0) {
+					if (m_AttachmentsPost[i]->m_Name && scumm_stricmp(m_AttachmentsPost[i]->m_Name, Name) == 0) {
 						Ret = m_AttachmentsPre[i];
 						break;
 					}

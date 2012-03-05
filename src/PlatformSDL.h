@@ -82,8 +82,8 @@ public:
 
 
 	// string functions
-	static int stricmp(const char *str1, const char *str2);
-	static int strnicmp(const char *str1, const char *str2, size_t maxCount);
+//	static int stricmp(const char *str1, const char *str2);
+//	static int strnicmp(const char *str1, const char *str2, size_t maxCount);
 	static char *strupr(char *string);
 	static char *strlwr(char *string);
 

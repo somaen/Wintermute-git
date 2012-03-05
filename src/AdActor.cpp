@@ -960,7 +960,7 @@ HRESULT CAdActor::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 
 		bool Found = false;
 		for (int i = 0; i < m_Anims.GetSize(); i++) {
-			if (CBPlatform::stricmp(m_Anims[i]->m_Name, AnimName) == 0) {
+			if (scumm_stricmp(m_Anims[i]->m_Name, AnimName) == 0) {
 				// invalidate sprites in use
 				if (m_Anims[i]->ContainsSprite(m_TempSprite2)) m_TempSprite2 = NULL;
 				if (m_Anims[i]->ContainsSprite(m_CurrentSprite)) m_CurrentSprite = NULL;
@@ -1151,7 +1151,7 @@ CBSprite *CAdActor::GetTalkStance(char *Stance) {
 	if (!Ret) {
 		CBArray<CAdSpriteSet *, CAdSpriteSet *> TalkAnims;
 		for (int i = 0; i < m_Anims.GetSize(); i++) {
-			if (CBPlatform::stricmp(m_Anims[i]->m_Name, m_TalkAnimName) == 0)
+			if (scumm_stricmp(m_Anims[i]->m_Name, m_TalkAnimName) == 0)
 				TalkAnims.Add(m_Anims[i]);
 		}
 
@@ -1176,7 +1176,7 @@ CBSprite *CAdActor::GetTalkStanceOld(char *Stance) {
 	if (Stance != NULL) {
 		// search special stances
 		for (int i = 0; i < m_TalkSpritesEx.GetSize(); i++) {
-			if (CBPlatform::stricmp(m_TalkSpritesEx[i]->m_Name, Stance) == 0) {
+			if (scumm_stricmp(m_TalkSpritesEx[i]->m_Name, Stance) == 0) {
 				ret = m_TalkSpritesEx[i]->GetSprite(m_Dir);
 				break;
 			}
@@ -1184,7 +1184,7 @@ CBSprite *CAdActor::GetTalkStanceOld(char *Stance) {
 		if (ret == NULL) {
 			// search generic stances
 			for (int i = 0; i < m_TalkSprites.GetSize(); i++) {
-				if (CBPlatform::stricmp(m_TalkSprites[i]->m_Name, Stance) == 0) {
+				if (scumm_stricmp(m_TalkSprites[i]->m_Name, Stance) == 0) {
 					ret = m_TalkSprites[i]->GetSprite(m_Dir);
 					break;
 				}
@@ -1276,7 +1276,7 @@ CAdSpriteSet *CAdActor::GetAnimByName(char *AnimName) {
 	if (!AnimName) return NULL;
 
 	for (int i = 0; i < m_Anims.GetSize(); i++) {
-		if (CBPlatform::stricmp(m_Anims[i]->m_Name, AnimName) == 0) return m_Anims[i];
+		if (scumm_stricmp(m_Anims[i]->m_Name, AnimName) == 0) return m_Anims[i];
 	}
 	return NULL;
 }

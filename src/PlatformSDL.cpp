@@ -31,6 +31,7 @@ THE SOFTWARE.
 #include "BRegistry.h"
 #include "BSoundMgr.h"
 #include "ScEngine.h"
+#include "common/str.h"
 #include <boost/filesystem.hpp>
 
 #ifdef __WIN32__
@@ -64,7 +65,7 @@ int CBPlatform::Initialize(CBGame *inGame, int argc, char *argv[]) {
 	for (int i = 0; i < argc; i++) {
 		strcpy(param, argv[i]);
 
-		if (CBPlatform::stricmp(param, "-project") == 0) {
+		if (scumm_stricmp(param, "-project") == 0) {
 			if (argc > i) strcpy(param, argv[i + 1]);
 			else param[0] = '\0';
 
@@ -82,7 +83,7 @@ int CBPlatform::Initialize(CBGame *inGame, int argc, char *argv[]) {
 				delete [] IniDir;
 				delete [] IniName;
 			}
-		} else if (CBPlatform::stricmp(param, "-windowed") == 0) windowedMode = true;
+		} else if (scumm_stricmp(param, "-windowed") == 0) windowedMode = true;
 	}
 
 
@@ -543,7 +544,7 @@ AnsiString CBPlatform::GetPlatformName() {
 }
 
 //////////////////////////////////////////////////////////////////////////
-int CBPlatform::stricmp(const char *str1, const char *str2) {
+int scumm_stricmp(const char *str1, const char *str2) {
 #ifdef __WIN32__
 	return ::stricmp(str1, str2);
 #else
@@ -552,7 +553,7 @@ int CBPlatform::stricmp(const char *str1, const char *str2) {
 }
 
 //////////////////////////////////////////////////////////////////////////
-int CBPlatform::strnicmp(const char *str1, const char *str2, size_t maxCount) {
+int scumm_strnicmp(const char *str1, const char *str2, size_t maxCount) {
 #ifdef __WIN32__
 	return ::strnicmp(str1, str2, maxCount);
 #else

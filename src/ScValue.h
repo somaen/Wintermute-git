@@ -33,6 +33,7 @@ THE SOFTWARE.
 #include <map>
 #include <string>
 #include "wme_debugger.h"
+#include "common/str.h"
 
 namespace WinterMute {
 

@@ -23,9 +23,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-//#include "dcgf.h"
 #include "PlatformSDL.h"
 #include "BResources.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -2806,15 +2806,15 @@ unsigned char systemfont[] = {
 //////////////////////////////////////////////////////////////////////////
 bool CBResources::GetFile(const char *fileName, byte*& buffer, uint32 &size) {
 	// better!
-	if (CBPlatform::stricmp(fileName, "invalid.bmp") == 0) {
+	if (scumm_stricmp(fileName, "invalid.bmp") == 0) {
 		buffer = invalid;
 		size = sizeof(invalid);
 		return true;
-	} else if (CBPlatform::stricmp(fileName, "invalid_debug.bmp") == 0) {
+	} else if (scumm_stricmp(fileName, "invalid_debug.bmp") == 0) {
 		buffer = invaliddebug;
 		size = sizeof(invaliddebug);
 		return true;
-	} else if (CBPlatform::stricmp(fileName, "system_font.bmp") == 0) {
+	} else if (scumm_stricmp(fileName, "system_font.bmp") == 0) {
 		buffer = systemfont;
 		size = sizeof(systemfont);
 		return true;

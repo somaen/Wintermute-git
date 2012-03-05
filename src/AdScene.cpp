@@ -1353,7 +1353,7 @@ HRESULT CAdScene::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 			char *LayerName = val->GetString();
 			bool LayerFound = false;
 			for (int i = 0; i < m_Layers.GetSize(); i++) {
-				if (CBPlatform::stricmp(LayerName, m_Layers[i]->m_Name) == 0) {
+				if (scumm_stricmp(LayerName, m_Layers[i]->m_Name) == 0) {
 					Stack->PushNative(m_Layers[i], true);
 					LayerFound = true;
 					break;
@@ -1403,7 +1403,7 @@ HRESULT CAdScene::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 		} else {
 			char *Name = Val->GetString();
 			for (int i = 0; i < m_Objects.GetSize(); i++) {
-				if (m_Objects[i] && m_Objects[i]->m_Name && CBPlatform::stricmp(m_Objects[i]->m_Name, Name) == 0) {
+				if (m_Objects[i] && m_Objects[i]->m_Name && scumm_stricmp(m_Objects[i]->m_Name, Name) == 0) {
 					Ret = m_Objects[i];
 					break;
 				}
@@ -2432,8 +2432,8 @@ CBObject *CAdScene::GetNodeByName(char *Name) {
 		CAdLayer *layer = m_Layers[i];
 		for (int j = 0; j < layer->m_Nodes.GetSize(); j++) {
 			CAdSceneNode *node = layer->m_Nodes[j];
-			if ((node->m_Type == OBJECT_ENTITY && !CBPlatform::stricmp(Name, node->m_Entity->m_Name)) ||
-			        (node->m_Type == OBJECT_REGION && !CBPlatform::stricmp(Name, node->m_Region->m_Name))) {
+			if ((node->m_Type == OBJECT_ENTITY && !scumm_stricmp(Name, node->m_Entity->m_Name)) ||
+			        (node->m_Type == OBJECT_REGION && !scumm_stricmp(Name, node->m_Region->m_Name))) {
 				switch (node->m_Type) {
 				case OBJECT_ENTITY:
 					ret = node->m_Entity;
@@ -2451,14 +2451,14 @@ CBObject *CAdScene::GetNodeByName(char *Name) {
 
 	// free entities
 	for (i = 0; i < m_Objects.GetSize(); i++) {
-		if (m_Objects[i]->m_Type == OBJECT_ENTITY && !CBPlatform::stricmp(Name, m_Objects[i]->m_Name)) {
+		if (m_Objects[i]->m_Type == OBJECT_ENTITY && !scumm_stricmp(Name, m_Objects[i]->m_Name)) {
 			return m_Objects[i];
 		}
 	}
 
 	// waypoint groups
 	for (i = 0; i < m_WaypointGroups.GetSize(); i++) {
-		if (!CBPlatform::stricmp(Name, m_WaypointGroups[i]->m_Name)) {
+		if (!scumm_stricmp(Name, m_WaypointGroups[i]->m_Name)) {
 			return m_WaypointGroups[i];
 		}
 	}

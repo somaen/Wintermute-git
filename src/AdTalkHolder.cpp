@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "BGame.h"
 #include "BSprite.h"
 #include "PlatformSDL.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -80,7 +81,7 @@ CBSprite *CAdTalkHolder::GetTalkStance(char *Stance) {
 	if (Stance != NULL) {
 		// search special talk stances
 		for (int i = 0; i < m_TalkSpritesEx.GetSize(); i++) {
-			if (CBPlatform::stricmp(m_TalkSpritesEx[i]->m_Name, Stance) == 0) {
+			if (scumm_stricmp(m_TalkSpritesEx[i]->m_Name, Stance) == 0) {
 				ret = m_TalkSpritesEx[i];
 				break;
 			}
@@ -88,7 +89,7 @@ CBSprite *CAdTalkHolder::GetTalkStance(char *Stance) {
 		if (ret == NULL) {
 			// serach generic talk stances
 			for (int i = 0; i < m_TalkSprites.GetSize(); i++) {
-				if (CBPlatform::stricmp(m_TalkSprites[i]->m_Name, Stance) == 0) {
+				if (scumm_stricmp(m_TalkSprites[i]->m_Name, Stance) == 0) {
 					ret = m_TalkSprites[i];
 					break;
 				}
@@ -205,7 +206,7 @@ HRESULT CAdTalkHolder::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack
 
 		if (Ex) {
 			for (i = 0; i < m_TalkSpritesEx.GetSize(); i++) {
-				if (CBPlatform::stricmp(m_TalkSpritesEx[i]->m_Filename, Filename) == 0) {
+				if (scumm_stricmp(m_TalkSpritesEx[i]->m_Filename, Filename) == 0) {
 					if (m_CurrentSprite == m_TalkSpritesEx[i]) SetCurrent = true;
 					if (m_TempSprite2 == m_TalkSpritesEx[i]) SetTemp2 = true;
 					delete m_TalkSpritesEx[i];
@@ -215,7 +216,7 @@ HRESULT CAdTalkHolder::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack
 			}
 		} else {
 			for (i = 0; i < m_TalkSprites.GetSize(); i++) {
-				if (CBPlatform::stricmp(m_TalkSprites[i]->m_Filename, Filename) == 0) {
+				if (scumm_stricmp(m_TalkSprites[i]->m_Filename, Filename) == 0) {
 					if (m_CurrentSprite == m_TalkSprites[i]) SetCurrent = true;
 					if (m_TempSprite2 == m_TalkSprites[i]) SetTemp2 = true;
 					delete m_TalkSprites[i];

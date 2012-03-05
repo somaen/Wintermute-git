@@ -31,6 +31,7 @@ THE SOFTWARE.
 #include "BSprite.h"
 #include "utils.h"
 #include "PlatformSDL.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -147,11 +148,11 @@ HRESULT CAdNodeState::TransferEntity(CAdEntity *Entity, bool IncludingSprites, b
 			if (m_Caption[i]) Entity->SetCaption(m_Caption[i], i);
 		}
 		if (m_Filename && !Entity->m_Region && IncludingSprites && strcmp(m_Filename, "") != 0) {
-			if (!Entity->m_Sprite || !Entity->m_Sprite->m_Filename || CBPlatform::stricmp(Entity->m_Sprite->m_Filename, m_Filename) != 0)
+			if (!Entity->m_Sprite || !Entity->m_Sprite->m_Filename || scumm_stricmp(Entity->m_Sprite->m_Filename, m_Filename) != 0)
 				Entity->SetSprite(m_Filename);
 		}
 		if (m_Cursor) {
-			if (!Entity->m_Cursor || !Entity->m_Cursor->m_Filename || CBPlatform::stricmp(Entity->m_Cursor->m_Filename, m_Cursor) != 0)
+			if (!Entity->m_Cursor || !Entity->m_Cursor->m_Filename || scumm_stricmp(Entity->m_Cursor->m_Filename, m_Cursor) != 0)
 				Entity->SetCursor(m_Cursor);
 		}
 

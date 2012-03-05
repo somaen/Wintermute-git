@@ -35,6 +35,7 @@ THE SOFTWARE.
 #include "ScScript.h"
 #include "ScStack.h"
 #include "PlatformSDL.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -533,7 +534,7 @@ HRESULT CBFrame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 		Stack->CorrectParams(1);
 		char *Event = Stack->Pop()->GetString();
 		for (int i = 0; i < m_ApplyEvent.GetSize(); i++) {
-			if (CBPlatform::stricmp(m_ApplyEvent[i], Event) == 0) {
+			if (scumm_stricmp(m_ApplyEvent[i], Event) == 0) {
 				Stack->PushNULL();
 				return S_OK;
 			}
@@ -550,7 +551,7 @@ HRESULT CBFrame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *This
 		Stack->CorrectParams(1);
 		char *Event = Stack->Pop()->GetString();
 		for (int i = 0; i < m_ApplyEvent.GetSize(); i++) {
-			if (CBPlatform::stricmp(m_ApplyEvent[i], Event) == 0) {
+			if (scumm_stricmp(m_ApplyEvent[i], Event) == 0) {
 				delete [] m_ApplyEvent[i];
 				m_ApplyEvent.RemoveAt(i);
 				break;

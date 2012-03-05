@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "AdTalkHolder.h"
 #include "BPoint.h" // Added by ClassView
 #include "persistent.h"
+#include "common/str.h"
 
 #if _MSC_VER > 1000
 #pragma once

@@ -40,6 +40,7 @@ THE SOFTWARE.
 #include "BFileManager.h"
 #include "utils.h"
 #include "PlatformSDL.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -280,14 +281,14 @@ HRESULT CAdResponseBox::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_TEXT_ALIGN:
-			if (CBPlatform::stricmp((char *)params, "center") == 0) m_Align = TAL_CENTER;
-			else if (CBPlatform::stricmp((char *)params, "right") == 0) m_Align = TAL_RIGHT;
+			if (scumm_stricmp((char *)params, "center") == 0) m_Align = TAL_CENTER;
+			else if (scumm_stricmp((char *)params, "right") == 0) m_Align = TAL_RIGHT;
 			else m_Align = TAL_LEFT;
 			break;
 
 		case TOKEN_VERTICAL_ALIGN:
-			if (CBPlatform::stricmp((char *)params, "top") == 0) m_VerticalAlign = VAL_TOP;
-			else if (CBPlatform::stricmp((char *)params, "center") == 0) m_VerticalAlign = VAL_CENTER;
+			if (scumm_stricmp((char *)params, "top") == 0) m_VerticalAlign = VAL_TOP;
+			else if (scumm_stricmp((char *)params, "center") == 0) m_VerticalAlign = VAL_CENTER;
 			else m_VerticalAlign = VAL_BOTTOM;
 			break;
 
@@ -474,11 +475,11 @@ HRESULT CAdResponseBox::Listen(CBScriptHolder *param1, uint32 param2) {
 
 	switch (obj->m_Type) {
 	case UI_BUTTON:
-		if (CBPlatform::stricmp(obj->m_Name, "prev") == 0) {
+		if (scumm_stricmp(obj->m_Name, "prev") == 0) {
 			m_ScrollOffset--;
-		} else if (CBPlatform::stricmp(obj->m_Name, "next") == 0) {
+		} else if (scumm_stricmp(obj->m_Name, "next") == 0) {
 			m_ScrollOffset++;
-		} else if (CBPlatform::stricmp(obj->m_Name, "response") == 0) {
+		} else if (scumm_stricmp(obj->m_Name, "response") == 0) {
 			if (m_WaitingScript) m_WaitingScript->m_Stack->PushInt(m_Responses[param2]->m_ID);
 			HandleResponse(m_Responses[param2]);
 			m_WaitingScript = NULL;

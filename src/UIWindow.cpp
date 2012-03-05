@@ -379,8 +379,8 @@ HRESULT CUIWindow::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_TITLE_ALIGN:
-			if (CBPlatform::stricmp((char *)params, "left") == 0) m_TitleAlign = TAL_LEFT;
-			else if (CBPlatform::stricmp((char *)params, "right") == 0) m_TitleAlign = TAL_RIGHT;
+			if (scumm_stricmp((char *)params, "left") == 0) m_TitleAlign = TAL_LEFT;
+			else if (scumm_stricmp((char *)params, "right") == 0) m_TitleAlign = TAL_RIGHT;
 			else m_TitleAlign = TAL_CENTER;
 			break;
 
@@ -658,7 +658,7 @@ HRESULT CUIWindow::SaveAsText(CBDynBuffer *Buffer, int Indent) {
 //////////////////////////////////////////////////////////////////////////
 HRESULT CUIWindow::EnableWidget(char *Name, bool Enable) {
 	for (int i = 0; i < m_Widgets.GetSize(); i++) {
-		if (CBPlatform::stricmp(m_Widgets[i]->m_Name, Name) == 0) m_Widgets[i]->m_Disable = !Enable;
+		if (scumm_stricmp(m_Widgets[i]->m_Name, Name) == 0) m_Widgets[i]->m_Disable = !Enable;
 	}
 	return S_OK;
 }
@@ -667,7 +667,7 @@ HRESULT CUIWindow::EnableWidget(char *Name, bool Enable) {
 //////////////////////////////////////////////////////////////////////////
 HRESULT CUIWindow::ShowWidget(char *Name, bool Visible) {
 	for (int i = 0; i < m_Widgets.GetSize(); i++) {
-		if (CBPlatform::stricmp(m_Widgets[i]->m_Name, Name) == 0) m_Widgets[i]->m_Visible = Visible;
+		if (scumm_stricmp(m_Widgets[i]->m_Name, Name) == 0) m_Widgets[i]->m_Visible = Visible;
 	}
 	return S_OK;
 }
@@ -689,7 +689,7 @@ HRESULT CUIWindow::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 			else Stack->PushNative(m_Widgets[widget], true);
 		} else {
 			for (int i = 0; i < m_Widgets.GetSize(); i++) {
-				if (CBPlatform::stricmp(m_Widgets[i]->m_Name, val->GetString()) == 0) {
+				if (scumm_stricmp(m_Widgets[i]->m_Name, val->GetString()) == 0) {
 					Stack->PushNative(m_Widgets[i], true);
 					return S_OK;
 				}
@@ -1260,7 +1260,7 @@ HRESULT CUIWindow::Listen(CBScriptHolder *param1, uint32 param2) {
 
 	switch (obj->m_Type) {
 	case UI_BUTTON:
-		if (CBPlatform::stricmp(obj->m_Name, "close") == 0) Close();
+		if (scumm_stricmp(obj->m_Name, "close") == 0) Close();
 		else return CBObject::Listen(param1, param2);
 		break;
 	default:

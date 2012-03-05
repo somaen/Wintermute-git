@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include "BGame.h"
 #include "utils.h"
 #include "PlatformSDL.h"
+#include "common/str.h"
 #include <math.h>
 
 namespace WinterMute {
@@ -69,7 +70,7 @@ CPartParticle::~CPartParticle(void) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CPartParticle::SetSprite(char *Filename) {
-	if (m_Sprite && m_Sprite->m_Filename && CBPlatform::stricmp(Filename, m_Sprite->m_Filename) == 0) {
+	if (m_Sprite && m_Sprite->m_Filename && scumm_stricmp(Filename, m_Sprite->m_Filename) == 0) {
 		m_Sprite->Reset();
 		return S_OK;
 	}

@@ -38,6 +38,7 @@ THE SOFTWARE.
 #include "dcpackage.h"
 #include "utils.h"
 #include "PlatformSDL.h"
+#include "common/str.h"
 
 #include <boost/filesystem.hpp>
 
@@ -647,7 +648,7 @@ HRESULT CBFileManager::CloseFile(CBFile *File) {
 CBFile *CBFileManager::OpenFileRaw(const char *Filename) {
 	RestoreCurrentDir();
 
-	if (CBPlatform::strnicmp(Filename, "savegame:", 9) == 0) {
+	if (scumm_strnicmp(Filename, "savegame:", 9) == 0) {
 		CBSaveThumbFile *SaveThumbFile = new CBSaveThumbFile(Game);
 		if (SUCCEEDED(SaveThumbFile->Open(Filename))) return SaveThumbFile;
 		else {

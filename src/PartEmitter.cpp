@@ -34,6 +34,7 @@ THE SOFTWARE.
 #include "BFileManager.h"
 #include "utils.h"
 #include "PlatformSDL.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -115,7 +116,7 @@ HRESULT CPartEmitter::AddSprite(char *Filename) {
 
 	// do we already have the file?
 	for (int i = 0; i < m_Sprites.GetSize(); i++) {
-		if (CBPlatform::stricmp(Filename, m_Sprites[i]) == 0) return S_OK;
+		if (scumm_stricmp(Filename, m_Sprites[i]) == 0) return S_OK;
 	}
 
 	// check if file exists
@@ -135,7 +136,7 @@ HRESULT CPartEmitter::AddSprite(char *Filename) {
 //////////////////////////////////////////////////////////////////////////
 HRESULT CPartEmitter::RemoveSprite(char *Filename) {
 	for (int i = 0; i < m_Sprites.GetSize(); i++) {
-		if (CBPlatform::stricmp(Filename, m_Sprites[i]) == 0) {
+		if (scumm_stricmp(Filename, m_Sprites[i]) == 0) {
 			delete [] m_Sprites[i];
 			m_Sprites.RemoveAt(i);
 			return S_OK;
@@ -362,7 +363,7 @@ CPartForce *CPartEmitter::AddForceByName(char *Name) {
 	CPartForce *Force = NULL;
 
 	for (int i = 0; i < m_Forces.GetSize(); i++) {
-		if (CBPlatform::stricmp(Name, m_Forces[i]->m_Name) == 0) {
+		if (scumm_stricmp(Name, m_Forces[i]->m_Name) == 0) {
 			Force = m_Forces[i];
 			break;
 		}
@@ -397,7 +398,7 @@ HRESULT CPartEmitter::AddForce(char *Name, CPartForce::TForceType Type, int PosX
 //////////////////////////////////////////////////////////////////////////
 HRESULT CPartEmitter::RemoveForce(char *Name) {
 	for (int i = 0; i < m_Forces.GetSize(); i++) {
-		if (CBPlatform::stricmp(Name, m_Forces[i]->m_Name) == 0) {
+		if (scumm_stricmp(Name, m_Forces[i]->m_Name) == 0) {
 			delete m_Forces[i];
 			m_Forces.RemoveAt(i);
 			return S_OK;

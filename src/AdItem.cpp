@@ -39,6 +39,7 @@ THE SOFTWARE.
 #include "BFileManager.h"
 #include "utils.h"
 #include "PlatformSDL.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -228,8 +229,8 @@ HRESULT CAdItem::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_AMOUNT_ALIGN:
-			if (CBPlatform::stricmp((char *)params, "left") == 0) m_AmountAlign = TAL_LEFT;
-			else if (CBPlatform::stricmp((char *)params, "right") == 0) m_AmountAlign = TAL_RIGHT;
+			if (scumm_stricmp((char *)params, "left") == 0) m_AmountAlign = TAL_LEFT;
+			else if (scumm_stricmp((char *)params, "right") == 0) m_AmountAlign = TAL_RIGHT;
 			else m_AmountAlign = TAL_CENTER;
 			break;
 

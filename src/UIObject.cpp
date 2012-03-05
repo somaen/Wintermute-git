@@ -237,7 +237,7 @@ HRESULT CUIObject::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 			else {
 				char *name = val->GetString();
 				for (i = 0; i < win->m_Widgets.GetSize(); i++) {
-					if (CBPlatform::stricmp(win->m_Widgets[i]->m_Name, name) == 0) {
+					if (scumm_stricmp(win->m_Widgets[i]->m_Name, name) == 0) {
 						found = true;
 						break;
 					}

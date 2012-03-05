@@ -866,7 +866,7 @@ HRESULT CScScript::ExecuteInstruction() {
 		    m_Operand->SetBool(op1->GetNative() == op2->GetNative());
 		}
 		else if(op1->GetType()==VAL_STRING || op2->GetType()==VAL_STRING){
-		    m_Operand->SetBool(CBPlatform::stricmp(op1->GetString(), op2->GetString())==0);
+		    m_Operand->SetBool(scumm_stricmp(op1->GetString(), op2->GetString())==0);
 		}
 		else if(op1->GetType()==VAL_FLOAT && op2->GetType()==VAL_FLOAT){
 		    m_Operand->SetBool(op1->GetFloat() == op2->GetFloat());
@@ -890,7 +890,7 @@ HRESULT CScScript::ExecuteInstruction() {
 		    m_Operand->SetBool(op1->GetNative() != op2->GetNative());
 		}
 		else if(op1->GetType()==VAL_STRING || op2->GetType()==VAL_STRING){
-		    m_Operand->SetBool(CBPlatform::stricmp(op1->GetString(), op2->GetString())!=0);
+		    m_Operand->SetBool(scumm_stricmp(op1->GetString(), op2->GetString())!=0);
 		}
 		else if(op1->GetType()==VAL_FLOAT && op2->GetType()==VAL_FLOAT){
 		    m_Operand->SetBool(op1->GetFloat() != op2->GetFloat());
@@ -1234,7 +1234,7 @@ CScScript *CScScript::InvokeEventHandler(const char *EventName, bool Unbreakable
 //////////////////////////////////////////////////////////////////////////
 uint32 CScScript::GetEventPos(const char *Name) {
 	for (int i = m_NumEvents - 1; i >= 0; i--) {
-		if (CBPlatform::stricmp(Name, m_Events[i].name) == 0) return m_Events[i].pos;
+		if (scumm_stricmp(Name, m_Events[i].name) == 0) return m_Events[i].pos;
 	}
 	return 0;
 }
@@ -1504,7 +1504,7 @@ HRESULT CScScript::CopyParameters(CScStack *Stack) {
 HRESULT CScScript::FinishThreads() {
 	for (int i = 0; i < m_Engine->m_Scripts.GetSize(); i++) {
 		CScScript *Scr = m_Engine->m_Scripts[i];
-		if (Scr->m_Thread && Scr->m_State != SCRIPT_FINISHED && Scr->m_Owner == m_Owner && CBPlatform::stricmp(Scr->m_Filename, m_Filename) == 0)
+		if (Scr->m_Thread && Scr->m_State != SCRIPT_FINISHED && Scr->m_Owner == m_Owner && scumm_stricmp(Scr->m_Filename, m_Filename) == 0)
 			Scr->Finish(true);
 	}
 	return S_OK;

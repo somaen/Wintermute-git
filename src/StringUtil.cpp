@@ -27,8 +27,9 @@ THE SOFTWARE.
 #include <algorithm>
 #include <string>
 #include <sstream>
+#include "common/tokenizer.h"
 //#include <boost/lexical_cast.hpp>
-#include <boost/tokenizer.hpp>
+//#include <boost/tokenizer.hpp>
 #include "StringUtil.h"
 #include "ConvertUTF.h"
 
@@ -305,14 +306,16 @@ AnsiString StringUtil::ToString(double val) {
 //////////////////////////////////////////////////////////////////////////
 void StringUtil::Split(const AnsiString &list, const AnsiString &delimiters, AnsiStringArray &result, bool keepEmptyItems) {
 	result.clear();
+//TODO: Verify this, wrt keepEmptyItems.
+	Common::StringTokenizer tokenizer(list.c_str(), delimiters.c_str());
+	//typedef boost::char_separator<char> separator_t;
+	//typedef boost::tokenizer<separator_t, AnsiString::const_iterator, AnsiString> tokenizer_t;
 
-	typedef boost::char_separator<char> separator_t;
-	typedef boost::tokenizer<separator_t, AnsiString::const_iterator, AnsiString> tokenizer_t;
-
-	separator_t del(delimiters.c_str(), "", keepEmptyItems ? boost::keep_empty_tokens : boost::drop_empty_tokens);
-	tokenizer_t tokens(list, del);
-	for (tokenizer_t::iterator it = tokens.begin(); it != tokens.end(); it++) {
-		result.push_back(*it);
+	//separator_t del(delimiters.c_str(), "", keepEmptyItems ? boost::keep_empty_tokens : boost::drop_empty_tokens);
+	//tokenizer_t tokens(list, del);
+	while (!tokenizer.empty()) {
+		std::string copy(tokenizer.nextToken().c_str());
+		result.push_back(copy);
 	}
 }
 

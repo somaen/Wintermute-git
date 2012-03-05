@@ -45,6 +45,7 @@ THE SOFTWARE.
 #include "BFileManager.h"
 #include "PlatformSDL.h"
 #include "utils.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -354,7 +355,7 @@ HRESULT CAdEntity::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_SUBTYPE: {
-			if (CBPlatform::stricmp((char *)params, "sound") == 0) {
+			if (scumm_stricmp((char *)params, "sound") == 0) {
 				SAFE_DELETE(m_Sprite);
 				if (Game->m_EditorMode) {
 					spr = new CBSprite(Game, this);

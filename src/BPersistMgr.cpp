@@ -33,6 +33,7 @@ THE SOFTWARE.
 #include "StringUtil.h"
 #include "BImage.h"
 #include "BSound.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -228,7 +229,7 @@ HRESULT CBPersistMgr::InitLoad(char *Filename) {
 			if (Magic == SAVE_MAGIC_2) {
 				m_SavedVerBuild = (byte )GetDWORD();
 				char *SavedName = GetString();
-				if (SavedName == NULL || CBPlatform::stricmp(SavedName, Game->m_Name) != 0) {
+				if (SavedName == NULL || scumm_stricmp(SavedName, Game->m_Name) != 0) {
 					Game->LOG(0, "ERROR: Saved game name doesn't match current game");
 					goto init_fail;
 				}

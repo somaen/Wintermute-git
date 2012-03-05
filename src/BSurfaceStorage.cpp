@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "BGame.h"
 #include "BFileManager.h"
 #include "PlatformSDL.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -95,7 +96,7 @@ HRESULT CBSurfaceStorage::RemoveSurface(CBSurface *surface) {
 //////////////////////////////////////////////////////////////////////
 CBSurface *CBSurfaceStorage::AddSurface(char *Filename, bool default_ck, byte ck_red, byte ck_green, byte ck_blue, int LifeTime, bool KeepLoaded) {
 	for (int i = 0; i < m_Surfaces.GetSize(); i++) {
-		if (CBPlatform::stricmp(m_Surfaces[i]->m_Filename, Filename) == 0) {
+		if (scumm_stricmp(m_Surfaces[i]->m_Filename, Filename) == 0) {
 			m_Surfaces[i]->m_ReferenceCount++;
 			return m_Surfaces[i];
 		}

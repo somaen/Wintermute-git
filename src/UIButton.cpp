@@ -354,8 +354,8 @@ HRESULT CUIButton::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_TEXT_ALIGN:
-			if (CBPlatform::stricmp((char *)params, "left") == 0) m_Align = TAL_LEFT;
-			else if (CBPlatform::stricmp((char *)params, "right") == 0) m_Align = TAL_RIGHT;
+			if (scumm_stricmp((char *)params, "left") == 0) m_Align = TAL_LEFT;
+			else if (scumm_stricmp((char *)params, "right") == 0) m_Align = TAL_RIGHT;
 			else m_Align = TAL_CENTER;
 			break;
 

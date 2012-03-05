@@ -27,7 +27,7 @@ THE SOFTWARE.
 #include "BParser.h"
 #include "BGame.h"
 #include "PlatformSDL.h"
-
+#include "common/str.h"
 
 #define WHITESPACE " \t\n\r"
 
@@ -74,7 +74,7 @@ long CBParser::GetObject(char **buf, TokenDesc *tokens, char **name, char **data
 	// find the token.
 	// for now just use brute force.  Improve later.
 	while (tokens->id != 0) {
-		if (!CBPlatform::strnicmp(tokens->token, *buf, strlen(tokens->token))) {
+		if (!scumm_strnicmp(tokens->token, *buf, strlen(tokens->token))) {
 			// here we could be matching PART of a string
 			// we could detect this here or the token list
 			// could just have the longer tokens first in the list
@@ -310,8 +310,8 @@ int CBParser::ScanStr(const char *in, const char *format, ...) {
 				const char *in2 = in + strspn(in, "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
 				int l = (int)(in2 - in);
 
-				*a = (bool)(!CBPlatform::strnicmp(in, "yes", l) || !CBPlatform::strnicmp(in, "true", l) || !CBPlatform::strnicmp(in, "on", l) ||
-				            !CBPlatform::strnicmp(in, "1", l));
+				*a = (bool)(!scumm_strnicmp(in, "yes", l) || !scumm_strnicmp(in, "true", l) || !scumm_strnicmp(in, "on", l) ||
+				            !scumm_strnicmp(in, "1", l));
 
 
 				in = in2 + strspn(in2, " \t\n\f");

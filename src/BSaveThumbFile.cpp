@@ -51,7 +51,7 @@ CBSaveThumbFile::~CBSaveThumbFile() {
 HRESULT CBSaveThumbFile::Open(Common::String Filename) {
 	Close();
 
-	if (CBPlatform::strnicmp(Filename.c_str(), "savegame:", 9) != 0) return E_FAIL;
+	if (scumm_strnicmp(Filename.c_str(), "savegame:", 9) != 0) return E_FAIL;
 
 	char *TempFilename = new char[strlen(Filename.c_str()) - 8];
 	strcpy(TempFilename, Filename.c_str() + 9);

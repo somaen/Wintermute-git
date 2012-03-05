@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BGame.h"
 #include "BStringTable.h"
 #include "StringUtil.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -49,7 +50,7 @@ CBStringTable::~CBStringTable() {
 HRESULT CBStringTable::AddString(const char *Key, const char *Val, bool ReportDuplicities) {
 	if (Key == NULL || Val == NULL) return E_FAIL;
 
-	if (CBPlatform::stricmp(Key, "@right-to-left") == 0) {
+	if (scumm_stricmp(Key, "@right-to-left") == 0) {
 		Game->m_TextRTL = true;
 		return S_OK;
 	}

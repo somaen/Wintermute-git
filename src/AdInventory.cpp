@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "ADGame.h"
 #include "AdItem.h"
 #include "PlatformSDL.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -53,12 +54,12 @@ HRESULT CAdInventory::InsertItem(char *Name, char *InsertAfter) {
 
 	int InsertIndex = -1;
 	for (int i = 0; i < m_TakenItems.GetSize(); i++) {
-		if (CBPlatform::stricmp(m_TakenItems[i]->m_Name, Name) == 0) {
+		if (scumm_stricmp(m_TakenItems[i]->m_Name, Name) == 0) {
 			m_TakenItems.RemoveAt(i);
 			i--;
 			continue;
 		}
-		if (InsertAfter && CBPlatform::stricmp(m_TakenItems[i]->m_Name, InsertAfter) == 0) InsertIndex = i + 1;
+		if (InsertAfter && scumm_stricmp(m_TakenItems[i]->m_Name, InsertAfter) == 0) InsertIndex = i + 1;
 	}
 
 
@@ -74,7 +75,7 @@ HRESULT CAdInventory::RemoveItem(char *Name) {
 	if (Name == NULL) return E_FAIL;
 
 	for (int i = 0; i < m_TakenItems.GetSize(); i++) {
-		if (CBPlatform::stricmp(m_TakenItems[i]->m_Name, Name) == 0) {
+		if (scumm_stricmp(m_TakenItems[i]->m_Name, Name) == 0) {
 			if (((CAdGame *)Game)->m_SelectedItem == m_TakenItems[i])((CAdGame *)Game)->m_SelectedItem = NULL;
 			m_TakenItems.RemoveAt(i);
 			return S_OK;

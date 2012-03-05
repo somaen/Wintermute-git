@@ -34,6 +34,7 @@ THE SOFTWARE.
 #include "ScStack.h"
 #include "BFileManager.h"
 #include "PlatformSDL.h"
+#include "common/str.h"
 
 namespace WinterMute {
     
@@ -235,8 +236,8 @@ HRESULT CAdLayer::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Thi
 		if (val->m_Type == VAL_INT) node = val->GetInt();
 		else { // get by name
 			for (int i = 0; i < m_Nodes.GetSize(); i++) {
-				if ((m_Nodes[i]->m_Type == OBJECT_ENTITY && CBPlatform::stricmp(m_Nodes[i]->m_Entity->m_Name, val->GetString()) == 0) ||
-				        (m_Nodes[i]->m_Type == OBJECT_REGION && CBPlatform::stricmp(m_Nodes[i]->m_Region->m_Name, val->GetString()) == 0)) {
+				if ((m_Nodes[i]->m_Type == OBJECT_ENTITY && scumm_stricmp(m_Nodes[i]->m_Entity->m_Name, val->GetString()) == 0) ||
+				        (m_Nodes[i]->m_Type == OBJECT_REGION && scumm_stricmp(m_Nodes[i]->m_Region->m_Name, val->GetString()) == 0)) {
 					node = i;
 					break;
 				}

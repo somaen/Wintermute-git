@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BGame.h"
 #include "BFont.h"
 #include "PlatformSDL.h"
+#include "common/str.h"
 
 namespace WinterMute {
 
@@ -88,7 +89,7 @@ CBFont *CBFontStorage::AddFont(char *Filename) {
 	if (!Filename) return NULL;
 
 	for (int i = 0; i < m_Fonts.GetSize(); i++) {
-		if (CBPlatform::stricmp(m_Fonts[i]->m_Filename, Filename) == 0) {
+		if (scumm_stricmp(m_Fonts[i]->m_Filename, Filename) == 0) {
 			m_Fonts[i]->m_RefCount++;
 			return m_Fonts[i];
 		}

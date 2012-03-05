@@ -173,7 +173,7 @@ HRESULT CBScriptHolder::ScCallMethod(CScScript *Script, CScStack *Stack, CScStac
 		bool KillThreads = Stack->Pop()->GetBool(false);
 		bool ret = false;
 		for (int i = 0; i < m_Scripts.GetSize(); i++) {
-			if (CBPlatform::stricmp(m_Scripts[i]->m_Filename, Filename) == 0) {
+			if (scumm_stricmp(m_Scripts[i]->m_Filename, Filename) == 0) {
 				m_Scripts[i]->Finish(KillThreads);
 				ret = true;
 				break;
@@ -192,7 +192,7 @@ HRESULT CBScriptHolder::ScCallMethod(CScScript *Script, CScStack *Stack, CScStac
 		char *Filename = Stack->Pop()->GetString();
 		bool ret = false;
 		for (int i = 0; i < m_Scripts.GetSize(); i++) {
-			if (CBPlatform::stricmp(m_Scripts[i]->m_Filename, Filename) == 0 && m_Scripts[i]->m_State != SCRIPT_FINISHED && m_Scripts[i]->m_State != SCRIPT_ERROR) {
+			if (scumm_stricmp(m_Scripts[i]->m_Filename, Filename) == 0 && m_Scripts[i]->m_State != SCRIPT_FINISHED && m_Scripts[i]->m_State != SCRIPT_ERROR) {
 				ret = true;
 				break;
 			}
@@ -275,7 +275,7 @@ HRESULT CBScriptHolder::Persist(CBPersistMgr *PersistMgr) {
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBScriptHolder::AddScript(char *Filename) {
 	for (int i = 0; i < m_Scripts.GetSize(); i++) {
-		if (CBPlatform::stricmp(m_Scripts[i]->m_Filename, Filename) == 0) {
+		if (scumm_stricmp(m_Scripts[i]->m_Filename, Filename) == 0) {
 			if (m_Scripts[i]->m_State != SCRIPT_FINISHED) {
 				Game->LOG(0, "CBScriptHolder::AddScript - trying to add script '%s' mutiple times (obj: '%s')", Filename, m_Name);
 				return S_OK;

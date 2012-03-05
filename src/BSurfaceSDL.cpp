@@ -88,7 +88,7 @@ HRESULT CBSurfaceSDL::Create(char *Filename, bool default_ck, byte ck_red, byte 
 	m_Width = surface->w;
 	m_Height = surface->h;
 
-	bool isSaveGameGrayscale = CBPlatform::strnicmp(Filename, "savegame:", 9) == 0 && (Filename[strFileName.size() - 1] == 'g' || Filename[strFileName.size() - 1] == 'G');
+	bool isSaveGameGrayscale = scumm_strnicmp(Filename, "savegame:", 9) == 0 && (Filename[strFileName.size() - 1] == 'g' || Filename[strFileName.size() - 1] == 'G');
 	if (isSaveGameGrayscale) {
 		warning("grayscaleConversion not yet implemented");
 /*		FIBITMAP *newImg = FreeImage_ConvertToGreyscale(img);
@@ -144,7 +144,7 @@ HRESULT CBSurfaceSDL::Create(char *Filename, bool default_ck, byte ck_red, byte 
 	m_CKBlue = ck_blue;
 
 
-	if (!m_Filename || CBPlatform::stricmp(m_Filename, Filename) != 0) {
+	if (!m_Filename || scumm_stricmp(m_Filename, Filename) != 0) {
 		SetFilename(Filename);
 	}
 

@@ -217,14 +217,14 @@ HRESULT CUIText::LoadBuffer(byte  *Buffer, bool Complete) {
 			break;
 
 		case TOKEN_TEXT_ALIGN:
-			if (CBPlatform::stricmp((char *)params, "left") == 0) m_TextAlign = TAL_LEFT;
-			else if (CBPlatform::stricmp((char *)params, "right") == 0) m_TextAlign = TAL_RIGHT;
+			if (scumm_stricmp((char *)params, "left") == 0) m_TextAlign = TAL_LEFT;
+			else if (scumm_stricmp((char *)params, "right") == 0) m_TextAlign = TAL_RIGHT;
 			else m_TextAlign = TAL_CENTER;
 			break;
 
 		case TOKEN_VERTICAL_ALIGN:
-			if (CBPlatform::stricmp((char *)params, "top") == 0) m_VerticalAlign = VAL_TOP;
-			else if (CBPlatform::stricmp((char *)params, "bottom") == 0) m_VerticalAlign = VAL_BOTTOM;
+			if (scumm_stricmp((char *)params, "top") == 0) m_VerticalAlign = VAL_TOP;
+			else if (scumm_stricmp((char *)params, "bottom") == 0) m_VerticalAlign = VAL_BOTTOM;
 			else m_VerticalAlign = VAL_CENTER;
 			break;
 
