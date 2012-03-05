@@ -117,7 +117,6 @@ THE SOFTWARE.
 #include "AdRotLevel.h"
 #include "AdInventoryBox.h"
 #include "AdScene.h"
-#include "UIEntity.h"
 
 // macros
 #define RELEASE(obj) if(obj) { obj->Release(); obj = NULL; } else 0

@@ -35,6 +35,7 @@ THE SOFTWARE.
 #include "BSound.h"
 #include "UIWindow.h"
 #include "ScValue.h"
+#include "UIEntity.h"
 
 namespace WinterMute {
 
