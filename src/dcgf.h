@@ -75,37 +75,21 @@ THE SOFTWARE.
 // base classes
 #include "BStringTable.h"
 #include "BPersistMgr.h"
-#include "BScriptable.h"
-#include "BScriptHolder.h"
-#include "BPackage.h"
 #include "BFileManager.h"
 #include "BEvent.h"
-#include "BViewport.h"
 #include "BRegion.h"
-#include "BSubFrame.h"
-#include "BFrame.h"
-#include "BFontStorage.h"
-#include "BFontTT.h"
 
 // scripting classes
-#include "dcscript.h"
 #include "ScStack.h"
 #include "ScScript.h"
 #include "ScEngine.h"
-
-#include "AdTypes.h"
-
 #include "AdSpriteSet.h"
 #include "AdResponseContext.h"
 #include "AdNodeState.h"
-#include "AdSceneState.h"
 #include "AdResponse.h"
 #include "AdPath.h"
 #include "AdSentence.h"
 #include "AdTalkHolder.h"
-#include "AdItem.h"
-#include "AdActorDir.h"
-#include "AdWaypointGroup.h"
 
 // macros
 #define RELEASE(obj) if(obj) { obj->Release(); obj = NULL; } else 0

@@ -32,6 +32,9 @@ THE SOFTWARE.
 #include "BDynBuffer.h"
 #include "BGame.h"
 #include "AdGame.h"
+#include "AdItem.h"
+#include "BViewport.h"
+
 #include <cmath>
 
 

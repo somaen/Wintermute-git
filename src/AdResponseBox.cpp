@@ -31,6 +31,8 @@ THE SOFTWARE.
 #include "UIButton.h"
 #include "UIWindow.h"
 #include "BDynBuffer.h"
+#include "BFontStorage.h"
+#include "BFont.h"
 
 namespace WinterMute {
 

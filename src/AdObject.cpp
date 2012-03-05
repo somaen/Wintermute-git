@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "AdObject.h"
 #include "AdScene.h"
 #include "BGame.h"
+#include "BFrame.h"
 #include "BSound.h"
 #include "BSurfaceStorage.h"
 #include "ScValue.h"
@@ -34,6 +35,11 @@ THE SOFTWARE.
 #include "AdLayer.h"
 #include "AdSceneNode.h"
 #include "AdInventory.h"
+#include "AdWaypointGroup.h"
+#include "AdItem.h"
+#include "BSubFrame.h"
+#include "BFont.h"
+#include "BFontStorage.h"
 
 namespace WinterMute {
 

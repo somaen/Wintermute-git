@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "BSaveThumbFile.h"
 #include "BFileEntry.h"
 #include "BPkgFile.h"
+#include "BPackage.h"
 #include "BRegistry.h"
 #include "BGame.h"
 #include <boost/filesystem.hpp>

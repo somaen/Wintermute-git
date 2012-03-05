@@ -35,7 +35,9 @@ THE SOFTWARE.
 #include "UIEdit.h"
 #include "UIText.h"
 #include "UITiledImage.h"
-
+#include "BViewport.h"
+#include "BFontStorage.h"
+#include "BFont.h"
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CUIWindow, false)

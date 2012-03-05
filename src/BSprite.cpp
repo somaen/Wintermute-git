@@ -32,8 +32,9 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "BSurface.h"
 #include "BGame.h"
+#include "BFrame.h"
 #include "BSound.h"
-
+#include "BSubFrame.h"
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CBSprite, false)

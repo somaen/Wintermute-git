@@ -24,13 +24,20 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "dctypes.h"
+#include "persistent.h"
+#include "BObject.h"
 #include "AdActor.h"
 #include "AdGame.h"
 #include "BParser.h"
 #include "ScValue.h"
+#include "BObject.h"
 #include "BSound.h"
 #include "AdScene.h"
 #include "AdEntity.h"
+#include "AdSpriteSet.h"
+#include "AdWaypointGroup.h"
+#include "AdPath.h"
 #include <math.h>
 
 namespace WinterMute {

@@ -31,6 +31,7 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "BSoundMgr.h"
 #include "BSound.h"
+#include "BSubFrame.h"
 
 namespace WinterMute {
 

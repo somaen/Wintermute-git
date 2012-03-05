@@ -30,6 +30,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 class CBRegion;
+class CBSubFrame;
 class CBActiveRect: CBBase {
 public:
 	void ClipRect();

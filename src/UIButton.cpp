@@ -31,7 +31,8 @@ THE SOFTWARE.
 #include "BParser.h"
 #include "BActiveRect.h"
 #include "ScValue.h"
-
+#include "BFontStorage.h"
+#include "BFont.h"
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CUIButton, false)

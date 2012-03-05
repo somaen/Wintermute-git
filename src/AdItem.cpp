@@ -30,7 +30,8 @@ THE SOFTWARE.
 #include "BGame.h"
 #include "AdGame.h"
 #include "BSound.h"
-
+#include "BFontStorage.h"
+#include "BFont.h"
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdItem, false)

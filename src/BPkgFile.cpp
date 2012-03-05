@@ -24,6 +24,7 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "BPackage.h"
 #include "BPkgFile.h"
 #include "BGame.h"
 

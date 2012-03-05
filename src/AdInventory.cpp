@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdInventory.h"
 #include "ADGame.h"
+#include "AdItem.h"
 
 namespace WinterMute {
 

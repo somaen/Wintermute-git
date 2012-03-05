@@ -28,6 +28,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 class CBSound;
+class CBSubFrame;
 class CBFrame: public CBScriptable {
 public:
 	bool m_KillSound;

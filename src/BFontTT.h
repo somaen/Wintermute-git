@@ -26,7 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeBFontTT_H__
 #define __WmeBFontTT_H__
 
-
+#include "BFontStorage.h"
 #include "BFont.h"
 #include "BSurface.h"
 

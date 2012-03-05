@@ -28,6 +28,7 @@ THE SOFTWARE.
 
 
 #include "SDL.h"
+#include "BFontStorage.h"
 
 namespace WinterMute {
 

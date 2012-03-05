@@ -50,6 +50,10 @@ THE SOFTWARE.
 #include "ScValue.h"
 #include "BSoundMgr.h"
 #include "BSound.h"
+#include "BSubFrame.h"
+#include "BViewport.h"
+#include "BFontStorage.h"
+#include "BFontTT.h"
 
 #ifdef __IPHONEOS__
 #   include "ios_utils.h"

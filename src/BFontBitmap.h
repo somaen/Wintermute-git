@@ -30,7 +30,7 @@ THE SOFTWARE.
 #include "BFont.h"
 
 namespace WinterMute {
-
+class CBSubFrame;
 class CBFontBitmap : public CBFont {
 public:
 	DECLARE_PERSISTENT(CBFontBitmap, CBFont)

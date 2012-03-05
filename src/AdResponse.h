@@ -28,9 +28,10 @@ THE SOFTWARE.
 
 
 #include "BObject.h"
+#include "AdTypes.h"
 
 namespace WinterMute {
-
+class CBFont;
 class CAdResponse : public CBObject {
 public:
 	DECLARE_PERSISTENT(CAdResponse, CBObject)

@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include "BGame.h"
 #include "BParser.h"
 #include "ScValue.h"
+#include "BFont.h"
+#include "BFontStorage.h"
 
 namespace WinterMute {
 
