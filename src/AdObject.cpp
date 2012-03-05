@@ -31,6 +31,7 @@ THE SOFTWARE.
 #include "BSurfaceStorage.h"
 #include "ScValue.h"
 #include "AdGame.h"
+#include "AdLayer.h"
 
 namespace WinterMute {
 

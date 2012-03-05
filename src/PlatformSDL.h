@@ -26,10 +26,7 @@ THE SOFTWARE.
 #ifndef __WmePlatformSDL_H__
 #define __WmePlatformSDL_H__
 
-
-//#include "SDL.h"
 #include "dctypes.h"
-
 
 #ifdef __WIN32__
 #   define WIN32_LEAN_AND_MEAN
