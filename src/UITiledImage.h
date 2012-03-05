@@ -30,7 +30,7 @@ THE SOFTWARE.
 #include "UIObject.h"
 
 namespace WinterMute {
-
+class CBSubFrame;
 class CUITiledImage : public CBObject {
 public:
 	DECLARE_PERSISTENT(CUITiledImage, CBObject)

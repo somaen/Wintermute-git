@@ -23,11 +23,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "dcgf.h"
+#include "BGame.h"
+#include "BSprite.h"
 #include "UIObject.h"
 #include "UITiledImage.h"
 #include "UIWindow.h"
+#include "PlatformSDL.h"
 #include "ScValue.h"
+#include "ScStack.h"
+#include "BFontStorage.h"
 
 namespace WinterMute {
 
@@ -158,7 +162,8 @@ HRESULT CUIObject::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 
 		char *Filename = Val->GetString();
 
-		SAFE_DELETE(m_Image);
+		delete m_Image;
+		m_Image = NULL;
 		if (Val->IsNULL()) {
 			Stack->PushBool(true);
 			return S_OK;
@@ -166,7 +171,8 @@ HRESULT CUIObject::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *Th
 
 		m_Image = new CBSprite(Game);
 		if (!m_Image || FAILED(m_Image->LoadFile(Val->GetString()))) {
-			SAFE_DELETE(m_Image);
+			delete m_Image;
+			m_Image = NULL;
 			Stack->PushBool(false);
 		} else Stack->PushBool(true);
 
