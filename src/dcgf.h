@@ -108,7 +108,6 @@ THE SOFTWARE.
 #include "AdSceneState.h"
 #include "AdResponse.h"
 #include "AdResponseBox.h"
-#include "AdPathPoint.h"
 #include "AdPath.h"
 #include "AdSentence.h"
 #include "AdInventory.h"
