@@ -44,6 +44,7 @@ THE SOFTWARE.
 #include "BTransitionMgr.h"
 #include "BKeyboardState.h"
 #include "UIWindow.h"
+#include "ScValue.h"
 
 #ifdef __IPHONEOS__
 #   include "ios_utils.h"

@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "BActiveRect.h"
 #include "BDynBuffer.h"
 #include "BKeyboardState.h"
+#include "ScValue.h"
 #include "UIButton.h"
 #include "UIEdit.h"
 #include "UIText.h"

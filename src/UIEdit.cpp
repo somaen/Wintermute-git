@@ -31,6 +31,7 @@ THE SOFTWARE.
 #include "BKeyboardState.h"
 #include "BDynBuffer.h"
 #include "BParser.h"
+#include "ScValue.h"
 
 namespace WinterMute {
 

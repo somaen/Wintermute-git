@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "UIEntity.h"
 #include "BParser.h"
 #include "BDynBuffer.h"
+#include "ScValue.h"
 
 namespace WinterMute {
 

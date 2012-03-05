@@ -94,7 +94,6 @@ THE SOFTWARE.
 
 // scripting classes
 #include "dcscript.h"
-#include "ScValue.h"
 #include "ScStack.h"
 #include "ScScript.h"
 #include "ScEngine.h"

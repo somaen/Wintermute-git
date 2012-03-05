@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "AdObject.h"
 #include "BSurfaceStorage.h"
+#include "ScValue.h"
 
 namespace WinterMute {
 

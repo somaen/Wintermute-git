@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "BDynBuffer.h"
 #include "BActiveRect.h"
 #include "BSurfaceStorage.h"
+#include "ScValue.h"
 
 namespace WinterMute {
 

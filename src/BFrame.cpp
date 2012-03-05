@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "BParser.h"
 #include "BFrame.h"
 #include "BDynBuffer.h"
+#include "ScValue.h"
 
 namespace WinterMute {
 

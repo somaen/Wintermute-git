@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "ScEngine.h"
 #include "StringUtil.h"
+#include "ScValue.h"
 #include <algorithm>
 #include <vector>
 

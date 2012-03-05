@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "UITiledImage.h"
 #include "BParser.h"
 #include "BActiveRect.h"
+#include "ScValue.h"
 
 namespace WinterMute {
 

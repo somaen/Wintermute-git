@@ -33,6 +33,7 @@ THE SOFTWARE.
 #include "BTransitionMgr.h"
 #include "BObject.h"
 #include "UIWindow.h"
+#include "ScValue.h"
 
 namespace WinterMute {
 

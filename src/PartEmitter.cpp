@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "PartEmitter.h"
 #include "Vector2.h"
 #include "Matrix4.h"
+#include "ScValue.h"
 
 namespace WinterMute {
 
