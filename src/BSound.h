@@ -67,13 +67,12 @@ public:
 
 	HRESULT ApplyFX(TSFXType Type = SFX_NONE, float Param1 = 0, float Param2 = 0, float Param3 = 0, float Param4 = 0);
 
+private:
 	TSFXType m_SFXType;
 	float m_SFXParam1;
 	float m_SFXParam2;
 	float m_SFXParam3;
 	float m_SFXParam4;
-
-private:
 	CBSoundBuffer *m_Sound;
 
 };

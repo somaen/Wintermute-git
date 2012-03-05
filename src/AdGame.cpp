@@ -1381,7 +1381,7 @@ HRESULT CAdGame::GetVersion(byte  *VerMajor, byte *VerMinor, byte *ExtMajor, byt
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdGame::LoadItemsFile(char *Filename, bool Merge) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CAdGame::LoadItemsFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -1407,7 +1407,7 @@ HRESULT CAdGame::LoadItemsBuffer(byte  *Buffer, bool Merge) {
 	TOKEN_TABLE(ITEM)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 

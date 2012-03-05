@@ -95,6 +95,12 @@ void CBPersistMgr::Cleanup() {
 	}
 }
 
+// TODO: This is not at all endian-safe
+uint32 makeUint32(byte first, byte second, byte third, byte fourth) {
+	uint32 retVal = first;
+	retVal = retVal & second << 8 & third << 16 & fourth << 24;
+	return retVal;
+}
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBPersistMgr::InitSave(char *Desc) {
@@ -131,7 +137,8 @@ HRESULT CBPersistMgr::InitSave(char *Desc) {
 
 		byte VerMajor, VerMinor, ExtMajor, ExtMinor;
 		Game->GetVersion(&VerMajor, &VerMinor, &ExtMajor, &ExtMinor);
-		uint32 Version = MAKELONG(MAKEWORD(VerMajor, VerMinor), MAKEWORD(ExtMajor, ExtMinor));
+		//uint32 Version = MAKELONG(MAKEWORD(VerMajor, VerMinor), MAKEWORD(ExtMajor, ExtMinor));
+		uint32 Version = makeUint32(VerMajor, VerMinor, ExtMajor, ExtMinor);
 		PutDWORD(Version);
 
 		// new in ver 2
@@ -173,7 +180,29 @@ HRESULT CBPersistMgr::InitSave(char *Desc) {
 	}
 	return res;
 }
+// TODO: Do this properly, this is just a quickfix, that probably doesnt even work.
+// The main point of which is ditching BASS completely.
+byte getLowByte(uint16 word) {
+	uint16 mask = 0xff;
+	return word & mask;
+}
 
+byte getHighByte(uint16 word) {
+	uint16 mask = 0xff << 8;
+	word = word & mask;
+	return word >> 8;
+}
+
+uint16 getLowWord(uint32 dword) {
+	uint32 mask = 0xffff;
+	return dword & mask;
+}
+
+uint16 getHighWord(uint32 dword) {
+	uint32 mask = 0xffff << 16;
+	dword = dword & mask;
+	return dword >> 16;
+}
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBPersistMgr::InitLoad(char *Filename) {
@@ -191,10 +220,10 @@ HRESULT CBPersistMgr::InitLoad(char *Filename) {
 
 		if (Magic == SAVE_MAGIC || Magic == SAVE_MAGIC_2) {
 			uint32 Version = GetDWORD();
-			m_SavedVerMajor = LOBYTE(LOWORD(Version));
-			m_SavedVerMinor = HIBYTE(LOWORD(Version));
-			m_SavedExtMajor = LOBYTE(HIWORD(Version));
-			m_SavedExtMinor = HIBYTE(HIWORD(Version));
+			m_SavedVerMajor = getLowByte(getLowWord(Version));
+			m_SavedVerMinor = getHighByte(getLowWord(Version));
+			m_SavedExtMajor = getLowByte(getHighWord(Version));
+			m_SavedExtMinor = getHighByte(getHighWord(Version));
 
 			if (Magic == SAVE_MAGIC_2) {
 				m_SavedVerBuild = (byte )GetDWORD();

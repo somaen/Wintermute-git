@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 
 #include "BBase.h"
-#include "bass.h"
+//#include "bass.h"
 
 namespace WinterMute {
 
@@ -67,8 +67,8 @@ public:
 	void SetStreaming(bool Streamed, uint32 NumBlocks = 0, uint32 BlockSize = 0);
 	HRESULT ApplyFX(TSFXType Type, float Param1, float Param2, float Param3, float Param4);
 
-	HSTREAM m_Stream;
-	HSYNC m_Sync;
+	//HSTREAM m_Stream;
+	//HSYNC m_Sync;
 
 	bool m_FreezePaused;
 	uint32 m_LoopStart;
@@ -79,12 +79,12 @@ public:
 	bool m_Streamed;
 	int m_PrivateVolume;
 
-	static void CALLBACK LoopSyncProc(HSYNC handle, uint32 channel, uint32 data, void *user);
+	/*static void CALLBACK LoopSyncProc(HSYNC handle, uint32 channel, uint32 data, void *user);
 
 	static void CALLBACK FileCloseProc(void *user);
 	static QWORD CALLBACK FileLenProc(void *user);
 	static uint32 CALLBACK FileReadProc(void *buffer, uint32 length, void *user);
-	static BOOL CALLBACK FileSeekProc(QWORD offset, void *user);
+	static BOOL CALLBACK FileSeekProc(QWORD offset, void *user);*/
 };
 
 } // end of namespace WinterMute

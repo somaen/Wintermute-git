@@ -260,7 +260,7 @@ CScScript *CScEngine::RunScript(char *Filename, CBScriptHolder *Owner) {
 
 
 //////////////////////////////////////////////////////////////////////////
-BYTE *CScEngine::GetCompiledScript(char *Filename, uint32 *OutSize, bool IgnoreCache) {
+byte *CScEngine::GetCompiledScript(char *Filename, uint32 *OutSize, bool IgnoreCache) {
 	int i;
 
 	// is script in cache?

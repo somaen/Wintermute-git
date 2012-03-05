@@ -668,7 +668,7 @@ void CBGame::GetOffset(int *OffsetX, int *OffsetY) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBGame::LoadFile(const char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CBGame::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -774,7 +774,7 @@ HRESULT CBGame::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(COMPAT_KILL_METHOD_THREADS)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 
@@ -1657,10 +1657,10 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	else if (strcmp(Name, "FadeOut") == 0 || strcmp(Name, "FadeOutAsync") == 0 || strcmp(Name, "SystemFadeOut") == 0 || strcmp(Name, "SystemFadeOutAsync") == 0) {
 		Stack->CorrectParams(5);
 		uint32 Duration = Stack->Pop()->GetInt(500);
-		BYTE Red = Stack->Pop()->GetInt(0);
-		BYTE Green = Stack->Pop()->GetInt(0);
-		BYTE Blue = Stack->Pop()->GetInt(0);
-		BYTE Alpha = Stack->Pop()->GetInt(0xFF);
+		byte Red = Stack->Pop()->GetInt(0);
+		byte Green = Stack->Pop()->GetInt(0);
+		byte Blue = Stack->Pop()->GetInt(0);
+		byte Alpha = Stack->Pop()->GetInt(0xFF);
 
 		bool System = (strcmp(Name, "SystemFadeOut") == 0 || strcmp(Name, "SystemFadeOutAsync") == 0);
 
@@ -1677,10 +1677,10 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 	else if (strcmp(Name, "FadeIn") == 0 || strcmp(Name, "FadeInAsync") == 0 || strcmp(Name, "SystemFadeIn") == 0 || strcmp(Name, "SystemFadeInAsync") == 0) {
 		Stack->CorrectParams(5);
 		uint32 Duration = Stack->Pop()->GetInt(500);
-		BYTE Red = Stack->Pop()->GetInt(0);
-		BYTE Green = Stack->Pop()->GetInt(0);
-		BYTE Blue = Stack->Pop()->GetInt(0);
-		BYTE Alpha = Stack->Pop()->GetInt(0xFF);
+		byte Red = Stack->Pop()->GetInt(0);
+		byte Green = Stack->Pop()->GetInt(0);
+		byte Blue = Stack->Pop()->GetInt(0);
+		byte Alpha = Stack->Pop()->GetInt(0xFF);
 
 		bool System = (strcmp(Name, "SystemFadeIn") == 0 || strcmp(Name, "SystemFadeInAsync") == 0);
 
@@ -2003,7 +2003,7 @@ HRESULT CBGame::ScCallMethod(CScScript *Script, CScStack *Stack, CScStack *ThisS
 		CBFile *File = m_FileManager->OpenFile(Filename, false);
 		if (File) {
 			crc remainder = crc_initialize();
-			BYTE Buf[1024];
+			byte Buf[1024];
 			int BytesRead = 0;
 
 			while (BytesRead < File->GetSize()) {
@@ -3034,7 +3034,7 @@ HRESULT CBGame::ExternalCall(CScScript *Script, CScStack *Stack, CScStack *ThisS
 		Stack->CorrectParams(1);
 		uint32 rgb = (uint32)Stack->Pop()->GetInt();
 
-		BYTE H, S, L;
+		byte H, S, L;
 		CBUtils::RGBtoHSL(rgb, &H, &S, &L);
 		Stack->PushInt(H);
 	}
@@ -3434,7 +3434,7 @@ HRESULT CBGame::LoadSettings(char *Filename) {
 	TOKEN_TABLE_END
 
 
-	BYTE *OrigBuffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *OrigBuffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (OrigBuffer == NULL) {
 		Game->LOG(0, "CBGame::LoadSettings failed for file '%s'", Filename);
 		return E_FAIL;
@@ -3442,8 +3442,8 @@ HRESULT CBGame::LoadSettings(char *Filename) {
 
 	HRESULT ret = S_OK;
 
-	BYTE *Buffer = OrigBuffer;
-	BYTE *params;
+	byte *Buffer = OrigBuffer;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 
@@ -4009,7 +4009,7 @@ HRESULT CBGame::DisplayIndicator() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBGame::UpdateMusicCrossfade() {
-	BYTE GlobMusicVol = m_SoundMgr->GetVolumePercent(SOUND_MUSIC);
+	byte GlobMusicVol = m_SoundMgr->GetVolumePercent(SOUND_MUSIC);
 
 	if (!m_MusicCrossfadeRunning) return S_OK;
 	if (m_State == GAME_FROZEN) return S_OK;

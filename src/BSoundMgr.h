@@ -29,7 +29,7 @@ THE SOFTWARE.
 #include "coll_templ.h"
 #include "BBase.h"
 #include "BSoundBuffer.h"
-#include "bass.h"
+//#include "bass.h"
 
 namespace WinterMute {
 
@@ -40,9 +40,9 @@ public:
 	HRESULT PauseAll(bool IncludingMusic = true);
 	HRESULT Cleanup();
 	//DECLARE_PERSISTENT(CBSoundMgr, CBBase);
-	BYTE GetMasterVolumePercent();
+	byte GetMasterVolumePercent();
 	HRESULT SetMasterVolumePercent(byte  Percent);
-	BYTE GetVolumePercent(TSoundType Type);
+	byte GetVolumePercent(TSoundType Type);
 	HRESULT SetVolumePercent(TSoundType Type, byte Percent);
 	HRESULT SetVolume(TSoundType Type, int Volume);
 	uint32 m_VolumeOriginal;
