@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BSubFrame.h"
 #include "BActiveRect.h"
 #include "BDynBuffer.h"
+#include "BSurface.h"
 #include "ScValue.h"
 
 namespace WinterMute {

@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "UITiledImage.h"
+#include "BSurface.h"
 #include "BDynBuffer.h"
 #include "BParser.h"
 

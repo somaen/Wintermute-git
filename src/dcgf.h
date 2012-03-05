@@ -82,7 +82,6 @@ THE SOFTWARE.
 #include "BEvent.h"
 #include "BViewport.h"
 #include "BRegion.h"
-#include "BSurface.h"
 #include "BSubFrame.h"
 #include "BFrame.h"
 #include "BFontStorage.h"

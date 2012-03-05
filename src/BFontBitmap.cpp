@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "BFontBitmap.h"
 #include "StringUtil.h"
 #include "BParser.h"
+#include "BSurface.h"
 
 namespace WinterMute {
 

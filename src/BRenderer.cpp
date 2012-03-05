@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BActiveRect.h"
 #include "BRenderer.h"
+#include "BSurface.h"
 
 namespace WinterMute {
 
