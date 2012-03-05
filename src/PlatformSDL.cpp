@@ -32,7 +32,7 @@ THE SOFTWARE.
 #include "BSoundMgr.h"
 #include "ScEngine.h"
 #include "common/str.h"
-#include <boost/filesystem.hpp>
+#include "common/textconsole.h"
 
 #ifdef __WIN32__
 #   include <dbghelp.h>
@@ -397,13 +397,15 @@ bool CBPlatform::DeleteFile(const char *lpFileName) {
 
 //////////////////////////////////////////////////////////////////////////
 bool CBPlatform::CopyFile(const char *from, const char *to, bool failIfExists) {
-	try {
-		if (failIfExists && boost::filesystem::exists(to)) return false;
-		boost::filesystem::copy_file(from, to);
-		return true;
-	} catch (...) {
-		return false;
-	}
+//	try {
+	warning("CBPlatform::CopyFile(%s, %s, %d) - not implemented", from, to, failIfExists);
+	return false;
+//		if (failIfExists && boost::filesystem::exists(to)) return false;
+//		boost::filesystem::copy_file(from, to);
+//		return true;
+//	} catch (...) {
+//		return false;
+//	}
 }
 
 //////////////////////////////////////////////////////////////////////////

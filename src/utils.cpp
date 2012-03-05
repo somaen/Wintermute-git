@@ -30,7 +30,7 @@ THE SOFTWARE.
 #include "PathUtil.h"
 #include "BGame.h"
 #include "common/str.h"
-#include "boost/filesystem.hpp"
+#include "common/textconsole.h"
 
 namespace WinterMute {
 
@@ -100,11 +100,12 @@ void CBUtils::CreatePath(const char *Path, bool PathOnly) {
 	if (!PathOnly) path = PathUtil::GetDirectoryName(Path);
 	else path = Path;
 
-	try {
-		boost::filesystem::create_directories(path);
-	} catch (...) {
+//	try {
+	warning("CBUtils::CreatePath - not implemented: %s", Path);
+//		boost::filesystem::create_directories(path);
+//	} catch (...) {
 		return;
-	}
+//	}
 }
 
 
@@ -231,8 +232,9 @@ bool CBUtils::MatchesPattern(const char *Pattern, const char *String) {
 //////////////////////////////////////////////////////////////////////////
 char *CBUtils::GetPath(char *Filename) {
 	AnsiString path = PathUtil::GetDirectoryName(Filename);
-	path = boost::filesystem::system_complete(path).string();
-
+	//path = boost::filesystem::system_complete(path).string();
+	warning("CBUtils::GetPath: (%s), not implemented", Filename);
+	return Filename;
 	char *ret = new char[path.length() + 1];
 	strcpy(ret, path.c_str());
 

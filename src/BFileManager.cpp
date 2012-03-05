@@ -39,7 +39,7 @@ THE SOFTWARE.
 #include "utils.h"
 #include "PlatformSDL.h"
 #include "common/str.h"
-
+#include "common/textconsole.h"
 #include <boost/filesystem.hpp>
 
 #ifdef __WIN32__
@@ -51,8 +51,6 @@ THE SOFTWARE.
 #ifdef __APPLE__
 #   include <CoreFoundation/CoreFoundation.h>
 #endif
-
-using namespace boost::filesystem;
 
 
 #if _DEBUG
@@ -354,12 +352,12 @@ HRESULT CBFileManager::RegisterPackages() {
 	RestoreCurrentDir();
 
 	Game->LOG(0, "Scanning packages...");
-
+	warning("Scanning packages");
 
 	AnsiString extension = AnsiString(".") + AnsiString(PACKAGE_EXTENSION);
 
 	for (int i = 0; i < m_PackagePaths.GetSize(); i++) {
-		path absPath = system_complete(m_PackagePaths[i]);
+		boost::filesystem::path absPath = boost::filesystem::system_complete(m_PackagePaths[i]);
 
 		//Game->LOG(0, "Scanning: %s", absPath.string().c_str());
 		//printf("Scanning: %s\n", absPath.string().c_str());
@@ -367,8 +365,8 @@ HRESULT CBFileManager::RegisterPackages() {
 		if (!exists(absPath)) continue;
 
 		// scan files
-		directory_iterator endIter;
-		for (directory_iterator dit(absPath); dit != endIter; ++dit) {
+		boost::filesystem::directory_iterator endIter;
+		for (boost::filesystem::directory_iterator dit(absPath); dit != endIter; ++dit) {
 			if (!is_directory((*dit).status())) {
 				AnsiString fileName = (*dit).path().string();
 

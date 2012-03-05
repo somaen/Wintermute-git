@@ -61,6 +61,7 @@ THE SOFTWARE.
 #include "BSprite.h"
 #include "BFileManager.h"
 #include "ScStack.h"
+#include "common/textconsole.h"
 
 #ifdef __IPHONEOS__
 #   include "ios_utils.h"
@@ -568,6 +569,7 @@ void CBGame::LOG(HRESULT res, LPCSTR fmt, ...) {
 	}
 	if (m_DebugMgr) m_DebugMgr->OnLog(res, buff);
 
+	warning("%02d:%02d: %s\n", tm->tm_hour, tm->tm_min, buff);
 	fprintf(m_DEBUG_LogFile, "%02d:%02d: %s\n", tm->tm_hour, tm->tm_min, buff);
 	fflush(m_DEBUG_LogFile);
 #endif

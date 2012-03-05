@@ -28,8 +28,6 @@ THE SOFTWARE.
 #include <string>
 #include <sstream>
 #include "common/tokenizer.h"
-//#include <boost/lexical_cast.hpp>
-//#include <boost/tokenizer.hpp>
 #include "StringUtil.h"
 #include "ConvertUTF.h"
 
