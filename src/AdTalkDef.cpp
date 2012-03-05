@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "AdTalkDef.h"
 #include "AdTalkNode.h"
 #include "BParser.h"
+#include "BGame.h"
 #include "BDynBuffer.h"
 
 namespace WinterMute {
@@ -58,7 +59,7 @@ CAdTalkDef::~CAdTalkDef() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdTalkDef::LoadFile(const char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CAdTalkDef::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;

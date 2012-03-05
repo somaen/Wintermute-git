@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BSurface.h"
 #include "BDynBuffer.h"
 #include "BParser.h"
+#include "BGame.h"
 
 namespace WinterMute {
 
@@ -112,7 +113,7 @@ HRESULT CUITiledImage::Display(int X, int Y, int Width, int Height) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CUITiledImage::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CUITiledImage::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -169,7 +170,7 @@ HRESULT CUITiledImage::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(EDITOR_PROPERTY)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 	bool HTiles = false, VTiles = false;

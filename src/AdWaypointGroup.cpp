@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BParser.h"
 #include "BDynBuffer.h"
 #include "ScValue.h"
+#include "BGame.h"
 
 namespace WinterMute {
 	
@@ -59,7 +60,7 @@ void CAdWaypointGroup::Cleanup() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdWaypointGroup::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CAdWaypointGroup::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;

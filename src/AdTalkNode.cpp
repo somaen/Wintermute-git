@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "AdTalkNode.h"
 #include "BParser.h"
 #include "BDynBuffer.h"
+#include "BGame.h"
 
 namespace WinterMute {
 
@@ -82,7 +83,7 @@ HRESULT CAdTalkNode::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(EDITOR_PROPERTY)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 

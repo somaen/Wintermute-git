@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "StringUtil.h"
 #include "BParser.h"
 #include "BSurface.h"
+#include "BGame.h"
 
 namespace WinterMute {
 

@@ -24,6 +24,7 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "BGame.h"
 #include "BRegistry.h"
 #include "scriptables/SXStore.h"
 #include "ScValue.h"

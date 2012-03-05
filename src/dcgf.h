@@ -117,7 +117,6 @@ THE SOFTWARE.
 #include "AdRotLevel.h"
 #include "AdInventoryBox.h"
 #include "AdScene.h"
-#include "AdGame.h"
 #include "UIEntity.h"
 
 // macros

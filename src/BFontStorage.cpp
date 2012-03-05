@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BFontStorage.h"
+#include "BGame.h"
 
 namespace WinterMute {
 

@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "AdActor.h"
+#include "AdGame.h"
 #include "BParser.h"
 #include "ScValue.h"
 #include <math.h>
@@ -113,7 +114,7 @@ CAdActor::~CAdActor() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdActor::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CAdActor::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -212,7 +213,7 @@ HRESULT CAdActor::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(ANIMATION)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 

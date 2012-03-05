@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BRegistry.h"
 #include "PathUtil.h"
 #include "StringUtil.h"
+#include "BGame.h"
 
 namespace WinterMute {
 

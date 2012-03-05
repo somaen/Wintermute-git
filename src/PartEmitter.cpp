@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "Vector2.h"
 #include "Matrix4.h"
 #include "ScValue.h"
+#include "BGame.h"
 
 namespace WinterMute {
 

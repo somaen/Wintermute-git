@@ -24,6 +24,7 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "BGame.h"
 #include "wintypes.h"
 #include "BPkgFile.h"
 #include "BDiskFile.h"

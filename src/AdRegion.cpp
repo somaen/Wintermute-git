@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BParser.h"
 #include "BDynBuffer.h"
 #include "ScValue.h"
+#include "BGame.h"
 
 namespace WinterMute {
 
@@ -49,7 +50,7 @@ CAdRegion::~CAdRegion() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdRegion::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CAdRegion::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -110,7 +111,7 @@ HRESULT CAdRegion::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(EDITOR_PROPERTY)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 

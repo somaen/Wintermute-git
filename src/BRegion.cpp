@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BParser.h"
 #include "BDynBuffer.h"
 #include "ScValue.h"
+#include "BGame.h"
 
 namespace WinterMute {
 
@@ -87,7 +88,7 @@ bool CBRegion::PointInRegion(int X, int Y) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CBRegion::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CBRegion::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;

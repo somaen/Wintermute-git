@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BParser.h"
+#include "BGame.h"
 
 
 #define WHITESPACE " \t\n\r"

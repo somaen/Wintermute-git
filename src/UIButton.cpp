@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BDynBuffer.h"
+#include "BGame.h"
 #include "UIButton.h"
 #include "UITiledImage.h"
 #include "BParser.h"
@@ -84,7 +85,7 @@ CUIButton::~CUIButton() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CUIButton::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CUIButton::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;

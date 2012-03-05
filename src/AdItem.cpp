@@ -27,6 +27,8 @@ THE SOFTWARE.
 #include "AdItem.h"
 #include "BParser.h"
 #include "ScValue.h"
+#include "BGame.h"
+#include "AdGame.h"
 
 namespace WinterMute {
 
@@ -65,7 +67,7 @@ CAdItem::~CAdItem() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdItem::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CAdItem::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -144,7 +146,7 @@ HRESULT CAdItem::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(AMOUNT)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd = 2;
 	CBParser parser(Game);
 

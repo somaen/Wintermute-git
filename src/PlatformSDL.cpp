@@ -24,6 +24,7 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "BGame.h"
 #include "BRenderSDL.h"
 #include "PathUtil.h"
 #include "PlatformSDL.h"

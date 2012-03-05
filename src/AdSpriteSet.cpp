@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "AdSpriteSet.h"
 #include "BParser.h"
 #include "BDynBuffer.h"
+#include "BGame.h"
 
 namespace WinterMute {
 
@@ -53,7 +54,7 @@ CAdSpriteSet::~CAdSpriteSet() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdSpriteSet::LoadFile(char *Filename, int LifeTime, TSpriteCacheType CacheType) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CAdSpriteSet::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;

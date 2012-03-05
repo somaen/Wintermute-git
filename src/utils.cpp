@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "PlatformSDL.h"
 #include "wintypes.h"
 #include "PathUtil.h"
+#include "BGame.h"
 #include "boost/filesystem.hpp"
 
 namespace WinterMute {

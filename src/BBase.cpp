@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BBase.h"
+#include "BGame.h"
 #include "BParser.h"
 #include "BDynBuffer.h"
 
@@ -89,7 +90,7 @@ HRESULT CBBase::ParseEditorProperty(byte  *Buffer, bool Complete) {
 	if (!Game->m_EditorMode) return S_OK;
 
 
-	BYTE *params;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 

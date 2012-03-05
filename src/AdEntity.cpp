@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include "BActiveRect.h"
 #include "BSurfaceStorage.h"
 #include "ScValue.h"
+#include "BGame.h"
+#include "AdGame.h"
 
 namespace WinterMute {
 

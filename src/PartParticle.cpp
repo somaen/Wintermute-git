@@ -26,6 +26,8 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "PartParticle.h"
 #include "PartEmitter.h"
+#include "BSprite.h"
+#include "BGame.h"
 #include <math.h>
 
 namespace WinterMute {

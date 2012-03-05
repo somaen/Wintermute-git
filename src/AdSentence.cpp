@@ -27,7 +27,9 @@ THE SOFTWARE.
 #include "AdSentence.h"
 #include "AdTalkDef.h"
 #include "AdTalkNode.h"
+#include "AdGame.h"
 #include "PathUtil.h"
+#include "BGame.h"
 
 namespace WinterMute {
 

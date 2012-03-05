@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "BDynBuffer.h"
 #include "UIText.h"
 #include "UITiledImage.h"
+#include "BGame.h"
 #include "BParser.h"
 #include "ScValue.h"
 
@@ -84,7 +85,7 @@ HRESULT CUIText::Display(int OffsetX, int OffsetY) {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CUIText::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CUIText::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -150,7 +151,7 @@ HRESULT CUIText::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(EDITOR_PROPERTY)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd = 2;
 	CBParser parser(Game);
 

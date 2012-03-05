@@ -25,8 +25,10 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "AdObject.h"
+#include "BGame.h"
 #include "BSurfaceStorage.h"
 #include "ScValue.h"
+#include "AdGame.h"
 
 namespace WinterMute {
 

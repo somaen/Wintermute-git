@@ -24,6 +24,7 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "AdGame.h"
 #include "BScriptHolder.h"
 #include "BParser.h"
 #include "ScValue.h"

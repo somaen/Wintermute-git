@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "UIWindow.h"
+#include "BGame.h"
 #include "BParser.h"
 #include "BActiveRect.h"
 #include "BDynBuffer.h"

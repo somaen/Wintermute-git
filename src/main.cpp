@@ -38,6 +38,7 @@ THE SOFTWARE.
 #ifdef __WIN32__
 #   include "../visualc/resource.h"
 #endif
+#include "AdGame.h"
 
 #include "FreeImage.h"
 

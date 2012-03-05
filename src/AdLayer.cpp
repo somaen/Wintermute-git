@@ -24,6 +24,7 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "BGame.h"
 #include "AdLayer.h"
 #include "BParser.h"
 #include "BDynBuffer.h"
@@ -52,7 +53,7 @@ CAdLayer::~CAdLayer() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdLayer::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CAdLayer::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
@@ -109,7 +110,7 @@ HRESULT CAdLayer::LoadBuffer(byte  *Buffer, bool Complete) {
 	TOKEN_TABLE(EDITOR_PROPERTY)
 	TOKEN_TABLE_END
 
-	BYTE *params;
+	byte *params;
 	int cmd;
 	CBParser parser(Game);
 

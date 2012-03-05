@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include "AdRotLevel.h"
 #include "BParser.h"
 #include "BDynBuffer.h"
+#include "BGame.h"
 
 namespace WinterMute {
 
@@ -48,7 +49,7 @@ CAdRotLevel::~CAdRotLevel() {
 
 //////////////////////////////////////////////////////////////////////////
 HRESULT CAdRotLevel::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CAdRotLevel::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;

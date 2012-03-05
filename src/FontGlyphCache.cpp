@@ -82,7 +82,7 @@ void GlyphInfo::SetGlyphImage(size_t width, size_t height, size_t stride, byte *
 		Uint32 *buf32 = (Uint32 *)buf;
 
 		for (int x = 0; x < width; x++) {
-			BYTE alpha = pixels[y * stride + x];
+			byte alpha = pixels[y * stride + x];
 			Uint32 color = SDL_MapRGBA(m_Image->format, 255, 255, 255, alpha);
 			buf32[x] = color;
 		}

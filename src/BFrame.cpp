@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BParser.h"
 #include "BFrame.h"
+#include "BGame.h"
 #include "BDynBuffer.h"
 #include "ScValue.h"
 

@@ -24,6 +24,7 @@ THE SOFTWARE.
 */
 
 #include "dcgf.h"
+#include "AdGame.h"
 #include "AdResponseBox.h"
 #include "BParser.h"
 #include "BSurfaceStorage.h"

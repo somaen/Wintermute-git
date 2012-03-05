@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BSurfaceStorage.h"
 #include "BSurfaceSDL.h"
+#include "BGame.h"
 
 namespace WinterMute {
 

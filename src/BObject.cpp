@@ -27,6 +27,8 @@ THE SOFTWARE.
 #include "BObject.h"
 #include "BParser.h"
 #include "ScValue.h"
+#include "BSound.h"
+#include "BGame.h"
 
 namespace WinterMute {
 

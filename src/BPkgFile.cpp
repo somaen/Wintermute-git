@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BPkgFile.h"
+#include "BGame.h"
 
 
 #if _DEBUG

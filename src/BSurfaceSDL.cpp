@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 #include "dcgf.h"
 #include "BFile.h"
+#include "BGame.h"
 #include "BSurfaceSDL.h"
 #include "BRenderSDL.h"
 #include "SdlUtil.h"
@@ -352,10 +353,10 @@ HRESULT CBSurfaceSDL::DrawSprite(int X, int Y, RECT *Rect, float ZoomX, float Zo
 
 	if (renderer->m_ForceAlphaColor != 0) Alpha = renderer->m_ForceAlphaColor;
 
-	BYTE r = D3DCOLGetR(Alpha);
-	BYTE g = D3DCOLGetG(Alpha);
-	BYTE b = D3DCOLGetB(Alpha);
-	BYTE a = D3DCOLGetA(Alpha);
+	byte r = D3DCOLGetR(Alpha);
+	byte g = D3DCOLGetG(Alpha);
+	byte b = D3DCOLGetB(Alpha);
+	byte a = D3DCOLGetA(Alpha);
 
 	SDL_SetTextureColorMod(m_Texture, r, g, b);
 	SDL_SetTextureAlphaMod(m_Texture, a);

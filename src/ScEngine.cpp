@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "StringUtil.h"
 #include "ScValue.h"
 #include "BRegistry.h"
+#include "BGame.h"
 #include <algorithm>
 #include <vector>
 

@@ -29,6 +29,8 @@ THE SOFTWARE.
 #include "UIButton.h"
 #include "UIWindow.h"
 #include "BDynBuffer.h"
+#include "BGame.h"
+#include "AdGame.h"
 #include <cmath>
 
 

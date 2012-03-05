@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include "BImage.h"
 #include "FreeImage.h"
 #include "MathUtil.h"
+#include "BGame.h"
 
 namespace WinterMute {
 

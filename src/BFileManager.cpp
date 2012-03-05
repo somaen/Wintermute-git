@@ -33,6 +33,7 @@ THE SOFTWARE.
 #include "BFileEntry.h"
 #include "BPkgFile.h"
 #include "BRegistry.h"
+#include "BGame.h"
 #include <boost/filesystem.hpp>
 
 #ifdef __WIN32__
@@ -125,9 +126,9 @@ HRESULT CBFileManager::Cleanup() {
 
 #define MAX_FILE_SIZE 10000000
 //////////////////////////////////////////////////////////////////////
-BYTE *CBFileManager::ReadWholeFile(const char *Filename, uint32 *Size, bool MustExist) {
+byte *CBFileManager::ReadWholeFile(const char *Filename, uint32 *Size, bool MustExist) {
 
-	BYTE *buffer = NULL;
+	byte *buffer = NULL;
 
 	CBFile *File = OpenFile(Filename);
 	if (!File) {

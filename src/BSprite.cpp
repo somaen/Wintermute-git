@@ -31,6 +31,7 @@ THE SOFTWARE.
 #include "BDynBuffer.h"
 #include "ScValue.h"
 #include "BSurface.h"
+#include "BGame.h"
 
 namespace WinterMute {
 
@@ -141,7 +142,7 @@ HRESULT CBSprite::LoadFile(char *Filename, int LifeTime, TSpriteCacheType CacheT
 			ret = S_OK;
 		}
 	} else {
-		BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+		byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 		if (Buffer) {
 			if (FAILED(ret = LoadBuffer(Buffer, true, LifeTime, CacheType))) Game->LOG(0, "Error parsing SPRITE file '%s'", Filename);
 			delete [] Buffer;

@@ -33,6 +33,7 @@ THE SOFTWARE.
 #include "BRenderSDL.h"
 #include "BSurfaceSDL.h"
 #include "BParser.h"
+#include "BGame.h"
 
 namespace WinterMute {
 
@@ -345,7 +346,7 @@ int CBFontTT::GetLetterHeight() {
 
 //////////////////////////////////////////////////////////////////////
 HRESULT CBFontTT::LoadFile(char *Filename) {
-	BYTE *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
+	byte *Buffer = Game->m_FileManager->ReadWholeFile(Filename);
 	if (Buffer == NULL) {
 		Game->LOG(0, "CBFontTT::LoadFile failed for file '%s'", Filename);
 		return E_FAIL;
