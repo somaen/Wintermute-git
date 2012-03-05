@@ -44,6 +44,7 @@ THE SOFTWARE.
 #include "BStringTable.h"
 #include "AdSentence.h"
 #include "ScScript.h"
+#include "BSprite.h"
 
 namespace WinterMute {
 

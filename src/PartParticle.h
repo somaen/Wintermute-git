@@ -33,6 +33,7 @@ THE SOFTWARE.
 namespace WinterMute {
 
 class CPartEmitter;
+class CBSprite;
 
 class CPartParticle : public CBBase {
 public:

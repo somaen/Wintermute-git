@@ -33,6 +33,8 @@ THE SOFTWARE.
 namespace WinterMute {
 class CAdTalkDef;
 class CBFont;
+class CBSprite;
+class CBSound;
 class CAdSentence : public CBBase {
 public:
 	bool m_Freezable;

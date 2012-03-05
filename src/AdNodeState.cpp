@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "AdNodeState.h"
 #include "AdEntity.h"
 #include "BStringTable.h"
+#include "BSprite.h"
 
 namespace WinterMute {
 

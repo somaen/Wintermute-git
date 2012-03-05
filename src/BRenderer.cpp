@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include "BRenderer.h"
 #include "BSurface.h"
 #include "BSubFrame.h"
+#include "BRegion.h"
 
 namespace WinterMute {
 

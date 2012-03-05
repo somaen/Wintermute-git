@@ -27,7 +27,8 @@ THE SOFTWARE.
 #define __WmeAdTalkNode_H__
 
 namespace WinterMute {
-
+class CAdSpriteSet;
+class CBSprite;
 class CAdTalkNode : public CBBase {
 public:
 	char *m_SpriteSetFilename;

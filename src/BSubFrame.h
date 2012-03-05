@@ -28,9 +28,11 @@ THE SOFTWARE.
 
 
 #include "BBase.h"
+#include "BScriptable.h"
 
 namespace WinterMute {
-
+class CBObject;
+class CBSurface;
 class CBSubFrame : public CBScriptable {
 public:
 	bool m_MirrorX;

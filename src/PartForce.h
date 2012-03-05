@@ -28,6 +28,7 @@ THE SOFTWARE.
 
 
 #include "BBase.h"
+#include "BNamedObject.h"
 #include "Vector2.h"
 
 namespace WinterMute {

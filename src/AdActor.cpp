@@ -41,6 +41,7 @@ THE SOFTWARE.
 #include "AdSentence.h"
 #include "AdPath.h"
 #include "ScScript.h"
+#include "BRegion.h"
 
 #include <math.h>
 

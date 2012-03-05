@@ -74,12 +74,9 @@ THE SOFTWARE.
 
 // base classes
 #include "BFileManager.h"
-#include "BEvent.h"
-#include "BRegion.h"
 
 // scripting classes
 #include "ScStack.h"
-#include "AdSpriteSet.h"
 #include "AdPath.h"
 
 // macros

@@ -26,9 +26,14 @@ THE SOFTWARE.
 #ifndef __WmeBFrame_H__
 #define __WmeBFrame_H__
 
+#include "BScriptable.h"
+
 namespace WinterMute {
 class CBSound;
 class CBSubFrame;
+class CBObject;
+class CScScript;
+class CScStack;
 class CBFrame: public CBScriptable {
 public:
 	bool m_KillSound;

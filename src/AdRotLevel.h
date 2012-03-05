@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeAdRotLevel_H__
 #define __WmeAdRotLevel_H__
 
+#include "BObject.h"
+
 namespace WinterMute {
 
 class CAdRotLevel : public CBObject {

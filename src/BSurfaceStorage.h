@@ -28,9 +28,10 @@ THE SOFTWARE.
 
 
 #include "coll_templ.h"
+#include "BBase.h"
 
 namespace WinterMute {
-
+class CBSurface;
 class CBSurfaceStorage : public CBBase {
 public:
 	uint32 m_LastCleanupTime;

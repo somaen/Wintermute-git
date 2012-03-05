@@ -28,9 +28,12 @@ THE SOFTWARE.
 
 
 #include "coll_templ.h"
+#include "BScriptHolder.h"
 
 namespace WinterMute {
 class CBFrame;
+class CBSurface;
+class CBObject;
 class CBSprite: public CBScriptHolder {
 public:
 	HRESULT KillAllSounds();

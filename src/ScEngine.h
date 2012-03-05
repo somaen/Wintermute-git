@@ -43,7 +43,9 @@ typedef void (*COMPILE_ERROR_CALLBACK)(int Line, char *Text , void *Data);
 typedef void (*PARSE_ELEMENT_CALLBACK)(int Line, int Type, void *ElementData, void *Data);
 
 #define MAX_CACHED_SCRIPTS 20
-
+class CScScript;
+class CBObject;
+class CBScriptHolder;
 class CScEngine : public CBBase {
 public:
 	class CScCachedScript {

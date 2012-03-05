@@ -57,6 +57,8 @@ THE SOFTWARE.
 #include "ScEngine.h"
 #include "BStringTable.h"
 #include "ScScript.h"
+#include "BRegion.h"
+#include "BSprite.h"
 
 #ifdef __IPHONEOS__
 #   include "ios_utils.h"

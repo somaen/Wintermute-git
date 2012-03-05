@@ -29,6 +29,7 @@ THE SOFTWARE.
 #include "Matrix4.h"
 #include "ScValue.h"
 #include "BGame.h"
+#include "BRegion.h"
 
 namespace WinterMute {
 

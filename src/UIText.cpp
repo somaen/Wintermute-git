@@ -34,6 +34,7 @@ THE SOFTWARE.
 #include "BFontStorage.h"
 #include "BStringTable.h"
 #include "ScScript.h"
+#include "BSprite.h"
 
 namespace WinterMute {
 

@@ -31,6 +31,7 @@ THE SOFTWARE.
 
 namespace WinterMute {
 class CAdTalkNode;
+class CAdSpriteSet;
 class CAdTalkDef : public CBObject {
 public:
 	char *m_DefaultSpriteSetFilename;

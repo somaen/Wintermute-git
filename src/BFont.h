@@ -26,6 +26,7 @@ THE SOFTWARE.
 #ifndef __WmeBFont_H__
 #define __WmeBFont_H__
 
+#include "BObject.h"
 
 #define NUM_CHARACTERS 256
 

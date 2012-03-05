@@ -28,7 +28,8 @@ THE SOFTWARE.
 #include "BParser.h"
 #include "BDynBuffer.h"
 #include "BGame.h"
-
+#include "BSprite.h"
+#include "AdSpriteSet.h"
 namespace WinterMute {
 
 IMPLEMENT_PERSISTENT(CAdTalkNode, false)

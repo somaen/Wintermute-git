@@ -30,7 +30,7 @@ THE SOFTWARE.
 #include "BBase.h"
 
 namespace WinterMute {
-
+class CBPoint;
 class CAdPath : public CBBase {
 public:
 	DECLARE_PERSISTENT(CAdPath, CBBase)

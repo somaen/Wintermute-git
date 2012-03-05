@@ -28,6 +28,7 @@ THE SOFTWARE.
 
 
 #include "BBase.h"
+#include "BScriptable.h"
 #include <SDL.h>
 
 namespace WinterMute {

@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include "dcgf.h"
 #include "BActiveRect.h"
 #include "BGame.h"
+#include "BRegion.h"
 
 namespace WinterMute {
 

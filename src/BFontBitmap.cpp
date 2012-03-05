@@ -32,6 +32,7 @@ THE SOFTWARE.
 #include "BGame.h"
 #include "BSubFrame.h"
 #include "BFrame.h"
+#include "BSprite.h"
 
 namespace WinterMute {
 

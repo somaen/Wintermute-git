@@ -28,11 +28,13 @@ THE SOFTWARE.
 
 
 #include "coll_templ.h"
+#include "BBase.h"
 
 namespace WinterMute {
 
 class CBImage;
 class CBActiveRect;
+class CBObject;
 
 class CBRenderer: public CBBase {
 public:
