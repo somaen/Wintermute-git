@@ -23,7 +23,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "dcgf.h"
+#include "wintypes.h"
+#include "BGame.h"
 #include "BSurface.h"
 
 namespace WinterMute {
@@ -175,7 +176,8 @@ HRESULT CBSurface::PrepareToDraw() {
 
 //////////////////////////////////////////////////////////////////////////
 void CBSurface::SetFilename(const char *Filename) {
-	SAFE_DELETE_ARRAY(m_Filename);
+	delete[] m_Filename;
+	m_Filename = NULL;
 	if (!Filename) return;
 
 	m_Filename = new char[strlen(Filename) + 1];

@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __WmeBSurface_H__
 #define __WmeBSurface_H__
 
+#include "BBase.h"
+
 namespace WinterMute {
 
 class CBSurface: public CBBase {
